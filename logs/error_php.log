@@ -33,3 +33,18 @@ Stack trace:
 #0 /var/www/html/franky-skeleton-application/index.php(3): require()
 #1 {main}
   thrown in /var/www/html/franky-skeleton-application/modulos/base/loads/init.php on line 18
+[11-Apr-2019 23:17:12 America/Mexico_City] PHP Fatal error:  Uncaught Error: Class 'vendor\core\configure' not found in /var/www/html/franky-skeleton-application/modulos/base/loads/init.php:18
+Stack trace:
+#0 /var/www/html/franky-skeleton-application/index.php(3): require()
+#1 {main}
+  thrown in /var/www/html/franky-skeleton-application/modulos/base/loads/init.php on line 18
+[11-Apr-2019 23:20:56 America/Mexico_City] PHP Fatal error:  Uncaught Error: Class 'vendor\core\configure' not found in /var/www/html/franky-skeleton-application/modulos/base/loads/init.php:18
+Stack trace:
+#0 /var/www/html/franky-skeleton-application/index.php(3): require()
+#1 {main}
+  thrown in /var/www/html/franky-skeleton-application/modulos/base/loads/init.php on line 18
+[11-Apr-2019 23:20:56 America/Mexico_City] PHP Fatal error:  Uncaught Error: Class 'vendor\core\configure' not found in /var/www/html/franky-skeleton-application/modulos/base/loads/init.php:18
+Stack trace:
+#0 /var/www/html/franky-skeleton-application/index.php(3): require()
+#1 {main}
+  thrown in /var/www/html/franky-skeleton-application/modulos/base/loads/init.php on line 18

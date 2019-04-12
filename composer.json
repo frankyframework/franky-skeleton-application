@@ -16,6 +16,12 @@
     "autoload": {
             "psr-4": {
                 "base\\": "modulos/base/",
+                "blog\\": "modulos/blog/",
+                "galeria\\": "modulos/galeria/",
+                "seo\\": "modulos/seo/",
+                "developer\\": "modulos/developer/",
+                "sociallogin\\": "modulos/sociallogin/",
+                "ecommerce\\": "modulos/ecommerce/",
                 "franky\\": "modulos/franky/"
             }
     }
