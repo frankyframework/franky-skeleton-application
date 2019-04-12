@@ -1,32 +1,5 @@
 <?php
 return array (
-  'local.tecamac' => 'tecamac',
-  'local.bingoo.com' => 'bingoo',
-  'local.marketingfb.com' => 'marketingfb',
-  'local.caribecooler' => 'caribecooler',
-  'local.amelaf' => 'amelaf',
-  'local.ubiflow' => 'ubiflow',
-  'local.aztlan-hack.org' => 'aztlanhack',
-  'local.mercarancho.com' => 'mercarancho',
-  'local.cloudstudio' => 'cloudstudio',
-  'local.cuantocuesta' => 'cuantocuesta',
-  'local.mubbmi.com' => 'mubbmi',
-  'local.inteligenciacanina' => 'inteligenciacanina',
-  'local.modellico' => 'modellico',
-  'local.walkmodels' => 'walkmodels',
-  'local.franky' => 'franky',
-  'local.intelytrade' => 'intelytrade',
-  'local.parrilladas' => 'parrilladas',
-  'local.cuidados' => 'cuidados',
-  'local.ranoanticorrupcion.com' => 'rano',
-  'local.shell' => 'franky',
-  'local.meteoro' => 'meteoro',
-  'local.ochobag' => '_88bag',
-  'local.lamatmexico.com' => 'lamatmexico',
-  'local.vengadoronirico.com' => 'vengador',
-  'ruta136.test' => 'ruta136',
-  'ginecologiamr.test' => 'mr',
-  'mubbmi.com' => 'mubbmi',
-  'www.mubbmi.com' => 'mubbmi',
+ 
 );
 ?>
