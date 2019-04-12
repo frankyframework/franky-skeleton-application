@@ -1,6 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
-use vendor\core\configure;
+use Franky\Core\configure;
 
 class AliasPHPTest extends TestCase
 {

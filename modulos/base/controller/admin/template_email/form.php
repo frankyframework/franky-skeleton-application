@@ -2,7 +2,7 @@
 use modulos\base\Form\templateEmailForm;
 use modulos\base\vendor\model\TemplateemailModel;
 use modulos\base\vendor\entity\TemplateemailEntity;
-use vendor\haxor\Tokenizer;
+use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer;
 $TemplateemailModel      = new TemplateemailModel();

@@ -1,7 +1,7 @@
 <?php
-use vendor\core\validaciones;
+use Franky\Core\validaciones;
 use modulos\developer\vendor\model\Ftp;
-use vendor\filesystem\File;
+use Franky\Filesystem\File;
 
 if($MySession->getVar('nivel') != NIVEL_USERDEVELOPER)
 {
@@ -19,7 +19,7 @@ $host = $MyRequest->getRequest("host");
 if(!empty($site))
 {
     $_SERVER["SERVER_NAME"] = $site;
-    $ibd  = new vendor\database\IBD(new \vendor\database\configure,'conexion_bd',new \vendor\core\MYDEBUG);
+    $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Core\MYDEBUG);
 }
 
 headerShell();

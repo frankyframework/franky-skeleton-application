@@ -29,7 +29,7 @@ if (is_array($MyFrankyMonster->MyJQueyfile())) {
         foreach ($MyFrankyMonster->MyJQueyfile() as $jquery) {
 
             $path = PROJECT_DIR."/public/jquery/$jquery/css/";
-            $css_jquery = \vendor\filesystem\File::getFiles($path);
+            $css_jquery = \Franky\Filesystem\File::getFiles($path);
             if(count($css_jquery) > 0)
             {
                 foreach($css_jquery as $_css_jquery)

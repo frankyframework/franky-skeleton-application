@@ -8,10 +8,10 @@ use modulos\ecommerce\vendor\entity\direcciones_facturacion as DireccionesFactur
 use modulos\ecommerce\vendor\model\direcciones_facturacion;
 use modulos\ecommerce\vendor\entity\direcciones as DireccionesEnvioEntity;
 use modulos\ecommerce\vendor\model\direcciones;
-use vendor\core\validaciones;
+use Franky\Core\validaciones;
 use modulos\ecommerce\vendor\model\CardsModel;
 use modulos\ecommerce\vendor\entity\CardsEntity;
-use vendor\core\ObserverManager;
+use Franky\Core\ObserverManager;
 
 $CardsModel        = new CardsModel();
 $CardsEntity       = new CardsEntity();

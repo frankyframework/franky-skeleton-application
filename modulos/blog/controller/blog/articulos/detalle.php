@@ -3,8 +3,8 @@ use modulos\blog\vendor\model\Blog;
 use modulos\blog\vendor\model\calificacionBlog;
 use modulos\blog\vendor\model\comentariosBlog;
 use modulos\blog\vendor\schema\blogPostingSchema;
-use vendor\schema\aggregateRatingSchema;
-use vendor\schema\personSchema;
+use Franky\Schema\aggregateRatingSchema;
+use Franky\Schema\personSchema;
 use modulos\base\vendor\model\USERS;
 use modulos\blog\Form\buscadorForm;
 

@@ -1,10 +1,10 @@
 <?php
-use vendor\core\validaciones;
+use Franky\Core\validaciones;
 use modulos\base\vendor\model\USERS;
 use modulos\base\vendor\entity\users as entityUser;
 
 $MyUser             = new USERS();
-$MyLogin = new \vendor\core\LOGIN("users","email","1",array("status" => "1"));
+$MyLogin = new \Franky\Core\LOGIN("users","email","1",array("status" => "1"));
 
 $email  	= $MyRequest->getRequest('email');
 $error = false;

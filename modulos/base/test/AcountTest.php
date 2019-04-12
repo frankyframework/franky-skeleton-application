@@ -1,7 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
 use modulos\base\vendor\model\USERS;
-use vendor\core\LOGIN;
+use Franky\Core\LOGIN;
 
 class AcountTest extends TestCase
 {

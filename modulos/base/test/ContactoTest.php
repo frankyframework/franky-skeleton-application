@@ -2,7 +2,7 @@
 use PHPUnit\Framework\TestCase;
 use modulos\base\vendor\model\Contacto;
 use modulos\base\vendor\entity\comentarios;
-use vendor\core\MYDEBUG;
+use Franky\Core\MYDEBUG;
 
 class ContactoTest extends TestCase
 {

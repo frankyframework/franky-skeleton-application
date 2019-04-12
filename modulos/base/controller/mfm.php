@@ -1,6 +1,6 @@
 <?php
 use modulos\base\vendor\model\mfm;
-use vendor\filesystem\File;
+use Franky\Filesystem\File;
 
 if (!$MyAccessList->MeDasChancePasar(ADMINISTRAR_UPLOADERS)) {  die('No autorizado'); }
 
@@ -34,7 +34,7 @@ $field = $MyRequest->getRequest('field');
 
 if(isset($_FILES['new_file']) && $MyRequest->getRequest('return') != "") {
     if(is_dir(PROJECT_DIR.$MyRequest->getRequest('return'))) {
-        $handle = new \vendor\filesystem\Upload($_FILES['new_file']);
+        $handle = new \Franky\Filesystem\Upload($_FILES['new_file']);
         if ($handle->uploaded) {
             $handle->file_new_name_body   = $mfm->format_filename(substr($_FILES['new_file']['name'],0,-4));
             //resize image. more options coming soon.

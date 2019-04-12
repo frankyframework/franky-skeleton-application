@@ -1,7 +1,7 @@
 <?php
 namespace modulos\\{modulo}\\vendor\\model;
 
-class {nombre}Model  extends \vendor\database\mysql\objectOperations
+class {nombre}Model  extends \Franky\Database\Mysql\objectOperations
 {
 
     public function __construct()

@@ -1,7 +1,7 @@
 <?php
 use modulos\ecommerce\Form\ComprovantePagoForm;
 use modulos\ecommerce\Form\StatusPagoForm;
-use vendor\haxor\Tokenizer;
+use Franky\Haxor\Tokenizer;
 use modulos\ecommerce\vendor\model\EcommercelogstatusModel;
 use modulos\ecommerce\vendor\entity\EcommercelogstatusEntity;
 

@@ -1,5 +1,5 @@
 <?php
-use vendor\core\validaciones; 
+use Franky\Core\validaciones; 
 use modulos\seo\vendor\model\SeoModel;
 use modulos\seo\vendor\entity\SeoEntity;
 

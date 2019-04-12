@@ -1,9 +1,9 @@
 <?php
-use vendor\core\validaciones;
+use Franky\Core\validaciones;
 use modulos\base\vendor\model\TemplateemailModel;
 use modulos\base\vendor\entity\TemplateemailEntity;
-use vendor\haxor\Tokenizer;
-use vendor\filesystem\File;
+use Franky\Haxor\Tokenizer;
+use Franky\Filesystem\File;
 
 $Tokenizer = new Tokenizer();
 

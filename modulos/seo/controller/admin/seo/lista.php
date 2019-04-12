@@ -1,6 +1,6 @@
 <?php
 use modulos\base\Form\filtrosForm;
-use vendor\core\paginacion;
+use Franky\Core\paginacion;
 use modulos\seo\vendor\model\SeoModel;
 use modulos\seo\vendor\entity\SeoEntity;
 use modulos\base\vendor\entity\OrganosEntity;

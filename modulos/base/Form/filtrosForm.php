@@ -1,7 +1,7 @@
 <?php
 namespace modulos\base\Form;
 
-class filtrosForm extends \vendor\form\Form
+class filtrosForm extends \Franky\Form\Form
 {
     public function __construct($name)
     {

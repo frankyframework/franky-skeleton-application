@@ -1,7 +1,7 @@
 <?php
 namespace modulos\base\Form;
 
-class UrlInternacionalForm extends \vendor\form\Form
+class UrlInternacionalForm extends \Franky\Form\Form
 {
     public function __construct($name)
     {

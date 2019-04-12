@@ -117,7 +117,7 @@ function EliminarDireccionFacturacionEcommerce($id,$status)
 function eliminarProductoCarrito($id)
 {
     $MyCarritoProducto =  new \modulos\ecommerce\vendor\model\carrito_producto();
-    $Tokenizer = new \vendor\haxor\Tokenizer;
+    $Tokenizer = new \Franky\Haxor\Tokenizer;
     global $MyAccessList;
     global $MyMessageAlert;
 
@@ -149,7 +149,7 @@ function getInfoCarrito()
 {
     $MyCarritoProducto =  new \modulos\ecommerce\vendor\model\carrito_producto();
     $MyCarritoCompras =  new \modulos\ecommerce\vendor\model\carrito();
-    $Tokenizer = new \vendor\haxor\Tokenizer;
+    $Tokenizer = new \Franky\Haxor\Tokenizer;
     global $MyConfigure;
 
     $productos =  OBJETO_PRODUCTOS;
@@ -204,7 +204,7 @@ function addProductoCarrito($producto,$qty=1,$caracteristicas=array())
         $MyCarritoCompras =  new \modulos\ecommerce\vendor\model\carrito();
         $MyCarritoProducto =  new \modulos\ecommerce\vendor\model\carrito_producto();
         $MyCarritoProductoEntity =  new \modulos\ecommerce\vendor\entity\carrito_producto();
-        $Tokenizer = new \vendor\haxor\Tokenizer;
+        $Tokenizer = new \Franky\Haxor\Tokenizer;
         global $MyAccessList;
         global $MyMessageAlert;
         global $MySession;
@@ -268,7 +268,7 @@ function setQTYProductoCarrido($id,$qty)
 {
         $MyCarritoProdcutoEntity =  new \modulos\ecommerce\vendor\entity\carrito_producto();
 	       $MyCarritoProducto =  new \modulos\ecommerce\vendor\model\carrito_producto();
-         $Tokenizer = new \vendor\haxor\Tokenizer;
+         $Tokenizer = new \Franky\Haxor\Tokenizer;
         global $MyAccessList;
         global $MyMessageAlert;
         global $MySession;
@@ -473,14 +473,14 @@ function SetStatusPagoEcommerce($id,$status,$nota,$monto)
     global $MyAccessList;
     global $MySession;
     global $MyMessageAlert;
-    $Tokenizer = new \vendor\haxor\Tokenizer;
+    $Tokenizer = new \Franky\Haxor\Tokenizer;
     $pedidosModel    = new \modulos\ecommerce\vendor\model\pedidos();
     $pedidosEntity   = new \modulos\ecommerce\vendor\entity\pedidos();
     $TemplateemailModel    = new \modulos\base\vendor\model\TemplateemailModel;
     $USERS = new \modulos\base\vendor\model\USERS();
     $EcommercelogstatusModel    = new \modulos\ecommerce\vendor\model\EcommercelogstatusModel();
     $EcommercelogstatusEntity   = new \modulos\ecommerce\vendor\entity\EcommercelogstatusEntity();
-    $ObserverManager = new \vendor\core\ObserverManager;
+    $ObserverManager = new \Franky\Core\ObserverManager;
 
 
     $respuesta = array("error" => false);

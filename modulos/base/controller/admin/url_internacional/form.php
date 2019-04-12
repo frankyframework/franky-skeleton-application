@@ -2,7 +2,7 @@
 use modulos\base\Form\UrlInternacionalForm;
 use modulos\base\vendor\model\UrlInternacionalModel;
 use modulos\base\vendor\entity\UrlInternacionalEntity;
-use vendor\haxor\Tokenizer;
+use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer;
 $UrlInternacionalModel              = new UrlInternacionalModel();

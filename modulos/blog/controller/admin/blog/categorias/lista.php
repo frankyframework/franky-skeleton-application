@@ -1,7 +1,7 @@
 <?php
 use modulos\base\Form\filtrosForm;
 use modulos\blog\vendor\model\categoriasBlog;
-use vendor\core\paginacion;
+use Franky\Core\paginacion;
 $MyPaginacion = new paginacion();
 
 $MyPaginacion->setPage($MyRequest->getRequest('page',1));

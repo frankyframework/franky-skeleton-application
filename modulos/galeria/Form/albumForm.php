@@ -1,7 +1,7 @@
 <?php
 namespace modulos\galeria\Form;
 
-class albumForm extends \vendor\form\Form
+class albumForm extends \Franky\Form\Form
 {
     public function __construct($name)
     {

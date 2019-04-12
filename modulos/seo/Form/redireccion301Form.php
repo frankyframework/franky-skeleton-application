@@ -1,7 +1,7 @@
 <?php
 namespace modulos\seo\Form;
 
-class redireccion301Form extends \vendor\form\Form
+class redireccion301Form extends \Franky\Form\Form
 {
     public function __construct($name)
     {

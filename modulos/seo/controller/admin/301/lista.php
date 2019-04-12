@@ -1,6 +1,6 @@
 <?php
 use modulos\base\Form\filtrosForm;
-use vendor\core\paginacion;
+use Franky\Core\paginacion;
 $MyPaginacion = new paginacion();
 
 $MyPaginacion->setPage($MyRequest->getRequest('page',1));

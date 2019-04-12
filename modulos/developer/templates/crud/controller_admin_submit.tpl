@@ -2,7 +2,7 @@
 use vendor\\core\\validaciones;
 use modulos\\{modulo}\\vendor\\model\\{modelo};
 use modulos\\{modulo}\\vendor\\entity\\{entidad};
-use vendor\haxor\Tokenizer;
+use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();
 ${modelo}             = new {modelo}();

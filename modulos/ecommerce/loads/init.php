@@ -1,5 +1,5 @@
 <?php
-use vendor\core\ObserverManager;
+use Franky\Core\ObserverManager;
 $ObserverManager = new ObserverManager;
 
 include 'lca.php';

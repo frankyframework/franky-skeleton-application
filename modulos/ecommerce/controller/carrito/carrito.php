@@ -1,7 +1,7 @@
 <?php
 use \modulos\ecommerce\vendor\model\carrito;
 use modulos\ecommerce\vendor\model\carrito_producto;
-use vendor\haxor\Tokenizer;
+use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();
 $MyCarritoCompras =  new carrito();

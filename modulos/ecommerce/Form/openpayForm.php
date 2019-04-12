@@ -1,7 +1,7 @@
 <?php
 namespace modulos\ecommerce\Form;
 
-class openpayForm extends \vendor\form\Form
+class openpayForm extends \Franky\Form\Form
 {
     public function __construct($name)
     {

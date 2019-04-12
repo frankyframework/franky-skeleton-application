@@ -1,5 +1,5 @@
 <?php
-$MyAccessList = new \vendor\core\AccessList();
+$MyAccessList = new \Franky\Core\AccessList();
 
 define("NIVEL_USERPUBLICO",		0);
 define("NIVEL_USERADMIN",		1);

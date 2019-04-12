@@ -1,5 +1,5 @@
 <?php
-use vendor\core\validaciones;
+use Franky\Core\validaciones;
 use modulos\ecommerce\vendor\model\pedidos;
 use modulos\ecommerce\vendor\entity\pedidos as PedidosEntity;
 use modulos\ecommerce\vendor\model\producto_pedidoModel;

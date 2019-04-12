@@ -2,7 +2,7 @@
 use \modulos\base\vendor\model\CoreConfig;
 use \modulos\base\vendor\model\CoreConfigModel;
 use \modulos\base\vendor\entity\CoreConfigEntity;
-use \vendor\form\Form;
+use \Franky\Form\Form;
 
 $CoreConfig           = new CoreConfig();
 $CoreConfigModel      = new CoreConfigModel();

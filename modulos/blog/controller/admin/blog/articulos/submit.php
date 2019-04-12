@@ -1,12 +1,12 @@
 <?php
 use modulos\blog\vendor\model\Blog;
-use vendor\core\validaciones;
+use Franky\Core\validaciones;
 use modulos\base\vendor\entity\redireccionesEntity;
 use modulos\blog\vendor\model\BorradorblogModel;
 use modulos\blog\vendor\entity\BorradorblogEntity;
-use vendor\filesystem\File;
+use Franky\Filesystem\File;
 
-use vendor\haxor\Tokenizer;
+use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();
 $MyBlog = new Blog();
@@ -64,7 +64,7 @@ if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_ARTICULOS_BLOG))
 $dir_blog = $MyConfigure->getServerUploadDir()."/blog/".$MySession->GetVar('path_img_blog')."/";
 $File = new File();
 $File->mkdir($dir_blog);
-$handle = new \vendor\filesystem\Upload($_FILES["imagen"]);
+$handle = new \Franky\Filesystem\Upload($_FILES["imagen"]);
 if ($handle->uploaded)
 {
     if  (in_array(strtolower(pathinfo($_FILES["imagen"]["name"], PATHINFO_EXTENSION)),array("jpg","png","gif","bmp","jpe","jpeg")))//($handle->file_is_image)

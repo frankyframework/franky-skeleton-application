@@ -8,7 +8,7 @@ if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_SEO) && $MySession->getVar('nive
 }   
 
 
-use vendor\core\validaciones;
+use Franky\Core\validaciones;
 
 $CORREGIR_POINTS = array("txt" => "corregir","color" => "rojo");
 $MEJORAR_POINTS = array("txt" => "mejorar","color" => "amarillo");

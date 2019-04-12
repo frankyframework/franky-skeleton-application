@@ -1,6 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
-use vendor\core\MYDEBUG;
+use Franky\Core\MYDEBUG;
 use \modulos\base\vendor\model\TemplateemailModel;
 use \modulos\base\vendor\entity\SecciontransaccionalEntity;
 

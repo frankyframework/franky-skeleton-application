@@ -17,7 +17,7 @@ if (!file_exists($dir))
 
 if($error == false){
 
-    $handle = new \vendor\filesystem\Upload($_FILES['avatar']);
+    $handle = new \Franky\Filesystem\Upload($_FILES['avatar']);
 
     if ($handle->uploaded && $_FILES['avatar']["name"] != "")
     {

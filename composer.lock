@@ -4,8 +4,230 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7c4db94c0314879cdab016bac786a875",
+    "content-hash": "a4d6b82a296645c6fe106a52da87fc56",
     "packages": [
+        {
+            "name": "frankyframework/franky-core",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/frankyframework/franky-core.git",
+                "reference": "b7332b0a0e21b2bdcad7e876e76da37802bbfe57"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/frankyframework/franky-core/zipball/b7332b0a0e21b2bdcad7e876e76da37802bbfe57",
+                "reference": "b7332b0a0e21b2bdcad7e876e76da37802bbfe57",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Franky\\Core\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ussiel Acevedo",
+                    "email": "ussiel@gmail.com"
+                }
+            ],
+            "description": "Funciones de tokenizacion y escape de caracteres",
+            "time": "2019-04-12T15:33:00+00:00"
+        },
+        {
+            "name": "frankyframework/franky-database",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/frankyframework/franky-database.git",
+                "reference": "c0007e24f129aa61cffb68e47944283d40eab327"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/frankyframework/franky-database/zipball/c0007e24f129aa61cffb68e47944283d40eab327",
+                "reference": "c0007e24f129aa61cffb68e47944283d40eab327",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Franky\\Database\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ussiel Acevedo",
+                    "email": "ussiel@gmail.com"
+                }
+            ],
+            "description": "Funciones de tokenizacion y escape de caracteres",
+            "time": "2019-04-12T17:43:24+00:00"
+        },
+        {
+            "name": "frankyframework/franky-filesystem",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/frankyframework/franky-filesystem.git",
+                "reference": "aad175544108b070b5e98bb95ce660f0370b5796"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/frankyframework/franky-filesystem/zipball/aad175544108b070b5e98bb95ce660f0370b5796",
+                "reference": "aad175544108b070b5e98bb95ce660f0370b5796",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Franky\\Filesystem\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Funciones de tokenizacion y escape de caracteres",
+            "time": "2019-04-12T19:23:32+00:00"
+        },
+        {
+            "name": "frankyframework/franky-form",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/frankyframework/franky-form.git",
+                "reference": "2f00b70b082e0b3431c316466fec6bfd28d8cc82"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/frankyframework/franky-form/zipball/2f00b70b082e0b3431c316466fec6bfd28d8cc82",
+                "reference": "2f00b70b082e0b3431c316466fec6bfd28d8cc82",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Franky\\Form\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ussiel Acevedo",
+                    "email": "ussiel@gmail.com"
+                }
+            ],
+            "description": "Funciones de tokenizacion y escape de caracteres",
+            "time": "2019-04-12T19:02:54+00:00"
+        },
+        {
+            "name": "frankyframework/franky-haxor",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/frankyframework/franky-haxor.git",
+                "reference": "a83fd3ac3b395b09a540a3ba836fc47d6e4734a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/frankyframework/franky-haxor/zipball/a83fd3ac3b395b09a540a3ba836fc47d6e4734a6",
+                "reference": "a83fd3ac3b395b09a540a3ba836fc47d6e4734a6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Franky\\Haxor\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ussiel Acevedo",
+                    "email": "ussiel@gmail.com"
+                }
+            ],
+            "description": "Funciones de tokenizacion y escape de caracteres",
+            "time": "2019-04-12T15:05:00+00:00"
+        },
+        {
+            "name": "frankyframework/franky-schema",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/frankyframework/franky-schema.git",
+                "reference": "3d7fa68b751642f96343d3847c1535bb0a43b63a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/frankyframework/franky-schema/zipball/3d7fa68b751642f96343d3847c1535bb0a43b63a",
+                "reference": "3d7fa68b751642f96343d3847c1535bb0a43b63a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Franky\\Schema\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Funciones de schema",
+            "time": "2019-04-12T19:46:19+00:00"
+        },
         {
             "name": "mobiledetect/mobiledetectlib",
             "version": "2.8.33",
@@ -123,45 +345,6 @@
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
             "time": "2019-02-01T15:04:28+00:00"
-        },
-        {
-            "name": "sombrerodepaja/franky-haxor",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sombrerodepaja/franky-haxor.git",
-                "reference": "2f9b5288090b82e4a127b8ef5b0615a4aa17287c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sombrerodepaja/franky-haxor/zipball/2f9b5288090b82e4a127b8ef5b0615a4aa17287c",
-                "reference": "2f9b5288090b82e4a127b8ef5b0615a4aa17287c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^6.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Franky\\Haxor\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ussiel Acevedo",
-                    "email": "ussiel@gmail.com"
-                }
-            ],
-            "description": "Funciones de tokenizacion y escape de caracteres",
-            "time": "2019-04-12T14:37:12+00:00"
         }
     ],
     "packages-dev": [
@@ -1686,7 +1869,12 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "sombrerodepaja/franky-haxor": 20
+        "frankyframework/franky-haxor": 20,
+        "frankyframework/franky-core": 20,
+        "frankyframework/franky-database": 20,
+        "frankyframework/franky-form": 20,
+        "frankyframework/franky-filesystem": 20,
+        "frankyframework/franky-schema": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

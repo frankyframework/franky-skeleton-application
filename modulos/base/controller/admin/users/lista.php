@@ -1,8 +1,8 @@
 <?php
 use modulos\base\Form\filtrosForm;
-use vendor\core\paginacion;
+use Franky\Core\paginacion;
 use modulos\base\vendor\model\USERS;
-use vendor\haxor\Tokenizer;
+use Franky\Haxor\Tokenizer;
 $MyUser             = new USERS();
 $MyPaginacion = new paginacion();
 $Tokenizer = new Tokenizer();

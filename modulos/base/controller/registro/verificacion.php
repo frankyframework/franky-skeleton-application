@@ -34,7 +34,7 @@ if($error == false)
 
             $MyUser->getData($id);
             $registro = $MyUser->getRows();
-            $MyLogin = new \vendor\core\LOGIN("users",array("usuario","email"),"contrasena",array("status" => "1"));
+            $MyLogin = new \Franky\Core\LOGIN("users",array("usuario","email"),"contrasena",array("status" => "1"));
             $MyLogin->setLogin($registro["usuario"], $registro["contrasena"]);
 
 

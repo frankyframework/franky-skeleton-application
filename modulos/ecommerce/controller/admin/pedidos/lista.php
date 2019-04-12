@@ -1,9 +1,9 @@
 <?php
 use modulos\base\Form\filtrosForm;
-use vendor\core\paginacion;
+use Franky\Core\paginacion;
 use modulos\ecommerce\vendor\model\pedidos;
 use modulos\ecommerce\vendor\model\producto_pedidoModel;
-use vendor\haxor\Tokenizer;
+use Franky\Haxor\Tokenizer;
 $Tokenizer = new Tokenizer;
 $pedidosModel             = new pedidos();
 $producto_pedidoModel             = new producto_pedidoModel();

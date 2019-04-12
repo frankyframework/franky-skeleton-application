@@ -20,7 +20,7 @@ if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_FTP))
         
 foreach ($files as $file) 
 {    
-    $handle = new \vendor\filesystem\Upload($file);
+    $handle = new \Franky\Filesystem\Upload($file);
     if ($handle->uploaded)
     {
               

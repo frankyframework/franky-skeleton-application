@@ -1,14 +1,14 @@
 <?php
-use vendor\core\validaciones;
-use vendor\core\Plantilla;
+use Franky\Core\validaciones;
+use Franky\Core\Plantilla;
 use modulos\base\vendor\model\USERS;
 use modulos\base\vendor\entity\users as entityUser;
 use modulos\base\vendor\model\AvataresModel;
 use modulos\base\vendor\entity\AvataresEntity;
 use modulos\base\vendor\model\VerificacionesPendientes;
 use modulos\base\vendor\model\Emails;
-use vendor\core\ObserverManager;
-use vendor\haxor\Tokenizer;
+use Franky\Core\ObserverManager;
+use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();
 $Emails = new Emails();
@@ -101,7 +101,7 @@ if($MyUserEntity->getTelefono() != "" && $MyUser->findTelefono($MyUserEntity->ge
             $VerificacionesPendientes   = new VerificacionesPendientes();
             $VerificacionesPendientes->addVerifica($id_user, $token );
 
-            $MyLogin = new \vendor\core\LOGIN("users",array("usuario","email"),"contrasena",array("status" => "1"));
+            $MyLogin = new \Franky\Core\LOGIN("users",array("usuario","email"),"contrasena",array("status" => "1"));
             $MyLogin->setLogin($MyUserEntity->getUsuario(), $MyUserEntity->getContrasena());
 
 

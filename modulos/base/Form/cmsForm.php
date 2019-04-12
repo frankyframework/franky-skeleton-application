@@ -1,7 +1,7 @@
 <?php
 namespace modulos\base\Form;
 
-class cmsForm extends \vendor\form\Form
+class cmsForm extends \Franky\Form\Form
 {
     public function __construct($name)
     {

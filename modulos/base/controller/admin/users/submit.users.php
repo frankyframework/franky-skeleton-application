@@ -1,11 +1,11 @@
 <?php
-use vendor\core\validaciones;
+use Franky\Core\validaciones;
 use modulos\base\vendor\model\USERS;
 use modulos\base\vendor\entity\users as entityUser;
 use modulos\base\vendor\model\AvataresModel;
 use modulos\base\vendor\entity\AvataresEntity;
 use modulos\base\vendor\model\Emails;
-use vendor\haxor\Tokenizer;
+use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();
 $Emails = new Emails();

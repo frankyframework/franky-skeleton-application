@@ -1,7 +1,7 @@
 <?php
 namespace modulos\developer\Form;
 
-class  shellForm extends \vendor\form\Form
+class  shellForm extends \Franky\Form\Form
 {
     public function __construct($name)
     {

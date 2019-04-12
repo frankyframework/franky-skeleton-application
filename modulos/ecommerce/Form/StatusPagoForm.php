@@ -1,7 +1,7 @@
 <?php
 namespace modulos\ecommerce\Form;
 
-class StatusPagoForm extends \vendor\form\Form
+class StatusPagoForm extends \Franky\Form\Form
 {
     public function __construct($name)
     {

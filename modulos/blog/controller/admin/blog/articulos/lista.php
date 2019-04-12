@@ -3,8 +3,8 @@ use modulos\base\Form\filtrosForm;
 use modulos\blog\vendor\model\Blog;
 use modulos\blog\vendor\model\BorradorblogModel;
 use modulos\blog\vendor\entity\BorradorblogEntity;
-use vendor\core\paginacion;
-use vendor\haxor\Tokenizer;
+use Franky\Core\paginacion;
+use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();
 $MyPaginacion = new paginacion();

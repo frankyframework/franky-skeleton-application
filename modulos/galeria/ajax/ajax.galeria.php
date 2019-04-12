@@ -161,7 +161,7 @@ function guardarAlbumGaleria($nombre)
                     );
 
 
-        $validaciones =  new vendor\core\validaciones();
+        $validaciones =  new Franky\Core\validaciones();
         $valid = $validaciones->validRules($rules);
         if(!$valid)
         {

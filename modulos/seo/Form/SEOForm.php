@@ -1,7 +1,7 @@
 <?php
 namespace modulos\seo\Form;
 
-class SEOForm extends \vendor\form\Form
+class SEOForm extends \Franky\Form\Form
 {
     public function __construct($name)
     {

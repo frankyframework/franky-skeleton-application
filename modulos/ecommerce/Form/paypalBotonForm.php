@@ -1,7 +1,7 @@
 <?php
 namespace modulos\ecommerce\Form;
 
-class paypalBotonForm extends \vendor\form\Form
+class paypalBotonForm extends \Franky\Form\Form
 {
     public function __construct($name)
     {

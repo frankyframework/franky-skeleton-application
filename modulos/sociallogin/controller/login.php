@@ -2,7 +2,7 @@
 use modulos\base\vendor\entity\users as entityUser;
 use modulos\base\vendor\model\AvataresModel;
 use modulos\base\vendor\entity\AvataresEntity;
-use vendor\core\ObserverManager;
+use Franky\Core\ObserverManager;
 $MyUser             = new \modulos\base\vendor\model\USERS();
 $ObserverManager = new ObserverManager;
 $MySocialLogin = new \modulos\sociallogin\vendor\model\socialLogin("users","usuario","contrasena",array("status" => "1"));

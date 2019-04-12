@@ -2,14 +2,14 @@
 define('PROJECT_DIR',$_SERVER["DOCUMENT_ROOT"]);
 require(PROJECT_DIR."/modulos/base/loads/init.php");
 
-$MyAjax = new \vendor\core\Ajax();
+$MyAjax = new \Franky\Core\Ajax();
 
 $modulos = getModulos();
 if(!empty($modulos))
 {
     foreach($modulos as $modulo)
     {
-        $files = \vendor\filesystem\File::getFiles(PROJECT_DIR."/modulos/$modulo/ajax/","file");
+        $files = \Franky\Filesystem\File::getFiles(PROJECT_DIR."/modulos/$modulo/ajax/","file");
 
         if(count($files) > 0)
         {

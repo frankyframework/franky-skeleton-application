@@ -20,7 +20,7 @@ if (is_array($MyFrankyMonster->MyJQueyfile())) {
         foreach ($MyFrankyMonster->MyJQueyfile() as $jquery) {
 
             $path = PROJECT_DIR."/public/jquery/$jquery/js/";
-            $js_jquery = \vendor\filesystem\File::getFiles($path);
+            $js_jquery = \Franky\Filesystem\File::getFiles($path);
 
             if(count($js_jquery) > 0)
             {

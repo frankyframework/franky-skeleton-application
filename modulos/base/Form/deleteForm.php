@@ -1,7 +1,7 @@
 <?php
 namespace modulos\base\Form;
 
-class deleteForm extends \vendor\form\Form
+class deleteForm extends \Franky\Form\Form
 {
     public function __construct($name)
     {

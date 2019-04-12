@@ -1,9 +1,9 @@
 <?php
 use modulos\base\Form\filtrosForm;
-use vendor\core\paginacion;
+use Franky\Core\paginacion;
 use modulos\base\vendor\model\UserdeviceModel;
 use modulos\base\vendor\entity\UserdeviceEntity;
-use vendor\haxor\Tokenizer;
+use Franky\Haxor\Tokenizer;
 $MyPaginacion = new paginacion();
 $UserdeviceModel = new UserdeviceModel();
 $UserdeviceEntity = new UserdeviceEntity();

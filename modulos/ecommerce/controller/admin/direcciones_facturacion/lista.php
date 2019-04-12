@@ -1,6 +1,6 @@
 <?php
 use modulos\base\Form\filtrosForm;
-use vendor\core\paginacion;
+use Franky\Core\paginacion;
 use modulos\ecommerce\vendor\model\direcciones_facturacion;
 
 $MyDirecciones             = new direcciones_facturacion();

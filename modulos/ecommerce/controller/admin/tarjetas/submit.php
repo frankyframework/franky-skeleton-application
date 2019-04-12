@@ -1,5 +1,5 @@
 <?php
-use vendor\core\validaciones;
+use Franky\Core\validaciones;
 use modulos\ecommerce\vendor\model\CardsModel;
 use modulos\ecommerce\vendor\entity\CardsEntity;
 

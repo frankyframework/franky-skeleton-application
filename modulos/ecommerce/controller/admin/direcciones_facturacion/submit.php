@@ -1,5 +1,5 @@
 <?php
-use vendor\core\validaciones; 
+use Franky\Core\validaciones; 
 use modulos\ecommerce\vendor\model\direcciones_facturacion;
 use modulos\ecommerce\vendor\entity\direcciones_facturacion as direccionesEntity;
 

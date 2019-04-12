@@ -1,8 +1,8 @@
 <?php
-use vendor\core\validaciones;
+use Franky\Core\validaciones;
 use modulos\base\vendor\model\Contacto;
 use modulos\base\vendor\entity\comentarios;
-use vendor\haxor\Tokenizer;
+use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();
 $MyContacto         = new Contacto();

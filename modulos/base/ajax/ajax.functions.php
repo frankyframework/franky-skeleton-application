@@ -6,7 +6,7 @@ function EliminarUser($id,$status)
 
         $MyUser             = new \modulos\base\vendor\model\USERS();
         $MyUserEntity    = new \modulos\base\vendor\entity\users();
-        $Tokenizer = new \vendor\haxor\Tokenizer;
+        $Tokenizer = new \Franky\Haxor\Tokenizer;
         global $MyAccessList;
         global $MyMessageAlert;
         global $MyFlashMessage;
@@ -37,7 +37,7 @@ function EliminarTemplate($id,$status)
 {
         $TemplateemailModel    = new\modulos\base\vendor\model\TemplateemailModel;
         $TemplateemailEntity    = new\modulos\base\vendor\entity\TemplateemailEntity;
-          $Tokenizer = new \vendor\haxor\Tokenizer;
+          $Tokenizer = new \Franky\Haxor\Tokenizer;
         global $MyAccessList;
         global $MyMessageAlert;
         $respuesta = null;
@@ -95,7 +95,7 @@ function EliminarDispositivo($password,$id,$status)
 	     $UserdeviceModel = new \modulos\base\vendor\model\UserdeviceModel;
          $UserdeviceEntity = new \modulos\base\vendor\entity\UserdeviceEntity;
        $MyUser         = new \modulos\base\vendor\model\USERS();
-       $Tokenizer = new \vendor\haxor\Tokenizer;
+       $Tokenizer = new \Franky\Haxor\Tokenizer;
         global $MyAccessList;
         global $MyMessageAlert;
         $respuesta = null;
@@ -138,7 +138,7 @@ function BloquearDispositivo($password,$id,$status)
 	     $UserdeviceModel = new \modulos\base\vendor\model\UserdeviceModel;
          $UserdeviceEntity = new \modulos\base\vendor\entity\UserdeviceEntity;
        $MyUser         = new \modulos\base\vendor\model\USERS();
-       $Tokenizer = new \vendor\haxor\Tokenizer;
+       $Tokenizer = new \Franky\Haxor\Tokenizer;
         global $MyAccessList;
         global $MyMessageAlert;
         $respuesta = null;
@@ -208,7 +208,7 @@ function EliminarComentario($id,$status)
 function _getFiles($path,$file='file')
 {
 	//echo $path;
-  $File = new \vendor\filesystem\File;
+  $File = new \Franky\Filesystem\File;
         $files = $File->getFiles(PROJECT_DIR.$path,$file);
 
         if(count($files) > 0)
@@ -230,12 +230,12 @@ function _getFiles($path,$file='file')
 
 function registrarEmail($email)
 {
-    $Select = new \vendor\database\mysql\Select();
-    $Insert = new \vendor\database\mysql\Insert();
-    $From = new \vendor\database\mysql\From();
-    $Where = new \vendor\database\mysql\Where();
-    $validaciones = new \vendor\core\validaciones();
-    $ObserverManager = new \vendor\core\ObserverManager();
+    $Select = new \Franky\Database\Mysql\Select();
+    $Insert = new \Franky\Database\Mysql\Insert();
+    $From = new \Franky\Database\Mysql\From();
+    $Where = new \Franky\Database\Mysql\Where();
+    $validaciones = new \Franky\Core\validaciones();
+    $ObserverManager = new \Franky\Core\ObserverManager();
 
 
 
@@ -288,7 +288,7 @@ function EliminarUrlIternacional($id,$status)
         $UrlInternacionalModel              = new \modulos\base\vendor\model\UrlInternacionalModel();
         $UrlInternacionalEntity              = new \modulos\base\vendor\entity\UrlInternacionalEntity();
 
-        $Tokenizer = new \vendor\haxor\Tokenizer;
+        $Tokenizer = new \Franky\Haxor\Tokenizer;
         $respuesta = null;
         if($MyAccessList->MeDasChancePasar(ADMINISTRAR_URLINTERNACIONAL))
         {

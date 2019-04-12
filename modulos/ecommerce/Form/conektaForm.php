@@ -1,7 +1,7 @@
 <?php
 namespace modulos\ecommerce\Form;
 
-class conektaForm extends \vendor\form\Form
+class conektaForm extends \Franky\Form\Form
 {
     public function __construct($name)
     {

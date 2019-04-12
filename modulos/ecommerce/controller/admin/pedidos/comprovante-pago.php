@@ -1,8 +1,8 @@
 <?php
 use modulos\ecommerce\vendor\model\pedidos;
 use modulos\ecommerce\vendor\entity\pedidos as pedidosEntity;
-use vendor\filesystem\File;
-use vendor\haxor\Tokenizer;
+use Franky\Filesystem\File;
+use Franky\Haxor\Tokenizer;
 use \modulos\base\vendor\model\USERS;
 use \modulos\base\vendor\model\TemplateemailModel;
 
@@ -37,7 +37,7 @@ $File->mkdir($dir);
 
 if(!$error)
 {
-    $handle = new \vendor\filesystem\Upload($_FILES["comprovante"]);
+    $handle = new \Franky\Filesystem\Upload($_FILES["comprovante"]);
     if ($handle->uploaded)
     {
         if  (in_array(strtolower(pathinfo($_FILES["comprovante"]["name"], PATHINFO_EXTENSION)),array("jpg","png","gif","bmp","jpe","jpeg")))//($handle->file_is_image)

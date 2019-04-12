@@ -1,7 +1,7 @@
 <?php
 use modulos\base\Form\registroForm;
 use modulos\base\vendor\model\USERS;
-use vendor\haxor\Tokenizer;
+use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();
 $MyUser             = new USERS();

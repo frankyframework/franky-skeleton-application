@@ -1,6 +1,6 @@
 <?php
 use modulos\base\Form\contactanosForm;
-use vendor\haxor\Tokenizer;
+use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();
 $contactanosForm = new contactanosForm("frmContacto");

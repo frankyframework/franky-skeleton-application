@@ -1,6 +1,6 @@
 <?php
 use modulos\base\Form\filtrosForm;
-use vendor\core\paginacion;
+use Franky\Core\paginacion;
 use modulos\base\vendor\model\Contacto;
 $MyPaginacion = new paginacion();
 

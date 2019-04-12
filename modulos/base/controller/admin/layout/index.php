@@ -1,6 +1,6 @@
 <?php
 
-$MyMenuAdmin = new \vendor\core\menuSitio();
+$MyMenuAdmin = new \Franky\Core\menuSitio();
 
 $modulos = getModulos('DESC');
 $mi_modulo = $MyConfigure->getPathSite();

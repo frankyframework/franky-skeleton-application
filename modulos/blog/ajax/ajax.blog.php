@@ -27,7 +27,7 @@ function EliminarCategoriaBlog($id,$status)
 
 function EliminarArticuloBlog($id,$status)
 {
-				$Tokenizer = new \vendor\haxor\Tokenizer;
+				$Tokenizer = new \Franky\Haxor\Tokenizer;
 				$MyBlog = new modulos\blog\vendor\model\Blog();
         global $MyAccessList;
         global $MyMessageAlert;

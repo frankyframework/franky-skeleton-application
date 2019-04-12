@@ -1,6 +1,6 @@
 <?php
-use vendor\core\validaciones;
-use \vendor\core\Plantilla;
+use Franky\Core\validaciones;
+use \Franky\Core\Plantilla;
 
 
 if($MySession->getVar('nivel') != NIVEL_USERDEVELOPER)
@@ -21,7 +21,7 @@ $site = $MyRequest->getRequest("site",'local.shell');
 if(!empty($site))
 {
     $_SERVER["SERVER_NAME"] = $site;
-    $ibd  = new vendor\database\IBD(new \vendor\database\configure,'conexion_bd',new \vendor\core\MYDEBUG);
+    $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Core\MYDEBUG);
 }
 
 headerShell();

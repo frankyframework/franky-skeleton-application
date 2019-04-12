@@ -35,7 +35,7 @@ if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_GALERIA))
         
 foreach ($files as $file) 
 {    
-    $handle = new \vendor\filesystem\Upload($file);
+    $handle = new \Franky\Filesystem\Upload($file);
     if ($handle->uploaded)
     {
         if  (in_array(strtolower(pathinfo($file["name"], PATHINFO_EXTENSION)),array("jpg","png","gif","bmp","jpe","jpeg")))//($handle->file_is_image)

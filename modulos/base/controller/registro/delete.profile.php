@@ -1,5 +1,5 @@
 <?php
-use vendor\core\validaciones;
+use Franky\Core\validaciones;
 use modulos\base\vendor\model\USERS;
 use modulos\base\vendor\entity\users as entityUser;
 

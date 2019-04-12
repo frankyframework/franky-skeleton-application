@@ -359,9 +359,9 @@ function sendEmail($campos,$data)
 
 
     global $MyConfigure;
-    $plantilla = new \vendor\core\Plantilla();
+    $plantilla = new \Franky\Core\Plantilla();
     $plantilla->asigna_variables($campos);
-    $validaciones =  new \vendor\core\validaciones();
+    $validaciones =  new \Franky\Core\validaciones();
 
     $ContenidoString = $plantilla->muestra($data['html']);
 
@@ -514,7 +514,7 @@ function imageResize($img,$w,$h,$crop=false)
 
 
 
-            $image = new vendor\core\ImageResize(PROJECT_DIR.$img);
+            $image = new Franky\Core\ImageResize(PROJECT_DIR.$img);
             if($crop)
             {
                 $image->crop($w, $h);
@@ -535,7 +535,7 @@ function imageResize($img,$w,$h,$crop=false)
 
  function getModulos($orden = "ASC")
  {
-        $MyConfigure = new \vendor\core\configure;
+        $MyConfigure = new \Franky\Core\configure;
         $_modulos =  include(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/env/modulos.php");
         $_modulos = array_merge(array("base"),$_modulos);
         $modulos = array($MyConfigure->getPathSite());

@@ -1,10 +1,10 @@
 <?php
 use modulos\base\Form\filtrosForm;
-use vendor\core\paginacion;
+use Franky\Core\paginacion;
 use modulos\base\vendor\model\UrlInternacionalModel;
 use modulos\base\vendor\entity\UrlInternacionalEntity;
 use modulos\base\vendor\entity\OrganosEntity;
-use vendor\haxor\Tokenizer;
+use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer;
 

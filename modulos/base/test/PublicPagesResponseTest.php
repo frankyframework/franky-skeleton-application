@@ -1,8 +1,8 @@
 <?php
 use PHPUnit\Framework\TestCase;
 use modulos\base\vendor\model\paginasModel;
-use vendor\core\configure;
-use vendor\core\request;
+use Franky\Core\configure;
+use Franky\Core\request;
 
 class PublicPagesResponseTest extends TestCase
 {

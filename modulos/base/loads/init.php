@@ -15,23 +15,23 @@ include_once(PROJECT_DIR."/modulos/base/loads/util.shell.php");
 include_once(PROJECT_DIR."/modulos/base/loads/constantes.php");
 include_once(PROJECT_DIR."/modulos/base/loads/autoload.php");
 
-$MyConfigure        = new \vendor\core\configure();
+$MyConfigure        = new \Franky\Core\configure();
 
-ini_set('display_errors',getCoreConfig('base/debug/display_errors'));
+ini_set('display_errors',1 /*getCoreConfig('base/debug/display_errors')*/);
 
 
-$MyDebug = new \vendor\core\MYDEBUG();
+$MyDebug = new \Franky\Core\MYDEBUG();
 $MyDebug->SetDebug(getCoreConfig('base/debug/debug'));
 
-$MySession          = new \vendor\core\MYSESSION("auth");
-$MyMessageAlert     = new \vendor\core\MessageAlert();
-$MyFrankyMonster    = new \vendor\core\FRANKY();
-$MyMetatag          = new \vendor\core\Metatags();
-$MyFlashMessage     = new \vendor\core\flashMessages($CONTEXT);
-$MyRequest          = new \vendor\core\request();
-$Mobile_detect      = new \vendor\mobile_detect\Mobile_Detect();
+$MySession          = new \Franky\Core\MYSESSION("auth");
+$MyMessageAlert     = new \Franky\Core\MessageAlert();
+$MyFrankyMonster    = new \Franky\Core\FRANKY();
+$MyMetatag          = new \Franky\Core\Metatags();
+$MyFlashMessage     = new \Franky\Core\flashMessages($CONTEXT);
+$MyRequest          = new \Franky\Core\request();
+$Mobile_detect      = new \Mobile_Detect();
 $MyRedireccion      = new \modulos\base\vendor\model\redireccionesModel();
-$ObserverManager    = new \vendor\core\ObserverManager();
+$ObserverManager    = new \Franky\Core\ObserverManager();
 
 define('LOCALE_DIR', PROJECT_DIR .'/modulos/base/locale/');
 $catalogo_idiomas  = include(PROJECT_DIR.'/modulos/base/configure/idiomas.php');
@@ -229,7 +229,7 @@ if(isset($_SESSION["cookie_http_vars"]) && !empty($_SESSION["cookie_http_vars"])
 $_SESSION["cookie_http_vars"]=array();
  endif;
 
-$MyMenuFront = new \vendor\core\menuSitio();
+$MyMenuFront = new \Franky\Core\menuSitio();
 $modulos = getModulos();
 if(!empty($modulos))
 {

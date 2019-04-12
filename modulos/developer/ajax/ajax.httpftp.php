@@ -2,7 +2,7 @@
 
 function changeDir($path = PROJECT_DIR)
 {
-    $File = new \vendor\filesystem\File;
+    $File = new \Franky\Filesystem\File;
     $contenido = array();
 
     foreach($files = $File->getFiles(realpath($path),'dir') as $file)
@@ -70,7 +70,7 @@ function descargarArchivo($path)
 
 function getAllFiles($path)
 {
-    $File = new \vendor\filesystem\File;
+    $File = new \Franky\Filesystem\File;
     $files = $File->getAllFiles($path);
   return $files;
 }

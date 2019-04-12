@@ -1,7 +1,7 @@
 <?php
 namespace modulos\ecommerce\Form;
 
-class ComprovantePagoForm extends \vendor\form\Form
+class ComprovantePagoForm extends \Franky\Form\Form
 {
     public function __construct($name)
     {

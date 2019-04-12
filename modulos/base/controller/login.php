@@ -1,10 +1,10 @@
 <?php
 use modulos\base\vendor\model\USERS;
 use modulos\base\vendor\entity\users as entityUser;
-use vendor\core\ObserverManager;
+use Franky\Core\ObserverManager;
 
 $MyUser             = new USERS();
-$MyLogin = new \vendor\core\LOGIN("users",array("usuario","email"),"contrasena",array("status" => "1"));
+$MyLogin = new \Franky\Core\LOGIN("users",array("usuario","email"),"contrasena",array("status" => "1"));
 
 
 $usuario	= $MyRequest->getRequest('usuario');

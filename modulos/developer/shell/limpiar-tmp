@@ -1,6 +1,6 @@
 <?php
-use vendor\core\validaciones;
-use vendor\filesystem\File;
+use Franky\Core\validaciones;
+use Franky\Filesystem\File;
 ini_set('memory_limit', '-1');
 
 

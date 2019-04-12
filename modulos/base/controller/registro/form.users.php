@@ -1,6 +1,6 @@
 <?php
 use modulos\base\Form\registroForm;
-use vendor\haxor\Tokenizer;
+use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();
 $callback	= $MyRequest->getRequest('callback');

@@ -1,7 +1,7 @@
 <?php
 namespace modulos\ecommerce\Form;
 
-class direccionesForm extends \vendor\form\Form
+class direccionesForm extends \Franky\Form\Form
 {
     public function __construct($name)
     {

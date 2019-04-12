@@ -1,6 +1,6 @@
 <?php
 
-use vendor\core\validaciones;
+use Franky\Core\validaciones;
 use modulos\base\vendor\entity\redireccionesEntity;
 
 $error = false;

@@ -1,5 +1,5 @@
 <?php
-use vendor\core\validaciones;
+use Franky\Core\validaciones;
 use modulos\blog\vendor\model\comentariosBlog;
 
 $MyComentariosBlog =  new comentariosBlog;

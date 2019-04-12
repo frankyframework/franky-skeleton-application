@@ -1,8 +1,8 @@
 <?php
-use vendor\core\validaciones;
+use Franky\Core\validaciones;
 use modulos\base\vendor\model\UrlInternacionalModel;
 use modulos\base\vendor\entity\UrlInternacionalEntity;
-use vendor\haxor\Tokenizer;
+use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();
 $UrlInternacionalEntity = new UrlInternacionalEntity($MyRequest->getRequest());

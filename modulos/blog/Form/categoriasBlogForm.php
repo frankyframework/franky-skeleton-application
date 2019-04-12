@@ -1,7 +1,7 @@
 <?php
 namespace modulos\blog\Form;
 
-class categoriasBlogForm extends \vendor\form\Form
+class categoriasBlogForm extends \Franky\Form\Form
 {
     public function __construct($name)
     {

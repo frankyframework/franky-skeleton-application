@@ -2,8 +2,8 @@
 use \modulos\base\vendor\model\CoreConfig;
 use \modulos\base\vendor\model\CoreConfigModel;
 use \modulos\base\vendor\entity\CoreConfigEntity;
-use vendor\filesystem\File;
-use vendor\core\validaciones;
+use Franky\Filesystem\File;
+use Franky\Core\validaciones;
 
 
 $CoreConfig           = new CoreConfig();
@@ -116,7 +116,7 @@ if($error == false)
 
                       $File->mkdir($MyConfigure->getServerUploadDir()."/core_config/".$config['path']);
 
-                      $handle = new \vendor\filesystem\Upload($_FILES[str_replace("/","_",$config['path'])]);
+                      $handle = new \Franky\Filesystem\Upload($_FILES[str_replace("/","_",$config['path'])]);
                       if ($handle->uploaded)
                       {
 

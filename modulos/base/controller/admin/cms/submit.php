@@ -1,6 +1,6 @@
 <?php
 use modulos\base\vendor\entity\redireccionesEntity;
-use vendor\core\validaciones;
+use Franky\Core\validaciones;
 
 $id             = $MyRequest->getRequest('id');
 $callback       = $MyRequest->getRequest('callback');

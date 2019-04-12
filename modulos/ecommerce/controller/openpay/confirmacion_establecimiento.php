@@ -8,7 +8,7 @@ use modulos\ecommerce\vendor\entity\direcciones_facturacion as DireccionesFactur
 use modulos\ecommerce\vendor\model\direcciones_facturacion;
 use modulos\ecommerce\vendor\entity\direcciones as DireccionesEnvioEntity;
 use modulos\ecommerce\vendor\model\direcciones;
-use vendor\core\ObserverManager;
+use Franky\Core\ObserverManager;
 
 
 if($MySession->GetVar('establecimiento_pay') == "" ||  $MyRequest->getRequest('establecimiento_pay') == "")
