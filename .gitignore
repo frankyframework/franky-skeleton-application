@@ -1,3 +1,6 @@
-vendor
 
-/nbproject/private/
+vendor
+configure/data.php
+phpunit.xml
+public/upload/
+logs/
