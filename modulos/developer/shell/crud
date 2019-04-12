@@ -1,0 +1,139 @@
+<?php
+use vendor\core\validaciones;
+use \vendor\core\Plantilla;
+
+if($MySession->getVar('nivel') != NIVEL_USERDEVELOPER)
+{
+    echo shellFontColor($MyMessageAlert->Message("sin_privilegios"),"rojo")."\n";
+    exit;
+}
+
+
+ini_set('memory_limit', '-1');
+
+
+$modulo = $MyRequest->getRequest("modulo");
+$form = $MyRequest->getRequest("form");
+$modelo = $MyRequest->getRequest("modelo");
+$entidad = $MyRequest->getRequest("entidad");
+$seccion = $MyRequest->getRequest("seccion");
+$site = $MyRequest->getRequest("site",'local.shell');
+
+if(!empty($site))
+{
+    $_SERVER["SERVER_NAME"] = $site;
+    $ibd  = new vendor\database\IBD(new \vendor\database\configure,'conexion_bd',new \vendor\core\MYDEBUG);
+}
+
+headerShell();
+$help = helpShell([
+    ["var" => "modulo", "required" => true, "description" => "nombre del modulo"],
+    ["var" => "form", "required" => true, "description" => "nombre de la clase form de la seccion"],
+    ["var" => "modelo", "required" => true, "description" => "nombre de la clase modelo de la seccion"],
+    ["var" => "entidad", "required" => true, "description" => "nombre de la clase entidad de la seccion"],
+    ["var" => "seccion", "required" => true, "description" => "nombre de la seccion para administrar"],
+    ["var" => "site", "required" => false, "description" => "si no se proporciona usa local.shell para su configuracion"],
+]);
+
+
+$validaciones =  new validaciones();
+$valid = $validaciones->validRules(array(
+    "Modulo" => array("valor" => $modulo,"required"),
+    "Form" => array("valor" => $form,"required"),
+    "Modelo" => array("valor" => $modelo,"required"),
+    "Entidad" => array("valor" => $entidad,"required"),
+    "Seccion" => array("valor" => $seccion,"required")
+    ));
+if(!$valid)
+{
+    echo shellFontColor($validaciones->getMsg(),"rojo")."\n\n".$help;
+    exit;
+}
+
+if(is_numeric(substr($modulo,0,1)))
+{
+    $modulo = "_". $modulo;
+}
+
+
+$paths = array(PROJECT_DIR."/modulos/".$modulo,
+                PROJECT_DIR."/modulos/".$modulo."/Form/".$form.".php",
+                PROJECT_DIR."/modulos/".$modulo."/vendor/model/".$modelo.".php",
+                PROJECT_DIR."/modulos/".$modulo."/vendor/entity/".$entidad.".php"
+    );
+
+foreach($paths as $path)
+{
+    if(!file_exists($path))
+    {
+        echo "\t".shellFontColor("[error] $path no existe","rojo")."\n";
+
+        exit;
+
+    }
+}
+
+
+$paths = array(PROJECT_DIR."/modulos/".$modulo."/controller",
+                PROJECT_DIR."/modulos/".$modulo."/controller/admin",
+                PROJECT_DIR."/modulos/".$modulo."/controller/admin/",
+                PROJECT_DIR."/modulos/".$modulo."/controller/admin/".$seccion,
+                PROJECT_DIR."/modulos/".$modulo."/diseno",
+                PROJECT_DIR."/modulos/".$modulo."/diseno/admin",
+                PROJECT_DIR."/modulos/".$modulo."/diseno/admin/".$seccion,
+                PROJECT_DIR."/modulos/".$modulo."/configure/"
+    );
+
+echo "[+]Revisando estructura de directorios...\n";
+
+foreach ($paths as $path)
+{
+    if(!file_exists($path))
+    {
+        if(mkdir($path,0777))
+        {
+            echo "\t".shellFontColor("[success] Se creo el directorio ".$path,"verde")."\n";
+        }
+        else{
+            echo "\t".shellFontColor("[error] No se creo el directorio ".$path,"rojo")."\n";
+
+            exit;
+        }
+    }
+}
+
+
+$plantilla = new Plantilla();
+$plantilla->asigna_variables(array("modulo" => $modulo,"form" => $form, "modelo" => $modelo, "entidad" => $entidad,"seccion" => $seccion));
+
+$files = array(
+    PROJECT_DIR."/modulos/".$modulo."/controller/admin/$seccion/form.php" =>  $plantilla->muestra(PROJECT_DIR."/modulos/developer/templates/crud/controller_admin_form.tpl"),
+    PROJECT_DIR."/modulos/".$modulo."/controller/admin/$seccion/lista.php" =>  $plantilla->muestra(PROJECT_DIR."/modulos/developer/templates/crud/controller_admin_lista.tpl"),
+    PROJECT_DIR."/modulos/".$modulo."/controller/admin/$seccion/submit.php" =>  $plantilla->muestra(PROJECT_DIR."/modulos/developer/templates/crud/controller_admin_submit.tpl"),
+    PROJECT_DIR."/modulos/".$modulo."/diseno/admin/$seccion/form.phtml" =>  $plantilla->muestra(PROJECT_DIR."/modulos/developer/templates/crud/diseno_admin_form.tpl"),
+);
+
+echo "[+]Creando archivos necesarios\n";
+
+foreach ($files as $path => $file)
+{
+    if(!file_exists($path))
+    {
+        $fopen = fopen($path, 'w');
+        fwrite($fopen,$file);
+        fclose($fopen);
+        if($fopen != false)
+        {
+            echo "\t".shellFontColor("[success] Se creo el archivo ".$path,"verde")."\n";
+        }
+        else
+        {
+            echo "\t".shellFontColor("[error] No se puedo crear el archivo ".$path,"rojo")."\n";
+        }
+    }
+    else {
+        echo "\t".shellFontColor("[advertencia] El archivo ".$path." ya existe y no se modifico","amarillo")."\n";
+    }
+}
+
+?>

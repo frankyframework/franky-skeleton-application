@@ -1,0 +1,173 @@
+<?php
+function shellFontColor($txt,$color = "default")
+{
+    global $argv;
+
+    if(!empty($argv))
+    {
+        $colors = array(
+            "verde" => "32",
+            "rojo" => "31",
+            "amarillo" => "33",
+            "azul" => "34",
+            "default" => "0"
+            );
+        return "\033[".$colors[$color]."m".$txt."\033[".$colors["default"]."m";
+    }
+    else
+    {
+        $colors = array(
+            "verde" => "green",
+            "rojo" => "red",
+            "amarillo" => "yellow",
+            "azul" => "blue",
+            "default" => ""
+            );
+            return "<p style='color:".$colors[$color]."'>".htmlentities($txt)."</p>";
+    }
+}
+
+
+function shellTable($cols = array(),$rows = array())
+{
+    global $argv;
+    global $MyRequest;
+    $html = "";
+    if(!empty($argv))
+    {
+        if(!empty($cols))
+        {
+            $html = "\t|";
+            foreach($cols as $col)
+            {
+                $html .= shellFontColor($col,"azul")."\t|";
+            }
+            $html .= "\n";
+
+        }
+        if(!empty($rows))
+        {
+
+            foreach($rows as $row => $_row)
+            {
+                $html .= "\t|";
+
+                $html .= implode("\t|",$_row);
+
+
+                $html .= "\t|\n";
+            }
+
+
+        }
+
+    }
+    else
+    {
+        $html .= "<table>";
+        if(!empty($cols))
+        {
+
+            foreach($cols as $col)
+            {
+                $html .= "<th>".shellFontColor($col,"azul")."</th>";
+            }
+
+
+        }
+        if(!empty($rows))
+        {
+
+            foreach($rows as $row => $_row)
+            {
+                $html .= "<tr>";
+                foreach ($_row as $__row)
+                {
+                    $html .= "<td>".shellFontColor($__row)."</td>";
+                }
+                $html .= "</tr>";
+            }
+        }
+         $html .= "</table>";
+    }
+
+    return $html;
+}
+
+function headerShell()
+{
+echo "===============================================
+        (0 0)
+---oOO-- (_) ----oOO---\n";
+echo "HOLA SOY FRANKY DEVELOPER MI TRABAJO ES\n";
+echo "HACER TU VIDA MAS FACIL\n";
+echo "===============================================\n\n";
+}
+
+function helpShell($rules)
+{
+    $html =  "AYUDA PARA IDIOTAS:\n\n";
+
+    foreach($rules as $rule)
+    {
+        $html .= ($rule["required"] == true ? "[*]" : "[ ]").$rule["var"].": ".$rule["description"]." \n";
+    }
+
+    return $html;
+}
+
+
+
+function SplitSQL($site, $file, $delimiter = ';')
+{
+    set_time_limit(0);
+
+    $ibd  = new vendor\database\IBD(new \vendor\database\configure,'conexion_bd',new \vendor\core\MYDEBUG);
+
+    if (is_file($file) === true)
+    {
+        $file = fopen($file, 'r');
+
+        if (is_resource($file) === true)
+        {
+            $query = array();
+
+            while (feof($file) === false)
+            {
+                $query[] = fgets($file);
+
+                if (preg_match('~' . preg_quote($delimiter, '~') . '\s*$~iS', end($query)) === 1)
+                {
+                    $query = trim(implode('', $query));
+
+                    if ($ibd->Execute($query) != IBD_SUCCESS)
+                    {
+                        echo shellFontColor("[error] ".$query,'rojo'). "\n";
+                    }
+
+                    else
+                    {
+                       echo shellFontColor("[success] ".$query,'verde'). "\n";
+                    }
+
+                    while (ob_get_level() > 0)
+                    {
+                        ob_end_flush();
+                    }
+
+                    flush();
+                }
+
+                if (is_string($query) === true)
+                {
+                    $query = array();
+                }
+            }
+
+            return fclose($file);
+        }
+    }
+
+    return false;
+}
+

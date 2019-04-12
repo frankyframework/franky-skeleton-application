@@ -1,0 +1,44 @@
+<div class="w-xxxx-12">
+
+
+    <div class="content">
+        <div class="w-xxxx-2 w-xxx-3 w-xx-4 cont-submenu">
+            <?php echo render("blog/lateral.phtml"); ?>
+        </div>
+        <div class="w-xxxx-9 w-xxx-9 w-xx-8 cont-cont-gral">
+          <div class="blog_thumbnail_single_page mb-30">
+              <img src="<?php echo $blog_detalle["imagen_portada"]; ?>" alt="">
+            
+          </div>
+
+             <h1><?php print $blog_detalle["titulo"]; ?></h1>
+             <div class="cont_articulos">
+                 <?php echo $blog_detalle["contenido"]; ?>
+             </div>
+             <span class="cont_art_fecha">
+                 <span  title="<?php echo $blog_detalle["fecha_original"]; ?>" >
+                     Fecha: <?php echo $blog_detalle["fecha"]; ?>
+                 </span>
+             </span>
+
+             <?php  echo render("blog/autor.phtml"); ?>
+
+             <?php
+             if(!empty($blog_detalle["permitircomentarios"]))
+             {
+                 echo render("blog/calificacion.phtml");
+                 echo render("blog/comentarios.phtml");
+              } ?>
+        </div>
+    </div>
+</div>
+<script >
+    <!--
+    $(document).ready(function(){
+        $("#frmcommentsblog").validate();
+        $("#autentificacioncoment").validate();
+        $("#autentificacion_rating").validate();
+    });
+    //     -->
+</script>
+    <?php echo $schema->get(); ?>

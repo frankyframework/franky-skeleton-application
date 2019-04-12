@@ -1,0 +1,7 @@
+/********** Generales *****************/
+
+input.error { border: 1px solid #cc0000; }
+label.error { background: url("../images/flag_red.png") no-repeat 0 4px; font-size: 1em; font-weight: 300; padding-left: 18px; margin-left: .3em; color:#cc0000; }
+label.valid { background: url("../images/flag_red.png") no-repeat 0 4px; display: block; font-size: 1em; font-weight: 300; width: 18px; height: 16px; color:green; }
+
+/********** / Generales *****************/

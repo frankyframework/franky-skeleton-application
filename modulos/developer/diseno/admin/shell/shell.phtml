@@ -1,0 +1,136 @@
+<div class="content">
+    
+    <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
+    <h1 class="titulo_seccion_admin">Shell</h1>
+    <div class="w-xxxx-12">
+
+        <?php echo $MyShellForm->openTag(); ?>
+        <?php echo $MyShellForm->getAllRow(); ?>
+        <?php echo $MyShellForm->endTag(); ?>
+
+
+        <div class="irix-window" id="shell" >
+            <div class="inner-wrap" id="main-inner">
+               <div class="terminal-view">
+                  <div class="console-preabmle">
+                     Franky Shell Version 1.1<br>
+                     Listo...<br>
+                  </div>
+                  <div class="command-history"></div>
+                  <span id="prompt"></span>
+                  <span class="command-input" id="comando" ></span><span id="main-cursor" class="cursor">&nbsp;</span>
+               </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script >
+$(document).ready(function()
+{
+	promp_command = "franky>";
+	
+	
+	var command = "";
+	
+
+	$("#prompt").html(promp_command);
+	$("#main-cursor").addClass("cursor-activo");
+	$("#usuario_login").focus();
+
+	$("#shell").click(function(){
+		
+			$("input[name=command_shell]").focus();
+		
+		
+	});
+
+	$("input[name=command_shell]").keyup(function(){
+		
+			$("#comando").html($("input[name=command_shell]").val());			
+		
+		
+	});
+
+        
+
+
+	$("input[name=command_shell]").keypress(function(e){
+		
+		innerWrap = $('.inner-wrap');
+		var tecla = (document.all) ? e.keyCode : e.which;
+            	if (tecla==13)
+		{
+			
+
+			$(".command-history").append("<div class='entered-command'>"+promp_command+" "+$("#comando").html()+"</"+"div>");
+			$("#comando").html("");
+
+			if($("input[name=command_shell]").val() != "")
+			{
+				command = $("input[name=command_shell]").val();
+				$("input[name=command_shell]").val("");
+                               
+                            
+			}
+			
+                        if(command != "" )
+                        {
+                            
+                            if(command == "reset")
+                            {
+                                $(".command-history").html("");
+                            }
+                            else
+                            {
+                                $("input[name=command_shell]").attr("disabled",true);
+                                var response_inicio = 0;
+                                var response_fin = 0;
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/public/php/admin/shell/execute.php",
+                                    data: "command="+command.trim().split(' ').join('&'),
+                                    cache: false,
+                                    success: function(response)
+                                    {
+                                        $(".command-history").append("<div class='entered-command'>"+response+"</"+"div>");
+                                       
+                                         command = "";
+                                        $("#prompt").html(promp_command);
+                                        $("input[name=command_shell]").attr("disabled",false);
+                                        $("input[name=command_shell]").focus();
+                                        innerWrap.scrollTop(innerWrap[0].scrollHeight);
+
+
+                                    },
+                                    error: function(){ 
+                                        
+                                        innerWrap.scrollTop(innerWrap[0].scrollHeight);
+                                    }
+                                    
+                                });
+                            }
+                            
+                            
+
+
+			}
+			
+
+		}
+		else
+		{
+			
+				$("#comando").html($("input[name=command_shell]").val());			
+			
+		}
+		
+    		innerWrap.scrollTop(innerWrap[0].scrollHeight);
+	});
+
+	$("input[name=command_shell]").blur(function(){
+		$("#main-cursor").removeClass("cursor-activo");
+	});
+});
+
+
+</script>

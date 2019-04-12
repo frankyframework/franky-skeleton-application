@@ -1,0 +1,256 @@
+<?xml version='1.0' standalone='yes'?>
+<mensajes>
+    <prefijo></prefijo>
+        <mensaje>
+        <llave>error_conexion</llave>
+        <valor>Error de conexión favor de intentar más tarde</valor>
+    </mensaje>
+    <mensaje>
+        <llave>error_login</llave>
+        <valor>bad login</valor>
+    </mensaje>
+    <mensaje>
+        <llave>empty_login</llave>
+        <valor>Favor de escribir un nombre de usuario y una contraseña</valor>
+    </mensaje>
+    <mensaje>
+        <llave>error_message_key</llave>
+        <valor>La llave del mensaje no exite</valor>
+    </mensaje>
+    <mensaje>
+        <llave>empty_input</llave>
+        <valor>Favor de llenar el campo %s</valor>
+    </mensaje>
+    <mensaje>
+        <llave>bad_chars</llave>
+        <valor>El campo %s contiene caracteres no permitidos</valor>
+    </mensaje>
+    <mensaje>
+        <llave>bad_email</llave>
+        <valor>El campo %s debe contener un correo electrónico</valor>
+    </mensaje>
+    <mensaje>
+        <llave>bad_url</llave>
+        <valor>El campo %s debe contener una URL válida</valor>
+    </mensaje>
+    <mensaje>
+        <llave>bad_numeric</llave>
+        <valor>El campo %s debe contener un valor numerico</valor>
+    </mensaje>
+    <mensaje>
+        <llave>spam_boot</llave>
+        <valor>Se a detectado un spam boot favor de revisar el contenido de su formulario</valor>
+    </mensaje>
+    <mensaje>
+        <llave>puterias</llave>
+        <valor>El campo %s contiene palabras inapropiadas</valor>
+    </mensaje>
+    <mensaje>
+        <llave>recaptcha</llave>
+        <valor>Error al demostrar que no eres un robot</valor>
+    </mensaje>
+    <mensaje>
+        <llave>error_max_length</llave>
+        <valor>El campo %s no debe exeder el limite de caracteres</valor>
+    </mensaje>
+    <mensaje>
+        <llave>error_min_length</llave>
+        <valor>El campo %s es demaciado corto</valor>
+    </mensaje>
+    <mensaje>
+        <llave>no_login</llave>
+        <valor>Debes iniciar sesion para realizar esta operacion</valor>
+    </mensaje>
+    <mensaje>
+        <llave>correo_no_verificado</llave>
+        <valor>Debes verificar tu correlo electornico para realizar esta operacion</valor>
+    </mensaje>
+    <mensaje>
+        <llave>error_captcha</llave>
+        <valor>Lo sentimos, el código de verificación es incorrecto. Intenta de nuevo.</valor>
+    </mensaje>
+    <mensaje>
+        <llave>email_no_register</llave>
+        <valor>El correo o el usuario que proporcionaste no esta registrado</valor>
+    </mensaje>
+    <mensaje>
+        <llave>forgot_password_confirmation</llave>
+        <valor>Su contraseña fue enviada a su direccion de correo electronico</valor>
+    </mensaje>
+    <mensaje>
+        <llave>frm_success</llave>
+        <valor>Tu informacion y comentario se envio correctamente</valor>
+    </mensaje>
+    <mensaje>
+        <llave>frm_err</llave>
+        <valor>Error al enviar, favor de intentar mas tarde</valor>
+    </mensaje>
+    <mensaje>
+        <llave>1_error</llave>
+        <valor>Te faltó llenar 1 campo. Está marcado en rojo.</valor>
+    </mensaje>
+    <mensaje>
+        <llave>n_error</llave>
+        <valor>Te faltó llenar '+errors+' campos.  Están marcados en rojo.</valor>
+    </mensaje>
+    <mensaje>
+        <llave>error_pass_actual</llave>
+        <valor>La contraseña actual no es valida.</valor>
+    </mensaje>
+    <mensaje>
+        <llave>delete_suscriptor_success</llave>
+        <valor>El usuario se eliminó correctamente</valor>
+    </mensaje>
+    <mensaje>
+        <llave>delete_suscriptor_error</llave>
+        <valor>Error al eliminar el usuario intente mas tarde</valor>
+    </mensaje>
+    <mensaje>
+        <llave>success_send_email_verificacion_suscriptor</llave>
+        <valor>En breve recibiras un correo electrónico de confirmación</valor>
+    </mensaje>
+    <mensaje>
+        <llave>error_send_email_verificacion_suscriptor</llave>
+        <valor>Error al enviar el correo electrónico de confirmación</valor>
+    </mensaje>
+    <mensaje>
+        <llave>comparar_contrasenas</llave>
+        <valor>Las contraseñas con diferentes.</valor>
+    </mensaje>
+    <mensaje>
+        <llave>username_duplicate</llave>
+        <valor>El nombre de usuario %s ya esta siendo usado en otra cuenta</valor>
+    </mensaje>
+    <mensaje>
+        <llave>email_duplicate</llave>
+        <valor>La dirección de email %s ya esta siendo usada por otro usuario</valor>
+    </mensaje>
+    <mensaje>
+        <llave>aceptar_politicas</llave>
+        <valor>Debe aceptar las políticas de privacidad y condiciones de uso</valor>
+    </mensaje>
+    <mensaje>
+        <llave>regtistro_user_success</llave>
+        <valor>Te has registrado correctamente, en breve recibirás un correo electrónico de confirmación</valor>
+    </mensaje>
+    <mensaje>
+        <llave>regtistro_user_error</llave>
+        <valor>Error al registrarte favor de intentar mas tarde</valor>
+    </mensaje>
+    <mensaje>
+        <llave>editar_perfil_success</llave>
+        <valor>Los datos de perfil se actualizarón correctamente</valor>
+    </mensaje>
+    <mensaje>
+        <llave>editar_perfil_error</llave>
+        <valor>Error al intentar actualizar los datos de perfil intente mas tarde</valor>
+    </mensaje>
+    <mensaje>
+        <llave>url_duplicada</llave>
+        <valor>Esta url ya esta registrada</valor>
+    </mensaje>
+    <mensaje>
+        <llave>guardar_generico_success</llave>
+        <valor>El registro se agrego correctamente</valor>
+    </mensaje>
+    <mensaje>
+        <llave>guardar_generico_error</llave>
+        <valor>Error al guardar el registro</valor>
+    </mensaje>
+    <mensaje>
+        <llave>editar_generico_success</llave>
+        <valor>El registro se editó correctamente</valor>
+    </mensaje>
+    <mensaje>
+        <llave>editar_generico_error</llave>
+        <valor>Error al editar el registro</valor>
+    </mensaje>
+    <mensaje>
+        <llave>eliminar_generico_success</llave>
+        <valor>El registro se elimino correctamente</valor>
+    </mensaje>
+    <mensaje>
+        <llave>eliminar_generico_error</llave>
+        <valor>Error al eliminar el registro</valor>
+    </mensaje>
+    <mensaje>
+        <llave>activar_generico_success</llave>
+        <valor>El registro se activo correctamente</valor>
+    </mensaje>
+    <mensaje>
+        <llave>activar_generico_error</llave>
+        <valor>Error al activar el registro</valor>
+    </mensaje>
+    <mensaje>
+        <llave>nombre_pagina_duplicado</llave>
+        <valor>Este nombre ya esta en uso para otra pagina</valor>
+    </mensaje>
+    <mensaje>
+        <llave>constante_pagina_duplicado</llave>
+        <valor>El valor de la Constante ya esta en uso</valor>
+    </mensaje>
+    <mensaje>
+        <llave>nombre_template_duplicado</llave>
+        <valor>Existe otro template con este nombre.</valor>
+    </mensaje>
+    <mensaje>
+        <llave>avatar_success</llave>
+        <valor>El avatar se guardo correctamente</valor>
+    </mensaje>
+    <mensaje>
+        <llave>avatar_error</llave>
+        <valor>Error al guardar  el avatar: %s</valor>
+    </mensaje>
+    <mensaje>
+        <llave>solo_imagen</llave>
+        <valor>Solo se permiten formatos de tipo imagen</valor>
+    </mensaje>
+    <mensaje>
+        <llave>imagen_error</llave>
+        <valor>Error al guardar la imagen: %s</valor>
+    </mensaje>
+    <mensaje>
+        <llave>editar_password_success</llave>
+        <valor>La contraseña actualizó correctamente</valor>
+    </mensaje>
+    <mensaje>
+        <llave>editar_password_error</llave>
+        <valor>Error al actualizar la contraseña</valor>
+    </mensaje>
+    <mensaje>
+        <llave>error_token_verificacion_email</llave>
+        <valor>Error al verificar tus datos, la solicitud de verificación no es válida</valor>
+    </mensaje>
+    <mensaje>
+        <llave>success_verificacion_email</llave>
+        <valor>Gracias, tu e-mail ha sido verificados</valor>
+    </mensaje>
+    <mensaje>
+        <llave>error_verificacion_email</llave>
+        <valor>Error al verificar tus datos, favor de intentar mas tarde</valor>
+    </mensaje>
+    <mensaje>
+        <llave>error_change_pass</llave>
+        <valor>Error al cambiar tu contraseña favor de intentar más tarde</valor>
+    </mensaje>
+    <mensaje>
+        <llave>sin_privilegios</llave>
+        <valor>No tienes los suficientes privilegios para realizar esta acción</valor>
+    </mensaje>
+    <mensaje>
+        <llave>error_mkdir</llave>
+        <valor>[!] Error al crear el directorio: %s</valor>
+    </mensaje>
+    <mensaje>
+        <llave>error_copy_file</llave>
+        <valor>[!] Error al copiar el archivo</valor>
+    </mensaje>
+    <mensaje>
+        <llave>rename_error</llave>
+        <valor>Error al intentar renombrar el archivo: %s</valor>
+    </mensaje>
+    <mensaje>
+        <llave>error_sql</llave>
+        <valor>Error de sql: %s</valor>
+    </mensaje>
+</mensajes>

@@ -1,0 +1,42 @@
+<div class="content">
+    <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
+    <div class="w-xxxx-12 cont_global_admin">
+        <h1 class="titulo_seccion_admin">Newsletter</h1>
+        <p>En esta sección podrás revisar los usuarios inscritos al Newsletter</p>
+        <div class="w-xxxx-12 cont_header_panel">
+           <div class="form-group form-inline">
+                    <?php echo $MyFiltrosForm->openTag(); ?>
+                    <?php echo $MyFiltrosForm->getAllRow(); ?>
+                    <?php echo $MyFiltrosForm->endTag(); ?>
+
+            </div>
+        </div>
+        <div  class="w-xxxx-12 cont_gral_admin cont_mailing">
+            <div >
+                <div class="w-xxxx-12">
+                    <div class="contenedor_titulo_columnas">
+                        <div class="w-xxxx-2"><?php echo makeHTMLOrder( "publicado", "Fecha"); ?></div>
+                        <div class="w-xxxx-4"><?php echo makeHTMLOrder( "email", "E-mail"); ?></div>
+                    </div>
+                    <div class="contenedor_columnas_info"  >
+                    <div class="contenedor_columnas"  >
+                        <div class='w-xxxx-2'>{{_data.fecha}}</div>
+                        <div class='w-xxxx-4 email'>{{_data.email}}</div>
+                    </div>
+                    </div>
+                </div>
+                <div class="w-xxxx-12">
+                    <div class="no_hay_datos" >No hay emails registrados</div>
+                </div>
+                <div class="w-xxxx-12">
+                    <?php echo render("admin/widget.paginar.phtml"); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script >
+<!--
+$(".contenedor_columnas_info").htmlDataDum(<?php echo json_encode($lista_admin_data); ?>,".no_hay_datos");
+// -->
+</script>

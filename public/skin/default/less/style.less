@@ -1,0 +1,318 @@
+@import "variables"; // variables.less
+
+/* ********* Estilos Generales ********* */
+html { font-size: 62.5%; }
+body { font-family: @font_gral; background:#ffffff; margin:0px; padding: 0; color: @gray; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-smoothing: antialiased; }
+body.active_nav { overflow-y: hidden; }
+* { outline: none; }
+:focus { outline: none; }
+img{ border:none; }
+h1 { font-size: 2.7rem; text-align:left; font-weight: 400; margin:10px; color: #000000; }
+h1 strong { color: #2eabff; }
+h2 { font-size:2.5rem; text-align:left; font-weight: 400; margin: 15px 10px 3px 10px; color: #222222; }
+h3, h4, h5, h6 { font-size:2.1rem; text-align:left; font-weight: 400; margin: 30px 10px 5px 10px ; }
+p { font-size: 1.7rem; line-height: 1.7rem; text-align:justify; font-weight: 300; padding: 0 10px; margin: 10px 0 0px 0; }
+a { color: #336699; text-decoration: underline; font-weight: 400;
+    &:hover { color: #000000; text-decoration: underline; }
+}
+.clear { clear: both; }
+
+
+ul.gral { list-style: none; margin: 8px 0 8px 20px; padding: 0; }
+ul.gral li {  margin: 2px 0; padding: 0 0 0 10px; }
+ul.gral li p { padding: 0; margin: 0; text-indent: 0; }
+ol.gral { list-style: decimal; margin: 8px 0 8px 40px; padding: 0; }
+ol.gral li {  margin: 2px 0; padding: 0; }
+ol.gral li p { padding: 0; margin: 0; text-indent: 0; }
+
+#up { position: fixed; bottom: 30px; right: 5px; z-index: 99; }
+#up span { width: 60px; height: 60px; display: block;background: url(/skin/default/images/up_arrow.png) no-repeat center center; }
+
+.margin_top { margin-top:10px !important; }
+.margin_bottom { margin-bottom:10px !important; }
+.margin_top_bottom { margin-bottom:10px !important; margin-top: 10px !important; }
+.margin_left_right { margin-left:10px !important; margin-right: 10px !important; }
+.margin_left { margin-left:10px !important; }
+.margin_right { margin-right: 10px !important; }
+
+object { pointer-events: none; }
+
+/* ****** Estilos Botones ******** */
+.btn.btn-text, a.btn.btn-text, button.btn.btn-text, input.btn.btn-text {  color: @enfasis_color; }
+.btn.btn-text:hover, a:hover.btn.btn-text, button:hover.btn.btn-text, input:hover.btn.btn-text { color: @theme_color;  }
+.btn.btn-default, a.btn.btn-default, button.btn.btn-default { color: #000000; background: lighten(@theme_color, 20%); }
+.btn.btn-primary, a.btn.btn-primary, button.btn.btn-primary, input.btn.btn-primary { color: @white; background: @enfasis_color;  }
+.btn.btn-default:hover, a:hover.btn.btn-default, button:hover.btn.btn-default, input:hover.btn.btn-default, .btn.btn-primary:hover, a:hover.btn.btn-primary, button:hover.btn.btn-primary, input:hover.btn.btn-primary { background: darken(@enfasis_color, 10); color: @white; }
+
+// Alertas
+
+.alert-variation(@names; @notificationColors; @index) when (iscolor(extract(@notificationColors, @index))) and (@index > 0) {
+    .alert-variation(@names; @notificationColors; (@index - 1)); // decrement.
+
+  @name  : extract(@names, @index);
+  @color : extract(@notificationColors, @index);
+
+  .alert-@{name} {
+    border-color: darken(@color, 10%);
+    color: darken(@color, 30%);
+    background-color: @color;
+  }
+
+}
+// Gracias
+.cont_error_pages { margin-top: 100px; text-align: center;
+     &.error {
+               i { color: @error; }
+          }
+     &.gracias {
+          i { color: @success; }
+     }
+     i { font-size: 5em; }
+     p, h1 { text-align: center; }
+}
+
+/*********** Panel *************/
+
+
+/*********** Paginación *************/
+.cont_paginar { text-align: center; max-width: 300px; margin: 0 auto; font-size: 1.3em;
+     a, span { display: inline-block; margin: 0 2px; }
+     a { font-size: 1em; }
+     .resumen_paginacion { font-weight: bold; }
+     div {
+          &.cont_numereacion, &.form_tampag { display: block; margin-top: 10px; }
+      }
+ }
+
+
+/********** Header **********/
+
+header {
+
+     .a_logo { position: absolute; left: 10px; top: -40px; z-index: 11; display: block;
+          img { max-width: 90px; height: auto; }
+     }
+     .cont_login { z-index: 5; }
+     .cont_nav_bg { position: relative; width: 100%; height: 40px; left: 0; top: 40px; background: lighten(@theme_color, 10); z-index: 10; }
+
+     .datos_contacto {
+     position: absolute; right: 10px; top: 10px; list-style: none; margin:0; padding: 0; z-index: 10;
+     li { float: left; margin: 0 3px;
+          a {
+                    color: @white;
+                    text-decoration: none;
+               }
+               &.li_phone { color: @white; font-size: 1.6em; margin-left: 10px; .text-shadow; font-weight: 600; white-space: nowrap;
+                    a { float: none; font-size: 1em;
+                         &:hover { background: transparent; }
+                         &:before { content: ""; margin-right: 0; }
+                    }
+               }
+          }
+     }
+     .cont_nav_movil { display: none; }
+
+// Nav
+
+     .menu_web {
+          margin-left: 150px;
+          ul { position: absolute; top: 0px; float: left; margin: 0; padding: 0; list-style: none;
+               li { float: left; margin: 0 ; padding: 0; list-style: none; font-size: 1.2em;
+                    &.first a:before { content: ""; margin-right: 0px; }
+                    a { float: left; margin: 0 ; padding: 0 5px; height: 40px; line-height: 35px;  color: @white; text-decoration: none;
+                         &:hover { background: darken(@enfasis_color, 10); }
+                         &:before { content: "·"; margin-right: 10px;
+                         }
+                    }
+                    &.li_phone {
+                      a { color: @enfasis_color; }
+                    }
+               }
+          }
+     }
+
+
+}
+
+
+/*  Contenido  */
+main {
+     .page_wrapper {  }
+     // Home
+     h2.margin_home { margin-top: 36px; margin-bottom: 36px; font-size: 3em; }
+     p.margin_home, h2.margin_home { margin-left: 170px; margin-right: 170px; text-align: center; }
+     .cont_banner_programas {
+          .w-xxxx-6 { text-align: center; }
+          a.btn { position: absolute; right: 20px; bottom: 20px; z-index: 1; color: @white; font-size: 1.6em; .box-shadow;
+               &.btn_theme_color { background: @theme_color; }
+               &.btn_enfasis_color { background: @enfasis_color; }
+               &:hover { background: @gray; }
+          }
+     }
+}
+
+
+/*   Footer  */
+footer { font-size: .9em;
+     .footer_wrapper { background: darken(@theme_color, 30); margin-top: 32px; padding-top: 16px; color: @white;
+          .footer_2 { background: darken(@theme_color, 20); padding: 16px 0; }
+     }
+     a { color: @white; text-decoration: none;
+          &:hover { color: @enfasis_color; text-decoration: none; }
+     }
+     .logo_cloud { display: block; text-align: right; margin-top: 10px;
+          img, object { max-width: 120px; height: auto; margin: 5px 0; }
+     }
+     p, h3 { color: @white; }
+     h3 { font-size: 2em; margin: 10px 0 5px 0; }
+     ul { margin: 0 0 20px 0; padding: 0 0 0 10px; list-style: disc; color: @white;
+          &.no_bullet { list-style: none; }
+          li { margin-bottom: 5px;
+               p { margin: 0; padding: 0; text-align: left; }
+               strong { display: block; }
+               a {
+               }
+          }
+     }
+     .cont_certificados a { display: inline-block; margin: 0 5px -3px 5px; opacity: .8;
+         &:hover { opacity: 1; }
+     }
+}
+
+/*  Debug  */
+#debug { position:fixed; left:0px; bottom:0px; width:100%; background:#999; z-index: 9999; }
+#content-detalle-debug { height: 300px; overflow: auto; display:none; width:100%; background:#fff; }
+#debug .pestanas .pestana { float:left; width: 200px; font-size: 15px; height:30px; }
+#debug .pestanas .pestana-hide { float:right; width: 30px; font-size: 15px; height:30px; }
+#content-detalle-debug div{ display:none;  }
+
+/* Media Escritorio */
+@media @xlarge {
+
+     /*  Header  */
+header {
+     #logo { float: left; margin: 5px 0; width: 25%; height: auto; }
+     .cont_login { position: absolute; right: 10px; top: 10px; display: block; }
+
+     .datos_contacto {
+     position: absolute; right: 10px; top: 10px; list-style: none; margin:0; padding: 0; z-index: 10;
+     li { float: left; margin: 0 3px;
+          &.li_phone { position: absolute; right: 0; top: -40px; line-height: 40px; }
+          }
+     }
+
+     }
+
+}
+
+
+/* Media Tableta */
+@media @large {
+
+     /*  Header  */
+
+     header {
+          #logo { float: left; margin: 5px 0; width: 25%; height: auto; }
+          .cont_login { position: absolute; right: 10px; top: 10px; display: block; }
+          .menu_web {
+               .datos_contacto { top: -30px;
+                a { color: @white; line-height: 15px; }
+               }
+          }
+     }
+
+      main {
+          p.margin_home, h2.margin_home { margin-left: 50px; margin-right: 50px; }
+     }
+
+     img.img_smart { display: none; }
+     img.img_desk { display: block; }
+
+}
+
+/* Media Tableta Vertical */
+@media @medium {
+
+     /*  Header  */
+      header {
+          #logo { float: left; margin: 5px 0; width: 25%; height: auto; }
+          .cont_login { position: absolute; right: 10px; top: 10px; display: block; }
+
+          .menu_web {
+               ul {
+                    li { font-size: 1.1em; }
+               }
+               .datos_contacto { top: -30px;
+                a { color: @white; line-height: 15px; }
+               }
+          }
+     }
+
+     main {
+          p.margin_home, h2.margin_home { margin-left: 50px; margin-right: 50px; }
+     }
+
+     img.img_smart { display: none; }
+     img.img_desk { display: block; }
+}
+
+/* Media Smartphone */
+@media @small {
+
+     /*  Header  */
+     header {
+          .cont_nav_bg { position: relative; top: 0;  }
+          .cont_nav_movil { position: fixed; right: 20px; top: 20px; display: block; z-index: 13;
+               &:after { font-family: @ico_font; content: "\e85f"; font-size: 2em; background: @theme_color; color: @white; padding: 10px; .radius(50%);
+               }
+               &.active:after { content: "\e80f" }
+          }
+          .menu_web {
+               position: fixed; top: 0; left: 0; display: none; margin: 0; padding: 0; float: left; width: 100%; height: 110vh; background: @bkg_nav; z-index: 12;
+               ul { position: relative; margin-top: 90px;  width: 100%;
+                    li {
+                         float: left; width: 100%;
+                         a { float: left; width: 100%; text-align: center; }
+                    }
+                }
+                .datos_contacto { margin-top: 10px; text-align: center;
+                    li.li_phone { text-shadow:none; margin-top: 20px; }
+                }
+          }
+          .a_logo { top: 0; width: 80px; }
+          #banners_header { float: left; display: none; margin: 5px 1%; width: 73%; height: auto; }
+          .cont_login { position: relative; right: auto; top: auto; display: none; }
+
+          // Nav
+          nav { background:#2eabff; padding-left: 0px; }
+     }
+
+          .wrap.push { margin-left: 0px; }
+          .panel { left: -260px;
+               ul { font-size: 1.3em;
+                    li {
+                         a { width: 140px; }
+                    }
+               }
+          }
+
+     /*  Contenido  */
+     main {
+          .page_wrapper {  }
+
+          p.margin_home, h2.margin_home { margin-left: 10px; margin-right: 10px; }
+          h2.margin_home { text-align: left; }
+          p.margin_home { text-align: justify; }
+     }
+
+     img.img_smart { display: block; }
+     img.img_desk { display: none; }
+
+     /*  Home  */
+
+}
+
+/* Media Smartphone Peque < 360 */
+@media @xsmall {
+
+}

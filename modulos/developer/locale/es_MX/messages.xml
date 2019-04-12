@@ -1,0 +1,28 @@
+<?xml version='1.0' standalone='yes'?>
+<mensajes>
+    <prefijo>developer_</prefijo>
+    <mensaje>
+        <llave>rmdir_error</llave>
+        <valor>Error al eliminar el directorio</valor>
+    </mensaje>
+    <mensaje>
+        <llave>rmdir_error</llave>
+        <valor>Error al eliminar el directorio</valor>
+    </mensaje>
+    <mensaje>
+        <llave>nombre_pagina_duplicado</llave>
+        <valor>Este nombre ya esta en uso para otra pagina</valor>
+    </mensaje>
+    <mensaje>
+        <llave>constante_pagina_duplicado</llave>
+        <valor>El valor de la Constante ya esta en uso</valor>
+    </mensaje>
+    <mensaje>
+        <llave>nombre_pagina_duplicado</llave>
+        <valor>Este nombre ya esta en uso para otra pagina</valor>
+    </mensaje>
+    <mensaje>
+        <llave>url_pagina_duplicado</llave>
+        <valor>El valor de la url ya esta en uso</valor>
+    </mensaje>
+</mensajes>

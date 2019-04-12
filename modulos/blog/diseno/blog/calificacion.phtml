@@ -1,0 +1,33 @@
+<div class="w_100">
+    <div class="bkg_titulo bkg_t_calificacion"><h3>Calificación de nuestros lectores</h3></div>
+    <div class="cont_art_calificacion_gral">
+        <span>
+              <span  title="<?php echo $blog_detalle["cal"]; ?>" ></span>
+        </span>
+        <span>
+               <span  title="<?php echo $blog_detalle["t_cal"]; ?>" ></span>
+        </span>
+        <div class="cont_art_calificacion"><?php  echo calificacionStars($blog_detalle["cal"]); ?> <span>(<?php echo $blog_detalle["t_cal"]; ?>)</span></div>
+        <div class="cont_art_califica">
+            <?php if($blog_detalle["calificable"]): ?> 
+            <div class="w_100 define_rating">
+                <div class="w_100">
+                    <form name="frmrating" method="post" action="">
+                        <input type="hidden" id="input_rating" name="input_rating" value="" />
+                        <input class="btn_califica" name="califica" type="button" onclick="<?php echo (!$MySession->LoggedIn() ? "$('.rating_login').slideDown('fast'); $('#usuario_r').focus();" : "AgregarCalificacionBlog('".$blog_detalle["id"]."',document.frmrating.input_rating.value)"); ?>" value="Califica"  />
+                        <div id="rater" class="rater">
+                        <div id="stars"></div>
+                        <div class="clear"></div>
+                        </div>
+                    </form>
+                </div>
+            <script >
+                var r = new rating('stars', 5,  '' || 0 , true, 'input_rating');
+            </script>
+            </div>
+            <?php endif; ?>
+
+    <?php echo render("blog/frm.login.calificacion.phtml"); ?>
+    </div>
+</div>
+    </div>

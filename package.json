@@ -1,0 +1,25 @@
+{
+  "name": "framework_franky",
+  "version": "1.0.0",
+  "description": "Configuration package file",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://arredondo@bitbucket.org/cloudstudiomx/framework_franky.git"
+  },
+  "keywords": [
+    "less"
+  ],
+  "author": "CloudStudio.mx",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/cloudstudiomx/framework_franky#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-less": "^1.4.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "jit-grunt": "^0.10.0"
+  }
+}

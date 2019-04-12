@@ -1,0 +1,118 @@
+<?php
+use vendor\core\validaciones;
+use \vendor\core\Plantilla;
+
+
+if($MySession->getVar('nivel') != NIVEL_USERDEVELOPER)
+{
+    echo shellFontColor($MyMessageAlert->Message("sin_privilegios"),"rojo")."\n";
+    exit;
+}
+
+ini_set('memory_limit', '-1');
+
+
+$nombre = getFriendly($MyRequest->getRequest("nombre"));
+$tabla = $MyRequest->getRequest("tabla");
+$modulo = $MyRequest->getRequest("modulo");
+$site = $MyRequest->getRequest("site",'local.shell');
+
+if(!empty($site))
+{
+    $_SERVER["SERVER_NAME"] = $site;
+    $ibd  = new vendor\database\IBD(new \vendor\database\configure,'conexion_bd',new \vendor\core\MYDEBUG);
+}
+
+headerShell();
+$help = helpShell([
+    ["var" => "nombre", "required" => true, "description" => "nombre de la entidad"],
+    ["var" => "tabla", "required" => true, "description" => "es la tabla de BD apartir de la que se creara la entidad"],
+    ["var" => "modulo", "required" => true, "description" => "es el modulo donde se guardara la entidad"],
+    ["var" => "site", "required" => false, "description" => "si no se proporciona usa local.shell para su configuracion"],
+]);
+
+
+$validaciones =  new validaciones();
+$valid = $validaciones->validRules(array("Nombre" => array("valor" => $nombre,"required"),
+    "Tabla" => array("valor" => $tabla,"required"),
+    "Modulo" => array("valor" => $modulo,"required")));
+if(!$valid)
+{
+    echo shellFontColor($validaciones->getMsg(),"rojo")."\n\n".$help;
+    exit;
+}
+
+$path = PROJECT_DIR."/modulos/".$modulo;
+
+if(!file_exists($path))
+{
+    echo "\t".shellFontColor("[error] El modulo ".$modulo." no existe","rojo")."\n";
+
+    exit;
+
+}
+
+if(!file_exists($path."/vendor/entity"))
+{
+    if(mkdir($path."/vendor/entity",0777))
+    {
+        echo "\t".shellFontColor("[success] Se creo el directorio ".$path."/vendor/entity","verde")."\n";
+    }
+    else{
+        echo "\t".shellFontColor("[error] No se creo el directorio ".$path."/vendor/entity","rojo")."\n";
+        exit;
+    }
+
+}
+
+$nombre = ucfirst(strtolower($nombre));
+
+if(file_exists($path."/vendor/entity/".  $nombre."Entity.php"))
+{
+    echo "\t".shellFontColor("[error] La entidad ".$nombre."Entity ya existe","rojo")."\n";
+
+    exit;
+
+}
+
+echo "[+]Creando entidad ".$nombre."Entity\n";
+
+$campos = array();
+$ibd->Query("campos_BD","Describe $tabla");
+
+$vars = "";
+$vars_fill = "";
+$getters = "";
+$setters = "";
+while($registro = $ibd->fetch("campos_BD"))
+{
+    $vars .= 'private $'.$registro["Field"].";\n";
+    $vars_fill .= '$this->'.$registro["Field"].' = (isset($data["'.$registro["Field"].'"]) ? $data["'.$registro["Field"].'"] : null);'."\n";
+
+    $setters .= 'public function '.($registro["Field"]).'($'.$registro["Field"].' = null){ if($'.$registro["Field"].' != null){ $this->'.$registro["Field"].'=$'.$registro["Field"].'; }else{ return $this->'.$registro["Field"].'; } }'."\n\n";
+
+}
+
+if(is_numeric(substr($modulo,0,1)))
+{
+    $modulo = "_". $modulo;
+}
+
+$plantilla = new Plantilla();
+
+$plantilla->asigna_variables(array("nombre" => $nombre,"modulo" => $modulo,"vars" => $vars,"vars_fill" => $vars_fill,"setters" => $setters,"getters" => $getters));
+
+$fopen = fopen($path."/vendor/entity/".$nombre."Entity.php", 'w');
+
+fwrite($fopen, $plantilla->muestra(PROJECT_DIR."/modulos/developer/templates/dev/class_entity.tpl"));
+fclose($fopen);
+if($fopen != false)
+{
+    echo "\t".shellFontColor("[success] Se creo la entidad","verde")."\n";
+}
+else
+{
+    echo "\t".shellFontColor("[error] No se puedo crear la entidad","rojo")."\n";
+}
+
+?>

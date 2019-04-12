@@ -1,0 +1,59 @@
+<div class="content">
+    <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
+    <div class="w-xxxx-12">
+        <h1><?php echo $title_form; ?></h1>
+        <p>En esta sección podrás cambiar la contraseña de tu cuenta.</p>
+         <div class="w-xxxx-6">
+            <?php echo $adminForm->openTag(); ?>
+            <?php echo $adminForm->getAllRow(); ?>
+            <?php echo $adminForm->endTag(); ?>
+       </div>
+    </div>
+</div>
+
+<script >
+
+$( "#userspass" ).validate({
+rules: {
+
+    <?php if(!empty($contrasena_db) && !$MyAccessList->MeDasChancePasar(ADMINISTRAR_OTRA_CONTRASENA)): ?>
+    contrasena_ant: {
+            required: true,
+            minlength: 6
+    },
+    <?php endif; ?>
+    contrasena: {
+            required: true,
+            minlength: 6
+    },
+    contrasena1: {
+            required: true,
+            minlength: 6,
+            equalTo: "#contrasena"
+    }
+
+},
+messages: {
+    <?php if(!empty($contrasena_db) && !$MyAccessList->MeDasChancePasar(ADMINISTRAR_OTRA_CONTRASENA)): ?>
+    contrasena_ant: {
+            required: "Escribe tu contrase&ntilde;a actual",
+            minlength: jQuery.validator.format("Tu contrase&ntilde;a actual debe tener minimo {0} caracteres"),
+    },
+    <?php endif; ?>
+    contrasena: {
+            required: "Escribe tu contrase&ntilde;a",
+            minlength: jQuery.validator.format("Tu contrase&ntilde;a debe tener minimo {0} caracteres")
+    },
+    contrasena1: {
+
+            required: "Repite tu contrase&ntilde;a",
+
+            minlength: jQuery.validator.format("Tu contrase&ntilde;a debe tener mínimo {0} caracteres"),
+            equalTo: "Tu contrase&ntilde;a no coincide"
+    }
+
+
+}
+});
+
+</script>

@@ -1,0 +1,77 @@
+/*********************** LOGIN SHELL *****************************/
+#shell {
+   height: 500px;
+   width: 90%;
+   margin: auto;
+   padding-top: 31px;
+   padding-left: 30px;
+   background-color: #000000;
+   background-repeat: no-repeat;
+
+}
+
+#shell .inner-wrap {
+   height: 488px;
+   width: 95%;
+   overflow: hidden; 
+	 overflow-y: auto; 
+	/* overflow-x: hidden; */
+}
+
+.irix-window a{
+   color: #cccccc;
+}
+
+.command-history, .command-input,  .entered-command {
+   white-space: pre;
+   white-space: pre-wrap;
+   white-space: -moz-pre-wrap;
+}
+
+.command-history p{
+    font-weight: 700;
+   font-size: 15px;
+   color: #cccccc;
+}
+
+
+.command-history table{
+    font-weight: 700;
+   font-size: 15px;
+   color: #cccccc;
+   border-style: dotted; 
+   border-color: #cccccc; 
+}
+
+
+
+.terminal-view {
+/*   font-family: 'Courier';*/
+   font-weight: 700;
+   font-size: 15px;
+   color: #CCCCCC;
+   word-wrap: break-word;
+}
+
+.terminal-input {
+   width: 100%;
+}
+
+.buffer {
+   position: absolute;
+   left: -10000px;
+   top: -10000px;
+}
+
+.hide {
+   display: none;
+}
+
+.cursor {
+   font-size: 15px;
+   border: solid 1px #ffffff;
+}
+
+.cursor-activo {
+   background: #ffffff;
+}

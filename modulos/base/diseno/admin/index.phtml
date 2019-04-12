@@ -1,0 +1,11 @@
+<div class="w-xxxx12 _wrapper_avatar">
+    <h1>Mi perfil</h1>
+    <?php if ($MySession->LoggedIn() && $MySession->GetVar('verificado') == 0): ?>
+    <div class="w-xxxx-12">
+        <h3>Confirmar mi cuenta</h3>
+
+            <a class="_btn _secondary" href="/public/php/registro/setVerificacion.php">Reenviar el correo de confirmación</a>
+
+    </div>
+    <?php endif; ?>
+</div>

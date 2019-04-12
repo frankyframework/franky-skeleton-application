@@ -1,0 +1,23 @@
+<div class="w-xxxx-12 cont_contactanos">
+    <div class="w-xxxx-2">&nbsp;</div>
+    <div class="w-xxxx-8">
+        <h1><?php echo _('Contáctanos'); ?></h1>
+        <div class="error_contacto" style="display:none;">
+            <span><br/></span>.<br />
+        </div>
+        <div class="w-xxxx-6">
+            <?php echo $contactanosForm->openTag(); ?>
+            <?php echo $contactanosForm->getAllRow(); ?>
+            <?php echo $contactanosForm->endTag(); ?>
+        </div>
+        <div class="w-xxxx-6">
+            <p class="align_center"><img src="/public/skin/default/images/img_contactanos.png" alt="" /></p>
+            <p class="align_center">Si quieres saber más acerca de nuestros productos o servicios no dudes en contactarnos.</p>
+        </div>
+    </div>
+</div>
+<script >
+    <!--
+    $("textarea[name=comentarios]").maximaLongitud(1000,"contador_opina");
+    // -->
+</script>

@@ -1,0 +1,76 @@
+<?php
+$css = array();
+$css[] = getCss("style.css");
+$css[] = getCss("style_base.css");
+$css[] = getCss("grid.css");
+$css[] = getCss("franky.mobile.css");
+$css[] = getCss("franky-font/style.css");
+$css[] = "/public/jquery-ui/css/jquery-ui.min.css";
+$css[] = "/public/jquery-ui/css/jquery-ui.structure.css";
+
+if(is_array($MyFrankyMonster->MyCSSFile()))
+{
+	if(count($MyFrankyMonster->MyCSSFile()) > 0)
+	{
+		foreach($MyFrankyMonster->MyCSSFile() as $_css)
+		{
+                    if(!empty($_css))
+                    {
+                        $css[] = getCss($_css);
+                    }
+		}
+	}
+}
+
+
+
+if (is_array($MyFrankyMonster->MyJQueyfile())) {
+    if (count($MyFrankyMonster->MyJQueyfile()) > 0) {
+        foreach ($MyFrankyMonster->MyJQueyfile() as $jquery) {
+
+            $path = PROJECT_DIR."/public/jquery/$jquery/css/";
+            $css_jquery = \vendor\filesystem\File::getFiles($path);
+            if(count($css_jquery) > 0)
+            {
+                foreach($css_jquery as $_css_jquery)
+                {
+                    $css[] = "/public/jquery/$jquery/css/" . $_css_jquery;
+
+                }
+            }
+        }
+    }
+}
+
+
+
+if(getCoreConfig('base/debug/production')){
+
+    $CssCreatos         = new modulos\base\vendor\model\cssCreator();
+    $CssCreatos->addCss($css);
+    $CssCreatos->setPath($MyConfigure->getPathSite()."/");
+    $name_css =  getFriendly($MyFrankyMonster->MySeccion());
+    $CssCreatos->setName((!empty($name_css) ? $name_css.".css" : "home.css"));
+    if($MyFrankyMonster->MySeccion() == ERR_404)
+    {
+       $CssCreatos->setName("404.css");
+    }
+
+    $global_css = $CssCreatos->get();
+    ?>
+    <link rel='stylesheet' type='text/css' href="<?php echo $global_css; ?>" />
+    <?php
+
+
+}
+else
+{
+    foreach($css as $_file_css)
+    {
+        ?>
+        <link rel='stylesheet' type='text/css' href="<?php echo $_file_css; ?>" />
+        <?php
+    }
+}
+//echo $MyMetatag->getCss();
+?>
