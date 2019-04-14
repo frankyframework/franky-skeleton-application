@@ -1,7 +1,7 @@
 <?php
 function makeHTMLCategoriasBlog( $type="interface")
 {
-    $MyCategoriaBlog = new modulos\blog\vendor\model\categoriasBlog();
+    $MyCategoriaBlog = new Blog\model\categoriasBlog();
     $MyCategoriaBlog->setTampag(1000);
     $MyCategoriaBlog->setOrdensql("nombre ASC");
     $MyCategoriaBlog->getData();
@@ -54,7 +54,7 @@ function getMenuCategoriasBlog()
 {
     global $MySession;
     global $MyRequest;
-    $MyCategoriaBlog = new modulos\blog\vendor\model\categoriasBlog();
+    $MyCategoriaBlog = new Blog\model\categoriasBlog();
     $MyCategoriaBlog->setOrdensql("nombre ASC");
     $MyCategoriaBlog->setTampag(1000);
     $MyCategoriaBlog->getData('',1);
@@ -91,7 +91,7 @@ function getMenuArticulosBlog($cat = "")
 {
     global $MyRequest;
 
-    $MyBlog = new modulos\blog\vendor\model\Blog();
+    $MyBlog = new Blog\model\Blog();
     $MyBlog->setOrdensql("titulo ASC");
     $MyBlog->setTampag(10);
     $MyBlog->getData('',"","","",1);
@@ -173,7 +173,7 @@ function calificacionStars($cal)
 function prevArticuloBlog($id){
     global $MyRequest;
     global $MyConfigure;
-  $MyBlog = new \modulos\blog\vendor\model\Blog();
+  $MyBlog = new \Blog\model\Blog();
   $blog_detalle = array();
   if($MyBlog->getData($id, "","","",1,"","",1)== REGISTRO_SUCCESS)
   {
@@ -191,7 +191,7 @@ function prevArticuloBlog($id){
 
 function nextArticuloBlog($id){
     global $MyRequest;
-  $MyBlog = new \modulos\blog\vendor\model\Blog();
+  $MyBlog = new \Blog\model\Blog();
   $blog_detalle = array();
   if($MyBlog->getData($id, "","","",1,"",1)== REGISTRO_SUCCESS)
   {

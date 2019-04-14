@@ -1,5 +1,5 @@
 <?php
-namespace modulos\developer\Form;
+namespace Developer\Form;
 
 class  shellForm extends \Franky\Form\Form
 {

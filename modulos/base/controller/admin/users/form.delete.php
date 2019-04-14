@@ -1,6 +1,6 @@
 <?php
-use modulos\base\vendor\model\USERS;
-use modulos\base\Form\deleteForm;
+use Base\model\USERS;
+use Base\Form\deleteForm;
 
 $MyUser = new USERS();
 $result	 = $MyUser->getData($MySession->GetVar('id'));

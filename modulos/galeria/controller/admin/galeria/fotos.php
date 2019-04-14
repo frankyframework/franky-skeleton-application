@@ -1,6 +1,6 @@
 <?php
-use modulos\galeria\vendor\model\fotos;
-use modulos\galeria\vendor\model\albumes;
+use Galeria\model\fotos;
+use Galeria\model\albumes;
 
 $album	= $MyRequest->getRequest('album');
 $MyAlbum = new albumes();

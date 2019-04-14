@@ -1,7 +1,7 @@
 <?php
-use \modulos\base\vendor\model\CoreConfig;
-use \modulos\base\vendor\model\CoreConfigModel;
-use \modulos\base\vendor\entity\CoreConfigEntity;
+use \Base\model\CoreConfig;
+use \Base\model\CoreConfigModel;
+use \Base\entity\CoreConfigEntity;
 use Franky\Filesystem\File;
 use Franky\Core\validaciones;
 

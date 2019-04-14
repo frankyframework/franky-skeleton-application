@@ -2,4 +2,4 @@ User-agent: *
 Allow: /*
 Disallow: /plesk-stat
 Disallow: /pie
-Disallow: /public/php/lang.php
+Disallow: //lang.php

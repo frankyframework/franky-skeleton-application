@@ -1,10 +1,10 @@
 <?php
-use modulos\ecommerce\vendor\model\pedidos;
-use modulos\ecommerce\vendor\entity\pedidos as pedidosEntity;
+use Ecommerce\model\pedidos;
+use Ecommerce\entity\pedidos as pedidosEntity;
 use Franky\Filesystem\File;
 use Franky\Haxor\Tokenizer;
-use \modulos\base\vendor\model\USERS;
-use \modulos\base\vendor\model\TemplateemailModel;
+use \Base\model\USERS;
+use \Base\model\TemplateemailModel;
 
 $Tokenizer = new Tokenizer();
 $pedidosModel             = new pedidos();
@@ -103,7 +103,7 @@ if(!$error)
             'comprovante' => makeHTMLImg( $MyRequest->link(imageResize($MyConfigure->getUploadDir()."/ecommerce/pedidos/".$detalle_pedido['uid']."/".$detalle_pedido['id']."/".$newtestigo,400,400),false,true))
 );
            
-            $SecciontransaccionalEntity    = new \modulos\base\vendor\entity\SecciontransaccionalEntity;
+            $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
             $SecciontransaccionalEntity->frinedly('agregar-comprovante-de-pago');
             $TemplateemailModel->setOrdensql('id DESC');
             $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());

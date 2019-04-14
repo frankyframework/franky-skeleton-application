@@ -1,5 +1,5 @@
 <?php
-namespace modulos\developer\Form;
+namespace Developer\Form;
 
 class frankyForm extends \Franky\Form\Form
 {
@@ -10,7 +10,7 @@ class frankyForm extends \Franky\Form\Form
         parent::__construct();
        $this->setAtributos(array(
             'name' => $name,
-            'action' => "/public/php/admin/franky/submit.php",
+            'action' => "//admin/franky/submit.php",
             'method' => 'post'
         ));
 

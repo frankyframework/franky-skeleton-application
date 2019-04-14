@@ -1,5 +1,5 @@
 <?php
-use modulos\base\vendor\model\VerificacionesPendientes;
+use Base\model\VerificacionesPendientes;
 $VerificacionesPendientes             = new VerificacionesPendientes();
 
 if($MySession->GetVar('id') != "")
@@ -14,8 +14,8 @@ if($MySession->GetVar('id') != "")
 
 
 
-    $TemplateemailModel    = new \modulos\base\vendor\model\TemplateemailModel;
-    $SecciontransaccionalEntity    = new \modulos\base\vendor\entity\SecciontransaccionalEntity;
+    $TemplateemailModel    = new \Base\model\TemplateemailModel;
+    $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
     $SecciontransaccionalEntity->frinedly('confirmacion-de-email');
     $TemplateemailModel->setOrdensql('id DESC');
     $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());

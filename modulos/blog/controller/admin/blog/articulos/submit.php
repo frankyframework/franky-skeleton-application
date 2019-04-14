@@ -1,9 +1,9 @@
 <?php
-use modulos\blog\vendor\model\Blog;
+use Blog\model\Blog;
 use Franky\Core\validaciones;
-use modulos\base\vendor\entity\redireccionesEntity;
-use modulos\blog\vendor\model\BorradorblogModel;
-use modulos\blog\vendor\entity\BorradorblogEntity;
+use Base\entity\redireccionesEntity;
+use Blog\model\BorradorblogModel;
+use Blog\entity\BorradorblogEntity;
 use Franky\Filesystem\File;
 
 use Franky\Haxor\Tokenizer;

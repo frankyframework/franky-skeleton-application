@@ -1,7 +1,7 @@
 <?php
-use modulos\base\Form\filtrosForm;
+use Base\Form\filtrosForm;
 use Franky\Core\paginacion;
-use modulos\developer\vendor\model\ORGANOS;
+use Developer\model\ORGANOS;
 
 $OrganosCorporales  = new ORGANOS();
 $MyPaginacion = new paginacion();

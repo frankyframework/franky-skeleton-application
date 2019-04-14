@@ -1,5 +1,5 @@
 <?php
-namespace modulos\ecommerce\Form;
+namespace Ecommerce\Form;
 
 class StatusPagoForm extends \Franky\Form\Form
 {

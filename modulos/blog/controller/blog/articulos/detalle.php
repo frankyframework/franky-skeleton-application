@@ -1,12 +1,12 @@
 <?php
-use modulos\blog\vendor\model\Blog;
-use modulos\blog\vendor\model\calificacionBlog;
-use modulos\blog\vendor\model\comentariosBlog;
-use modulos\blog\vendor\schema\blogPostingSchema;
+use Blog\model\Blog;
+use Blog\model\calificacionBlog;
+use Blog\model\comentariosBlog;
+use Blog\schema\blogPostingSchema;
 use Franky\Schema\aggregateRatingSchema;
 use Franky\Schema\personSchema;
-use modulos\base\vendor\model\USERS;
-use modulos\blog\Form\buscadorForm;
+use Base\model\USERS;
+use Blog\Form\buscadorForm;
 
 $MyBuscadorBlog = new buscadorForm('buscadorblog');
 $MyBuscadorBlog->setAtributo("action", $MyRequest->url(BLOG));

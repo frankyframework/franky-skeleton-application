@@ -1,9 +1,9 @@
 <?php
-use modulos\base\Form\filtrosForm;
+use Base\Form\filtrosForm;
 use Franky\Core\paginacion;
-use modulos\seo\vendor\model\SeoModel;
-use modulos\seo\vendor\entity\SeoEntity;
-use modulos\base\vendor\entity\OrganosEntity;
+use Seo\model\SeoModel;
+use Seo\entity\SeoEntity;
+use Base\entity\OrganosEntity;
 
 
 $MyPaginacion = new paginacion();

@@ -1,5 +1,5 @@
 <?php
-use modulos\base\vendor\model\mfm;
+use Base\model\mfm;
 use Franky\Filesystem\File;
 
 if (!$MyAccessList->MeDasChancePasar(ADMINISTRAR_UPLOADERS)) {  die('No autorizado'); }
@@ -112,7 +112,7 @@ if(isset($_REQUEST['return'])) {
 
             $.ajax({
                 type: "GET",
-                url: "/public/php/mfm.php",
+                url: "//mfm.php",
                 data: query,
                 cache: false,
                 success: function(response){

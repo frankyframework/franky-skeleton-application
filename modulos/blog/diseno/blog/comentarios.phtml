@@ -12,7 +12,7 @@
             <img class="image_100" src="<?php echo $blog_detalle["miavatar"]; ?>" alt="<?php echo $MySession->GetVar('usuario'); ?>">
         </div>
         <div class="cont_comment">
-            <form name="frmcommentsblog" id="frmcommentsblog" action="/public/php/blog/articulos/comment.submit.php" method="post">
+            <form name="frmcommentsblog" id="frmcommentsblog" action="//blog/articulos/comment.submit.php" method="post">
               <input type="hidden" name="id" value="<?php echo $blog_detalle["id"]; ?>" />
                 <?php if($MySession->LoggedIn() ): ?>
                     <label for="comentario" class="user_nickname"><?php echo $MySession->GetVar('usuario'); ?></label>

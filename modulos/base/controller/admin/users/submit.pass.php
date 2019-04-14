@@ -1,7 +1,7 @@
 <?php
 use Franky\Core\validaciones;
-use modulos\base\vendor\model\USERS;
-use modulos\base\vendor\entity\users as entityUser;
+use Base\model\USERS;
+use Base\entity\users as entityUser;
 use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();

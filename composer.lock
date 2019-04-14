@@ -4,20 +4,126 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a4d6b82a296645c6fe106a52da87fc56",
+    "content-hash": "c699dd02b3a1b3f2a0fb7e138aabe35b",
     "packages": [
         {
-            "name": "frankyframework/franky-core",
-            "version": "dev-master",
+            "name": "conekta/conekta-php",
+            "version": "v4.0.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/frankyframework/franky-core.git",
-                "reference": "b7332b0a0e21b2bdcad7e876e76da37802bbfe57"
+                "url": "https://github.com/conekta/conekta-php.git",
+                "reference": "585d29341ad8a398800856ae41904c11914cbae0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/frankyframework/franky-core/zipball/b7332b0a0e21b2bdcad7e876e76da37802bbfe57",
-                "reference": "b7332b0a0e21b2bdcad7e876e76da37802bbfe57",
+                "url": "https://api.github.com/repos/conekta/conekta-php/zipball/585d29341ad8a398800856ae41904c11914cbae0",
+                "reference": "585d29341ad8a398800856ae41904c11914cbae0",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": "~7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~6.1"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "lib/Conekta/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Conekta  and contributors",
+                    "homepage": "https://github.com/conekta/conekta-php/contributors"
+                }
+            ],
+            "description": "Conekta PHP Library",
+            "homepage": "https://www.conekta.io/",
+            "keywords": [
+                "api",
+                "conekta",
+                "payment processing"
+            ],
+            "time": "2018-07-11T17:03:55+00:00"
+        },
+        {
+            "name": "facebook/graph-sdk",
+            "version": "5.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/facebook/php-graph-sdk.git",
+                "reference": "2d8250638b33d73e7a87add65f47fabf91f8ad9b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/facebook/php-graph-sdk/zipball/2d8250638b33d73e7a87add65f47fabf91f8ad9b",
+                "reference": "2d8250638b33d73e7a87add65f47fabf91f8ad9b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.4|^7.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "~5.0",
+                "mockery/mockery": "~0.8",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "Allows for implementation of the Guzzle HTTP client",
+                "paragonie/random_compat": "Provides a better CSPRNG option in PHP 5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Facebook\\": "src/Facebook/"
+                },
+                "files": [
+                    "src/Facebook/polyfills.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Facebook Platform"
+            ],
+            "authors": [
+                {
+                    "name": "Facebook",
+                    "homepage": "https://github.com/facebook/php-graph-sdk/contributors"
+                }
+            ],
+            "description": "Facebook SDK for PHP",
+            "homepage": "https://github.com/facebook/php-graph-sdk",
+            "keywords": [
+                "facebook",
+                "sdk"
+            ],
+            "time": "2018-12-11T22:56:31+00:00"
+        },
+        {
+            "name": "frankyframework/franky-core",
+            "version": "1.0.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/frankyframework/franky-core.git",
+                "reference": "1a4bfda00ef21704b87016495b9005de980d46f0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/frankyframework/franky-core/zipball/1a4bfda00ef21704b87016495b9005de980d46f0",
+                "reference": "1a4bfda00ef21704b87016495b9005de980d46f0",
                 "shasum": ""
             },
             "require": {
@@ -42,21 +148,21 @@
                     "email": "ussiel@gmail.com"
                 }
             ],
-            "description": "Funciones de tokenizacion y escape de caracteres",
-            "time": "2019-04-12T15:33:00+00:00"
+            "description": "Funciones de core",
+            "time": "2019-04-12T23:15:26+00:00"
         },
         {
             "name": "frankyframework/franky-database",
-            "version": "dev-master",
+            "version": "1.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/frankyframework/franky-database.git",
-                "reference": "c0007e24f129aa61cffb68e47944283d40eab327"
+                "reference": "1032d22c055dd39b5099fa3bf83a6e21925fc4b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/frankyframework/franky-database/zipball/c0007e24f129aa61cffb68e47944283d40eab327",
-                "reference": "c0007e24f129aa61cffb68e47944283d40eab327",
+                "url": "https://api.github.com/repos/frankyframework/franky-database/zipball/1032d22c055dd39b5099fa3bf83a6e21925fc4b0",
+                "reference": "1032d22c055dd39b5099fa3bf83a6e21925fc4b0",
                 "shasum": ""
             },
             "require": {
@@ -81,21 +187,21 @@
                     "email": "ussiel@gmail.com"
                 }
             ],
-            "description": "Funciones de tokenizacion y escape de caracteres",
-            "time": "2019-04-12T17:43:24+00:00"
+            "description": "Modulo de consultas y conexion a BD.",
+            "time": "2019-04-12T23:21:30+00:00"
         },
         {
             "name": "frankyframework/franky-filesystem",
-            "version": "dev-master",
+            "version": "1.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/frankyframework/franky-filesystem.git",
-                "reference": "aad175544108b070b5e98bb95ce660f0370b5796"
+                "reference": "bcd3e3bdcc37bb51ca5ef609563f0c02d69025ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/frankyframework/franky-filesystem/zipball/aad175544108b070b5e98bb95ce660f0370b5796",
-                "reference": "aad175544108b070b5e98bb95ce660f0370b5796",
+                "url": "https://api.github.com/repos/frankyframework/franky-filesystem/zipball/bcd3e3bdcc37bb51ca5ef609563f0c02d69025ca",
+                "reference": "bcd3e3bdcc37bb51ca5ef609563f0c02d69025ca",
                 "shasum": ""
             },
             "require": {
@@ -114,21 +220,21 @@
             "license": [
                 "MIT"
             ],
-            "description": "Funciones de tokenizacion y escape de caracteres",
-            "time": "2019-04-12T19:23:32+00:00"
+            "description": "Funciones de directorios y archivos",
+            "time": "2019-04-12T23:23:47+00:00"
         },
         {
             "name": "frankyframework/franky-form",
-            "version": "dev-master",
+            "version": "1.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/frankyframework/franky-form.git",
-                "reference": "2f00b70b082e0b3431c316466fec6bfd28d8cc82"
+                "reference": "7adcbec4033b3f61ecc8a67a5ccfe4342f3347c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/frankyframework/franky-form/zipball/2f00b70b082e0b3431c316466fec6bfd28d8cc82",
-                "reference": "2f00b70b082e0b3431c316466fec6bfd28d8cc82",
+                "url": "https://api.github.com/repos/frankyframework/franky-form/zipball/7adcbec4033b3f61ecc8a67a5ccfe4342f3347c4",
+                "reference": "7adcbec4033b3f61ecc8a67a5ccfe4342f3347c4",
                 "shasum": ""
             },
             "require": {
@@ -153,12 +259,12 @@
                     "email": "ussiel@gmail.com"
                 }
             ],
-            "description": "Funciones de tokenizacion y escape de caracteres",
-            "time": "2019-04-12T19:02:54+00:00"
+            "description": "Constructor de formularios",
+            "time": "2019-04-13T22:04:59+00:00"
         },
         {
             "name": "frankyframework/franky-haxor",
-            "version": "dev-master",
+            "version": "1.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/frankyframework/franky-haxor.git",
@@ -197,7 +303,7 @@
         },
         {
             "name": "frankyframework/franky-schema",
-            "version": "dev-master",
+            "version": "1.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/frankyframework/franky-schema.git",
@@ -279,6 +385,53 @@
                 "php mobile detect"
             ],
             "time": "2018-09-01T15:05:15+00:00"
+        },
+        {
+            "name": "openpay/sdk",
+            "version": "1.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/open-pay/openpay-php.git",
+                "reference": "7dd9b168efc823eb6ff38ef5db73551cac81e77c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/open-pay/openpay-php/zipball/7dd9b168efc823eb6ff38ef5db73551cac81e77c",
+                "reference": "7dd9b168efc823eb6ff38ef5db73551cac81e77c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-hash": "*",
+                "php": ">=5.2.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.8.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Openpay": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Openpay",
+                    "email": "soporte@openpay.mx",
+                    "homepage": "http://www.openpay.mx/docs/libraries.html"
+                },
+                {
+                    "name": "Federico Balderas",
+                    "email": "federico.balderas@foograde.com",
+                    "homepage": "http://foograde.com"
+                }
+            ],
+            "description": "This is a client implementing the payment services for Openpay at openpay.mx",
+            "time": "2019-02-14T19:31:06+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -1867,12 +2020,12 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": {
-        "frankyframework/franky-haxor": 20,
         "frankyframework/franky-core": 20,
-        "frankyframework/franky-database": 20,
         "frankyframework/franky-form": 20,
+        "frankyframework/franky-database": 20,
+        "frankyframework/franky-haxor": 20,
         "frankyframework/franky-filesystem": 20,
         "frankyframework/franky-schema": 20
     },

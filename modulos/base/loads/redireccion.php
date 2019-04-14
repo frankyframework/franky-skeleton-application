@@ -1,5 +1,5 @@
 <?php
-$MyRedireccion      = new \modulos\base\vendor\model\redireccionesModel();
+$MyRedireccion      = new \Base\model\redireccionesModel();
 
 $result	 	= $MyRedireccion->getData("",parse_url($MyRequest->getURI(),PHP_URL_PATH),1);
 $total		= $MyRedireccion->getTotal();

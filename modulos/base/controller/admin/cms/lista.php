@@ -1,5 +1,5 @@
 <?php
-use modulos\base\Form\filtrosForm;
+use Base\Form\filtrosForm;
 use Franky\Core\paginacion;
 $MyPaginacion = new paginacion();
 
@@ -9,7 +9,7 @@ $MyPaginacion->setOrden($MyRequest->getRequest('order',"DESC"));
 $MyPaginacion->setTampageDefault($MyRequest->getRequest('tampag',25));
 $busca_b	= $MyRequest->getRequest('busca_b');
 
-$MyCMS = new \modulos\base\vendor\model\CMS;
+$MyCMS = new \Base\model\CMS;
 
 $MyCMS->setPage($MyPaginacion->getPage());
 $MyCMS->setTampag($MyPaginacion->getTampageDefault());

@@ -1,6 +1,6 @@
 <?php
 use Franky\Core\validaciones;
-use modulos\developer\vendor\model\Ftp;
+use Developer\model\Ftp;
 use Franky\Filesystem\File;
 
 if($MySession->getVar('nivel') != NIVEL_USERDEVELOPER)

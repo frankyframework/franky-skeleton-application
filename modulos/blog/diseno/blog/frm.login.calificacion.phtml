@@ -1,5 +1,5 @@
 <?php if(!$MySession->LoggedIn()): ?>
-<?php $loginFormRating = new modulos\base\Form\loginForm("autentificacion_rating"); ?>
+<?php $loginFormRating = new Base\Form\loginForm("autentificacion_rating"); ?>
 <?php echo $loginFormRating->addCallback($MyRequest->link($MyRequest->getURI())); ?>
 <div class="deja_comment rating_login" style="display:none;">
        

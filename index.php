@@ -20,7 +20,7 @@ else {
 
 if(getCoreConfig('base/debug/debug') == 0 && getCoreConfig('base/debug/production'))
 {
-    $MinifyHtml = new modulos\base\vendor\model\MinifyHtml();
+    $MinifyHtml = new Base\model\MinifyHtml();
     echo $MinifyHtml->minify($dump_hmtl);
 }
 else

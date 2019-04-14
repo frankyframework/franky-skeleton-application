@@ -4,8 +4,8 @@
 function EliminarUser($id,$status)
 {
 
-        $MyUser             = new \modulos\base\vendor\model\USERS();
-        $MyUserEntity    = new \modulos\base\vendor\entity\users();
+        $MyUser             = new \Base\model\USERS();
+        $MyUserEntity    = new \Base\entity\users();
         $Tokenizer = new \Franky\Haxor\Tokenizer;
         global $MyAccessList;
         global $MyMessageAlert;
@@ -35,8 +35,8 @@ function EliminarUser($id,$status)
 
 function EliminarTemplate($id,$status)
 {
-        $TemplateemailModel    = new\modulos\base\vendor\model\TemplateemailModel;
-        $TemplateemailEntity    = new\modulos\base\vendor\entity\TemplateemailEntity;
+        $TemplateemailModel    = new\Base\model\TemplateemailModel;
+        $TemplateemailEntity    = new\Base\entity\TemplateemailEntity;
           $Tokenizer = new \Franky\Haxor\Tokenizer;
         global $MyAccessList;
         global $MyMessageAlert;
@@ -65,7 +65,7 @@ function EliminarTemplate($id,$status)
 function EliminarCMSTemplate($id,$status)
 {
 
-	$MyCMS = new \modulos\base\vendor\model\CMS;
+	$MyCMS = new \Base\model\CMS;
         global $MyAccessList;
         global $MyMessageAlert;
         $respuesta = null;
@@ -92,9 +92,9 @@ function EliminarCMSTemplate($id,$status)
 function EliminarDispositivo($password,$id,$status)
 {
       global $MySession;
-	     $UserdeviceModel = new \modulos\base\vendor\model\UserdeviceModel;
-         $UserdeviceEntity = new \modulos\base\vendor\entity\UserdeviceEntity;
-       $MyUser         = new \modulos\base\vendor\model\USERS();
+	     $UserdeviceModel = new \Base\model\UserdeviceModel;
+         $UserdeviceEntity = new \Base\entity\UserdeviceEntity;
+       $MyUser         = new \Base\model\USERS();
        $Tokenizer = new \Franky\Haxor\Tokenizer;
         global $MyAccessList;
         global $MyMessageAlert;
@@ -135,9 +135,9 @@ function EliminarDispositivo($password,$id,$status)
 function BloquearDispositivo($password,$id,$status)
 {
       global $MySession;
-	     $UserdeviceModel = new \modulos\base\vendor\model\UserdeviceModel;
-         $UserdeviceEntity = new \modulos\base\vendor\entity\UserdeviceEntity;
-       $MyUser         = new \modulos\base\vendor\model\USERS();
+	     $UserdeviceModel = new \Base\model\UserdeviceModel;
+         $UserdeviceEntity = new \Base\entity\UserdeviceEntity;
+       $MyUser         = new \Base\model\USERS();
        $Tokenizer = new \Franky\Haxor\Tokenizer;
         global $MyAccessList;
         global $MyMessageAlert;
@@ -180,7 +180,7 @@ function BloquearDispositivo($password,$id,$status)
 function EliminarComentario($id,$status)
 {
 
-	$ContactoModel = new modulos\base\vendor\model\Contacto;
+	$ContactoModel = new Base\model\Contacto;
         global $MyAccessList;
         global $MyMessageAlert;
         $respuesta = null;
@@ -285,8 +285,8 @@ function EliminarUrlIternacional($id,$status)
         global $MyAccessList;
         global $MyMessageAlert;
 
-        $UrlInternacionalModel              = new \modulos\base\vendor\model\UrlInternacionalModel();
-        $UrlInternacionalEntity              = new \modulos\base\vendor\entity\UrlInternacionalEntity();
+        $UrlInternacionalModel              = new \Base\model\UrlInternacionalModel();
+        $UrlInternacionalEntity              = new \Base\entity\UrlInternacionalEntity();
 
         $Tokenizer = new \Franky\Haxor\Tokenizer;
         $respuesta = null;

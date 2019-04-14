@@ -1,8 +1,8 @@
 <?php
-use modulos\base\vendor\model\USERS;
-use modulos\base\vendor\entity\users as entityUser;
-use modulos\base\vendor\model\VerificacionesPendientes;
-use modulos\base\vendor\model\Emails;
+use Base\model\USERS;
+use Base\entity\users as entityUser;
+use Base\model\VerificacionesPendientes;
+use Base\model\Emails;
 
 $Emails = new Emails();
 

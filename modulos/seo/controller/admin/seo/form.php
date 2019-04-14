@@ -1,7 +1,7 @@
 <?php
-use modulos\seo\Form\SEOForm;
-use modulos\seo\vendor\model\SeoModel;
-use modulos\seo\vendor\entity\SeoEntity;
+use Seo\Form\SEOForm;
+use Seo\model\SeoModel;
+use Seo\entity\SeoEntity;
 
 $MySeo              = new SeoModel();
 $SeoEntity  = new SeoEntity($MyRequest->getRequest());

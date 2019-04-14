@@ -1,5 +1,5 @@
 <?php
-namespace modulos\ecommerce\Form;
+namespace Ecommerce\Form;
 
 class paypalBotonForm extends \Franky\Form\Form
 {

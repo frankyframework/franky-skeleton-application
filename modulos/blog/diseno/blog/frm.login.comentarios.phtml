@@ -1,6 +1,6 @@
 <?php if(!$MySession->LoggedIn()): ?>
 <div class="deja_comment comment_login" style="display:none;">
-    <?php $loginFormRating = new modulos\base\Form\loginForm("autentificacioncoment"); ?>
+    <?php $loginFormRating = new Base\Form\loginForm("autentificacioncoment"); ?>
     <?php echo $loginFormRating->addCallback($MyRequest->link($MyRequest->getURI())); ?>
     <?php echo $loginFormRating->openTag(); ?>
     <?php echo $loginFormRating->getAllRow(); ?>

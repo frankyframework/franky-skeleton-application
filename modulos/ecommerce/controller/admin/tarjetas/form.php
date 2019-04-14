@@ -1,7 +1,7 @@
 <?php
-use modulos\ecommerce\Form\conektaForm;
-use modulos\ecommerce\Form\openpayForm;
-use modulos\ecommerce\vendor\model\CardsModel;
+use Ecommerce\Form\conektaForm;
+use Ecommerce\Form\openpayForm;
+use Ecommerce\model\CardsModel;
 
 $CardsModel             = new CardsModel();
 

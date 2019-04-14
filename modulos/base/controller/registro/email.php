@@ -1,5 +1,5 @@
 <?php
-use modulos\base\vendor\model\USERS;
+use Base\model\USERS;
 use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();

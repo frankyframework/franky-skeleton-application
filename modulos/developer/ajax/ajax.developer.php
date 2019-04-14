@@ -5,9 +5,9 @@ function EliminarPagina($id,$status)
         global $MyAccessList;
         global $MyMessageAlert;
 
-        $OrganosCorporales  = new \modulos\developer\vendor\model\ORGANOS();
+        $OrganosCorporales  = new \Developer\model\ORGANOS();
 
-        $organosEntity = new \modulos\developer\vendor\entity\organosEntity();
+        $organosEntity = new \Developer\entity\organosEntity();
         $organosEntity->setId($id);
         $organosEntity->setStatus($status);
         $respuesta = null;

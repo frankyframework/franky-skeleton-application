@@ -3,14 +3,14 @@
 function checkCustomerOpenpay($id)
 {
 
-    $CustomerModel = new \modulos\ecommerce\vendor\model\CustomersModel();
-    $CustomerEntity = new \modulos\ecommerce\vendor\entity\CustomersEntity();
+    $CustomerModel = new \Ecommerce\model\CustomersModel();
+    $CustomerEntity = new \Ecommerce\entity\CustomersEntity();
     $CustomerEntity->id_user($id);
 
     if($CustomerModel->getData($CustomerEntity->getArrayCopy()) != REGISTRO_SUCCESS)
     {
 
-        $UserModel = new \modulos\base\vendor\model\USERS();
+        $UserModel = new \Base\model\USERS();
         if($UserModel->getData($id)==REGISTRO_SUCCESS)
         {
 
@@ -53,14 +53,14 @@ function checkCustomerOpenpay($id)
 function updateCustomerOpenpay($id)
 {
 
-    $CustomerModel = new \modulos\ecommerce\vendor\model\CustomersModel();
-    $CustomerEntity = new \modulos\ecommerce\vendor\entity\CustomersEntity();
+    $CustomerModel = new \Ecommerce\model\CustomersModel();
+    $CustomerEntity = new \Ecommerce\entity\CustomersEntity();
     $CustomerEntity->id_user($id);
 
     if($CustomerModel->getData($CustomerEntity->getArrayCopy()) == REGISTRO_SUCCESS)
     {
         $registro = $CustomerModel->getRows();
-        $UserModel = new \modulos\base\vendor\model\USERS();
+        $UserModel = new \Base\model\USERS();
         if($UserModel->getData($id)==REGISTRO_SUCCESS)
         {
             $_registro = $UserModel->getRows();
@@ -93,8 +93,8 @@ function updateCustomerOpenpay($id)
 function deleteCustomerOpenpay($id)
 {
 
-    $CustomerModel = new \modulos\ecommerce\vendor\model\CustomersModel();
-    $CustomerEntity = new \modulos\ecommerce\vendor\entity\CustomersEntity();
+    $CustomerModel = new \Ecommerce\model\CustomersModel();
+    $CustomerEntity = new \Ecommerce\entity\CustomersEntity();
     $CustomerEntity->id_user($id);
 
     if($CustomerModel->getData($CustomerEntity->getArrayCopy()) == REGISTRO_SUCCESS)
@@ -125,8 +125,8 @@ function deleteCustomerOpenpay($id)
 
 function getCustomerOpenpay($id)
 {
-    $CustomerModel = new \modulos\ecommerce\vendor\model\CustomersModel();
-    $CustomerEntity = new \modulos\ecommerce\vendor\entity\CustomersEntity();
+    $CustomerModel = new \Ecommerce\model\CustomersModel();
+    $CustomerEntity = new \Ecommerce\entity\CustomersEntity();
     $CustomerEntity->id_user($id);
 
     if($CustomerModel->getData($CustomerEntity->getArrayCopy()) == REGISTRO_SUCCESS)

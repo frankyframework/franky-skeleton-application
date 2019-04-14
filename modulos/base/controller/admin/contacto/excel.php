@@ -1,5 +1,5 @@
 <?php
-use modulos\base\vendor\model\Contacto;
+use Base\model\Contacto;
 $MyContacto         = new Contacto();
 $busca_b	= $MyRequest->getRequest('busca_b');
 

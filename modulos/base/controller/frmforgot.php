@@ -1,4 +1,4 @@
 <?php
-use modulos\base\Form\forgotForm;
+use Base\Form\forgotForm;
 $forgotForm = new forgotForm("forgotp");
 ?>

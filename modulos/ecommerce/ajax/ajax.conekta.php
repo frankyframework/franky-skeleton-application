@@ -2,12 +2,12 @@
 function conekta_tarjeta()
 {
     global $MyRequest;
-    $MyForm =  new \modulos\ecommerce\Form\conektaForm("card-form");
+    $MyForm =  new \Ecommerce\Form\conektaForm("card-form");
 
     //$MyForm->addCheckGuardar();
-    $MyForm->setAtributo("action", "/public/php/ecommerce/tarjeta/confirmacion.submit.php");
-    $checkoutForm = new \modulos\ecommerce\Form\checkoutForm("frm_tarjeta_checkout");
-    $checkoutForm->setAtributo("action", "/public/php/ecommerce/tarjeta/confirmacion.submit.php");
+    $MyForm->setAtributo("action", "//ecommerce/tarjeta/confirmacion.submit.php");
+    $checkoutForm = new \Ecommerce\Form\checkoutForm("frm_tarjeta_checkout");
+    $checkoutForm->setAtributo("action", "//ecommerce/tarjeta/confirmacion.submit.php");
     global $MyMessageAlert;
     global $MySession;
     $respuesta = array("error" => false,"html" => "");

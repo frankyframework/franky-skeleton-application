@@ -2,7 +2,7 @@
 function EliminarCategoriaBlog($id,$status)
 {
 
-	$MyCategoriaBlog = new modulos\blog\vendor\model\categoriasBlog();
+	$MyCategoriaBlog = new Blog\model\categoriasBlog();
         global $MyAccessList;
         global $MyMessageAlert;
          if($MyAccessList->MeDasChancePasar(ADMINISTRAR_CATEGORIAS_BLOG))
@@ -28,7 +28,7 @@ function EliminarCategoriaBlog($id,$status)
 function EliminarArticuloBlog($id,$status)
 {
 				$Tokenizer = new \Franky\Haxor\Tokenizer;
-				$MyBlog = new modulos\blog\vendor\model\Blog();
+				$MyBlog = new Blog\model\Blog();
         global $MyAccessList;
         global $MyMessageAlert;
          if($MyAccessList->MeDasChancePasar(ADMINISTRAR_ARTICULOS_BLOG))
@@ -54,7 +54,7 @@ function EliminarArticuloBlog($id,$status)
 function EliminarComentarioBlog($id,$status)
 {
 
-	$MyComentarioBlog = new modulos\blog\vendor\model\comentariosBlog();
+	$MyComentarioBlog = new Blog\model\comentariosBlog();
         global $MyAccessList;
         global $MyMessageAlert;
         $respuesta =null;
@@ -81,7 +81,7 @@ function EliminarComentarioBlog($id,$status)
 
 function AgregarCalificacionBlog($id,$calificacion)
 {
-	$MyCalificacionBlog = new modulos\blog\vendor\model\calificacionBlog();
+	$MyCalificacionBlog = new Blog\model\calificacionBlog();
         global $MySession;
         global $MyMessageAlert;
         global $MyAccessList;
@@ -125,8 +125,8 @@ function AgregarCalificacionBlog($id,$calificacion)
 function descartarBorradorBlog($id,$status)
 {
 
-				$BorradorblogModel = new \modulos\blog\vendor\model\BorradorblogModel();
-				$BorradorblogEntity = new \modulos\blog\vendor\entity\BorradorblogEntity();
+				$BorradorblogModel = new \Blog\model\BorradorblogModel();
+				$BorradorblogEntity = new \Blog\entity\BorradorblogEntity();
         global $MyAccessList;
         global $MyMessageAlert;
          if($MyAccessList->MeDasChancePasar(ADMINISTRAR_ARTICULOS_BLOG))

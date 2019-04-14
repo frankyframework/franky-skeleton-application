@@ -1,7 +1,7 @@
 <?php
-use modulos\base\Form\filtrosForm;
+use Base\Form\filtrosForm;
 use Franky\Core\paginacion;
-use modulos\base\vendor\model\Mailing;
+use Base\model\Mailing;
 
 $MyPaginacion = new paginacion();
 $MyMailing          = new Mailing;

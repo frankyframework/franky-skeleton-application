@@ -77,7 +77,7 @@ if (is_array($MyMetatag->getJs(false))) {
 <?php
 if(getCoreConfig('base/debug/production')){
 
-    $JsCreatos   = new modulos\base\vendor\model\jsCreator();
+    $JsCreatos   = new Base\model\jsCreator();
     $JsCreatos->addJs($js);
     $JsCreatos->setEmbebed(getJSEmbebed($render_phtml));
     $JsCreatos->setPath($MyConfigure->getPathSite()."/");

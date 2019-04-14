@@ -1,13 +1,13 @@
 <?php
-use \modulos\ecommerce\vendor\model\producto_pedidoModel;
-use \modulos\ecommerce\vendor\model\carrito;
-use \modulos\ecommerce\vendor\model\pedidos as pedidos_model;
-use \modulos\ecommerce\vendor\entity\pedidos;
-use \modulos\ecommerce\vendor\entity\producto_pedido;
-use modulos\ecommerce\vendor\entity\direcciones_facturacion as DireccionesFacturacionEntity;
-use modulos\ecommerce\vendor\model\direcciones_facturacion;
-use modulos\ecommerce\vendor\entity\direcciones as DireccionesEnvioEntity;
-use modulos\ecommerce\vendor\model\direcciones;
+use \Ecommerce\model\producto_pedidoModel;
+use \Ecommerce\model\carrito;
+use \Ecommerce\model\pedidos as pedidos_model;
+use \Ecommerce\entity\pedidos;
+use \Ecommerce\entity\producto_pedido;
+use Ecommerce\entity\direcciones_facturacion as DireccionesFacturacionEntity;
+use Ecommerce\model\direcciones_facturacion;
+use Ecommerce\entity\direcciones as DireccionesEnvioEntity;
+use Ecommerce\model\direcciones;
 use Franky\Core\ObserverManager;
 
 if($MySession->GetVar('pay_free') == "")
@@ -124,8 +124,8 @@ if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)
    'gran_total' => getFormatoPrecio($productos_comprados['gran_total']),'metodo_pago' =>'No requerido','status' => getStatusTransaccion($status_pago),'referencia' => $referencia);
 
 
-    $TemplateemailModel    = new \modulos\base\vendor\model\TemplateemailModel;
-    $SecciontransaccionalEntity    = new \modulos\base\vendor\entity\SecciontransaccionalEntity;
+    $TemplateemailModel    = new \Base\model\TemplateemailModel;
+    $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
     $SecciontransaccionalEntity->frinedly('nueva-orden-de-compra');
     $TemplateemailModel->setOrdensql('id DESC');
     $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());

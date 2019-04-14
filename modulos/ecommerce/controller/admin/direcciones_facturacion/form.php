@@ -1,6 +1,6 @@
 <?php
-use modulos\ecommerce\Form\direccionesForm;
-use modulos\ecommerce\vendor\model\direcciones_facturacion;
+use Ecommerce\Form\direccionesForm;
+use Ecommerce\model\direcciones_facturacion;
 
 $MyDirecciones             = new direcciones_facturacion();
 
@@ -10,7 +10,7 @@ $data = $MyFlashMessage->getResponse();
 
 $adminForm = new direccionesForm("frmdirecciones_facturacion");
 
-$adminForm->setAtributo("action", "/public/php/ecommerce/admin/direcciones_facturacion/submit.php");
+$adminForm->setAtributo("action", "//ecommerce/admin/direcciones_facturacion/submit.php");
 if(!empty($id))
 {
 	

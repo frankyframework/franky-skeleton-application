@@ -1,7 +1,7 @@
 <?php
-use modulos\base\Form\filtrosForm;
+use Base\Form\filtrosForm;
 use Franky\Core\paginacion;
-use modulos\ecommerce\vendor\model\direcciones;
+use Ecommerce\model\direcciones;
 
 $MyDirecciones             = new direcciones();
 $MyPaginacion = new paginacion();

@@ -1,5 +1,5 @@
 <?php
-namespace modulos\ecommerce\Form;
+namespace Ecommerce\Form;
 
 class direccionesForm extends \Franky\Form\Form
 {
@@ -10,7 +10,7 @@ class direccionesForm extends \Franky\Form\Form
 
         $this->setAtributos(array(
             'name' => $name,
-            'action' => "/public/php/ecommerce/admin/direcciones/submit.php",
+            'action' => "//ecommerce/admin/direcciones/submit.php",
             'method' => 'post'
         ));
 

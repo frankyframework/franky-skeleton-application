@@ -1,7 +1,8 @@
-
-vendor
+/vendor
 configure/data.php
 configure/databases.php
 phpunit.xml
 public/upload/
 logs/
+sess_tmp/
+docker/

@@ -68,7 +68,7 @@
 
                     <form name="frmcarrito" action="<?php echo $action; ?>" method="GET">
                         <?php if(!$MySession->LoggedIn()): ?>
-                        <input type='hidden' name="callback" value="<?php echo $MyRequest->link("public/php/setCarritoUser.php"); ?>" />
+                        <input type='hidden' name="callback" value="<?php echo $MyRequest->link("/setCarritoUser.php"); ?>" />
                         <?php endif; ?>
                         <input class="_btn_pay" type='submit' name="pagar_ahora" value="Ir a pagar" />
                     </form>

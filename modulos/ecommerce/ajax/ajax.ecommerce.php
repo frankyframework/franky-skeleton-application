@@ -2,8 +2,8 @@
 function EliminarDireccionEcommerce($id,$status)
 {
     global $MySession;
-    $MyDireccion =  new \modulos\ecommerce\vendor\model\direcciones();
-    $MyDireccionEntity =  new \modulos\ecommerce\vendor\entity\direcciones();
+    $MyDireccion =  new \Ecommerce\model\direcciones();
+    $MyDireccionEntity =  new \Ecommerce\entity\direcciones();
     global $MyAccessList;
     global $MyMessageAlert;
 
@@ -37,8 +37,8 @@ function EliminarDireccionEcommerce($id,$status)
 function EliminarTarjetaEcommerce($id,$status)
 {
     global $MySession;
-    $CardsModel =  new \modulos\ecommerce\vendor\model\CardsModel();
-    $CardsEntity =  new \modulos\ecommerce\vendor\entity\CardsEntity();
+    $CardsModel =  new \Ecommerce\model\CardsModel();
+    $CardsEntity =  new \Ecommerce\entity\CardsEntity();
     global $MyAccessList;
     global $MyMessageAlert;
 
@@ -82,8 +82,8 @@ function EliminarTarjetaEcommerce($id,$status)
 function EliminarDireccionFacturacionEcommerce($id,$status)
 {
     global $MySession;
-    $MyDireccion =  new \modulos\ecommerce\vendor\model\direcciones_facturacion();
-    $MyDireccionEntity =  new \modulos\ecommerce\vendor\entity\direcciones_facturacion();
+    $MyDireccion =  new \Ecommerce\model\direcciones_facturacion();
+    $MyDireccionEntity =  new \Ecommerce\entity\direcciones_facturacion();
     global $MyAccessList;
     global $MyMessageAlert;
 
@@ -116,7 +116,7 @@ function EliminarDireccionFacturacionEcommerce($id,$status)
 
 function eliminarProductoCarrito($id)
 {
-    $MyCarritoProducto =  new \modulos\ecommerce\vendor\model\carrito_producto();
+    $MyCarritoProducto =  new \Ecommerce\model\carrito_producto();
     $Tokenizer = new \Franky\Haxor\Tokenizer;
     global $MyAccessList;
     global $MyMessageAlert;
@@ -147,8 +147,8 @@ function eliminarProductoCarrito($id)
 
 function getInfoCarrito()
 {
-    $MyCarritoProducto =  new \modulos\ecommerce\vendor\model\carrito_producto();
-    $MyCarritoCompras =  new \modulos\ecommerce\vendor\model\carrito();
+    $MyCarritoProducto =  new \Ecommerce\model\carrito_producto();
+    $MyCarritoCompras =  new \Ecommerce\model\carrito();
     $Tokenizer = new \Franky\Haxor\Tokenizer;
     global $MyConfigure;
 
@@ -200,10 +200,10 @@ function getInfoCarrito()
 
 function addProductoCarrito($producto,$qty=1,$caracteristicas=array())
 {
-        $MyCarritoEntity =  new \modulos\ecommerce\vendor\entity\carrito();
-        $MyCarritoCompras =  new \modulos\ecommerce\vendor\model\carrito();
-        $MyCarritoProducto =  new \modulos\ecommerce\vendor\model\carrito_producto();
-        $MyCarritoProductoEntity =  new \modulos\ecommerce\vendor\entity\carrito_producto();
+        $MyCarritoEntity =  new \Ecommerce\entity\carrito();
+        $MyCarritoCompras =  new \Ecommerce\model\carrito();
+        $MyCarritoProducto =  new \Ecommerce\model\carrito_producto();
+        $MyCarritoProductoEntity =  new \Ecommerce\entity\carrito_producto();
         $Tokenizer = new \Franky\Haxor\Tokenizer;
         global $MyAccessList;
         global $MyMessageAlert;
@@ -266,8 +266,8 @@ function addProductoCarrito($producto,$qty=1,$caracteristicas=array())
 
 function setQTYProductoCarrido($id,$qty)
 {
-        $MyCarritoProdcutoEntity =  new \modulos\ecommerce\vendor\entity\carrito_producto();
-	       $MyCarritoProducto =  new \modulos\ecommerce\vendor\model\carrito_producto();
+        $MyCarritoProdcutoEntity =  new \Ecommerce\entity\carrito_producto();
+	       $MyCarritoProducto =  new \Ecommerce\model\carrito_producto();
          $Tokenizer = new \Franky\Haxor\Tokenizer;
         global $MyAccessList;
         global $MyMessageAlert;
@@ -315,8 +315,8 @@ function setQTYProductoCarrido($id,$qty)
 function setconfigPago($id_pago)
 {
 
-    $MyCarritoModel = new \modulos\ecommerce\vendor\model\carrito();
-    $MyCarritoEntity = new \modulos\ecommerce\vendor\entity\carrito();
+    $MyCarritoModel = new \Ecommerce\model\carrito();
+    $MyCarritoEntity = new \Ecommerce\entity\carrito();
     global $MyAccessList;
     global $MySession;
     global $MyMessageAlert;
@@ -364,7 +364,7 @@ function setDireccionCheckout($id_envio)
 {
     global $MySession;
     $data = array("id_envio" => $id_envio);
-    $MyDireccion = new modulos\ecommerce\vendor\model\direcciones();
+    $MyDireccion = new Ecommerce\model\direcciones();
 
     $MyDireccion->setTampag(1000);
     $MyDireccion->setOrdensql("fecha ASC");
@@ -416,7 +416,7 @@ function setFacturacionCheckout($id_facturacion)
     $data = $MySession->GetVar('checkout');
     $data["id_facturacion"] = $id_facturacion;
 
-    $MyDireccion = new modulos\ecommerce\vendor\model\direcciones_facturacion();
+    $MyDireccion = new Ecommerce\model\direcciones_facturacion();
 
     $MyDireccion->setTampag(1000);
     $MyDireccion->setOrdensql("fecha ASC");
@@ -474,12 +474,12 @@ function SetStatusPagoEcommerce($id,$status,$nota,$monto)
     global $MySession;
     global $MyMessageAlert;
     $Tokenizer = new \Franky\Haxor\Tokenizer;
-    $pedidosModel    = new \modulos\ecommerce\vendor\model\pedidos();
-    $pedidosEntity   = new \modulos\ecommerce\vendor\entity\pedidos();
-    $TemplateemailModel    = new \modulos\base\vendor\model\TemplateemailModel;
-    $USERS = new \modulos\base\vendor\model\USERS();
-    $EcommercelogstatusModel    = new \modulos\ecommerce\vendor\model\EcommercelogstatusModel();
-    $EcommercelogstatusEntity   = new \modulos\ecommerce\vendor\entity\EcommercelogstatusEntity();
+    $pedidosModel    = new \Ecommerce\model\pedidos();
+    $pedidosEntity   = new \Ecommerce\entity\pedidos();
+    $TemplateemailModel    = new \Base\model\TemplateemailModel;
+    $USERS = new \Base\model\USERS();
+    $EcommercelogstatusModel    = new \Ecommerce\model\EcommercelogstatusModel();
+    $EcommercelogstatusEntity   = new \Ecommerce\entity\EcommercelogstatusEntity();
     $ObserverManager = new \Franky\Core\ObserverManager;
 
 
@@ -524,7 +524,7 @@ function SetStatusPagoEcommerce($id,$status,$nota,$monto)
                 'gran_total' => getFormatoPrecio($detalle_pedido['monto_compra']),'metodo_pago' =>$detalle_pedido['metodo_pago'],"status" => getStatusTransaccion($status));
 
 
-                $SecciontransaccionalEntity    = new \modulos\base\vendor\entity\SecciontransaccionalEntity;
+                $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
                 $SecciontransaccionalEntity->frinedly('cambio-status-pedido');
                 $TemplateemailModel->setOrdensql('id DESC');
                 $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());

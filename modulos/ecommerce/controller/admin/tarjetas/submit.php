@@ -1,7 +1,7 @@
 <?php
 use Franky\Core\validaciones;
-use modulos\ecommerce\vendor\model\CardsModel;
-use modulos\ecommerce\vendor\entity\CardsEntity;
+use Ecommerce\model\CardsModel;
+use Ecommerce\entity\CardsEntity;
 
 $CardsModel        = new CardsModel();
 $CardsEntity       = new CardsEntity();

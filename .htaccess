@@ -9,28 +9,13 @@ RewriteCond %{REQUEST_URI}  !\.(php?|html?|jpg|jpeg|png|bmp|gif|svg|js|css|ttf|w
 RewriteRule ^(.*)([^/])$ http://%{HTTP_HOST}/$1$2/ [L,R=301]
 
 
-RewriteCond %{REQUEST_URI}  sitemap.xml$
-RewriteRule ^sitemap.xml$  public/php/sitemap.xml [NC,L]
 
-RewriteCond %{REQUEST_URI}  service_worker.js$
-RewriteRule ^service_worker.js  public/php/service_worker.js [NC,L]
-
-RewriteCond %{REQUEST_URI}  !public/php/index\.php$
-RewriteRule ^public/php/(.*)$  post/index.php [NC,L]
-
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?my_url_friendly=$1 [L,QSA]
-
-
+RewriteRule ^(.*)$  index.php?my_url_friendly=$1 [L,QSA]
 
 
 Options -MultiViews
 
 </IfModule>
-
-
 
 
 <IfModule mod_expires.c>

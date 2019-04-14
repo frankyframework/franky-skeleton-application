@@ -26,7 +26,7 @@ rules: {
       minlength: 3,
         ValidaCaracteres: true,
         remote: {
-            url: "/public/php/registro/alias.php",
+            url: "//registro/alias.php",
             type: "post",
             data: {
                 usuario: function() {
@@ -42,7 +42,7 @@ rules: {
         required: true,
         email: true,
         remote: {
-            url: "/public/php/registro/email.php",
+            url: "//registro/email.php",
             type: "post",
             data: {
                 email: function() {

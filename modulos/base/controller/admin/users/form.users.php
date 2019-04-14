@@ -1,6 +1,6 @@
 <?php
-use modulos\base\Form\registroForm;
-use modulos\base\vendor\model\USERS;
+use Base\Form\registroForm;
+use Base\model\USERS;
 use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();
@@ -17,7 +17,7 @@ if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_OTROS_USUARIOS))
 }
 
 $adminForm = new registroForm("users");
-$adminForm->setAtributo("action","/public/php/admin/users/submit.users.php");
+$adminForm->setAtributo("action","//admin/users/submit.users.php");
 
 $title = "Alta";
 

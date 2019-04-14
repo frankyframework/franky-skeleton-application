@@ -1,6 +1,6 @@
 <?php
-$MyPedidoTiendaEntity = new \modulos\ecommerce\vendor\entity\pedidos();
-$MyPedidoTienda = new \modulos\ecommerce\vendor\model\pedidos();
+$MyPedidoTiendaEntity = new \Ecommerce\entity\pedidos();
+$MyPedidoTienda = new \Ecommerce\model\pedidos();
 
 $header = '';
 $req = 'cmd=_notify-validate';

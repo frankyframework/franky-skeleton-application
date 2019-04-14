@@ -1,6 +1,6 @@
 <?php
-use modulos\ecommerce\vendor\model\carrito;
-use modulos\ecommerce\vendor\entity\carrito as carritoEntity;
+use Ecommerce\model\carrito;
+use Ecommerce\entity\carrito as carritoEntity;
 
 $error = false;
 

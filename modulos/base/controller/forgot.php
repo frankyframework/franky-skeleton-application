@@ -1,7 +1,7 @@
 <?php
 use Franky\Core\validaciones;
-use modulos\base\vendor\model\USERS;
-use modulos\base\vendor\entity\users as entityUser;
+use Base\model\USERS;
+use Base\entity\users as entityUser;
 
 $MyUser             = new USERS();
 $MyLogin = new \Franky\Core\LOGIN("users","email","1",array("status" => "1"));
@@ -34,8 +34,8 @@ if($error == false)
         $result = $MyUser->save($MyUserEntity->getArrayCopy());
 
 
-        $TemplateemailModel    = new \modulos\base\vendor\model\TemplateemailModel;
-        $SecciontransaccionalEntity    = new \modulos\base\vendor\entity\SecciontransaccionalEntity;
+        $TemplateemailModel    = new \Base\model\TemplateemailModel;
+        $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
         $SecciontransaccionalEntity->frinedly('recuperar-contrasena');
         $TemplateemailModel->setOrdensql('id DESC');
         $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());

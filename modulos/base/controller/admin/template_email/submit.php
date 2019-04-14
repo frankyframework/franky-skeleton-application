@@ -1,7 +1,7 @@
 <?php
 use Franky\Core\validaciones;
-use modulos\base\vendor\model\TemplateemailModel;
-use modulos\base\vendor\entity\TemplateemailEntity;
+use Base\model\TemplateemailModel;
+use Base\entity\TemplateemailEntity;
 use Franky\Haxor\Tokenizer;
 use Franky\Filesystem\File;
 

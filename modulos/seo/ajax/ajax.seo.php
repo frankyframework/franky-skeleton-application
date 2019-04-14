@@ -7,7 +7,7 @@ function EliminarRedireccion($id,$status)
         global $MyAccessList;
         global $MyMessageAlert;
         
-        $redireccionEntity = new modulos\base\vendor\entity\redireccionesEntity();
+        $redireccionEntity = new Base\entity\redireccionesEntity();
         $redireccionEntity->setId($id);
         $redireccionEntity->setStatus($status);
         $respuesta = null;
@@ -35,8 +35,8 @@ function EliminarSeo($id,$status)
         global $MyAccessList;
         global $MyMessageAlert;
 
-        $MySeo              = new \modulos\seo\vendor\model\SeoModel();
-        $SeoEntity              = new \modulos\seo\vendor\entity\SeoEntity();
+        $MySeo              = new \Seo\model\SeoModel();
+        $SeoEntity              = new \Seo\entity\SeoEntity();
         $respuesta = null;
         if($MyAccessList->MeDasChancePasar(ADMINISTRAR_SEO))
         {

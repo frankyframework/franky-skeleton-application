@@ -1,12 +1,12 @@
 <?php
 use Franky\Core\validaciones;
-use modulos\ecommerce\vendor\model\pedidos;
-use modulos\ecommerce\vendor\entity\pedidos as PedidosEntity;
-use modulos\ecommerce\vendor\model\producto_pedidoModel;
-use modulos\ecommerce\vendor\entity\producto_pedido as producto_pedidoEntity;
-use modulos\base\vendor\model\USERS;
-use modulos\ecommerce\vendor\model\EcommercelogstatusModel;
-use modulos\ecommerce\vendor\entity\EcommercelogstatusEntity;
+use Ecommerce\model\pedidos;
+use Ecommerce\entity\pedidos as PedidosEntity;
+use Ecommerce\model\producto_pedidoModel;
+use Ecommerce\entity\producto_pedido as producto_pedidoEntity;
+use Base\model\USERS;
+use Ecommerce\model\EcommercelogstatusModel;
+use Ecommerce\entity\EcommercelogstatusEntity;
 
 $body = @file_get_contents('php://input');
 $data_conketa = json_decode($body);
@@ -77,8 +77,8 @@ if ($data_conketa->type == 'charge.paid'){
               $campos = array("orden" => $PedidosEntity->getId(),"nombre" =>$detalle_pedido['nombre'],'productos' =>$productos_html,"email" => $dataUser['email'],
               'gran_total' => getFormatoPrecio($detalle_pedido['monto_compra']),'metodo_pago' =>$detalle_pedido['metodo_pago'],"status" => getStatusTransaccion($status_pago));
 
-              $TemplateemailModel    = new \modulos\base\vendor\model\TemplateemailModel;
-              $SecciontransaccionalEntity    = new \modulos\base\vendor\entity\SecciontransaccionalEntity;
+              $TemplateemailModel    = new \Base\model\TemplateemailModel;
+              $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
               $SecciontransaccionalEntity->frinedly('cambio-status-pedido');
               $TemplateemailModel->setOrdensql('id DESC');
               $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());

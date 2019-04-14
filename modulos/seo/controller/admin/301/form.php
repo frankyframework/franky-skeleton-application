@@ -1,5 +1,5 @@
 <?php
-use modulos\seo\Form\redireccion301Form;
+use Seo\Form\redireccion301Form;
 
 $id		= $MyRequest->getRequest('id');
 $callback	= $MyRequest->getRequest('callback');

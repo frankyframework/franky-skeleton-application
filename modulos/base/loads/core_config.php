@@ -1,7 +1,7 @@
 <?php
-use \modulos\base\vendor\model\CoreConfig;
-use \modulos\base\vendor\model\CoreConfigModel;
-use \modulos\base\vendor\entity\CoreConfigEntity;
+use \Base\model\CoreConfig;
+use \Base\model\CoreConfigModel;
+use \Base\entity\CoreConfigEntity;
 use Franky\Filesystem\File;
 
 $CoreConfig      = new CoreConfig();
@@ -56,7 +56,7 @@ if(!$core_config_render):
                     $CoreConfigEntity->value((is_array($config['value']) ? json_encode($config['value']) : $config['value']));
                     $CoreConfigModel->save($CoreConfigEntity->getArrayCopy());
                     $core_config_db[$config['path']] = $config['value'];
-
+                  
 
                 }
                 else {

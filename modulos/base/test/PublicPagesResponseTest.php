@@ -1,6 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
-use modulos\base\vendor\model\paginasModel;
+use Base\model\paginasModel;
 use Franky\Core\configure;
 use Franky\Core\request;
 

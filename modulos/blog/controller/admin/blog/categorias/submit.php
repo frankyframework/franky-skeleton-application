@@ -1,6 +1,6 @@
 <?php
 use Franky\Core\validaciones; 
-use modulos\blog\vendor\model\categoriasBlog;
+use Blog\model\categoriasBlog;
 $MyCategoriaBlog = new categoriasBlog();
 
 $id                 = $MyRequest->getRequest('id');

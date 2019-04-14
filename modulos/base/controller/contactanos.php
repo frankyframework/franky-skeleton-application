@@ -1,5 +1,5 @@
 <?php
-use modulos\base\Form\contactanosForm;
+use Base\Form\contactanosForm;
 use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();

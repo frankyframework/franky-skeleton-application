@@ -1,8 +1,8 @@
 <?php
-use modulos\blog\vendor\model\Blog;
-use modulos\blog\vendor\model\categoriasBlog;
+use Blog\model\Blog;
+use Blog\model\categoriasBlog;
 use Franky\Core\paginacion;
-use modulos\blog\Form\buscadorForm;
+use Blog\Form\buscadorForm;
 
 $MyPaginacion = new paginacion();
 

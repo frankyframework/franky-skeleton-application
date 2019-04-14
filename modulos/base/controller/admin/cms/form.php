@@ -1,5 +1,5 @@
 <?php
-use modulos\base\Form\cmsForm;
+use Base\Form\cmsForm;
 
 
 
@@ -12,7 +12,7 @@ $path_img_blog = 'temp/'.md5(time());
 $MySession->SetVar('path_img_blog',$path_img_blog);
 if(!empty($id))
 {
-    $MyCMS = new \modulos\base\vendor\model\CMS;
+    $MyCMS = new \Base\model\CMS;
     $result = $MyCMS->getData($id);
     $data   = $MyCMS->getRows();
     $path_img_blog = $id;

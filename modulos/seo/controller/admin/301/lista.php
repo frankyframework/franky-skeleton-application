@@ -1,5 +1,5 @@
 <?php
-use modulos\base\Form\filtrosForm;
+use Base\Form\filtrosForm;
 use Franky\Core\paginacion;
 $MyPaginacion = new paginacion();
 

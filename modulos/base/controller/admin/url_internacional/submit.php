@@ -1,7 +1,7 @@
 <?php
 use Franky\Core\validaciones;
-use modulos\base\vendor\model\UrlInternacionalModel;
-use modulos\base\vendor\entity\UrlInternacionalEntity;
+use Base\model\UrlInternacionalModel;
+use Base\entity\UrlInternacionalEntity;
 use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();

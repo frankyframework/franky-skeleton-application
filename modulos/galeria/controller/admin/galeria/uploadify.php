@@ -1,5 +1,5 @@
 <?php
-use modulos\galeria\vendor\model\fotos;
+use Galeria\model\fotos;
 $MyFoto = new fotos();
 $respuesta = array("error" => false);  
 $album = $MyRequest->getRequest('album');

@@ -1,6 +1,6 @@
 <?php
-use \modulos\ecommerce\vendor\model\carrito;
-use modulos\ecommerce\vendor\model\carrito_producto;
+use \Ecommerce\model\carrito;
+use Ecommerce\model\carrito_producto;
 use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();

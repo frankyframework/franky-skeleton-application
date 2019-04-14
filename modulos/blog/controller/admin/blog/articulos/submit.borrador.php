@@ -1,7 +1,7 @@
 <?php
-use modulos\blog\vendor\model\Blog;
-use modulos\blog\vendor\model\BorradorblogModel;
-use modulos\blog\vendor\entity\BorradorblogEntity;
+use Blog\model\Blog;
+use Blog\model\BorradorblogModel;
+use Blog\entity\BorradorblogEntity;
 use Franky\Haxor\Tokenizer;
 use Franky\Filesystem\File;
 

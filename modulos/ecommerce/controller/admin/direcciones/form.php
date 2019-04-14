@@ -1,6 +1,6 @@
 <?php
-use modulos\ecommerce\Form\direccionesForm;
-use modulos\ecommerce\vendor\model\direcciones;
+use Ecommerce\Form\direccionesForm;
+use Ecommerce\model\direcciones;
 
 $MyDirecciones             = new direcciones();
 

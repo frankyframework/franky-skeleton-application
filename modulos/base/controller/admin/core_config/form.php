@@ -1,7 +1,7 @@
 <?php
-use \modulos\base\vendor\model\CoreConfig;
-use \modulos\base\vendor\model\CoreConfigModel;
-use \modulos\base\vendor\entity\CoreConfigEntity;
+use \Base\model\CoreConfig;
+use \Base\model\CoreConfigModel;
+use \Base\entity\CoreConfigEntity;
 use \Franky\Form\Form;
 
 $CoreConfig           = new CoreConfig();
@@ -40,7 +40,7 @@ if($CoreConfigModel->getTotal() > 0)
 
 $Form->setAtributos(array(
      'name' => 'frmConfig',
-     'action' => "/public/php/admin/core-config/submit.php",
+     'action' => "//admin/core-config/submit.php",
      'method' => 'post',
     'enctype' => "multipart/form-data"
  ));

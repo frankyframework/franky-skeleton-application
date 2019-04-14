@@ -1,11 +1,11 @@
 <?php
-use modulos\base\vendor\entity\users as entityUser;
-use modulos\base\vendor\model\AvataresModel;
-use modulos\base\vendor\entity\AvataresEntity;
+use Base\entity\users as entityUser;
+use Base\model\AvataresModel;
+use Base\entity\AvataresEntity;
 use Franky\Core\ObserverManager;
-$MyUser             = new \modulos\base\vendor\model\USERS();
+$MyUser             = new \Base\model\USERS();
 $ObserverManager = new ObserverManager;
-$MySocialLogin = new \modulos\sociallogin\vendor\model\socialLogin("users","usuario","contrasena",array("status" => "1"));
+$MySocialLogin = new \Sociallogin\model\socialLogin("users","usuario","contrasena",array("status" => "1"));
 
 
 $usuario	= $MyRequest->getRequest('usuario');

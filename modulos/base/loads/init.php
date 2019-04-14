@@ -1,4 +1,5 @@
 <?php
+die;
 ini_set('session.save_path', PROJECT_DIR.'/sess_tmp');
 session_start();
 
@@ -17,7 +18,7 @@ include_once(PROJECT_DIR."/modulos/base/loads/autoload.php");
 
 $MyConfigure        = new \Franky\Core\configure();
 
-ini_set('display_errors',1 /*getCoreConfig('base/debug/display_errors')*/);
+ini_set('display_errors',getCoreConfig('base/debug/display_errors'));
 
 
 $MyDebug = new \Franky\Core\MYDEBUG();
@@ -30,7 +31,7 @@ $MyMetatag          = new \Franky\Core\Metatags();
 $MyFlashMessage     = new \Franky\Core\flashMessages($CONTEXT);
 $MyRequest          = new \Franky\Core\request();
 $Mobile_detect      = new \Mobile_Detect();
-$MyRedireccion      = new \modulos\base\vendor\model\redireccionesModel();
+$MyRedireccion      = new \Base\model\redireccionesModel();
 $ObserverManager    = new \Franky\Core\ObserverManager();
 
 define('LOCALE_DIR', PROJECT_DIR .'/modulos/base/locale/');
@@ -102,7 +103,7 @@ $lang_root = (!empty($catalogo_idiomas[$locale]) ? $catalogo_idiomas[$locale] : 
 header("Content-type: text/html; charset=UTF-8");
 
 
-$loginForm = new modulos\base\Form\loginForm("autentificacion");
+$loginForm = new Base\Form\loginForm("autentificacion");
 
 
 include_once(PROJECT_DIR."/modulos/base/loads/lca.php");
@@ -116,13 +117,18 @@ if(!empty($modulos))
 {
     foreach($modulos as $modulo)
     {
-       if($modulo != "base")
-       {
-           if(file_exists(PROJECT_DIR.'/modulos/'.$modulo.'/loads/init.php'))
-           {
-                include_once(PROJECT_DIR.'/modulos/'.$modulo.'/loads/init.php');
-           }
-       }
+        if($modulo != "base")
+        {
+            if(file_exists(PROJECT_DIR.'/modulos/'.$modulo.'/loads/init.php'))
+            {
+                 include_once(PROJECT_DIR.'/modulos/'.$modulo.'/loads/init.php');
+            }
+
+        }
+        if(file_exists(PROJECT_DIR."/modulos/$modulo/configure/alias.php"))
+        {
+             $files[$modulo] = include(PROJECT_DIR."/modulos/$modulo/configure/alias.php");
+        }
     }
 }
 
@@ -133,14 +139,30 @@ $seccion = $MyRequest->getRequest("my_url_friendly","");
 if(!$MyFrankyMonster->crearMonstruo(($seccion)) || $seccion == ERR_404)
 {
 
-      $MyCMS = new \modulos\base\vendor\model\CMS;
+      $MyCMS = new \Base\model\CMS;
       if($MyCMS->getData($MyRequest->getURI(),"",1) == REGISTRO_SUCCESS){
-          $MyFrankyMonster->crearMonstruo(CMS);
+            $MyFrankyMonster->crearMonstruo(CMS);
       }
       else {
-        header("HTTP/1.0 404 Not Found");
-        header("Status: 404 Not Found");
-        $MyFrankyMonster->crearMonstruo(ERR_404);
+     
+        $_files = array();
+        foreach ($files as $k => $v)
+        {
+            foreach ($v as $_k => $_v)
+            {
+                    $_files[$_k] = $_v;
+            }
+        }
+        if(isset($_files[$MyRequest->getRequest("my_url_friendly","")]) && file_exists($_files[$MyRequest->getRequest("my_url_friendly","")]))
+        {
+            require($_files[$MyRequest->getRequest("my_url_friendly","")]);
+        }
+        else
+        {
+            header("HTTP/1.0 404 Not Found");
+            header("Status: 404 Not Found");
+            $MyFrankyMonster->crearMonstruo(ERR_404);
+        }
       }
 }
 $permisos = $MyFrankyMonster->MyPermisos();

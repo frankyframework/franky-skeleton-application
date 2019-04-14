@@ -1,6 +1,6 @@
 <?php
-use modulos\base\Form\contrasenaForm;
-use modulos\base\vendor\model\USERS;
+use Base\Form\contrasenaForm;
+use Base\model\USERS;
 use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();

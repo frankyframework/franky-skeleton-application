@@ -1,8 +1,8 @@
 <?php
 use PHPUnit\Framework\TestCase;
 use Franky\Core\MYDEBUG;
-use \modulos\base\vendor\model\TemplateemailModel;
-use \modulos\base\vendor\entity\SecciontransaccionalEntity;
+use \Base\model\TemplateemailModel;
+use \Base\entity\SecciontransaccionalEntity;
 
 include(dirname(__FILE__).'/../loads/util.php');
 

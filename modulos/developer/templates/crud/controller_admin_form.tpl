@@ -1,5 +1,5 @@
 <?php
-use modulos\\{modulo}\\Form\\{form};
+use modulos\\{modulo}\\Form\{form};
 use modulos\\{modulo}\\vendor\\model\\{modelo};
 use modulos\\{modulo}\\vendor\\entity\\{entidad};
 use vendor\\haxor\\Tokenizer;

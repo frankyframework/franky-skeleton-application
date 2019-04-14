@@ -1,6 +1,6 @@
 <?php
-use modulos\base\vendor\model\AvataresModel;
-use modulos\base\vendor\entity\AvataresEntity;
+use Base\model\AvataresModel;
+use Base\entity\AvataresEntity;
 
 $AvataresModel = new AvataresModel();
 $AvataresEntity = new AvataresEntity();

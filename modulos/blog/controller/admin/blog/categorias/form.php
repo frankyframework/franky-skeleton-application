@@ -1,6 +1,6 @@
 <?php
-use modulos\blog\Form\categoriasBlogForm;
-use modulos\blog\vendor\model\categoriasBlog;
+use Blog\Form\categoriasBlogForm;
+use Blog\model\categoriasBlog;
 
 $id                 = $MyRequest->getRequest('id');
 $callback           = $MyRequest->getRequest('callback');

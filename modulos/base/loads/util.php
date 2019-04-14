@@ -455,8 +455,8 @@ function getAvatar($id)
 
     if(!empty($id))
     {
-      $AvataresModel = new \modulos\base\vendor\model\AvataresModel();
-      $AvataresEntity = new \modulos\base\vendor\entity\AvataresEntity();
+      $AvataresModel = new \Base\model\AvataresModel();
+      $AvataresEntity = new \Base\entity\AvataresEntity();
       $AvataresEntity->id_user($id);
 
       $AvataresEntity->status(1);
@@ -536,7 +536,7 @@ function imageResize($img,$w,$h,$crop=false)
  function getModulos($orden = "ASC")
  {
         $MyConfigure = new \Franky\Core\configure;
-        $_modulos =  include(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/env/modulos.php");
+        $_modulos =  include(PROJECT_DIR."/configure/modulos.php");
         $_modulos = array_merge(array("base"),$_modulos);
         $modulos = array($MyConfigure->getPathSite());
 
@@ -646,7 +646,7 @@ function getFechaUI($date)
 function selectPagina()
 {
 
-      $pagina = new \modulos\base\vendor\model\paginasModel();
+      $pagina = new \Base\model\paginasModel();
 
       $paginas = array();
       $pagina->setTampag(1000);
@@ -666,8 +666,8 @@ return ($paginas);
 
 function selectSeccionTransaccional()
 {
-      $SecciontransaccionalModel = new \modulos\base\vendor\model\SecciontransaccionalModel();
-      $SecciontransaccionalEntity = new \modulos\base\vendor\entity\SecciontransaccionalEntity();
+      $SecciontransaccionalModel = new \Base\model\SecciontransaccionalModel();
+      $SecciontransaccionalEntity = new \Base\entity\SecciontransaccionalEntity();
 
       $SecciontransaccionalEntity->status(1);
       $secciones = array();
@@ -723,7 +723,7 @@ function getFormatoPrecio($number, $fractional=true,$simbol = true) {
 function getCoreConfig($path)
 {
 
-   $CoreConfig = new modulos\base\vendor\model\CoreConfig();
+   $CoreConfig = new Base\model\CoreConfig();
    return $CoreConfig->getMapRender($path);
  }
 
@@ -745,9 +745,9 @@ function validLoginUserDevice()
 {
       global $MySession;
       global $MyRequest;
-      $UserdeviceModel = new \modulos\base\vendor\model\UserdeviceModel();
-      $UserdeviceEntity = new \modulos\base\vendor\entity\UserdeviceEntity();
-      $Mobile_detect      = new \vendor\mobile_detect\Mobile_Detect();
+      $UserdeviceModel = new \Base\model\UserdeviceModel();
+      $UserdeviceEntity = new \Base\entity\UserdeviceEntity();
+      $Mobile_detect      = new \Mobile_Detect();
 
       $type= 'desktop';
       $os = 'desconocido';
@@ -810,8 +810,8 @@ function validLoginUserDevice()
         {
             if($UserdeviceModel->getTotal() > 1)
             {
-                $TemplateemailModel    = new \modulos\base\vendor\model\TemplateemailModel;
-                $SecciontransaccionalEntity    = new \modulos\base\vendor\entity\SecciontransaccionalEntity;
+                $TemplateemailModel    = new \Base\model\TemplateemailModel;
+                $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
                 $SecciontransaccionalEntity->frinedly('nuevo-dispositivo');
                 $TemplateemailModel->setOrdensql('id DESC');
                 $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
@@ -835,9 +835,9 @@ function validUserDevice()
 {
       global $MySession;
       global $MyRequest;
-      $UserdeviceModel = new \modulos\base\vendor\model\UserdeviceModel();
-      $UserdeviceEntity = new \modulos\base\vendor\entity\UserdeviceEntity();
-      $Mobile_detect      = new \vendor\mobile_detect\Mobile_Detect();
+      $UserdeviceModel = new \Base\model\UserdeviceModel();
+      $UserdeviceEntity = new \Base\entity\UserdeviceEntity();
+      $Mobile_detect      = new \Mobile_Detect();
 
 
       $device_id =md5($Mobile_detect->getUserAgent());

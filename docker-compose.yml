@@ -1,0 +1,14 @@
+web:
+ image: station.space.bar:4567/labs/docker-images-pengo/magento-cloud-pengo:php71-fpm
+ ports:
+ - 80:80
+ - 443:443
+ - 21:21
+ - 22:22
+ volumes:
+ - ./:/var/www/html
+ - ./docker/log/apache:/var/log/apache
+ - ./docker/log/php:/var/log/php
+ - ./docker/key-ssh/:/home/magento2/.ssh/
+ - ./docker/key-ssl/:/home/magento2/.ssl/
+ container_name: franky-web

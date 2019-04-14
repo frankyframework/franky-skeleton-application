@@ -1,10 +1,10 @@
 <?php
 use Franky\Core\validaciones;
-use modulos\base\vendor\model\USERS;
-use modulos\base\vendor\entity\users as entityUser;
-use modulos\base\vendor\model\AvataresModel;
-use modulos\base\vendor\entity\AvataresEntity;
-use modulos\base\vendor\model\Emails;
+use Base\model\USERS;
+use Base\entity\users as entityUser;
+use Base\model\AvataresModel;
+use Base\entity\AvataresEntity;
+use Base\model\Emails;
 use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();
@@ -130,8 +130,8 @@ if(!$error)
                              'url_web'          =>  URL_WEB
             );
 
-            $TemplateemailModel    = new \modulos\base\vendor\model\TemplateemailModel;
-            $SecciontransaccionalEntity    = new \modulos\base\vendor\entity\SecciontransaccionalEntity;
+            $TemplateemailModel    = new \Base\model\TemplateemailModel;
+            $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
             $SecciontransaccionalEntity->frinedly('registro-de-usuario-backend');
             $TemplateemailModel->setOrdensql('id DESC');
             $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
@@ -156,14 +156,14 @@ if(!$error)
 
             if($Emails->getMailV($MyUserEntity->getEmail()) != REGISTRO_SUCCESS)
             {
-              $VerificacionesPendientes             = new \modulos\base\vendor\model\VerificacionesPendientes();
+              $VerificacionesPendientes             = new \Base\model\VerificacionesPendientes();
               $token = $Tokenizer->token('validar_email', time());
               $VerificacionesPendientes->addVerifica($MySession->GetVar('id'),  $token);
 
               $campos = array( 'token'=> $token,'usuario' => $MySession->GetVar('usuario'), "url" => $MyRequest->getSERVER(),"email" => $MyUserEntity->getEmail());
 
-              $TemplateemailModel    = new \modulos\base\vendor\model\TemplateemailModel;
-              $SecciontransaccionalEntity    = new \modulos\base\vendor\entity\SecciontransaccionalEntity;
+              $TemplateemailModel    = new \Base\model\TemplateemailModel;
+              $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
               $SecciontransaccionalEntity->frinedly('confirmacion-de-email');
               $TemplateemailModel->setOrdensql('id DESC');
               $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());

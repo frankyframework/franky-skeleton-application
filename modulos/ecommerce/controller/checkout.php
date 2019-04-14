@@ -1,12 +1,12 @@
 <?php
-use \modulos\base\vendor\model\CoreConfig;
-use modulos\ecommerce\Form\checkoutForm;
-use modulos\ecommerce\Form\direccionesForm;
+use \Base\model\CoreConfig;
+use Ecommerce\Form\checkoutForm;
+use Ecommerce\Form\direccionesForm;
 
-use modulos\ecommerce\Form\conektaForm;
-use modulos\ecommerce\Form\openpayForm;
-use modulos\ecommerce\vendor\model\carrito;
-use modulos\ecommerce\vendor\model\carrito_producto;
+use Ecommerce\Form\conektaForm;
+use Ecommerce\Form\openpayForm;
+use Ecommerce\model\carrito;
+use Ecommerce\model\carrito_producto;
 
 $MyCarritoProducto =  new carrito_producto();
 $MyCarritoModel = new carrito();

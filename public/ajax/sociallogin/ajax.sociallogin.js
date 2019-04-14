@@ -30,7 +30,7 @@ function addSocialDataHTML(response, provider)
         }
         if (respuesta[0]["message"] == "login")
         {
-            window.location='/public/php/sociallogin.php?'+($.get('callback') ? "callback="+$.get('callback') : "");
+            window.location='//sociallogin.php?'+($.get('callback') ? "callback="+$.get('callback') : "");
             return false;
         }
     }

@@ -1,5 +1,5 @@
 <?php
-namespace modulos\ecommerce\Form;
+namespace Ecommerce\Form;
 
 class cuponesForm extends \Franky\Form\Form
 {
@@ -10,7 +10,7 @@ class cuponesForm extends \Franky\Form\Form
 
        $this->setAtributos(array(
             'name' => $name,
-            'action' => "/public/php/ecommers/admin/cupones/submit.php",
+            'action' => "//ecommers/admin/cupones/submit.php",
             'method' => 'post'
         ));
 

@@ -75,7 +75,7 @@ function getStatusTransaccion($status)
 function getMyIdCarrito()
 {
     global $MySession;
-    $MyCarritoCompras =  new \modulos\ecommerce\vendor\model\carrito();
+    $MyCarritoCompras =  new \Ecommerce\model\carrito();
 
     if($MyCarritoCompras->getData("", ($MySession->LoggedIn() ? $MySession->GetVar("id") : ""),  session_id()) == REGISTRO_SUCCESS)
     {
@@ -88,8 +88,8 @@ function getMyIdCarrito()
 
 function makeHTMLCards($uid = "")
 {
-    $CardsModel = new modulos\ecommerce\vendor\model\CardsModel();
-    $CardsEntity = new \modulos\ecommerce\vendor\entity\CardsEntity();
+    $CardsModel = new Ecommerce\model\CardsModel();
+    $CardsEntity = new \Ecommerce\entity\CardsEntity();
     $CardsEntity->uid($uid);
     $CardsEntity->status(1);
     $CardsModel->setTampag(50);
@@ -117,12 +117,12 @@ function makeHTMLDireccion($type="envio",$uid = "")
 
     if($type =="envio")
     {
-        $MyDireccion = new modulos\ecommerce\vendor\model\direcciones();
+        $MyDireccion = new Ecommerce\model\direcciones();
         $direccion = "%s: calle %s #%s, Colonia %s, municipio %s,%s C.P. %d";
     }
     if($type == "facturacion")
     {
-        $MyDireccion = new modulos\ecommerce\vendor\model\direcciones_facturacion();
+        $MyDireccion = new Ecommerce\model\direcciones_facturacion();
         $direccion = "%s: calle %s #%s, Colonia %s, municipio %s,%s C.P. %d";
     }
     $MyDireccion->setTampag(1000);
@@ -154,8 +154,8 @@ function makeHTMLDireccion($type="envio",$uid = "")
 
 function getCustomer($id)
 {
-    $CustomerModel = new \modulos\ecommerce\vendor\model\CustomersModel();
-    $CustomerEntity = new \modulos\ecommerce\vendor\entity\CustomersEntity();
+    $CustomerModel = new \Ecommerce\model\CustomersModel();
+    $CustomerEntity = new \Ecommerce\entity\CustomersEntity();
     $CustomerEntity->id_user($id);
 
     if($CustomerModel->getData($CustomerEntity->getArrayCopy()) == REGISTRO_SUCCESS)
@@ -171,7 +171,7 @@ function getCarrito()
 {
   $productos =  OBJETO_PRODUCTOS;
   $MyProducto =  new $productos();
-  $MyCarritoProducto =  new \modulos\ecommerce\vendor\model\carrito_producto();
+  $MyCarritoProducto =  new \Ecommerce\model\carrito_producto();
 
   $MyCarritoProducto->setTampag(100);
   $MyCarritoProducto->getData("", getMyIdCarrito());
@@ -216,10 +216,10 @@ function getCarrito()
 
 function getPedido($id,$uid=""){
 
-  $pedidosModel             = new \modulos\ecommerce\vendor\model\pedidos();
-  $producto_pedidoModel             = new \modulos\ecommerce\vendor\model\producto_pedidoModel();
-  $producto_pedidoEntity          = new \modulos\ecommerce\vendor\entity\producto_pedido();
-  $MyDirecciones = new \modulos\ecommerce\vendor\model\direcciones_facturacion;
+  $pedidosModel             = new \Ecommerce\model\pedidos();
+  $producto_pedidoModel             = new \Ecommerce\model\producto_pedidoModel();
+  $producto_pedidoEntity          = new \Ecommerce\entity\producto_pedido();
+  $MyDirecciones = new \Ecommerce\model\direcciones_facturacion;
 
 
   $productos =  OBJETO_PRODUCTOS;
@@ -298,8 +298,8 @@ function setCarritoUser(){
   }
 
 
-  $MyCarritoCompras =  new \modulos\ecommerce\vendor\model\carrito();
-  $MyCarritoComprasEntity =  new \modulos\ecommerce\vendor\entity\carrito();
+  $MyCarritoCompras =  new \Ecommerce\model\carrito();
+  $MyCarritoComprasEntity =  new \Ecommerce\entity\carrito();
   if($MyCarritoCompras->getData("","", session_id()) == REGISTRO_SUCCESS)
   {
 

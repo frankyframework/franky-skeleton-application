@@ -1,6 +1,6 @@
 <?php
-use modulos\base\Form\filtrosForm;
-use modulos\blog\vendor\model\comentariosBlog;
+use Base\Form\filtrosForm;
+use Blog\model\comentariosBlog;
 use Franky\Core\paginacion;
 $MyPaginacion = new paginacion();
 

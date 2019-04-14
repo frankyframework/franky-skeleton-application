@@ -1,6 +1,6 @@
 <?php
-use modulos\galeria\Form\albumForm;
-use modulos\galeria\vendor\model\albumes;
+use Galeria\Form\albumForm;
+use Galeria\model\albumes;
 
 $MyAlbum = new albumes();
 

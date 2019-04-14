@@ -1,5 +1,5 @@
 <?php
-use modulos\galeria\vendor\model\albumes;
+use Galeria\model\albumes;
 
 $MyAlbum = new albumes();
 

@@ -1,7 +1,7 @@
 <?php
-use modulos\base\Form\templateEmailForm;
-use modulos\base\vendor\model\TemplateemailModel;
-use modulos\base\vendor\entity\TemplateemailEntity;
+use Base\Form\templateEmailForm;
+use Base\model\TemplateemailModel;
+use Base\entity\TemplateemailEntity;
 use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer;

@@ -1,8 +1,8 @@
 <?php
-use modulos\blog\Form\articulosBlogForm;
-use modulos\blog\vendor\model\Blog;
-use modulos\blog\vendor\model\BorradorblogModel;
-use modulos\blog\vendor\entity\BorradorblogEntity;
+use Blog\Form\articulosBlogForm;
+use Blog\model\Blog;
+use Blog\model\BorradorblogModel;
+use Blog\entity\BorradorblogEntity;
 use Franky\Haxor\Tokenizer;
 
 

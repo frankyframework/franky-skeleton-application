@@ -2,7 +2,7 @@
 define('PROJECT_DIR',$_SERVER["DOCUMENT_ROOT"]);
 require(PROJECT_DIR."/modulos/base/loads/init.php");
 
-$path = ltrim(str_replace("/public/php/","",parse_url($MyRequest->getURI(),PHP_URL_PATH)),'/');
+$path = ltrim(str_replace("//","",parse_url($MyRequest->getURI(),PHP_URL_PATH)),'/');
 
 
 

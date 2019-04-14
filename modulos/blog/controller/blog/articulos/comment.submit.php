@@ -1,6 +1,6 @@
 <?php
 use Franky\Core\validaciones;
-use modulos\blog\vendor\model\comentariosBlog;
+use Blog\model\comentariosBlog;
 
 $MyComentariosBlog =  new comentariosBlog;
 $nombre        = $MyRequest->getRequest('nombre');

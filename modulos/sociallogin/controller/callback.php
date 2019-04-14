@@ -1,7 +1,7 @@
 <?php
-use modulos\sociallogin\vendor\model\configureGoogle;
-use modulos\sociallogin\vendor\model\facebookx;
-use modulos\sociallogin\vendor\model\google;
+use Sociallogin\model\configureGoogle;
+use Sociallogin\model\facebookx;
+use Sociallogin\model\google;
 
 $MyConfigureGoogle = new configureGoogle();
 $MyFacebook = new facebookx(getCoreConfig('sociallogin/facebook/api'),getCoreConfig('sociallogin/facebook/secret'));

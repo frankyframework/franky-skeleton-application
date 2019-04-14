@@ -1,5 +1,5 @@
 <?php
-use modulos\base\Form\registroForm;
+use Base\Form\registroForm;
 use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();

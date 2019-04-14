@@ -1,5 +1,5 @@
 <?php
-use modulos\\base\\Form\\filtrosForm;
+use modulos\\base\\Form\filtrosForm;
 use vendor\\core\\paginacion;
 use modulos\\{modulo}\\vendor\\model\\{modelo};
 use vendor\\haxor\\Tokenizer;

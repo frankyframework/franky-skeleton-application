@@ -7,8 +7,8 @@ function pago_paypal()
         $productos =  OBJETO_PRODUCTOS;
         $MyProducto =  new $productos();
 
-        $MyCarritoCompras =  new \modulos\ecommerce\vendor\model\carrito();
-        $MyCarritoProducto =  new \modulos\ecommerce\vendor\model\carrito_producto();
+        $MyCarritoCompras =  new \Ecommerce\model\carrito();
+        $MyCarritoProducto =  new \Ecommerce\model\carrito_producto();
 
         $respuesta = array("error" => false,"html" => "");
 

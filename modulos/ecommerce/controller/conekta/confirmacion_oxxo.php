@@ -1,13 +1,13 @@
 <?php
-use \modulos\ecommerce\vendor\model\producto_pedidoModel;
-use \modulos\ecommerce\vendor\model\carrito;
-use \modulos\ecommerce\vendor\model\pedidos as pedidos_model;
-use \modulos\ecommerce\vendor\entity\pedidos;
-use \modulos\ecommerce\vendor\entity\producto_pedido;
-use modulos\ecommerce\vendor\entity\direcciones_facturacion as DireccionesFacturacionEntity;
-use modulos\ecommerce\vendor\model\direcciones_facturacion;
-use modulos\ecommerce\vendor\entity\direcciones as DireccionesEnvioEntity;
-use modulos\ecommerce\vendor\model\direcciones;
+use \Ecommerce\model\producto_pedidoModel;
+use \Ecommerce\model\carrito;
+use \Ecommerce\model\pedidos as pedidos_model;
+use \Ecommerce\entity\pedidos;
+use \Ecommerce\entity\producto_pedido;
+use Ecommerce\entity\direcciones_facturacion as DireccionesFacturacionEntity;
+use Ecommerce\model\direcciones_facturacion;
+use Ecommerce\entity\direcciones as DireccionesEnvioEntity;
+use Ecommerce\model\direcciones;
 use Franky\Core\ObserverManager;
 
 
@@ -153,8 +153,8 @@ if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)
    $campos['ticket_oxxo'] = render(PROJECT_DIR.'/modulos/ecommerce/diseno/email/ticket_oxxo.phtml',
            ['productos_comprados' =>$productos_comprados,'referencia' => $referencia['id'],'MyRequest' => $MyRequest,"code_referencia" => $order->charges[0]->payment_method->reference]);
 
-    $TemplateemailModel    = new \modulos\base\vendor\model\TemplateemailModel;
-    $SecciontransaccionalEntity    = new \modulos\base\vendor\entity\SecciontransaccionalEntity;
+    $TemplateemailModel    = new \Base\model\TemplateemailModel;
+    $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
     $SecciontransaccionalEntity->frinedly('nueva-orden-de-compra-oxxo');
     $TemplateemailModel->setOrdensql('id DESC');
     $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());

@@ -1,7 +1,7 @@
 <?php
 
 use Franky\Core\validaciones;
-use modulos\base\vendor\entity\redireccionesEntity;
+use Base\entity\redireccionesEntity;
 
 $error = false;
 $redireciconesEntity = new redireccionesEntity($MyRequest->getRequest());

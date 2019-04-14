@@ -1,7 +1,7 @@
 <?php
-use modulos\base\vendor\model\UrlInternacionalModel;
-use modulos\base\vendor\entity\UrlInternacionalEntity;
-use modulos\base\vendor\model\paginasModel;
+use Base\model\UrlInternacionalModel;
+use Base\entity\UrlInternacionalEntity;
+use Base\model\paginasModel;
 
 
 $UrlInternacionalModel = new UrlInternacionalModel;

@@ -9,13 +9,13 @@ RewriteCond %{REQUEST_URI}  !\.(php?|html?|jpg|png|bmp|gif|svg|js|css|ttf|woff|x
 RewriteRule ^(.*)([^/])$ http://%{HTTP_HOST}/$1$2/ [L,R=301]
 
 RewriteCond %{REQUEST_URI}  sitemap.xml$
-RewriteRule ^sitemap.xml$  public/php/sitemap.xml [NC,L]
+RewriteRule ^sitemap.xml$  /sitemap.xml [NC,L]
 
 RewriteCond %{REQUEST_URI}  service_worker.js$
-RewriteRule ^service_worker.js  public/php/service_worker.js [NC,L]
+RewriteRule ^service_worker.js  /service_worker.js [NC,L]
 
-RewriteCond %{REQUEST_URI}  !public/php/index\.php$
-RewriteRule ^public/php/(.*)$  post/index.php [NC,L]
+RewriteCond %{REQUEST_URI}  !/index\.php$
+RewriteRule ^/(.*)$  post/index.php [NC,L]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f

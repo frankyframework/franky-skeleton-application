@@ -1,7 +1,7 @@
 <?php
 use Franky\Core\validaciones; 
-use modulos\seo\vendor\model\SeoModel;
-use modulos\seo\vendor\entity\SeoEntity;
+use Seo\model\SeoModel;
+use Seo\entity\SeoEntity;
 
 $SeoEntity = new SeoEntity($MyRequest->getRequest());
 $error = false;

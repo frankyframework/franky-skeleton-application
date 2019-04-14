@@ -2,7 +2,7 @@
 function eliminarAlbumGaleria($id,$status=0)
 {
 	
-	$MyAlbum = new modulos\galeria\vendor\model\albumes();
+	$MyAlbum = new Galeria\model\albumes();
         global $MyAccessList;
         global $MyMessageAlert;
         $respuesta =null;
@@ -28,7 +28,7 @@ function eliminarAlbumGaleria($id,$status=0)
 function eliminarFotoGaleria($id,$status=0)
 {
 	
-	$MyFoto = new modulos\galeria\vendor\model\fotos();
+	$MyFoto = new Galeria\model\fotos();
         global $MyAccessList;
         global $MyMessageAlert;
         $respuesta =null;
@@ -56,7 +56,7 @@ function eliminarFotoGaleria($id,$status=0)
 function editarFotoGaleria($id,$descripcion)
 {
 	
-	$MyFoto = new modulos\galeria\vendor\model\fotos();
+	$MyFoto = new Galeria\model\fotos();
         global $MyAccessList;
         global $MyMessageAlert;
         $respuesta =null;
@@ -83,7 +83,7 @@ function editarFotoGaleria($id,$descripcion)
 function editarAlbumGaleria($id,$nombre)
 {
 	
-	$MyAlbum = new modulos\galeria\vendor\model\albumes();
+	$MyAlbum = new Galeria\model\albumes();
         global $MyAccessList;
         global $MyMessageAlert;
         $respuesta =null;
@@ -119,7 +119,7 @@ function editarAlbumGaleria($id,$nombre)
 function ShowFotosGaleria($album)
 {
         
-	$MyFoto = new modulos\galeria\vendor\model\fotos();
+	$MyFoto = new Galeria\model\fotos();
         global $MyAccessList;
         $respuesta =null;
         if($MyAccessList->MeDasChancePasar(ADMINISTRAR_GALERIA))
@@ -150,7 +150,7 @@ function ShowFotosGaleria($album)
 function guardarAlbumGaleria($nombre)
 {
         
-	$MyAlbum = new modulos\galeria\vendor\model\albumes();
+	$MyAlbum = new Galeria\model\albumes();
         global $MyAccessList;
         global $MyMessageAlert;
         $respuesta =null;
@@ -205,7 +205,7 @@ function guardarAlbumGaleria($nombre)
 function setOrdenFotoGaleria($album, $orden)
 {
 	
-	$MyFoto = new modulos\galeria\vendor\model\fotos();
+	$MyFoto = new Galeria\model\fotos();
         global $MyAccessList;
         global $MyMessageAlert;
         $respuesta =null;
@@ -241,7 +241,7 @@ function setOrdenFotoGaleria($album, $orden)
 function setOrdenAlbumGaleria($orden)
 {
 	
-	$MyAlbum = new modulos\galeria\vendor\model\albumes();
+	$MyAlbum = new Galeria\model\albumes();
         global $MyAccessList;
         global $MyMessageAlert;
         $respuesta =null;

@@ -1,5 +1,5 @@
 <?php
-use modulos\base\vendor\entity\redireccionesEntity;
+use Base\entity\redireccionesEntity;
 use Franky\Core\validaciones;
 
 $id             = $MyRequest->getRequest('id');
@@ -9,7 +9,7 @@ $template       = $MyRequest->getRequest('template',"",true);
 $meta_titulo    = $MyRequest->getRequest('meta_titulo');
 $meta_descripcion       = $MyRequest->getRequest('meta_descripcion');
 $nametemplate    = $MyRequest->getRequest('friendly');
-$MyCMS = new \modulos\base\vendor\model\CMS;
+$MyCMS = new \Base\model\CMS;
 
 $error = false;
 

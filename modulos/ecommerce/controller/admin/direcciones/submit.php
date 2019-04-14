@@ -1,7 +1,7 @@
 <?php
 use Franky\Core\validaciones; 
-use modulos\ecommerce\vendor\model\direcciones;
-use modulos\ecommerce\vendor\entity\direcciones as direccionesEntity;
+use Ecommerce\model\direcciones;
+use Ecommerce\entity\direcciones as direccionesEntity;
 
 $MyDirecciones             = new direcciones();
 $MyDireccionesEntity       = new direccionesEntity($MyRequest->getRequest());

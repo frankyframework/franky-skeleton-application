@@ -1,5 +1,5 @@
 <?php
-namespace modulos\ecommerce\Form;
+namespace Ecommerce\Form;
 
 class conektaForm extends \Franky\Form\Form
 {
@@ -10,7 +10,7 @@ class conektaForm extends \Franky\Form\Form
 
        $this->setAtributos(array(
             'name' => $name,
-            'action' => "public/php/ecommerce/admin/tarjetas/submit.php",
+            'action' => "/ecommerce/admin/tarjetas/submit.php",
             'method' => 'post'
         ));
 

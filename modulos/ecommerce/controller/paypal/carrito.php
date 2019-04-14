@@ -1,6 +1,6 @@
 <?php
-use \modulos\ecommerce\vendor\model\carrito;
-use modulos\ecommerce\vendor\model\carrito_producto;
+use \Ecommerce\model\carrito;
+use Ecommerce\model\carrito_producto;
 $MyCarritoCompras =  new carrito();
 $MyCarritoProducto =  new carrito_producto();
 $productos =  OBJETO_PRODUCTOS;

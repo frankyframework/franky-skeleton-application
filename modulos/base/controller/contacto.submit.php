@@ -1,7 +1,7 @@
 <?php
 use Franky\Core\validaciones;
-use modulos\base\vendor\model\Contacto;
-use modulos\base\vendor\entity\comentarios;
+use Base\model\Contacto;
+use Base\entity\comentarios;
 use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();
@@ -42,8 +42,8 @@ if($error== false)
 
                 $campos = $MyContactoEntity->getArrayCopy();
 
-                $TemplateemailModel    = new \modulos\base\vendor\model\TemplateemailModel;
-                $SecciontransaccionalEntity    = new \modulos\base\vendor\entity\SecciontransaccionalEntity;
+                $TemplateemailModel    = new \Base\model\TemplateemailModel;
+                $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
                 $SecciontransaccionalEntity->frinedly('contactanos');
                 $TemplateemailModel->setOrdensql('id DESC');
                 $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());

@@ -1,6 +1,6 @@
 <?php
-use modulos\base\vendor\model\USERS;
-use modulos\base\vendor\entity\users as entityUser;
+use Base\model\USERS;
+use Base\entity\users as entityUser;
 use Franky\Core\ObserverManager;
 
 $MyUser             = new USERS();

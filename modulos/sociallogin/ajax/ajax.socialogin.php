@@ -7,7 +7,7 @@ function addSocialData() {
 
     if($MySession->LoggedIn())
     {
-        $MySocialLogin = new \modulos\sociallogin\vendor\model\socialLogin("users","usuario","contrasena",array("status" => "1"));
+        $MySocialLogin = new \Sociallogin\model\socialLogin("users","usuario","contrasena",array("status" => "1"));
         if ($MyUserSocial->findSocial($_SESSION["my_social_data"][$_SESSION["my_social_data"]["provider"]]["id"], $_SESSION["my_social_data"]["provider"], $MySession->GetVar('id')) == REGISTRO_SUCCESS) {
             if ($MyUserSocial->updateSocial($MySession->GetVar('id'), $_SESSION["my_social_data"][$_SESSION["my_social_data"]["provider"]]["id"], $_SESSION["my_social_data"]["provider"], json_encode($_SESSION["my_social_data"][$_SESSION["my_social_data"]["provider"]])) == REGISTRO_SUCCESS) {
                 $respuesta[0]["message"] = "success";
@@ -31,8 +31,8 @@ function addSocialData() {
                     $MySocialLogin->getSocial($MySession->GetVar('id'));
                     $MySession->SetVar('social',     $MySocialLogin->m_social_data);
 
-                    $AvataresModel = new \modulos\base\vendor\model\AvataresModel();
-                    $AvataresEntity = new \modulos\base\vendor\entity\AvataresEntity();
+                    $AvataresModel = new \Base\model\AvataresModel();
+                    $AvataresEntity = new \Base\entity\AvataresEntity();
 
                     $AvataresEntity->id_user($MySession->GetVar('id'));
                     $AvataresEntity->name($_SESSION['my_social_data']["provider"]);
@@ -58,7 +58,7 @@ function removeConnection($provider) {
     global $MyUserSocial;
     if($MySession->LoggedIn())
     {
-        $MySocialLogin = new \modulos\sociallogin\vendor\model\socialLogin("users",array("usuario","email"),"contrasena",array("status" => "1"));
+        $MySocialLogin = new \Sociallogin\model\socialLogin("users",array("usuario","email"),"contrasena",array("status" => "1"));
 
         if ($MyUserSocial->removeSocial($MySession->GetVar('id'), $provider) == REGISTRO_SUCCESS) {
             $respuesta[0]["message"] = "success";
@@ -66,8 +66,8 @@ function removeConnection($provider) {
             $MySocialLogin->getSocial($MySession->GetVar('id'));
             $MySession->SetVar('social',     $MySocialLogin->m_social_data);
 
-            $AvataresModel = new \modulos\base\vendor\model\AvataresModel();
-            $AvataresEntity = new \modulos\base\vendor\entity\AvataresEntity();
+            $AvataresModel = new \Base\model\AvataresModel();
+            $AvataresEntity = new \Base\entity\AvataresEntity();
 
             $AvataresEntity->id_user($MySession->GetVar('id'));
             $AvataresEntity->name($provider);

@@ -46,7 +46,7 @@ if (is_array($MyFrankyMonster->MyJQueyfile())) {
 
 if(getCoreConfig('base/debug/production')){
 
-    $CssCreatos         = new modulos\base\vendor\model\cssCreator();
+    $CssCreatos         = new Base\model\cssCreator();
     $CssCreatos->addCss($css);
     $CssCreatos->setPath($MyConfigure->getPathSite()."/");
     $name_css =  getFriendly($MyFrankyMonster->MySeccion());

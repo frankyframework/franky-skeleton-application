@@ -1,7 +1,7 @@
 <?php
-use modulos\base\Form\filtrosForm;
+use Base\Form\filtrosForm;
 use Franky\Core\paginacion;
-use modulos\base\vendor\model\TemplateemailModel;
+use Base\model\TemplateemailModel;
 use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer;

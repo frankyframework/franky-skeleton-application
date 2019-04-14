@@ -1,5 +1,5 @@
 <?php
-$MyCMS = new \modulos\base\vendor\model\CMS;
+$MyCMS = new \Base\model\CMS;
 
 if($MyCMS->getData($MyRequest->getURI() ,"",1) == REGISTRO_SUCCESS)
 {

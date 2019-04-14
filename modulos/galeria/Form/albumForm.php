@@ -1,5 +1,5 @@
 <?php
-namespace modulos\galeria\Form;
+namespace Galeria\Form;
 
 class albumForm extends \Franky\Form\Form
 {

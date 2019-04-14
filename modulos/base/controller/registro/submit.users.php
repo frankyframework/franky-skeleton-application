@@ -1,12 +1,12 @@
 <?php
 use Franky\Core\validaciones;
 use Franky\Core\Plantilla;
-use modulos\base\vendor\model\USERS;
-use modulos\base\vendor\entity\users as entityUser;
-use modulos\base\vendor\model\AvataresModel;
-use modulos\base\vendor\entity\AvataresEntity;
-use modulos\base\vendor\model\VerificacionesPendientes;
-use modulos\base\vendor\model\Emails;
+use Base\model\USERS;
+use Base\entity\users as entityUser;
+use Base\model\AvataresModel;
+use Base\entity\AvataresEntity;
+use Base\model\VerificacionesPendientes;
+use Base\model\Emails;
 use Franky\Core\ObserverManager;
 use Franky\Haxor\Tokenizer;
 
@@ -141,8 +141,8 @@ if($MyUserEntity->getTelefono() != "" && $MyUser->findTelefono($MyUserEntity->ge
 
                             );
 
-                            $TemplateemailModel    = new \modulos\base\vendor\model\TemplateemailModel;
-                            $SecciontransaccionalEntity    = new \modulos\base\vendor\entity\SecciontransaccionalEntity;
+                            $TemplateemailModel    = new \Base\model\TemplateemailModel;
+                            $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
                             $SecciontransaccionalEntity->frinedly('registro-de-usuario-frontend');
                             $TemplateemailModel->setOrdensql('id DESC');
                             $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());

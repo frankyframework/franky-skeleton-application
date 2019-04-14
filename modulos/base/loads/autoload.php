@@ -1,3 +1,5 @@
-<?
-  require_once PROJECT_DIR."vendor/autoload.php";
+<?php
+
+          require_once PROJECT_DIR."/vendor/autoload.php";
+
 ?>

@@ -1,6 +1,6 @@
 <?php
-use modulos\developer\Form\frankyForm;
-use modulos\developer\vendor\model\ORGANOS;
+use Developer\Form\frankyForm;
+use Developer\model\ORGANOS;
 use Franky\Filesystem\File;
 
 $id		= $MyRequest->getRequest('id');

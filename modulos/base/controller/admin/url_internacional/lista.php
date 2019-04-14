@@ -1,9 +1,9 @@
 <?php
-use modulos\base\Form\filtrosForm;
+use Base\Form\filtrosForm;
 use Franky\Core\paginacion;
-use modulos\base\vendor\model\UrlInternacionalModel;
-use modulos\base\vendor\entity\UrlInternacionalEntity;
-use modulos\base\vendor\entity\OrganosEntity;
+use Base\model\UrlInternacionalModel;
+use Base\entity\UrlInternacionalEntity;
+use Base\entity\OrganosEntity;
 use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer;

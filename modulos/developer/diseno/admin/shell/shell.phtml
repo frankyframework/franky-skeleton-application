@@ -87,7 +87,7 @@ $(document).ready(function()
                                 var response_fin = 0;
                                 $.ajax({
                                     type: "POST",
-                                    url: "/public/php/admin/shell/execute.php",
+                                    url: "//admin/shell/execute.php",
                                     data: "command="+command.trim().split(' ').join('&'),
                                     cache: false,
                                     success: function(response)

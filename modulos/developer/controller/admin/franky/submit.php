@@ -1,7 +1,7 @@
 <?php
 use Franky\Core\validaciones;
-use modulos\developer\vendor\entity\organosEntity;
-use modulos\developer\vendor\model\ORGANOS;
+use Developer\entity\organosEntity;
+use Developer\model\ORGANOS;
 
 
 
