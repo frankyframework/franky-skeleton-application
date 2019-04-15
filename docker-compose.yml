@@ -1,0 +1,14 @@
+version: '2'
+services:
+  web:
+    image: franky-server
+    ports:
+        - 80:80
+        - 443:443
+        - 21:21
+        - 22:22
+    volumes:
+        - ./:/var/www/html/
+        - ./docker/log/apache:/var/log/apache
+        - ./docker/log/php:/var/log/php-fpm
+    container_name: franky-web
