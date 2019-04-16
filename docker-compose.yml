@@ -1,14 +1,15 @@
-web:
- image: webserver
- ports:
- - 80:80
- - 443:443
- - 21:21
- - 22:22
- volumes:
- - ./:/var/www/html
- - ./docker/log/apache:/var/log/apache
- - ./docker/log/php:/var/log/php
- - ./docker/key-ssh/:/home/magento2/.ssh/
- - ./docker/key-ssl/:/home/magento2/.ssl/
- container_name: franky-web
+version: '2'
+services:
+  web:
+    image: franky-server
+    ports:
+        - 80:80
+        - 443:443
+        - 21:21
+        - 22:22
+    volumes:
+        - ./:/var/www/html/
+        - ./docker/log/apache:/var/log/apache
+        - ./docker/log/php:/var/log/php-fpm
+    container_name: franky-web
+
