@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "license": "MIT",
     "minimum-stability": "dev",
-    "prefer-stable": false,
+    "prefer-stable": true,
     "require": {
         "php": "^7.0",
         "phpmailer/phpmailer": "~6.0",
