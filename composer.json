@@ -2,7 +2,7 @@
     "name": "frankyframework/franky-skeleton-application",
     "description": "Skeleton Application for Franky Framework applications",
     "type": "project",
-    "version": "1.0.0"
+    "version": "1.0.0",
     "license": "MIT",
     "minimum-stability": "dev",
     "prefer-stable": false,
