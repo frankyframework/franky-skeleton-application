@@ -1,6 +1,7 @@
 /vendor
 configure/data.php
 configure/databases.php
+configure/modulos.php
 phpunit.xml
 public/upload/
 logs/
