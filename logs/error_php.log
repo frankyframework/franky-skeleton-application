@@ -18317,3 +18317,22 @@ Stack trace:
 #4 /var/www/html/modulos/base/src/model/UrlInternacionalModel.php(36): Franky\Database\Mysql\objectOperations->getColeccion(Array)
 #5 /var/www/html/modulos/base/loads/llenaFranky.php(14): Base\model\UrlInternacionalModel->getData(Array)
 #6 /var/www/html/modulos/base/loads/init.php(135): i in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php on line 41
+[16-Apr-2019 14:01:52 America/Mexico_City] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Connection refused in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php:41
+Stack trace:
+#0 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(41): PDO->__construct('mysql:host=enco...', 'ecclick_franky', 'nkIGiX*JuQ$t')
+#1 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(81): Franky\Database\IBD->ConectarBD()
+#2 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/Select.php(35): Franky\Database\IBD->Query(1555441312, 'SELECT nombre F...')
+#3 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/objectOperations.php(101): Franky\Database\Mysql\Select->execute('franky ', Array, 'status = '1'', '', 'id ASC')
+#4 /var/www/html/modulos/base/src/model/paginasModel.php(27): Franky\Database\Mysql\objectOperations->getColeccion(Array)
+#5 /var/www/html/modulos/base/loads/llenaFranky.php(35): Base\model\paginasModel->getData()
+#6 /var/www/html/modulos/base/loads/init.php(135): include_once('/var/www/html/m...')
+ in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php on line 41
+[16-Apr-2019 14:02:06 America/Mexico_City] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Connection refused in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php:41
+Stack trace:
+#0 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(41): PDO->__construct('mysql:host=enco...', 'ecclick_franky', 'nkIGiX*JuQ$t')
+#1 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(81): Franky\Database\IBD->ConectarBD()
+#2 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/Select.php(35): Franky\Database\IBD->Query(1555441326, 'SELECT id, id_u...')
+#3 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/objectOperations.php(105): Franky\Database\Mysql\Select->execute('user_device ', Array, 'user_device.id_...', '', '', '0, 1')
+#4 /var/www/html/modulos/base/src/model/UserdeviceModel.php(23): Franky\Database\Mysql\objectOperations->getColeccion(Array)
+#5 /var/www/html/modulos/base/loads/util.php(849): Base\model\UserdeviceModel->getData(Array)
+#6 /var/www/html/modulos/base/loads/init.php(142): validUserDevice() in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php on line 41
