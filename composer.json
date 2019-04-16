@@ -3,6 +3,8 @@
     "description": "Skeleton Application for Franky Framework applications",
     "type": "project",
     "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": "^7.0",
         "phpmailer/phpmailer": "~6.0",
