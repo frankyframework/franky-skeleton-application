@@ -18116,3 +18116,48 @@ Stack trace:
 #4 /var/www/html/modulos/base/src/model/UrlInternacionalModel.php(36): Franky\Database\Mysql\objectOperations->getColeccion(Array)
 #5 /var/www/html/modulos/base/loads/llenaFranky.php(14): Base\model\UrlInternacionalModel->getData(Array)
 #6 /var/www/html/modulos/base/loads/init.php(135): i in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php on line 41
+[16-Apr-2019 11:58:42 America/Mexico_City] PHP Fatal error:  Uncaught Error: Class 'Franky/corerequest' not found in /var/www/html/vendor/frankyframework/franky-core/src/paginacion.php:27
+Stack trace:
+#0 /var/www/html/modulos/base/controller/admin/devices/lista.php(7): Franky\Core\paginacion->__construct()
+#1 /var/www/html/index.php(6): require('/var/www/html/m...')
+#2 {main}
+  thrown in /var/www/html/vendor/frankyframework/franky-core/src/paginacion.php on line 27
+[16-Apr-2019 12:41:35 America/Mexico_City] PHP Parse error:  syntax error, unexpected '/', expecting ',' or ';' in /var/www/html/vendor/frankyframework/franky-core/src/paginacion.php on line 3
+[16-Apr-2019 12:41:44 America/Mexico_City] PHP Parse error:  syntax error, unexpected '/', expecting ',' or ';' in /var/www/html/vendor/frankyframework/franky-core/src/paginacion.php on line 3
+[16-Apr-2019 12:41:48 America/Mexico_City] PHP Parse error:  syntax error, unexpected '/', expecting ',' or ';' in /var/www/html/vendor/frankyframework/franky-core/src/paginacion.php on line 3
+[16-Apr-2019 12:41:52 America/Mexico_City] PHP Parse error:  syntax error, unexpected '/', expecting ',' or ';' in /var/www/html/vendor/frankyframework/franky-core/src/paginacion.php on line 3
+[16-Apr-2019 12:41:57 America/Mexico_City] PHP Parse error:  syntax error, unexpected '/', expecting ',' or ';' in /var/www/html/vendor/frankyframework/franky-core/src/paginacion.php on line 3
+[16-Apr-2019 12:42:01 America/Mexico_City] PHP Parse error:  syntax error, unexpected '/', expecting ',' or ';' in /var/www/html/vendor/frankyframework/franky-core/src/paginacion.php on line 3
+[16-Apr-2019 12:42:05 America/Mexico_City] PHP Parse error:  syntax error, unexpected '/', expecting ',' or ';' in /var/www/html/vendor/frankyframework/franky-core/src/paginacion.php on line 3
+[16-Apr-2019 12:42:09 America/Mexico_City] PHP Parse error:  syntax error, unexpected '/', expecting ',' or ';' in /var/www/html/vendor/frankyframework/franky-core/src/paginacion.php on line 3
+[16-Apr-2019 12:42:13 America/Mexico_City] PHP Parse error:  syntax error, unexpected '/', expecting ',' or ';' in /var/www/html/vendor/frankyframework/franky-core/src/paginacion.php on line 3
+[16-Apr-2019 12:42:17 America/Mexico_City] PHP Parse error:  syntax error, unexpected '/', expecting ',' or ';' in /var/www/html/vendor/frankyframework/franky-core/src/paginacion.php on line 3
+[16-Apr-2019 12:42:21 America/Mexico_City] PHP Parse error:  syntax error, unexpected '/', expecting ',' or ';' in /var/www/html/vendor/frankyframework/franky-core/src/paginacion.php on line 3
+[16-Apr-2019 12:42:26 America/Mexico_City] PHP Parse error:  syntax error, unexpected '/', expecting ',' or ';' in /var/www/html/vendor/frankyframework/franky-core/src/paginacion.php on line 3
+[16-Apr-2019 12:42:30 America/Mexico_City] PHP Parse error:  syntax error, unexpected '/', expecting ',' or ';' in /var/www/html/vendor/frankyframework/franky-core/src/paginacion.php on line 3
+[16-Apr-2019 12:42:38 America/Mexico_City] PHP Parse error:  syntax error, unexpected '/', expecting ',' or ';' in /var/www/html/vendor/frankyframework/franky-core/src/paginacion.php on line 3
+[16-Apr-2019 12:43:21 America/Mexico_City] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Connection refused in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php:41
+Stack trace:
+#0 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(41): PDO->__construct('mysql:host=enco...', 'ecclick_franky', 'nkIGiX*JuQ$t')
+#1 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(81): Franky\Database\IBD->ConectarBD()
+#2 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/Select.php(35): Franky\Database\IBD->Query(1555436600, 'SELECT id, url,...')
+#3 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/objectOperations.php(105): Franky\Database\Mysql\Select->execute('redirecciones ', Array, 'url = '/public/...', '', '', '0, 1')
+#4 /var/www/html/modulos/base/src/model/redireccionesModel.php(34): Franky\Database\Mysql\objectOperations->getColeccion(Array)
+#5 /var/www/html/modulos/base/loads/init.php(247): Base\model\redireccionesModel->getData('', '/public/skin/de...', 1)
+#6 /var/www/html/index.php(3): require in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php on line 41
+[16-Apr-2019 12:50:36 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to private method Franky\Database\Debug::getMessages() from context '' in /var/www/html/modulos/base/diseno/debug.phtml:18
+Stack trace:
+#0 /var/www/html/modulos/base/loads/util.php(250): include()
+#1 /var/www/html/modulos/base/diseno/index.phtml(42): render('/var/www/html/m...', Array)
+#2 /var/www/html/modulos/base/loads/util.php(250): include('/var/www/html/m...')
+#3 /var/www/html/index.php(17): render('/var/www/html/m...')
+#4 {main}
+  thrown in /var/www/html/modulos/base/diseno/debug.phtml on line 18
+[16-Apr-2019 12:50:41 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to private method Franky\Database\Debug::getMessages() from context '' in /var/www/html/modulos/base/diseno/debug.phtml:18
+Stack trace:
+#0 /var/www/html/modulos/base/loads/util.php(250): include()
+#1 /var/www/html/modulos/base/diseno/index.phtml(42): render('/var/www/html/m...', Array)
+#2 /var/www/html/modulos/base/loads/util.php(250): include('/var/www/html/m...')
+#3 /var/www/html/index.php(17): render('/var/www/html/m...')
+#4 {main}
+  thrown in /var/www/html/modulos/base/diseno/debug.phtml on line 18
