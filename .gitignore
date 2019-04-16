@@ -7,3 +7,4 @@ public/upload/
 logs/
 sess_tmp/
 docker/log
+composer.lock
