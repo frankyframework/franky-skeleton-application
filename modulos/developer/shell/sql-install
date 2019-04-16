@@ -1,0 +1,61 @@
+<?php
+use Franky\Core\validaciones;
+use \Franky\Core\Plantilla;
+
+
+if($MySession->getVar('nivel') != NIVEL_USERDEVELOPER)
+{
+    echo shellFontColor($MyMessageAlert->Message("sin_privilegios"),"rojo")."\n";
+    exit;
+}
+
+
+
+
+ini_set('memory_limit', '-1');
+
+
+$modulo = $MyRequest->getRequest("modulo");
+$site = $MyRequest->getRequest("site",'local.shell');
+
+if(!empty($site))
+{
+    $_SERVER["SERVER_NAME"] = $site;
+    $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Core\MYDEBUG);
+}
+
+headerShell();
+$help = helpShell([
+    ["var" => "modulo", "required" => true, "description" => "nombre del modulo"],
+    ["var" => "site", "required" => false, "description" => "si no se proporciona usa local.shell para su configuracion"],
+]);
+
+$validaciones =  new validaciones();
+$valid = $validaciones->validRules(array("Modulo" => array("valor" => $modulo,"required")));
+if(!$valid)
+{
+    echo shellFontColor($validaciones->getMsg(),"rojo")."\n\n".$help;
+    exit;
+}
+
+if(!file_exists(PROJECT_DIR."/modulos/".$modulo))
+{
+    echo "\t".shellFontColor("[error] El modulo ".$modulo." no existe","rojo")."\n";
+
+    exit;
+
+}
+
+if(!file_exists(PROJECT_DIR."/modulos/".$modulo."/sql/install.sql"))
+{
+    echo "\t".shellFontColor("[error] El archivo de instalacion SQL no existe","rojo")."\n";
+
+    exit;
+
+}
+
+
+
+SplitSQL($site, PROJECT_DIR."/modulos/".$modulo."/sql/install.sql", $delimiter = ';')
+
+?>

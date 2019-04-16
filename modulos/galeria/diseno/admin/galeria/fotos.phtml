@@ -1,0 +1,175 @@
+<div class="content">
+     <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
+        <h1 class="titulo_seccion_admin"><?php echo $album_nombre; ?></h1>
+    
+        <form name="imageform" id="imageform" method="post" enctype="multipart/form-data" action='//admin/galeria/uploadify.php' style="clear:both">
+        <input type="hidden" name="album" value="<?php echo $album; ?>" />
+        <div id='imageloadstatus' class="w-xxxx-12">
+            <div id="progressbar" style="display:none;"><div class="progress-label">Loading...</div></div>
+        </div>
+        <div id='imageloadbutton' class="w-xxxx-12">
+        <a href="javascript:void(0);" onclick="$('#photoimg').click()">Subir imagenes</a>
+        <input type="file" name="photos[]" id="photoimg" multiple="true" class="input-file" style='display:none' />
+        </div>
+        </form>
+<div class=" w-xxxx-12 ">
+    <div class="w-xxxx-12 cont_100_p interiores one_column">
+        <div id="galeria_clientes" >
+ 
+        <div class="ver_cabecera"></div>
+        
+        <div  class="fondo_galeria galeria_dock" id="cont_fotos">
+        <?php 
+        $count = 0;
+        if(!empty($lista_admin_data))
+        {
+            foreach ($lista_admin_data as $k => $v)
+            {
+                echo getFotoGaleria($v["id"],$v["id_album"],$v["foto"],$v["descripcion"],$v["fecha"],1,$count);
+                $count++;
+            }
+        }
+        ?>
+ 
+        </div>
+        </div>  
+    </div>
+  
+
+    <?php if($count == 0): ?>
+    <div class="w-xxxx-12">
+    <div class="no_hay_datos" >No hay fotos registradas</div>
+    </div>
+    <?php endif; ?>
+        
+</div>
+        </div>
+
+<script >
+    <!--
+    
+    function uploadMultiGaleria(e)
+    {
+        var files;
+        if(e.originalEvent.dataTransfer) {
+          files = e.originalEvent.dataTransfer.files;
+        } else if(e.target) {
+          files = e.originalEvent.target.files;
+        }
+
+        var fd = new FormData(); 
+        fd.append('album', <?php echo $album; ?>);
+
+        for (var i = 0; i < files.length; i++) { // Loop all files
+                fd.append('photos[]', files[i]); // Create an append() method, one for each file dropped
+        }
+        
+        var progressbar = $( "#progressbar" ),  progressLabel = $( ".progress-label" );
+        progressbar.progressbar({
+            value: false,
+            change: function() {
+              progressLabel.text( progressbar.progressbar( "value" ) + "%" );
+            },
+            complete: function() {
+              progressLabel.text( "Completo!" );
+            }
+        });
+        
+
+        $.ajax({ // JQuery Ajax
+                type: 'POST',
+                url: $('form[name=imageform]').attr("action"), // URL to the PHP file which will insert new value in the database
+                data:fd, // We send the data string
+                processData: false,
+                contentType: false,
+                mimeType:"multipart/form-data",
+                beforeSend:function(){
+                    progressbar.show();
+                    $("#imageloadbutton").hide();
+                },
+                success:function(){
+
+                   
+
+                    $("#imageloadbutton").show();
+
+                    ShowFotosGaleria(<?php echo $album; ?>);
+                    $("#photoimg").val('');
+                },
+                error:function(){
+                    
+                    $("#imageloadbutton").show();
+                },
+                xhr: function () {
+                    var xhr = $.ajaxSettings.xhr();
+                    if(xhr.upload){
+                    xhr.upload.addEventListener("progress", function (e) {
+                                if (e.lengthComputable) {
+                                        var pourc = Math.round(e.loaded / e.total * 100);                                        
+                                        progressbar.progressbar( "value", pourc );
+                                }
+          
+                               
+                        } , false);
+                    }
+                    return xhr;
+                },
+
+        });
+        
+    }
+    $(document).ready(function()
+    {
+        $('#photoimg').on('change', function(e)
+        {
+            uploadMultiGaleria(e);
+            
+        });
+         
+    });
+
+    $(function() {    
+      $( "#cont_fotos" ).sortable({
+          connectWith: ".fondo_galeria",
+          update: function(event, ui){
+              var newOrder = $(this).sortable('toArray').toString();
+              setOrdenFotoGaleria(<?php echo $album; ?>,newOrder);  
+          }  ,
+          placeholder: 'ui-state-default'
+      });
+      $( "#cont_fotos" ).disableSelection();
+    });
+    
+
+    function makeDroppable() 
+    {
+        $("#cont_fotos").on('dragover', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          $(this).addClass('galeria_dock_hover');
+        });
+
+        $("#cont_fotos").on('dragleave', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          $(this).removeClass('galeria_dock_hover');
+        });
+
+       $("#cont_fotos").on('drop', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          $(this).removeClass('galeria_dock_hover');
+          triggerCallback(e);
+        });
+    }
+   
+    function triggerCallback(e) {
+        $('.progress-bar').css({width: '0%'}).attr('aria-valuenow', '0').text('0%');
+        uploadMultiGaleria(e);
+    }
+  
+
+    makeDroppable();
+    
+  // -->
+</script>

@@ -1,0 +1,13 @@
+<div class="w-xxxx-12 cont_login_admin">
+    <div class="content">
+        <div class="w-xxxx-4 w-xxx-3 x-xx-3">&nbsp;</div>
+        <div class="w-xxxx-4 w-xxx-5 x-xx-5">
+            <h1>Iniciar sesión</h1>
+            <?php  $loginForm->setAtributoInput("callback","value",$MyRequest->getRequest("callback")); ?>
+            <?php echo $loginForm->openTag(); ?>
+            <?php echo $loginForm->getAllRow(); ?>
+            <?php echo $loginForm->endTag(); ?>
+            <a class="btn btn-text" href="<?php echo $MyRequest->url(FORGOT); ?>">¿Olvidaste tu contraseña?</a>
+        </div>
+    </div>
+</div>

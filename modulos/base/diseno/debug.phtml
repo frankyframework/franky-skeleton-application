@@ -1,0 +1,25 @@
+<?php if($debugEnabled): ?>
+<?php $debugSQL = new \Franky\Database\Debug(); ?>
+<div id="debug" class="w-xxxx-12">
+    <div class="pestanas" class="w-xxxx-12">
+        <div class="w-xxxx-1 pestana"><a href="#debug-personal">Debug</a></div>
+        <div class="w-xxxx-1 pestana"><a href="#debug-errors">Errores PHP</a></div>
+        <div class="w-xxxx-1 pestana"><a href="#debug-files">Includes</a></div>
+        <div class="w-xxxx-1 pestana"><a href="#debug-sql">SQL</a></div>
+        <div class="w-xxxx-1 pestana"><a href="#debug-session">Sesiones</a></div>
+        <div class="w-xxxx-1 pestana"><a href="#debug-request">Request</a></div>
+        <div class="w-xxxx-1 pestana"><a href="#debug-server">Servidor</a></div>
+        <div class="w-xxxx-1 pestana-hide"><a href="javascript:void(0)" onclick="$('#content-detalle-debug').hide();">[-]</a></div>
+    </div>
+
+    <div id="content-detalle-debug" class="w-xxxx-12">
+        <div id="debug-personal" style="display:none;"><?php echo $messages; ?></div>
+        <div id="debug-errors" style="display:none;"><?php echo $phpErrors; ?></div>
+        <div id="debug-files" style="display:none;"><?php echo $includeFiles; ?></div>
+        <div id="debug-sql" style="display:none;"><?=$debugSQL->getMessages()?></div>
+        <div id="debug-session" style="display:none;"><?php echo $session; ?></div>
+        <div id="debug-request" style="display:none;"><?php echo $request; ?></div>
+        <div id="debug-server" style="display:none;"><?php echo $cpu; ?></div>
+    </div>
+</div>
+<?php endif; ?>

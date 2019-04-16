@@ -1,0 +1,64 @@
+<div class="content">
+     <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
+    <h1 class="titulo_seccion_admin">Albumes</h1>
+    <div class="content">
+        <div><a href="javascript:void(0);" class='add_album'>Agregar album</a></div>
+        <div class='contenedor_form_album' style='display:none;'>
+        <?php echo $albumForm->openTag(); ?>
+        <?php echo $albumForm->getRow('nombre_album'); ?>
+            <?php echo $albumForm->get('guardar_album'); ?>
+        <?php echo $albumForm->endTag(); ?>
+            </div>
+
+
+   <div id='contenedor_albumes' class='fondo_albumes'>
+        <?php if(!empty($lista_admin_data)): ?>
+        
+            <?php foreach($lista_admin_data as $album): ?>
+                <?php echo getAlbumGaleria($album["id"],$album["nombre"],$album["fecha"],1); ?>
+            <?php endforeach; ?>
+        
+        <?php else: ?>
+   </div>
+        <div class='no_hay_datos'>No hay albumes registrados</div>
+        <?php endif; ?>
+        
+    </div>
+</div>
+
+
+<script >
+    <!--
+  $(function() {    
+    $( "#contenedor_albumes" ).sortable({
+        connectWith: ".fondo_albumes",
+        update: function(event, ui){
+            var newOrder = $(this).sortable('toArray').toString();
+            setOrdenAlbumGaleria(newOrder,"album");  
+        }  ,
+        placeholder: 'ui-state-default-album'
+    });
+    $( "#contenedor_albumes" ).disableSelection();
+  });
+  $(document).ready(function(){
+      $(".add_album").click(function(){
+          $(".contenedor_form_album").slideToggle();
+      })
+  })
+  
+  $(document).ready(function(){
+    
+    jQuery.validator.setDefaults({
+        debug: true,
+        success: "valid"
+      });
+    $("button[name=guardar_album]" ).click(function(){
+        $("form[name=frmalbum]").validate();
+        if($("form[name=frmalbum]").valid()){ guardarAlbumGaleria(); }
+       
+    });
+    
+});
+
+    // -->
+</script>

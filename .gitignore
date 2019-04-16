@@ -1,0 +1,10 @@
+/vendor
+configure/data.php
+configure/databases.php
+configure/modulos.php
+phpunit.xml
+public/upload/
+logs/
+sess_tmp/
+docker/log
+composer.lock

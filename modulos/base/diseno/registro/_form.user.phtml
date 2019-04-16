@@ -1,0 +1,23 @@
+<div class="w-xxxx-12">
+    <div class="content">
+        <h1>Registro</h1>
+        <div class="w_100-2">
+          <?php echo $registroForm->openTag(); ?>
+          <?php echo $registroForm->get('token_xsrf'); ?>
+          <?php echo $registroForm->get('callback'); ?>
+          <?php echo $registroForm->getRow('nombre'); ?>          
+          <?php echo $registroForm->getRow('usuario'); ?>
+          <?php echo $registroForm->getRow('contrasena'); ?>
+          <?php echo $registroForm->getRow('contrasena1'); ?>
+          <?php echo $registroForm->getRow('email'); ?>
+          <?php echo $registroForm->getRow('telefono'); ?>
+
+          <?php echo $registroForm->getRow('sexo'); ?>
+          <?php echo $registroForm->getRow('fecha_nacimiento'); ?>
+          <?php echo $registroForm->getRow('acepto'); ?>
+           <label id="acepto-error" class="error" for="acepto" style="display:none;"></label>
+          <?php echo $registroForm->getRow('guardar'); ?>
+          <?php echo $registroForm->endTag(); ?>
+        </div>
+    </div>
+</div>

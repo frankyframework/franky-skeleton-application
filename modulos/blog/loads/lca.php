@@ -1,0 +1,46 @@
+<?php
+define("ADMINISTRAR_CATEGORIAS_BLOG",           "administrar_categorias_blog");
+$MyAccessList->addRoll(NIVEL_USERADMIN,         ADMINISTRAR_CATEGORIAS_BLOG);
+$MyAccessList->addRoll(NIVEL_USERDEVELOPER,     ADMINISTRAR_CATEGORIAS_BLOG);
+
+
+define("ADMINISTRAR_ARTICULOS_BLOG",            "administrar_articulo_blog");
+$MyAccessList->addRoll(NIVEL_USERADMIN,         ADMINISTRAR_ARTICULOS_BLOG);
+$MyAccessList->addRoll(NIVEL_USERDEVELOPER,     ADMINISTRAR_ARTICULOS_BLOG);
+
+
+define("CALIFICAR_ARTICULOS_BLOG",              "calificar_articulo_blog");
+$MyAccessList->addRoll(NIVEL_USERADMIN,         CALIFICAR_ARTICULOS_BLOG);
+$MyAccessList->addRoll(NIVEL_USERDEVELOPER,     CALIFICAR_ARTICULOS_BLOG);
+$MyAccessList->addRoll(NIVEL_USERSEO,           CALIFICAR_ARTICULOS_BLOG);
+$MyAccessList->addRoll(NIVEL_USERSUSCRIPTOR,    CALIFICAR_ARTICULOS_BLOG);
+
+define("COMENTAR_ARTICULOS_BLOG",                 "comentar_articulo_blog");
+$MyAccessList->addRoll(NIVEL_USERADMIN,         COMENTAR_ARTICULOS_BLOG);
+$MyAccessList->addRoll(NIVEL_USERDEVELOPER,     COMENTAR_ARTICULOS_BLOG);
+$MyAccessList->addRoll(NIVEL_USERSEO,           COMENTAR_ARTICULOS_BLOG);
+$MyAccessList->addRoll(NIVEL_USERSUSCRIPTOR,    COMENTAR_ARTICULOS_BLOG);
+$MyAccessList->addRoll(NIVEL_USERPUBLICO,       COMENTAR_ARTICULOS_BLOG);
+
+define("VER_CALIFICAR_ARTICULOS_BLOG",          "ver_calificar_articulo_blog");
+$MyAccessList->addRoll(NIVEL_USERADMIN,         VER_CALIFICAR_ARTICULOS_BLOG);
+$MyAccessList->addRoll(NIVEL_USERDEVELOPER,     VER_CALIFICAR_ARTICULOS_BLOG);
+$MyAccessList->addRoll(NIVEL_USERSEO,     VER_CALIFICAR_ARTICULOS_BLOG);
+$MyAccessList->addRoll(NIVEL_USERSUSCRIPTOR,     VER_CALIFICAR_ARTICULOS_BLOG);
+
+define("VER_COMENTARIOS_ARTICULOS_BLOG",             "ver_opinar_articulo_blog");
+$MyAccessList->addRoll(NIVEL_USERADMIN,         VER_COMENTARIOS_ARTICULOS_BLOG);
+$MyAccessList->addRoll(NIVEL_USERDEVELOPER,     VER_COMENTARIOS_ARTICULOS_BLOG);
+$MyAccessList->addRoll(NIVEL_USERSEO,           VER_COMENTARIOS_ARTICULOS_BLOG);
+$MyAccessList->addRoll(NIVEL_USERSUSCRIPTOR,    VER_COMENTARIOS_ARTICULOS_BLOG);
+
+
+
+define("ADMINISTRAR_CALIFICAR_ARTICULOS_BLOG",  "administrar_calificar_articulo_blog");
+$MyAccessList->addRoll(NIVEL_USERADMIN,         ADMINISTRAR_CALIFICAR_ARTICULOS_BLOG);
+$MyAccessList->addRoll(NIVEL_USERDEVELOPER,     ADMINISTRAR_CALIFICAR_ARTICULOS_BLOG);
+
+define("ADMINISTRAR_COMENTARIOS_ARTICULOS_BLOG",     "administrar_opinar_articulo_blog");
+$MyAccessList->addRoll(NIVEL_USERADMIN,         ADMINISTRAR_COMENTARIOS_ARTICULOS_BLOG);
+$MyAccessList->addRoll(NIVEL_USERDEVELOPER,     ADMINISTRAR_COMENTARIOS_ARTICULOS_BLOG);
+?>

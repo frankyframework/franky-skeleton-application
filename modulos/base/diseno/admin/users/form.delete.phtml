@@ -1,0 +1,36 @@
+<div class="content">
+    <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
+    <div class="w-xxxx-12">
+        <h1><?php echo $title_form; ?></h1>
+        <p>En esta sección podrás eliminar tu cuenta.</p>
+         <div class="w-xxxx-6">
+             <p><strong>IMPORTANTE:</strong> Ten en cuenta que una vez eliminada, no podrás recuperarla.</p>
+            <?php echo $adminForm->openTag(); ?>
+            <?php echo $adminForm->getAllRow(); ?>
+            <?php echo $adminForm->endTag(); ?>
+       </div>
+    </div>
+</div>
+
+
+<?php if(!empty($contrasena_db)): ?>
+<script >
+$( "#userspass" ).validate({
+rules: {
+
+    contrasena_ant: {
+            required: true,
+            minlength: 6
+    }
+
+},
+messages: {
+
+    contrasena_ant: {
+            required: "Escribe tu contrase&ntilde;a actual",
+            minlength: jQuery.validator.format("Tu contrase&ntilde;a actual debe tener minimo {0} caracteres"),
+    }
+}
+});
+</script>
+<?php endif; ?>

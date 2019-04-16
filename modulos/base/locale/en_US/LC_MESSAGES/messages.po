@@ -1,0 +1,97 @@
+# meses
+msgid "Enero"
+msgstr "January"
+
+msgid "Febrero"
+msgstr "February"
+
+msgid "Marzo"
+msgstr "March"
+
+msgid "Abril"
+msgstr "April"
+
+msgid "Mayo"
+msgstr "May"
+
+msgid "Junio"
+msgstr "June"
+
+msgid "Julio"
+msgstr "July"
+
+msgid "Agosto"
+msgstr "August"
+
+msgid "Septiembre"
+msgstr "September"
+
+msgid "Octubre"
+msgstr "October"
+
+msgid "Noviembre"
+msgstr "November"
+
+msgid "Diciembre"
+msgstr "December"
+
+
+# contacto
+msgid "Contáctanos"
+msgstr "Contact Us"
+
+# inicio
+msgid "Inicio"
+msgstr "Home"
+
+# Nosotros
+msgid "Nosotros"
+msgstr "About Us"
+
+msgid "Guardar"
+msgstr "Save"
+
+msgid "Salir"
+msgstr "Logout"
+
+msgid  "Nombre"
+msgstr "Name"
+
+msgid  "Email"
+msgstr "Email"
+
+msgid  "Teléfono"
+msgstr "Telephone"
+
+msgid  "Asunto"
+msgstr "Subject"
+
+msgid  "Comentarios"
+msgstr "Comments"
+
+msgid  "Enviar"
+msgstr "Send"
+
+msgid  "Sexo"
+msgstr "Gender"
+
+msgid  "Hombre"
+msgstr "Man"
+
+msgid  "Mujer"
+msgstr "Woman"
+
+msgid  "Día"
+msgstr "Day"
+
+msgid  "Mes"
+msgstr "Month"
+
+msgid  "Año"
+msgstr "Year"
+
+msgid  "Fecha de nacimiento"
+msgstr "Birthday"
+
+msgid  "Tu email"
+msgstr "Your email"

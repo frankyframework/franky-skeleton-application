@@ -1,0 +1,13 @@
+<div class="cont_nav_movil">&nbsp;</div>
+<nav class="menu_web">
+    <ul class="franky_menu">
+        <?php echo $MyMenuFront->getItemMenu("<li class=\"btn_nav \"><a href=\"%s\">%s</a></li>"); ?>
+        <li class="last link_contactanos"><a href="<?php echo $MyRequest->url(CONTACTANOS) ?>"><?=_('Contáctanos')?></a></li>
+    </ul>
+    <ul class="datos_contacto">
+         <?php if($_SESSION["lang"] == "es_MX"): ?><li class="first"><a href="//lang.php?lang=en_US&amp;callback=<?php echo $callbacks_idioma["en_US"]; ?>"><?php echo makeHTMLImg(getImg('flag_en.png'),"","","English","class='image_100'"); ?></a></li><?php endif; ?>
+         <?php if($_SESSION["lang"] == "en_US"): ?><li class="first"><a href="//lang.php?lang=es_MX&amp;callback=<?php echo $callbacks_idioma["es_MX"]; ?>"><?php echo makeHTMLImg(getImg('flag_mx.png'),"","","Español","class='image_100'"); ?></a></li><?php endif; ?>
+         <?php echo render( "widget_login.phtml"); ?>
+         <li class="li_phone"><i class="icon icon-telefono"></i><a href="#" class="tel1">+52 (55) 00-00-00-00</a></li>
+     </ul>
+</nav>

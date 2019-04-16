@@ -1,0 +1,13 @@
+<div class="flexslider">
+    <ul class="slides">
+        <li><a href="<?php echo $MyRequest->url(CONTACTANOS) ?>"><?php echo makeHTMLImg(getImg('home/chile.jpg'),"","","",""); ?></a></li>
+        <li><a href="<?php echo $MyRequest->url(CONTACTANOS) ?>"><?php echo makeHTMLImg(getImg('home/usa.jpg'),"","","",""); ?></a></li>
+        <li><a href="<?php echo $MyRequest->url(CONTACTANOS) ?>"><?php echo makeHTMLImg(getImg('home/marruecos.jpg'),"","","",""); ?></a></li>                
+        <li><a href="<?php echo $MyRequest->url(CONTACTANOS) ?>"><?php echo makeHTMLImg(getImg('home/francia.jpg'),"","","",""); ?></a></li>
+    </ul>
+</div>
+<script  >
+    $(window).load(function() {
+        $('.flexslider').flexslider();
+    });    
+</script>

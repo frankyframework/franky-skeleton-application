@@ -1,0 +1,27 @@
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="shortcut icon" href="<?=(getCoreConfig('base/theme/favicon') ? getCoreConfig('base/theme/favicon') : getImg('favicon.ico')) ?>" type="image/x-icon" />
+<meta name="description" content="<?php echo $MyMetatag->getDescripcion(); ?>" />
+<?php if($MyMetatag->getKeywords() != ""): ?>
+    <meta name="keywords" content="<?php echo $MyMetatag->getKeywords(); ?>" />
+<?php endif; ?>
+<?php if($MyMetatag->getAuthor() != ""): ?>
+<link rel="author" href="<?php echo $MyMetatag->getAuthor(); ?>"  />
+<?php endif; ?>
+<base href="<?php echo $MyRequest->getPROTOCOLO().$MyRequest->getSERVER().($_SERVER['SERVER_PORT'] != 80 ? ':'.$_SERVER['SERVER_PORT'] : ''); ?>/" />
+<?php echo $MyMetatag->getCode(); ?>
+<?php echo $MyMetatag->getHreflang(); ?>
+<!--[if IE 8]>
+<meta http-equiv="x-ua-compatible" content="IE=8" />
+<![endif]-->
+<!--[if IE 9]>
+<meta http-equiv="x-ua-compatible" content="IE=EmulateIE8" />
+<![endif]-->
+<!--[if IE 10]>
+<meta http-equiv="x-ua-compatible" content="IE=8" />
+<![endif]-->
+
+<link rel="stylesheet" type="text/css" href="<?php echo getCss("imprimir.css"); ?>" media="print">
+
+
+<title><?php echo $MyMetatag->getTitulo(); ?></title>

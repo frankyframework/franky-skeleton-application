@@ -1,0 +1,13 @@
+<?xml version='1.0' standalone='yes'?>
+<mensajes>
+    <prefijo>galeria_</prefijo>
+        <mensaje>
+        <llave>album_duplicado</llave>
+        <valor>Ya existe un album con este nombre</valor>
+    </mensaje>
+    <mensaje>
+        <llave>foto_duplicado</llave>
+        <valor>Ya existe una foto con este nombre</valor>
+    </mensaje>
+   
+</mensajes>

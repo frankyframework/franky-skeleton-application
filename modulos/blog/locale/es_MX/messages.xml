@@ -1,0 +1,56 @@
+<?xml version='1.0' standalone='yes'?>
+<mensajes>
+    <prefijo>blog_</prefijo>
+        <mensaje>
+        <llave>articulo_duplicado</llave>
+        <valor>Ya existe un articulo con este titulo y esta categoria</valor>
+    </mensaje>
+    <mensaje>
+        <llave>categoria_duplicado</llave>
+        <valor>Ya existe una categoria con este nombre</valor>
+    </mensaje>
+   <mensaje>
+        <llave>guardar_articulo_success</llave>
+        <valor>El articulo se guardo correctamente</valor>
+    </mensaje>
+    <mensaje>
+        <llave>guardar_articulo_error</llave>
+        <valor>Error al guardar el articulo</valor>
+    </mensaje>
+    <mensaje>
+        <llave>editar_articulo_success</llave>
+        <valor>El articulo se edito correctamente</valor>
+    </mensaje>
+    <mensaje>
+        <llave>editar_articulo_error</llave>
+        <valor>Error al editar el articulo</valor>
+    </mensaje>
+       <mensaje>
+        <llave>calificacion_success</llave>
+        <valor>Calificado correctamente</valor>
+    </mensaje>
+    <mensaje>
+        <llave>calificacion_error</llave>
+        <valor>Error al guardar la calificación</valor>
+    </mensaje>
+    <mensaje>
+        <llave>ya_calificado</llave>
+        <valor>Ya has calificado esto anteriormente</valor>
+    </mensaje>
+    <mensaje>
+        <llave>comentario_success</llave>
+        <valor>El comentarios se guardo correctamente</valor>
+    </mensaje>
+    <mensaje>
+        <llave>comentario_error</llave>
+        <valor>Error al guardar el comentario</valor>
+    </mensaje>
+    <mensaje>
+        <llave>guardar_borrador_success</llave>
+        <valor>El borrador se guardo correctamente</valor>
+    </mensaje>
+    <mensaje>
+        <llave>guardar_borrador_error</llave>
+        <valor>Error al guardar el borrador</valor>
+    </mensaje>
+</mensajes>

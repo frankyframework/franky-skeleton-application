@@ -1,0 +1,865 @@
+<?php
+
+
+if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_SEO) && $MySession->getVar('nivel') != NIVEL_USERDEVELOPER)
+{
+    echo shellFontColor($MyMessageAlert->Message("sin_privilegios"),"rojo")."\n";
+    exit;
+}   
+
+
+use Franky\Core\validaciones;
+
+$CORREGIR_POINTS = array("txt" => "corregir","color" => "rojo");
+$MEJORAR_POINTS = array("txt" => "mejorar","color" => "amarillo");
+$EXELENTE_POINTS = array("txt" => "exelente","color" => "verde");
+$IRRELEVANTE_POINTS = array("txt" => "no afecta","color" => "default");
+
+
+ini_set('memory_limit', '-1');
+
+
+$url = $MyRequest->getRequest("url");
+$dispositivo = $MyRequest->getRequest("dispositivo","desktop");
+
+headerShell();
+$help = helpShell([
+    ["var" => "url", "required" => true, "description" => "formato ejemplo: http(s)://dominio.com"],
+    ["var" => "dispositivo", "required" => false, "description" => "[desktop(default),mobile]"],
+   ]);
+
+$validaciones =  new validaciones();
+$valid = $validaciones->validRules(array("URL" => array("valor" => $url,"required","url")));
+if(!$valid)
+{
+    echo shellFontColor($validaciones->getMsg(),"rojo")."\n\n".$help;
+    exit;
+}
+
+echo "Validando sitio...\n\n\n";
+
+
+$ch = curl_init("https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url=".urlencode($url)."&screenshot=true&strategy=".$dispositivo);
+//mobile
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+$response = curl_exec($ch);
+$status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+if(in_array($status,[400,404]))
+{
+    echo shellFontColor("La url a regresado $status","rojo")."\n";
+    exit;
+}
+
+curl_close($ch);
+$response = json_decode($response,true);
+      
+                
+          
+$validador = array();
+$validador["screenshot"]["mime"] =$response["screenshot"]["mime_type"];
+$validador["screenshot"]["image"] = $response["screenshot"]["data"];
+$validador["screenshot"]["width"] = $response["screenshot"]["width"];
+$validador["screenshot"]["height"] = $response["screenshot"]["height"];
+
+                 
+if($response["ruleGroups"]["SPEED"]["score"] < 60){  
+    $cal_speed = $CORREGIR_POINTS;
+}
+if($response["ruleGroups"]["SPEED"]["score"] >= 60 && $response["ruleGroups"]["SPEED"]["score"] < 85 )
+{  
+     $cal_speed = $MEJORAR_POINTS;
+}
+if($response["ruleGroups"]["SPEED"]["score"] >= 85 )
+{  
+    $cal_speed = $EXELENTE_POINTS;
+      
+}
+
+echo shellFontColor("[".$cal_speed["txt"]."] Calificación Google Speed: ". $response["ruleGroups"]["SPEED"]["score"]."/100",$cal_speed["color"])."\n";
+  
+
+$validador["kb_css"]["valor"] = (isset($response["pageStats"]["cssResponseBytes"]) ? round($response["pageStats"]["cssResponseBytes"]/1024,2) : 0);
+$validador["kb_html"]["valor"] = (isset($response["pageStats"]["htmlResponseBytes"]) ? round($response["pageStats"]["htmlResponseBytes"]/1024,2) : 0);
+$validador["kb_js"]["valor"] = (isset($response["pageStats"]["javascriptResponseBytes"]) ? round($response["pageStats"]["javascriptResponseBytes"]/1024,2) : 0);
+$validador["kb_img"]["valor"] = (isset($response["pageStats"]["imageResponseBytes"]) ? round($response["pageStats"]["imageResponseBytes"]/1024,2) : 0);
+$validador["kb_otros"]["valor"] = (isset($response["pageStats"]["otherResponseBytes"]) ? round($response["pageStats"]["otherResponseBytes"]/1024,2) : 0);
+$validador["kb_totales"]["valor"] = round(($validador["kb_css"]["valor"]+$validador["kb_html"]["valor"]+$validador["kb_js"]["valor"]+$validador["kb_img"]["valor"]+$validador["kb_otros"]["valor"])/1024,2);
+
+if($validador["kb_totales"]["valor"] < 2){ // 2 mb
+    $cal_kb_total = $EXELENTE_POINTS;
+}
+else{  
+    $cal_kb_total = $CORREGIR_POINTS;
+}
+
+echo shellFontColor("[".$cal_kb_total["txt"]."] Peso total de la pagina: ".$validador["kb_totales"]["valor"]."Mb",$cal_kb_total["color"])."\n";
+
+$validador["count_js"]["valor"] = 0;
+$validador["count_css"]["valor"] = 0; 
+$validador["file_js"]["valor"] = array();
+$validador["file_css"]["valor"] = array();
+
+if($response["formattedResults"]["ruleResults"]["MinimizeRenderBlockingResources"]["ruleImpact"] > 0)
+{
+    foreach($response["formattedResults"]["ruleResults"]["MinimizeRenderBlockingResources"]["summary"]["args"] as $args)
+    {
+        if($args["key"] == "NUM_SCRIPTS")
+        {
+            $validador["count_js"]["valor"] = $args["value"];
+            $validador["count_js"]["calificacion"] = ($args["value"] <= 4 ? $EXELENTE_POINTS : $CORREGIR_POINTS);
+        }
+        if($args["key"] == "NUM_CSS")
+        {
+            $validador["count_css"]["valor"] = $args["value"];
+            $validador["count_css"]["calificacion"] = ($args["value"] <= 4 ? $EXELENTE_POINTS : $CORREGIR_POINTS);
+        }
+    }
+    foreach($response["formattedResults"]["ruleResults"]["MinimizeRenderBlockingResources"]["urlBlocks"] as $args)
+    {
+        if(isset($args["urls"]))
+        {
+            foreach($args["urls"] as $_args)
+            {
+                if(preg_match("/.js/", $_args["result"]["args"][0]["value"]))
+                {
+                    $validador["file_js"]["valor"][] = $_args["result"]["args"][0]["value"];
+                }
+                 if(preg_match("/.css/", $_args["result"]["args"][0]["value"]))
+                {
+                    $validador["file_css"]["valor"][] = $_args["result"]["args"][0]["value"];
+                }
+            }
+
+        }
+
+    }
+}
+
+echo shellFontColor("[".$validador["count_js"]["calificacion"]["txt"]."] Numero de llamadas Javascript: ".$validador["count_js"]["valor"],$validador["count_js"]["calificacion"]["color"])."\n";
+
+if(!empty($validador["file_js"]["valor"]))
+{
+    foreach($validador["file_js"]["valor"] as $js)
+    {
+        echo "\t[*]".$js."\n";
+    }
+}
+echo shellFontColor("[".$validador["count_css"]["calificacion"]["txt"]."] Numero de llamadas CSS: ".$validador["count_css"]["valor"],$validador["count_css"]["calificacion"]["color"])."\n";
+if(!empty($validador["file_css"]["valor"]))
+{
+    foreach($validador["file_css"]["valor"] as $css)
+    {
+        echo "\t[*]".$css."\n";
+    }
+}
+
+$validador["minify_js"] = array("total" => array("kb" => 0,"porcentaje" => 0),"valor" => 0);
+
+
+if($response["formattedResults"]["ruleResults"]["MinifyJavaScript"]["ruleImpact"] <= 15)
+{
+    $cal_minify_js = $EXELENTE_POINTS;
+}
+if($response["formattedResults"]["ruleResults"]["MinifyJavaScript"]["ruleImpact"] > 15 && $response["formattedResults"]["ruleResults"]["MinifyJavaScript"]["ruleImpact"] < 40)
+{
+    $cal_minify_js = $MEJORAR_POINTS;
+}
+if($response["formattedResults"]["ruleResults"]["MinifyJavaScript"]["ruleImpact"] >= 40)
+{
+    $cal_minify_js = $CORREGIR_POINTS;
+}
+$count_js = 0;
+if($response["formattedResults"]["ruleResults"]["MinifyJavaScript"]["ruleImpact"] +1 > 1)
+{
+
+    foreach($response["formattedResults"]["ruleResults"]["MinifyJavaScript"]["urlBlocks"][0]["header"]["args"] as $args)
+    {
+
+        if($args["key"] == "SIZE_IN_BYTES")
+        {
+            $validador["minify_js"]["total"]["kb"] = $args["value"];
+
+        }
+        if($args["key"] == "PERCENTAGE")
+        {
+            $validador["minify_js"]["total"]["porcentaje"] = $args["value"];
+        }
+
+    }
+    
+    foreach($response["formattedResults"]["ruleResults"]["MinifyJavaScript"]["urlBlocks"][0]["urls"] as $args)
+    {
+        foreach($args["result"]["args"] as $_args)
+        {
+
+            if($_args["key"] == "URL")
+            {
+                $validador["minify_js"]["urls"][$count_js]["url"] = $_args["value"];
+            }
+            if($_args["key"] == "SIZE_IN_BYTES")
+            {
+                $validador["minify_js"]["urls"][$count_js]["size"] = $_args["value"];
+            }
+            if($_args["key"] == "PERCENTAGE")
+            {
+                $validador["minify_js"]["urls"][$count_js]["porcentaje"] = $_args["value"];
+            }
+        } 
+        $count_js++;
+        $validador["minify_js"]["valor"] = $count_js;
+    }
+}
+echo shellFontColor("[".$cal_minify_js["txt"]."] Minificar codigo Javascript: ".$validador["minify_js"]["valor"]." archivos, ".$validador["minify_js"]["total"]["kb"]."bytes (".$validador["minify_js"]["total"]["porcentaje"]."%) ",$cal_minify_js["color"])."\n";
+
+if(!empty($count_js))
+{
+
+    foreach( $validador["minify_js"]["urls"] as $k => $js)
+    {
+        echo "\t[*]".$js["url"].": ".$js["size"]. "bytes (".$js["porcentaje"]."%)\n";
+    }
+}
+$validador["minify_css"] = array("total" => array("kb" => 0,"porcentaje" => 0),"valor" => 0);
+
+if($response["formattedResults"]["ruleResults"]["MinifyCss"]["ruleImpact"] <= 15)
+{
+    $cal_minify_css = $EXELENTE_POINTS;
+}
+if($response["formattedResults"]["ruleResults"]["MinifyCss"]["ruleImpact"] > 15 && $response["formattedResults"]["ruleResults"]["MinifyCss"]["ruleImpact"] < 40)
+{
+    $cal_minify_css = $MEJORAR_POINTS;
+}
+if($response["formattedResults"]["ruleResults"]["MinifyCss"]["ruleImpact"] >= 40)
+{
+    $cal_minify_css = $CORREGIR_POINTS;
+}
+
+$count_css = 0;
+if($response["formattedResults"]["ruleResults"]["MinifyCss"]["ruleImpact"]+1 > 1)
+{
+
+    foreach($response["formattedResults"]["ruleResults"]["MinifyCss"]["urlBlocks"][0]["header"]["args"] as $args)
+    {
+
+        if($args["key"] == "SIZE_IN_BYTES")
+        {
+            $validador["minify_css"]["total"]["kb"] = $args["value"];
+
+        }
+        if($args["key"] == "PERCENTAGE")
+        {
+            $validador["minify_css"]["total"]["porcentaje"] = $args["value"];
+        }
+
+    }
+    
+    foreach($response["formattedResults"]["ruleResults"]["MinifyCss"]["urlBlocks"][0]["urls"] as $args)
+    {
+        foreach($args["result"]["args"] as $_args)
+        {
+
+            if($_args["key"] == "URL")
+            {
+                $validador["minify_css"]["urls"][$count_css]["url"] = $_args["value"];
+            }
+            if($_args["key"] == "SIZE_IN_BYTES")
+            {
+                $validador["minify_css"]["urls"][$count_css]["size"] = $_args["value"];
+            }
+            if($_args["key"] == "PERCENTAGE")
+            {
+                $validador["minify_css"]["urls"][$count_css]["porcentaje"] = $_args["value"];
+            }
+        } 
+        $count_css++;
+        $validador["minify_css"]["valor"] = $count_css;
+    }
+}
+echo shellFontColor("[".$cal_minify_css["txt"]."] Minificar codigo CSS: ".$validador["minify_css"]["valor"]." archivos, ".$validador["minify_css"]["total"]["kb"]."bytes (".$validador["minify_css"]["total"]["porcentaje"]."%) ",$cal_minify_css["color"])."\n";
+if(!empty($count_css))
+{
+    foreach( $validador["minify_css"]["urls"] as $k => $css)
+    {
+        echo "\t[*]".$css["url"].": ".$css["size"]. "bytes (".$css["porcentaje"]."%)\n";
+    }                
+}              
+$validador["optimizar_imagenes"] = array("total" => array("kb" => 0,"porcentaje" => 0),"valor" => 0);
+              
+               
+if($response["formattedResults"]["ruleResults"]["OptimizeImages"]["ruleImpact"] <= 15)
+{
+    $cal_opt_img = $EXELENTE_POINTS;
+}
+if($response["formattedResults"]["ruleResults"]["OptimizeImages"]["ruleImpact"] > 15 && $response["formattedResults"]["ruleResults"]["OptimizeImages"]["ruleImpact"] < 40)
+{
+    $cal_opt_img = $MEJORAR_POINTS;
+}
+if($response["formattedResults"]["ruleResults"]["OptimizeImages"]["ruleImpact"] >= 40)
+{
+    $cal_opt_img = $CORREGIR_POINTS;
+}
+
+$count_img = 0;
+if($response["formattedResults"]["ruleResults"]["OptimizeImages"]["ruleImpact"] > 0)
+{
+
+    foreach($response["formattedResults"]["ruleResults"]["OptimizeImages"]["urlBlocks"][0]["header"]["args"] as $args)
+    {
+
+        if($args["key"] == "SIZE_IN_BYTES")
+        {
+            $validador["optimizar_imagenes"]["total"]["kb"] = $args["value"];
+
+        }
+        if($args["key"] == "PERCENTAGE")
+        {
+            $validador["optimizar_imagenes"]["total"]["porcentaje"] = $args["value"];
+        }
+
+    }
+    
+    foreach($response["formattedResults"]["ruleResults"]["OptimizeImages"]["urlBlocks"][0]["urls"] as $args)
+    {
+        foreach($args["result"]["args"] as $_args)
+        {
+
+            if($_args["key"] == "URL")
+            {
+                $validador["optimizar_imagenes"]["urls"][$count_img]["url"] = $_args["value"];
+            }
+            if($_args["key"] == "SIZE_IN_BYTES")
+            {
+                $validador["optimizar_imagenes"]["urls"][$count_img]["size"] = $_args["value"];
+            }
+            if($_args["key"] == "PERCENTAGE")
+            {
+                $validador["optimizar_imagenes"]["urls"][$count_img]["porcentaje"] = $_args["value"];
+            }
+        } 
+        $count_img++;
+        $validador["optimizar_imagenes"]["valor"] = $count_img;
+    }
+}
+
+echo shellFontColor("[".$cal_opt_img["txt"]."] Optimizacion de imagenes: ".$validador["optimizar_imagenes"]["valor"]." archivos, ".$validador["optimizar_imagenes"]["total"]["kb"]."bytes (".$validador["optimizar_imagenes"]["total"]["porcentaje"]."%) ",$cal_opt_img["color"])."\n";
+if(!empty($count_img))
+{
+    foreach( $validador["optimizar_imagenes"]["urls"] as $k => $img)
+    {
+        echo "\t[*]".$img["url"].": ".$img["size"]. "bytes (".$img["porcentaje"]."%)\n";
+    }
+}
+      
+                
+$validador["tiempo_servidor"]["valor"] = "0 "._("segundos");
+
+if($response["formattedResults"]["ruleResults"]["MainResourceServerResponseTime"]["ruleImpact"] <= 15)
+{
+    $cal_time = $EXELENTE_POINTS;
+}
+if($response["formattedResults"]["ruleResults"]["MainResourceServerResponseTime"]["ruleImpact"] > 15 && $response["formattedResults"]["ruleResults"]["MainResourceServerResponseTime"]["ruleImpact"] < 40)
+{
+    $cal_time = $MEJORAR_POINTS;
+}
+if($response["formattedResults"]["ruleResults"]["MainResourceServerResponseTime"]["ruleImpact"] >= 40)
+{
+    $cal_time = $CORREGIR_POINTS;
+}
+
+             
+             
+                
+                
+if($response["formattedResults"]["ruleResults"]["MainResourceServerResponseTime"]["ruleImpact"] > 0)
+{
+    foreach($response["formattedResults"]["ruleResults"]["MainResourceServerResponseTime"]["urlBlocks"][0]["header"]["args"] as $args)
+    {
+
+        if($args["key"] == "RESPONSE_TIME")
+        {
+            $validador["tiempo_servidor"]["valor"] = intval(preg_replace('/[^0-9.]+/', '', $args["value"]), 10)." "._("segundos");
+
+        }
+    }
+}
+echo shellFontColor("[".$cal_time["txt"]."] Tiempo de respuesta del servidor: ".$validador["tiempo_servidor"]["valor"],$cal_time["color"])."\n";
+                  
+                
+$validador["cache"]["valor"] = "0";
+if($response["formattedResults"]["ruleResults"]["LeverageBrowserCaching"]["ruleImpact"] <= 15)
+{
+    $cal_cache = $EXELENTE_POINTS;
+}
+if($response["formattedResults"]["ruleResults"]["LeverageBrowserCaching"]["ruleImpact"] > 15 && $response["formattedResults"]["ruleResults"]["LeverageBrowserCaching"]["ruleImpact"] < 40)
+{
+    $cal_cache = $MEJORAR_POINTS;
+}
+if($response["formattedResults"]["ruleResults"]["LeverageBrowserCaching"]["ruleImpact"] >= 40)
+{
+    $cal_cache = $CORREGIR_POINTS;
+}
+
+$count_time = 0;
+
+if($response["formattedResults"]["ruleResults"]["LeverageBrowserCaching"]["ruleImpact"] > 0)
+{
+
+
+    foreach($response["formattedResults"]["ruleResults"]["LeverageBrowserCaching"]["urlBlocks"][0]["urls"] as $args)
+    {
+       // print_r($args);
+        $validador["cache"]["urls"][$count_time]["time"] = _("expiración no especificada");
+        foreach($args["result"]["args"] as $_args)
+        {
+
+            if($_args["key"] == "URL")
+            {
+                $validador["cache"]["urls"][$count_time]["url"] = $_args["value"] ;
+
+            }
+            if($_args["key"] == "LIFETIME")
+            {
+                $validador["cache"]["urls"][$count_time]["time"] = $_args["value"] ;
+
+            }
+        }
+        $count_time++;
+        $validador["cache"]["valor"] = $count_time;
+
+    }
+}
+echo shellFontColor("[".$cal_cache["txt"]."] Archivos no guardados en cache: ".$validador["cache"]["valor"],$cal_cache["color"])."\n";
+if(!empty($count_time))
+{
+    foreach ($validador["cache"]["urls"] as $k => $file)
+    {
+        echo "\t[*]".$file["url"].": ".$file["time"]."\n";
+    }
+}                 
+                
+$validador["gzip"]["valor"] = "0";
+if($response["formattedResults"]["ruleResults"]["EnableGzipCompression"]["ruleImpact"] <= 15)
+{
+    $cal_gzip = $EXELENTE_POINTS;
+}
+if($response["formattedResults"]["ruleResults"]["EnableGzipCompression"]["ruleImpact"] > 15 && $response["formattedResults"]["ruleResults"]["EnableGzipCompression"]["ruleImpact"] < 40)
+{
+    $cal_gzip = $MEJORAR_POINTS;
+}
+if($response["formattedResults"]["ruleResults"]["EnableGzipCompression"]["ruleImpact"] >= 40)
+{
+    $cal_gzip = $CORREGIR_POINTS;
+}
+
+
+$count_gzip = 0;
+$validador["gzip"]["total"]["kb"] = 0;
+$validador["gzip"]["total"]["porcentaje"] = 0;
+
+if($response["formattedResults"]["ruleResults"]["EnableGzipCompression"]["ruleImpact"] > 0)
+{
+    
+    foreach($response["formattedResults"]["ruleResults"]["EnableGzipCompression"]["urlBlocks"][0]["header"]["args"] as $args)
+    {
+
+        if($args["key"] == "SIZE_IN_BYTES")
+        {
+            $validador["gzip"]["total"]["kb"] = $args["value"];
+
+        }
+        if($args["key"] == "PERCENTAGE")
+        {
+            $validador["gzip"]["total"]["porcentaje"] = $args["value"];
+        }
+
+    }
+    
+    foreach($response["formattedResults"]["ruleResults"]["EnableGzipCompression"]["urlBlocks"][0]["urls"] as $args)
+    {
+        foreach($args["result"]["args"] as $_args)
+        {
+
+            if($_args["key"] == "URL")
+            {
+                $validador["gzip"]["urls"][$count_gzip]["url"] = $_args["value"];
+            }
+            if($_args["key"] == "SIZE_IN_BYTES")
+            {
+                $validador["gzip"]["urls"][$count_gzip]["size"] = $_args["value"];
+            }
+            if($_args["key"] == "PERCENTAGE")
+            {
+                $validador["gzip"]["urls"][$count_gzip]["porcentaje"] = $_args["value"];
+            }
+        } 
+        $count_gzip++;
+        $validador["gzip"]["valor"] = $count_gzip;
+
+    }
+}
+
+echo shellFontColor("[".$cal_gzip["txt"]."] Archivos no comprimidos: ".$validador["gzip"]["valor"].", ".$validador["gzip"]["total"]["kb"]."bytes (".$validador["gzip"]["total"]["porcentaje"]."%)",$cal_gzip["color"])."\n";
+if(!empty($count_gzip))
+{
+    foreach ($validador["gzip"]["urls"] as $k => $file)
+    {
+        echo "\t[*]".$file["url"].": ".$file["size"]."bytes (".$file["porcentaje"]."%)\n";
+    }
+}
+
+/****************************** W3c *****************************************/
+
+$ch = curl_init("https://validator.w3.org/nu/?doc=".urlencode($url)."&out=json");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Franky OS) Gecko/20100101 Firefox/44.");
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+$response = json_decode($response,true);
+
+
+
+$cal_w3c = $EXELENTE_POINTS; 
+if(!empty($response["messages"])){
+
+    $cal_w3c = $CORREGIR_POINTS; 
+    echo shellFontColor("[".$cal_w3c["txt"]."] Validacion HTML w3c",$cal_w3c["color"])."\n";
+    foreach($response["messages"] as $errores)
+    {
+        switch($errores["type"])
+        {
+            case "error":
+                $color = "rojo";
+                break;
+                
+            case "info":
+                $color = "amarillo";
+                break;
+            default:
+                $color= "rojo";
+                break;
+                
+        }
+        echo shellFontColor("\t[".$errores["type"]."] ".$errores["message"]."]",$color)."\n".
+                "\tFila ".(isset($errores["lastLine"]) ? $errores["lastLine"] : 0)."\n".
+                "\tColumn ".(isset($errores["firstColumn"]) ? $errores["firstColumn"] : 0)."\n".
+                "\t".(isset($errores["extract"]) ? shellFontColor($errores["extract"]) : _("No aplica"))."\n";
+        
+    }
+}
+else
+{
+    echo shellFontColor("[".$cal_w3c["txt"]."] Validacion HTML w3c",$cal_w3c["color"])."\n";
+}
+      
+
+/******* SEO RULES ********/
+
+
+$url_disect = parse_url($url);
+$sinwww = str_replace("www.","",$url_disect["host"]);
+$ch = curl_init($url_disect["scheme"]."://".$sinwww);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Franky OS) Gecko/20100101 Firefox/44.");
+curl_setopt($ch, CURLOPT_HEADER, true);
+$response = curl_exec($ch);
+$status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+$cal_www = $CORREGIR_POINTS;
+if($status == "301")
+{
+
+    preg_match('/Location:(.*?)\n/', $response, $matches);
+     $newUrl = trim(array_pop($matches));
+
+    $newUrl_disect = parse_url($newUrl);
+
+    if($newUrl_disect["host"] == "www.".$sinwww)
+    {
+        $cal_www = $EXELENTE_POINTS;
+    }
+}
+echo shellFontColor("[".$cal_www["txt"]."] Redireccionamiento 301 sin WWW",$cal_www["color"])."\n";
+
+
+$ch = curl_init($url_disect["scheme"]."://".$url_disect["host"]."/robots.txt");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+$response = curl_exec($ch);
+$status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+$cal_robot = $CORREGIR_POINTS;
+if($status == "200")
+{
+    $cal_robot = $EXELENTE_POINTS;
+}
+
+echo shellFontColor("[".$cal_robot["txt"]."] Archivo robots.txt",$cal_robot["color"])."\n";
+
+
+$ch = curl_init($url_disect["scheme"]."://".$url_disect["host"]."/sitemap.xml");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+$response = curl_exec($ch);
+$status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+$cal_sitemap = $CORREGIR_POINTS;
+if($status == "200")
+{
+    $cal_sitemap = $EXELENTE_POINTS;
+}
+else
+{
+    $ch = curl_init($url_disect["scheme"]."://".$url_disect["host"]."/sitemap.php");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    $response = curl_exec($ch);
+    $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if($status == "200")
+    {
+        $cal_sitemap = $EXELENTE_POINTS;
+    }
+
+}
+
+echo shellFontColor("[".$cal_sitemap["txt"]."] Archivo sitemap.xml o sitemap.php",$cal_sitemap["color"])."\n";
+
+
+$ch = curl_init($url_disect["scheme"]."://".$url_disect["host"]."/blog/");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+$response = curl_exec($ch);
+$status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+$cal_blog = $CORREGIR_POINTS;
+if($status == "200")
+{
+    $cal_blog = $EXELENTE_POINTS;
+}
+echo shellFontColor("[".$cal_blog["txt"]."] Blog en la pagina",$cal_blog["color"])."\n";
+
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+$response = curl_exec($ch);
+$status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+
+
+
+
+if($status == "200")
+{
+    $doc = new \DOMDocument();
+    libxml_use_internal_errors(true);  
+    $doc->loadHTML(preg_replace("/&(?!(?:apos|quot|[gl]t|amp);|#)/", '&amp;', $response));
+
+    $tag=$doc->getElementsByTagName('title')->item(0);
+
+    $cal_title = $CORREGIR_POINTS;
+    if(!empty($tag) && $tag->nodeValue != "")
+    {
+        
+        $cal_title= (strlen($tag->nodeValue) >= 10 && strlen($tag->nodeValue) <= 70 ? $EXELENTE_POINTS : $MEJORAR_POINTS);
+    }
+    $title_pag = $tag->nodeValue;
+
+    echo shellFontColor("[".$cal_title["txt"]."] Titulo de la página: ".$tag->nodeValue." (".strlen($tag->nodeValue)." caracteres)",$cal_title["color"])."\n";
+
+    $tag = $doc->getElementsByTagName("meta");
+    if(!empty($tag))
+    {
+        $cal_description = $CORREGIR_POINTS;
+        foreach($tag as $element)
+        {
+            if(strtolower($element->getAttribute('name')) == "description")
+            {
+                   
+                    $descripcion = $element->getAttribute('content');
+                    $cal_description= (strlen($descripcion) >= 70 && strlen($descripcion) <= 160 ? $EXELENTE_POINTS : $MEJORAR_POINTS);
+                    $description_pag = $descripcion;
+
+                    echo shellFontColor("[".$cal_description["txt"]."] Descripcion de la página: ".$descripcion." (".strlen($descripcion)." caracteres)",$cal_description["color"])."\n";
+            }
+        }
+    }
+    
+    $cal_h = $CORREGIR_POINTS;
+    $h_txt = "";
+    $count_h = 0;
+    for($x=1;$x<=5;$x++)
+    {
+        ${'h'.$x} = $doc->getElementsByTagName("h$x");
+        if(!empty(${'h'.$x}))
+        {
+            $cal_h = $EXELENTE_POINTS;
+            
+            
+            
+            foreach(${'h'.$x} as $element)
+            { 
+                $count_h++;
+                $h_txt .= "\t".shellFontColor("<H$x>".$element->nodeValue)."\n";
+                $encabezado["h$x"][] = $element->nodeValue;
+            }
+            
+        }
+    }
+    echo shellFontColor("[".$cal_h["txt"]."] Titulos de pagina <H>: $count_h",$cal_h["color"])."\n";
+    echo $h_txt;
+
+    $tag = $doc->getElementsByTagName("img");
+    $cont_alt = 0;
+    $cont_img = 0;
+    $txt_img = "";
+    if(!empty($tag))
+    {
+
+        foreach($tag as $element)
+        {
+
+            $alt =  $element->getAttribute('alt');
+            $cont_img++;
+            if(empty($alt))
+            {
+                $cont_alt++;
+                $txt_img .= "\t[*] ".$element->getAttribute('src')."\n";
+            }
+
+        }
+        $promedio_alt = ($cont_alt <= 0 ? 100 :($cont_alt*100/$cont_img));
+        if($promedio_alt >= 85){ $cal_alt = $EXELENTE_POINTS; }
+        if($promedio_alt < 85 && $promedio_alt >= 60){ $cal_alt = $MEJORAR_POINTS; }
+        if($promedio_alt < 60){ $cal_alt = $CORREGIR_POINTS; }
+        
+        echo shellFontColor("[".$cal_alt["txt"]."] Imagenes sin ALT: $cont_alt",$cal_alt["color"])."\n";
+        echo $txt_img;
+    }
+    
+    
+
+
+    $tag = $doc->getElementsByTagName("a");
+    $count_no_friendly = 0;
+    $count_a = 0;
+    $txt_a = "";
+    if(!empty($tag))
+    {
+
+        foreach($tag as $element)
+        {
+            $count_a++;
+            $url_friendly = parse_url($element->getAttribute('href'));
+            if(isset($url_friendly["host"]) && $url_disect["host"] == $url_friendly["host"])
+            {
+                if (isset($url_friendly["query"]))
+                {
+                    $count_no_friendly++;  
+                    $txt_a = "\t[*]".$element->getAttribute('href')."\n";
+                }
+            }
+        }
+    }
+    $promedio_a = ($count_no_friendly <= 0 ? 100 : ($count_no_friendly*100/$count_a));
+    if($promedio_a >= 85){ $cal_a = $EXELENTE_POINTS; }
+    if($promedio_a < 85 && $promedio_alt >= 60){ $cal_a = $MEJORAR_POINTS; }
+    if($promedio_a < 60){ $cal_a = $CORREGIR_POINTS; }
+
+    echo shellFontColor("[".$cal_a["txt"]."] URL's no amigables: $count_no_friendly",$cal_a["color"])."\n";
+    echo $txt_a;
+
+    $count_no_friendly = 0;
+    
+    $txt_a = "";
+    
+    if(!empty($tag))
+    {
+
+        foreach($tag as $element)
+        {
+
+            $url_friendly = $element->getAttribute('href');
+            if(preg_match("/_/",$url_friendly))
+            {
+
+                $count_no_friendly++;  
+                $txt_a .= "\t[*]".$element->getAttribute('href')."\n";
+
+            }
+        }
+    }
+    $promedio_a = ($count_no_friendly <= 0 ? 100 : ($count_no_friendly*100/$count_a));
+    if($promedio_a >= 85){ $cal_a = $EXELENTE_POINTS; }
+    if($promedio_a < 85 && $promedio_alt >= 60){ $cal_a = $MEJORAR_POINTS; }
+    if($promedio_a < 60){ $cal_a = $CORREGIR_POINTS; }
+
+    echo shellFontColor("[".$cal_a["txt"]."] URL's con \"_\": $count_no_friendly",$cal_a["color"])."\n";
+    echo $txt_a;
+    
+    
+    $flash = $doc->getElementsByTagName("object");
+    $frame = $doc->getElementsByTagName("frame");
+    $iframe = $doc->getElementsByTagName("iframe");
+    $applets = $doc->getElementsByTagName("applet");
+
+    $cal_limitante = $EXELENTE_POINTS;
+    if($flash->length > 0 ||($frame->length + $iframe->length) > 0 ||$applets->length > 0)
+    {
+        $cal_limitante = $CORREGIR_POINTS;
+    }
+
+    
+    echo shellFontColor("[".$cal_limitante["txt"]."] Limitantes para la visualizacion de página (Flash, Frames, Applets)",$cal_limitante["color"])."\n";
+
+    
+    echo shellFontColor("[".$IRRELEVANTE_POINTS["txt"]."] Nube de palabras",$IRRELEVANTE_POINTS["color"])."\n";
+    
+    $rows = array();
+    $cols = array("palaba","total","titulo","descripcion","<H>");
+    $html = preg_replace("/<script[^>]*?>.*?<\/script>/si", "", $response);
+    $html = preg_replace("/<script[^>]*?javascript{1}[^>]*?>.*?<\/script>/si", "", $html); 
+    $html = preg_replace("/<style[^>]*?css{1}[^>]*?>.*?<\/style>/si", "", $html); 
+    $palabras = preg_split("/(,| )/",strip_tags($html));
+    $_palabras =  array();
+    foreach($palabras as $palabra)
+    {
+        $palabra = trim(preg_replace('[^A-Za-z0-9_-ñÑ]', '', $palabra));
+        if(!empty($palabra) && strlen($palabra) > 3 && !is_numeric($palabra))
+        {
+            $_palabras[] = strtolower($palabra);
+        }
+    }
+    $count_palabras = array_count_values($_palabras);
+    arsort($count_palabras);
+
+    foreach($count_palabras as $k => $v)
+    {
+        if($v >=2)
+        {
+
+            $keyword_h = 0;
+
+            for ($x =1; $x <= 5; $x++)
+            {
+                if(isset($encabezado["h$x"]) && !empty($encabezado["h$x"]))
+                {
+                    foreach ($encabezado["h$x"] as $encabezado)
+                        $keyword_h += substr_count(strtolower($encabezado),$k);
+                }
+            }
+
+           $rows[] = array(htmlentities($k),$v,substr_count(strtolower($title_pag),$k),substr_count(strtolower($description_pag),$k),$keyword_h);
+
+        }
+    }
+    echo shellTable($cols, $rows);
+   
+}
+?>

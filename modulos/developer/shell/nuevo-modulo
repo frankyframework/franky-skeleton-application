@@ -1,0 +1,194 @@
+<?php
+use Franky\Core\validaciones;
+use \Franky\Core\Plantilla;
+
+
+if($MySession->getVar('nivel') != NIVEL_USERDEVELOPER)
+{
+    echo shellFontColor($MyMessageAlert->Message("sin_privilegios"),"rojo")."\n";
+    exit;
+}
+
+ini_set('memory_limit', '-1');
+
+
+$nombre = getFriendly($MyRequest->getRequest("nombre"));
+
+$principal = $MyRequest->getRequest("principal",1);
+$host = $MyRequest->getRequest("host","nuevo_sitio");
+
+
+if(!empty($site))
+{
+    $_SERVER["SERVER_NAME"] = $site;
+    $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Core\MYDEBUG);
+}
+headerShell();
+$help = helpShell([
+    ["var" => "nombre", "required" => true, "description" => "nombre del modulo"],
+    ["var" => "principal", "required" => false, "description" => "[1 (default)|0], valor 1 creara un nodo en la configuracion data.php con el host"],
+    ["var" => "host", "required" => true, "description" => "default 'nuevo_sitio' para configuracion de sitio en data.php"]
+]);
+
+$validaciones =  new validaciones();
+$valid = $validaciones->validRules(array("Nombre" => array("valor" => $nombre,"required")));
+if(!$valid)
+{
+    echo shellFontColor($validaciones->getMsg(),"rojo")."\n\n".$help;
+    exit;
+}
+
+if(file_exists(PROJECT_DIR."/modulos/".$nombre))
+{
+    echo "\t".shellFontColor("[error] El modulo ".$nombre." ya existe","rojo")."\n";
+
+    exit;
+
+}
+
+
+$paths = array(PROJECT_DIR."/modulos/".$nombre,
+                PROJECT_DIR."/modulos/".$nombre."/Form",
+                PROJECT_DIR."/modulos/".$nombre."/ajax",
+                PROJECT_DIR."/modulos/".$nombre."/vendor",
+                PROJECT_DIR."/modulos/".$nombre."/vendor/model",
+                PROJECT_DIR."/modulos/".$nombre."/vendor/entity",
+                PROJECT_DIR."/modulos/".$nombre."/vendor/schema",
+                PROJECT_DIR."/modulos/".$nombre."/configure/",
+                PROJECT_DIR."/modulos/".$nombre."/controller/",
+                PROJECT_DIR."/modulos/".$nombre."/diseno/",
+                PROJECT_DIR."/modulos/".$nombre."/loads/",
+                PROJECT_DIR."/modulos/".$nombre."/locale/",
+                PROJECT_DIR."/modulos/".$nombre."/locale/en_US/",
+                PROJECT_DIR."/modulos/".$nombre."/locale/en_US/LC_MESSAGES/",
+                PROJECT_DIR."/modulos/".$nombre."/locale/es_MX/",
+                PROJECT_DIR."/modulos/".$nombre."/locale/es_MX/LC_MESSAGES/",
+                PROJECT_DIR."/modulos/".$nombre."/menu/",
+                PROJECT_DIR."/modulos/".$nombre."/shell/",
+                PROJECT_DIR."/modulos/".$nombre."/sql/",
+                PROJECT_DIR."/modulos/".$nombre."/env/",
+                PROJECT_DIR."/public/ajax/".$nombre,
+    );
+
+echo "[+]Creando estructura de directorios'\n";
+
+foreach ($paths as $path)
+{
+    if(file_exists($path))
+    {
+        echo "\t".shellFontColor("[error] ".$path." ya existe","rojo")."\n";
+
+    }
+    else
+    {
+        if(mkdir($path,0777))
+        {
+            echo "\t".shellFontColor("[success] Se creo el directorio ".$path,"verde")."\n";
+        }
+        else{
+            echo "\t".shellFontColor("[error] No se creo el directorio ".$path,"rojo")."\n";
+        }
+    }
+}
+
+
+$plantilla = new Plantilla();
+$plantilla->asigna_variables(array("nombre" => $nombre));
+
+$files = array(
+    PROJECT_DIR."/modulos/".$nombre."/loads/init.php" =>  $plantilla->muestra(PROJECT_DIR."/modulos/developer/templates/dev/init.tpl"),
+    PROJECT_DIR."/modulos/".$nombre."/loads/lca.php" => $plantilla->muestra(PROJECT_DIR."/modulos/developer/templates/dev/lca.tpl"),
+    PROJECT_DIR."/modulos/".$nombre."/loads/util.php" => $plantilla->muestra(PROJECT_DIR."/modulos/developer/templates/dev/util.tpl"),
+    PROJECT_DIR."/modulos/".$nombre."/locale/en_US/LC_MESSAGES/".$nombre.".po" => "",
+    PROJECT_DIR."/modulos/".$nombre."/locale/es_MX/LC_MESSAGES/".$nombre.".po" => "",
+);
+
+echo "[+]Creando archivos necesarios\n";
+
+foreach ($files as $path => $file)
+{
+    $fopen = fopen($path, 'w');
+    fwrite($fopen,$file);
+    fclose($fopen);
+    if($fopen != false)
+    {
+        echo "\t".shellFontColor("[success] Se creo el archivo ".$path,"verde")."\n";
+    }
+    else
+    {
+        echo "\t".shellFontColor("[error] No se puedo crear el archivo ".$path,"rojo")."\n";
+    }
+}
+
+echo "[+]Creando tpl de E-mails\n";
+
+if(mkdir(PROJECT_DIR."/modulos/$nombre/templates/",0777))
+{
+    echo "\t".shellFontColor("[success] Se creo el directorio ".PROJECT_DIR."/modulos/$nombre/templates/","verde")."\n";
+}
+else{
+    echo "\t".shellFontColor("[error] No se creo el directorio ".PROJECT_DIR."/modulos/$nombre/templates/","rojo")."\n";
+}
+if(mkdir(PROJECT_DIR."/modulos/$nombre/templates/email",0777))
+{
+    echo "\t".shellFontColor("[success] Se creo el directorio ".PROJECT_DIR."/modulos/$nombre/templates/email","verde")."\n";
+}
+else{
+    echo "\t".shellFontColor("[error] No se creo el directorio ".PROJECT_DIR."/modulos/$nombre/templates/email","rojo")."\n";
+}
+
+
+
+$nuevo_sitio = array($host => $nombre);
+$db = array(
+                "conexion_bd" => array(
+                "usuario" => "",
+                "password" => "",
+                "basedatos" => "",
+                "host" => "",
+                'drive' => 'mysql'
+            ));
+
+
+$modulos_config =  array(
+    'developer',
+);
+
+
+$env = array(
+    PROJECT_DIR."/configure/data.php" => $nuevo_sitio,
+    PROJECT_DIR."/modulos/$nombre/env/databases.php" => $db,
+    PROJECT_DIR."/modulos/$nombre/env/modulos.php" => $modulos_config,
+);
+if($principal)
+{
+
+    echo "[+]Creando nodo de configuracion del sitio\n";
+
+    foreach($env as $k => $v)
+    {
+        $nodos = array();
+        if(file_exists($k))
+        {
+          $nodos = @include($k);
+        }
+
+        $nodos = array_merge($v,$nodos);
+        $_data = var_export($nodos,true);
+        $plantilla = new Plantilla();
+        $plantilla->asigna_variables(array("nodos" => $_data));
+
+        $fopen = fopen($k, 'w');
+        fwrite($fopen, $plantilla->muestra(PROJECT_DIR."/modulos/developer/templates/dev/data.tpl"));
+        fclose($fopen);
+        if($fopen != false)
+        {
+            echo "\t".shellFontColor("[success] Se creo el archivo de configuracion","verde")."\n";
+        }
+        else
+        {
+            echo "\t".shellFontColor("[error] No se puedo crear el archivo de configuracion","rojo")."\n";
+        }
+    }
+}
+?>

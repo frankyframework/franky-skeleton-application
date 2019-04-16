@@ -1,0 +1,8 @@
+
+	<?php if($MySession->LoggedIn()): ?>
+		<li  class="first"><a class="" href="<?php echo $MyRequest->url(ADMIN); ?>">Mi cuenta</a></li>
+        <li  class=""><a class="" href="//logout.php"><?php echo _("Salir"); ?></a></li>
+	<?php else: ?>
+		<li  class="first"><a class="" href="<?php echo $MyRequest->url(LOGIN); ?>">Entrar</a></li>
+		<li  class=""><a class="" href="<?php echo $MyRequest->url(REGISTRO); ?>">Crear cuenta</a></li>
+	<?php endif; ?>

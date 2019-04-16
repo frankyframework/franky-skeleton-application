@@ -1,0 +1,186 @@
+<?php
+
+$u = parse_url($MyRequest->getURI());
+$uri = $u["path"]."?";
+
+$request = $MyRequest->getRequest();
+if(!empty($request))
+{
+    unset($request["my_url_friendly"]);
+    foreach ($request as $k => $v)
+    {
+      if(!in_array(strtolower($k),array("my_url_friendly","page","tampag","order","por")))
+      {
+        if(is_array($v))
+        {
+          foreach($v as $_v)
+          {
+            $uri .= $MyRequest->Sanitizacion($k)."[]=".$_v."&amp;";
+          }
+
+        }
+        else {
+            $uri .= $MyRequest->Sanitizacion($k)."=".$v."&amp;";
+        }
+
+      }
+        elseif(strtolower($k) == "order")
+        {
+            $uri .= "order=".$MyPaginacion->getOrden()."&";
+        }
+        elseif(strtolower($k) == "por")
+        {
+            $uri .= "por=".$MyPaginacion->getCampoOrden()."&";
+        }
+        elseif(strtolower($k) == "tampag")
+        {
+            $uri .= "tampag=".$MyPaginacion->getTampageDefault()."&";
+        }
+    }
+}
+
+$terminamosconel        = $MyPaginacion->getPage() * $MyPaginacion->getTampageDefault();
+$maxPage		= ceil($MyPaginacion->getTotal() / $MyPaginacion->getTampageDefault());
+
+
+
+
+//if($MyPaginacion->getTotal() > $maxPage)
+//{
+
+     if ($terminamosconel >= $MyPaginacion->getTotal())
+        {
+                $terminamoscon = $MyPaginacion->getTotal();
+        }
+        else
+        {
+                $terminamoscon = $terminamosconel;
+        }
+        $empezamoscon = $terminamosconel - ($MyPaginacion->getTampageDefault()-1);
+    ?>
+    <div class="cont_paginar">
+    <div class="cont_numereacion">
+       <span class="resumen_paginacion">
+
+
+        <span><?php echo $empezamoscon; ?> - <?php echo $terminamoscon; ?> (de <?php echo $MyPaginacion->getTotal(); ?>)</span>
+
+
+
+        </span>
+
+<?php
+         if ($MyPaginacion->getPage() > 1)
+        {
+                $page = $MyPaginacion->getPage() - 1;
+                ?>
+                <a  class="nav_left "  data-transition="back" href="<?php echo $uri."page=$page"; ?>">Anterior</a>
+                <?php
+        }
+        ?>
+        <?php
+        if($MyPaginacion->getTampageDefault() <= $MyPaginacion->getTotal() && $MyPaginacion->getShowPages())
+        {
+
+                if ($MyPaginacion->getPage() > $MyPaginacion->getPaginasVisibles()): ?>
+
+                    <a  class="a_numeracion" href="<?php echo $uri.'page=1'; ?>" data-transition="back" >1</a>...
+                <?php
+                endif;
+
+
+                if ($MyPaginacion->getPage() < $MyPaginacion->getPaginasVisibles())
+                {
+                        for ($i=1; $i<$MyPaginacion->getPage(); $i++): ?>
+                            <a class="a_numeracion" href="<?php echo $uri."page=$i"; ?>" data-transition="back"> <?php echo $i; ?></a>
+                        <?php
+                        endfor;
+                }
+                else
+                {
+                        for ($i=$MyPaginacion->getPage()-($MyPaginacion->getPaginasVisibles()-1); $i<$MyPaginacion->getPage(); $i++):
+                        ?>
+                            <a class="a_numeracion" href="<?php echo $uri."page=$i"; ?>" data-transition="back"><?php echo $i; ?></a>
+                        <?php
+                        endfor;
+
+                }
+                ?>
+                <span>[<b><?php echo $MyPaginacion->getPage(); ?></b>]</span>
+                <?php
+                if($MyPaginacion->getPage() +$MyPaginacion->getPaginasVisibles() > $maxPage)
+                {
+                        for ($i=$MyPaginacion->getPage()+1; $i<=$maxPage; $i++):
+                        ?>
+                            <a class="a_numeracion"  href="<?php echo $uri."page=$i"; ?>" > <?php echo $i; ?></a>
+                        <?php
+                        endfor;
+                }
+                else
+                {
+                        for ($i=$MyPaginacion->getPage()+1; $i<=$MyPaginacion->getPage()+$MyPaginacion->getPaginasVisibles(); $i++):
+                            ?>
+                            <a class="a_numeracion" href="<?php echo $uri."page=$i"; ?>" > <?php echo $i; ?></a>
+                            <?php
+                        endfor;
+
+                }
+                if (($MyPaginacion->getPage()+$MyPaginacion->getPaginasVisibles())<$maxPage):
+                    ?>
+                    ...<a class="a_numeracion"  href="<?php echo $uri."page=$maxPage"; ?>" ><?php echo $maxPage;?></a>
+                    <?php
+                endif;
+
+        }
+        ?>
+        <?php
+        if ($MyPaginacion->getPage() < $maxPage)
+        {
+                $page = $MyPaginacion->getPage() + 1;
+                ?>
+                <a  class="nav_right "  href="<?php echo $uri."page=$page"; ?>">Siguiente </a>
+                <?php
+        }
+        ?>
+        </div>
+        <?php
+        if($MyPaginacion->getShowTampage())
+        {
+            ?>
+            <div class="form_tampag"><form name='tamanopag'  action='' method='get'>
+            <span class='datos mostrar'>Mostrar</span>
+            <select name='tam'>
+            <?php
+            foreach($MyPaginacion->getTamanosValidos() as $v)
+            {
+                ?>
+                <option value='<?php echo $v; ?>' <?php echo ($MyPaginacion->getTampageDefault() == "$v" ? "selected=\"selected\" " : ""); ?> class="datos"><?php echo $v; ?></option>
+                <?php
+            }
+            ?>
+            </select>
+            <span class='datos registro'>Registros</span>
+            </form>
+            <a class="tampag" href="#"></a>
+            </div>
+            <?php
+        }
+
+        ?>
+        </div>
+
+        <?php
+//}
+?>
+
+        <script >
+        $("select[name=tam]").change(function()
+        {
+
+            <?php $uri = preg_replace("/tampag=(\d+)\&/", "", $uri); ?>
+            <?php $uri = preg_replace("/page=(\d+)\&/", "", $uri); ?>
+
+            $("a.tampag").attr('href','<?php echo $uri; ?>'+'page=1&tampag='+$(this).val());
+            $("a.tampag").get(0).click();
+        });
+        </script>

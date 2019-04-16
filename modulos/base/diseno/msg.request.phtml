@@ -1,0 +1,29 @@
+<?php if($MyFlashMessage->hayMensajes()): ?>
+
+
+      <?php
+      $msg_erro = $MyFlashMessage->getMsg("error");
+      if( !empty($msg_erro)):
+          $icon_alert = "ui-icon-alert";
+          $msg_alert = "Error";
+      endif;
+      $msg_success  = $MyFlashMessage->getMsg("success");
+       if( !empty($msg_success)):
+          $icon_alert = "ui-icon-circle-check";
+          $msg_alert = "Proceso satisfactorio";
+      endif;
+      ?>
+      <div id="dialog-message" title="<?php echo $msg_alert; ?>">
+        <p>
+          <span class="ui-icon  <?php echo $icon_alert; ?>" style="float:left; margin:0 7px 50px 0;"></span>
+          <span class="txt_doalog">
+           <?php
+               echo $MyFlashMessage->getMsg("error");
+               echo  $MyFlashMessage->getMsg("success");
+            ?>
+            <span>
+        </p>
+
+      </div>
+
+<?php endif; ?>

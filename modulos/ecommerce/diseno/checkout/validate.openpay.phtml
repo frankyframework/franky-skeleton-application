@@ -1,0 +1,83 @@
+<script>
+    $(document).ajaxComplete(function(){
+
+
+      $("form[name=card-form]").validate({
+        ignore: [],
+          rules: {
+
+              'holder_name': {
+                 required: true,
+              },
+              'card_number': {
+                 required: true,
+              //   minlength: 12,
+                //  maxlength: 12
+              },
+              'cvv2': {
+                  required: true,
+                  minlength:3,
+                  maxlength: 3
+              },
+              'expiration_month': {
+                  required: true
+              },
+              'expiration_year': {
+                  required: true
+              }
+
+          },
+          messages: {
+
+              'holder_name': {
+                  required: "Favor de escribir el nombre de la tarjeta"
+              },
+              'card_number': {
+                  required: "Favor de escribir el n&uacute;mero de la tarjeta",
+                  minlength: "El n&uacute;mero de tarjeta debe tener 12 numeros",
+                  maxlength: "El n&uacute;mero de tarjeta debe tener 12 numeros",
+              },
+              'cvv2': {
+                 required: "Favor de escribir el n&uacute;mero de seguridad",
+                  minlength: "El n&uacute;mero de seguridad debe tener 3 numeros",
+                  maxlength: "El n&uacute;meros de seguridad debe tener 3 numeros",
+              },
+               'expiration_month': {
+                 required: "Favor de seleccionar el mes de expiraci&oacute;n",
+              },
+              'expiration_year': {
+                 required: "Favor de seleccionar el a&ntilde;o de expiraci&oacute;n"
+              },
+
+          },
+
+           invalidHandler: function(event, validator) {
+
+
+            },
+          submitHandler: function() {
+
+              OpenPay.setId('<?php echo (getCoreConfig('ecommerce/openpay/sandbox') == 1 ? getCoreConfig('ecommerce/openpay/idsandbox') :  getCoreConfig('ecommerce/openpay/id')); ?>');
+              OpenPay.setApiKey('<?php echo (getCoreConfig('ecommerce/openpay/sandbox') == 1 ? getCoreConfig('ecommerce/openpay/publicsandbox') :  getCoreConfig('ecommerce/openpay/public')); ?>');
+              OpenPay.setSandboxMode(<?=(bool)getCoreConfig('ecommerce/openpay/sandbox')?>);
+
+              //jQuery generate the token on submit.
+
+              var $form = $("form[name=card-form]");
+              // Prevents double clic
+              $form.append($("<input name=\"device_session_id\" type=\"hidden\">"));
+              var deviceSessionId = OpenPay.deviceData.setup("card-form", "device_session_id");
+              $form.find("input[type=submit]").prop("disabled", true);
+
+              OpenPay.token.extractFormAndCreate('card-form', openpaySuccessResponseHandler, openpayErrorResponseHandler);
+
+              return false
+
+          },
+          onkeyup: false,
+          errorClass: "invalid-input",
+          validClass: "valid-input"
+
+      });
+    });
+</script>
