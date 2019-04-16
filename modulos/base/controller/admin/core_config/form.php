@@ -40,7 +40,7 @@ if($CoreConfigModel->getTotal() > 0)
 
 $Form->setAtributos(array(
      'name' => 'frmConfig',
-     'action' => "//admin/core-config/submit.php",
+     'action' => "/admin/core-config/submit.php",
      'method' => 'post',
     'enctype' => "multipart/form-data"
  ));

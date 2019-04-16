@@ -10,7 +10,7 @@ class registroForm extends \Franky\Form\Form
 
        $this->setAtributos(array(
             'name' => $name,
-            'action' => "//registro/submit.users.php",
+            'action' => "/registro/submit.users.php",
             'method' => 'post'
         ));
 

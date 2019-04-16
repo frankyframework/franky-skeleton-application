@@ -10,7 +10,7 @@ class redireccion301Form extends \Franky\Form\Form
 
        $this->setAtributos(array(
             'name' => $name,
-            'action' => "//admin/301/submit.php",
+            'action' => "/admin/301/submit.php",
             'method' => 'post'
         ));
 

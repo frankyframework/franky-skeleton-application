@@ -10,7 +10,7 @@ class direccionesForm extends \Franky\Form\Form
 
         $this->setAtributos(array(
             'name' => $name,
-            'action' => "//ecommerce/admin/direcciones/submit.php",
+            'action' => "/ecommerce/admin/direcciones/submit.php",
             'method' => 'post'
         ));
 

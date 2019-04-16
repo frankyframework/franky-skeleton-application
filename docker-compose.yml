@@ -3,13 +3,12 @@ services:
   web:
     image: franky-server
     ports:
-        - 80:80
-        - 443:443
-        - 21:21
-        - 22:22
+        - 8080:80
     volumes:
         - ./:/var/www/html/
         - ./docker/log/apache:/var/log/apache
         - ./docker/log/php:/var/log/php-fpm
+        - ./docker/vhost/:/etc/apache2/sites-enabled/
+        - ./docker/key-ssl/:/home/ussiel/.ssl/
     container_name: franky-web
 

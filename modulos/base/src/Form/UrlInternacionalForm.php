@@ -10,7 +10,7 @@ class UrlInternacionalForm extends \Franky\Form\Form
 
        $this->setAtributos(array(
             'name' => $name,
-            'action' => "//admin/url-internacional/submit.php",
+            'action' => "/admin/url-internacional/submit.php",
             'method' => 'post'
         ));
 

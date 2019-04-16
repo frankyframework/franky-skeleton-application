@@ -10,7 +10,7 @@ class deleteForm extends \Franky\Form\Form
 
        $this->setAtributos(array(
             'name' => $name,
-            'action' => "//registro/delete.profile.php",
+            'action' => "/registro/delete.profile.php",
             'method' => 'post'
         ));
 

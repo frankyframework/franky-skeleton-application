@@ -10,7 +10,7 @@ class frankyForm extends \Franky\Form\Form
         parent::__construct();
        $this->setAtributos(array(
             'name' => $name,
-            'action' => "//admin/franky/submit.php",
+            'action' => "/admin/franky/submit.php",
             'method' => 'post'
         ));
 

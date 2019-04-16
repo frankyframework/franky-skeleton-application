@@ -10,7 +10,7 @@ class SEOForm extends \Franky\Form\Form
 
        $this->setAtributos(array(
             'name' => $name,
-            'action' => "//admin/seo/submit.php",
+            'action' => "/admin/seo/submit.php",
             'method' => 'post'
         ));
 

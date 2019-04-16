@@ -1,5 +1,5 @@
 <?php
-die;
+
 ini_set('session.save_path', PROJECT_DIR.'/sess_tmp');
 session_start();
 
@@ -144,7 +144,7 @@ if(!$MyFrankyMonster->crearMonstruo(($seccion)) || $seccion == ERR_404)
             $MyFrankyMonster->crearMonstruo(CMS);
       }
       else {
-     
+
         $_files = array();
         foreach ($files as $k => $v)
         {

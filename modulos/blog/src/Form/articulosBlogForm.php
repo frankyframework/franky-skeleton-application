@@ -10,7 +10,7 @@ class articulosBlogForm extends \Franky\Form\Form
 
        $this->setAtributos(array(
             'name' => $name,
-            'action' => "//admin/blog/articulos/submit.php",
+            'action' => "/admin/blog/articulos/submit.php",
             'method' => 'post',
            'enctype' => "multipart/form-data"
         ));

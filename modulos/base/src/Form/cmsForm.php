@@ -10,7 +10,7 @@ class cmsForm extends \Franky\Form\Form
 
        $this->setAtributos(array(
             'name' => $name,
-            'action' => "//admin/cms/submit.php",
+            'action' => "/admin/cms/submit.php",
             'method' => 'post'
         ));
 

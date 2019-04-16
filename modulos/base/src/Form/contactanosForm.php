@@ -8,7 +8,7 @@ class contactanosForm extends \Franky\Form\Form
         parent::__construct();
        $this->setAtributos(array(
             'name' => $name,
-            'action' => "//contacto.submit.php",
+            'action' => "/contacto.submit.php",
             'method' => 'post'
         ));
 

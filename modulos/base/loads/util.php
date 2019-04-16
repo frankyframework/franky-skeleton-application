@@ -447,7 +447,7 @@ function sendEmail($campos,$data)
     }
 
 
-   return \vendor\PHPMailer\Correo::Enviar(utf8_decode($data['Asunto']), $destinatario, $ContenidoString, $from,$reply,$bcc,$cc);
+   return \Base\Model\Correo::Enviar(utf8_decode($data['Asunto']), $destinatario, $ContenidoString, $from,$reply,$bcc,$cc);
 }
 
 function getAvatar($id)
@@ -816,7 +816,7 @@ function validLoginUserDevice()
                 $TemplateemailModel->setOrdensql('id DESC');
                 $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
 
-                
+
                 $campos['email'] = $MySession->GetVar('email');
                 $campos['nombre'] = $MySession->GetVar('nombre');
                 $registro  = $TemplateemailModel->getRows();

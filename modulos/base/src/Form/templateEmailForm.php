@@ -10,7 +10,7 @@ class templateEmailForm extends \Franky\Form\Form
 
        $this->setAtributos(array(
             'name' => $name,
-            'action' => "//admin/template_email/submit.php",
+            'action' => "/admin/template_email/submit.php",
             'method' => 'post'
         ));
 

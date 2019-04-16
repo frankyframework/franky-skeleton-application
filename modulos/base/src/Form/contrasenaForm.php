@@ -10,7 +10,7 @@ class contrasenaForm extends \Franky\Form\Form
 
        $this->setAtributos(array(
             'name' => $name,
-            'action' => "//admin/users/submit.pass.php",
+            'action' => "/admin/users/submit.pass.php",
             'method' => 'post'
         ));
 

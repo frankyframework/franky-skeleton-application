@@ -9,7 +9,7 @@ class loginForm extends \Franky\Form\Form
        parent::__construct();
        $this->setAtributos(array(
             'name' => $name,
-            'action' => "//login.php",
+            'action' => "/login.php",
             'method' => 'post'
         ));
 
