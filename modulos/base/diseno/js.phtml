@@ -1,0 +1,112 @@
+<?php
+$js = array();
+
+$js[] = "/public/jquery/jquery-2.2.2.min.js";
+$js[] = "/public/jquery-ui/js/jquery-ui.min.js";
+
+$js[] = "/public/ajax/ajax.js";
+$js[] = "/public/ajax/base/ajax.common.js";
+
+if (is_array($MyFrankyMonster->MyAjaxFile())) {
+    if (count($MyFrankyMonster->MyAjaxFile()) > 0) {
+        foreach ($MyFrankyMonster->MyAjaxFile() as $ajax) {
+            $js[]  = "/public/ajax/" . $ajax;
+        }
+    }
+}
+
+if (is_array($MyFrankyMonster->MyJQueyfile())) {
+    if (count($MyFrankyMonster->MyJQueyfile()) > 0) {
+        foreach ($MyFrankyMonster->MyJQueyfile() as $jquery) {
+
+            $path = PROJECT_DIR."/public/jquery/$jquery/js/";
+            $js_jquery = \Franky\Filesystem\File::getFiles($path);
+
+            if(count($js_jquery) > 0)
+            {
+                foreach($js_jquery as $_js_jquery)
+                {
+
+
+                        $js[] = "/public/jquery/$jquery/js/".$_js_jquery;
+
+                }
+            }
+        }
+    }
+}
+
+$js[] = "/public/js/viewport.js";
+$js[] = "/public/js/funciones.js";
+$js[] = "/public/js/franky.mobile.js";
+
+if (is_array($MyFrankyMonster->MyJSFile())) {
+    if (count($MyFrankyMonster->MyJSFile()) > 0) {
+        foreach ($MyFrankyMonster->MyJSFile() as $_js) {
+            if(!empty($js))
+            {
+                $js[] ='/public/js/' . $_js ;
+
+            }
+        }
+    }
+}
+
+if (is_array($MyMetatag->getJs(false))) {
+    if (count($MyMetatag->getJs(false)) > 0) {
+        foreach ($MyMetatag->getJs(false) as $_js) {
+            if(!empty($js))
+            {
+                $js[] = $_js ;
+
+            }
+        }
+    }
+}
+
+
+?>
+    <script >
+     <!--
+        var idioma_sitio = '<?php echo $lang_root; ?>'
+
+        function isMobile(){ return <?php echo ($Mobile_detect->isMobile() ? 'true' : 'false'); ?>; };
+
+     -->
+    </script>
+<?php
+if(getCoreConfig('base/debug/production')){
+
+    $JsCreatos   = new Base\model\jsCreator();
+    $JsCreatos->addJs($js);
+    $JsCreatos->setEmbebed(getJSEmbebed($render_phtml));
+    $JsCreatos->setPath($MyConfigure->getPathSite()."/");
+    $name_js =  getFriendly($MyFrankyMonster->MySeccion());
+    $JsCreatos->setName((!empty($name_js) ? $name_js.".js" : "home.js"));
+    if($MyFrankyMonster->MySeccion() == ERR_404)
+    {
+       $JsCreatos->setName("404.js");
+    }
+    ?>
+    <script <?=(!$MyRequest->isAjax() ? 'async' : '');?> src='<?php echo $JsCreatos->get(); ?>'  ></script>
+
+
+    <?php
+}
+else
+{
+    foreach($js as $_file_js)
+    {
+        ?>
+        <script src='<?php echo $_file_js; ?>'  ></script>
+        <?php
+    }
+    ?>
+    <script >
+        <!--
+        <?php echo getJSEmbebed($render_phtml); ?>
+        //-->
+    </script>
+    <?php
+}
+?>

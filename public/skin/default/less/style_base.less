@@ -1,0 +1,20 @@
+@import "variables"; // variables.less
+
+html { font-size: 62.5%; }
+main {
+    form {
+        select { font-size: 1.6rem; }
+        label { position: relative;
+            .label_fade { position: absolute; padding: 3px 6px;left: 10px; bottom: 90%; font-size: 1rem; background: @white; color: lighten(@black, 70); box-sizing: border-box; }
+        }
+        ul { .ul-reset;
+            li { .ul-reset; margin: 4px 0; }
+        }
+        .form_tipo_persona {
+            label { padding-top: 0; padding-bottom: 0; }
+        }
+        .form_acepto, .form_sexo {
+            label { padding: 5px 10px; }
+        }
+    }
+}

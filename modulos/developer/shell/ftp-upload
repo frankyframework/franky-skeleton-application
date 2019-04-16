@@ -1,0 +1,288 @@
+<?php
+use Franky\Core\validaciones;
+use Developer\model\Ftp;
+use Franky\Filesystem\File;
+
+if($MySession->getVar('nivel') != NIVEL_USERDEVELOPER)
+{
+    echo shellFontColor($MyMessageAlert->Message("sin_privilegios"),"rojo")."\n";
+    exit;
+}
+
+ini_set('memory_limit', '-1');
+
+
+$site = $MyRequest->getRequest("site");
+$path = $MyRequest->getRequest("path");
+$host = $MyRequest->getRequest("host");
+
+if(!empty($site))
+{
+    $_SERVER["SERVER_NAME"] = $site;
+    $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Core\MYDEBUG);
+}
+
+headerShell();
+$help = helpShell([
+    ["var" => "site", "required" => true, "description" => "Es el sitio que se subira a servidor"],
+    ["var" => "path", "required" => true, "description" => "Es el 'DOCUMENT ROOT' del sitio"],
+    ["var" => "host", "required" => true, "description" => "Es el dominio del sitio en produccion"],
+]);
+
+$validaciones =  new validaciones();
+$valid = $validaciones->validRules(array("Sitio" => array("valor" => $site,"required"),'Path' => array("valor" => $path,"required"),'Host' => array("valor" => $host,"required")));
+if(!$valid)
+{
+    echo shellFontColor($validaciones->getMsg(),"rojo")."\n\n".$help;
+    exit;
+}
+
+
+$mkdir = array(
+    "/configure",
+    "/modulos",
+    "/public",
+    "/public/css",
+    "/public/mjs",
+    "/public/jquery",
+    "/public/js",
+    "/public/ajax",
+    "/public/skin",
+    "/public/upload",
+    "/sess_tmp/",
+
+);
+$fullmkdir = array(
+    "bin/",
+    "/vendor/",
+    "/logs/",
+    "/php-gettext",
+    "/post/",
+    "/public/jquery-ui",
+    "/public/plugins",
+    "/public/js/html5shiv",
+    "/public/skin/default",
+    );
+
+$archivos = array(
+                "/configure/palabras_prohividas.txt",
+                "/public/js/analytics.js",
+                "/public/js/charts_loader.js",
+                "/public/js/funciones.js",
+                "/public/js/validaciones.js",
+                "/public/js/viewport.js",
+                "/public/js/menuSlide.js",
+                "/public/js/google_maps.js",
+                "/public/js/geolocalizacion.js",
+                "/public/jquery/jquery-2.2.2.min.js",
+                "/.htaccess",
+                "/index.php",
+                "/robots.txt",
+                "/public/ajax/ajax.js",
+                "/public/ajax/ajax.php",);
+
+
+$ibd->Query("JS","Select js,jquery FROM franky WHERE status=1");
+
+while($registro = $ibd->fetch("JS"))
+{
+
+    $js = json_decode($registro["js"],true);
+    $jquery = json_decode($registro["jquery"],true);
+    if(!empty($js))
+    {
+        foreach($js as $_js)
+        {
+            if(!in_array("/public/js/".$_js,$archivos))
+            {
+                $archivos[] = "/public/js/".$_js;
+            }
+        }
+    }
+    if(!empty($jquery))
+    {
+        foreach($jquery as $_jquery)
+        {
+            if(!in_array("/public/jquery/".$_jquery,$fullmkdir))
+            {
+                $fullmkdir[] = "/public/jquery/".$_jquery;
+            }
+        }
+    }
+}
+
+
+$modulos = getModulos("DESC");
+
+if(!empty($modulos))
+{
+    foreach($modulos as $modulo)
+    {
+
+       if($modulo != "developer")
+       {
+           if(file_exists(PROJECT_DIR.'/modulos/'.$modulo))
+           {
+                $fullmkdir[] = '/modulos/'.$modulo;
+           }
+           if(file_exists(PROJECT_DIR.'/public/ajax/'.$modulo))
+           {
+                $fullmkdir[] = '/public/ajax/'.$modulo;
+           }
+           if(file_exists(PROJECT_DIR.'/public/skin/'.$modulo))
+           {
+                $fullmkdir[] = '/public/skin/'.$modulo;
+           }
+           if(file_exists(PROJECT_DIR.'/public/upload/'.$modulo))
+           {
+                $fullmkdir[] = '/public/upload/'.$modulo;
+           }
+           if(file_exists(PROJECT_DIR.'/public/js/'.$modulo.'.js'))
+           {
+                $archivos[] = '/public/js/'.$modulo.'.js';
+           }
+       }
+    }
+}
+
+
+
+
+echo "[+]Conectando con servicio FTP (".$host.")...\n";
+
+$Ftp = new Ftp();
+
+if(!$Ftp->connect(getCoreConfig('developer/ftp/host'),getCoreConfig('developer/ftp/user'),getCoreConfig('developer/ftp/password')))
+{
+    echo "\t".shellFontColor("[error] No se pudo conectar con el servidor","rojo")."\n";
+    exit;
+}
+
+echo "[+]Subiendo archivos al servidor...\n";
+foreach($mkdir as $mkdir)
+{
+    if($Ftp->mkdir($path.$mkdir))
+    {
+        echo "\t".shellFontColor("[success] ".$path.$mkdir,"verde")."\n";
+    }
+}
+
+$File = new File;
+foreach($fullmkdir as $full)
+{
+
+    $files = $File->getAllFiles(PROJECT_DIR."/".$full);
+
+
+    foreach($files['dir'] as $_file)
+    {
+        if($Ftp->mkdir($path."/".str_replace((PROJECT_DIR),"", $_file)))
+        {
+            echo "\t".shellFontColor("[success] ".$path.str_replace((PROJECT_DIR),"", $_file),"verde")."\n";
+        }
+    }
+
+
+    foreach($files['file'] as $_file)
+    {
+
+        $size = $Ftp->size($path.str_replace((PROJECT_DIR),"", $_file));
+        if($size == -1)
+        {
+            if($Ftp->put($path.str_replace((PROJECT_DIR),"", $_file), $_file))
+            {
+                echo "\t".shellFontColor("[success] ".$path.str_replace((PROJECT_DIR),"", $_file),"verde")."\n";
+            }
+            else {
+                 echo "\t".shellFontColor("[error] ".$_file." >> ". $path.str_replace((PROJECT_DIR),"", $_file) ." no se pudo subir","rojo")."\n";
+            }
+        }
+        else
+        {
+            if($size != filesize($_file))
+            {
+                $Ftp->delete($path.str_replace((PROJECT_DIR),"", $_file));
+                if($Ftp->put($path.str_replace((PROJECT_DIR),"", $_file), $_file))
+                {
+                    echo "\t".shellFontColor("[success] ".$path.str_replace((PROJECT_DIR),"", $_file),"verde")."\n";
+                }
+                else {
+                     echo "\t".shellFontColor("[error] ".$_file." >> ". $path.str_replace((PROJECT_DIR),"", $_file) ." no se pudo subir","rojo")."\n";
+                }
+            }
+            else
+            {
+                 echo "\t".shellFontColor("[no-diff] ".$path.str_replace((PROJECT_DIR),"", $_file),"amarillo")."\n";
+            }
+        }
+
+
+    }
+}
+
+
+foreach($archivos as $archivo)
+{
+
+    $size = $Ftp->size($path.$archivo);
+    if($size == -1)
+    {
+        if(file_exists(PROJECT_DIR.$archivo))
+        {
+            if($Ftp->put($path.$archivo,PROJECT_DIR.$archivo))
+            {
+                echo "\t".shellFontColor("[success] ".$path.$archivo,"verde")."\n";
+            }
+            else {
+                echo "\t".shellFontColor("[error] ".PROJECT_DIR.$archivo." >> ".$path.$archivo." no se pudo subir","rojo")."\n";
+            }
+        }
+    }
+    else
+    {
+        if($size != filesize(PROJECT_DIR.$archivo))
+        {
+            $Ftp->delete($path.$archivo);
+            if($Ftp->put($path.$archivo,PROJECT_DIR.$archivo))
+            {
+                echo "\t".shellFontColor("[success] ".$path.$archivo,"verde")."\n";
+            }
+            else {
+                 echo "\t".shellFontColor("[error] ".PROJECT_DIR.$archivo." >> ".$path.$archivo." no se pudo subir","rojo")."\n";
+            }
+        }
+        else
+        {
+             echo "\t".shellFontColor("[no-diff] ".$path.$archivo,"amarillo")."\n";
+        }
+    }
+}
+
+
+$nuevo_sitio = include(PROJECT_DIR."/configure/data.php");
+$nodo = $nuevo_sitio[$site];
+$data = var_export(array($host => $nodo,'local.shell' => $nodo),true);
+$stream = fopen('data://text/plain,<?php return ' . $data.'; ?>','r');
+$Ftp->fput($path."/configure/data.php",$stream, FTP_BINARY);
+
+
+
+$nuevo_sitio = include(PROJECT_DIR."/modulos/".$modulo."/env/databases.php");
+
+foreach($nuevo_sitio as $k => $v)
+{
+    if($host == $nuevo_sitio[$k]["host"])
+    {
+        $nuevo_sitio[$k]["host"] = "localhost";
+    }
+}
+$data = var_export($nuevo_sitio,true);
+$stream = fopen('data://text/plain,<?php return ' . $data.'; ?>','r');
+$Ftp->delete($path."/modulos/".$modulo."/env/databases.php");
+$Ftp->fput($path."/modulos/".$modulo."/env/databases.php",$stream, FTP_BINARY);
+
+
+$Ftp->chmod('0777',$path."/public/");
+
+$Ftp->close();
+?>

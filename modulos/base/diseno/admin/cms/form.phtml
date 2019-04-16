@@ -1,0 +1,40 @@
+<script >
+function BrowseFiles(field_name,url,type,win) {
+
+
+        var url_p = '//mfm.php?mode=standalone&field='+field_name+"&url=" + url+"&pwd=cms/<?php echo $path_img_blog; ?>";
+        var winpops=window.open(url_p,"","status = 1, height = 450, width = 640, left = 200, top = 180, resizable = 0")
+}
+
+tinymce.init({
+selector: 'textarea',
+height: 500,
+menubar: false,
+codesample_dialog_width: '600',
+codesample_dialog_height: '400',
+plugins: [
+'advlist autolink lists link image charmap print preview anchor textcolor',
+'searchreplace visualblocks code fullscreen',
+'insertdatetime media table contextmenu paste code help  codesample'
+],
+toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | codesample table | help',
+content_css: [
+'//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+'//www.tinymce.com/css/codepen.min.css'],
+relative_urls: true,
+remove_script_host: false,
+file_browser_callback: BrowseFiles
+});
+
+// -->
+</script>
+
+<div class="content">
+    <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
+    <h1 class="titulo_seccion_admin"><?php echo $title_form; ?></h1>
+    <div class="w-xxxx-12">
+    <?php echo $cmsForm->openTag(); ?>
+      <?php echo $cmsForm->getAllRow(); ?>
+    <?php echo $cmsForm->endTag(); ?>
+   </div>
+</div>

@@ -1,16 +1,38 @@
 {
-    "name": "sombrerodepaja/franky-skeleton-application",
+    "name": "frankyframework/franky-skeleton-application",
     "description": "Skeleton Application for Franky Framework applications",
     "type": "project",
+    "version": "1.0.0"
     "license": "MIT",
     "minimum-stability": "dev",
-    "prefer-stable": true,
+    "prefer-stable": false,
     "require": {
         "php": "^7.0",
         "phpmailer/phpmailer": "~6.0",
-         "mobiledetect/mobiledetectlib": "^2.8"
+        "mobiledetect/mobiledetectlib": "^2.8",
+        "openpay/sdk" : "1.2.3",
+        "conekta/conekta-php" : "4.0.4",
+        "frankyframework/franky-core": "1.0.x-dev",
+        "frankyframework/franky-form": "1.0.x-dev",
+        "frankyframework/franky-database": "1.0.x-dev",
+        "frankyframework/franky-haxor": "1.0.x-dev",
+        "frankyframework/franky-filesystem": "1.0.x-dev",
+        "frankyframework/franky-schema": "1.0.x-dev",
+        "facebook/graph-sdk": "^5.7"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.5"
+    },
+    "autoload": {
+            "psr-4": {
+                "Base\\": "modulos/base/src",
+                "Blog\\": "modulos/blog/src",
+                "Galeria\\": "modulos/galeria/src",
+                "Seo\\": "modulos/seo/src",
+                "Developer\\": "modulos/developer/src",
+                "Sociallogin\\": "modulos/sociallogin/src",
+                "Ecommerce\\": "modulos/ecommerce/src",
+                "Franky\\": "modulos/franky/src"
+            }
     }
 }

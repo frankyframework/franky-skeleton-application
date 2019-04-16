@@ -1,0 +1,156 @@
+<div class="content">
+    <?php if($MyAccessList->MeDasChancePasar(ADMINISTRAR_FTP)): ?>
+        <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
+        <h1 class="titulo_seccion_admin">FTP</h1>
+
+        <div class="w-xxxx-12">
+            <div id="status_ftp" class="w-xxxx-12"><?php echo _developer("Desconectado"); ?></div>
+
+
+
+            <div class="w-xxxx-12">
+                <div  class="w-xxxx-12">Path: <span id="path_ftp"></span></div>
+
+                <div  class="w-xxxx-12">
+                    <input type="button" value="Nueva Carpeta" id="nueva_carpeta_ftp" style="display:none;"/>
+                    <form name="fileform" id="fileform" method="post" enctype="multipart/form-data" action='//admin/ftp/uploadify.php' style="clear:both">
+
+                    <div id='fileloadstatus' class="w-xxxx-12">
+
+                      <div id="progressbar" style="display:none;"><div class="progress-label">Loading...</div></div>
+                    </div>
+                    <div id='fileloadbutton' class="w-xxxx-12">
+                    <a href="javascript:void(0);" onclick="$('#files').click()">Subir Archivos</a>
+                    <input type="file" name="files[]" id="files" multiple="true" class="input-file" style='display:none' />
+                    </div>
+                    </form>
+
+
+                </div>
+                <div id="contenedor_archivos_remotos"  class="w-xxxx-12 ftp_dock"></div>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    </div>
+
+
+<script >
+    <!--
+    
+    function uploadMultiFile(e)
+    {
+        var files;
+        if(e.originalEvent.dataTransfer) {
+          files = e.originalEvent.dataTransfer.files;
+        } else if(e.target) {
+          files = e.originalEvent.target.files;
+        }
+
+        var fd = new FormData();
+        fd.append('path', $("#path_ftp").text());
+
+        for (var i = 0; i < files.length; i++) { // Loop all files
+                fd.append('files[]', files[i]); // Create an append() method, one for each file dropped
+        }
+
+        var progressbar = $( "#progressbar" ),  progressLabel = $( ".progress-label" );
+        progressbar.progressbar({
+            value: false,
+            change: function() {
+              progressLabel.text( progressbar.progressbar( "value" ) + "%" );
+            },
+            complete: function() {
+              progressLabel.text( "Completo!" );
+            }
+        });
+
+
+        $.ajax({ // JQuery Ajax
+                type: 'POST',
+                url: $('form[name=fileform]').attr("action"), // URL to the PHP file which will insert new value in the database
+                data:fd, // We send the data string
+                processData: false,
+                contentType: false,
+                mimeType:"multipart/form-data",
+                beforeSend:function(){
+
+                    progressbar.show();
+                    $("#fileloadbutton").hide();
+                },
+                success:function(){
+
+
+                    $("#fileloadbutton").show();
+
+                    changeDir($("#path_ftp").text());
+                    $("#files").val('');
+                },
+                error:function(){
+
+                    $("#fileloadbutton").show();
+                },
+                xhr: function () {
+                    var xhr = $.ajaxSettings.xhr();
+                    if(xhr.upload){
+                    xhr.upload.addEventListener("progress", function (e) {
+                                if (e.lengthComputable) {
+                                        var pourc = Math.round(e.loaded / e.total * 100);
+                                        progressbar.progressbar( "value", pourc );
+                                }
+
+
+                        } , false);
+                    }
+                    return xhr;
+                },
+
+        });
+
+    }
+    $(document).ready(function()
+    {
+        $('#fileloadbutton').on('change', function(e)
+        {
+            uploadMultiFile(e);
+
+        });
+    });
+
+
+
+    function makeDroppable()
+    {
+        $("#contenedor_archivos_remotos").on('dragover', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          $(this).addClass('ftp_dock_hover');
+        });
+
+        $("#contenedor_archivos_remotos").on('dragleave', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          $(this).removeClass('ftp_dock_hover');
+        });
+
+       $("#contenedor_archivos_remotos").on('drop', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          $(this).removeClass('ftp_dock_hover');
+          triggerCallback(e);
+        });
+    }
+
+    function triggerCallback(e) {
+        $('.progress-bar').attr('style', 'width: 0%').attr('aria-valuenow', '0').text('0%');
+        uploadMultiFile(e);
+    }
+
+    $(window).load(function(){
+        connect();
+        makeDroppable();
+    });
+    
+
+  // -->
+</script>

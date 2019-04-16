@@ -1,0 +1,178 @@
+<script >
+
+function BrowseFiles(field_name,url,type,win) {
+
+              var url_p = '//mfm.php?mode=standalone&field='+field_name+"&url=" + url+"&pwd=blog/<?php echo $path_img_blog; ?>";
+              var winpops=window.open(url_p,"","status = 1, height = 450, width = 640, left = 200, top = 180, resizable = 0")
+}
+$(window).load(function(){
+  tinymce.init({
+    selector: 'textarea',
+    height: 500,
+    menubar: false,
+    codesample_dialog_width: '600',
+    codesample_dialog_height: '400',
+    plugins: [
+      'advlist autolink lists link image charmap print preview anchor textcolor',
+      'searchreplace visualblocks code fullscreen',
+      'insertdatetime media table contextmenu paste code help  codesample'
+    ],
+    toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify table | bullist numlist outdent indent | removeformat | code codesample  | help',
+    content_css: [
+      '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+      '//www.tinymce.com/css/codepen.min.css'],
+   relative_urls: true,
+  remove_script_host: false,
+  file_browser_callback: BrowseFiles
+  });
+});
+</script>
+<div class="content">
+    <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
+    <div class="w-xxxx-12">
+         <div class="w-xxxx-4 m-l-xxxx-1">
+           <div>
+          <?php if(!empty($id)): ?>
+           <a href="#" class="guardar_borrador">Guardar Borrador</a>
+          <?php endif; ?>
+          <?php if($borrador == 1): ?>
+           <a href="#" class="descartar_borrador">Descartar Borrador</a>
+          <?php endif; ?>
+          </div>
+             <h1><?php echo $title_form; ?></h1>
+
+            <?php echo $adminForm->openTag(); ?>
+            <?php echo $adminForm->get('id'); ?>
+            <?php echo $adminForm->get('callback'); ?>
+            <?php echo $adminForm->get('borrador'); ?>
+            <?php echo $adminForm->get('data_img'); ?>
+            <?php if(!empty($data['imagen_portada'])): ?>
+            <?php echo makeHTMLImg($data['imagen_portada'],"","","","class='img_100 priview_portada'"); ?>
+            <?php endif; ?>
+            <div class="col-xl-6 m-l-xl-3 ">
+                     <div class="col-xl-3"><p>Imagen de título :</p></div>
+                     <div class="col-xl-9">
+                     <div id='content_guillotina' style="display:none;">
+                         <div class='frame'>
+                         <img id="imgpreview" src="" />
+                         </div>
+
+                         <div id='controls'>
+                        <!--   <button id='rotate_left'  type='button' title='Rotate left'> &lt; </button> -->
+                           <button id='zoom_out'     type='button' title='Zoom out'> - </button>
+                           <button id='fit'          type='button' title='Fit image'> [ ]  </button>
+                           <button id='zoom_in'      type='button' title='Zoom in'> + </button>
+                           <!-- <button id='rotate_right' type='button' title='Rotate right'> &gt; </button> -->
+                         </div>
+                         <!--
+                         <ul id='data'>
+                           <div class='column'>
+                             <li>x: <span id='x'></span></li>
+                             <li>y: <span id='y'></span></li>
+                           </div>
+                           <div class='column'>
+                             <li>width:  <span id='w'></span></li>
+                             <li>height: <span id='h'></span></li>
+                           </div>
+                           <div class='column'>
+                             <li>scale: <span id='scale'></span></li>
+                             <li>angle: <span id='angle'></span></li>
+                           </div>
+                         </ul>
+                       -->
+                     </div>
+
+                     <?php echo $adminForm->get('imagen'); ?>
+                     </div>
+           </div>
+
+
+
+             <?php echo $adminForm->getRow('titulo'); ?>
+             <?php echo $adminForm->getRow('categoria'); ?>
+             <?php echo $adminForm->getRow('contenido'); ?>
+             <?php echo $adminForm->getRow('keywords'); ?>
+             <?php echo $adminForm->getRow('meta_titulo'); ?>
+             <?php echo $adminForm->getRow('meta_descripcion'); ?>
+             <?php echo $adminForm->getRow('comentarios'); ?>
+             <?php echo $adminForm->getRow('destacado'); ?>
+             <?php echo $adminForm->getRow('visible_in_search'); ?>
+             <?php echo $adminForm->getRow('permisos[]'); ?>
+             <?php echo $adminForm->getRow('guardar'); ?>
+
+             <?php if(!empty($id)): ?>
+                <?php echo $adminForm->getRow('guardar_borrador'); ?>
+             <?php endif; ?>
+
+
+            <?php echo $adminForm->endTag(); ?>
+            <div>
+           <?php if(!empty($id)): ?>
+            <a href="#" class="guardar_borrador">Guardar Borrador</a>
+           <?php endif; ?>
+           <?php if($borrador == 1): ?>
+            <a href="#" class="descartar_borrador">Descartar Borrador</a>
+           <?php endif; ?>
+           </div>
+       </div>
+    </div>
+</div>
+
+<script >
+
+function RedirectListaBlog(response,id,status)
+{
+
+    var respuesta = null;
+    if(response != "null" && response != null)
+    {
+        respuesta = JSON.parse(response);
+
+        if(respuesta[0] && respuesta[0]["message"])
+        {
+
+            _alert(respuesta[0]["message"],"");
+        }
+    }
+    else
+    {
+        window.location = '<?=$Tokenizer->decode($callback)?>';
+    }
+}
+
+$(document).ready(function(){
+
+        $("#frmarticulosblog").validate();
+        $('#keywords').tagsInput({width:'auto'});
+        $('a.guardar_borrador').click(function(e){
+            e.preventDefault();
+            $('form[name=frmarticulosblog]').attr('action','//admin/blog/articulos/submit.borrador.php').submit();
+        });
+
+        $('a.descartar_borrador').click(function(e){
+            e.preventDefault();
+            EliminarRegistro('descartarBorradorBlog','<?=$id?>',0,'¿Estas seguro que ya no quieres este borrador?','RedirectListaBlog');
+        });
+
+
+        $("#imagen").change(function() {
+            $('.priview_portada').hide();
+          if (this.files && this.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+              $('#imgpreview').attr('src', e.target.result);
+
+                GuillotineBlog()
+            }
+
+            reader.readAsDataURL(this.files[0]);
+          }
+
+         });
+
+
+
+});
+
+</script>

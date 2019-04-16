@@ -1,0 +1,21 @@
+<?php if(!$MySession->LoggedIn()): ?>
+<div class="deja_comment comment_login" style="display:none;">
+    <?php $loginFormRating = new Base\Form\loginForm("autentificacioncoment"); ?>
+    <?php echo $loginFormRating->addCallback($MyRequest->link($MyRequest->getURI())); ?>
+    <?php echo $loginFormRating->openTag(); ?>
+    <?php echo $loginFormRating->getAllRow(); ?>
+    <?php echo $loginFormRating->endTag(); ?>
+    <div class="w_50">
+        <p>Para comentar necesitas estar registrado</p>
+        <a class="olvide_contrasena_comm" href="<?php echo $MyRequest->url(FORGOT); ?>">Olvide mi contraseña</a>
+    </div>
+    
+    <div class="w_50">
+        <!--
+        <p>Ó conetate con:<p>
+        <a class="button-facebook" href="javascript:void(0)">FB CONNECT</a>
+        <a class="button-twitter" href="javascript:void(0)">TW CONNECT</a>
+        -->
+    </div>
+</div>
+<?php endif; ?>

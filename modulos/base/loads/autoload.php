@@ -1,0 +1,5 @@
+<?php
+
+          require_once PROJECT_DIR."/vendor/autoload.php";
+
+?>

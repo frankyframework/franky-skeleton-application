@@ -1,0 +1,14 @@
+<?php
+$productos =  OBJETO_PRODUCTOS;
+$MyProducto =  new $productos();
+?>
+<table>
+<tr><td>Nombre</td><td>Precio</td><td>QTY</td></tr>
+<?php foreach($items as $producto):
+
+  $MyProducto->getInfoProdcuto($producto["id"]);
+  $_registro = $MyProducto->getRows();
+?>
+  <tr><td><?php echo $_registro['nombre']; ?></td><td><?php echo getFormatoPrecio($_registro['precio']); ?></td><td><?php echo $producto['qty']; ?></td></tr>
+<?php endforeach; ?>
+<table>

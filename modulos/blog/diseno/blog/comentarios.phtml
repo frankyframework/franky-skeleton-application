@@ -1,0 +1,76 @@
+<div class="w_100">
+    <div class="bkg_titulo bkg_t_comentario"><h3>Comentarios</h3></div>
+<div class="w_100">
+    <p>¿Te gusto el artículo? Déja un comentario.</p>
+</div>
+<?php //echo render("blog/frm.login.comentarios.phtml"); ?>
+</div>
+<div class="w_100 cont_comments">
+
+    <div class="w_100 sin_comments">
+        <div class="cont_nickname">
+            <img class="image_100" src="<?php echo $blog_detalle["miavatar"]; ?>" alt="<?php echo $MySession->GetVar('usuario'); ?>">
+        </div>
+        <div class="cont_comment">
+            <form name="frmcommentsblog" id="frmcommentsblog" action="//blog/articulos/comment.submit.php" method="post">
+              <input type="hidden" name="id" value="<?php echo $blog_detalle["id"]; ?>" />
+                <?php if($MySession->LoggedIn() ): ?>
+                    <label for="comentario" class="user_nickname"><?php echo $MySession->GetVar('usuario'); ?></label>
+                <?php else: ?>
+                    <input value="" name="nombre" class="required" type="text" placeholder="Nombre"  />
+                <?php endif; ?>
+
+                <textarea  name="comentario" id="comentario" class="required" placeholder="Escribe aquí tu comentario..." ></textarea>
+                <input value="Comentar" class="btn_comment" type="submit" />
+            </form>
+        </div>
+    </div>
+    <script >
+    $(document).ready(function(){
+             $("#frmcommentsblog").validate();
+    });
+    </script>
+
+    <?php
+
+    if(!empty($blog_detalle["comentarios"]))
+    {
+	?>
+    <h3>Comentarios</h3>
+    <?php
+	$iRow = 0;
+
+	foreach($blog_detalle["comentarios"] as $comentario): ?>
+
+                <div class="w_100 con_comments">
+                    <div class="cont_nickname">
+                        <img class="image_100" src="<?php echo $comentario["avatar"]; ?>" alt="<?php echo $comentario["usuario"]; ?>">
+                    </div>
+                    <div class="cont_comment">
+                        <label for="comentario" class="user_nickname"><span>
+                          <?php echo $comentario["usuario"]; ?>
+                          <?php echo $comentario["nombre"]; ?>
+                        </span></label>
+                        <div>
+                            <p><?php echo $comentario["comentario"]; ?></p>
+                        </div>
+                    </div>
+
+                    <span>
+                        <span title="<?php echo $comentario["fecha_explode"][0]."-".$comentario["fecha_explode"][1]."-".$comentario["fecha_explode"][2]; ?> " >
+                        <?php echo $comentario["fecha_comment"]; ?>
+                        </span></span>
+                </div>
+
+<?php
+	endforeach;
+
+    }
+    else
+    {
+
+    }
+    ?>
+
+
+</div>

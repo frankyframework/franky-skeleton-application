@@ -1,0 +1,82 @@
+<div class="content">
+    <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
+    <div class="w-xxxx-12">
+        <div class="content_form">
+            <h1><?php echo $title_form; ?></h1>
+            <div class="w-xxxx-5">
+                <p>Aquí podrás editar la información de tu perfil.</p>
+                <p>Recuerda, es importante que tu perfil esté completo.</p>
+                <?php echo $adminForm->openTag(); ?>
+                <?php echo $adminForm->getAllRow(); ?>
+                <?php echo $adminForm->endTag(); ?>
+           </div>
+       </div>
+    </div>
+</div>
+
+
+<script >
+
+
+$( "#users" ).validate({
+rules: {
+
+    usuario: {
+        required: true,
+      minlength: 3,
+        ValidaCaracteres: true,
+        remote: {
+            url: "//registro/alias.php",
+            type: "post",
+            data: {
+                usuario: function() {
+                    return $( "input[name=usuario]" ).val();
+                },id: function() {
+                    return $( "input[name=id]" ).val();
+                }
+            }
+        }
+    },
+
+    email: {
+        required: true,
+        email: true,
+        remote: {
+            url: "//registro/email.php",
+            type: "post",
+            data: {
+                email: function() {
+                    return $( "input[name=email]" ).val();
+                },
+                id: function() {
+                    return $( "input[name=id]" ).val();
+                }
+            }
+        }
+    },
+    nombre: {
+            required: true,
+            'name-validation':true
+    }
+
+},
+messages: {
+  nombre: {
+            required: "Escribe tu nombre completo",
+            'name-validation': 'El campo nombre contiene caracteres no permitidos'
+            },
+
+    usuario: {
+            required: "Escribe tu nombre de usuario",
+            minlength: jQuery.validator.format("El nombre de usuario debe tener m&iacute;nimo {0} caracteres"),
+            ValidaCaracteres:"El nombre de usuario no puede contener caracteres extra&ntilde;os",
+            remote: jQuery.validator.format("El nombre de usuario {0} ya esta en uso")
+    },
+    email: {
+            required: "Escribe tu direcci&oacute;n de correo electr&oacute;nico",
+            remote: jQuery.validator.format("La direcci&oacute;n de correo electr&oacute;nico ya esta en uso")
+    }
+}
+});
+
+</script>

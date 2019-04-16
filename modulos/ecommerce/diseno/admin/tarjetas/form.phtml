@@ -1,0 +1,11 @@
+<?php echo render("admin/template/form.phtml"); ?>
+<?php
+if(getCoreConfig('ecommerce/conekta/enabled') == 1)
+{
+	echo render("admin/tarjetas/validate.conekta.phtml");
+}
+elseif(getCoreConfig('ecommerce/openpay/enabled') == 1)
+{
+	echo render("admin/tarjetas/validate.openpay.phtml");
+}
+?>

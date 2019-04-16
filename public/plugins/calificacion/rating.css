@@ -1,0 +1,39 @@
+.rater
+{
+	float:left;
+	cursor: pointer;
+	z-index:6;
+        margin-right: 10px;
+}
+
+span.mouseOn
+{
+    display:block;
+    float:left;
+    background-image:url('good.png');
+    width:32px;
+    height:32px;
+}
+
+span.mouseOff
+{
+    display:block;
+    float:left;
+    background-image:url('soso.png');
+    width:32px;
+    height:32px;
+}
+
+span.blank
+{
+    display:block;
+    float:left;
+    background-image:url('bad.png');
+    width:32px;
+    height:32px;
+}
+
+div.clear
+{
+    clear:both;
+}

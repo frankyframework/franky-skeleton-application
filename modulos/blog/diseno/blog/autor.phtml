@@ -1,0 +1,13 @@
+       <div class="w_100">
+            <div class="bkg_titulo bkg_t_autor"><h3>Acerca del autor</h3></div>
+            <div class="cont_autor">
+                <div class="div_autor avatar_autor">
+                  <?php //if(!empty($blog_detalle["m_info_google"]['link'])): <a href="<?php echo $blog_detalle["m_info_google"]['link']; ?rel=author" target="_blank" > echo $blog_detalle["autor"];</a> ?> 
+                  <?php //else: ?>
+                    <span ><?php echo $blog_detalle["autor"]; ?></span>
+                  <?php //endif; ?></div>
+                    <?php if(!empty($blog_detalle["bio"])): ?>
+                <div class="div_autor"><p><?php echo $blog_detalle["bio"]; ?></p></div>
+                    <?php endif; ?>
+            </div>
+        </div>

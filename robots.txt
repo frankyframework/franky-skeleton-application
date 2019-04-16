@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /*
+Disallow: /plesk-stat
+Disallow: /pie
+Disallow: //lang.php

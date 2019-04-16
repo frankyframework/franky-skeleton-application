@@ -1,0 +1,118 @@
+<?php
+use Franky\Core\validaciones;
+use \Franky\Core\Plantilla;
+
+if($MySession->getVar('nivel') != NIVEL_USERDEVELOPER)
+{
+    echo shellFontColor($MyMessageAlert->Message("sin_privilegios"),"rojo")."\n";
+    exit;
+}
+
+
+
+
+ini_set('memory_limit', '-1');
+
+
+$nombre = str_replace("-","_",getFriendly($MyRequest->getRequest("nombre")));
+$tabla = $MyRequest->getRequest("tabla");
+$modulo = $MyRequest->getRequest("modulo");
+$site = $MyRequest->getRequest("site",'local.shell');
+if(!empty($site))
+{
+    $_SERVER["SERVER_NAME"] = $site;
+    $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Core\MYDEBUG);
+}
+
+headerShell();
+$help = helpShell([
+    ["var" => "nombre", "required" => true, "description" => "nombre del modelo"],
+    ["var" => "tabla", "required" => true, "description" => "es la tabla de BD apartir de la que se creara el modelo"],
+    ["var" => "modulo", "required" => true, "description" => "es el modulo donde se guardara el modelo"],
+    ["var" => "site", "required" => false, "description" => "si no se proporciona usa local.shell para su configuracion"],
+]);
+
+$validaciones =  new validaciones();
+$valid = $validaciones->validRules(array("Nombre" => array("valor" => $nombre,"required"),
+    "Tabla" => array("valor" => $tabla,"required"),
+    "Modulo" => array("valor" => $modulo,"required")));
+if(!$valid)
+{
+    echo shellFontColor($validaciones->getMsg(),"rojo")."\n\n".$help;
+    exit;
+}
+
+$path = PROJECT_DIR."/modulos/".$modulo;
+
+if(!file_exists($path))
+{
+    echo "\t".shellFontColor("[error] El modulo ".$modulo." no existe","rojo")."\n";
+
+    exit;
+
+}
+
+if(!file_exists($path."/vendor/model"))
+{
+    if(mkdir($path."/vendor/model",0777))
+    {
+        echo "\t".shellFontColor("[success] Se creo el directorio ".$path."/class/model","verde")."\n";
+    }
+    else{
+        echo "\t".shellFontColor("[error] No se creo el directorio ".$path."/class/model","rojo")."\n";
+        exit;
+    }
+
+}
+
+$nombre = ucfirst(strtolower($nombre));
+
+if(file_exists($path."/vendor/model/".$nombre."Model.php"))
+{
+    echo "\t".shellFontColor("[error] El modelo ".$nombre."Model ya existe","rojo")."\n";
+
+    exit;
+
+}
+
+
+echo "[+]Creando modelo ".$nombre."Model\n";
+
+$campos = array();
+$ibd->Query("campos_BD","Describe $tabla");
+
+while($registro = $ibd->fetch("campos_BD"))
+{
+
+    $campos[] = $registro["Field"];
+}
+
+
+//$campos = var_export($campos,true);
+
+$campos = json_encode($campos);
+
+if(is_numeric(substr($modulo,0,1)))
+{
+    $modulo = "_". $modulo;
+}
+
+$plantilla = new Plantilla();
+
+$plantilla->asigna_variables(array("nombre" => $nombre,"campos" => $campos, "modulo" => $modulo,"tabla" => $tabla));
+
+
+$fopen = fopen($path."/vendor/model/".$nombre."Model.php", 'w');
+
+fwrite($fopen, $plantilla->muestra(PROJECT_DIR."/modulos/developer/templates/dev/class_model.tpl"));
+fclose($fopen);
+if($fopen != false)
+{
+    echo "\t".shellFontColor("[success] Se creo el modelo","verde")."\n";
+}
+else
+{
+    echo "\t".shellFontColor("[error] No se puedo crear el modelo","rojo")."\n";
+}
+
+?>

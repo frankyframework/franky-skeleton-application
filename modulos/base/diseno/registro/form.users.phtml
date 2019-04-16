@@ -1,0 +1,87 @@
+<div class="width_100">
+<?php echo render("registro/_form.user.phtml"); ?>
+</div>
+
+<script>
+$( "#users" ).validate({
+rules: {
+    usuario: {
+        required: true,
+        minlength: 3,
+        ValidaCaracteres: true,
+        remote: {
+            url: "//registro/alias.php",
+            type: "post",
+            data: {
+                usuario: function() {
+                    return $( "input[name=usuario]" ).val();
+                }
+            }
+        }
+    },
+    email: {
+        required: true,
+        email: true,
+        remote: {
+            url: "//registro/email.php",
+            type: "post",
+            data: {
+                email: function() {
+                    return $( "input[name=email]" ).val();
+                }
+            }
+        }
+    },
+    nombre: {
+            required: true,
+            'name-validation': true
+    },
+    fecha_nacimiento: {
+            required: true,
+    },
+    contrasena: {
+            required: true,
+            minlength: <?=getCoreConfig('base/user/passwordlength')?>
+    },
+    contrasena1: {
+            required: true,
+            minlength: <?=getCoreConfig('base/user/passwordlength')?>,
+            equalTo: "#contrasena"
+    },
+    acepto: {
+            required: true
+    }
+},
+messages: {
+    nombre: {
+              required: "Escribe tu nombre completo",
+              'name-validation': 'El campo nombre contiene caracteres no permitidos'
+              },
+    usuario: {
+            required: "Escribe tu nombre de usuario",
+            minlength: jQuery.validator.format("El nombre de usuario debe tener minimo {0} caracteres"),
+            ValidaCaracteres:"El nombre de usuario no puede contener caracteres extra&ntilde;os",
+            remote: jQuery.validator.format("El nombre de usuario {0} ya esta en uso")
+    },
+    fecha_nacimiento: {
+        required: "Favor de seleccionar tu fecha de nacimiento",
+    },
+    contrasena: {
+            required: "Escribe tu contraseña",
+            rangelength: jQuery.validator.format("Tu contraseña debe tener mínimo {0} caracteres")
+    },
+    contrasena1: {
+            required: "Repite tu contraseña",
+            minlength: jQuery.validator.format("Tu contraseña debe tener mínimo {0} caracteres"),
+            equalTo: "Tu contraseña no coincide"
+    },
+    email: {
+            required: "Escribe tu dirección de correo electrónico",
+            remote: jQuery.validator.format("La direccion {0} ya esta en uso")
+    },
+     acepto: {
+            required: "Debes aceptar las condiciones y terminos del servicio"
+    }
+}
+});
+</script>

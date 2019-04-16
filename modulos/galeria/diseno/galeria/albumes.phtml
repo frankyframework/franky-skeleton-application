@@ -1,0 +1,14 @@
+<div class="w-xxxx-12">
+    <div class="content">
+        <div id='contenedor_albumes'>
+            <?php if(!empty($lista_admin_data)): ?>
+                <?php foreach($lista_admin_data as $album): ?>
+                    <?php echo getAlbumGaleria($album["friendly"],$album["nombre"],$album["fecha"],0); ?>
+                <?php endforeach; ?>
+            <?php else: ?>
+            <div class='no_hay_datos'>No hay albumes registrados</div>
+            <?php endif; ?>
+
+        </div>
+    </div>
+</div>

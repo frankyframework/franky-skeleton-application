@@ -1,0 +1,33 @@
+
+<div class="content">
+    <div class="cont_100_p interiores one_column">
+        
+
+
+
+        <div id="galeria_clientes" >
+ 
+        <div class="ver_cabecera"></div>
+        <div  class="fondo_galeria" id="cont_fotos">
+        <?php 
+        $count = 0;
+        if(!empty($lista_admin_data))
+        {
+            foreach ($lista_admin_data as $k => $v)
+            {
+                echo getFotoGaleria($v["id"],$v["id_album"],$v["foto"],$v["descripcion"],$v["fecha"],0,$count);
+                $count++;
+            }
+        }
+        ?>
+ 
+        </div>
+        </div>  
+    </div>
+</div>
+<?php if($count == 0): ?>
+<div class="w_100">
+<div class="no_hay_datos" >No hay fotos registradas</div>
+</div>
+<?php endif; ?>
+<?php echo render("galeria/galeria_js.phtml"); ?>

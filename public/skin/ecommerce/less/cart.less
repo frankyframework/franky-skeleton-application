@@ -1,0 +1,152 @@
+@import "public/skin/default/less/variables"; // variables.less
+
+header {
+    #widget_carrito {
+        .cerrar_carrito { position: absolute; right: 10px; top: 10px; color: @black; font-size: 2rem; z-index: 20;
+            &:hover { color: @enfasis_color; }
+        }
+        ._minicart { display: block; margin: 10px 0; padding: 10px 20px; text-decoration: none; text-transform: uppercase; font-weight: 600; .radius;
+            &._checkout { background: @enfasis_color; color: @white; }
+        }
+        ._minicart_product { text-align: left; margin-top: 10px; border-bottom: 1px solid @soft_gray;
+            ._minicart_image { text-align: center;
+                img { max-width: 100%; height: auto; }
+            }
+            ._minicart_prices {
+                span { font-weight: 600;
+                    &._unit_price { font-size: 1.6rem; }
+                }
+            }
+        }
+        ._minicart_resume { text-align: right;
+            ._subtotal { margin-top: 10px; }
+            ._total { font-weight: 600; font-size: 2rem; }
+        }
+    }
+}
+
+main {
+/////////////// Checkout
+
+    .cont_success_oxxo {
+        i { color: @success; }
+    }
+    .cont_price_checkout {
+        ._resume { float: left; width: 100%; font-size: 1.8rem;
+            strong { float: left; width: 50%; text-align: right; padding-right: 10px; box-sizing: border-box; }
+            span { float: left; }
+            &._total {
+                span { font-weight: 600; color: @enfasis_color; }
+            }
+        }
+    }
+    #resumen_checkout_facturacion,
+    .cont_success_oxxo,
+    #contenedor_frm_pago{
+        a, a[onclick="changePaimentMethod();"]{background:@gray;color:@white;text-decoration: none;margin:10px;padding:10px;float: right;.radius;
+            i{
+                &:before{
+                    color:@white;
+                }
+            }
+        }
+    }
+
+/////////////// Success
+    ._success {
+        h1, h2 { text-align: center; }
+        &._checkout_success {
+            i { color: @success; }
+        }
+        &._checkout_error {
+            i { color: @error; }
+        }
+        i { font-size: 6rem; margin-top: 30px; display: inline-block; }
+    }
+
+    ._tab_step { position: relative; margin: 0; padding: 10px 30px 10px 10px; box-sizing: border-box; background: @soft_gray; border-bottom: 3px @white solid; .radius;
+        @media @small { font-size: 1.6rem; }
+        &:after { position: absolute; right: 10px; top: 10px; font-family: @ico_font; content: '\e82e'; }
+        &._nono { background: @soft_gray; color: @gray;
+
+        }
+        &._sisi { background: lighten(@black, 30); color: @white;
+            &:after { content: "\e850"; }
+        }
+    }
+    ._mycart_step { float: left; width: 100%; padding: 5px 0;
+        ul { .ul-reset;
+            li { .ul-reset; }
+        }
+        .btn-primary { margin: 10px 30px 10px 10px;
+            &:hover { background: @gray; }
+        }
+    }
+    .resumen_page_carrito {
+        ._mycart_resume { font-size: 1.5rem;  margin-bottom: 10px; text-align: right;
+            &._total { font-size: 2rem; }
+        }
+    }
+    ._list_mycart_product { float: left; width: 100%; border-bottom: 1px solid @enfasis_color; margin-bottom: 10px; padding: 20px 0; }
+    ._mycart_resume {
+        ._col_mycart_resume { float: left; width: 20%; padding:5px; box-sizing: border-box;
+            &._img_product { width: 10%; text-align: center;
+                @media @small { width: 100%;
+                    img { max-width: 100px; }
+                }
+            }
+            &._name { width: 30%;
+                @media @small { width: 100%; }
+                a { color: @gray; text-decoration: none; text-transform: uppercase; font-weight: 600;
+                    &:hover { color: @black; }
+                }
+            }
+            &.control_qty { text-align: center;
+                @media @small { width: 35%; }
+            }
+            &.subtotal_producto { text-align: center;
+                @media @small { width: 40%; }
+            }
+        }
+        ._row_mycart_resume { float: left; width: 100%; padding: 10px; box-sizing: border-box; }
+        .control_qty {
+            input, a { float: left; }
+            a { width: 30px; color: lighten(@gray, 70); font-size: 3rem; line-height: 45px; text-decoration: none;
+                @media @small { width: 20px; font-size: 2rem; line-height: 35px; }
+                &:hover { color: lighten(@gray, 50);  }
+            }
+            input { width: 50px; margin: 0 5px; text-align: center;
+                @media @small { font-size: 1rem; width: 30px; margin: 0 2px; }
+            }
+        }
+        ._btn_eliminar { color: lighten(@gray, 50);
+            @media @small { font-size: 1rem; }
+            &:hover { color: @enfasis_color; }
+        }
+    }
+    ._mycart_checkout { float: right; margin-right: 30px;
+        ._btn_pay { float: right; }
+    }
+    ._btn_pay, ._mycart_step .btn-primary, ._primary_checkout { .aparience-reset; background: @enfasis_color; color: @white; padding: 10px 20px; text-transform: uppercase; font-weight: 600;
+        &:hover { background-color: @gray; cursor: pointer; }
+    }
+    ._primary_checkout { .radius(8px); float: right; margin: 10px 0; padding: 10px 20px; font-size: 2rem; text-decoration: none; text-transform: uppercase; font-weight: 600; }
+    ._checkout_resume { font-size: 1.6rem;
+        ._coin {
+            strong { display: inline-block; width: 80px; text-align: right; }
+        }
+        h3 { margin: 0; }
+        ul { .ul-reset; margin: 0 0 15px 15px;
+            li { .ul-reset; }
+        }
+        ._checkout_total { font-size: 2rem; }
+    }
+    form {
+        &#frmdirecciones, &#frmdirecciones_facturacion {
+            .form-group { width: 50%; box-sizing: border-box;
+                @media @small { width: 100%; }
+            }
+        }
+    }
+
+}

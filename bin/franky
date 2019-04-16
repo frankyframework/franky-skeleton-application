@@ -1,0 +1,76 @@
+#!/usr/bin/env php
+<?php
+session_start();
+$_SERVER["REQUEST_METHOD"] = "ARGV";
+$_SERVER["SERVER_NAME"] = "local.shell";
+define('PROJECT_DIR',str_replace("/bin","/",__DIR__));
+require(PROJECT_DIR."/modulos/base/loads/init.php");
+
+$MySession->SetVar('nivel',NIVEL_USERDEVELOPER);
+
+$File = new \Franky\Filesystem\File;
+
+$modulos = $File->getFiles(PROJECT_DIR."modulos","dir");
+
+$comandos = array();
+$ls = "";
+//echo PROJECT_DIR;
+foreach($modulos as $modulo)
+{
+    
+    if(file_exists(PROJECT_DIR."modulos/$modulo/shell/"))
+    {
+        $files = $File->getFiles(PROJECT_DIR."modulos/$modulo/shell/");
+
+        foreach ($files as $file)
+        {
+
+            $comando = $modulo.":".basename($file,".php");
+             
+            $ls .= shellFontColor($comando,"verde")."\n";
+            $comandos[$comando] = PROJECT_DIR."modulos/$modulo/shell/".$file;
+        }
+    }
+}
+
+
+
+if(!isset($argv[1]))
+{
+    echo shellFontColor("command not found","rojo")."\n";
+    echo $ls; exit;
+}
+$ambiguo = array();
+foreach($comandos as $k => $v)
+{
+    $command = explode(":",$k);
+    $_command = explode(":",$argv[1]);
+
+    if($_command[0] == substr($command[0],0,strlen($_command[0])) && $_command[1] == substr($command[1],0,strlen($_command[1])))
+    {
+        $ambiguo[] = $k;
+    }
+}
+
+
+
+
+
+
+if(count($ambiguo) > 1)
+{
+    
+     echo shellFontColor("El commando es ambiguo","rojo")."\n";
+     echo shellFontColor(implode("\n",$ambiguo),"verde")."\n";
+}
+elseif(isset($comandos[$ambiguo[0]]) && file_exists($comandos[$ambiguo[0]]))
+{
+    
+    echo (render($comandos[$ambiguo[0]]));
+}
+else{
+   
+    echo shellFontColor("command not found","rojo")."\n";
+    echo $ls; exit;
+}
+

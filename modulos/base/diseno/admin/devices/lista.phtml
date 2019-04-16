@@ -1,0 +1,70 @@
+<div class="content">
+    <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
+    <div class="w-xxxx-12 cont_global_admin">
+        <h1 class="titulo_seccion_admin">Dispositivos</h1>
+        <div class="w-xxxx-12 cont_header_panel">
+
+        </div>
+
+        <div  class="w-xxxx-12 cont_gral_admin cont_contactos">
+            <div >
+                <div class="w-xxxx-12">
+                    <div class="w-xxxx-12 contenedor_titulo_columnas">
+                      <div class="w-xxxx-2"><?php echo makeHTMLOrder( "tipo", "Tipo"); ?></div>
+                        <div class="w-xxxx-2"><?php echo makeHTMLOrder( "access_last", "Ultimo acceso"); ?></div>
+                        <div class="w-xxxx-1"><?php echo makeHTMLOrder( "os", "Sitema operativo"); ?></div>
+                        <div class="w-xxxx-1"><?php echo makeHTMLOrder( "ip", "IP"); ?></div>
+                        <div class="w-xxxx-2"><?php echo makeHTMLOrder( "user_agent", "User-Agent"); ?></div>
+                        <div class="w-xxxx-1">Permitir Acceso</div>
+                        <div class="w-xxxx-1">Eliminar</div>
+                    </div>
+                    <div class="contenedor_columnas_info"  >
+                    <div class="contenedor_columnas" id="content_row_{{_data.id}}" >
+                        <div class='w-xxxx-2'>{{_data.type}}</div>
+                        <div class='w-xxxx-2'>{{_data.access_last}}</div>
+                        <div class='w-xxxx-1 '>{{_data.os}}</div>
+                        <div class='w-xxxx-1 '>{{_data.ip}}</div>
+                        <div class='w-xxxx-2'>{{_data.user_agent}}</div>
+                        <div class='w-xxxx-1 _table_delete {{_data.thisClass}}'>
+                            <a class="btn_adm_eliminar_switch_device" id="{{_data.id}}" href="#{{_data.nuevo_estado}}" >Eliminar</a>
+                        </div>
+                        <div class='w-xxxx-1 _table_delete {{_data.thisClass}}'>
+                            <a class="btn_adm_eliminar " data-id="{{_data.id}}" href="#{{_data.delete}}" >Eliminar</a>
+                        </div>
+
+                    </div>
+                </div>
+              </div>
+                <div class="w-xxxx-12">
+                    <div class="no_hay_datos" >No hay dispositivos registrados</div>
+                </div>
+                <div class="w-xxxx-12">
+                    <?php echo render("admin/widget.paginar.phtml"); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script >
+$(".contenedor_columnas_info").htmlDataDum(<?php echo json_encode($lista_admin_data); ?>,".no_hay_datos");
+$(window).load(function(){
+    $(".btn_adm_eliminar_switch_device").click(function(event){
+
+         event.preventDefault();
+         var nuevo_estado = ($(this).attr("href").replace("#","") == "activar" ? 1 : 0);
+
+         EliminarDevice('<?php echo $deleteFunction; ?>',$(this).attr("id"),nuevo_estado,'',"EliminarRegistroPanel")
+
+    });
+    $(".btn_adm_eliminar").click(function(event){
+
+         event.preventDefault();
+         EliminarDevice('EliminarDispositivo',$(this).attr("data-id"),0,'¿Realmente quieres eliminar el dispositivo?',"EliminarRegistorPanelRemove")
+
+    });
+
+    $.fn.buttonDelete('a.btn_adm_eliminar_switch_device')
+
+
+});
+</script>

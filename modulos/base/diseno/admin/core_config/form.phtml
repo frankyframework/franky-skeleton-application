@@ -1,0 +1,110 @@
+<div class="content">
+    <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
+    <h1 class="titulo_seccion_admin">Configuracion de sistema</h1>
+    <div class="w-xxxx-12">
+    <?php echo $Form->openTag(); ?>
+    <?php echo $Form->getRow('guardar'); ?>
+    <?php
+    if(!empty($core_config)):
+      foreach($core_config as $key_config => $val_config):
+          ?>
+          <div class="title_menu"><h3><?=$val_config['menu']?></h3></div>
+            <div class="content_menu" style="display:none;">
+          <?php
+          foreach($val_config['config'] as $key =>$config):
+
+              if(in_array($config['type'],['file','text','password'])):
+
+                        if($config['type'] == 'file' && isset($core_config_db[$config['path']]) && !empty($core_config_db[$config['path']]))
+                        {
+                           $config['validation']['required'] =false;
+                        }
+                          $input = array(
+                                'name' => str_replace("/","_",$config['path']),
+                                'label' => _($config['label']),
+                                'type'  => $config['type'],
+                                'required' => ($config['validation']['required'] ? true : false),
+                                'atributos' => array(
+                                    'class' => (isset($config['validation']['image']) ? 'image ' : '').
+                                                (isset($config['validation']['required']) && $config['validation']['required'] == true ? ' required ' : ''),
+                                    'value' => (!isset($core_config_db[$config['path']]) ? '' : $core_config_db[$config['path']])
+                                 )
+                            );
+                            if(isset($config['validation']['maxlength']))
+                            {
+                              $input['atributos']['maxlength'] = $config['validation']['maxlength'];
+                            }
+                            $Form->add($input);
+
+              elseif(in_array($config['type'],['select'])):
+
+                      $input = array(
+                        'name' => str_replace("/","_",$config['path']),
+                        'label' => _($config['label']),
+                        'type'  => $config['type'],
+                        'required' => ($config['validation']['required'] ? true : false),
+                        'atributos' => array(
+                            'class' => (isset($config['validation']['required']) && $config['validation']['required'] == true ? ' required ' : ''),
+                            'value' => (!isset($core_config_db[$config['path']]) ? '' : $core_config_db[$config['path']])
+                         ),
+                         'options' => $config['data'],
+                         'empty_option' => 'Elije...',
+                    );
+                if(isset($config['multiple']) && $config['multiple'] == true)
+                {
+                  $input['name'] = $input['name'].'[]';
+                  $input['atributos']['multiple'] = 'multiple';
+                  $input['atributos']['value'] = (!isset($core_config_db[$config['path']]) ? [] : json_decode($core_config_db[$config['path']],true));
+                  unset($input['empty_option']);
+                }
+                $Form->add($input);
+
+              endif;
+              echo $Form->getRow($input['name']);
+              if($config['type'] == 'file' && $config['validation']['image']): ?>
+                  <div class="preview_<?=$input['name']?>">
+                  <?php if(!empty($core_config_db[$config['path']])): ?>
+                      <?php echo makeHTMLImg($core_config_db[$config['path']],"","","",'style="max-width: 100px;"'); ?>
+                  <?php endif; ?>
+                </div>
+              <?php endif;
+
+
+          endforeach; ?>
+        </div>
+          <?php
+      endforeach;
+    endif;
+    ?>
+    <?php echo $Form->getRow('guardar'); ?>
+    <?php echo $Form->endTag(); ?>
+   </div>
+</div>
+
+<script>
+$(document).ready(function(){
+
+        $("#frmConfig").validate();
+
+        $(".image").change(function() {
+
+                var self = $(this);
+                if (this.files && this.files[0])
+          			{
+          					var reader = new FileReader();
+          					reader.onload = function (e)
+          					{
+
+          							$('.preview_'+self.attr('name')).empty().html('<img style="max-width: 100px;" src="'+e.target.result+'" />');
+          					}
+          					reader.readAsDataURL(this.files[0]);
+          			}
+
+         });
+
+         $('.title_menu').click(function(){
+                    $('.content_menu').hide();
+                    $(this).next('.content_menu').show();
+         });
+});
+</script>
