@@ -12,12 +12,12 @@
         "mobiledetect/mobiledetectlib": "^2.8",
         "openpay/sdk" : "1.2.3",
         "conekta/conekta-php" : "4.0.4",
-        "frankyframework/franky-core": "1.0@dev",
-        "frankyframework/franky-form": "1.0@dev",
-        "frankyframework/franky-database": "1.0@dev",
-        "frankyframework/franky-haxor": "1.0@dev",
-        "frankyframework/franky-filesystem": "1.0@dev",
-        "frankyframework/franky-schema": "1.0@dev",
+        "frankyframework/franky-core": "1.0.x-dev@dev",
+        "frankyframework/franky-form": "1.0.x-dev@dev",
+        "frankyframework/franky-database": "1.0.x-dev@dev",
+        "frankyframework/franky-haxor": "1.0.x-dev@dev",
+        "frankyframework/franky-filesystem": "1.0.x-dev@dev",
+        "frankyframework/franky-schema": "1.0.x-dev@dev",
         "facebook/graph-sdk": "^5.7"
     },
     "require-dev": {
