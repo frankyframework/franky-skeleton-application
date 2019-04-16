@@ -8,3 +8,5 @@ logs/
 sess_tmp/
 docker/log
 composer.lock
+docker-compose.yml
+docker/
