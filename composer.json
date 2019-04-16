@@ -3,7 +3,8 @@
     "description": "Skeleton Application for Franky Framework applications",
     "type": "project",
     "license": "MIT",
-    "prefer-stable": true,
+    "prefer-stable": false,
+    "minimum-stability":"dev",
     "version": "dev",
     "require": {
         "php": "^7.0",
