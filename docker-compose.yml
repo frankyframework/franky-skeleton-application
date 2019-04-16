@@ -1,5 +1,5 @@
 web:
- image: station.space.bar:4567/labs/docker-images-pengo/magento-cloud-pengo:php71-fpm
+ image: webserver
  ports:
  - 80:80
  - 443:443
