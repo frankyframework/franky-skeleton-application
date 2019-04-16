@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c699dd02b3a1b3f2a0fb7e138aabe35b",
+    "content-hash": "0ae4fbdc829d81d47074fb458d025cf0",
     "packages": [
         {
             "name": "conekta/conekta-php",
@@ -118,12 +118,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/frankyframework/franky-core.git",
-                "reference": "1a4bfda00ef21704b87016495b9005de980d46f0"
+                "reference": "bde807c85c1e5651aa2a51bd6a75a0d5218c769f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/frankyframework/franky-core/zipball/1a4bfda00ef21704b87016495b9005de980d46f0",
-                "reference": "1a4bfda00ef21704b87016495b9005de980d46f0",
+                "url": "https://api.github.com/repos/frankyframework/franky-core/zipball/bde807c85c1e5651aa2a51bd6a75a0d5218c769f",
+                "reference": "bde807c85c1e5651aa2a51bd6a75a0d5218c769f",
                 "shasum": ""
             },
             "require": {
@@ -149,7 +149,7 @@
                 }
             ],
             "description": "Funciones de core",
-            "time": "2019-04-12T23:15:26+00:00"
+            "time": "2019-04-16T19:36:46+00:00"
         },
         {
             "name": "frankyframework/franky-database",
@@ -2020,7 +2020,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {
         "frankyframework/franky-core": 20,
         "frankyframework/franky-form": 20,
