@@ -18161,3 +18161,35 @@ Stack trace:
 #3 /var/www/html/index.php(17): render('/var/www/html/m...')
 #4 {main}
   thrown in /var/www/html/modulos/base/diseno/debug.phtml on line 18
+[16-Apr-2019 13:25:39 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to private method Franky\Database\Debug::getMessages() from context '' in /var/www/html/modulos/base/diseno/debug.phtml:18
+Stack trace:
+#0 /var/www/html/modulos/base/loads/util.php(250): include()
+#1 /var/www/html/modulos/base/diseno/admin/layout/index.phtml(46): render('/var/www/html/m...', Array)
+#2 /var/www/html/modulos/base/loads/util.php(250): include('/var/www/html/m...')
+#3 /var/www/html/index.php(13): render('/var/www/html/m...')
+#4 {main}
+  thrown in /var/www/html/modulos/base/diseno/debug.phtml on line 18
+[16-Apr-2019 13:25:44 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to private method Franky\Database\Debug::getMessages() from context '' in /var/www/html/modulos/base/diseno/debug.phtml:18
+Stack trace:
+#0 /var/www/html/modulos/base/loads/util.php(250): include()
+#1 /var/www/html/modulos/base/diseno/index.phtml(42): render('/var/www/html/m...', Array)
+#2 /var/www/html/modulos/base/loads/util.php(250): include('/var/www/html/m...')
+#3 /var/www/html/index.php(17): render('/var/www/html/m...')
+#4 {main}
+  thrown in /var/www/html/modulos/base/diseno/debug.phtml on line 18
+[16-Apr-2019 13:25:49 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to private method Franky\Database\Debug::getMessages() from context '' in /var/www/html/modulos/base/diseno/debug.phtml:18
+Stack trace:
+#0 /var/www/html/modulos/base/loads/util.php(250): include()
+#1 /var/www/html/modulos/base/diseno/index.phtml(42): render('/var/www/html/m...', Array)
+#2 /var/www/html/modulos/base/loads/util.php(250): include('/var/www/html/m...')
+#3 /var/www/html/index.php(17): render('/var/www/html/m...')
+#4 {main}
+  thrown in /var/www/html/modulos/base/diseno/debug.phtml on line 18
+[16-Apr-2019 13:25:54 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to private method Franky\Database\Debug::getMessages() from context '' in /var/www/html/modulos/base/diseno/debug.phtml:18
+Stack trace:
+#0 /var/www/html/modulos/base/loads/util.php(250): include()
+#1 /var/www/html/modulos/base/diseno/index.phtml(42): render('/var/www/html/m...', Array)
+#2 /var/www/html/modulos/base/loads/util.php(250): include('/var/www/html/m...')
+#3 /var/www/html/index.php(17): render('/var/www/html/m...')
+#4 {main}
+  thrown in /var/www/html/modulos/base/diseno/debug.phtml on line 18
