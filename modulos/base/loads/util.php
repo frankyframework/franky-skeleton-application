@@ -446,8 +446,8 @@ function sendEmail($campos,$data)
        $destinatario = substr($destinatario,0,-1);
     }
 
-
-   return \Base\Model\Correo::Enviar(utf8_decode($data['Asunto']), $destinatario, $ContenidoString, $from,$reply,$bcc,$cc);
+      $Correo = new \Base\model\Correo();
+   return $Correo->Enviar(utf8_decode($data['Asunto']), $destinatario, $ContenidoString, $from,$reply,$bcc,$cc);
 }
 
 function getAvatar($id)
@@ -803,6 +803,7 @@ function validLoginUserDevice()
         $UserdeviceEntity->access_last(date('Y-m-d H:i:s'));
         $UserdeviceEntity->ip($MyRequest->getIp());
         $UserdeviceModel->save($UserdeviceEntity->getArrayCopy());
+        //die;
         $campos = $UserdeviceEntity->getArrayCopy();
         $UserdeviceEntity->exchangeArray([]);
         $UserdeviceEntity->id_user($MySession->GetVar('id'));

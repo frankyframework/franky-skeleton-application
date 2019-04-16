@@ -18,7 +18,7 @@ include_once(PROJECT_DIR."/modulos/base/loads/autoload.php");
 
 $MyConfigure        = new \Franky\Core\configure();
 
-ini_set('display_errors',getCoreConfig('base/debug/display_errors'));
+ini_set('display_errors',1 /*getCoreConfig('base/debug/display_errors')*/);
 
 
 $MyDebug = new \Franky\Core\MYDEBUG();
@@ -54,7 +54,7 @@ else
     $idioma_encontrado = false;
     foreach ($catalogo_idiomas as $idioma => $path_idioma)
     {
-        $is_idioma = substr($MyRequest->getRequest("my_url_friendly",""), 0,strlen($path_idioma)+1);
+        $is_idioma = substr($seccion, 0,strlen($path_idioma)+1);
         if(!empty($path_idioma) && $is_idioma == $path_idioma."/" && in_array($idioma,$idiomas))
         {
             $locale = $idioma;
@@ -135,7 +135,39 @@ if(!empty($modulos))
 include_once(PROJECT_DIR."/modulos/base/loads/llenaFranky.php");
 include_once(PROJECT_DIR."/modulos/base/loads/core_config.php");
 
-$seccion = $MyRequest->getRequest("my_url_friendly","");
+
+$ObserverManager->addObserver('login_user','validLoginUserDevice');
+if($MySession->LoggedIn())
+{
+    validUserDevice();
+}
+
+
+ltrim($_SERVER['REQUEST_URI'],"/");
+
+if(!empty($files))
+{
+  $_files = array();
+  foreach ($files as $k => $v)
+  {
+      foreach ($v as $_k => $_v)
+      {
+              $_files[$_k] = $_v;
+      }
+  }
+
+  if(isset($_files[ltrim($_SERVER['REQUEST_URI'],"/")]) && file_exists($_files[ltrim($_SERVER['REQUEST_URI'],"/")]))
+  {
+
+      require($_files[ltrim($_SERVER['REQUEST_URI'],"/")]);
+      die;
+  }
+}
+
+
+
+$seccion = $MyRequest->getRequest('my_url_friendly');
+
 if(!$MyFrankyMonster->crearMonstruo(($seccion)) || $seccion == ERR_404)
 {
 
@@ -144,25 +176,10 @@ if(!$MyFrankyMonster->crearMonstruo(($seccion)) || $seccion == ERR_404)
             $MyFrankyMonster->crearMonstruo(CMS);
       }
       else {
-
-        $_files = array();
-        foreach ($files as $k => $v)
-        {
-            foreach ($v as $_k => $_v)
-            {
-                    $_files[$_k] = $_v;
-            }
-        }
-        if(isset($_files[$MyRequest->getRequest("my_url_friendly","")]) && file_exists($_files[$MyRequest->getRequest("my_url_friendly","")]))
-        {
-            require($_files[$MyRequest->getRequest("my_url_friendly","")]);
-        }
-        else
-        {
             header("HTTP/1.0 404 Not Found");
             header("Status: 404 Not Found");
             $MyFrankyMonster->crearMonstruo(ERR_404);
-        }
+
       }
 }
 $permisos = $MyFrankyMonster->MyPermisos();
@@ -260,14 +277,6 @@ if(!empty($modulos))
         $MyMenuFront->setArraySeccion(PROJECT_DIR."/modulos/".$modulo."/menu/front.php","modulo_".$modulo);
     }
 }
-
-
-$ObserverManager->addObserver('login_user','validLoginUserDevice');
-if($MySession->LoggedIn())
-{
-    validUserDevice();
-}
-
 
 
 ?>

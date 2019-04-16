@@ -17811,3 +17811,308 @@ Stack trace:
 #6 /var/www/html/index.php(3): require('/var/www/html/m...')
 #7 {main}
   thrown in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php on line 41
+[16-Apr-2019 08:29:11 America/Mexico_City] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Connection refused in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php:41
+Stack trace:
+#0 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(41): PDO->__construct('mysql:host=enco...', 'ecclick_franky', 'nkIGiX*JuQ$t')
+#1 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(81): Franky\Database\IBD->ConectarBD()
+#2 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/Select.php(35): Franky\Database\IBD->Query(1555421351, 'SELECT nombre, ...')
+#3 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/objectOperations.php(105): Franky\Database\Mysql\Select->execute('franky ', Array, 'status = '1'', '', 'id ASC', '0, 1000')
+#4 /var/www/html/modulos/base/src/model/paginasModel.php(27): Franky\Database\Mysql\objectOperations->getColeccion(Array)
+#5 /var/www/html/modulos/base/loads/llenaFranky.php(35): Base\model\paginasModel->getData()
+#6 /var/www/html/modulos/base/loads/init.php(135): include_once('/var/www/h in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php on line 41
+[16-Apr-2019 09:24:15 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to undefined function triml() in /var/www/html/modulos/base/loads/init.php:139
+Stack trace:
+#0 /var/www/html/index.php(3): require()
+#1 {main}
+  thrown in /var/www/html/modulos/base/loads/init.php on line 139
+[16-Apr-2019 09:24:17 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to undefined function triml() in /var/www/html/modulos/base/loads/init.php:139
+Stack trace:
+#0 /var/www/html/index.php(3): require()
+#1 {main}
+  thrown in /var/www/html/modulos/base/loads/init.php on line 139
+[16-Apr-2019 09:24:26 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to undefined function triml() in /var/www/html/modulos/base/loads/init.php:139
+Stack trace:
+#0 /var/www/html/index.php(3): require()
+#1 {main}
+  thrown in /var/www/html/modulos/base/loads/init.php on line 139
+[16-Apr-2019 09:24:28 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to undefined function triml() in /var/www/html/modulos/base/loads/init.php:139
+Stack trace:
+#0 /var/www/html/index.php(3): require()
+#1 {main}
+  thrown in /var/www/html/modulos/base/loads/init.php on line 139
+[16-Apr-2019 09:25:36 America/Mexico_City] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Connection refused in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php:41
+Stack trace:
+#0 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(41): PDO->__construct('mysql:host=enco...', 'ecclick_franky', 'nkIGiX*JuQ$t')
+#1 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(81): Franky\Database\IBD->ConectarBD()
+#2 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/Select.php(35): Franky\Database\IBD->Query(1555424736, 'SELECT id, titu...')
+#3 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/objectOperations.php(105): Franky\Database\Mysql\Select->execute('cms ', Array, 'friendly = '/la...', '', '', '0, 1')
+#4 /var/www/html/modulos/base/src/model/CMS.php(45): Franky\Database\Mysql\objectOperations->getColeccion(Array)
+#5 /var/www/html/modulos/base/loads/init.php(145): Base\model\CMS->getData('/layerslider/sk...', '', 1)
+#6 /var/www/html/index.php(3): require('/var/www/html/m...')
+#7 {main}
+  throw in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php on line 41
+[16-Apr-2019 09:25:36 America/Mexico_City] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Connection refused in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php:41
+Stack trace:
+#0 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(41): PDO->__construct('mysql:host=enco...', 'ecclick_franky', 'nkIGiX*JuQ$t')
+#1 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(81): Franky\Database\IBD->ConectarBD()
+#2 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/Select.php(35): Franky\Database\IBD->Query(1555424736, 'SELECT url_inte...')
+#3 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/objectOperations.php(101): Franky\Database\Mysql\Select->execute('url_internacion...', Array, 'franky.status =...', '', '')
+#4 /var/www/html/modulos/base/src/model/UrlInternacionalModel.php(36): Franky\Database\Mysql\objectOperations->getColeccion(Array)
+#5 /var/www/html/modulos/base/loads/llenaFranky.php(14): Base\model\UrlInternacionalModel->getData(Array)
+#6 /var/www/html/modulos/base/loads/init.php(135): i in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php on line 41
+[16-Apr-2019 09:26:11 America/Mexico_City] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Connection refused in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php:41
+Stack trace:
+#0 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(41): PDO->__construct('mysql:host=enco...', 'ecclick_franky', 'nkIGiX*JuQ$t')
+#1 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(81): Franky\Database\IBD->ConectarBD()
+#2 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/Select.php(35): Franky\Database\IBD->Query(1555424770, 'SELECT nombre, ...')
+#3 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/objectOperations.php(105): Franky\Database\Mysql\Select->execute('franky ', Array, 'status = '1'', '', 'id ASC', '0, 1000')
+#4 /var/www/html/modulos/base/src/model/paginasModel.php(27): Franky\Database\Mysql\objectOperations->getColeccion(Array)
+#5 /var/www/html/modulos/base/loads/llenaFranky.php(35): Base\model\paginasModel->getData()
+#6 /var/www/html/modulos/base/loads/init.php(135): include_once('/var/www/h in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php on line 41
+[16-Apr-2019 09:27:47 America/Mexico_City] PHP Fatal error:  Uncaught Error: Class 'vendor\database\IBD' not found in /var/www/html/vendor/frankyframework/franky-core/src/LOGIN.php:14
+Stack trace:
+#0 /var/www/html/modulos/base/controller/login.php(7): Franky\Core\LOGIN->__construct('users', Array, 'contrasena', Array)
+#1 /var/www/html/modulos/base/loads/init.php(160): require('/var/www/html/m...')
+#2 /var/www/html/index.php(3): require('/var/www/html/m...')
+#3 {main}
+  thrown in /var/www/html/vendor/frankyframework/franky-core/src/LOGIN.php on line 14
+[16-Apr-2019 09:28:11 America/Mexico_City] PHP Fatal error:  Uncaught Error: Class 'vendor\database\IBD' not found in /var/www/html/vendor/frankyframework/franky-core/src/LOGIN.php:14
+Stack trace:
+#0 /var/www/html/modulos/base/controller/login.php(7): Franky\Core\LOGIN->__construct('users', Array, 'contrasena', Array)
+#1 /var/www/html/modulos/base/loads/init.php(160): require('/var/www/html/m...')
+#2 /var/www/html/index.php(3): require('/var/www/html/m...')
+#3 {main}
+  thrown in /var/www/html/vendor/frankyframework/franky-core/src/LOGIN.php on line 14
+[16-Apr-2019 09:35:22 America/Mexico_City] PHP Fatal error:  Uncaught Error: Class 'Franky\Database\MYDEBUG' not found in /var/www/html/vendor/frankyframework/franky-core/src/LOGIN.php:14
+Stack trace:
+#0 /var/www/html/modulos/base/controller/login.php(7): Franky\Core\LOGIN->__construct('users', Array, 'contrasena', Array)
+#1 /var/www/html/modulos/base/loads/init.php(160): require('/var/www/html/m...')
+#2 /var/www/html/index.php(3): require('/var/www/html/m...')
+#3 {main}
+  thrown in /var/www/html/vendor/frankyframework/franky-core/src/LOGIN.php on line 14
+[16-Apr-2019 09:48:09 America/Mexico_City] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Connection refused in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php:41
+Stack trace:
+#0 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(41): PDO->__construct('mysql:host=enco...', 'ecclick_franky', 'nkIGiX*JuQ$t')
+#1 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(81): Franky\Database\IBD->ConectarBD()
+#2 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/Select.php(35): Franky\Database\IBD->Query(1555426089, 'SELECT nombre, ...')
+#3 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/objectOperations.php(105): Franky\Database\Mysql\Select->execute('franky ', Array, 'status = '1'', '', 'id ASC', '0, 1000')
+#4 /var/www/html/modulos/base/src/model/paginasModel.php(27): Franky\Database\Mysql\objectOperations->getColeccion(Array)
+#5 /var/www/html/modulos/base/loads/llenaFranky.php(35): Base\model\paginasModel->getData()
+#6 /var/www/html/modulos/base/loads/init.php(135): include_once('/var/www/h in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php on line 41
+[16-Apr-2019 09:49:09 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to undefined function print_() in /var/www/html/modulos/base/loads/init.php:150
+Stack trace:
+#0 /var/www/html/index.php(3): require()
+#1 {main}
+  thrown in /var/www/html/modulos/base/loads/init.php on line 150
+[16-Apr-2019 09:49:11 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to undefined function print_() in /var/www/html/modulos/base/loads/init.php:150
+Stack trace:
+#0 /var/www/html/index.php(3): require()
+#1 {main}
+  thrown in /var/www/html/modulos/base/loads/init.php on line 150
+[16-Apr-2019 09:49:19 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to undefined function print_() in /var/www/html/modulos/base/loads/init.php:150
+Stack trace:
+#0 /var/www/html/index.php(3): require()
+#1 {main}
+  thrown in /var/www/html/modulos/base/loads/init.php on line 150
+[16-Apr-2019 09:52:56 America/Mexico_City] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/modulos/base/loads/init.php:138) in /var/www/html/modulos/base/loads/init.php on line 169
+[16-Apr-2019 09:52:56 America/Mexico_City] PHP Stack trace:
+[16-Apr-2019 09:52:56 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[16-Apr-2019 09:52:56 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[16-Apr-2019 09:52:56 America/Mexico_City] PHP   3. header() /var/www/html/modulos/base/loads/init.php:169
+[16-Apr-2019 09:52:56 America/Mexico_City] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/modulos/base/loads/init.php:138) in /var/www/html/modulos/base/loads/init.php on line 170
+[16-Apr-2019 09:52:56 America/Mexico_City] PHP Stack trace:
+[16-Apr-2019 09:52:56 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[16-Apr-2019 09:52:56 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[16-Apr-2019 09:52:56 America/Mexico_City] PHP   3. header() /var/www/html/modulos/base/loads/init.php:170
+[16-Apr-2019 09:53:10 America/Mexico_City] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/modulos/base/loads/init.php:138) in /var/www/html/vendor/frankyframework/franky-core/src/request.php on line 93
+[16-Apr-2019 09:53:10 America/Mexico_City] PHP Stack trace:
+[16-Apr-2019 09:53:10 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[16-Apr-2019 09:53:10 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[16-Apr-2019 09:53:10 America/Mexico_City] PHP   3. require() /var/www/html/modulos/base/loads/init.php:153
+[16-Apr-2019 09:53:10 America/Mexico_City] PHP   4. Franky\Core\request->redirect() /var/www/html/modulos/base/controller/login.php:81
+[16-Apr-2019 09:53:10 America/Mexico_City] PHP   5. header() /var/www/html/vendor/frankyframework/franky-core/src/request.php:93
+[16-Apr-2019 09:53:10 America/Mexico_City] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/modulos/base/loads/init.php:138) in /var/www/html/vendor/frankyframework/franky-core/src/request.php on line 100
+[16-Apr-2019 09:53:10 America/Mexico_City] PHP Stack trace:
+[16-Apr-2019 09:53:10 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[16-Apr-2019 09:53:10 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[16-Apr-2019 09:53:10 America/Mexico_City] PHP   3. require() /var/www/html/modulos/base/loads/init.php:153
+[16-Apr-2019 09:53:10 America/Mexico_City] PHP   4. Franky\Core\request->redirect() /var/www/html/modulos/base/controller/login.php:81
+[16-Apr-2019 09:53:10 America/Mexico_City] PHP   5. header() /var/www/html/vendor/frankyframework/franky-core/src/request.php:100
+[16-Apr-2019 09:53:56 America/Mexico_City] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/modulos/base/loads/init.php:138) in /var/www/html/vendor/frankyframework/franky-core/src/request.php on line 93
+[16-Apr-2019 09:53:56 America/Mexico_City] PHP Stack trace:
+[16-Apr-2019 09:53:56 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[16-Apr-2019 09:53:56 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[16-Apr-2019 09:53:56 America/Mexico_City] PHP   3. require() /var/www/html/modulos/base/loads/init.php:154
+[16-Apr-2019 09:53:56 America/Mexico_City] PHP   4. Franky\Core\request->redirect() /var/www/html/modulos/base/controller/login.php:81
+[16-Apr-2019 09:53:56 America/Mexico_City] PHP   5. header() /var/www/html/vendor/frankyframework/franky-core/src/request.php:93
+[16-Apr-2019 09:53:56 America/Mexico_City] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/modulos/base/loads/init.php:138) in /var/www/html/vendor/frankyframework/franky-core/src/request.php on line 100
+[16-Apr-2019 09:53:56 America/Mexico_City] PHP Stack trace:
+[16-Apr-2019 09:53:56 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[16-Apr-2019 09:53:56 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[16-Apr-2019 09:53:56 America/Mexico_City] PHP   3. require() /var/www/html/modulos/base/loads/init.php:154
+[16-Apr-2019 09:53:56 America/Mexico_City] PHP   4. Franky\Core\request->redirect() /var/www/html/modulos/base/controller/login.php:81
+[16-Apr-2019 09:53:56 America/Mexico_City] PHP   5. header() /var/www/html/vendor/frankyframework/franky-core/src/request.php:100
+[16-Apr-2019 09:54:42 America/Mexico_City] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/modulos/base/loads/init.php:138) in /var/www/html/vendor/frankyframework/franky-core/src/request.php on line 93
+[16-Apr-2019 09:54:42 America/Mexico_City] PHP Stack trace:
+[16-Apr-2019 09:54:42 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[16-Apr-2019 09:54:42 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[16-Apr-2019 09:54:42 America/Mexico_City] PHP   3. require() /var/www/html/modulos/base/loads/init.php:154
+[16-Apr-2019 09:54:42 America/Mexico_City] PHP   4. Franky\Core\request->redirect() /var/www/html/modulos/base/controller/login.php:81
+[16-Apr-2019 09:54:42 America/Mexico_City] PHP   5. header() /var/www/html/vendor/frankyframework/franky-core/src/request.php:93
+[16-Apr-2019 09:54:42 America/Mexico_City] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/modulos/base/loads/init.php:138) in /var/www/html/vendor/frankyframework/franky-core/src/request.php on line 100
+[16-Apr-2019 09:54:42 America/Mexico_City] PHP Stack trace:
+[16-Apr-2019 09:54:42 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[16-Apr-2019 09:54:42 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[16-Apr-2019 09:54:42 America/Mexico_City] PHP   3. require() /var/www/html/modulos/base/loads/init.php:154
+[16-Apr-2019 09:54:42 America/Mexico_City] PHP   4. Franky\Core\request->redirect() /var/www/html/modulos/base/controller/login.php:81
+[16-Apr-2019 09:54:42 America/Mexico_City] PHP   5. header() /var/www/html/vendor/frankyframework/franky-core/src/request.php:100
+[16-Apr-2019 09:55:51 America/Mexico_City] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/modulos/base/loads/init.php:138) in /var/www/html/vendor/frankyframework/franky-core/src/request.php on line 93
+[16-Apr-2019 09:55:51 America/Mexico_City] PHP Stack trace:
+[16-Apr-2019 09:55:51 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[16-Apr-2019 09:55:51 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[16-Apr-2019 09:55:51 America/Mexico_City] PHP   3. require() /var/www/html/modulos/base/loads/init.php:154
+[16-Apr-2019 09:55:51 America/Mexico_City] PHP   4. Franky\Core\request->redirect() /var/www/html/modulos/base/controller/login.php:82
+[16-Apr-2019 09:55:51 America/Mexico_City] PHP   5. header() /var/www/html/vendor/frankyframework/franky-core/src/request.php:93
+[16-Apr-2019 09:55:51 America/Mexico_City] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/modulos/base/loads/init.php:138) in /var/www/html/vendor/frankyframework/franky-core/src/request.php on line 100
+[16-Apr-2019 09:55:51 America/Mexico_City] PHP Stack trace:
+[16-Apr-2019 09:55:51 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[16-Apr-2019 09:55:51 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[16-Apr-2019 09:55:51 America/Mexico_City] PHP   3. require() /var/www/html/modulos/base/loads/init.php:154
+[16-Apr-2019 09:55:51 America/Mexico_City] PHP   4. Franky\Core\request->redirect() /var/www/html/modulos/base/controller/login.php:82
+[16-Apr-2019 09:55:51 America/Mexico_City] PHP   5. header() /var/www/html/vendor/frankyframework/franky-core/src/request.php:100
+[16-Apr-2019 09:56:15 America/Mexico_City] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/modulos/base/loads/init.php:138) in /var/www/html/vendor/frankyframework/franky-core/src/request.php on line 93
+[16-Apr-2019 09:56:15 America/Mexico_City] PHP Stack trace:
+[16-Apr-2019 09:56:15 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[16-Apr-2019 09:56:15 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[16-Apr-2019 09:56:15 America/Mexico_City] PHP   3. require() /var/www/html/modulos/base/loads/init.php:154
+[16-Apr-2019 09:56:15 America/Mexico_City] PHP   4. Franky\Core\request->redirect() /var/www/html/modulos/base/controller/login.php:83
+[16-Apr-2019 09:56:15 America/Mexico_City] PHP   5. header() /var/www/html/vendor/frankyframework/franky-core/src/request.php:93
+[16-Apr-2019 09:56:15 America/Mexico_City] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/modulos/base/loads/init.php:138) in /var/www/html/vendor/frankyframework/franky-core/src/request.php on line 100
+[16-Apr-2019 09:56:15 America/Mexico_City] PHP Stack trace:
+[16-Apr-2019 09:56:15 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[16-Apr-2019 09:56:15 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[16-Apr-2019 09:56:15 America/Mexico_City] PHP   3. require() /var/www/html/modulos/base/loads/init.php:154
+[16-Apr-2019 09:56:15 America/Mexico_City] PHP   4. Franky\Core\request->redirect() /var/www/html/modulos/base/controller/login.php:83
+[16-Apr-2019 09:56:15 America/Mexico_City] PHP   5. header() /var/www/html/vendor/frankyframework/franky-core/src/request.php:100
+[16-Apr-2019 09:56:17 America/Mexico_City] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Connection refused in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php:41
+Stack trace:
+#0 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(41): PDO->__construct('mysql:host=enco...', 'ecclick_franky', 'nkIGiX*JuQ$t')
+#1 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(81): Franky\Database\IBD->ConectarBD()
+#2 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/Select.php(35): Franky\Database\IBD->Query(1555426576, 'SELECT nombre, ...')
+#3 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/objectOperations.php(105): Franky\Database\Mysql\Select->execute('franky ', Array, 'status = '1'', '', 'id ASC', '0, 1000')
+#4 /var/www/html/modulos/base/src/model/paginasModel.php(27): Franky\Database\Mysql\objectOperations->getColeccion(Array)
+#5 /var/www/html/modulos/base/loads/llenaFranky.php(35): Base\model\paginasModel->getData()
+#6 /var/www/html/modulos/base/loads/init.php(135): include_once('/var/www/h in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php on line 41
+[16-Apr-2019 09:56:26 America/Mexico_City] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/modulos/base/controller/login.php:29) in /var/www/html/vendor/frankyframework/franky-core/src/request.php on line 93
+[16-Apr-2019 09:56:26 America/Mexico_City] PHP Stack trace:
+[16-Apr-2019 09:56:26 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[16-Apr-2019 09:56:26 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[16-Apr-2019 09:56:26 America/Mexico_City] PHP   3. require() /var/www/html/modulos/base/loads/init.php:154
+[16-Apr-2019 09:56:26 America/Mexico_City] PHP   4. Franky\Core\request->redirect() /var/www/html/modulos/base/controller/login.php:83
+[16-Apr-2019 09:56:26 America/Mexico_City] PHP   5. header() /var/www/html/vendor/frankyframework/franky-core/src/request.php:93
+[16-Apr-2019 09:56:26 America/Mexico_City] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/modulos/base/controller/login.php:29) in /var/www/html/vendor/frankyframework/franky-core/src/request.php on line 100
+[16-Apr-2019 09:56:26 America/Mexico_City] PHP Stack trace:
+[16-Apr-2019 09:56:26 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[16-Apr-2019 09:56:26 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[16-Apr-2019 09:56:26 America/Mexico_City] PHP   3. require() /var/www/html/modulos/base/loads/init.php:154
+[16-Apr-2019 09:56:26 America/Mexico_City] PHP   4. Franky\Core\request->redirect() /var/www/html/modulos/base/controller/login.php:83
+[16-Apr-2019 09:56:26 America/Mexico_City] PHP   5. header() /var/www/html/vendor/frankyframework/franky-core/src/request.php:100
+[16-Apr-2019 09:57:03 America/Mexico_City] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/modulos/base/controller/login.php:29) in /var/www/html/vendor/frankyframework/franky-core/src/request.php on line 93
+[16-Apr-2019 09:57:03 America/Mexico_City] PHP Stack trace:
+[16-Apr-2019 09:57:03 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[16-Apr-2019 09:57:03 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[16-Apr-2019 09:57:03 America/Mexico_City] PHP   3. require() /var/www/html/modulos/base/loads/init.php:154
+[16-Apr-2019 09:57:03 America/Mexico_City] PHP   4. Franky\Core\request->redirect() /var/www/html/modulos/base/controller/login.php:83
+[16-Apr-2019 09:57:03 America/Mexico_City] PHP   5. header() /var/www/html/vendor/frankyframework/franky-core/src/request.php:93
+[16-Apr-2019 09:57:03 America/Mexico_City] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/modulos/base/controller/login.php:29) in /var/www/html/vendor/frankyframework/franky-core/src/request.php on line 100
+[16-Apr-2019 09:57:03 America/Mexico_City] PHP Stack trace:
+[16-Apr-2019 09:57:03 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[16-Apr-2019 09:57:03 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[16-Apr-2019 09:57:03 America/Mexico_City] PHP   3. require() /var/www/html/modulos/base/loads/init.php:154
+[16-Apr-2019 09:57:03 America/Mexico_City] PHP   4. Franky\Core\request->redirect() /var/www/html/modulos/base/controller/login.php:83
+[16-Apr-2019 09:57:03 America/Mexico_City] PHP   5. header() /var/www/html/vendor/frankyframework/franky-core/src/request.php:100
+[16-Apr-2019 09:58:24 America/Mexico_City] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/vendor/frankyframework/franky-core/src/LOGIN.php:88) in /var/www/html/vendor/frankyframework/franky-core/src/request.php on line 93
+[16-Apr-2019 09:58:24 America/Mexico_City] PHP Stack trace:
+[16-Apr-2019 09:58:24 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[16-Apr-2019 09:58:24 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[16-Apr-2019 09:58:24 America/Mexico_City] PHP   3. require() /var/www/html/modulos/base/loads/init.php:154
+[16-Apr-2019 09:58:24 America/Mexico_City] PHP   4. Franky\Core\request->redirect() /var/www/html/modulos/base/controller/login.php:83
+[16-Apr-2019 09:58:24 America/Mexico_City] PHP   5. header() /var/www/html/vendor/frankyframework/franky-core/src/request.php:93
+[16-Apr-2019 09:58:24 America/Mexico_City] PHP Warning:  Cannot modify header information - headers already sent by (output started at /var/www/html/vendor/frankyframework/franky-core/src/LOGIN.php:88) in /var/www/html/vendor/frankyframework/franky-core/src/request.php on line 100
+[16-Apr-2019 09:58:24 America/Mexico_City] PHP Stack trace:
+[16-Apr-2019 09:58:24 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[16-Apr-2019 09:58:24 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[16-Apr-2019 09:58:24 America/Mexico_City] PHP   3. require() /var/www/html/modulos/base/loads/init.php:154
+[16-Apr-2019 09:58:24 America/Mexico_City] PHP   4. Franky\Core\request->redirect() /var/www/html/modulos/base/controller/login.php:83
+[16-Apr-2019 09:58:24 America/Mexico_City] PHP   5. header() /var/www/html/vendor/frankyframework/franky-core/src/request.php:100
+[16-Apr-2019 10:02:48 America/Mexico_City] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Connection refused in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php:41
+Stack trace:
+#0 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(41): PDO->__construct('mysql:host=enco...', 'ecclick_franky', 'nkIGiX*JuQ$t')
+#1 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(81): Franky\Database\IBD->ConectarBD()
+#2 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/Select.php(35): Franky\Database\IBD->Query(1555426967, 'SELECT id FROM ...')
+#3 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/objectOperations.php(101): Franky\Database\Mysql\Select->execute('redirecciones ', Array, 'url = '/admin/'...', '', '')
+#4 /var/www/html/modulos/base/src/model/redireccionesModel.php(34): Franky\Database\Mysql\objectOperations->getColeccion(Array)
+#5 /var/www/html/modulos/base/loads/init.php(239): Base\model\redireccionesModel->getData('', '/admin/', 1)
+#6 /var/www/html/index.php(3): require('/var/www/html/m.. in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php on line 41
+[16-Apr-2019 10:26:56 America/Mexico_City] PHP Fatal error:  Uncaught Error: Class 'Base\Model\Correo' not found in /var/www/html/modulos/base/loads/util.php:450
+Stack trace:
+#0 /var/www/html/modulos/base/loads/util.php(825): sendEmail(Array, Array)
+#1 [internal function]: validLoginUserDevice()
+#2 /var/www/html/vendor/frankyframework/franky-core/src/ObserverManager.php(20): call_user_func_array('validLoginUserD...', Array)
+#3 /var/www/html/modulos/base/controller/login.php(54): Franky\Core\ObserverManager->dispatch('login_user')
+#4 /var/www/html/modulos/base/loads/init.php(162): require('/var/www/html/m...')
+#5 /var/www/html/index.php(3): require('/var/www/html/m...')
+#6 {main}
+  thrown in /var/www/html/modulos/base/loads/util.php on line 450
+[16-Apr-2019 10:30:13 America/Mexico_City] PHP Fatal error:  Uncaught Error: Class 'Base\Model\Correo' not found in /var/www/html/modulos/base/loads/util.php:450
+Stack trace:
+#0 /var/www/html/modulos/base/loads/util.php(825): sendEmail(Array, Array)
+#1 [internal function]: validLoginUserDevice()
+#2 /var/www/html/vendor/frankyframework/franky-core/src/ObserverManager.php(20): call_user_func_array('validLoginUserD...', Array)
+#3 /var/www/html/modulos/base/controller/login.php(54): Franky\Core\ObserverManager->dispatch('login_user')
+#4 /var/www/html/modulos/base/loads/init.php(162): require('/var/www/html/m...')
+#5 /var/www/html/index.php(3): require('/var/www/html/m...')
+#6 {main}
+  thrown in /var/www/html/modulos/base/loads/util.php on line 450
+[16-Apr-2019 10:33:51 America/Mexico_City] PHP Fatal error:  Uncaught Error: Class 'Base\Model\Correo' not found in /var/www/html/modulos/base/loads/util.php:450
+Stack trace:
+#0 /var/www/html/modulos/base/loads/util.php(825): sendEmail(Array, Array)
+#1 [internal function]: validLoginUserDevice()
+#2 /var/www/html/vendor/frankyframework/franky-core/src/ObserverManager.php(20): call_user_func_array('validLoginUserD...', Array)
+#3 /var/www/html/modulos/base/controller/login.php(54): Franky\Core\ObserverManager->dispatch('login_user')
+#4 /var/www/html/modulos/base/loads/init.php(162): require('/var/www/html/m...')
+#5 /var/www/html/index.php(3): require('/var/www/html/m...')
+#6 {main}
+  thrown in /var/www/html/modulos/base/loads/util.php on line 450
+[16-Apr-2019 10:56:22 America/Mexico_City] PHP Parse error:  syntax error, unexpected '}', expecting elseif (T_ELSEIF) or else (T_ELSE) or endif (T_ENDIF) in /var/www/html/modulos/base/src/model/Correo.php on line 72
+[16-Apr-2019 10:57:35 America/Mexico_City] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /var/www/html/modulos/base/src/model/Correo.php:12
+Stack trace:
+#0 /var/www/html/modulos/base/loads/util.php(450): Base\model\Correo::Enviar('Se detecto un n...', 'ussiel@gmail.co...', '<table style="f...', Array, 'webmaster@test....', NULL, NULL)
+#1 /var/www/html/modulos/base/loads/util.php(825): sendEmail(Array, Array)
+#2 [internal function]: validLoginUserDevice()
+#3 /var/www/html/vendor/frankyframework/franky-core/src/ObserverManager.php(20): call_user_func_array('validLoginUserD...', Array)
+#4 /var/www/html/modulos/base/controller/login.php(54): Franky\Core\ObserverManager->dispatch('login_user')
+#5 /var/www/html/modulos/base/loads/init.php(162): require('/var/www/html/m...')
+#6 /var/www/html/index.php(3): require('/var/www/html/m...')
+#7 {main}
+  thrown in /var/www/html/modulos/base/src/model/Correo.php on line 12
+[16-Apr-2019 11:01:01 America/Mexico_City] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /var/www/html/modulos/base/src/model/Correo.php:12
+Stack trace:
+#0 /var/www/html/modulos/base/loads/util.php(450): Base\model\Correo::Enviar('Se detecto un n...', 'ussiel@gmail.co...', '<table style="f...', Array, 'webmaster@test....', NULL, NULL)
+#1 /var/www/html/modulos/base/loads/util.php(825): sendEmail(Array, Array)
+#2 [internal function]: validLoginUserDevice()
+#3 /var/www/html/vendor/frankyframework/franky-core/src/ObserverManager.php(20): call_user_func_array('validLoginUserD...', Array)
+#4 /var/www/html/modulos/base/controller/login.php(54): Franky\Core\ObserverManager->dispatch('login_user')
+#5 /var/www/html/modulos/base/loads/init.php(162): require('/var/www/html/m...')
+#6 /var/www/html/index.php(3): require('/var/www/html/m...')
+#7 {main}
+  thrown in /var/www/html/modulos/base/src/model/Correo.php on line 12
+[16-Apr-2019 11:02:55 America/Mexico_City] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Connection refused in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php:41
+Stack trace:
+#0 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(41): PDO->__construct('mysql:host=enco...', 'ecclick_franky', 'nkIGiX*JuQ$t')
+#1 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(81): Franky\Database\IBD->ConectarBD()
+#2 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/Select.php(35): Franky\Database\IBD->Query(1555430575, 'SELECT url_inte...')
+#3 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/objectOperations.php(101): Franky\Database\Mysql\Select->execute('url_internacion...', Array, 'franky.status =...', '', '')
+#4 /var/www/html/modulos/base/src/model/UrlInternacionalModel.php(36): Franky\Database\Mysql\objectOperations->getColeccion(Array)
+#5 /var/www/html/modulos/base/loads/llenaFranky.php(14): Base\model\UrlInternacionalModel->getData(Array)
+#6 /var/www/html/modulos/base/loads/init.php(135): i in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php on line 41

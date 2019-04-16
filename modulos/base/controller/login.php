@@ -26,6 +26,7 @@ if(empty($contrasena))
 }
 if($error == false)
 {
+
     if( $MyLogin->setLogin($usuario, md5($contrasena)) == LOGIN_SUCCESS)
     {
 
@@ -65,7 +66,7 @@ if($error == false)
     }
     else
     {
-    
+
         $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("error_login"));
 
         $location = $MyRequest->getReferer();

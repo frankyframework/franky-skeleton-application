@@ -86,7 +86,7 @@ values
 (15,'admin/template_email/form.php','','[\"validaciones.js\"]','[\"jquery-validate\"]','[1]','FRM_EMAIL_TEMPLATE','admin/email-template/frm/','Alta transaccionales','',1,0,'base'),
 (16,'admin/cms/lista.php','','','[]','[1,2]','LISTA_CMS_TEMPLATE','admin/cms/','CMS','[\"base/ajax.admin.js\"]',1,0,'base'),
 (17,'admin/cms/form.php','','[\"validaciones.js\"]','[\"jquery-validate\",\"flexslider\"]','[1,2]','FRM_CMS_TEMPLATE','admin/cms/frm/','Alta CMS','',1,0,'base'),
-(18,'cms.php','','','[\"flexslider\"]','','CMS','[titulo_cms]/','CMS','',1,0,'base'),
+(18,'cms.php','','','[\"flexslider\"]','','CMS','cms/','CMS','',1,0,'base'),
 (19,'gracias.php','','','','','GRACIAS','gracias/','gracias','',1,0,'base'),
 (20,'admin/url_internacional/lista.php','','','[]','[1,2]','ADMIN_URL_INTERNACIONAL','admin/url-internacional/','URL internacional','[\"base/ajax.admin.js\"]',1,0,'base'),
 (21,'admin/url_internacional/form.php','','[\"validaciones.js\"]','[\"jquery-validate\"]','[1,2]','FRM_URL_INTERNACIONAL','admin/url-internacional/frm/','Alta de URL internacional','',1,0,'base');

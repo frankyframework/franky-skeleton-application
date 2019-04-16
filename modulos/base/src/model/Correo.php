@@ -1,21 +1,15 @@
 <?php
-namespace vendor\PHPMailer;
-
+namespace Base\model;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require PROJECT_DIR.'/vendor/PHPMailer/src/Exception.php';
-require PROJECT_DIR.'/vendor/PHPMailer/src/PHPMailer.php';
-require PROJECT_DIR.'/vendor/PHPMailer/src/SMTP.php';
-
-
-class Correo
+class Correo extends \Franky\Core\configure
 {
-        static function Enviar($Asunto, $Direccion, $Texto, $from, $reply,$bcc,$cc)
+        public function Enviar($Asunto, $Direccion, $Texto, $from, $reply,$bcc,$cc)
       	{
 
-              if(!file_exists($this->getServerUploadDir()."/core_config/core_config.php")):
+              if(!file_exists($this->getServerUploadDir()."/core_config/core_config.php"))
                 {
                   return false;
                 }
