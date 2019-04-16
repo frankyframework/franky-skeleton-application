@@ -4,8 +4,7 @@
     "type": "project",
     "license": "MIT",
     "prefer-stable": false,
-    "minimum-stability":"dev",
-    "version": "dev",
+    "minimum-stability":"1.0.x-dev",
     "require": {
         "php": "^7.0",
         "phpmailer/phpmailer": "~6.0",
