@@ -1,4 +1,5 @@
 <?php if($debugEnabled): ?>
+<?php $debugSQL = new \Franky\Database\Debug(); ?>
 <div id="debug" class="w-xxxx-12">
     <div class="pestanas" class="w-xxxx-12">
         <div class="w-xxxx-1 pestana"><a href="#debug-personal">Debug</a></div>
@@ -15,7 +16,7 @@
         <div id="debug-personal" style="display:none;"><?php echo $messages; ?></div>
         <div id="debug-errors" style="display:none;"><?php echo $phpErrors; ?></div>
         <div id="debug-files" style="display:none;"><?php echo $includeFiles; ?></div>
-        <div id="debug-sql" style="display:none;"><?=\Franky\Database\Debug::getMessages()?></div>
+        <div id="debug-sql" style="display:none;"><?=$debugSQL->getMessages()?></div>
         <div id="debug-session" style="display:none;"><?php echo $session; ?></div>
         <div id="debug-request" style="display:none;"><?php echo $request; ?></div>
         <div id="debug-server" style="display:none;"><?php echo $cpu; ?></div>
