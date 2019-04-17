@@ -5,9 +5,9 @@ function openpay_tarjeta()
     $MyForm =  new \Ecommerce\Form\openpayForm("card-form");
 
     //$MyForm->addCheckGuardar();
-    $MyForm->setAtributo("action", "//ecommerce/openpay/tarjeta/confirmacion.submit.php");
+    $MyForm->setAtributo("action", "/ecommerce/openpay/tarjeta/confirmacion.submit.php");
     $checkoutForm = new \Ecommerce\Form\checkoutForm("frm_tarjeta_checkout");
-    $checkoutForm->setAtributo("action", "//ecommerce/openpay/tarjeta/confirmacion.submit.php");
+    $checkoutForm->setAtributo("action", "/ecommerce/openpay/tarjeta/confirmacion.submit.php");
     global $MyMessageAlert;
     global $MySession;
     $respuesta = array("error" => false,"html" => "");

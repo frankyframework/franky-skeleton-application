@@ -5,12 +5,12 @@ class categoriasBlogForm extends \Franky\Form\Form
 {
     public function __construct($name)
     {
-        
+
         parent::__construct();
-     
+
        $this->setAtributos(array(
             'name' => $name,
-            'action' =>  "//admin/blog/categorias/submit.php",
+            'action' =>  "/admin/blog/categorias/submit.php",
             'method' => 'post',
            'enctype' => "multipart/form-data"
         ));
@@ -18,17 +18,17 @@ class categoriasBlogForm extends \Franky\Form\Form
          $this->add(array(
                 'name' => 'id',
                 'type'  => 'hidden',
-                
+
             )
         );
        $this->add(array(
                 'name' => 'callback',
                 'type'  => 'hidden',
-                
+
             )
         );
-       
-       
+
+
         $this->add(array(
                 'name' => 'nombre',
                 'label' => 'Nombre:',
@@ -43,7 +43,7 @@ class categoriasBlogForm extends \Franky\Form\Form
                  )
             )
         );
-        
+
           $this->add(array(
                 'name' => 'visible',
                 'type'  => 'checkbox',
@@ -57,15 +57,15 @@ class categoriasBlogForm extends \Franky\Form\Form
         );
         $this->add(array(
                 'label' => 'Restringir acceso a:',
-                'name' => 'permisos[]',                
-                'type'  => 'checkbox',                
+                'name' => 'permisos[]',
+                'type'  => 'checkbox',
                 'options' => array(
                 ),
-             
+
             )
         );
-        
-       
+
+
          $this->add(array(
                 'name' => 'guardar',
                 'type'  => 'submit',
@@ -73,11 +73,11 @@ class categoriasBlogForm extends \Franky\Form\Form
                     'class'       => 'btn btn-primary btn-big float_right',
                     'value' => "Guardar"
                  )
-                
+
             )
         );
 
     }
- 
+
 }
 ?>

@@ -10,15 +10,15 @@ $data = $MyFlashMessage->getResponse();
 
 $adminForm = new direccionesForm("frmdirecciones_facturacion");
 
-$adminForm->setAtributo("action", "//ecommerce/admin/direcciones_facturacion/submit.php");
+$adminForm->setAtributo("action", "/ecommerce/admin/direcciones_facturacion/submit.php");
 if(!empty($id))
 {
-	
+
         $MyDirecciones->getData($id,$MySession->GetVar('id'));
 
-	$data = $MyDirecciones->getRows();	
+	$data = $MyDirecciones->getRows();
         $adminForm->addId();
-        
+
 }
 
 $adminForm->addRFC();

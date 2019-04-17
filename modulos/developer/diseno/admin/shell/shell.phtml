@@ -1,5 +1,5 @@
 <div class="content">
-    
+
     <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
     <h1 class="titulo_seccion_admin">Shell</h1>
     <div class="w-xxxx-12">
@@ -28,39 +28,39 @@
 $(document).ready(function()
 {
 	promp_command = "franky>";
-	
-	
+
+
 	var command = "";
-	
+
 
 	$("#prompt").html(promp_command);
 	$("#main-cursor").addClass("cursor-activo");
 	$("#usuario_login").focus();
 
 	$("#shell").click(function(){
-		
+
 			$("input[name=command_shell]").focus();
-		
-		
+
+
 	});
 
 	$("input[name=command_shell]").keyup(function(){
-		
-			$("#comando").html($("input[name=command_shell]").val());			
-		
-		
+
+			$("#comando").html($("input[name=command_shell]").val());
+
+
 	});
 
-        
+
 
 
 	$("input[name=command_shell]").keypress(function(e){
-		
+
 		innerWrap = $('.inner-wrap');
 		var tecla = (document.all) ? e.keyCode : e.which;
             	if (tecla==13)
 		{
-			
+
 
 			$(".command-history").append("<div class='entered-command'>"+promp_command+" "+$("#comando").html()+"</"+"div>");
 			$("#comando").html("");
@@ -69,13 +69,13 @@ $(document).ready(function()
 			{
 				command = $("input[name=command_shell]").val();
 				$("input[name=command_shell]").val("");
-                               
-                            
+
+
 			}
-			
+
                         if(command != "" )
                         {
-                            
+
                             if(command == "reset")
                             {
                                 $(".command-history").html("");
@@ -87,13 +87,13 @@ $(document).ready(function()
                                 var response_fin = 0;
                                 $.ajax({
                                     type: "POST",
-                                    url: "//admin/shell/execute.php",
+                                    url: "/admin/shell/execute.php",
                                     data: "command="+command.trim().split(' ').join('&'),
                                     cache: false,
                                     success: function(response)
                                     {
                                         $(".command-history").append("<div class='entered-command'>"+response+"</"+"div>");
-                                       
+
                                          command = "";
                                         $("#prompt").html(promp_command);
                                         $("input[name=command_shell]").attr("disabled",false);
@@ -102,28 +102,28 @@ $(document).ready(function()
 
 
                                     },
-                                    error: function(){ 
-                                        
+                                    error: function(){
+
                                         innerWrap.scrollTop(innerWrap[0].scrollHeight);
                                     }
-                                    
+
                                 });
                             }
-                            
-                            
+
+
 
 
 			}
-			
+
 
 		}
 		else
 		{
-			
-				$("#comando").html($("input[name=command_shell]").val());			
-			
+
+				$("#comando").html($("input[name=command_shell]").val());
+
 		}
-		
+
     		innerWrap.scrollTop(innerWrap[0].scrollHeight);
 	});
 

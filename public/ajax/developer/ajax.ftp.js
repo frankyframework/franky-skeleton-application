@@ -155,7 +155,7 @@ function simpleResponseFTPHTML(response)
 
         if(respuesta.dowload)
         {
-            window.open("//admin/ftp/descargar.php?file="+respuesta['dowload']);
+            window.open("/admin/ftp/descargar.php?file="+respuesta['dowload']);
         }
     }
 }

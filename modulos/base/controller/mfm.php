@@ -112,7 +112,7 @@ if(isset($_REQUEST['return'])) {
 
             $.ajax({
                 type: "GET",
-                url: "//mfm.php",
+                url: "/mfm.php",
                 data: query,
                 cache: false,
                 success: function(response){

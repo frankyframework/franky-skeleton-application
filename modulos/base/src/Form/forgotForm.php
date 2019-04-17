@@ -10,7 +10,7 @@ class forgotForm extends \Franky\Form\Form
 
        $this->setAtributos(array(
             'name' => $name,
-            'action' =>  "//forgot.php",
+            'action' =>  "/forgot.php",
             'method' => 'post'
         ));
 
