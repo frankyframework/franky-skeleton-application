@@ -1,14 +1,14 @@
-<phpunit bootstrap="modulos/base/loads/autoload.php" basedir="./">
+<phpunit bootstrap="vendor/autoload.php" basedir="./">
   <testsuites>
     <testsuite name="base">
       <directory>modulos/base/test/</directory>
     </testsuite>
-    <testsuite name="mercaracnho">
-      <directory>modulos/base/mercaracho/</directory>
+    <testsuite name="other">
+      <directory>modulos/other/test/</directory>
     </testsuite>
   </testsuites>
   <php>
-    <server name='SERVER_NAME' value='local.franky'/>
+    <server name='SERVER_NAME' value='local.shell'/>
     <const name='REGISTRO_SUCCESS' value='200'/>
     <const name='CONSULTAS_ERR_NOROWS' value='202'/>
   </php>

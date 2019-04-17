@@ -8,6 +8,7 @@ class AcountTest extends TestCase
 
     public function setUp() {
         define(PROJECT_DIR,realpath(dirname(__FILE__).'/../../../'));
+      
     }
 
 
@@ -34,5 +35,5 @@ class AcountTest extends TestCase
         $this->assertSame($result, LOGIN_SUCCESS,$data['usuario'].":".$data['contrasena']);
 
     }
-  
+
 }

@@ -20,7 +20,7 @@ class PublicPagesResponseTest extends TestCase
   public function testModules()
   {
       $Configure = new configure;
-      $modulos =  include(PROJECT_DIR."/modulos/".$Configure->getPathSite()."/env/modulos.php");
+      $modulos =  include(PROJECT_DIR."/configure/modulos.php");
       $modulos[] = "base";
       sort($modulos);
       $_modulos = array();
