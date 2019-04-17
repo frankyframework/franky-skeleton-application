@@ -1,7 +1,7 @@
 <script >
 function BrowseFiles(field_name,url,type,win) {
 
-        var url_p = '//mfm.php?mode=standalone&field='+field_name+"&url=" + url+"&pwd=email_template/<?php echo $path_img_blog; ?>";
+        var url_p = '/mfm.php?mode=standalone&field='+field_name+"&url=" + url+"&pwd=email_template/<?php echo $path_img_blog; ?>";
         var winpops=window.open(url_p,"","status = 1, height = 450, width = 640, left = 200, top = 180, resizable = 0")
 }
 $(window).load(function(){
