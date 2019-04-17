@@ -10,3 +10,6 @@ docker/log
 composer.lock
 docker-compose.yml
 docker/
+css/
+mjs/
+hash/
