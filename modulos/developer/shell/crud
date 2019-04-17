@@ -22,7 +22,7 @@ $site = $MyRequest->getRequest("site",'local.shell');
 if(!empty($site))
 {
     $_SERVER["SERVER_NAME"] = $site;
-    $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Core\MYDEBUG);
+    $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Core\Debug);
 }
 
 headerShell();
@@ -57,9 +57,9 @@ if(is_numeric(substr($modulo,0,1)))
 
 
 $paths = array(PROJECT_DIR."/modulos/".$modulo,
-                PROJECT_DIR."/modulos/".$modulo."/Form/".$form.".php",
-                PROJECT_DIR."/modulos/".$modulo."/vendor/model/".$modelo.".php",
-                PROJECT_DIR."/modulos/".$modulo."/vendor/entity/".$entidad.".php"
+                PROJECT_DIR."/modulos/".$modulo."/src/Form/".$form.".php",
+                PROJECT_DIR."/modulos/".$modulo."/src/model/".$modelo.".php",
+                PROJECT_DIR."/modulos/".$modulo."/src/entity/".$entidad.".php"
     );
 
 foreach($paths as $path)

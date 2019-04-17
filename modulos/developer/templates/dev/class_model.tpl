@@ -1,5 +1,5 @@
 <?php
-namespace modulos\\{modulo}\\vendor\\model;
+namespace {modulo}\\model;
 
 class {nombre}Model  extends \Franky\Database\Mysql\objectOperations
 {

@@ -1,21 +1,12 @@
 <IfModule mod_rewrite.c>
 Options +FollowSymLinks
-RewriteEngine on	
+RewriteEngine on
 
 RewriteCond %{HTTP_HOST} ^{host_sin_www}$ [NC]
 RewriteRule ^(.*)$ http://{host}/$1 [L,R=301]
 
 RewriteCond %{REQUEST_URI}  !\.(php?|html?|jpg|png|bmp|gif|svg|js|css|ttf|woff|xml|txt|swf|jar|zip|kml|eot|json|pdf|ico|mp4|ogg|webm)$
 RewriteRule ^(.*)([^/])$ http://%{HTTP_HOST}/$1$2/ [L,R=301]
-
-RewriteCond %{REQUEST_URI}  sitemap.xml$
-RewriteRule ^sitemap.xml$  /sitemap.xml [NC,L]
-
-RewriteCond %{REQUEST_URI}  service_worker.js$
-RewriteRule ^service_worker.js  /service_worker.js [NC,L]
-
-RewriteCond %{REQUEST_URI}  !/index\.php$
-RewriteRule ^/(.*)$  post/index.php [NC,L]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f

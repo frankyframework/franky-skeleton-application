@@ -21,7 +21,7 @@ $site = $MyRequest->getRequest("site",'local.shell');
 if(!empty($site))
 {
     $_SERVER["SERVER_NAME"] = $site;
-    $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Core\MYDEBUG);
+    $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Core\Debug);
 }
 
 headerShell();
@@ -52,9 +52,9 @@ if(!file_exists($path))
 
 }
 
-if(!file_exists($path."/vendor/model"))
+if(!file_exists($path."/src/model"))
 {
-    if(mkdir($path."/vendor/model",0777))
+    if(mkdir($path."/src/model",0777))
     {
         echo "\t".shellFontColor("[success] Se creo el directorio ".$path."/class/model","verde")."\n";
     }
@@ -67,7 +67,7 @@ if(!file_exists($path."/vendor/model"))
 
 $nombre = ucfirst(strtolower($nombre));
 
-if(file_exists($path."/vendor/model/".$nombre."Model.php"))
+if(file_exists($path."/src/model/".$nombre."Model.php"))
 {
     echo "\t".shellFontColor("[error] El modelo ".$nombre."Model ya existe","rojo")."\n";
 
@@ -102,7 +102,7 @@ $plantilla = new Plantilla();
 $plantilla->asigna_variables(array("nombre" => $nombre,"campos" => $campos, "modulo" => $modulo,"tabla" => $tabla));
 
 
-$fopen = fopen($path."/vendor/model/".$nombre."Model.php", 'w');
+$fopen = fopen($path."/src/model/".$nombre."Model.php", 'w');
 
 fwrite($fopen, $plantilla->muestra(PROJECT_DIR."/modulos/developer/templates/dev/class_model.tpl"));
 fclose($fopen);

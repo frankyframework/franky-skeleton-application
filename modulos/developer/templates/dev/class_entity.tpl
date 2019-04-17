@@ -1,11 +1,11 @@
 <?php
-namespace modulos\\{modulo}\\vendor\\entity;
+namespace {modulo}\\entity;
 
- 
+
 class {nombre}Entity
 {
     {vars}
-    
+
     public function __construct($data = null)
     {
         if (null != $data) {
@@ -18,7 +18,7 @@ class {nombre}Entity
     {
         {vars_fill}
     }
-    
+
     public function getArrayCopy()
     {
         return get_object_vars($this);
@@ -30,8 +30,8 @@ class {nombre}Entity
     }
 
     {getters}
-    
+
     {setters}
-  
+
 }
 ?>

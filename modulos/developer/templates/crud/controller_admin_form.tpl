@@ -1,8 +1,8 @@
 <?php
-use modulos\\{modulo}\\Form\{form};
-use modulos\\{modulo}\\vendor\\model\\{modelo};
-use modulos\\{modulo}\\vendor\\entity\\{entidad};
-use vendor\\haxor\\Tokenizer;
+use {modulo}\\Form\\{form};
+use {modulo}\\model\\{modelo};
+use {modulo}\\entity\\{entidad};
+use Franky\\Haxor\\Tokenizer;
 
 $Tokenizer = new Tokenizer();
 ${modelo}             = new {modelo}();

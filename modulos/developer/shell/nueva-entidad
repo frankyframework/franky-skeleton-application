@@ -20,7 +20,7 @@ $site = $MyRequest->getRequest("site",'local.shell');
 if(!empty($site))
 {
     $_SERVER["SERVER_NAME"] = $site;
-    $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Core\MYDEBUG);
+    $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Core\Debug);
 }
 
 headerShell();
@@ -52,14 +52,14 @@ if(!file_exists($path))
 
 }
 
-if(!file_exists($path."/vendor/entity"))
+if(!file_exists($path."/src/entity"))
 {
-    if(mkdir($path."/vendor/entity",0777))
+    if(mkdir($path."/src/entity",0777))
     {
-        echo "\t".shellFontColor("[success] Se creo el directorio ".$path."/vendor/entity","verde")."\n";
+        echo "\t".shellFontColor("[success] Se creo el directorio ".$path."/src/entity","verde")."\n";
     }
     else{
-        echo "\t".shellFontColor("[error] No se creo el directorio ".$path."/vendor/entity","rojo")."\n";
+        echo "\t".shellFontColor("[error] No se creo el directorio ".$path."/src/entity","rojo")."\n";
         exit;
     }
 
@@ -67,7 +67,7 @@ if(!file_exists($path."/vendor/entity"))
 
 $nombre = ucfirst(strtolower($nombre));
 
-if(file_exists($path."/vendor/entity/".  $nombre."Entity.php"))
+if(file_exists($path."/src/entity/".  $nombre."Entity.php"))
 {
     echo "\t".shellFontColor("[error] La entidad ".$nombre."Entity ya existe","rojo")."\n";
 
@@ -102,7 +102,7 @@ $plantilla = new Plantilla();
 
 $plantilla->asigna_variables(array("nombre" => $nombre,"modulo" => $modulo,"vars" => $vars,"vars_fill" => $vars_fill,"setters" => $setters,"getters" => $getters));
 
-$fopen = fopen($path."/vendor/entity/".$nombre."Entity.php", 'w');
+$fopen = fopen($path."/src/entity/".$nombre."Entity.php", 'w');
 
 fwrite($fopen, $plantilla->muestra(PROJECT_DIR."/modulos/developer/templates/dev/class_entity.tpl"));
 fclose($fopen);

@@ -54,10 +54,10 @@ $mkdir = array(
 );
 $fullmkdir = array(
     "bin/",
+    "configure/",
     "/vendor/",
     "/logs/",
     "/php-gettext",
-    "/post/",
     "/public/jquery-ui",
     "/public/plugins",
     "/public/js/html5shiv",
@@ -257,30 +257,6 @@ foreach($archivos as $archivo)
         }
     }
 }
-
-
-$nuevo_sitio = include(PROJECT_DIR."/configure/data.php");
-$nodo = $nuevo_sitio[$site];
-$data = var_export(array($host => $nodo,'local.shell' => $nodo),true);
-$stream = fopen('data://text/plain,<?php return ' . $data.'; ?>','r');
-$Ftp->fput($path."/configure/data.php",$stream, FTP_BINARY);
-
-
-
-$nuevo_sitio = include(PROJECT_DIR."/modulos/".$modulo."/env/databases.php");
-
-foreach($nuevo_sitio as $k => $v)
-{
-    if($host == $nuevo_sitio[$k]["host"])
-    {
-        $nuevo_sitio[$k]["host"] = "localhost";
-    }
-}
-$data = var_export($nuevo_sitio,true);
-$stream = fopen('data://text/plain,<?php return ' . $data.'; ?>','r');
-$Ftp->delete($path."/modulos/".$modulo."/env/databases.php");
-$Ftp->fput($path."/modulos/".$modulo."/env/databases.php",$stream, FTP_BINARY);
-
 
 $Ftp->chmod('0777',$path."/public/");
 

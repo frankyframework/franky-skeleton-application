@@ -1,8 +1,8 @@
 <?php
-use modulos\\base\\Form\filtrosForm;
-use vendor\\core\\paginacion;
-use modulos\\{modulo}\\vendor\\model\\{modelo};
-use vendor\\haxor\\Tokenizer;
+use Base\\Form\filtrosForm;
+use Franky\\Core\\paginacion;
+use {modulo}\\model\\{modelo};
+use Franky\\Haxor\\Tokenizer;
 
 ${modelo}             = new {modelo}();
 $MyPaginacion = new paginacion();

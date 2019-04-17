@@ -1,7 +1,7 @@
 <?php
-use vendor\\core\\validaciones;
-use modulos\\{modulo}\\vendor\\model\\{modelo};
-use modulos\\{modulo}\\vendor\\entity\\{entidad};
+use Franky\\Core\\validaciones;
+use {modulo}\\model\\{modelo};
+use {modulo}\\entity\\{entidad};
 use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();

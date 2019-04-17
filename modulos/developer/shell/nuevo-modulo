@@ -21,7 +21,7 @@ $host = $MyRequest->getRequest("host","nuevo_sitio");
 if(!empty($site))
 {
     $_SERVER["SERVER_NAME"] = $site;
-    $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Core\MYDEBUG);
+    $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Core\Debug);
 }
 headerShell();
 $help = helpShell([
@@ -48,12 +48,12 @@ if(file_exists(PROJECT_DIR."/modulos/".$nombre))
 
 
 $paths = array(PROJECT_DIR."/modulos/".$nombre,
-                PROJECT_DIR."/modulos/".$nombre."/Form",
+                PROJECT_DIR."/modulos/".$nombre."/src/Form",
                 PROJECT_DIR."/modulos/".$nombre."/ajax",
-                PROJECT_DIR."/modulos/".$nombre."/vendor",
-                PROJECT_DIR."/modulos/".$nombre."/vendor/model",
-                PROJECT_DIR."/modulos/".$nombre."/vendor/entity",
-                PROJECT_DIR."/modulos/".$nombre."/vendor/schema",
+                PROJECT_DIR."/modulos/".$nombre."/src",
+                PROJECT_DIR."/modulos/".$nombre."/src/model",
+                PROJECT_DIR."/modulos/".$nombre."/src/entity",
+                PROJECT_DIR."/modulos/".$nombre."/src/schema",
                 PROJECT_DIR."/modulos/".$nombre."/configure/",
                 PROJECT_DIR."/modulos/".$nombre."/controller/",
                 PROJECT_DIR."/modulos/".$nombre."/diseno/",
@@ -66,7 +66,6 @@ $paths = array(PROJECT_DIR."/modulos/".$nombre,
                 PROJECT_DIR."/modulos/".$nombre."/menu/",
                 PROJECT_DIR."/modulos/".$nombre."/shell/",
                 PROJECT_DIR."/modulos/".$nombre."/sql/",
-                PROJECT_DIR."/modulos/".$nombre."/env/",
                 PROJECT_DIR."/public/ajax/".$nombre,
     );
 
@@ -136,59 +135,3 @@ if(mkdir(PROJECT_DIR."/modulos/$nombre/templates/email",0777))
 else{
     echo "\t".shellFontColor("[error] No se creo el directorio ".PROJECT_DIR."/modulos/$nombre/templates/email","rojo")."\n";
 }
-
-
-
-$nuevo_sitio = array($host => $nombre);
-$db = array(
-                "conexion_bd" => array(
-                "usuario" => "",
-                "password" => "",
-                "basedatos" => "",
-                "host" => "",
-                'drive' => 'mysql'
-            ));
-
-
-$modulos_config =  array(
-    'developer',
-);
-
-
-$env = array(
-    PROJECT_DIR."/configure/data.php" => $nuevo_sitio,
-    PROJECT_DIR."/modulos/$nombre/env/databases.php" => $db,
-    PROJECT_DIR."/modulos/$nombre/env/modulos.php" => $modulos_config,
-);
-if($principal)
-{
-
-    echo "[+]Creando nodo de configuracion del sitio\n";
-
-    foreach($env as $k => $v)
-    {
-        $nodos = array();
-        if(file_exists($k))
-        {
-          $nodos = @include($k);
-        }
-
-        $nodos = array_merge($v,$nodos);
-        $_data = var_export($nodos,true);
-        $plantilla = new Plantilla();
-        $plantilla->asigna_variables(array("nodos" => $_data));
-
-        $fopen = fopen($k, 'w');
-        fwrite($fopen, $plantilla->muestra(PROJECT_DIR."/modulos/developer/templates/dev/data.tpl"));
-        fclose($fopen);
-        if($fopen != false)
-        {
-            echo "\t".shellFontColor("[success] Se creo el archivo de configuracion","verde")."\n";
-        }
-        else
-        {
-            echo "\t".shellFontColor("[error] No se puedo crear el archivo de configuracion","rojo")."\n";
-        }
-    }
-}
-?>
