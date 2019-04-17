@@ -143,7 +143,7 @@ if($MySession->LoggedIn())
 }
 
 
-ltrim($_SERVER['REQUEST_URI'],"/");
+$phpfile = ltrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH),"/");
 
 if(!empty($files))
 {
@@ -156,10 +156,10 @@ if(!empty($files))
       }
   }
 
-  if(isset($_files[ltrim($_SERVER['REQUEST_URI'],"/")]) && file_exists($_files[ltrim($_SERVER['REQUEST_URI'],"/")]))
+  if(isset($_files[$phpfile]) && file_exists($_files[$phpfile]))
   {
 
-      require($_files[ltrim($_SERVER['REQUEST_URI'],"/")]);
+      require($_files[$phpfile]);
       die;
   }
 }
