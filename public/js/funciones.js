@@ -117,7 +117,7 @@ $.fn.imgLoadAlive = function()
 
 $.fn.textToIcon = function() {
       $(this).each(function(index,value){
-        console.log($(this).attr('class'));
+        
         var _class = $(this).attr('class');
         if(_class)
         {
@@ -131,14 +131,14 @@ $.fn.textToIcon = function() {
               var telephone = $(this).text();
               $(this).empty().append($('<a>').attr('href',(!isMobile() ? 'javascript:void(0)' : 'tel:'+telephone)).attr('title',telephone).html('<i class="icon icon-telefono"></i>').addClass('jquery-tooltip'));
           }
-          
+
            if(_class.search('url') > -1)
           {
               var url = $(this).text();
               $(this).empty().append($('<a>').attr('href',url).attr('title',url).attr('target','_blank').html('<i class="icon icon-lupa"></i>').addClass('jquery-tooltip'));
           }
-          
-        
+
+
         }
 
       });

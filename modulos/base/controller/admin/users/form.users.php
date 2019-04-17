@@ -17,7 +17,7 @@ if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_OTROS_USUARIOS))
 }
 
 $adminForm = new registroForm("users");
-$adminForm->setAtributo("action","//admin/users/submit.users.php");
+$adminForm->setAtributo("action","/admin/users/submit.users.php");
 
 $title = "Alta";
 
