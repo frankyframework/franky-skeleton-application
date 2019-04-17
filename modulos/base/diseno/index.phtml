@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="<?php echo $lang_root; ?>">
 <head>
-  <?php //if($MyRequest->getPROTOCOLO() == "https" && $Mobile_detect->isMobile() && $Mobile_detect->isAndroidOS()): ?>
+  <?php if($MyRequest->getPROTOCOLO() == "https" && $Mobile_detect->isMobile() && $Mobile_detect->isAndroidOS()): ?>
   <link rel="manifest" href="//manifest.json">
-  <?php //endif; ?>
+  <?php endif; ?>
    <?php  include(getVista("widget.headers.phtml")); ?>
 </head>
 <body class="<?php echo $MyRequest->getClassBody($lang_root); ?>" <?php echo (!$MyRequest->isAjax() ? 'style="overflow: hidden;"' : ''); ?>>
