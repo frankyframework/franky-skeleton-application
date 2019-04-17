@@ -62,7 +62,7 @@ class contactanosForm extends \Franky\Form\Form
                 'atributos' => array(
                     'class'       => '',
                     'placeholder' => _('Teléfono'),
-                    'maxlength' => 21,
+                    'maxlength' => 10,
                     'type_mobile'  => 'tel',
                  ),
                 'label_atributos' => array(
