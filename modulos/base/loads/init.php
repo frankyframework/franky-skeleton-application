@@ -18,7 +18,7 @@ include_once(PROJECT_DIR."/modulos/base/loads/autoload.php");
 
 $MyConfigure        = new \Franky\Core\configure();
 
-ini_set('display_errors',1 /*getCoreConfig('base/debug/display_errors')*/);
+ini_set('display_errors',0);
 
 
 $MyDebug = new \Franky\Core\MYDEBUG();
