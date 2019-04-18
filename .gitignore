@@ -13,3 +13,4 @@ docker/
 css/
 mjs/
 hash/
+/nbproject/private/
