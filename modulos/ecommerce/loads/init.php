@@ -16,7 +16,7 @@ if (function_exists('bind_textdomain_codeset'))
 
 if(getCoreConfig('ecommerce/conekta/enabled') == 1)
 {
-  require_once( PROJECT_DIR.'/modulos/ecommerce/vendor/SDK/Conekta/lib/Conekta.php' );
+
   \Conekta\Conekta::setApiKey((getCoreConfig('ecommerce/conekta/sandbox') == 1 ? getCoreConfig('ecommerce/conekta/keysandbox') :  getCoreConfig('ecommerce/conekta/key')));
   \Conekta\Conekta::setApiVersion("2.0.0");
   include 'conekta.php';
@@ -27,7 +27,6 @@ if(getCoreConfig('ecommerce/conekta/enabled') == 1)
 }
 else if(getCoreConfig('ecommerce/openpay/enabled') == 1)
 {
-  require_once( PROJECT_DIR.'/modulos/ecommerce/vendor/SDK/openpay/Openpay.php' );
   Openpay::setId((getCoreConfig('ecommerce/openpay/sandbox') == 1 ? getCoreConfig('ecommerce/openpay/idsandbox') :  getCoreConfig('ecommerce/openpay/id')));
   Openpay::setApiKey((getCoreConfig('ecommerce/openpay/sandbox') == 1 ? getCoreConfig('ecommerce/openpay/secretsandbox') :  getCoreConfig('ecommerce/openpay/secret')));
   Openpay::setProductionMode((getCoreConfig('ecommerce/openpay/sandbox') == 1 ? false : true));

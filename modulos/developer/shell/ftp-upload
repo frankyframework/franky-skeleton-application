@@ -60,20 +60,12 @@ $fullmkdir = array(
     "/php-gettext",
     "/public/jquery-ui",
     "/public/plugins",
-    "/public/js/html5shiv",
+    "/public/js/",
     "/public/skin/default",
     );
 
 $archivos = array(
                 "/configure/palabras_prohividas.txt",
-                "/public/js/analytics.js",
-                "/public/js/charts_loader.js",
-                "/public/js/funciones.js",
-                "/public/js/validaciones.js",
-                "/public/js/viewport.js",
-                "/public/js/menuSlide.js",
-                "/public/js/google_maps.js",
-                "/public/js/geolocalizacion.js",
                 "/public/jquery/jquery-2.2.2.min.js",
                 "/.htaccess",
                 "/index.php",
