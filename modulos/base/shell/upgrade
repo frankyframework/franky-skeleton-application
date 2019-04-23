@@ -1,0 +1,121 @@
+<?php
+use Franky\Filesystem\File;
+ini_set('memory_limit', '-1');
+
+
+
+$path =$MyConfigure->getServerUploadDir()."/upgrade/";
+
+$File = new File;
+
+$files = $File->mkdir($path);
+
+echo shellFontColor("Descargando actualizaciones...","verde")."\n";
+
+$url = "https://codeload.github.com/frankyframework/franky-skeleton-application/zip/master";
+$destination = $path.'/master.zip';
+$fp = fopen ($destination, 'w+');
+$ch = curl_init();
+curl_setopt( $ch, CURLOPT_URL, $url );
+curl_setopt( $ch, CURLOPT_BINARYTRANSFER, true );
+curl_setopt( $ch, CURLOPT_RETURNTRANSFER, false );
+curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );
+curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 10 );
+curl_setopt( $ch, CURLOPT_FILE, $fp );
+curl_exec( $ch );
+curl_close( $ch );
+fclose( $fp );
+
+$zip = new ZipArchive;
+if ($zip->open($destination) === TRUE) {
+    $zip->extractTo($path);
+    $zip->close();
+
+
+
+    $modulos = getModulos("DESC");
+
+    $fullmkdir = array(
+        "/bin",
+    );
+    foreach($modulos as $modulo)
+    {
+      $fullmkdir[] = '/modulos/'.$modulo;
+      $fullmkdir[] = '/public/skin/'.$modulo;
+      $fullmkdir[] = '/public/ajax/'.$modulo;
+    }
+
+    $path =  $path.'franky-skeleton-application-master';
+
+    foreach($fullmkdir as $file)
+    {
+
+
+
+          $files = $File->getAllFiles($path.$file);
+
+
+
+        foreach($files['dir'] as $_file)
+        {
+
+            if(file_exists($_file) && !file_exists(str_replace($path,PROJECT_DIR,$_file)))
+            {
+                $File->mkdir(str_replace($path,PROJECT_DIR,$_file));
+                echo shellFontColor(str_replace($path,PROJECT_DIR,$_file),"verde")."\n";
+            }
+        }
+
+
+        foreach($files['file'] as $_file)
+        {
+            if(!file_exists(str_replace($path,PROJECT_DIR,$_file)) || md5_file($_file) !== md5_file(str_replace($path,PROJECT_DIR,$_file)))
+            {
+                rename($_file,str_replace($path,PROJECT_DIR,$_file));
+              echo shellFontColor(str_replace($path,PROJECT_DIR,$_file),"verde")."\n";
+            }
+        }
+
+      }
+
+      $archivos = array(
+                      $path."/public/js/analytics.js",
+                      $path."/public/js/funciones.js",
+                      $path."/public/js/validaciones.js",
+                      $path."/public/js/viewport.js",
+                      $path."/public/js/menuSlide.js",
+                      $path."/public/js/google_maps.js",
+                      $path."/public/js/geolocalizacion.js",
+                      $path."/public/js/direccionMap.js",
+                      $path."/public/js/NumeroALetras.js",
+                      $path."/public/js/skrollr.js",
+                      $path."/index.php",
+                      $path."/public/ajax/ajax.js",
+                      $path."/public/ajax/ajax.php",);
+
+    foreach($archivos as $_file)
+    {
+        if(!file_exists(str_replace($path,PROJECT_DIR,$_file)) || md5_file($_file) !== md5_file(str_replace($path,PROJECT_DIR,$_file)))
+        {
+            rename($_file,str_replace($path,PROJECT_DIR,$_file));
+            echo shellFontColor(str_replace($path,PROJECT_DIR,$_file),"verde")."\n";
+
+        }
+    }
+
+}
+
+unlink($destination);
+$files = $File->getAllFiles($path);
+if(!empty($files))
+{
+
+    foreach ($files['file'] as $file) {
+      unlink($file);
+    }
+    foreach ($files['dir'] as $dir) {
+      rmdir($dir);
+    }
+}
+rmdir($path);
+?>

@@ -2,10 +2,10 @@
 namespace Sociallogin\model;
 
 class configureGoogle extends \Franky\Core\configure
-{	
-    
+{
+
     private $config;
-    function __construct() 
+    function __construct()
     {
         parent::__construct();
         if(file_exists(PROJECT_DIR."/modulos/".$this->modulo."/env/googlep.php"))
@@ -13,8 +13,8 @@ class configureGoogle extends \Franky\Core\configure
             $this->config = include(PROJECT_DIR."/modulos/".$this->modulo."/env/googlep.php");
         }
     }
-    
-    
+
+
     public function getConsumeKey()
     {
         return $this->config["key"];
@@ -29,6 +29,6 @@ class configureGoogle extends \Franky\Core\configure
         global $MyRequest;
         return $this->config["develop"];
     }
-   
+
 }
 ?>

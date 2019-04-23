@@ -1,7 +1,6 @@
 <?php
 namespace Sociallogin\model;
 
-require_once( PROJECT_DIR.'/modulos/sociallogin/vendor/sdk/Facebook/autoload.php' );
 
 class facebookx {
 
@@ -24,7 +23,7 @@ class facebookx {
       {
         $this->permissions = $data;
       }
-         
+
     }
 
     public function pasarela()
