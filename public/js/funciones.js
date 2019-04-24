@@ -117,7 +117,7 @@ $.fn.imgLoadAlive = function()
 
 $.fn.textToIcon = function() {
       $(this).each(function(index,value){
-        
+
         var _class = $(this).attr('class');
         if(_class)
         {
@@ -455,14 +455,35 @@ $(window).load(function() {
         });},300);
     }
 
-  //  setTimeout($.fn.textGridfill(),500);
+
   $('.contenedor_columnas div').textToIcon();
+
+  $('.ancla').click(function(event)
+    {
+      var ancla = $(this).attr('data-ancla');
+
+      if($('#'+ancla).length > 0)
+      {
+        event.preventDefault();
+        $('html, body').animate({scrollTop:$('#'+ancla).offset().top}, 500,function(){
+
+        });
+      }
+    });
+
+    $('.ancla').each(function(index,val){
+
+       var pathname = window.location.pathname;
+
+       if($(this).attr('href') == pathname)
+       {
+         $(this).trigger('click');
+       }
+
+    });
 
 });
 
-$(window).resize(function(){
-  //  $.fn.textGridfill();
-})
 
 
 if (window.location.protocol == "https:") {
