@@ -86,7 +86,7 @@
                    
                        items.push(  
                         {  
-                        src: '<?php echo $MyRequest->getPROTOCOLO().$MyRequest->getSERVER().$MyConfigure->getUploadDir()."/galeria/".$v["id_album"]."/".$v["foto"]; ?>',
+                        src: '<?php echo $MyRequest->getPROTOCOLO().$MyRequest->getSERVER().($_SERVER['SERVER_PORT'] != 80 ? ':'.$_SERVER['SERVER_PORT'] : '').$MyConfigure->getUploadDir()."/galeria/".$v["id_album"]."/".$v["foto"]; ?>',
                         w: "<?php echo $ancho; ?>",
                         h: "<?php echo $alto; ?>",
                         title: JSON.stringify("<?php echo utf8_decode($v["descripcion"]); ?>"),

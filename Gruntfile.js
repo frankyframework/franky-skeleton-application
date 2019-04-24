@@ -10,7 +10,7 @@ module.exports = function(grunt) {
           optimization: 2
         },
         files: { // destination file and source file
-          "public/skin/default/css/style.css": "public/skin/default/less/style.less", "public/skin/default/css/grid.css": "public/skin/default/less/grid.less", "public/skin/default/css/panel.css": "public/skin/default/less/panel.less", "public/skin/ecommerce/css/cart.css": "public/skin/ecommerce/less/cart.less","public/skin/default/css/style_base.css": "public/skin/default/less/style_base.less",
+          "public/skin/default/css/style.css": "public/skin/default/less/style.less", "public/skin/default/css/grid.css": "public/skin/default/less/grid.less", "public/skin/default/css/panel.css": "public/skin/default/less/panel.less", "public/skin/ecommerce/css/cart.css": "public/skin/ecommerce/less/cart.less",
         }
       }
     },

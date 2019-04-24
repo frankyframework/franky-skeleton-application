@@ -97,6 +97,7 @@ function EliminarRegistorPanelRemove(response,id,status)
     else
     {
         $("#content_row_"+id).remove()
+        $("#cat_"+id).remove();
     }
     $("#"+id).trigger("eliminar-registro")
 
