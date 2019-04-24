@@ -37,11 +37,14 @@ if ($zip->open($destination) === TRUE) {
 
     $fullmkdir = array(
         "/bin",
+        "/public/skin/default/css",
+        "/public/skin/default/images",
     );
     foreach($modulos as $modulo)
     {
       $fullmkdir[] = '/modulos/'.$modulo;
-      $fullmkdir[] = '/public/skin/'.$modulo;
+      $fullmkdir[] = '/public/skin/'.$modulo.'/css';
+      $fullmkdir[] = '/public/skin/'.$modulo.'/images';
       $fullmkdir[] = '/public/ajax/'.$modulo;
     }
 
@@ -113,6 +116,7 @@ if(!empty($files))
     foreach ($files['file'] as $file) {
       unlink($file);
     }
+    krsort($files['dir']);
     foreach ($files['dir'] as $dir) {
       rmdir($dir);
     }
