@@ -2,7 +2,7 @@
 use Franky\Filesystem\File;
 ini_set('memory_limit', '-1');
 
-
+$archivos_actualizados = 0;
 
 $path =$MyConfigure->getServerUploadDir()."/upgrade/";
 
@@ -37,11 +37,14 @@ if ($zip->open($destination) === TRUE) {
 
     $fullmkdir = array(
         "/bin",
+        "/public/skin/default/css",
+        "/public/skin/default/images",
     );
     foreach($modulos as $modulo)
     {
       $fullmkdir[] = '/modulos/'.$modulo;
-      $fullmkdir[] = '/public/skin/'.$modulo;
+      $fullmkdir[] = '/public/skin/'.$modulo.'/css';
+      $fullmkdir[] = '/public/skin/'.$modulo.'/images';
       $fullmkdir[] = '/public/ajax/'.$modulo;
     }
 
@@ -62,7 +65,8 @@ if ($zip->open($destination) === TRUE) {
             if(file_exists($_file) && !file_exists(str_replace($path,PROJECT_DIR,$_file)))
             {
                 $File->mkdir(str_replace($path,PROJECT_DIR,$_file));
-                echo shellFontColor(str_replace($path,PROJECT_DIR,$_file),"verde")."\n";
+                echo shellFontColor("[mkdir] ".str_replace($path,PROJECT_DIR,$_file),"verde")."\n";
+
             }
         }
 
@@ -72,7 +76,8 @@ if ($zip->open($destination) === TRUE) {
             if(!file_exists(str_replace($path,PROJECT_DIR,$_file)) || md5_file($_file) !== md5_file(str_replace($path,PROJECT_DIR,$_file)))
             {
                 rename($_file,str_replace($path,PROJECT_DIR,$_file));
-              echo shellFontColor(str_replace($path,PROJECT_DIR,$_file),"verde")."\n";
+                echo shellFontColor("[descargado] ".str_replace($path,PROJECT_DIR,$_file),"verde")."\n";
+                $archivos_actualizados++:
             }
         }
 
@@ -113,9 +118,11 @@ if(!empty($files))
     foreach ($files['file'] as $file) {
       unlink($file);
     }
+    krsort($files['dir']);
     foreach ($files['dir'] as $dir) {
       rmdir($dir);
     }
 }
 rmdir($path);
+echo shellFontColor("Se descargaron $archivos_actualizados archivos","verde")."\n";
 ?>

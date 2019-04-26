@@ -40,7 +40,7 @@ $idioma_base = getCoreConfig('base/theme/baselang');
 define('DEFAULT_LOCALE',$idioma_base);
 
 $idiomas = getCoreConfig('base/theme/langs');
-
+$seccion = $MyRequest->getRequest('my_url_friendly');
 $locale = DEFAULT_LOCALE;
 $_SESSION['lang'] = DEFAULT_LOCALE;
 if($MyRequest->getRequest("lang") != "" && in_array($MyRequest->getRequest("lang"),$idiomas))
@@ -54,6 +54,7 @@ else
     $idioma_encontrado = false;
     foreach ($catalogo_idiomas as $idioma => $path_idioma)
     {
+
         $is_idioma = substr($seccion, 0,strlen($path_idioma)+1);
         if(!empty($path_idioma) && $is_idioma == $path_idioma."/" && in_array($idioma,$idiomas))
         {
@@ -166,7 +167,7 @@ if(!empty($files))
 
 
 
-$seccion = $MyRequest->getRequest('my_url_friendly');
+
 
 if(!$MyFrankyMonster->crearMonstruo(($seccion)) || $seccion == ERR_404)
 {
@@ -218,6 +219,7 @@ foreach ($catalogo_idiomas as $idioma => $path_idioma)
       $MyMetatag->setHreflang($_lang,$callbacks_idioma[$idioma]);
 
 }
+
 
 if(!empty($modulos))
 {
@@ -277,6 +279,7 @@ if(!empty($modulos))
         $MyMenuFront->setArraySeccion(PROJECT_DIR."/modulos/".$modulo."/menu/front.php","modulo_".$modulo);
     }
 }
+
 
 
 ?>
