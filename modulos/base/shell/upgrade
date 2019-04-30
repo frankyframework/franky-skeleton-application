@@ -77,7 +77,7 @@ if ($zip->open($destination) === TRUE) {
             {
                 rename($_file,str_replace($path,PROJECT_DIR,$_file));
                 echo shellFontColor("[descargado] ".str_replace($path,PROJECT_DIR,$_file),"verde")."\n";
-                $archivos_actualizados++:
+                $archivos_actualizados++;
             }
         }
 
