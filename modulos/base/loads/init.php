@@ -138,6 +138,7 @@ include_once(PROJECT_DIR."/modulos/base/loads/core_config.php");
 
 
 $ObserverManager->addObserver('login_user','validLoginUserDevice');
+$ObserverManager->addObserver('register_new_user','validLoginUserDevice');
 if($MySession->LoggedIn())
 {
     validUserDevice();
