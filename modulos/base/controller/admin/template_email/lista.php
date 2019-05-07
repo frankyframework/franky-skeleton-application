@@ -58,7 +58,7 @@ $css_columnas_grid = array("fecha" => "w-xxxx-2" , "templates_email.nombre" => "
 
 $permisos_grid = ADMINISTRAR_EMAIL_TEMPLATE;
 $MyFiltrosForm = new filtrosForm('paginar');
-
+$MyFiltrosForm->setMobile($Mobile_detect->isMobile());
 $MyFiltrosForm->addBusca();
 $MyFiltrosForm->addSubmit();
 

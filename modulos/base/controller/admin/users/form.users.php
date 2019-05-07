@@ -17,6 +17,7 @@ if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_OTROS_USUARIOS))
 }
 
 $adminForm = new registroForm("users");
+$adminForm->setMobile($Mobile_detect->isMobile());
 $adminForm->setAtributo("action","/admin/users/submit.users.php");
 
 $title = "Alta";

@@ -54,7 +54,7 @@ $css_columnas_grid = array("id" => "w-xxxx-1" ,"fecha" => "w-xxxx-2" , "titulo" 
 
 $permisos_grid = ADMINISTRAR_CMS_TEMPLATE;
 $MyFiltrosForm = new filtrosForm('paginar');
-
+$MyFiltrosForm->setMobile($Mobile_detect->isMobile());
 $MyFiltrosForm->addBusca();
 $MyFiltrosForm->addSubmit();
 

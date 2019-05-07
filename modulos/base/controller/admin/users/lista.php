@@ -65,6 +65,7 @@ if($MyUser->getTotal() > 0)
 
 
 $MyFiltrosForm = new filtrosForm('paginar');
+$MyFiltrosForm->setMobile($Mobile_detect->isMobile());
 $MyFiltrosForm->addFecha('rango_inicial');
 $MyFiltrosForm->addFecha('rango_final');
 $MyFiltrosForm->addBusca();

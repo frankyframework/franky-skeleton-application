@@ -1,14 +1,14 @@
 version: '2'
 services:
   web:
-    image: server-web
+    image: web-server-7
     ports:
         - 8080:80
     volumes:
         - ./:/var/www/html/
         - ./docker/log/apache:/var/log/apache
-        - ./docker/log/php:/var/log/php-fpm
+        - ./docker/log/php:/var/log/php
         - ./docker/vhost/:/etc/apache2/sites-enabled/
         - ./docker/key-ssl/:/home/ussiel/.ssl/
-    container_name: franky-skeleton-web
+    container_name: cs-franky
 
