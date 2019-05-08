@@ -57,7 +57,7 @@ $value_columnas_grid = array("nombre" ,"calle");
 $permisos_grid = ADMINISTRAR_DIRECCIONES_ECOMMERCE;
 
 $MyFiltrosForm = new filtrosForm('paginar');
-
+$MyFiltrosForm->setMobile($Mobile_detect->isMobile());
 $MyFiltrosForm->addBusca();
 $MyFiltrosForm->addSubmit();
 

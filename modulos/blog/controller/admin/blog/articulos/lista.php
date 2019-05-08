@@ -85,7 +85,7 @@ $titulo_columnas_grid = array("fecha" => "Fecha","titulo" => "Titulo", "categori
 $value_columnas_grid = array("fecha","titulo" , "categoria_nombre" ,"usuario" );
 $permisos_grid = ADMINISTRAR_ARTICULOS_BLOG;
 $MyFiltrosForm = new filtrosForm('paginar');
-
+$MyFiltrosForm->setMobile($Mobile_detect->isMobile());
 $MyFiltrosForm->addBusca();
 $MyFiltrosForm->addSubmit();
 

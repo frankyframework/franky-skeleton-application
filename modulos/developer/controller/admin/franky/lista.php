@@ -48,7 +48,7 @@ $value_columnas_grid = array("nombre","url" , "constante", "php");
 $css_columnas_grid = array("nombre" =>"w-xxxx-2","url"  =>"w-xxxx-2", "constante" =>"w-xxxx-3", "php" =>"w-xxxx-3");
 $permisos_grid = ADMINISTRAR_FRANKY;
 $MyFiltrosForm = new filtrosForm('paginar');
-
+$MyFiltrosForm->setMobile($Mobile_detect->isMobile());
 $MyFiltrosForm->addBusca();
 $MyFiltrosForm->addSubmit();
 

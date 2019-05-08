@@ -46,7 +46,7 @@ if($MyComentariosBlog->getTotal() > 0)
 
 
 $MyFiltrosForm = new filtrosForm('paginar');
-
+$MyFiltrosForm->setMobile($Mobile_detect->isMobile());
 $MyFiltrosForm->addBusca();
 $MyFiltrosForm->addSubmit();
 

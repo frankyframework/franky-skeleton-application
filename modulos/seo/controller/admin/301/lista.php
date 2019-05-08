@@ -61,7 +61,7 @@ $css_columnas_grid = array("fecha" => "w-xxxx-2" ,"url" => "w-xxxx-4", "redirecc
 
 $permisos_grid = ADMINISTRAR_REDIRECCIONES_301;
 $MyFiltrosForm = new filtrosForm('paginar');
-
+$MyFiltrosForm->setMobile($Mobile_detect->isMobile());
 $MyFiltrosForm->addBusca();
 $MyFiltrosForm->addSubmit();
 
