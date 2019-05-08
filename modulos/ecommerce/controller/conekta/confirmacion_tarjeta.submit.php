@@ -157,6 +157,11 @@ if(!$error)
         $MyRequest->redirect($MyRequest->getReferer());
 
     }
+    catch (\Conekta\ParameterValidationError $e) {
+        $MyFlashMessage->setMsg("error",$e->getMessage());
+        $MyRequest->redirect($MyRequest->getReferer());
+
+    }
 
     $referencia = json_encode(['id' => $order->id]);
     $status_pago = normalizeStatusTransaccion($order->payment_status);

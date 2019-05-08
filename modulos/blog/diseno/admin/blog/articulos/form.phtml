@@ -146,7 +146,7 @@ $(document).ready(function(){
         $('#keywords').tagsInput({width:'auto'});
         $('a.guardar_borrador').click(function(e){
             e.preventDefault();
-            $('form[name=frmarticulosblog]').attr('action','//admin/blog/articulos/submit.borrador.php').submit();
+            $('form[name=frmarticulosblog]').attr('action','/admin/blog/articulos/submit.borrador.php').submit();
         });
 
         $('a.descartar_borrador').click(function(e){
