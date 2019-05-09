@@ -195,7 +195,7 @@ var direccionGoogleMaps = function (){
             var latlng = {lat: parseFloat(position.coords.latitude), lng: parseFloat(position.coords.longitude)};
                 geocoder.geocode({'location': latlng}, function(results, status) {
                     self.renderMap(results[0]);
-                    $("input[name="+self.inputAddress+""+self.comodinstring+"]").val(results[0].formatted_address);
+                    $("input[name="+self.inputAddress+"]").val(results[0].formatted_address);
                     console.log(results);
                 });
 
