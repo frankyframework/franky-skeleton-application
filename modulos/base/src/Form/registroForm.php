@@ -114,7 +114,7 @@ class registroForm extends \Franky\Form\Form
                 'type'  => 'date',
                 'required'  => false,
                 'atributos' => array(
-
+                    'type_mobile' => 'date'
 
                  ),
                 'label_atributos' => array(
