@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="<?php echo $lang_root; ?>">
 <head>
-    <?php if($MyRequest->getPROTOCOLO() == "https" && $Mobile_detect->isMobile() && $Mobile_detect->isAndroidOS()): ?>
+<?php if($MyRequest->getPROTOCOLO() == "https://" && $Mobile_detect->isMobile()): ?>
         <link rel="manifest" href="/manifest.json">
-    <?php endif; ?>
-    <?php if($MyRequest->getPROTOCOLO() == "https" && $Mobile_detect->isMobile() && $Mobile_detect->isiOS() && getCoreConfig('base/pwa/icon') != ""): ?>
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="apple-mobile-web-app-title" content="<?=getCoreConfig('base/pwa/name')?>">
-        <link rel="apple-touch-icon" href="<?=imageResize($getCoreConfig('base/pwa/icon') ,152,152,true)?>">
+        <?php if($Mobile_detect->isiOS() && getCoreConfig('base/pwa/icon') != ""): ?>
+            <meta name="apple-mobile-web-app-capable" content="yes">
+            <meta name="apple-mobile-web-app-status-bar-style" content="black">
+            <meta name="apple-mobile-web-app-title" content="<?=getCoreConfig('base/pwa/name')?>">
+            <link rel="apple-touch-icon" href="<?=imageResize(getCoreConfig('base/pwa/icon') ,152,152,true)?>">
+        <?php endif; ?>
     <?php endif; ?>
    <?php  include(getVista("widget.headers.phtml")); ?>
 </head>
