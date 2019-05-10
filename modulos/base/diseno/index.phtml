@@ -4,14 +4,14 @@
     <?php if($MyRequest->getPROTOCOLO() == "https://" && $Mobile_detect->isMobile()): ?>
         <link rel="manifest" href="/manifest.json">
         <meta name="theme-color" content="<?=getCoreConfig('base/pwa/theme-color')?>">
-        <?php if($Mobile_detect->isiOS() && getCoreConfig('base/pwa/icon') != ""): ?>
+        <?php if($Mobile_detect->isiOS() && getCoreConfig('base/pwa/iconios') != ""): ?>
             <meta name="apple-mobile-web-app-capable" content="yes">
             <meta name="apple-mobile-web-app-status-bar-style" content="black">
             <meta name="apple-mobile-web-app-title" content="<?=getCoreConfig('base/pwa/name')?>">
-            <link rel="apple-touch-icon" href="<?=imageResize(getCoreConfig('base/pwa/icon') ,192,192,true)?>">
-            <link rel="apple-touch-icon" sizes="76x76" href="<?=imageResize(getCoreConfig('base/pwa/icon') ,76,76,true)?>">
-            <link rel="apple-touch-icon" sizes="120x120" href="<?=imageResize(getCoreConfig('base/pwa/icon') ,120,120,true)?>">
-            <link rel="apple-touch-icon" sizes="152x152" href="<?=imageResize(getCoreConfig('base/pwa/icon') ,152,152,true)?>">
+            <link rel="apple-touch-icon" href="<?=imageResize(getCoreConfig('base/pwa/iconios') ,192,192,true)?>">
+            <link rel="apple-touch-icon" sizes="76x76" href="<?=imageResize(getCoreConfig('base/pwa/iconios') ,76,76,true)?>">
+            <link rel="apple-touch-icon" sizes="120x120" href="<?=imageResize(getCoreConfig('base/pwa/iconios') ,120,120,true)?>">
+            <link rel="apple-touch-icon" sizes="152x152" href="<?=imageResize(getCoreConfig('base/pwa/iconios') ,152,152,true)?>">
         <?php endif; ?>
     <?php endif; ?>
    <?php  include(getVista("widget.headers.phtml")); ?>

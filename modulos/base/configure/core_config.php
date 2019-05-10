@@ -80,6 +80,12 @@ return array(
                               'validation' => array('required' => false,'image' => true),
                               'value' => ''
                             ),
+                      array('path' => 'base/pwa/iconios',
+                            'type' => 'file',
+                            'label' => 'Icono IOS',
+                            'validation' => array('required' => false,'image' => true),
+                            'value' => ''
+                          ),
                       array(
                           'path' => 'base/pwa/name',
                           'type' => 'text',
