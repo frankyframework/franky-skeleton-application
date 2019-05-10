@@ -86,8 +86,16 @@ return array(
                             'label' => 'Nombre',
                             'validation' => array('required' => false,'maxlength' => 50),
                             'value' => 'Franky'
-                          )
-                    )
+                      ),
+                      array(
+                        'path' => 'base/pwa/theme-color',
+                        'type' => 'text',
+                          'label' => 'Color de  tema',
+                          'validation' => array('required' => false,'maxlength' => 20),
+                          'value' => 'black'
+                        )
+                      )
+                     
 
 
           ),
