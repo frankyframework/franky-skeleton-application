@@ -4,7 +4,7 @@
     <?php if($MyRequest->getPROTOCOLO() == "https://" && $Mobile_detect->isMobile()): ?>
         <link rel="manifest" href="/manifest.json">
         <meta name="theme-color" content="<?=getCoreConfig('base/pwa/theme-color')?>">
-        <?php if($Mobile_detect->isiOS() && getCoreConfig('base/pwa/iconios') != ""): ?>
+        <?php if(getCoreConfig('base/pwa/iconios') != ""): ?>
             <meta name="apple-mobile-web-app-capable" content="yes">
             <meta name="apple-mobile-web-app-status-bar-style" content="black">
             <meta name="apple-mobile-web-app-title" content="<?=getCoreConfig('base/pwa/name')?>">
