@@ -91,9 +91,16 @@ return array(
                         'path' => 'base/pwa/theme-color',
                         'type' => 'text',
                           'label' => 'Color de  tema',
-                          'validation' => array('required' => false,'maxlength' => 20),
-                          'value' => 'black'
-                        )
+                          'validation' => array('required' => false,'maxlength' => 10),
+                          'value' => '#000'
+                      ),
+                      array(
+                        'path' => 'base/pwa/background_color',
+                        'type' => 'text',
+                          'label' => 'Color de  tema',
+                          'validation' => array('required' => false,'maxlength' => 10),
+                          'value' => '#000'
+                      )
                       )
                      
 
