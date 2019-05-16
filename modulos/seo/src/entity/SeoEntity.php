@@ -43,7 +43,7 @@ class SeoEntity
     {
         return array(
             "Titulo" => array("valor" => $this->titulo,"required","length" => array("max" => "70")),
-            "Descripcion" => array("valor" => $this->descripcion,"required", "length" => array("min" => "1","max" => "155")),
+            "Descripcion" => array("valor" => $this->descripcion,"required", "length" => array("min" => "1")),
             "Keywords" => array("valor" => $this->keywords,"length" => array("max" => "500")),
             "Página" => array("valor" => $this->id_franky,"required"),
             "Idioma" => array("valor" => $this->lang,"required")
