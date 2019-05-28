@@ -6,7 +6,7 @@ class CustomersEntity
 {
     private $id;
     private $id_user;
-    private $conekta;
+    private $token;
     private $id_categoria;
 
 
@@ -22,7 +22,7 @@ class CustomersEntity
     {
         $this->id = (isset($data["id"]) ? $data["id"] : null);
         $this->id_user = (isset($data["id_user"]) ? $data["id_user"] : null);
-        $this->conekta = (isset($data["conekta"]) ? $data["conekta"] : null);
+        $this->token = (isset($data["token"]) ? $data["token"] : null);
         $this->id_categoria = (isset($data["id_categoria"]) ? $data["id_categoria"] : null);
 
     }
@@ -43,6 +43,6 @@ class CustomersEntity
 
     public function id_categoria($id_categoria = null){ if($id_categoria != null){ $this->id_categoria=$id_categoria; }else{ return $this->id_categoria; } }
 
-    public function conekta($conekta = null){ if($conekta != null){ $this->conekta=$conekta; }else{ return $this->conekta; } }
+    public function token($token = null){ if($token != null){ $this->token=$token; }else{ return $this->token; } }
 }
 ?>

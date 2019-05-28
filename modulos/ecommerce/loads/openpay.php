@@ -5,6 +5,7 @@ function checkCustomerOpenpay($id)
 
     $CustomerModel = new \Ecommerce\model\CustomersModel();
     $CustomerEntity = new \Ecommerce\entity\CustomersEntity();
+    $CustomerModel->setTable('ecommerce_customers_openpay');
     $CustomerEntity->id_user($id);
 
     if($CustomerModel->getData($CustomerEntity->getArrayCopy()) != REGISTRO_SUCCESS)
@@ -32,7 +33,7 @@ function checkCustomerOpenpay($id)
 
                //print_r($customer);
 
-                $CustomerEntity->conekta($customer->id);
+                $CustomerEntity->token($customer->id);
                 $CustomerEntity->id_categoria(1);
                 $CustomerModel->save($CustomerEntity->getArrayCopy());
 
@@ -55,6 +56,7 @@ function updateCustomerOpenpay($id)
 
     $CustomerModel = new \Ecommerce\model\CustomersModel();
     $CustomerEntity = new \Ecommerce\entity\CustomersEntity();
+    $CustomerModel->setTable('ecommerce_customers_openpay');
     $CustomerEntity->id_user($id);
 
     if($CustomerModel->getData($CustomerEntity->getArrayCopy()) == REGISTRO_SUCCESS)
@@ -71,7 +73,7 @@ function updateCustomerOpenpay($id)
 
               Openpay::setProductionMode((getCoreConfig('ecommerce/openpay/sandbox') == 1 ? false : true));
 
-                $customer = $openpay->customers->get($registro["conekta"]);
+                $customer = $openpay->customers->get($registro["token"]);
                 $customer->name  = $_registro["nombre"];
                 $customer->email = $_registro["email"];
                 $customer->save();
@@ -95,6 +97,7 @@ function deleteCustomerOpenpay($id)
 
     $CustomerModel = new \Ecommerce\model\CustomersModel();
     $CustomerEntity = new \Ecommerce\entity\CustomersEntity();
+    $CustomerModel->setTable('ecommerce_customers_openpay');
     $CustomerEntity->id_user($id);
 
     if($CustomerModel->getData($CustomerEntity->getArrayCopy()) == REGISTRO_SUCCESS)
@@ -107,7 +110,7 @@ function deleteCustomerOpenpay($id)
           Openpay::setProductionMode((getCoreConfig('ecommerce/openpay/sandbox') == 1 ? false : true));
 
 
-            $customer = $openpay->customers->get($registro["conekta"]);
+            $customer = $openpay->customers->get($registro["token"]);
             $customer->delete();
             $CustomerEntity->id($registro["id"]);
             $CustomerModel->delete();
@@ -127,13 +130,14 @@ function getCustomerOpenpay($id)
 {
     $CustomerModel = new \Ecommerce\model\CustomersModel();
     $CustomerEntity = new \Ecommerce\entity\CustomersEntity();
+    $CustomerModel->setTable('ecommerce_customers_openpay');
     $CustomerEntity->id_user($id);
 
     if($CustomerModel->getData($CustomerEntity->getArrayCopy()) == REGISTRO_SUCCESS)
     {
         $registro = $CustomerModel->getRows();
 
-        return $registro["conekta"];
+        return $registro["token"];
     }
     return false;
 }

@@ -7,13 +7,18 @@ class CustomersModel  extends \Franky\Database\Mysql\objectOperations
   public function __construct()
   {
     parent::__construct();
-    $this->from()->addTable('ecommerce_customers');
+    
+  }
+
+  public function setTable($table)
+  {
+    $this->from()->addTable($table);
   }
 
     function getData($customer=array())
     {
         $customer = $this->optimizeEntity($customer);
-        $campos = ["id","id_user","conekta"];
+        $campos = ["id","id_user","token"];
 
         foreach($customer as $k => $v)
         {

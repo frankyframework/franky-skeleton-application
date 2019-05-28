@@ -25,7 +25,7 @@ if(getCoreConfig('ecommerce/conekta/enabled') == 1)
   $ObserverManager->addObserver('login_user_'.NIVEL_USERSUSCRIPTOR,'updateCustomerConekta');
 
 }
-else if(getCoreConfig('ecommerce/openpay/enabled') == 1)
+if(getCoreConfig('ecommerce/openpay/enabled') == 1)
 {
   Openpay::setId((getCoreConfig('ecommerce/openpay/sandbox') == 1 ? getCoreConfig('ecommerce/openpay/idsandbox') :  getCoreConfig('ecommerce/openpay/id')));
   Openpay::setApiKey((getCoreConfig('ecommerce/openpay/sandbox') == 1 ? getCoreConfig('ecommerce/openpay/secretsandbox') :  getCoreConfig('ecommerce/openpay/secret')));
@@ -35,8 +35,6 @@ else if(getCoreConfig('ecommerce/openpay/enabled') == 1)
   $ObserverManager->addObserver('register_new_user','checkCustomerOpenpay');
   $ObserverManager->addObserver('login_user_'.NIVEL_USERSUSCRIPTOR,'checkCustomerOpenpay');
   $ObserverManager->addObserver('login_user_'.NIVEL_USERSUSCRIPTOR,'updateCustomerOpenpay');
-
-
 }
 $ObserverManager->addObserver('login_user_'.NIVEL_USERSUSCRIPTOR,'setCarritoUser');
 $ObserverManager->addObserver('register_new_user','setCarritoUser');

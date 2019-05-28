@@ -63,12 +63,12 @@ if(empty($id_tarjeta))
     {
 
 
-      $source = addCardConekta($MyRequest->getRequest("conekta"),$MySession->GetVar('id'));
+      $source = addCardConekta($MyRequest->getRequest("token"),$MySession->GetVar('id'));
 
 
       $CardsEntity->nombre($data["name"]);
       $CardsEntity->fecha(date('Y-m-d H:i:s'));
-      $CardsEntity->conekta($source['id']);
+      $CardsEntity->token($source['id']);
       $id_tarjeta = $source['id'];
 
       $result = $CardsModel->save($CardsEntity->getArrayCopy());
@@ -90,7 +90,7 @@ if(empty($id_tarjeta))
     }
     else{
       $registro = $CardsModel->getRows();
-       $id_tarjeta = $registro["conekta"];
+       $id_tarjeta = $registro["token"];
     }
   }
 
@@ -102,7 +102,7 @@ else
     $CardsEntity->uid($MySession->GetVar('id'));
     $CardsModel->getData($CardsEntity->getArrayCopy());
     $registro = $CardsModel->getRows();
-    $id_tarjeta = $registro["conekta"];
+    $id_tarjeta = $registro["token"];
 }
 if(!$error)
 {

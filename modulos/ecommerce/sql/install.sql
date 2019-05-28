@@ -37,7 +37,7 @@ insert  into `templates_email`(`nombre`,`status`,`fecha`,`Asunto`,`destinatario`
     `numero` char(4) DEFAULT NULL,
     `nombre` varchar(20) DEFAULT NULL,
     `uid` int(11) DEFAULT NULL,
-    `conekta` varchar(50) DEFAULT NULL,
+    `token` varchar(50) DEFAULT NULL,
     `fecha` datetime DEFAULT NULL,
     `status` int(1) NOT NULL DEFAULT 1,
     PRIMARY KEY (`id`),
@@ -99,7 +99,7 @@ insert  into `templates_email`(`nombre`,`status`,`fecha`,`Asunto`,`destinatario`
   CREATE TABLE `ecommerce_customers` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `id_user` int(11) NOT NULL,
-    `conekta` varchar(50) DEFAULT NULL,
+    `token` varchar(50) DEFAULT NULL,
     `id_categoria` int(11) NOT NULL,
     PRIMARY KEY (`id`),
     KEY `id_user` (`id_user`),
@@ -107,6 +107,19 @@ insert  into `templates_email`(`nombre`,`status`,`fecha`,`Asunto`,`destinatario`
     CONSTRAINT `ecommerce_customers_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT `ecommerce_customers_ibfk_2` FOREIGN KEY (`id_categoria`) REFERENCES `ecommerce_categorias_customers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
   ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
+
+  CREATE TABLE `ecommerce_customers_openpay` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `id_user` int(11) NOT NULL,
+    `token` varchar(50) DEFAULT NULL,
+    `id_categoria` int(11) NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `id_user` (`id_user`),
+    KEY `id_categoria` (`id_categoria`),
+    CONSTRAINT `ecommerce_customers_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT `ecommerce_customers_ibfk_2` FOREIGN KEY (`id_categoria`) REFERENCES `ecommerce_categorias_customers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
+
 
   /*Table structure for table `ecommerce_direcciones` */
 

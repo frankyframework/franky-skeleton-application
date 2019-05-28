@@ -1,6 +1,6 @@
 var conektaSuccessResponseHandler = function(token) {
   var $form = $("#card-form");
-  $form.append($("<input name=\"conekta\" type=\"hidden\">").val(token.id));
+  $form.append($("<input name=\"token\" type=\"hidden\">").val(token.id));
   $form.get(0).submit();
 };
 
@@ -15,7 +15,7 @@ var conektaErrorResponseHandler = function(response) {
 
 var openpaySuccessResponseHandler = function(response) {
    var $form = $("#card-form");
-   $form.append($("<input name=\"conekta\" type=\"hidden\">").val(response.data.id));
+   $form.append($("<input name=\"token\" type=\"hidden\">").val(response.data.id));
    $form.get(0).submit();
  };
 

@@ -8,7 +8,7 @@ class CardsEntity
     private $numero;
     private $nombre;
     private $uid;
-    private $conekta;
+    private $token;
     private $status;
     private $fecha;
 
@@ -27,7 +27,7 @@ class CardsEntity
         $this->numero = (isset($data["numero"]) ? $data["numero"] : null);
         $this->nombre = (isset($data["nombre"]) ? $data["nombre"] : null);
         $this->uid = (isset($data["uid"]) ? $data["uid"] : null);
-        $this->conekta = (isset($data["conekta"]) ? $data["conekta"] : null);
+        $this->token = (isset($data["token"]) ? $data["token"] : null);
         $this->status = (isset($data["status"]) ? $data["status"] : null);
         $this->fecha = (isset($data["fecha"]) ? $data["fecha"] : null);
 
@@ -53,7 +53,7 @@ class CardsEntity
 
     public function uid($uid = null){ if($uid != null){ $this->uid=$uid; }else{ return $this->uid; } }
 
-    public function conekta($conekta = null){ if($conekta != null){ $this->conekta=$conekta; }else{ return $this->conekta; } }
+    public function token($token = null){ if($token != null){ $this->token=$token; }else{ return $this->token; } }
     
     public function status($status = null){ if($status !== null){ $this->status=$status; }else{ return $this->status; } }
       
