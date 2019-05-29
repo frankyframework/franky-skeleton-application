@@ -23,7 +23,6 @@ namespace Ecommerce\entity;
     private $entre_calle1;
     private $entre_calle2;
     private $instrucciones;
-    private $conekta;
 
     public function __construct($data = null)
     {
@@ -53,7 +52,7 @@ namespace Ecommerce\entity;
         $this->entre_calle1     = (isset($data['entre_calle1']))      ? $data['entre_calle1']       : null;
         $this->entre_calle2     = (isset($data['entre_calle2']))      ? $data['entre_calle2']       : null;
         $this->instrucciones    = (isset($data['instrucciones']))      ? $data['instrucciones']       : null;
-        $this->conekta    = (isset($data['conekta']))      ? $data['conekta']       : null;
+
         
     }
     
@@ -171,11 +170,6 @@ namespace Ecommerce\entity;
         return $this->instrucciones;
     }
     
-    public function getConekta()
-    {
-        return $this->conekta;
-    }
-    
     
     public function setId($id)
     {
@@ -269,9 +263,5 @@ namespace Ecommerce\entity;
         $this->instrucciones = $instrucciones;
     }
 
-    public function setConekta($conekta)
-    {
-        $this->conekta = $conekta;
-    }
  }
 

@@ -14,7 +14,7 @@ class direcciones  extends \Franky\Database\Mysql\objectOperations
     function getData($id='',$uid = '',$status='1',$busca ='')
     {
         $campos = array("id","uid","status","fecha","nombre","telefono","telefono_otro","calle","numero","numeroi","cp","estado","ciudad","municipio",
-            "colonia","entre_calle1","entre_calle2","instrucciones","conekta");
+            "colonia","entre_calle1","entre_calle2","instrucciones");
 
         if(!empty($id))
         {
