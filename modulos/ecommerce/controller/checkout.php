@@ -61,7 +61,13 @@ if($total > 0)
     }
     if(getCoreConfig('ecommerce/conekta/enabled') == 1)
     {
-        $cardForm = new conektaForm("card-form");
+        if(in_array('conekta_tarjeta',getCoreConfig('ecommerce/conekta/methods')))
+        {
+            $cardForm = new conektaForm("card-form");
+            $MyMetatag->setCode('<script  src="https://cdn.conekta.io/js/latest/conekta.js"></script>');
+            $MyMetatag->setCode('<script > Conekta.setPublicKey(\''.(getCoreConfig('ecommerce/conekta/sandbox') == 1 ? getCoreConfig('ecommerce/conekta/publicsandbox') : getCoreConfig('ecommerce/conekta/public')).'\'); </script>');
+        }
+        
         $metodos = getCoreConfig('ecommerce/conekta/methods');
         if(!empty($metodos)):
             foreach($metodos as $k)
@@ -71,12 +77,18 @@ if($total > 0)
 
         endif;
 
-        $MyMetatag->setCode('<script  src="https://cdn.conekta.io/js/latest/conekta.js"></script>');
-        $MyMetatag->setCode('<script > Conekta.setPublicKey(\''.(getCoreConfig('ecommerce/conekta/sandbox') == 1 ? getCoreConfig('ecommerce/conekta/publicsandbox') : getCoreConfig('ecommerce/conekta/public')).'\'); </script>');
+        
     }
     if(getCoreConfig('ecommerce/openpay/enabled') == 1)
     {
-        $cardForm = new openpayForm("card-form");
+        if(in_array('openpay_tarjeta',getCoreConfig('ecommerce/openpay/methods')))
+        {
+            $cardForm = new openpayForm("card-form");
+            $MyMetatag->setCode('<script  src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></script>');
+            $MyMetatag->setCode('<script  src="https://openpay.s3.amazonaws.com/openpay-data.v1.min.js"></script>');
+       
+        }
+        
         $metodos = getCoreConfig('ecommerce/openpay/methods');
         if(!empty($metodos)):
             foreach($metodos as $k)
@@ -86,8 +98,6 @@ if($total > 0)
 
         endif;
 
-        $MyMetatag->setCode('<script  src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></script>');
-    	$MyMetatag->setCode('<script  src="https://openpay.s3.amazonaws.com/openpay-data.v1.min.js"></script>');
     }
 }
 else{
