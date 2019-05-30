@@ -25,7 +25,7 @@ class Correo extends \Franky\Core\configure
                   $mail->Username = $config['base/smtp/user'];                 // SMTP username
                   $mail->Password =  $config['base/smtp/password'];                           // SMTP password
                   $mail->SMTPSecure =  $config['base/smtp/secure'];                            // Enable TLS encryption, `ssl` also accepted
-                  $mail->Port = $config['base/smt/port'];                                    // TCP port to connect to
+                  $mail->Port = $config['base/smtp/port'];                                    // TCP port to connect to
 
                   //Recipients
 
