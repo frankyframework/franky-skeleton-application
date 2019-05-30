@@ -65,7 +65,6 @@
 
               var $form = $("form[name=card-form]");
               // Prevents double clic
-              $form.append($("<input name=\"device_session_id\" type=\"hidden\">"));
               var deviceSessionId = OpenPay.deviceData.setup("card-form", "device_session_id");
               $form.find("input[type=submit]").prop("disabled", true);
 

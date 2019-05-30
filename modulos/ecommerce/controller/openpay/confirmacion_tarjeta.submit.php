@@ -20,7 +20,7 @@ $id_tarjeta = $MyRequest->getRequest('id_tarjeta');
 $error = false;
 if($MySession->GetVar('tarjeta_openpay') == "" )
 {
-  $error = true;
+  //$error = true;
 }
 $MySession->UnsetVar('tarjeta_openpay');
 
@@ -58,20 +58,12 @@ if(empty($id_tarjeta))
     if($CardsModel->getData($CardsEntity->getArrayCopy())!= REGISTRO_SUCCESS)
     {
 
-      if(getCoreConfig('ecommerce/conekta/enabled') == 1)
-      {
-        $data = $MyRequest->getRequest("card");
-        $CardsEntity->numero(substr($data["number"],-4));
-        $CardsEntity->nombre($data["name"]);
-        $source = addCardConekta($MyRequest->getRequest("token"),$MySession->GetVar('id'));
-      }
-      elseif(getCoreConfig('ecommerce/openpay/enabled') == 1)
-      {
-        $CardsEntity->numero(substr($MyRequest->getRequest("card_number"),-4));
-        $CardsEntity->nombre($MyRequest->getRequest("holder_name"));
-        $source = addCardOpenpay($MyRequest->getRequest("token"),$MySession->GetVar('id'),$MyRequest->getRequest("device_session_id"));
-      }
-
+    
+      $CardsEntity->numero(substr($MyRequest->getRequest("card_number"),-4));
+      $CardsEntity->nombre($MyRequest->getRequest("holder_name"));
+      $source = addCardOpenpay($MyRequest->getRequest("token"),$MySession->GetVar('id'),$MyRequest->getRequest("device_session_id"));
+    
+     
       $CardsEntity->fecha(date('Y-m-d H:i:s'));
       $CardsEntity->token($source['id']);
       $id_tarjeta = $source['id'];
@@ -134,8 +126,6 @@ if(!$error)
   }
 }
 
-/*Aqui conecta*/
-
 if(!$error)
 {
     try{
@@ -145,8 +135,11 @@ if(!$error)
 
       Openpay::setProductionMode((getCoreConfig('ecommerce/openpay/sandbox') == 1 ? false : true));
 
+  
        $customer = $openpay->customers->get(getCustomerOpenpay($MySession->GetVar('id')));
 
+      
+       
           $order = $customer->charges->create(
             array(
               'method' => 'card',
@@ -158,12 +151,14 @@ if(!$error)
                'device_session_id' => $MyRequest->getRequest("device_session_id"),
             )
           );
-
+      
+          
 
     } catch (\OpenpayApiError $e) {
         $MyFlashMessage->setMsg("error",$e->getMessage());
         $MyRequest->redirect($MyRequest->getReferer());
-
+       
+        
     }
 
 
