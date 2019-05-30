@@ -20,7 +20,7 @@ $id_tarjeta = $MyRequest->getRequest('id_tarjeta');
 $error = false;
 if($MySession->GetVar('tarjeta_openpay') == "" )
 {
-  //$error = true;
+  $error = true;
 }
 $MySession->UnsetVar('tarjeta_openpay');
 
