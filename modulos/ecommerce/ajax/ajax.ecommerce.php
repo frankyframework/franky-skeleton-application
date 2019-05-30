@@ -55,11 +55,17 @@ function EliminarTarjetaEcommerce($id,$status)
             $registro = $CardsModel->getRows();
             if(getCoreConfig('ecommerce/conekta/enabled') == 1)
             {
-                deleteCardConekta($registro['token'],$registro['uid']);
+                if(in_array('conekta_tarjeta',getCoreConfig('ecommerce/conekta/methods')))
+                {
+                    deleteCardConekta($registro['token'],$registro['uid']);
+                }
             }
-            elseif(getCoreConfig('ecommerce/openpay/enabled') == 1)
+            if(getCoreConfig('ecommerce/openpay/enabled') == 1)
             {
-                deleteCardOpenpay($registro['token'],$registro['uid']);
+                if(in_array('openpay_tarjeta',getCoreConfig('ecommerce/openpay/methods')))
+                {
+                    deleteCardOpenpay($registro['token'],$registro['uid']);
+                }
             }
              $respuesta["message"] = "success";
         }
