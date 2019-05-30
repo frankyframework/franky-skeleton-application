@@ -37,14 +37,20 @@ if(!$error)
     $CardsEntity->status(1);
     if(getCoreConfig('ecommerce/conekta/enabled') == 1)
     {
-      $data = $MyRequest->getRequest("card");
-      $CardsEntity->numero(substr($data["number"],-4));
-      $CardsEntity->nombre($data["name"]);
+      if(in_array('conekta_tarjeta',getCoreConfig('ecommerce/conekta/methods')))
+      {
+        $data = $MyRequest->getRequest("card");
+        $CardsEntity->numero(substr($data["number"],-4));
+        $CardsEntity->nombre($data["name"]);
       }
+    }
     if(getCoreConfig('ecommerce/openpay/enabled') == 1)
     {
-      $CardsEntity->numero(substr($MyRequest->getRequest("card_number"),-4));
-      $CardsEntity->nombre($MyRequest->getRequest("holder_name"));
+      if(in_array('openpay_tarjeta',getCoreConfig('ecommerce/openpay/methods')))
+      {
+        $CardsEntity->numero(substr($MyRequest->getRequest("card_number"),-4));
+        $CardsEntity->nombre($MyRequest->getRequest("holder_name"));
+      }
     }
 
 
@@ -52,11 +58,17 @@ if(!$error)
     {
       if(getCoreConfig('ecommerce/conekta/enabled') == 1)
       {
-      	$source = addCardConekta($MyRequest->getRequest("token"),$MySession->GetVar('id'));
+        if(in_array('conekta_tarjeta',getCoreConfig('ecommerce/conekta/methods')))
+        {
+      	  $source = addCardConekta($MyRequest->getRequest("token"),$MySession->GetVar('id'));
+        }
       }
       if(getCoreConfig('ecommerce/openpay/enabled') == 1)
       {
-      	$source = addCardOpenpay($MyRequest->getRequest("token"),$MySession->GetVar('id'),$MyRequest->getRequest("device_session_id"));
+        if(in_array('openpay_tarjeta',getCoreConfig('ecommerce/openpay/methods')))
+        {
+      	  $source = addCardOpenpay($MyRequest->getRequest("token"),$MySession->GetVar('id'),$MyRequest->getRequest("device_session_id"));
+        }
       }
 
 
