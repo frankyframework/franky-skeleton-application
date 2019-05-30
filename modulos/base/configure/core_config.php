@@ -80,14 +80,35 @@ return array(
                               'validation' => array('required' => false,'image' => true),
                               'value' => ''
                             ),
+                      array('path' => 'base/pwa/iconios',
+                            'type' => 'file',
+                            'label' => 'Icono IOS',
+                            'validation' => array('required' => false,'image' => true),
+                            'value' => ''
+                          ),
                       array(
                           'path' => 'base/pwa/name',
                           'type' => 'text',
                             'label' => 'Nombre',
                             'validation' => array('required' => false,'maxlength' => 50),
                             'value' => 'Franky'
-                          )
-                    )
+                      ),
+                      array(
+                        'path' => 'base/pwa/theme-color',
+                        'type' => 'text',
+                          'label' => 'Color de  tema',
+                          'validation' => array('required' => false,'maxlength' => 10),
+                          'value' => '#000'
+                      ),
+                      array(
+                        'path' => 'base/pwa/background_color',
+                        'type' => 'text',
+                          'label' => 'Color de  tema',
+                          'validation' => array('required' => false,'maxlength' => 10),
+                          'value' => '#000'
+                      )
+                      )
+                     
 
 
           ),

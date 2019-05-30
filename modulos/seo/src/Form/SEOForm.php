@@ -61,7 +61,8 @@ class SEOForm extends \Franky\Form\Form
                 'required'  => true,
                 'atributos' => array(
                     'class' => 'required',
-                    'rows'  => 5
+                    'rows'  => 5,
+                    'placeholder' => 'Recuerda que el optimo son 160 caracteres.'
                  ),
                 'label_atributos' => array(
                     'class'       => 'desc_form_obligatorio'

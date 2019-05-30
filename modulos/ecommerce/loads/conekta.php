@@ -5,6 +5,7 @@ function checkCustomerConekta($id)
 
     $CustomerModel = new \Ecommerce\model\CustomersModel();
     $CustomerEntity = new \Ecommerce\entity\CustomersEntity();
+    $CustomerModel->setTable('ecommerce_customers');
     $CustomerEntity->id_user($id);
 
     if($CustomerModel->getData($CustomerEntity->getArrayCopy()) != REGISTRO_SUCCESS)
@@ -25,7 +26,7 @@ function checkCustomerConekta($id)
 
               //  print_r($customer);  exit;
 
-                $CustomerEntity->conekta($customer->id);
+                $CustomerEntity->token($customer->id);
                 $CustomerEntity->id_categoria(1);
                 $CustomerModel->save($CustomerEntity->getArrayCopy());
 
@@ -48,6 +49,7 @@ function updateCustomerConekta($id)
 
     $CustomerModel = new \Ecommerce\model\CustomersModel();
     $CustomerEntity = new \Ecommerce\entity\CustomersEntity();
+    $CustomerModel->setTable('ecommerce_customers');
     $CustomerEntity->id_user($id);
 
     if($CustomerModel->getData($CustomerEntity->getArrayCopy()) == REGISTRO_SUCCESS)
@@ -58,7 +60,7 @@ function updateCustomerConekta($id)
         {
             $_registro = $UserModel->getRows();
             try{
-                $customer = \Conekta\Customer::find($registro["conekta"]);
+                $customer = \Conekta\Customer::find($registro["token"]);
                 $customer->update(
                   array(
                         'name'  => $_registro["nombre"],
@@ -84,13 +86,14 @@ function deleteCustomerConekta($id)
 
     $CustomerModel = new \Ecommerce\model\CustomersModel();
     $CustomerEntity = new \Ecommerce\entity\CustomersEntity();
+    $CustomerModel->setTable('ecommerce_customers');
     $CustomerEntity->id_user($id);
 
     if($CustomerModel->getData($CustomerEntity->getArrayCopy()) == REGISTRO_SUCCESS)
     {
         $registro = $CustomerModel->getRows();
         try{
-            $customer = \Conekta\Customer::find($registro["conekta"]);
+            $customer = \Conekta\Customer::find($registro["token"]);
             $customer->delete();
             $CustomerEntity->id($registro["id"]);
             $CustomerModel->delete();
@@ -110,13 +113,14 @@ function getCustomerConekta($id)
 {
     $CustomerModel = new \Ecommerce\model\CustomersModel();
     $CustomerEntity = new \Ecommerce\entity\CustomersEntity();
+    $CustomerModel->setTable('ecommerce_customers');
     $CustomerEntity->id_user($id);
 
     if($CustomerModel->getData($CustomerEntity->getArrayCopy()) == REGISTRO_SUCCESS)
     {
         $registro = $CustomerModel->getRows();
 
-        return $registro["conekta"];
+        return $registro["token"];
     }
     return false;
 }

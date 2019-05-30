@@ -63,17 +63,17 @@ if(empty($id_tarjeta))
         $data = $MyRequest->getRequest("card");
         $CardsEntity->numero(substr($data["number"],-4));
         $CardsEntity->nombre($data["name"]);
-        $source = addCardConekta($MyRequest->getRequest("conekta"),$MySession->GetVar('id'));
+        $source = addCardConekta($MyRequest->getRequest("token"),$MySession->GetVar('id'));
       }
       elseif(getCoreConfig('ecommerce/openpay/enabled') == 1)
       {
         $CardsEntity->numero(substr($MyRequest->getRequest("card_number"),-4));
         $CardsEntity->nombre($MyRequest->getRequest("holder_name"));
-        $source = addCardOpenpay($MyRequest->getRequest("conekta"),$MySession->GetVar('id'),$MyRequest->getRequest("device_session_id"));
+        $source = addCardOpenpay($MyRequest->getRequest("token"),$MySession->GetVar('id'),$MyRequest->getRequest("device_session_id"));
       }
 
       $CardsEntity->fecha(date('Y-m-d H:i:s'));
-      $CardsEntity->conekta($source['id']);
+      $CardsEntity->token($source['id']);
       $id_tarjeta = $source['id'];
 
       $result = $CardsModel->save($CardsEntity->getArrayCopy());
@@ -95,7 +95,7 @@ if(empty($id_tarjeta))
     }
     else{
       $registro = $CardsModel->getRows();
-       $id_tarjeta = $registro["conekta"];
+       $id_tarjeta = $registro["token"];
     }
   }
 
@@ -107,7 +107,7 @@ else
     $CardsEntity->uid($MySession->GetVar('id'));
     $CardsModel->getData($CardsEntity->getArrayCopy());
     $registro = $CardsModel->getRows();
-    $id_tarjeta = $registro["conekta"];
+    $id_tarjeta = $registro["token"];
 }
 if(!$error)
 {

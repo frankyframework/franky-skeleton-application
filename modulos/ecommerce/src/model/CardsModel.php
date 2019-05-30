@@ -14,7 +14,7 @@ class CardsModel  extends \Franky\Database\Mysql\objectOperations
     function getData($card=array())
     {
         $card = $this->optimizeEntity($card);
-        $campos = ["id","numero","nombre","uid","conekta"];
+        $campos = ["id","numero","nombre","uid","token"];
 
         foreach($card as $k => $v)
         {

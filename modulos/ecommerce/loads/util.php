@@ -152,6 +152,7 @@ function makeHTMLDireccion($type="envio",$uid = "")
     return $direcciones;
 }
 
+/*
 function getCustomer($id)
 {
     $CustomerModel = new \Ecommerce\model\CustomersModel();
@@ -166,7 +167,7 @@ function getCustomer($id)
     }
     return false;
 }
-
+*/
 function getCarrito()
 {
   $productos =  OBJETO_PRODUCTOS;
