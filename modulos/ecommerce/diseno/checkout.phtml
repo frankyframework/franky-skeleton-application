@@ -213,11 +213,11 @@
   });
   </script>
   <?php
-  if(getCoreConfig('ecommerce/conekta/enabled') == 1)
+  if(in_array('conekta_tarjeta',getCoreConfig('ecommerce/conekta/methods')))
   {
     echo render("checkout/validate.conekta.phtml");
   }
-  elseif(getCoreConfig('ecommerce/openpay/enabled') == 1)
+  elseif(in_array('openpay_tarjeta',getCoreConfig('ecommerce/openpay/methods')))
   {
     echo render("checkout/validate.openpay.phtml");
   }
