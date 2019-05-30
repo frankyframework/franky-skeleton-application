@@ -98,6 +98,10 @@ if ($zip->open($destination) === TRUE) {
                       $path."/public/ajax/ajax.js",
                       $path."/public/ajax/ajax.php",);
 
+    foreach($modulos as $modulo)
+    {
+      $archivos[] = '/public/js/'.$modulo.'.js';
+    }
     foreach($archivos as $_file)
     {
         if(!file_exists(str_replace($path,PROJECT_DIR,$_file)) || md5_file($_file) !== md5_file(str_replace($path,PROJECT_DIR,$_file)))
