@@ -18,7 +18,7 @@ if(getCoreConfig('ecommerce/conekta/enabled') == 1)
 
 	}
 }
-elseif(getCoreConfig('ecommerce/openpay/enabled') == 1)
+if(getCoreConfig('ecommerce/openpay/enabled') == 1)
 {
 	if(in_array('openpay_tarjeta',getCoreConfig('ecommerce/openpay/methods')))
 	{
