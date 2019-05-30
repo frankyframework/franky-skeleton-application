@@ -100,7 +100,7 @@ if ($zip->open($destination) === TRUE) {
 
     foreach($modulos as $modulo)
     {
-      $archivos[] = '/public/js/'.$modulo.'.js';
+        $archivos[] = $path.'/public/js/'.$modulo.'.js';
     }
     foreach($archivos as $_file)
     {
