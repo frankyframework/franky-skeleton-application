@@ -211,6 +211,12 @@
           }
       })
   });
+  
+  $(document).ready(function(){
+      $('input[name=id_pago]').each(function(index,val){
+          $(this).next('span').addClass($(this).val());
+      });
+  });
   </script>
   <?php
   if(in_array('conekta_tarjeta',getCoreConfig('ecommerce/conekta/methods')))
