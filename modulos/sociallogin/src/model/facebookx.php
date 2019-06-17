@@ -87,7 +87,7 @@ class facebookx {
                 $me["gender"] = $userNode->getGender();
                 $me["email"] = $userNode->getEmail();
                 $me["avatar"] = "http://graph.facebook.com/".$userNode->getId()."/picture?type=large";
-
+                $me['full'] = $userNode;
                 $_SESSION['my_social_data']["provider"] = "facebook";
                 $_SESSION['my_social_data']["facebook"] = $me;
 
