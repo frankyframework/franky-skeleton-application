@@ -52,8 +52,7 @@ if($MySocialLogin->authSocial($_SESSION['my_social_data'][$_SESSION['my_social_d
     }
 
 
-    $tw = $MySocialLogin->m_social_data;
-
+    
 
     $MyUserSocial->updateSocial($MySocialLogin->id,
             $_SESSION['my_social_data'][$_SESSION['my_social_data']["provider"]]["id"],
@@ -83,7 +82,7 @@ else
         {
             if(empty($email))
             {
-                $email = $nickname."@".($_SESSION['my_social_data']["provider"] == "twitter" ? "twitter-user" : "facebook").".com";
+                $email = $nickname."@facebook.com";
             }
         }
 
@@ -101,14 +100,17 @@ else
             {
                 $nickname = $nickname.$i++;
             }
-
+            if($_SESSION['my_social_data'][$_SESSION['my_social_data']["provider"]]["birthday"] != '--')
+            {
+                $MyUserEntity->setFecha_nacimiento($_SESSION['my_social_data'][$_SESSION['my_social_data']["provider"]]["birthday"]);
+            }
 
             $MyUserEntity->setUsuario($nickname);
             $MyUserEntity->setEmail($email);
             $MyUserEntity->setNombre($_SESSION['my_social_data'][$_SESSION['my_social_data']["provider"]]["name"]);
             $MyUserEntity->setNivel(NIVEL_USERSUSCRIPTOR);
             $MyUserEntity->setSexo($_SESSION['my_social_data'][$_SESSION['my_social_data']["provider"]]["gender"]);
-            $MyUserEntity->setFecha_nacimiento($_SESSION['my_social_data'][$_SESSION['my_social_data']["provider"]]["birthday"]);
+            
             $MyUserEntity->setStatus(1);
             $MyUserEntity->setFecha(date('Y-m-d H:i:s'));
             $MyUserEntity->setVerificado(1);
@@ -140,8 +142,7 @@ else
                 $MySession->SetVar('social',     $MySocialLogin->m_social_data);
 
 
-                $tw = $MySocialLogin->m_social_data;
-
+               
                 $AvataresEntity = new AvataresEntity;
                 $AvataresModel = new AvataresModel();
                 $AvataresEntity->id_user($ult_id);
