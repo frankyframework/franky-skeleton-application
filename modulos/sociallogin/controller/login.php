@@ -57,7 +57,7 @@ if($MySocialLogin->authSocial($_SESSION['my_social_data'][$_SESSION['my_social_d
     $MyUserSocial->updateSocial($MySocialLogin->id,
             $_SESSION['my_social_data'][$_SESSION['my_social_data']["provider"]]["id"],
             $_SESSION['my_social_data']["provider"],
-            json_encode($_SESSION['my_social_data'][$_SESSION['my_social_data']["provider"]]));
+            addslashes(json_encode($_SESSION['my_social_data'][$_SESSION['my_social_data']["provider"]])));
 
 }
 else

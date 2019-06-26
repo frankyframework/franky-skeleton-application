@@ -73,8 +73,6 @@ class facebookx {
                 $response = $fb->get('/me?fields=name,email,first_name,link,birthday,gender,hometown,location');
                 $userNode = $response->getGraphUser();
 
-                
-
 
                 $me["id"]   = $userNode->getId();
                 $me["name"] = $userNode->getName();
@@ -98,6 +96,20 @@ class facebookx {
                     do {
                         foreach ($edge as $post) {
                             $me['pages'][$post->getField('id')] = $post->getField('name');
+                        }
+                    } while ($edge = $fb->next($edge));
+                  
+                endif;
+
+
+                if(in_array('publish_pages',$this->permissions) || in_array('manage_pages',$this->permissions) ):
+                    $response = $fb->get('/me/accounts');
+        
+                    $edge = $response->getGraphEdge();
+               
+                    do {
+                        foreach ($edge as $post) {
+                            $me['pages'][$post->getField('id')] = ['name' => $post->getField('name'),'access_token' =>$post->getField('access_token')];
                         }
                     } while ($edge = $fb->next($edge));
                   
@@ -129,10 +141,10 @@ class facebookx {
 
     }
 
-    public function post($link,$message)
+    public function post($link,$data,$accessToken=null)
     {
 
-        global $MySession;
+  
 
         $fb = new \Facebook\Facebook([
            'app_id' => $this->fb_api_key,
@@ -140,24 +152,53 @@ class facebookx {
            'default_graph_version' => $this->version,
          ]);
 
-        $social = $MySession->GetVar('social');
+
 
         $helper = $fb->getCanvasHelper();
 
-        $accessToken = $this->tokenOffline();
+        if($accessToken === null)
+        {
+          $accessToken = $this->tokenOffline();
+        }
+        
 
         if (isset($accessToken)) {
-
-
-            $linkData = [
-            'link' => $link,
-            'message' => $message,
-            ];
-
-            $response = $fb->post('/'.$social["facebook"]["id"].'/feed', $linkData, (string)$accessToken);
-
-
+            $response = $fb->post($link, $data, (string)$accessToken);
             $graphNode = $response->getGraphNode();
+
+        }
+
+
+
+        return $graphNode;
+
+    }
+
+    public function get($link,$accessToken=null)
+    {
+
+  
+
+        $fb = new \Facebook\Facebook([
+           'app_id' => $this->fb_api_key,
+           'app_secret' => $this->fb_api_secret,
+           'default_graph_version' => $this->version,
+         ]);
+
+
+
+        $helper = $fb->getCanvasHelper();
+
+        if($accessToken === null)
+        {
+          $accessToken = $this->tokenOffline();
+        }
+        
+
+        if (isset($accessToken)) {
+          $response = $fb->get($link,$accessToken);
+          print_r($response);
+          $graphNode = $response->getGraphNode();
 
         }
 
