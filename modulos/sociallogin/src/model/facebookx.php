@@ -73,6 +73,7 @@ class facebookx {
                 $response = $fb->get('/me?fields=name,email,first_name,link,birthday,gender,hometown,location');
                 $userNode = $response->getGraphUser();
 
+
                 $me["id"]   = $userNode->getId();
                 $me["name"] = $userNode->getName();
                 $me["nickname"] = $userNode->getFirstName();
@@ -84,6 +85,21 @@ class facebookx {
                 $me["gender"] = $userNode->getGender();
                 $me["email"] = $userNode->getEmail();
                 $me["avatar"] = "http://graph.facebook.com/".$userNode->getId()."/picture?type=large";
+               
+              
+
+
+                if(in_array('publish_pages',$this->permissions) || in_array('manage_pages',$this->permissions) ):
+                    $response = $fb->get('/me/accounts');
+        
+                    $edge = $response->getGraphEdge();
+                    do {
+                        foreach ($edge as $post) {
+                            $me['pages'][$post->getField('id')] = $post->getField('name');
+                        }
+                    } while ($edge = $fb->next($edge));
+                  
+                endif;
 
 
                 if(in_array('publish_pages',$this->permissions) || in_array('manage_pages',$this->permissions) ):
