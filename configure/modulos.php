@@ -1,7 +1,7 @@
 <?php
 return array(
     //'blog',
-    //'seo',
+    'seo',
     //'sociallogin',
     //'developer'
 );

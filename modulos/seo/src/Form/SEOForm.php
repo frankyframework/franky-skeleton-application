@@ -71,6 +71,74 @@ class SEOForm extends \Franky\Form\Form
         );
 
 
+        $this->add(array(
+            'name' => 'extra_name[]',
+            'label' => 'Nombre metatag:',
+            'type'  => 'text',
+            'required'  => true,
+            'atributos' => array(
+                'class'       => 'required',
+                'maxlength' => 70,
+                'placeholder' => 'Nombre de la mataetiqueta'
+             ),
+            'label_atributos' => array(
+                'class'       => 'desc_form_obligatorio'
+             )
+            )
+        );
+
+        $this->add(array(
+            'name' => 'extra_scheme[]',
+            'label' => 'Scheme metatag:',
+            'type'  => 'text',
+            'required'  => true,
+            'atributos' => array(
+                'class'       => 'required',
+                'maxlength' => 70,
+                'placeholder' => 'Tipo de scheme de la mataetiqueta'
+             ),
+            'label_atributos' => array(
+                'class'       => 'desc_form_obligatorio'
+             )
+            )
+        );
+
+        $this->add(array(
+            'name' => 'extra_type[]',
+            'label' => 'tipo propiedad:',
+            'type'  => 'select',
+            'required'  => true,
+                
+                'atributos' => array(
+                    'class'       => 'required',
+                   
+                 ),
+                'options' => array(
+                    'name' => 'name',
+                    'property' => 'property'
+                ),
+                'label_atributos' => array(
+                     'class'       => 'desc_form_obligatorio'
+                 )
+        ));
+
+
+        $this->add(array(
+            'name' => 'extra_value[]',
+            'label' => 'Valor:',
+            'type'  => 'textarea',
+            'required'  => true,
+            'atributos' => array(
+                'class' => 'required',
+                'rows'  => 5,
+                'placeholder' => 'Contenido de la mataetiqueta'
+             ),
+            'label_atributos' => array(
+                'class'       => 'desc_form_obligatorio'
+             )
+        )
+    );
+
           $this->add(array(
                 'name' => 'keywords',
                 'label' => 'Metatag keywords:',

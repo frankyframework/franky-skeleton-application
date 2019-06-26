@@ -16,6 +16,8 @@ CREATE TABLE `seo` (
   `keywords` text COLLATE utf8_unicode_ci NOT NULL,
   `status` int(1) NOT NULL DEFAULT '1',
   `fecha` datetime NOT NULL,
+  `extra` text DEFAULT NULL,
+  `updateAt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_franky` (`id_franky`),
   CONSTRAINT `seo_ibfk_1` FOREIGN KEY (`id_franky`) REFERENCES `franky` (`id`) ON DELETE CASCADE ON UPDATE CASCADE

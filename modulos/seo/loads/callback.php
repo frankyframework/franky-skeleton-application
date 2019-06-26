@@ -1,5 +1,4 @@
 <?php
-
 use Seo\model\SeoModel;
 use Seo\entity\SeoEntity;
 use Base\entity\OrganosEntity;
@@ -20,7 +19,15 @@ $metatags_seo = $MySeo->getRows();
 
 if($MySeo->getTotal() > 0)
 {
+    $MyMetatag->setVars(['url' => $MyRequest->getPROTOCOLO().$MyRequest->getSERVER().$MyRequest->getURI()]);
     $MyMetatag->setTitulo($metatags_seo["titulo"]);
     $MyMetatag->setDescripcion($metatags_seo["descripcion"]);
     $MyMetatag->setkeywords($metatags_seo["keywords"]);
+
+    $data_extra_metats = json_decode($metatags_seo['extra'],true);
+    if(!empty($data_extra_metats)): 
+        foreach($data_extra_metats as $key => $metats): 
+            $MyMetatag->setCode('<meta name="'.$metats['name'].'" '.(!empty($metats['scheme']) ? 'scheme="'.$metats['scheme'].'"' : '').' content="'.$metats['value'].'" />');
+        endforeach;
+    endif;
 }

@@ -4,6 +4,10 @@ use Seo\model\SeoModel;
 use Seo\entity\SeoEntity;
 
 $SeoEntity = new SeoEntity($MyRequest->getRequest());
+$extra_type = $MyRequest->getRequest('extra_type');
+$extra_name = $MyRequest->getRequest('extra_name');
+$extra_value = $MyRequest->getRequest('extra_value');
+$extra_scheme = $MyRequest->getRequest('extra_scheme');
 $error = false;
 
 $validaciones =  new validaciones();
@@ -29,6 +33,20 @@ if($error == false)
         $SeoEntity->status(1);
         $SeoEntity->fecha(date('Y-m-d H:i:s'));
     }
+    else{
+        $SeoEntity->updateAt(date('Y-m-d H:i:s'));
+    }
+    $extra = [];
+    if(!empty($extra_type))
+    {
+        foreach($extra_type as $k => $v)
+        {
+            if(!empty($v)):
+                $extra[] = ['type' => $v,'name' => $extra_name[$k],'scheme' => $extra_scheme[$k],'value' => $extra_value[$k]];
+            endif;
+        }
+    }
+    $SeoEntity->extra(addslashes(json_encode($extra)));
     $result = $MySeo->save($SeoEntity->getArrayCopy());
     
   

@@ -12,6 +12,8 @@ class SeoEntity
     private $status;
     private $fecha;
     private $lang;
+    private $extra;
+    private $updateAt;
 
     public function __construct($data = null)
     {
@@ -31,6 +33,8 @@ class SeoEntity
         $this->status = (isset($data["status"]) ? $data["status"] : null);
         $this->fecha = (isset($data["fecha"]) ? $data["fecha"] : null);
         $this->lang = (isset($data["lang"]) ? $data["lang"] : null);
+        $this->extra = (isset($data["extra"]) ? $data["extra"] : null);
+        $this->updateAt = (isset($data["updateAt"]) ? $data["updateAt"] : null);
 
     }
 
@@ -66,7 +70,9 @@ class SeoEntity
 
     public function lang($lang = null){ if($lang != null){ $this->lang=$lang; }else{ return $this->lang; } }
 
+    public function extra($extra = null){ if($extra != null){ $this->extra=$extra; }else{ return $this->extra; } }
 
+    public function updateAt($updateAt = null){ if($updateAt != null){ $this->updateAt=$updateAt; }else{ return $this->updateAt; } }
 
 }
 ?>

@@ -13,7 +13,7 @@ class SeoModel  extends \Franky\Database\Mysql\objectOperations
     {
         $seo = $this->optimizeEntity($seo);
         $franky = $this->optimizeEntity($franky);
-        $campos = ["seo.id","id_franky","titulo","descripcion","keywords","seo.status","fecha","lang","nombre"];
+        $campos = ["seo.id","id_franky","titulo","descripcion","keywords","seo.status","fecha","lang","nombre","extra"];
 
          $this->where()->addAnd("franky.status",'1','=');
 

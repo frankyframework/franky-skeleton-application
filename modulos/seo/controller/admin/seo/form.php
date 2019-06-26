@@ -11,11 +11,12 @@ $id		= $MyRequest->getRequest('id');
 $callback	= $MyRequest->getRequest('callback');
 
 $data = $MyFlashMessage->getResponse();
-
+$data_extra_metats = [];
 if(!empty($id))
 {
         $result	 = $MySeo->getData($SeoEntity->getArrayCopy());
-	$data = $MySeo->getRows();
+        $data = $MySeo->getRows();
+        $data_extra_metats = json_decode($data['extra'],true);
         $adminForm->addId();
 }
 

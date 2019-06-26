@@ -90,7 +90,4 @@ if(!empty($amigable_categoria_context))
     }
 }
 
-$MyMetatag->setTitulo("Blog".(!empty($amigable_categoria_context) ? " categoria ".$registro["nombre"] : ""));
-$MyMetatag->setDescripcion("lista de articulos del blog".(!empty($amigable_categoria_context) ? " de la categoria ".$registro["nombre"]  : ""));
-
 ?>

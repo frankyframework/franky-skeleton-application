@@ -33,8 +33,7 @@ if($MyAlbum->get($album,1) == REGISTRO_SUCCESS)
     }
     
     
-    $MyMetatag->setTitulo($_registro["nombre"]);
-    $MyMetatag->setDescripcion("Fotos del album ".$_registro["nombre"]);
+
 }
 else
 {

@@ -1,11 +1,69 @@
-<?php echo render("admin/template/form.phtml"); ?>
+<div class="content">
+    <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
+    <div class="w-xxxx-12">
+         <div class="w-xxxx-4 m-l-xxxx-1">
+        <h1><?php echo $title_form; ?></h1>
+            <?php echo $adminForm->openTag(); ?>
+            <?php echo $adminForm->getRow('callback'); ?>
+            <?php if(!empty($id)): ?>
+            <?php echo $adminForm->getRow('id'); ?>
+                <?php endif;?>
+            <?php echo $adminForm->getRow('id_franky'); ?>
+            <?php echo $adminForm->getRow('lang'); ?>
+            <?php echo $adminForm->getRow('titulo'); ?>
+            <?php echo $adminForm->getRow('descripcion'); ?>
+            <?php echo $adminForm->getRow('keywords'); ?>
+
+
+            <div class="template_metats" style="display:none;">
+            <div class="w-xxxx-12">
+                <?php echo $adminForm->get('extra_type[]'); ?>
+                <?php echo $adminForm->get('extra_name[]'); ?>
+                <?php echo $adminForm->get('extra_scheme[]'); ?>
+                <?php echo $adminForm->get('extra_value[]'); ?>
+                <a href="javascript:void(0);" onclick="$(this).parent().remove();"><i class="icon  icon-r-eliminar"> </i></a>
+                </div>
+            </div>
+            <div class="w-xxxx-12 content_more_metats">
+                
+            
+            </div>
+                <div class="w-xxxx-12">
+                <a class="add_meta" href="#">Agregar otra etiqueta</a>
+                </div>
+
+            <?php echo $adminForm->getRow('guardar'); ?>
+            <?php echo $adminForm->endTag(); ?>
+       </div>
+    </div>
+</div>
+
 <script >
-<!--
+
 $(document).ready(function(){
     
         $("#frmseo").validate()
         $('#keywords').tagsInput({width:'auto'}); 
         $("textarea[name=descripcion]").maximaLongitud(155,"contador_descripcion");
+        $('.add_meta').click(function(e)
+        {
+                e.preventDefault();
+                var template = $('.template_metats').html();
+                $('.content_more_metats').append(template);
+
+        });
+        
+        <?php if(!empty($data_extra_metats)): ?>
+                <?php foreach($data_extra_metats as $key => $metats): ?>
+                        $('.add_meta').click();
+                        $('select[name="extra_type[]"]').eq(<?=$key+1?>).val('<?=$metats['type']; ?>');
+                        $('input[name="extra_name[]"]').eq(<?=$key+1?>).val('<?=$metats['name']; ?>');
+                        $('input[name="extra_scheme[]"]').eq(<?=$key+1?>).val('<?=$metats['scheme']; ?>');
+                        $('textarea[name="extra_value[]"]').eq(<?=$key+1?>).val('<?=htmlentities($metats['value']) ?>');
+                <?php endforeach; ?>
+        
+        <?php endif;?>
+
 });
-// -->
+
 </script>
