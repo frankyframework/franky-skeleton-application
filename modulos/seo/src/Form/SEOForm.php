@@ -91,14 +91,14 @@ class SEOForm extends \Franky\Form\Form
             'name' => 'extra_scheme[]',
             'label' => 'Scheme metatag:',
             'type'  => 'text',
-            'required'  => true,
+            'required'  => false,
             'atributos' => array(
-                'class'       => 'required',
+                'class'       => '',
                 'maxlength' => 70,
                 'placeholder' => 'Tipo de scheme de la mataetiqueta'
              ),
             'label_atributos' => array(
-                'class'       => 'desc_form_obligatorio'
+                'class'       => 'desc_form_no_obligatorio'
              )
             )
         );
