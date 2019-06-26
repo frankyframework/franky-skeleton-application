@@ -650,7 +650,7 @@ function selectPagina()
 
       $paginas = array();
       $pagina->setTampag(1000);
-      $pagina->setOrdensql("id ASC");
+      $pagina->setOrdensql("nombre ASC");
       if($pagina->getData(1) == REGISTRO_SUCCESS)
       {
         while($registro = $pagina->getRows())
