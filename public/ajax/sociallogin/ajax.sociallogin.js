@@ -77,12 +77,6 @@ $(document).ready(function(){
    e.preventDefault();
    });
 
-   $('.button-twitter').on('click', function (e) {
-       var url = "/social-login/pasarela/twitter/";
-       new_window = window.open(url, 'Twitter', 'height=500,width=900,resizable=false,scrollbars=no');
-   e.preventDefault();
-   });
-
    $('#facebook_rel').on('change', function (e) {
         if (this.checked) {
 
@@ -94,34 +88,6 @@ $(document).ready(function(){
         {
 
             removeConnection('facebook')
-        }
-    });
-
-    $('#twitter_rel').on('change', function (e) {
-
-        if (this.checked) {
-            var url = "/social-login/pasarela/twitter/";
-            new_window = window.open(url, 'Twitter', 'height=400,width=800,resizable=false,scrollbars=no');
-            e.preventDefault();
-        }
-        else
-        {
-
-            removeConnection('twitter')
-        }
-    });
-
-    $('#google_rel').on('change', function (e) {
-
-        if (this.checked) {
-            var url = "/social-login/pasarela/google/";
-            new_window = window.open(url, 'Twitter', 'height=400,width=800,resizable=false,scrollbars=no');
-            e.preventDefault();
-        }
-        else
-        {
-
-            removeConnection('google')
         }
     });
 

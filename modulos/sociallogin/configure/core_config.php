@@ -37,7 +37,9 @@ return array(
                                               'user_photos' => 'user_photos',
                                               'user_posts' => 'user_posts',
                                               'user_tagged_places' => 'user_tagged_places',
-                                              'user_videos' => 'user_videos'
+                                              'user_videos' => 'user_videos',
+                                              'manage_pages' => 'manage_pages',
+                                              'publish_pages' => 'publish_pages'
                               ),
                               'multiple' => true
                             ),
