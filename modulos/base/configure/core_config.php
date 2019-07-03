@@ -50,6 +50,20 @@ return array(
 
           )
   ),
+  'contactanos' => array(
+    'menu' => "Contactanos",
+    'title' => "Configuración de contactanos",
+    'config' =>  array(
+                array('path' => 'base/contactanos/user-notification',
+                        'type' => 'select',
+                        'label' => '¿Notificar al remitente que su información fue recibida?',
+                        'validation' => array('required' => false),
+                        'data' => ['0' => 'No', '1' => 'Si'],
+                        'value' => '0'
+                      ),
+
+    )
+),
   'google' => array(
           'menu' => "GOOGLE",
           'title' => "Configuración de google",

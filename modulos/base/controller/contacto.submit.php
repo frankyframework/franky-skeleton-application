@@ -52,6 +52,16 @@ if($error== false)
 
                 sendEmail($campos,$registro);
 
+                if(getCoreConfig('base/contactanos/user-notification')==1):
+                    $SecciontransaccionalEntity->frinedly('contactanos-user-notification');
+                    $TemplateemailModel->setOrdensql('id DESC');
+                    $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
+    
+                    $registro  = $TemplateemailModel->getRows();
+    
+                    sendEmail($campos,$registro);
+                endif;
+
 	}
 	else
 	{
