@@ -122,7 +122,7 @@ function SplitSQL($site, $file, $delimiter = ';')
 {
     set_time_limit(0);
 
-    $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Core\MYDEBUG);
+    $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Database\Debug);
 
     if (is_file($file) === true)
     {

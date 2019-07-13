@@ -25848,3 +25848,188 @@ Stack trace:
 #2 /var/www/html/index.php(3): require('/var/www/html/m...')
 #3 {main}
   thrown in /var/www/html/vendor/frankyframework/franky-core/src/Metatags.php on line 40
+[09-Jul-2019 12:22:41 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to undefined method Franky\Core\Metatags::setVars() in /var/www/html/modulos/seo/loads/callback.php:22
+Stack trace:
+#0 /var/www/html/modulos/base/loads/init.php(233): include_once()
+#1 /var/www/html/index.php(3): require('/var/www/html/m...')
+#2 {main}
+  thrown in /var/www/html/modulos/seo/loads/callback.php on line 22
+[09-Jul-2019 12:23:48 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to undefined method Franky\Core\Metatags::setVars() in /var/www/html/modulos/seo/loads/callback.php:22
+Stack trace:
+#0 /var/www/html/modulos/base/loads/init.php(233): include_once()
+#1 /var/www/html/index.php(3): require('/var/www/html/m...')
+#2 {main}
+  thrown in /var/www/html/modulos/seo/loads/callback.php on line 22
+[09-Jul-2019 12:24:14 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to undefined method Franky\Core\Metatags::setVars() in /var/www/html/modulos/seo/loads/callback.php:22
+Stack trace:
+#0 /var/www/html/modulos/base/loads/init.php(233): include_once()
+#1 /var/www/html/index.php(3): require('/var/www/html/m...')
+#2 {main}
+  thrown in /var/www/html/modulos/seo/loads/callback.php on line 22
+[09-Jul-2019 12:24:40 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to undefined method Franky\Core\Metatags::setVars() in /var/www/html/modulos/seo/loads/callback.php:22
+Stack trace:
+#0 /var/www/html/modulos/base/loads/init.php(233): include_once()
+#1 /var/www/html/index.php(3): require('/var/www/html/m...')
+#2 {main}
+  thrown in /var/www/html/modulos/seo/loads/callback.php on line 22
+[09-Jul-2019 12:25:32 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to undefined method Franky\Core\Metatags::setVars() in /var/www/html/modulos/seo/loads/callback.php:22
+Stack trace:
+#0 /var/www/html/modulos/base/loads/init.php(233): include_once()
+#1 /var/www/html/index.php(3): require('/var/www/html/m...')
+#2 {main}
+  thrown in /var/www/html/modulos/seo/loads/callback.php on line 22
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/modulos/base/loads/llenaFranky.php on line 44
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP Stack trace:
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
+[09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136

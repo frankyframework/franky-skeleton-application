@@ -14,14 +14,14 @@ if($MySession->getVar('nivel') != NIVEL_USERDEVELOPER)
 
 ini_set('memory_limit', '-1');
 
-
+ini_set('display_errors', 1);
 $modulo = $MyRequest->getRequest("modulo");
 $site = $MyRequest->getRequest("site",'local.shell');
 
 if(!empty($site))
 {
     $_SERVER["SERVER_NAME"] = $site;
-    $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Core\Debug);
+    $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Database\Debug);
 }
 
 headerShell();
