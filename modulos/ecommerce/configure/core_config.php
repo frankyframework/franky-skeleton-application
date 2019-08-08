@@ -1,5 +1,17 @@
 <?php
 return array(
+     'ecommerc' => array(
+          'menu' => "ECOMMERCE",
+          'title' => "Configuración de ecommerce",
+          'config' =>  array(
+                    array('path' => 'ecommerce/ecommerce/limitcards',
+                            'type' => 'text',
+                            'label' => 'Habilitar metodo de pago',
+                            'validation' => array('required' => true,'numeric' => true),
+                            'value' => '3'
+                          )
+              )
+         ),
   'ecommerce-conekta' => array(
           'menu' => "ECOMMERCE API CONEKTA",
           'title' => "Configuración de conekta",

@@ -25,16 +25,19 @@ if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_TARJETAS_ECOMMERCE))
     $error = true;
 }
 
-
+ $CardsEntity->uid($MySession->GetVar('id'));
+$CardsEntity->status(1);
+if($CardsModel->getData($CardsEntity->getArrayCopy())!= REGISTRO_SUCCESS)
+{
+    if($CardsModel->getTotal() >= getCoreConfig('ecommerce/ecommerce/limitcards'))
+    {
+        $error = true;
+        $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("guardar_generico_error"));
+    }
+}
 
 if(!$error)
 {
-
-
-
-
-    $CardsEntity->uid($MySession->GetVar('id'));
-    $CardsEntity->status(1);
     if(getCoreConfig('ecommerce/conekta/enabled') == 1)
     {
       if(in_array('conekta_tarjeta',getCoreConfig('ecommerce/conekta/methods')))
