@@ -65,4 +65,9 @@
         <llave>comprovante_success</llave>
         <valor>El comprobante de pago se guardo correctamente</valor>
     </mensaje>
+    <mensaje>
+        <llave>limit_cards</llave>
+        <valor>Puedes guardar maximo %s tarjetas</valor>
+    </mensaje>
+
 </mensajes>

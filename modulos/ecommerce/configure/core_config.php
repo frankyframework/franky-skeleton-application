@@ -1,17 +1,5 @@
 <?php
 return array(
-     'ecommerc' => array(
-          'menu' => "ECOMMERCE",
-          'title' => "Configuración de ecommerce",
-          'config' =>  array(
-                    array('path' => 'ecommerce/ecommerce/limitcards',
-                            'type' => 'text',
-                            'label' => 'Habilitar metodo de pago',
-                            'validation' => array('required' => true,'numeric' => true),
-                            'value' => '3'
-                          )
-              )
-         ),
   'ecommerce-conekta' => array(
           'menu' => "ECOMMERCE API CONEKTA",
           'title' => "Configuración de conekta",
@@ -64,6 +52,12 @@ return array(
                               ),
                               'multiple' => true
                             ),
+               array('path' => 'ecommerce/conekta/limitcards',
+                            'type' => 'text',
+                            'label' => 'Limite de tarjetas',
+                            'validation' => array('required' => true,'numeric' => true),
+                            'value' => '3'
+                          )
           )
   ),
   'ecommerce-paypal' => array(
@@ -107,7 +101,13 @@ return array(
                               'label' => 'SECRET KEY SANDBOX',
                               'validation' => array('required' => false),
                               'value' => ''
-                            )
+                            ),
+              array('path' => 'ecommerce/paypal/limitcards',
+                            'type' => 'text',
+                            'label' => 'Limite de tarjetas',
+                            'validation' => array('required' => true,'numeric' => true),
+                            'value' => '3'
+                          )
           )
   ),
   'ecommerce-openpay' => array(

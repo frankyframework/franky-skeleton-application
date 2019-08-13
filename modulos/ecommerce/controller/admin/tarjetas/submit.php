@@ -25,15 +25,34 @@ if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_TARJETAS_ECOMMERCE))
     $error = true;
 }
 
- $CardsEntity->uid($MySession->GetVar('id'));
+$CardsEntity->uid($MySession->GetVar('id'));
 $CardsEntity->status(1);
 if($CardsModel->getData($CardsEntity->getArrayCopy())!= REGISTRO_SUCCESS)
 {
-    if($CardsModel->getTotal() >= getCoreConfig('ecommerce/ecommerce/limitcards'))
+    $total_cards = $CardsModel->getTotal();
+    if(getCoreConfig('ecommerce/conekta/enabled') == 1)
     {
-        $error = true;
-        $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("guardar_generico_error"));
+         if(in_array('conekta_tarjeta',getCoreConfig('ecommerce/conekta/methods')))
+        {
+            if($total_cards >= getCoreConfig('ecommerce/conekta/limitcards'))
+            {
+                $error = true;
+                $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("ecommerce_limit_cards", getCoreConfig('ecommerce/conekta/limitcards')));
+            }
+        }
     }
+    if(getCoreConfig('ecommerce/openpay/enabled') == 1)
+    {
+      if(in_array('openpay_tarjeta',getCoreConfig('ecommerce/openpay/methods')))
+        {
+          if($total_cards >= getCoreConfig('ecommerce/openpay/limitcards'))
+            {
+                $error = true;
+                $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("ecommerce_limit_cards", getCoreConfig('ecommerce/conekta/limitcards')));
+            }
+        }
+    }
+        
 }
 
 if(!$error)
