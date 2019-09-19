@@ -324,10 +324,7 @@ var getFormatoPrecio = function(number, fractional=true,simbol = true) {
 }
 
 $(document).ready(function(){
-    $.fn.imgLoadAlive();
-    $(window).scroll(function () {
-      $.fn.imgLoadAlive();
-    });
+    
     $(".imprimible").addAllParentClass("imprimible");
     $(".hide_render_debug").click(function(e){
         e.preventDefault();
@@ -358,10 +355,7 @@ $(document).ready(function(){
             })
     });
 
-    if(isMobile())
-    {
-        $(".tel1").attr('href',"tel:"+$(".tel1").eq(0).text());
-    }
+   
 
 
     $("#up").hide();
@@ -432,6 +426,8 @@ $(document).ready(function(){
 });
 
 $(window).load(function() {
+
+
     if($('#preloaderfullpage'))
     {
 	     $('#preloaderfullpage').fadeOut('slow',function(){
@@ -440,6 +436,8 @@ $(window).load(function() {
         });
 
     }
+
+
 
     if($("#dialog-message"))
     {
@@ -456,9 +454,14 @@ $(window).load(function() {
     }
 
 
-  $('.contenedor_columnas div').textToIcon();
+    $.fn.imgLoadAlive();
+    $(window).scroll(function () {
+      $.fn.imgLoadAlive();
+    });
 
-  $('.ancla').click(function(event)
+    $('.contenedor_columnas div').textToIcon();
+
+    $('.ancla').click(function(event)
     {
       var ancla = $(this).attr('data-ancla');
 
@@ -481,6 +484,11 @@ $(window).load(function() {
        }
 
     });
+
+    if(isMobile())
+    {
+        $(".tel1").attr('href',"tel:"+$(".tel1").eq(0).text());
+    }
 
 });
 
