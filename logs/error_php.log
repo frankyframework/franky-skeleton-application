@@ -26033,3 +26033,49 @@ Stack trace:
 [09-Jul-2019 12:34:41 America/Mexico_City] PHP   1. {main}() /var/www/html/index.php:0
 [09-Jul-2019 12:34:41 America/Mexico_City] PHP   2. require() /var/www/html/index.php:3
 [09-Jul-2019 12:34:41 America/Mexico_City] PHP   3. include_once() /var/www/html/modulos/base/loads/init.php:136
+[26-Sep-2019 23:22:39 America/Mexico_City] PHP Fatal error:  Uncaught PDOException: PDO::__construct(): php_network_getaddresses: getaddrinfo failed: Temporary failure in name resolution in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php:41
+Stack trace:
+#0 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(41): PDO->__construct('mysql:host=enco...', 'ecclick_franky', 'nkIGiX*JuQ$t')
+#1 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(81): Franky\Database\IBD->ConectarBD()
+#2 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/Select.php(35): Franky\Database\IBD->Query(1569558139, 'SELECT url_inte...')
+#3 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/objectOperations.php(101): Franky\Database\Mysql\Select->execute('url_internacion...', Array, 'franky.status =...', '', '')
+#4 /var/www/html/modulos/base/src/model/UrlInternacionalModel.php(36): Franky\Database\Mysql\objectOperations->getColeccion(Array)
+#5 /var/www/html/modulos/base/loads/llenaFranky.php(14): Base\model\UrlInternacionalModel->getDat in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php on line 41
+[26-Sep-2019 23:24:45 America/Mexico_City] PHP Fatal error:  Uncaught PDOException: PDO::__construct(): php_network_getaddresses: getaddrinfo failed: Temporary failure in name resolution in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php:41
+Stack trace:
+#0 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(41): PDO->__construct('mysql:host=enco...', 'ecclick_franky', 'nkIGiX*JuQ$t')
+#1 /var/www/html/vendor/frankyframework/franky-database/src/IBD.php(81): Franky\Database\IBD->ConectarBD()
+#2 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/Select.php(35): Franky\Database\IBD->Query(1569558265, 'SELECT url_inte...')
+#3 /var/www/html/vendor/frankyframework/franky-database/src/Mysql/objectOperations.php(101): Franky\Database\Mysql\Select->execute('url_internacion...', Array, 'franky.status =...', '', '')
+#4 /var/www/html/modulos/base/src/model/UrlInternacionalModel.php(36): Franky\Database\Mysql\objectOperations->getColeccion(Array)
+#5 /var/www/html/modulos/base/loads/llenaFranky.php(14): Base\model\UrlInternacionalModel->getDat in /var/www/html/vendor/frankyframework/franky-database/src/IBD.php on line 41
+[26-Sep-2019 23:27:06 America/Mexico_City] PHP Fatal error:  Uncaught Error: Class 'Franky\Core\Debug' not found in /var/www/html/modulos/developer/shell/nueva-entidad:23
+Stack trace:
+#0 /var/www/html/modulos/base/loads/util.php(250): include()
+#1 /var/www/html/bin/franky(71): render('/var/www/html/m...')
+#2 {main}
+  thrown in /var/www/html/modulos/developer/shell/nueva-entidad on line 23
+[26-Sep-2019 23:27:16 America/Mexico_City] PHP Fatal error:  Uncaught Error: Class 'Franky\Core\Debug' not found in /var/www/html/modulos/developer/shell/nueva-entidad:23
+Stack trace:
+#0 /var/www/html/modulos/base/loads/util.php(250): include()
+#1 /var/www/html/bin/franky(71): render('/var/www/html/m...')
+#2 {main}
+  thrown in /var/www/html/modulos/developer/shell/nueva-entidad on line 23
+[26-Sep-2019 23:27:30 America/Mexico_City] PHP Fatal error:  Uncaught Error: Class 'Franky\Core\Debug' not found in /var/www/html/modulos/developer/shell/nueva-entidad:23
+Stack trace:
+#0 /var/www/html/modulos/base/loads/util.php(250): include()
+#1 /var/www/html/bin/franky(71): render('/var/www/html/m...')
+#2 {main}
+  thrown in /var/www/html/modulos/developer/shell/nueva-entidad on line 23
+[26-Sep-2019 23:27:49 America/Mexico_City] PHP Fatal error:  Uncaught Error: Class 'Franky\Core\Debug' not found in /var/www/html/modulos/developer/shell/nueva-entidad:23
+Stack trace:
+#0 /var/www/html/modulos/base/loads/util.php(250): include()
+#1 /var/www/html/bin/franky(71): render('/var/www/html/m...')
+#2 {main}
+  thrown in /var/www/html/modulos/developer/shell/nueva-entidad on line 23
+[26-Sep-2019 23:28:55 America/Mexico_City] PHP Fatal error:  Uncaught Error: Class 'Franky\Core\Debug' not found in /var/www/html/modulos/developer/shell/nueva-entidad:23
+Stack trace:
+#0 /var/www/html/modulos/base/loads/util.php(250): include()
+#1 /var/www/html/bin/franky(71): render('/var/www/html/m...')
+#2 {main}
+  thrown in /var/www/html/modulos/developer/shell/nueva-entidad on line 23
