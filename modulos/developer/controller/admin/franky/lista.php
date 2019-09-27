@@ -16,7 +16,7 @@ $OrganosCorporales->setBusca($busca_b);
 $OrganosCorporales->setPage($MyPaginacion->getPage());
 $OrganosCorporales->setTampag($MyPaginacion->getTampageDefault());
 $OrganosCorporales->setOrdensql($MyPaginacion->getCampoOrden()." ".$MyPaginacion->getOrden());
-$result	= $OrganosCorporales->getData();
+$result	= $OrganosCorporales->getData('', "","","");
 $MyPaginacion->setTotal($OrganosCorporales->getTotal());
 
 $lista_admin_data = array();
