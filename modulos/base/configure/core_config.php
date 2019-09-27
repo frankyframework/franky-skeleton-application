@@ -10,6 +10,12 @@ return array(
                               'validation' => array('image' => true),
                               'value' => ''
                             ),
+                            array('path' => 'base/theme/logopanel',
+                              'type' => 'file',
+                              'label' => 'Logo panel',
+                              'validation' => array('image' => true),
+                              'value' => ''
+                            ),
                       array('path' => 'base/theme/langs',
                               'type' => 'select',
                               'label' => 'Idiomas disponibles',

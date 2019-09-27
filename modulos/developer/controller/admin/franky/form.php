@@ -95,6 +95,8 @@ foreach($mymodulos as $modulo)
     }
 }
 
+
+       
 $_modulos = array();
 foreach ($modulos as $m)
 {
@@ -113,4 +115,6 @@ $adminForm->setData($data);
 $adminForm->setAtributoInput("callback","value", urldecode($callback));
 $title_form = "$title pagina";
 
+$MyMetatag->setCss("/public/plugins/fancytree/skin-win8/ui.fancytree.min.css");
+$MyMetatag->setJs("/public/plugins/fancytree/jquery.fancytree-all-deps.min.js");
 ?>

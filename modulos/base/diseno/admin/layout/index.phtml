@@ -14,7 +14,20 @@
         	<div class="w-xxxx-12 page_wrapper">
                 <div class="w-xxxx-12 cont_admin">
                     <div class="_left_menu">
-                        <a class="_admin_logo" href="/"><?php echo makeHTMLImg(getImg('logo.png'),"","","","class='img_logo'"); ?></a>
+                        <?php $logopanel = getImg('logo.png'); ?>
+
+                        <?php
+                        if(getCoreConfig('base/theme/logopanel') != "")
+                        {
+                            if(file_exists(PROJECT_DIR.getCoreConfig('base/theme/logopanel')))
+                            {
+                                $logopanel = getCoreConfig('base/theme/logopanel');
+                            }
+                            
+                        } 
+                        ?>
+
+                        <a class="_admin_logo" href="/"><?php echo makeHTMLImg($logopanel,"","200","200","class='img_logo'"); ?></a>
                         <a class="_my_account" href="<?php echo $MyRequest->url(ADMIN) ?>">Inicio</a>
                         <ul class="_img_perfil">
                             <li><span class="avatar_mask"><?php echo makeHTMLImg(getAvatar($MySession->GetVar('id'))); ?></span></li>
