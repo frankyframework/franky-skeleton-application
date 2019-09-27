@@ -12,11 +12,11 @@ $MyPaginacion->setOrden($MyRequest->getRequest('order',"ASC"));
 $MyPaginacion->setTampageDefault($MyRequest->getRequest('tampag',25));			
 $busca_b	= $MyRequest->getRequest('busca_b');	
 
-
+$OrganosCorporales->setBusca($busca_b);
 $OrganosCorporales->setPage($MyPaginacion->getPage());
 $OrganosCorporales->setTampag($MyPaginacion->getTampageDefault());
 $OrganosCorporales->setOrdensql($MyPaginacion->getCampoOrden()." ".$MyPaginacion->getOrden());
-$result	= $OrganosCorporales->getData('', $busca_b,"","");
+$result	= $OrganosCorporales->getData('', "","","");
 $MyPaginacion->setTotal($OrganosCorporales->getTotal());
 
 $lista_admin_data = array();
