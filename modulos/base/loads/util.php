@@ -445,9 +445,24 @@ function sendEmail($campos,$data)
        }
        $destinatario = substr($destinatario,0,-1);
     }
+    if(getCoreConfig('base/contactanos/user-notification')==1):
+        $Correo = new \Base\model\Correo();
+        return $Correo->Enviar(utf8_decode($data['Asunto']), $destinatario, $ContenidoString, $from,$reply,$bcc,$cc);
+    endif;
 
-      $Correo = new \Base\model\Correo();
-   return $Correo->Enviar(utf8_decode($data['Asunto']), $destinatario, $ContenidoString, $from,$reply,$bcc,$cc);
+    $Headers = "";
+    $Headers  = 'MIME-Version: 1.0' . "\r\n";
+    $Headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+    $Headers .= 'Reply-To: '.$reply. "\r\n" .
+    $Headers .= 'From: '.$from['name_from'].' < '.$from['email_from'].'>' . "\r\n";
+    foreach($cc as $email_cc):
+    $Headers .= 'Cc: '.$email_cc . "\r\n";
+    endforeach;
+    foreach($bcc as $email_bcc):
+        $Headers .= 'Bcc: '.$email_bcc . "\r\n";
+    endforeach;
+
+    return mail($destinatario,$data['Asunto'],$ContenidoString, $Headers);
 }
 
 function getAvatar($id)

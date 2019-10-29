@@ -136,6 +136,13 @@ return array(
         'menu' => "SMTP",
         'title' => "Configurar SMTP",
         'config' => array(
+                  array('path' => 'base/smtp/enabled',
+                  'type' => 'select',
+                  'label' => 'Habilitar',
+                  'validation' => array('required' => true),
+                  'data' => ['0' => 'No','1' => 'Sí'],
+                  'value' => '0'
+                  ),
                   array('path' => 'base/smtp/host',
                           'type' => 'text',
                           'label' => 'Host',
