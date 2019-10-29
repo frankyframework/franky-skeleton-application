@@ -26,7 +26,7 @@ class {nombre}Entity
 
     public function setValidation()
     {
-        return array();
+        return array( {filter});
     }
 
     {getters}

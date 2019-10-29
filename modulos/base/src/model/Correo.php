@@ -60,7 +60,7 @@ class Correo extends \Franky\Core\configure
                   //Content
                   $mail->isHTML(true); // Set email format to HTML
                   $mail->Subject = $Asunto;
-                  $mail->Body    = utf8_encode($Texto);
+                  $mail->Body    = $Texto;
                   //$mail->AltBody = '';
 
                   $mail->send();

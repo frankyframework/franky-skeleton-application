@@ -367,7 +367,8 @@ $(document).ready(function(){
                 $('#up').fadeOut();
             }
         });
-        $('#up a').click(function () {
+        $('#up a').click(function (e) {
+            e.preventDefault();
             $('body,html').animate({
                 scrollTop: 0
             }, 800);
