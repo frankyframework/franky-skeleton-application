@@ -467,7 +467,7 @@ function sendEmail($campos,$data)
     endforeach;
  
     //echo $Headers;
-    mail($destinatario,$data['Asunto'],$ContenidoString, $Headers);
+    return mail($destinatario,$data['Asunto'],$ContenidoString, $Headers);
     
 }
 
