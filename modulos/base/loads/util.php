@@ -453,7 +453,7 @@ function sendEmail($campos,$data)
     $Headers = "";
     $Headers .= 'MIME-Version: 1.0' . "\r\n";
     $Headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-    $Headers .= 'Reply-To: '.$reply. "\r\n" .
+    $Headers .= 'Reply-To: '.$reply. "\r\n" ;
     $Headers .= 'From: '.$from['name_from'].' <'.$from['email_from'].'>' . "\r\n";
     foreach($cc as $email_cc):
         if(!empty($email_cc)):
