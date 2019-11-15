@@ -18,11 +18,36 @@ include_once(PROJECT_DIR."/modulos/base/loads/autoload.php");
 
 $MyConfigure        = new \Franky\Core\configure();
 
-ini_set('display_errors',getCoreConfig('base/debug/display_errors'));
+$available_debug_ip = explode(",",getCoreConfig('base/debug/ip'));
+$enable_debug_php = getCoreConfig('base/debug/display_errors');
+$enable_debug_site = getCoreConfig('base/debug/debug');
+$enable_ip = 0;
 
+if(empty($available_debug_ip)):
+    $available_debug_ip = array('%');
+endif;
+
+foreach($available_debug_ip as $debug_ip):
+    if(in_array($debug_ip,array($_SERVER['REMOTE_ADDR'],'%'))):
+        $enable_ip = 1;
+        break;
+    endif;
+endforeach;
+if($enable_debug_php== 1 && $enable_ip == 1):
+    $enable_debug_php = 1;
+else:
+    $enable_debug_php = 0;
+endif;
+if($enable_debug_site== 1 && $enable_ip == 1):
+    $enable_debug_site = 1;
+else:
+    $enable_debug_site = 0;
+endif;
+
+ini_set('display_errors',$enable_debug_php);
 
 $MyDebug = new \Franky\Core\MYDEBUG();
-$MyDebug->SetDebug(getCoreConfig('base/debug/debug'));
+$MyDebug->SetDebug($enable_debug_site);
 
 $MySession          = new \Franky\Core\MYSESSION("auth");
 $MyMessageAlert     = new \Franky\Core\MessageAlert();

@@ -5,10 +5,10 @@
         <p>En esta sección podrás revisar los usuarios inscritos al Newsletter</p>
         <div class="w-xxxx-12 cont_header_panel">
            <div class="form-group form-inline">
-                    <?php echo $MyFiltrosForm->openTag(); ?>
-                    <?php echo $MyFiltrosForm->getAllRow(); ?>
-                    <?php echo $MyFiltrosForm->endTag(); ?>
-
+                <?php echo $MyFiltrosForm->openTag(); ?>
+                <?php echo $MyFiltrosForm->getAllRow(); ?>
+                <?php echo $MyFiltrosForm->endTag(); ?>
+                <a href="/admin/mailing/excel.php?busca_b=<?php echo $busca_b; ?>" target="_blank" class="_btn_new">Exportar</a>
             </div>
         </div>
         <div  class="w-xxxx-12 cont_gral_admin cont_mailing">

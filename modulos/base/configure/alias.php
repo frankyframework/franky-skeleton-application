@@ -19,6 +19,7 @@ return array
     "admin/cms/submit.php"  => PROJECT_DIR."/modulos/base/controller/admin/cms/submit.php",
     "admin/template_email/submit.php" => PROJECT_DIR."/modulos/base/controller/admin/template_email/submit.php",
     "admin/contacto/excel.php" => PROJECT_DIR."/modulos/base/controller/admin/contacto/excel.php",
+    "admin/mailing/excel.php" => PROJECT_DIR."/modulos/base/controller/admin/mailing/excel.php",
     "registro/verificacion.php" => PROJECT_DIR."/modulos/base/controller/registro/verificacion.php",
     "admin/url-internacional/submit.php" => PROJECT_DIR."/modulos/base/controller/admin/url_internacional/submit.php",
     "admin/core-config/submit.php" => PROJECT_DIR."/modulos/base/controller/admin/core_config/submit.php",

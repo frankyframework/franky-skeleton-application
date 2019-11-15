@@ -195,6 +195,12 @@ return array(
             'menu' => "DEBUG",
             'title' => "Herramientas de debbuging",
             'config' =>  array(
+                        array('path' => 'base/debug/ip',
+                                'type' => 'text',
+                                'label' => 'IP(s)',
+                                'validation' => array('required' => true),
+                                'value' => '%'
+                              ),
                         array('path' => 'base/debug/display_errors',
                                 'type' => 'select',
                                 'label' => 'Mostrar errores',
@@ -202,20 +208,20 @@ return array(
                                 'data' => ['0' => 'No','1' => 'Sí'],
                                 'value' => '0'
                               ),
-                      array('path' => 'base/debug/debug',
+                        array('path' => 'base/debug/debug',
                               'type' => 'select',
                               'label' => 'Habilitar debug',
                               'validation' => array('required' => true),
                               'data' => ['0' => 'No','1' => 'Sí'],
                               'value' => '0'
                             ),
-                      array('path' => 'base/debug/production',
+                        array('path' => 'base/debug/production',
                               'type' => 'select',
                               'label' => 'Produccion',
                               'validation' => array('required' => true),
                               'data' => ['0' => 'No','1' => 'Sí'],
                               'value' => '0'
-                            ),
+                        ),
 
             )
     ),

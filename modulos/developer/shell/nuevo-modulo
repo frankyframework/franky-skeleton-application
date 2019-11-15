@@ -118,20 +118,3 @@ foreach ($files as $path => $file)
         echo "\t".shellFontColor("[error] No se puedo crear el archivo ".$path,"rojo")."\n";
     }
 }
-
-echo "[+]Creando tpl de E-mails\n";
-
-if(mkdir(PROJECT_DIR."/modulos/$nombre/templates/",0777))
-{
-    echo "\t".shellFontColor("[success] Se creo el directorio ".PROJECT_DIR."/modulos/$nombre/templates/","verde")."\n";
-}
-else{
-    echo "\t".shellFontColor("[error] No se creo el directorio ".PROJECT_DIR."/modulos/$nombre/templates/","rojo")."\n";
-}
-if(mkdir(PROJECT_DIR."/modulos/$nombre/templates/email",0777))
-{
-    echo "\t".shellFontColor("[success] Se creo el directorio ".PROJECT_DIR."/modulos/$nombre/templates/email","verde")."\n";
-}
-else{
-    echo "\t".shellFontColor("[error] No se creo el directorio ".PROJECT_DIR."/modulos/$nombre/templates/email","rojo")."\n";
-}

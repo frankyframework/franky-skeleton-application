@@ -455,11 +455,13 @@ function sendEmail($campos,$data)
     $Headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
     $Headers .= 'Reply-To: '.$reply. "\r\n" ;
     $Headers .= 'From: '.$from['name_from'].' <'.$from['email_from'].'>' . "\r\n";
-    foreach($cc as $email_cc):
-        if(!empty($email_cc)):
-            $Headers .= 'Cc: '.$email_cc . "\r\n";
-        endif;
-    endforeach;
+    if(!empty($cc)):
+        foreach($cc as $email_cc):
+            if(!empty($email_cc)):
+                $Headers .= 'Cc: '.$email_cc . "\r\n";
+            endif;
+        endforeach;
+    endif;
     foreach($bcc as $email_bcc):
         if(!empty($email_bcc)):
             $Headers .= 'Bcc: '.$email_bcc . "\r\n";
