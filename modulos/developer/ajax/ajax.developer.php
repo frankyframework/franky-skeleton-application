@@ -30,5 +30,42 @@ function EliminarPagina($id,$status)
 	return $respuesta;
 }
 
+
+function EliminarCustomAttribute($id,$status)
+{
+    global $MySession;
+    $CustomattributesModel =  new \Developer\model\CustomattributesModel();
+    $CustomattributesEntity =  new \Developer\entity\CustomattributesEntity();
+    $Tokenizer = new \Franky\Haxor\Tokenizer;
+    global $MyAccessList;
+    global $MyMessageAlert;
+
+    $respuesta = null;
+
+    if($MyAccessList->MeDasChancePasar(ADMINISTRAR_CUSTOM_ATTRIBUTES))
+    {
+        $CustomattributesEntity->id(addslashes($Tokenizer->decode($id)));
+        $CustomattributesEntity->status($status);
+
+        if($CustomattributesModel->save($CustomattributesEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+        {
+
+        }
+        else
+        {
+              $respuesta["message"] = $MyMessageAlert->Message("custom_attribute_error_delete");
+              $respuesta["error"] = true;
+        }
+    }
+    else
+    {
+         $respuesta["message"] = $MyMessageAlert->Message("sin_privilegios");
+         $respuesta["error"] = true;
+    }
+
+    return $respuesta;
+}
+
 $MyAjax->register("EliminarPagina");
+$MyAjax->register("EliminarCustomAttribute");
 ?>

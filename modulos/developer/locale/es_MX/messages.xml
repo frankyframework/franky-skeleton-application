@@ -25,4 +25,8 @@
         <llave>url_pagina_duplicado</llave>
         <valor>El valor de la url ya esta en uso</valor>
     </mensaje>
+    <mensaje>
+        <llave>custom_attribute_error_delete</llave>
+        <valor>Error al eliminar el atributo</valor>
+    </mensaje>
 </mensajes>

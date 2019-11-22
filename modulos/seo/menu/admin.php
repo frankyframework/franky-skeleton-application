@@ -2,7 +2,7 @@
 global $MySession;
 
 return array(
-    
+    "title" => "SEO",
     array(
      "permiso" =>   ADMINISTRAR_SEO,
      "url" => $MyRequest->url(ADMIN_SEO),

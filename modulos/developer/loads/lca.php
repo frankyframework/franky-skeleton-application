@@ -9,3 +9,6 @@ $MyAccessList->addRoll(NIVEL_USERDEVELOPER,ADMINISTRAR_SHELL);
 
 define("ADMINISTRAR_FTP",      "administrar_ftp");
 $MyAccessList->addRoll(NIVEL_USERDEVELOPER,ADMINISTRAR_FTP);
+
+define("ADMINISTRAR_CUSTOM_ATTRIBUTES",      "administrar_custom_attributes");
+$MyAccessList->addRoll(NIVEL_USERDEVELOPER,ADMINISTRAR_CUSTOM_ATTRIBUTES);

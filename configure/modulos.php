@@ -3,5 +3,6 @@ return array(
     //'blog',
     'seo',
     //'sociallogin',
-    'developer'
+    'developer',
+    'catalog'
 );
