@@ -3,9 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/ussiel/kung-fu/www/cloudstudio/projectos/franky-skeleton-application/franky-skeleton-application/modulos/base/configure/core_config.php</file>
-            <file>file:/home/ussiel/kung-fu/www/cloudstudio/projectos/franky-skeleton-application/franky-skeleton-application/modulos/base/loads/init.php</file>
-            <file>file:/home/ussiel/kung-fu/www/cloudstudio/projectos/franky-skeleton-application/franky-skeleton-application/modulos/developer/shell/nuevo-modulo</file>
+            <file>file:/home/ussiel/kung-fu/www/cloudstudio/projectos/franky-skeleton-application/franky-skeleton-application/modulos/developer/src/Form/CustomAttributesForm.php</file>
+            <file>file:/home/ussiel/kung-fu/www/cloudstudio/projectos/franky-skeleton-application/franky-skeleton-application/modulos/developer/diseno/admin/custom_attributes/form.phtml</file>
+            <file>file:/home/ussiel/kung-fu/www/cloudstudio/projectos/franky-skeleton-application/franky-skeleton-application/modulos/developer/menu/admin.php</file>
+            <file>file:/home/ussiel/kung-fu/www/cloudstudio/projectos/franky-skeleton-application/franky-skeleton-application/modulos/developer/src/entity/CustomattributesEntity.php</file>
+            <file>file:/home/ussiel/kung-fu/www/cloudstudio/projectos/franky-skeleton-application/franky-skeleton-application/modulos/developer/controller/admin/custom_attributes/submit.php</file>
+            <file>file:/home/ussiel/kung-fu/www/cloudstudio/projectos/franky-skeleton-application/franky-skeleton-application/modulos/developer/src/model/CustomattributesModel.php</file>
+            <file>file:/home/ussiel/kung-fu/www/cloudstudio/projectos/franky-skeleton-application/franky-skeleton-application/modulos/developer/controller/admin/custom_attributes/form.php</file>
         </group>
     </open-files>
 </project-private>

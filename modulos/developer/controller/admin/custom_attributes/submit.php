@@ -11,7 +11,8 @@ $CustomattributesEntity = new CustomattributesEntity($MyRequest->getRequest());
 
 $id       = $Tokenizer->decode($MyRequest->getRequest('id'));
 $callback = $Tokenizer->decode($MyRequest->getRequest('callback'));
-$CustomattributesEntity->data(json_encode($MyRequest->getRequest('data',array())));
+$type_option = $MyRequest->getRequest('type_option');
+
 
 if($Tokenizer->decode($MyRequest->getRequest('id')) != false)
 {
@@ -33,7 +34,7 @@ if(!$valid)
 
 if($CustomattributesModel->existe($nombre,$entity,$id) == REGISTRO_SUCCESS)
 {
-    $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("blog_categoria_duplicado"));
+    $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("developer_attr_duplicado"));
     $error = true;
 }
 
@@ -43,6 +44,27 @@ if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_CUSTOM_ATTRIBUTES))
     $error = true;
 }
 
+if($type_option == "options_attr")
+{
+   
+    $values = $MyRequest->getRequest('option_value',array());
+    $label = $MyRequest->getRequest('option_label',array());
+    $options = [];
+    if(!empty($values))
+    {
+        foreach($values as $k => $v)
+        {
+            $options[$v] = $label[$k];
+        }
+    }
+    $CustomattributesEntity->data(json_encode($options));
+    $CustomattributesEntity->source('');
+}
+else
+{
+    
+    $CustomattributesEntity->data('');
+}
 
 
 if($error == false)        
@@ -69,7 +91,7 @@ if($error == false)
              $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("editar_generico_success"));
         }
 
-        $location = (!empty($callback) ? ($callback) : $MyRequest->url(ADMINISTRAR_CUSTOM_ATTRIBUTES));
+        $location = (!empty($callback) ? ($callback) : $MyRequest->url(ADMIN_CUSTOM_ATTRIBUTES));
 
     }
     elseif($result == REGISTRO_ERROR)

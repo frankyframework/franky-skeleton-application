@@ -9,5 +9,13 @@
         <llave>subcategory_error_delete</llave>
         <valor>No se pudo eliminar la subcategoria intenta mas tarde</valor>
     </mensaje>
+    <mensaje>
+        <llave>categoria_duplicado</llave>
+        <valor>Ya existe una categoría con este nombre</valor>
+    </mensaje>
+    <mensaje>
+        <llave>subcategoria_duplicado</llave>
+        <valor>Ya existe una subcategoría con este nombre</valor>
+    </mensaje>
   
 </mensajes>

@@ -29,4 +29,9 @@
         <llave>custom_attribute_error_delete</llave>
         <valor>Error al eliminar el atributo</valor>
     </mensaje>
+      <mensaje>
+        <llave>attr_duplicado</llave>
+        <valor>Ya existe un atributo con este nombre</valor>
+    </mensaje>
+    
 </mensajes>

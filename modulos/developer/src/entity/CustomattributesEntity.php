@@ -63,9 +63,9 @@ class CustomattributesEntity
 
     public function type($type = null){ if($type != null){ $this->type=$type; }else{ return $this->type; } }
 
-    public function data($data = null){ if($data != null){ $this->data=$data; }else{ return $this->data; } }
+    public function data($data = null){ if($data !== null){ $this->data=$data; }else{ return $this->data; } }
 
-    public function source($source = null){ if($source != null){ $this->source=$source; }else{ return $this->source; } }
+    public function source($source = null){ if($source !== null){ $this->source=$source; }else{ return $this->source; } }
 
     public function entity($entity = null){ if($entity != null){ $this->entity=$entity; }else{ return $this->entity; } }
 
@@ -73,7 +73,7 @@ class CustomattributesEntity
 
     public function updateAt($updateAt = null){ if($updateAt != null){ $this->updateAt=$updateAt; }else{ return $this->updateAt; } }
 
-    public function status($status = null){ if($status != null){ $this->status=$status; }else{ return $this->status; } }
+    public function status($status = null){ if($status !== null){ $this->status=$status; }else{ return $this->status; } }
 
 
 
