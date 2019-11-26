@@ -15,7 +15,7 @@ if (is_array($MyFrankyMonster->MyAjaxFile())) {
     }
 }
 
-$FILE =  \Franky\Filesystem\File();
+$FILE = new \Franky\Filesystem\File();
 if (is_array($MyFrankyMonster->MyJQueyfile())) {
     if (count($MyFrankyMonster->MyJQueyfile()) > 0) {
         foreach ($MyFrankyMonster->MyJQueyfile() as $jquery) {
