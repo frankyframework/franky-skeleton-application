@@ -40,7 +40,7 @@ if(!$valid)
 
 if($CatalogsubcategoryModel->existe($nombre,$id) == REGISTRO_SUCCESS)
 {
-    $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("blog_categoria_duplicado"));
+    $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("subcategoria_duplicado"));
     $error = true;
 }
 

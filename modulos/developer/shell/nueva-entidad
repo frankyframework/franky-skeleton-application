@@ -90,7 +90,7 @@ while($registro = $ibd->fetch("campos_BD"))
     $vars .= 'private $'.$registro["Field"].";\n";
     $vars_fill .= '$this->'.$registro["Field"].' = (isset($data["'.$registro["Field"].'"]) ? $data["'.$registro["Field"].'"] : null);'."\n";
 
-    $setters .= 'public function '.($registro["Field"]).'($'.$registro["Field"].' = null){ if($'.$registro["Field"].' != null){ $this->'.$registro["Field"].'=$'.$registro["Field"].'; }else{ return $this->'.$registro["Field"].'; } }'."\n\n";
+    $setters .= 'public function '.($registro["Field"]).'($'.$registro["Field"].' = null){ if($'.$registro["Field"].' !== null){ $this->'.$registro["Field"].'=$'.$registro["Field"].'; }else{ return $this->'.$registro["Field"].'; } }'."\n\n";
     $filter .= '"'.$registro["Field"].'" => array("valor" => $this->'.$registro["Field"].',"required"),';
 }
 

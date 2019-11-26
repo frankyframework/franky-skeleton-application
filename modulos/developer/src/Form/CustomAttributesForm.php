@@ -21,7 +21,12 @@ class CustomAttributesForm extends \Franky\Form\Form
                 
             )
         );
-       
+       $this->add(array(
+                'name' => 'type_option',
+                'type'  => 'hidden',
+                
+            )
+        );
        
         $this->add(array(
                 'name' => 'name',
