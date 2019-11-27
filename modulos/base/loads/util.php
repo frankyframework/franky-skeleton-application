@@ -462,12 +462,13 @@ function sendEmail($campos,$data)
             endif;
         endforeach;
     endif;
+    if(!empty($bcc)):
     foreach($bcc as $email_bcc):
         if(!empty($email_bcc)):
             $Headers .= 'Bcc: '.$email_bcc . "\r\n";
         endif;
     endforeach;
- 
+    endif;
     //echo $Headers;
     return mail($destinatario,$data['Asunto'],$ContenidoString, $Headers);
     
