@@ -15,12 +15,13 @@ if (is_array($MyFrankyMonster->MyAjaxFile())) {
     }
 }
 
+$FILE = new \Franky\Filesystem\File();
 if (is_array($MyFrankyMonster->MyJQueyfile())) {
     if (count($MyFrankyMonster->MyJQueyfile()) > 0) {
         foreach ($MyFrankyMonster->MyJQueyfile() as $jquery) {
 
             $path = PROJECT_DIR."/public/jquery/$jquery/js/";
-            $js_jquery = \Franky\Filesystem\File::getFiles($path);
+            $js_jquery = $FILE->getFiles($path);
 
             if(count($js_jquery) > 0)
             {
