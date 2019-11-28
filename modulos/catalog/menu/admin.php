@@ -2,8 +2,8 @@
 return array(
     'title'=> "Catalogo",
     array(
-     "permiso" =>   ADMINISTRAR_PRODCUT_CATALOG,
-     "url" => $MyRequest->url(ADMIN_CATALOG_PRODUCT),
+     "permiso" =>   ADMINISTRAR_PRODUCTS_CATALOG,
+     "url" => $MyRequest->url(ADMIN_CATALOG_PRODUCTS),
      "etiqueta" => "Productos"
     ),
     array(

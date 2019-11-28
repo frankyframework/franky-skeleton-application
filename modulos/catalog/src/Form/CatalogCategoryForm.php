@@ -42,21 +42,7 @@ class CatalogCategoryForm extends \Franky\Form\Form
                  )
             )
         );
-        $this->add(array(
-            'name' => 'url_key',
-            'label' => 'URL KEY:',
-            'type'  => 'text',
-            'required'  => false,
-            'atributos' => array(
-                    'class'       => '',
-                    'maxlength' => 255
-                ),
-                'label_atributos' => array(
-                    'class'       => 'desc_form_obligatorio'
-                )
-            )
-        );
-
+        
 
         $this->add(array(
                 'name' => 'description',
@@ -107,6 +93,20 @@ class CatalogCategoryForm extends \Franky\Form\Form
             )
         );
 
+        $this->add(array(
+            'name' => 'url_key',
+            'label' => 'URL KEY:',
+            'type'  => 'text',
+            'required'  => false,
+            'atributos' => array(
+                    'class'       => '',
+                    'maxlength' => 255
+                ),
+                'label_atributos' => array(
+                    'class'       => 'desc_form_obligatorio'
+                )
+            )
+        );
 
         $this->add(array(
                 'name' => 'meta_title',

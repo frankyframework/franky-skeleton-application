@@ -42,10 +42,12 @@ if ($zip->open($destination) === TRUE) {
     );
     foreach($modulos as $modulo)
     {
-      $fullmkdir[] = '/modulos/'.$modulo;
-      $fullmkdir[] = '/public/skin/'.$modulo.'/css';
-      $fullmkdir[] = '/public/skin/'.$modulo.'/images';
-      $fullmkdir[] = '/public/ajax/'.$modulo;
+        if(!empty($modulo)):
+            $fullmkdir[] = '/modulos/'.$modulo;
+            $fullmkdir[] = '/public/skin/'.$modulo.'/css';
+            $fullmkdir[] = '/public/skin/'.$modulo.'/images';
+            $fullmkdir[] = '/public/ajax/'.$modulo;
+        endif; 
     }
 
     $path =  $path.'franky-skeleton-application-master';

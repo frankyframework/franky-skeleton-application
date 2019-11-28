@@ -17,5 +17,9 @@
         <llave>subcategoria_duplicado</llave>
         <valor>Ya existe una subcategoría con este nombre</valor>
     </mensaje>
+    <mensaje>
+        <llave>products_error_delete</llave>
+        <valor>No se puede desactivar el producto</valor>
+    </mensaje>
   
 </mensajes>

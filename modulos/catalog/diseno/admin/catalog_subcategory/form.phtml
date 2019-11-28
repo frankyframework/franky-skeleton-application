@@ -15,7 +15,7 @@
         <?php endif; ?>
         <?php echo $adminForm->getRow('id_category'); ?>
         <?php echo $adminForm->getRow('name'); ?>
-        <?php echo $adminForm->getRow('url_key'); ?>
+        
         <?php echo $adminForm->getRow('description'); ?>
 
         <?php echo $adminForm->getRow('visible_in_search'); ?>
@@ -26,6 +26,9 @@
             <?php endif; ?>
         </div>
         <?php echo $adminForm->getRow('image'); ?>
+
+        <div class="form-group"><h3>SEO</h3></div>
+        <?php echo $adminForm->getRow('url_key'); ?>
         <?php echo $adminForm->getRow('meta_title'); ?>
         <?php echo $adminForm->getRow('meta_description'); ?>
         <?php echo $adminForm->getRow('meta_keywords'); ?>

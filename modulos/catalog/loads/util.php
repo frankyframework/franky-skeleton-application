@@ -26,6 +26,19 @@ function getCatalogCategorys( $type="interface")
     return $categorias;
 }
 
+function getFotoCatalogProduct($album,$foto,$token)
+{
+    global $MySession;
+    global $MyConfigure;
+    $Tokenizer = new \Franky\Haxor\Tokenizer();
 
+    $html = "";
+    $html .= "<div class='w-xxxx-4 w-xxx-4 w-xx-4 w-x-4 align_center img_foto_clientes foto_".$token."' id='foto_".$token."'>"
+            ."<div><button type='button' onclick=\"bingoo_eliminarFotoCatalogProduct('$token')\"><i class='icon icon-r-eliminar'></i></button></div>"
+
+            . "<div>".  makeHTMLImg(imageResize($MyConfigure->getUploadDir()."/catalog/products/$album/$foto",220,220,true), "", "", "")."</div>"
+            . "</div>";
+    return $html;
+}
 
 ?>
