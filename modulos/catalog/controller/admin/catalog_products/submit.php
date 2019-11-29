@@ -2,6 +2,8 @@
 use Franky\Core\validaciones;
 use Catalog\model\CatalogproductsModel;
 use Catalog\entity\CatalogproductsEntity;
+use Catalog\entity\CatalogsubcategoryproductEntity;
+use Catalog\model\CatalogsubcategoryproductModel;
 use Base\entity\redireccionesEntity;
 use Franky\Filesystem\File;
 use Franky\Haxor\Tokenizer;
@@ -13,9 +15,22 @@ $CatalogproductsEntity       = new CatalogproductsEntity($MyRequest->getRequest(
 $callback = $Tokenizer->decode($MyRequest->getRequest('callback'));
 $CatalogproductsEntity->id($Tokenizer->decode($MyRequest->getRequest('id')));
 $id = $CatalogproductsEntity->id();
+$category  = $MyRequest->getRequest('category');
+$subcategory  = $MyRequest->getRequest('subcategory');
+
 
 $error = false;
-$album = $MySession->GetVar('addProducts');
+
+if($CatalogproductsEntity->url_key() === "")
+{
+    $CatalogproductsEntity->url_key(getFriendly($CatalogproductsEntity->name()));
+}
+else{
+    $CatalogproductsEntity->url_key(getFriendly($CatalogproductsEntity->url_key()));
+}
+
+
+$album = $MySession->GetVar('addProduct');
 
 $validaciones =  new validaciones();
 
@@ -36,16 +51,40 @@ if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_PRODUCTS_CATALOG))
     $error = true;
 }
 
-
-$dir = $MyConfigure->getServerUploadDir()."/catalog/products/$album/";
-$File = new File();
-$File->mkdir($dir);
-
-
-$CatalogproductsEntity->images(json_encode($_SESSION['album_'.$album]));
+if(empty($category))
+{
+    $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("catalog_empty_category"));
+    $error = true;
+}
+if(empty($subcategory))
+{
+    $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("catalog_empty_subcategory"));
+    $error = true;
+}
 
 if(!$error)
 {
+    $subcategorias = getCatalogSubcategorys(null,'sql');
+    $category_subcategory = [];
+    foreach($subcategorias as $cat => $subcat)
+    {
+        if(in_array($cat,$category))
+        {
+            $category_subcategory[$cat] = array(); 
+            foreach($subcat as $id_sub => $label)
+            {
+                if(in_array($id_sub,$subcategory))
+                {
+                    $category_subcategory[$cat][] = $id_sub; 
+                }
+            }
+        }
+        
+    }
+    $CatalogproductsEntity->category(json_encode($category_subcategory));
+
+    $CatalogproductsEntity->images(json_encode($_SESSION['album_'.$album]));
+    
     if(empty($id))
     {
 
@@ -61,8 +100,6 @@ if(!$error)
    
     if($result == REGISTRO_SUCCESS)
     {
-       
-
         if(empty($id))
         {
 
@@ -81,7 +118,7 @@ if(!$error)
         $location = (!empty($callback) ? ($callback) : $MyRequest->url(ADMIN_CATALOG_PRODUCTS));
 
         $MySession->UnsetVar('album_'.$album);
-        $MySession->UnsetVar('addProducts');
+        $MySession->UnsetVar('addProduct');
 
 
     }

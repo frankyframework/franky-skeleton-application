@@ -1,32 +1,37 @@
 <?php
 use Franky\Filesystem\File;
 
-if(!$MyRequest->isAjax() || !$MyAccessList->MeDasChancePasar(SUSCRIPTOR_ADMINISTRAR_EXPERIENCIAS_PUBLICADAS))
+if(!$MyRequest->isAjax() || !$MyAccessList->MeDasChancePasar(ADMINISTRAR_PRODUCTS_CATALOG))
 {
     $MyRequest->redirect();
 }
 
 $respuesta = array("error" => false);
-
+$album = $MySession->GetVar('addProduct');
 $usadas = 0;
-foreach($_SESSION['album_'.$album] as $img)
+if(!empty($_SESSION['album_'.$album]))
 {
-  $usadas++;
+    foreach($_SESSION['album_'.$album] as $img)
+    {
+      $usadas++;
+    }
 }
+
+
 if($usadas >= 12)
 {
   $MyRequest->redirect();
 }
 
 
-$album = $MySession->GetVar('addExperiencia');
+$album = $MySession->GetVar('addProduct');
 
-$dir = $MyConfigure->getServerUploadDir()."/experiencias/".$MySession->GetVar('id')."/$album/";
+$dir = $MyConfigure->getServerUploadDir()."/catalog/products/$album/";
 $File = new File();
 $File->mkdir($dir);
 
 $files = array();
-foreach ($_FILES['photos'] as $k => $l) {
+foreach ($_FILES['images'] as $k => $l) {
     foreach ($l as $i => $v) {
         if (!array_key_exists($i, $files))
             $files[$i] = array();
@@ -58,7 +63,7 @@ foreach ($files as $file)
 
             if ($handle->processed)
             {
-                $respuesta["img"][] = array("name" => $handle->file_dst_name, "error" => false, "msg" => "", "html" => getBingooFotoExperiencia($album,$handle->file_dst_name,md5($handle->file_dst_name),$MySession->GetVar('id')));
+                $respuesta["img"][] = array("name" => $handle->file_dst_name, "error" => false, "msg" => "", "html" => getFotoCatalogProduct($album,$handle->file_dst_name,md5($handle->file_dst_name)));
             //    $_SESSION[$album] = array();
                 $_SESSION['album_'.$album][] = array("token" => md5($handle->file_dst_name), "img" => $handle->file_dst_name);
             }

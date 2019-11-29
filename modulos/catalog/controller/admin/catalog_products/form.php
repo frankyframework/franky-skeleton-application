@@ -28,12 +28,13 @@ else{
         foreach($_SESSION['album_'.$album]  as $foto)
         {
 
-            $galeria_frm .= getFotoCatalogProduct($album,$foto['img'],md5($foto['img']),$MySession->GetVar('id'));
+            $galeria_frm .= getFotoCatalogProduct($album,$foto['img'],md5($foto['img']));
         }
     }
 }
 
-
+$data_category = [];
+$data_subcategory = [];
 $adminForm = new ProductsForm("frmproduct");
 
 $title = "Nuevo producto";
@@ -62,6 +63,15 @@ if(!empty($id))
             $galeria_frm .= getFotoCatalogProduct($id,$foto['img'],md5($foto['img']),$data['id_usuario']);
         }
     }
+   
+    foreach($data["category"] as $cat => $sub)
+    {
+        $data_category[] = $cat;
+        foreach($sub as $_sub)
+        {
+            $data_subcategory[] = $_sub;
+        }
+    }
 
 
 }
@@ -73,7 +83,7 @@ $subcategorias = getCatalogSubcategorys(null,'sql');
 
 $adminForm->setAtributoInput("callback","value", urldecode($callback));
 $adminForm->setOptionsInput("category", $categorias);
-$adminForm->setOptionsInput("subcategory", $idiomas);
+$adminForm->setOptionsInput("subcategory", $subcategorias);
 
 $title_form = "$title";
 $MySession->SetVar('addProduct',$album);

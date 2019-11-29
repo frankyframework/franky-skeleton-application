@@ -66,8 +66,7 @@ class CatalogproductsEntity
     {
         return array( 
             "Nombre producto" => array("valor" => $this->name,"required"),
-            "SKU" => array("valor" => $this->sku,"required"),
-            "ULR Key" => array("valor" => $this->url_key,"required"),
+            "SKU" => array("valor" => $this->sku,"required")
         );
     }
 

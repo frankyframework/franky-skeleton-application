@@ -11,7 +11,7 @@ class ProductsForm  extends \Franky\Form\Form
 
         $this->setAtributos(array(
             'name' => $name,
-            'action' => "admin/catalog-product/submit.php",
+            'action' => "admin/catalog-products/submit.php",
             'method' => 'post',
             'enctype' => "multipart/form-data"
         ));
@@ -39,9 +39,22 @@ class ProductsForm  extends \Franky\Form\Form
                  )
             )
         );
-
         $this->add(array(
-                'name' => 'descripcion',
+            'name' => 'sku',
+            'label' => 'SKU',
+            'type'  => 'text',
+            'required'  => true,
+            'atributos' => array(
+                'maxlength' => 255,
+                'class' => 'required'
+             ),
+            'label_atributos' => array(
+                'class'       => 'desc_form_obligatorio'
+             )
+        )
+    );
+        $this->add(array(
+                'name' => 'description',
                 'label' => 'Descripción',
                 'type'  => 'textarea',
                 'required'  => false,
@@ -96,7 +109,7 @@ class ProductsForm  extends \Franky\Form\Form
                 'name' => 'price',
                 'label' => _('Precio'),
                 'type'  => 'text',
-                'required'  => true,
+                'required'  => false,
                 'atributos' => array(
                 'class'   => "",
                     'maxlength' => 10,
@@ -113,7 +126,7 @@ class ProductsForm  extends \Franky\Form\Form
                 'name' => 'iva',
                 'label' => _('IVA'),
                 'type'  => 'text',
-                'required'  => true,
+                'required'  => false,
                 'atributos' => array(
                 'class'   => "",
                     'maxlength' => 2,
@@ -165,10 +178,10 @@ class ProductsForm  extends \Franky\Form\Form
                 'name' => 'videos',
                 'label' => '¿Tienes videos? Coloca la url',
                 'type'  => 'text',
-                'required'  => true,
+                'required'  => false,
                 'atributos' => array(
                     'maxlength' => 250,
-                    'class' => 'required',
+                    'class' => '',
                     'id' => 'videos'
                 ),
                 'label_atributos' => array(
@@ -244,7 +257,7 @@ class ProductsForm  extends \Franky\Form\Form
         );
 
         $this->add(array(
-                'name' => 'meta_keywords',
+                'name' => 'meta_keyword',
                 'label' => 'Meta Keywords',
                 'type'  => 'textarea',
                 'required'  => false,

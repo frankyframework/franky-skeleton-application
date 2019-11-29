@@ -10,7 +10,7 @@
         <?php  echo $adminForm->get("id"); ?>
           <?php endif; ?>
         <?php  echo $adminForm->getRow("name"); ?>
-        
+        <?php  echo $adminForm->getRow("sku"); ?>
         <div class="form-group">
           <h3>Categorias</h3>
          
@@ -18,11 +18,11 @@
             <ul>
             <?php foreach($categorias as $cat_id => $cat_label): ?>
             <li>
-                <?=$cat_label;?>
+                <label ><input type="checkbox" name="category[]" value="<?=$cat_id;?>" <?=(in_array($cat_id,$data_category) ? 'checked="checked"' : '')?> class="required" /><?=$cat_label;?></label>
                 <?php if(!empty($subcategorias[$cat_id])): ?>
-                    <ul>
+                    <ul <?=(in_array($cat_id,$data_category) ? '' : 'style="display:none;"')?>>
                     <?php foreach($subcategorias[$cat_id] as $subcat_id => $subcat_label): ?>
-                    <li><?=$subcat_label;?><li>
+                    <li> <label ><input type="checkbox" name="subcategory[]" value="<?=$subcat_id;?>"  <?=(in_array($subcat_id,$data_subcategory) ? 'checked="checked"' : '')?>  class="required" /><?=$subcat_label;?></label><li>
                     <?php endforeach; ?>
                     </ul>
             <?php endif; ?>
@@ -30,10 +30,12 @@
             <?php endforeach; ?>
             </ul>
         <?php endif; ?>
+        <label id="category[]-error" class="error" for="category[]" style="display:none;"></label>
+        <label id="subcategory[]-error" class="error" for="subcategory[]" style="display:none;"></label>
         </div>
-        <?php  echo $adminForm->getRow("category[]"); ?>
+     
 
-        <?php  echo $adminForm->getRow("descripcion"); ?>
+        <?php  echo $adminForm->getRow("description"); ?>
 
         <?php  echo $adminForm->getRow("stock"); ?>
         <?php  echo $adminForm->getRow("visible_in_search"); ?>
@@ -59,7 +61,7 @@
 
                       <div class="ver_cabecera"></div>
 
-                      <div  id="cont_fotos"><?php echo $galeria_frm; ?></div>
+                      <div  id="cont_fotos" class="fondo_galeria"><?php echo $galeria_frm; ?></div>
                       </div>
                   </div>
               </div>
@@ -73,7 +75,7 @@
         <?php echo $adminForm->getRow('url_key'); ?>
         <?php echo $adminForm->getRow('meta_title'); ?>
         <?php echo $adminForm->getRow('meta_description'); ?>
-        <?php echo $adminForm->getRow('meta_keywords'); ?>
+        <?php echo $adminForm->getRow('meta_keyword'); ?>
 
         <?php  //echo $adminForm->getRow("videos"); ?>
      
@@ -98,9 +100,21 @@
 <script >
 $(document).ready(function()
 {
-  $( "#frmproducts" ).validate();
+  $( "#frmproduct" ).validate();
   $('textarea[name=meta_keywords]').tagsInput({width:'auto'});
   $('input[name=videos]').tagsInput({width:'auto'});
+
+
+  $('input[name="category[]"]').change(function(){
+      if($(this).is(':checked'))
+      {
+        
+        $(this).parents('li').children('ul').show();
+      }
+      else{
+        $(this).parents('li').children('ul').hide().find('input[type=checkbox]').prop('checked',false);
+      }
+  });
 });
 </script>
 <script>
@@ -133,7 +147,7 @@ function uploadMultiGaleria(e)
 
     $.ajax({ // JQuery Ajax
             type: 'POST',
-            url: "/bingoo/suscriptor/experiencias/publicar/upload.php", // URL to the PHP file which will insert new value in the database
+            url: "/admin/catalog_products/upload.php", // URL to the PHP file which will insert new value in the database
             data:fd, // We send the data string
             processData: false,
             contentType: false,
@@ -164,6 +178,7 @@ function uploadMultiGaleria(e)
                   {
                       $("#cont_fotos").append(respuesta['img'][i]["html"]);
                   }
+                  sortGaleria();
                 }
 
 
@@ -195,17 +210,32 @@ $(document).ready(function()
     $('#photoimg').on('change', function(e)
     {
         uploadMultiGaleria(e);
+       
     });
-
+    sortGaleria();
 
 });
+
+
+var sortGaleria = function() {    
+      $( "#cont_fotos" ).sortable({
+          connectWith: ".fondo_galeria",
+          update: function(event, ui){
+              var newOrder = $(this).sortable('toArray').toString();
+              setOrdenImagesProducts('<?php echo $album; ?>',newOrder);  
+          }  ,
+          placeholder: 'ui-state-default'
+      });
+      $( "#cont_fotos" ).disableSelection();
+    }
+    
 </script>
 <script >
 
 
 $(window).load(function(){
   tinymce.init({
-    selector: 'textarea[name=descripcion]',
+    selector: 'textarea[name=description]',
     height: 500,
     menubar: false,
     codesample_dialog_width: '600',

@@ -63,12 +63,15 @@ function getFotoCatalogProduct($album,$foto,$token)
 
     global $MyConfigure;
     $Tokenizer = new \Franky\Haxor\Tokenizer();
-
     $html = "";
     $html .= "<div class='w-xxxx-4 w-xxx-4 w-xx-4 w-x-4 align_center img_foto_clientes foto_".$token."' id='foto_".$token."'>"
-            ."<div><button type='button' onclick=\"bingoo_eliminarFotoCatalogProduct('$token')\"><i class='icon icon-r-eliminar'></i></button></div>"
+            ."<div class=\"w-xxxx-6 w-xxx-6 w-xx-6 w-x-6\">"
+            ."<input type=\"radio\" value=\"$token\" name=\"principal\" />Principal"
+            ."</div>"
+            ."<div class=\"w-xxxx-6 w-xxx-6 w-xx-6 w-x-6\">"
+            ."<button type='button' onclick=\"eliminarFotoCatalogProduct('$token')\"><i class='icon icon-r-eliminar'></i></button>"
 
-            . "<div>".  makeHTMLImg(imageResize($MyConfigure->getUploadDir()."/catalog/products/$album/$foto",220,220,true), "", "", "")."</div>"
+            . "</div><div>".  makeHTMLImg(imageResize($MyConfigure->getUploadDir()."/catalog/products/$album/$foto",220,220,true), "", "", "")."</div>"
             . "</div>";
     return $html;
 }

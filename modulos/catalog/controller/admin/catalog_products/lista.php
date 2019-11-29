@@ -50,7 +50,8 @@ if($CatalogproductsModel->getTotal() > 0)
         $lista_admin_data[$iRow] = array_merge($registro,array(
                 "thisClass"     => $thisClass,
                 "id" => $Tokenizer->token('catalog_products',$registro["id"]),
-                "callback" => $Tokenizer->token('catalog_products',$MyRequest->getURI())
+                "callback" => $Tokenizer->token('catalog_products',$MyRequest->getURI()),
+                "nuevo_estado"  => ($registro["status"] == 1 ?"desactivar" : "activar"),
         ));
 
 
@@ -65,10 +66,10 @@ $deleteFunction = "DeleteCatalogProduct";
 
 $frm_constante_link = FRM_CATALOG_PRODUCTS;
 
-$titulo_columnas_grid = array("createdAt" => "Fecha", "name" =>  "Nomre");
-$value_columnas_grid = array("createdAt" , "name");
+$titulo_columnas_grid = array("createdAt" => "Fecha", "name" =>  "Nomre","sku" => "SKU");
+$value_columnas_grid = array("createdAt" , "name","sku");
 
-$css_columnas_grid = array("createdAt" => "w-xxxx-2" , "name" => "w-xxxx-4");
+$css_columnas_grid = array("createdAt" => "w-xxxx-2" , "name" => "w-xxxx-4", "sku" => "w-xxxx-4");
 
 
 $permisos_grid = ADMINISTRAR_PRODUCTS_CATALOG;

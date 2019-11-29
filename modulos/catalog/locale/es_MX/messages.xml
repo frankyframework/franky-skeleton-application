@@ -21,5 +21,13 @@
         <llave>products_error_delete</llave>
         <valor>No se puede desactivar el producto</valor>
     </mensaje>
+    <mensaje>
+        <llave>empty_category</llave>
+        <valor>Selecciona almenos una categoria</valor>
+    </mensaje>
+     <mensaje>
+        <llave>empty_subcategory</llave>
+        <valor>Selecciona almenos una subcategoria</valor>
+    </mensaje>
   
 </mensajes>
