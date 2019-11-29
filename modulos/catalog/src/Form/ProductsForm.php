@@ -179,8 +179,8 @@ class ProductsForm  extends \Franky\Form\Form
 
 
         $this->add(array(
-                'name' => 'photos[]',
-                'label' => 'Fotos',
+                'name' => 'images[]',
+                'label' => 'Imagenes',
                 'type'  => 'file',
                 'required'  => false,
                 'atributos' => array(

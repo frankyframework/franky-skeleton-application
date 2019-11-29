@@ -288,3 +288,34 @@ CREATE TABLE user_device (
   id_user int(11) NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+
+/*Table structure for table `custom_attributes` */
+
+DROP TABLE IF EXISTS `custom_attributes`;
+
+CREATE TABLE `custom_attributes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `label` varchar(255) NOT NULL,
+  `type` varchar(20) NOT NULL,
+  `data` text DEFAULT NULL,
+  `source` text DEFAULT NULL,
+  `entity` varchar(255) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updateAt` datetime DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS `custom_attributes_values`;
+
+CREATE TABLE `custom_attributes_values` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_attribute` int(11) NOT NULL,
+  `id_ref` int(11) NOT NULL,
+  `value` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;

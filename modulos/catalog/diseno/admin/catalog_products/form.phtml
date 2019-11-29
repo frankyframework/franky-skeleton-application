@@ -10,7 +10,27 @@
         <?php  echo $adminForm->get("id"); ?>
           <?php endif; ?>
         <?php  echo $adminForm->getRow("name"); ?>
-
+        
+        <div class="form-group">
+          <h3>Categorias</h3>
+         
+        <?php if(!empty($categorias)): ?>
+            <ul>
+            <?php foreach($categorias as $cat_id => $cat_label): ?>
+            <li>
+                <?=$cat_label;?>
+                <?php if(!empty($subcategorias[$cat_id])): ?>
+                    <ul>
+                    <?php foreach($subcategorias[$cat_id] as $subcat_id => $subcat_label): ?>
+                    <li><?=$subcat_label;?><li>
+                    <?php endforeach; ?>
+                    </ul>
+            <?php endif; ?>
+            <li>
+            <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
+        </div>
         <?php  echo $adminForm->getRow("category[]"); ?>
 
         <?php  echo $adminForm->getRow("descripcion"); ?>

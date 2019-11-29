@@ -26,9 +26,41 @@ function getCatalogCategorys( $type="interface")
     return $categorias;
 }
 
+
+function getCatalogSubcategorys($id=null, $type="interface")
+{
+    $CatalogsubcategoryModel = new Catalog\model\CatalogsubcategoryModel();
+    $CatalogsubcategoryEntity = new Catalog\entity\CatalogsubcategoryEntity();
+    $CatalogsubcategoryModel->setTampag(1000);
+    $CatalogsubcategoryModel->setOrdensql("catalog_subcategory.name ASC");
+    $CatalogsubcategoryEntity->id_category($id);
+    $CatalogsubcategoryModel->getData($CatalogsubcategoryEntity->getArrayCopy());
+    $total	= $CatalogsubcategoryModel->getTotal();
+    $subcategorias = array();
+
+    if($total > 0)
+    {
+
+        while($registro = $CatalogsubcategoryModel->getRows())
+        {
+            if($id != null)
+            {
+                $subcategorias[($type == "interface" ? $registro["url_key"] : $registro['id'])] = $registro["name"];
+            }
+            else
+            {
+                 $subcategorias[$registro["id_category"]][($type == "interface" ? $registro["url_key"] : $registro['id'])] = $registro["name"];
+          
+            }
+	}
+    }
+    return $subcategorias;
+}
+
+
 function getFotoCatalogProduct($album,$foto,$token)
 {
-    global $MySession;
+
     global $MyConfigure;
     $Tokenizer = new \Franky\Haxor\Tokenizer();
 

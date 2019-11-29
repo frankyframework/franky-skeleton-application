@@ -68,8 +68,8 @@ if(!empty($id))
 //print_r($data); exit;
 
 $adminForm->setData($data);
-$categorias = getCatalogCategorys();
-//$categorias = selectCatalogSubCategoria();
+$categorias = getCatalogCategorys('sql');
+$subcategorias = getCatalogSubcategorys(null,'sql');
 
 $adminForm->setAtributoInput("callback","value", urldecode($callback));
 $adminForm->setOptionsInput("category", $categorias);
