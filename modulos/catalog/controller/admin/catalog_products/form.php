@@ -28,7 +28,7 @@ else{
         foreach($_SESSION['album_'.$album]  as $foto)
         {
 
-            $galeria_frm .= getFotoCatalogProduct($album,$foto['img'],md5($foto['img']));
+            $galeria_frm .= getFotoCatalogProduct($album,$foto['img'],md5($foto['img']),$foto['principal']);
         }
     }
 }
@@ -60,7 +60,7 @@ if(!empty($id))
         foreach($data["images"] as $foto)
         {
 
-            $galeria_frm .= getFotoCatalogProduct($id,$foto['img'],md5($foto['img']),$data['id_usuario']);
+            $galeria_frm .= getFotoCatalogProduct($id,$foto['img'],md5($foto['img']),$foto['principal']);
         }
     }
    

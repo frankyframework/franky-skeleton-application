@@ -10,6 +10,8 @@ use Franky\Haxor\Tokenizer;
 
 
 $Tokenizer = new Tokenizer();
+$CatalogsubcategoryproductEntity        = new CatalogsubcategoryproductEntity();
+$CatalogsubcategoryproductModel       = new CatalogsubcategoryproductModel();
 $CatalogproductsModel        = new CatalogproductsModel();
 $CatalogproductsEntity       = new CatalogproductsEntity($MyRequest->getRequest());
 $callback = $Tokenizer->decode($MyRequest->getRequest('callback'));
@@ -17,7 +19,8 @@ $CatalogproductsEntity->id($Tokenizer->decode($MyRequest->getRequest('id')));
 $id = $CatalogproductsEntity->id();
 $category  = $MyRequest->getRequest('category');
 $subcategory  = $MyRequest->getRequest('subcategory');
-
+$description  = $MyRequest->getRequest('description','',true);
+$principal  = $MyRequest->getRequest('principal');
 
 $error = false;
 
@@ -83,6 +86,22 @@ if(!$error)
     }
     $CatalogproductsEntity->category(json_encode($category_subcategory));
 
+    if(isset($_SESSION['album_'.$album]) && !empty($_SESSION['album_'.$album]))
+    {
+
+        foreach($_SESSION['album_'.$album]  as $k => $foto)
+        {
+            if(md5($foto['img']) == $principal)
+            {
+                $_SESSION['album_'.$album][$k]['principal'] = 1;
+            }
+            else{
+                $_SESSION['album_'.$album][$k]['principal'] = 0;
+            }
+        }
+    }
+    
+    
     $CatalogproductsEntity->images(json_encode($_SESSION['album_'.$album]));
     
     if(empty($id))
@@ -100,11 +119,13 @@ if(!$error)
    
     if($result == REGISTRO_SUCCESS)
     {
+        
         if(empty($id))
         {
-
+            $id = $CatalogproductsModel->getUltimoID();
+          
             $dir = $MyConfigure->getServerUploadDir()."/catalog/products/$album/";
-            rename($dir,str_replace($album,$CatalogproductsModel->getUltimoID(),$dir));
+            rename($dir,str_replace($album,$id,$dir));
 
 
             $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("guardar_generico_success"));
@@ -113,6 +134,16 @@ if(!$error)
         {
 
              $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("editar_generico_success"));
+        }
+        $CatalogsubcategoryproductEntity->id_product($id);
+        $CatalogsubcategoryproductModel->remove($CatalogsubcategoryproductEntity->getArrayCopy());     
+        foreach($category_subcategory as $cat => $subcat)
+        {
+            foreach($subcat as $id_sub)
+            {  
+                $CatalogsubcategoryproductEntity->id_subcategory($id_sub);
+                $CatalogsubcategoryproductModel->save($CatalogsubcategoryproductEntity->getArrayCopy());   
+            }
         }
 
         $location = (!empty($callback) ? ($callback) : $MyRequest->url(ADMIN_CATALOG_PRODUCTS));

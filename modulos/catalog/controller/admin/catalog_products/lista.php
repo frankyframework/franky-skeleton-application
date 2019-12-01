@@ -21,17 +21,20 @@ $MyPaginacion->setTampageDefault($MyRequest->getRequest('tampag',25));
 $busca_b	= $MyRequest->getRequest('busca_b');
 
 
-$alias = ['createdAt' => "catalog_products.cias.createdAt"];
+$alias = ['_id' => "catalog_products.id"];
 if(isset($alias[$MyRequest->getRequest('por')]))
 {
 
-  $MyPaginacion->setCampoOrden($alias[$MyRequest->getRequest('por')]);
+  $orden = $alias[$MyRequest->getRequest('por')];
+}
+else{
+    $orden = $MyPaginacion->getCampoOrden();
 }
 
 
 $CatalogproductsModel->setPage($MyPaginacion->getPage());
 $CatalogproductsModel->setTampag($MyPaginacion->getTampageDefault());
-$CatalogproductsModel->setOrdensql($MyPaginacion->getCampoOrden()." ".$MyPaginacion->getOrden());
+$CatalogproductsModel->setOrdensql($orden." ".$MyPaginacion->getOrden());
 $result	 		= $CatalogproductsModel->getData($CatalogproductsEntity->getArrayCopy(),$busca_b);
 $MyPaginacion->setTotal($CatalogproductsModel->getTotal());
 $lista_admin_data = array();
@@ -46,12 +49,31 @@ if($CatalogproductsModel->getTotal() > 0)
     {
         $thisClass  = ((($iRow % 2) == 0) ? "formFieldDk" : "formFieldLt");
 
+        $registro["images"] = json_decode($registro["images"],true);
+        $img = "";
+        if(!empty($registro['images']))
+        {
+            foreach($registro["images"] as $foto)
+            {
+                if($foto['principal'] == 1)
+                {
+                     if(!empty($foto["img"]) && file_exists($MyConfigure->getServerUploadDir()."/catalog/products/".$registro["id"].'/'.$foto['img']))
+                    {
+                        $img = imageResize($MyConfigure->getUploadDir()."/catalog/products/".$registro["id"].'/'.$foto['img'],50,50, true);
+                        $img = makeHTMLImg($img,50,50,$registro['name']);
+                    }
+                }
+
+            }
+        }
        
         $lista_admin_data[$iRow] = array_merge($registro,array(
                 "thisClass"     => $thisClass,
                 "id" => $Tokenizer->token('catalog_products',$registro["id"]),
+                "_id" => $registro["id"],
                 "callback" => $Tokenizer->token('catalog_products',$MyRequest->getURI()),
                 "nuevo_estado"  => ($registro["status"] == 1 ?"desactivar" : "activar"),
+                "images"     => $img,
         ));
 
 
@@ -66,10 +88,10 @@ $deleteFunction = "DeleteCatalogProduct";
 
 $frm_constante_link = FRM_CATALOG_PRODUCTS;
 
-$titulo_columnas_grid = array("createdAt" => "Fecha", "name" =>  "Nomre","sku" => "SKU");
-$value_columnas_grid = array("createdAt" , "name","sku");
+$titulo_columnas_grid = array("_id" => "ID","images" => "Thumb", "name" =>  "Nombre","sku" => "SKU");
+$value_columnas_grid = array("_id" ,"images", "name","sku");
 
-$css_columnas_grid = array("createdAt" => "w-xxxx-2" , "name" => "w-xxxx-4", "sku" => "w-xxxx-4");
+$css_columnas_grid = array("_id" => "w-xxxx-2" ,"images" => "w-xxxx-2" , "name" => "w-xxxx-4", "sku" => "w-xxxx-2");
 
 
 $permisos_grid = ADMINISTRAR_PRODUCTS_CATALOG;

@@ -9,11 +9,13 @@ if(!$MyRequest->isAjax() || !$MyAccessList->MeDasChancePasar(ADMINISTRAR_PRODUCT
 $respuesta = array("error" => false);
 $album = $MySession->GetVar('addProduct');
 $usadas = 0;
+$principal = 1;
 if(!empty($_SESSION['album_'.$album]))
 {
     foreach($_SESSION['album_'.$album] as $img)
     {
-      $usadas++;
+        if(($img['principal']) && $img['principal'] == 1){ $principal = 0; }
+        $usadas++;
     }
 }
 
@@ -63,9 +65,9 @@ foreach ($files as $file)
 
             if ($handle->processed)
             {
-                $respuesta["img"][] = array("name" => $handle->file_dst_name, "error" => false, "msg" => "", "html" => getFotoCatalogProduct($album,$handle->file_dst_name,md5($handle->file_dst_name)));
+                $respuesta["img"][] = array("name" => $handle->file_dst_name, "error" => false, "msg" => "", "html" => getFotoCatalogProduct($album,$handle->file_dst_name,md5($handle->file_dst_name),$principal));
             //    $_SESSION[$album] = array();
-                $_SESSION['album_'.$album][] = array("token" => md5($handle->file_dst_name), "img" => $handle->file_dst_name);
+                $_SESSION['album_'.$album][] = array("token" => md5($handle->file_dst_name), "img" => $handle->file_dst_name,'principal' => $principal);
             }
             else
             {
@@ -81,6 +83,7 @@ foreach ($files as $file)
     {
         $respuesta["img"][] = array("name" => $handle->file_dst_name, "error" => true, "msg" => "Error al subir la imagen");
     }
+    $principal = 0;
 }
 
 header('Content-Type: application/json');

@@ -52,5 +52,20 @@ class CatalogsubcategoryproductModel  extends \Franky\Database\Mysql\objectOpera
     	}
 
     }
+    
+    public function remove($data)
+    {
+        $data = $this->optimizeEntity($data);
+        if (!empty($data))
+    	{
+            foreach($data as $k => $v)
+            {
+                $this->where()->addAnd("catalog_subcategory_product.".$k,$v,'=');
+            }
+
+            return $this->eliminarRegistro();
+    	}
+    	return false;
+    }
 }
 ?>

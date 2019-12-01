@@ -2,6 +2,20 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/home/ussiel/kung-fu/www/cloudstudio/projectos/franky-skeleton-application/franky-skeleton-application/modulos/catalog/controller/admin/catalog_products/form.php</file>
+            <file>file:/home/ussiel/kung-fu/www/cloudstudio/projectos/franky-skeleton-application/franky-skeleton-application/modulos/catalog/src/model/CatalogcategoryModel.php</file>
+            <file>file:/home/ussiel/kung-fu/www/cloudstudio/projectos/franky-skeleton-application/franky-skeleton-application/modulos/catalog/loads/util.php</file>
+            <file>file:/home/ussiel/kung-fu/www/cloudstudio/projectos/franky-skeleton-application/franky-skeleton-application/modulos/catalog/diseno/admin/catalog_products/form.phtml</file>
+            <file>file:/home/ussiel/kung-fu/www/cloudstudio/projectos/franky-skeleton-application/franky-skeleton-application/modulos/catalog/src/Form/ProductsForm.php</file>
+            <file>file:/home/ussiel/kung-fu/www/cloudstudio/projectos/franky-skeleton-application/franky-skeleton-application/modulos/catalog/src/entity/CatalogproductsEntity.php</file>
+            <file>file:/home/ussiel/kung-fu/www/cloudstudio/projectos/franky-skeleton-application/franky-skeleton-application/modulos/catalog/src/entity/CatalogsubcategoryEntity.php</file>
+            <file>file:/home/ussiel/kung-fu/www/cloudstudio/projectos/franky-skeleton-application/franky-skeleton-application/configure/databases.php</file>
+            <file>file:/home/ussiel/kung-fu/www/cloudstudio/projectos/franky-skeleton-application/franky-skeleton-application/public/upload/franky/core_config/core_config.php</file>
+            <file>file:/home/ussiel/kung-fu/www/cloudstudio/projectos/franky-skeleton-application/franky-skeleton-application/modulos/catalog/controller/admin/catalog_category/lista.php</file>
+            <file>file:/home/ussiel/kung-fu/www/cloudstudio/projectos/franky-skeleton-application/franky-skeleton-application/configure/modulos.php</file>
+            <file>file:/home/ussiel/kung-fu/www/cloudstudio/projectos/franky-skeleton-application/franky-skeleton-application/modulos/catalog/src/model/CatalogsubcategoryModel.php</file>
+            <file>file:/home/ussiel/kung-fu/www/cloudstudio/projectos/franky-skeleton-application/franky-skeleton-application/configure/data.php</file>
+        </group>
     </open-files>
 </project-private>

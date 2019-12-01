@@ -33,11 +33,11 @@ if($CatalogCategoryModel->getTotal() > 0)
 	while($registro = $CatalogCategoryModel->getRows())
 	{
 		$thisClass  = ((($iRow % 2) == 0) ? "formFieldDk" : "formFieldLt");
-        
+                $img = "";
                 if(!empty($registro["image"]) && file_exists($MyConfigure->getServerUploadDir()."/catalog/category/".$registro["image"]))
                 {
                     $img = imageResize($MyConfigure->getUploadDir()."/catalog/category/".$registro["image"],50,50, true);
-                    
+                    $img = makeHTMLImg($img,50,50,$registro['name']);
                 }
 
 
@@ -46,7 +46,7 @@ if($CatalogCategoryModel->getTotal() > 0)
                 "callback" => $Tokenizer->token("category", $MyRequest->getURI()),    
                 "createdAt" 	=> getFechaUI($registro["createdAt"]),
                 "thisClass"     => $thisClass,
-                "image"     => makeHTMLImg($img,50,50,$registro['name']),
+                "image"     => $img,
                 "nuevo_estado"  => ($registro["status"] == 1 ?"desactivar" : "activar"),
                 ));
                 $iRow++;
