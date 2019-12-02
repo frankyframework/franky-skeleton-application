@@ -49,8 +49,14 @@ if($CatalogproductsModel->getTotal() > 0)
     {
         $thisClass  = ((($iRow % 2) == 0) ? "formFieldDk" : "formFieldLt");
 
-        $registro["images"] = json_decode($registro["images"],true);
+        
         $img = "";
+        $_img = getCoreConfig('catalog/product/placeholder');
+        if($_img != "" && file_exists(PROJECT_DIR.$_img))
+        {
+            $img = makeHTMLImg(imageResize($_img,50,50, true),50,50,$registro['name']);
+        }
+        $registro["images"] = json_decode($registro["images"],true);
         if(!empty($registro['images']))
         {
             foreach($registro["images"] as $foto)
