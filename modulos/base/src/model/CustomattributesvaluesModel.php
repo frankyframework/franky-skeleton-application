@@ -1,5 +1,5 @@
 <?php
-namespace developer\model;
+namespace Base\model;
 
 class CustomattributesvaluesModel  extends \Franky\Database\Mysql\objectOperations
 {
@@ -13,7 +13,7 @@ class CustomattributesvaluesModel  extends \Franky\Database\Mysql\objectOperatio
     function getData($data = array())
     {
         $data = $this->optimizeEntity($data);
-        $campos = ["id","id_attribute","id_ref","value"];
+        $campos = ["id_attribute","id_ref","value","entity"];
 
         foreach($data as $k => $v)
         {
@@ -39,18 +39,24 @@ class CustomattributesvaluesModel  extends \Franky\Database\Mysql\objectOperatio
     {
         $data = $this->optimizeEntity($data);
 
+        return $this->guardarRegistro($data);
+    	
 
-    	if (isset($data['id']))
+    }
+
+    public function remove($data)
+    {
+        $data = $this->optimizeEntity($data);
+        if (!empty($data))
     	{
-            $this->where()->addAnd('id',$data['id'],'=');
+            foreach($data as $k => $v)
+            {
+                $this->where()->addAnd("custom_attributes_values.".$k,$v,'=');
+            }
 
-            return $this->editarRegistro($data);
+            return $this->eliminarRegistro();
     	}
-    	else {
-
-            return $this->guardarRegistro($data);
-    	}
-
+    	return false;
     }
 }
 ?>

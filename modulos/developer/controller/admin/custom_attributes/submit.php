@@ -1,7 +1,7 @@
 <?php
 use Franky\Core\validaciones; 
-use Developer\model\CustomattributesModel;
-use Developer\entity\CustomattributesEntity;
+use Base\model\CustomattributesModel;
+use Base\entity\CustomattributesEntity;
 use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();

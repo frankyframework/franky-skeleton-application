@@ -1,7 +1,7 @@
 <?php
 use Developer\Form\filtrosForm;
-use Developer\model\CustomattributesModel;
-use Developer\entity\CustomattributesEntity;
+use Base\model\CustomattributesModel;
+use Base\entity\CustomattributesEntity;
 use Franky\Core\paginacion;
 use Franky\Haxor\Tokenizer;
 

@@ -34,8 +34,8 @@ function EliminarPagina($id,$status)
 function EliminarCustomAttribute($id,$status)
 {
     global $MySession;
-    $CustomattributesModel =  new \Developer\model\CustomattributesModel();
-    $CustomattributesEntity =  new \Developer\entity\CustomattributesEntity();
+    $CustomattributesModel =  new \Base\model\CustomattributesModel();
+    $CustomattributesEntity =  new \Base\entity\CustomattributesEntity();
     $Tokenizer = new \Franky\Haxor\Tokenizer;
     global $MyAccessList;
     global $MyMessageAlert;

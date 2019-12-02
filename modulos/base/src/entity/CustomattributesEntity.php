@@ -1,5 +1,5 @@
 <?php
-namespace developer\entity;
+namespace Base\entity;
 
 
 class CustomattributesEntity

@@ -1,5 +1,5 @@
 <?php
-namespace developer\model;
+namespace Base\model;
 
 class CustomattributesModel  extends \Franky\Database\Mysql\objectOperations
 {

@@ -7,13 +7,22 @@ use Catalog\model\CatalogsubcategoryproductModel;
 use Base\entity\redireccionesEntity;
 use Franky\Filesystem\File;
 use Franky\Haxor\Tokenizer;
+use Base\model\CustomattributesModel;
+use Base\entity\CustomattributesEntity;
+use Base\model\CustomattributesvaluesModel;
+use Base\entity\CustomattributesvaluesEntity;
 
 
 $Tokenizer = new Tokenizer();
-$CatalogsubcategoryproductEntity        = new CatalogsubcategoryproductEntity();
-$CatalogsubcategoryproductModel       = new CatalogsubcategoryproductModel();
-$CatalogproductsModel        = new CatalogproductsModel();
-$CatalogproductsEntity       = new CatalogproductsEntity($MyRequest->getRequest());
+$CatalogsubcategoryproductEntity    = new CatalogsubcategoryproductEntity();
+$CatalogsubcategoryproductModel     = new CatalogsubcategoryproductModel();
+$CatalogproductsModel               = new CatalogproductsModel();
+$CatalogproductsEntity              = new CatalogproductsEntity($MyRequest->getRequest());
+$CustomattributesModel              = new CustomattributesModel();
+$CustomattributesEntity             = new CustomattributesEntity();
+$CustomattributesvaluesModel              = new CustomattributesvaluesModel();
+$CustomattributesvaluesEntity             = new CustomattributesvaluesEntity();
+
 $callback = $Tokenizer->decode($MyRequest->getRequest('callback'));
 $CatalogproductsEntity->id($Tokenizer->decode($MyRequest->getRequest('id')));
 $id = $CatalogproductsEntity->id();
@@ -65,6 +74,17 @@ if(empty($subcategory))
     $error = true;
 }
 
+
+
+$custom_imputs = [];
+$CustomattributesEntity->entity("catalog_products");
+$CustomattributesEntity->status(1);
+$CustomattributesModel->setTampag(100);
+$CustomattributesModel->getData($CustomattributesEntity->getArrayCopy());
+while($data_attrs = $CustomattributesModel->getRows()){
+    
+    $custom_imputs[] = ['id' => $data_attrs['id'],'name' => $data_attrs['name']];
+}
 if(!$error)
 {
     $subcategorias = getCatalogSubcategorys(null,'sql');
@@ -119,6 +139,7 @@ if(!$error)
    
     if($result == REGISTRO_SUCCESS)
     {
+
         
         if(empty($id))
         {
@@ -132,7 +153,7 @@ if(!$error)
         }
         else
         {
-
+           
              $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("editar_generico_success"));
         }
         $CatalogsubcategoryproductEntity->id_product($id);
@@ -145,6 +166,19 @@ if(!$error)
                 $CatalogsubcategoryproductModel->save($CatalogsubcategoryproductEntity->getArrayCopy());   
             }
         }
+
+        $CustomattributesvaluesEntity->id_ref($id);
+        $CustomattributesvaluesEntity->entity("catalog_products");
+        $CustomattributesvaluesModel->remove($CustomattributesvaluesEntity->getArrayCopy());
+
+        foreach($custom_imputs as $input)
+        {
+            $CustomattributesvaluesEntity->id_attribute($input['id']);
+            $value = (is_array($MyRequest->getRequest($input['name'])) ? json_encode($MyRequest->getRequest($input['name'])) : $MyRequest->getRequest($input['name']));
+            $CustomattributesvaluesEntity->value($value);
+            $CustomattributesvaluesModel->save($CustomattributesvaluesEntity->getArrayCopy());
+        }
+
 
         $location = (!empty($callback) ? ($callback) : $MyRequest->url(ADMIN_CATALOG_PRODUCTS));
 

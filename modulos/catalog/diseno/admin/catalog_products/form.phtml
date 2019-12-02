@@ -71,6 +71,9 @@
         <?php  echo $adminForm->getRow("iva"); ?>
         <?php  echo $adminForm->getRow("incluye_iva"); ?>
       
+        <?php foreach($custom_imputs as $input): ?>
+          <?=$adminForm->getRow($input)?>
+        <?php endforeach; ?>
         <div class="form-group"><h3>SEO</h3></div>
         <?php echo $adminForm->getRow('url_key'); ?>
         <?php echo $adminForm->getRow('meta_title'); ?>

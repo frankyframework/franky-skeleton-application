@@ -2,13 +2,16 @@
 use Catalog\Form\ProductsForm;
 use Catalog\model\CatalogproductsModel;
 use Catalog\entity\CatalogproductsEntity;
+use Base\model\CustomattributesModel;
+use Base\entity\CustomattributesEntity;
 use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();
 
 $CatalogproductsModel  = new CatalogproductsModel();
 $CatalogproductsEntity = new CatalogproductsEntity();
-
+$CustomattributesModel = new CustomattributesModel();
+$CustomattributesEntity = new CustomattributesEntity();
 
 $id		= $Tokenizer->decode($MyRequest->getRequest('id'));
 $callback	= $MyRequest->getRequest('callback');
@@ -36,6 +39,61 @@ else{
 $data_category = [];
 $data_subcategory = [];
 $adminForm = new ProductsForm("frmproduct");
+
+$custom_imputs = [];
+$CustomattributesEntity->entity("catalog_products");
+$CustomattributesEntity->status(1);
+$CustomattributesModel->setTampag(100);
+$result	 = $CustomattributesModel->getData($CustomattributesEntity->getArrayCopy());
+while($data_attrs = $CustomattributesModel->getRows()){
+    
+    $custom_imputs[] = $data_attrs['name'];
+    $data_attrs['data'] = json_decode($data_attrs['data'],true);
+
+    if(!empty($data_attrs['source'])){
+        $objData = new $data_attrs['source'];
+        $data_attrs['data'] = $objData->getCollection();
+    }
+
+    if(in_array($data_attrs['type'],['text','textarea','file']))
+    {
+        $adminForm->add(array(
+            'name' => $data_attrs['name'],
+            'label' => $data_attrs['label'],
+            'type'  => $data_attrs['type'],
+           // 'required'  => true,
+            'atributos' => array(
+            //    'class'       => 'required',
+             //   'maxlength' => 60
+            ),
+            'label_atributos' => array(
+                'class'       => 'desc_form_no_obligatorio'
+            )
+            )
+        );
+    }
+    if(in_array($data_attrs['type'],['radio','select','checkbox']))
+    {
+        $adminForm->add(array(
+            'name' => $data_attrs['name'],
+            'label' => $data_attrs['label'],
+            'type'  => $data_attrs['type'],
+           // 'required'  => true,
+            'atributos' => array(
+            //    'class'       => 'required',
+             //   'maxlength' => 60
+            ),
+            'options' => $data_attrs['data'],
+            'label_atributos' => array(
+                'class'       => 'desc_form_no_obligatorio'
+            )
+            )
+        );
+    }
+
+}
+
+
 
 $title = "Nuevo producto";
 if(!empty($id))
