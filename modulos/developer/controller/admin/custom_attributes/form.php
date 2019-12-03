@@ -19,6 +19,7 @@ if(!empty($id))
     $result	 = $CustomattributesModel->getData($CustomattributesEntity->getArrayCopy());
     $data           = $CustomattributesModel->getRows();
     $data['data'] = json_decode($data['data'],true);
+    $data['required'] = json_decode($data['required'],true);
     
 
     $data['id'] = $Tokenizer->token('custom_attributes', $data['id']);

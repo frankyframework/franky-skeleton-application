@@ -174,7 +174,8 @@ if(!$error)
         foreach($custom_imputs as $input)
         {
             $CustomattributesvaluesEntity->id_attribute($input['id']);
-            $value = (is_array($MyRequest->getRequest($input['name'])) ? json_encode($MyRequest->getRequest($input['name'])) : $MyRequest->getRequest($input['name']));
+            $name = str_replace("[]", "", $input['name']);
+            $value = (is_array($MyRequest->getRequest($name)) ? json_encode($MyRequest->getRequest($name)) : $MyRequest->getRequest($name));
             $CustomattributesvaluesEntity->value($value);
             $CustomattributesvaluesModel->save($CustomattributesvaluesEntity->getArrayCopy());
         }

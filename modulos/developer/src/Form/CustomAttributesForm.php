@@ -142,6 +142,17 @@ class CustomAttributesForm extends \Franky\Form\Form
             )
         );
 
+              $this->add(array(
+                'name' => 'required',
+                'type'  => 'checkbox',
+                'atributos' => array(
+                    'class' => ''
+                 ),
+                'options' =>  array("1" => "Este campo es requerido"),
+
+
+            )
+        );
          $this->add(array(
                 'name' => 'guardar',
                 'type'  => 'submit',

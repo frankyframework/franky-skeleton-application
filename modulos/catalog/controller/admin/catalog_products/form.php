@@ -4,6 +4,8 @@ use Catalog\model\CatalogproductsModel;
 use Catalog\entity\CatalogproductsEntity;
 use Base\model\CustomattributesModel;
 use Base\entity\CustomattributesEntity;
+use Base\model\CustomattributesvaluesModel;
+use Base\entity\CustomattributesvaluesEntity;
 use Franky\Haxor\Tokenizer;
 
 $Tokenizer = new Tokenizer();
@@ -12,6 +14,9 @@ $CatalogproductsModel  = new CatalogproductsModel();
 $CatalogproductsEntity = new CatalogproductsEntity();
 $CustomattributesModel = new CustomattributesModel();
 $CustomattributesEntity = new CustomattributesEntity();
+$CustomattributesvaluesModel              = new CustomattributesvaluesModel();
+$CustomattributesvaluesEntity             = new CustomattributesvaluesEntity();
+
 
 $id		= $Tokenizer->decode($MyRequest->getRequest('id'));
 $callback	= $MyRequest->getRequest('callback');
@@ -47,8 +52,9 @@ $CustomattributesModel->setTampag(100);
 $result	 = $CustomattributesModel->getData($CustomattributesEntity->getArrayCopy());
 while($data_attrs = $CustomattributesModel->getRows()){
     
-    $custom_imputs[] = $data_attrs['name'];
+    $custom_imputs[$data_attrs['id']] = $data_attrs['name'];
     $data_attrs['data'] = json_decode($data_attrs['data'],true);
+
 
     if(!empty($data_attrs['source'])){
         $objData = new $data_attrs['source'];
@@ -57,17 +63,18 @@ while($data_attrs = $CustomattributesModel->getRows()){
 
     if(in_array($data_attrs['type'],['text','textarea','file']))
     {
+        
         $adminForm->add(array(
             'name' => $data_attrs['name'],
             'label' => $data_attrs['label'],
             'type'  => $data_attrs['type'],
-           // 'required'  => true,
+            'required'  => $data_attrs['required'],
             'atributos' => array(
-            //    'class'       => 'required',
+                'class'       => ($data_attrs['required'] ? 'required' : ''),
              //   'maxlength' => 60
             ),
             'label_atributos' => array(
-                'class'       => 'desc_form_no_obligatorio'
+                'class'       => ($data_attrs['required'] ? 'desc_form_obligatorio' : 'desc_form_no_obligatorio')
             )
             )
         );
@@ -78,20 +85,23 @@ while($data_attrs = $CustomattributesModel->getRows()){
             'name' => $data_attrs['name'],
             'label' => $data_attrs['label'],
             'type'  => $data_attrs['type'],
-           // 'required'  => true,
+            'required'  => $data_attrs['required'],
             'atributos' => array(
-            //    'class'       => 'required',
+                'class'       =>  ($data_attrs['required'] ? 'required' : ''),
              //   'maxlength' => 60
             ),
             'options' => $data_attrs['data'],
             'label_atributos' => array(
-                'class'       => 'desc_form_no_obligatorio'
+                 'class'       => ($data_attrs['required'] ? 'desc_form_obligatorio' : 'desc_form_no_obligatorio')
+         
             )
             )
         );
     }
 
 }
+
+
 
 
 
@@ -130,7 +140,29 @@ if(!empty($id))
             $data_subcategory[] = $_sub;
         }
     }
+    
+    $CustomattributesvaluesEntity->id_ref($id);
+    $CustomattributesvaluesEntity->entity("catalog_products");
+    $CustomattributesvaluesModel->setTampag(100);
+    if($CustomattributesvaluesModel->getData($CustomattributesvaluesEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+    {
+        
+        $values_attrs = [];
+        while($_values_attrs = $CustomattributesvaluesModel->getRows()){
+         
+            $value =json_decode($_values_attrs['value'],true);
+       
+            if($value == null)
+            {
+                $value = $_values_attrs['value'];
+            }
+            $values_attrs[$custom_imputs[$_values_attrs['id_attribute']]] = $value;
+          
+        }
+        $data = array_merge($data,$values_attrs);
+    }
 
+    
 
 }
 //print_r($data); exit;

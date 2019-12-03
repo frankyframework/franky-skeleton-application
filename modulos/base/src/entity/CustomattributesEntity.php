@@ -14,6 +14,7 @@ class CustomattributesEntity
     private $createdAt;
     private $updateAt;
     private $status;
+    private $required;
 
 
     public function __construct($data = null)
@@ -36,6 +37,7 @@ class CustomattributesEntity
         $this->createdAt = (isset($data["createdAt"]) ? $data["createdAt"] : null);
         $this->updateAt = (isset($data["updateAt"]) ? $data["updateAt"] : null);
         $this->status = (isset($data["status"]) ? $data["status"] : null);
+        $this->required = (isset($data["required"]) ? $data["required"] : null);
 
     }
 
@@ -75,6 +77,7 @@ class CustomattributesEntity
 
     public function status($status = null){ if($status !== null){ $this->status=$status; }else{ return $this->status; } }
 
+    public function required($required = null){ if($required !== null){ $this->required=$required; }else{ return $this->required; } }
 
 
 }

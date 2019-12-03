@@ -71,8 +71,9 @@
         <?php  echo $adminForm->getRow("iva"); ?>
         <?php  echo $adminForm->getRow("incluye_iva"); ?>
       
-        <?php foreach($custom_imputs as $input): ?>
+        <?php foreach($custom_imputs as $kinput => $input): ?>
           <?=$adminForm->getRow($input)?>
+        <label id="<?=$input?>-error" class="error" for="<?=$input?>" style="display:none;"></label>
         <?php endforeach; ?>
         <div class="form-group"><h3>SEO</h3></div>
         <?php echo $adminForm->getRow('url_key'); ?>
@@ -81,12 +82,6 @@
         <?php echo $adminForm->getRow('meta_keyword'); ?>
 
         <?php  //echo $adminForm->getRow("videos"); ?>
-     
-
-
-
-
-        <?php  //echo $adminForm->getRow("tags"); ?>
 
         <?php  echo $adminForm->getRow("guardar"); ?>
 
