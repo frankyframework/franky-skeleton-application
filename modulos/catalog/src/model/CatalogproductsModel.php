@@ -40,6 +40,21 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
 
     }
 
+
+    function getInfoProdcuto($id)
+    {
+
+        $campos = ["precio","incluye_iva","iva","name as nombre","image as imagen"];
+
+        $this->where()->addAnd("catalog_products.id",$id,'=');
+
+        $this->from()->addLeft('ecommerce_precios','catalog_products.id','ecommerce_precios.id_producto');
+
+        return $this->getColeccion($campos);
+    }
+
+
+
     private function optimizeEntity($array)
     {
         foreach ($array as $k => $v )

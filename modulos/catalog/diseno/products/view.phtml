@@ -3,4 +3,31 @@
 <div class="content">
 <h1>MAQUETAR AQUI EL DETALLE DE PRODUCTO</h1>
 <?=getCatalogBuscadorPrincipal()?>
+
+
+<div class="w-xxxx-12 ">
+
+<div class="w-xxxx-12 align_center">
+    <a href="javascript:void(0);" data-idlove="<?= $data_detalle['id']; ?>" class="ilove"> <span>Guardar favorito</span></a>
 </div>
+
+
+<div class="precio">
+    <?php echo getFormatoPrecio($data_detalle['price'],false); ?>
+</div>
+<div style="border:solid 1px #E7E7E7;" class="align_center">  
+    <?php echo render(PROJECT_DIR.'/modulos/catalog/diseno/ecommerce/boton.add.phtml',array("id_producto" => $data_detalle["id"],'MyAccessList' => $MyAccessList)); ?>
+</div>
+</div>
+
+</div>
+
+
+<script>
+  $(document).ready(function(){
+        $('[data-idlove]').click(function(){
+            catalog_addWhishlist($(this).attr('data-idlove'),($(this).attr('class').search('active') > -1 ? 0 : 1));
+        });
+        catalog_getWhishlist();
+  });
+</script>

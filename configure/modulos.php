@@ -4,5 +4,6 @@ return array(
     'seo',
     //'sociallogin',
     'developer',
+    'ecommerce',
     'catalog'
 );

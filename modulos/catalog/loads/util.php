@@ -86,4 +86,40 @@ function getCatalogBuscadorPrincipal()
     return render('widget.buscador.phtml',['BuscadorPrincipalForm' => $BuscadorPrincipalForm]);
 }
 
+
+
+function catalog_completarTareas()
+{
+    global $MySession;
+    global $MyRequest;
+    global $MyFlashMessage;
+    global $MyMessageAlert;
+    $eventos_pendientes = $MySession->GetVar('catalog_eventos_pendientes');
+
+
+    if(isset($eventos_pendientes['whishlist']))
+    {
+        $CatalogwhishlistModel = new Catalog\model\CatalogwhishlistModel;
+        $CatalogwhishlistEntity = new Catalog\entity\CatalogwhishlistEntity($eventos_pendientes['whishlist']);
+
+        if($CatalogwhishlistEntity->status() == 1)
+        {
+          $CatalogwhishlistEntity->fecha(date('Y-m-d H:i:s'));
+          $CatalogwhishlistEntity->uid($MySession->GetVar('id'));
+          $result = $CatalogwhishlistModel->save($CatalogwhishlistEntity->getArrayCopy());
+        }
+        else{
+          $CatalogwhishlistEntity->uid($MySession->GetVar('id'));
+          $CatalogwhishlistModel->delete($CatalogwhishlistEntity->getArrayCopy());
+        }
+
+    }
+
+    $MySession->UnsetVar('catalog_eventos_pendientes');
+
+}
+
+
+
+
 ?>
