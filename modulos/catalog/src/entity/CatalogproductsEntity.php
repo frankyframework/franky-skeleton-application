@@ -23,6 +23,8 @@ class CatalogproductsEntity
     private $createdAt;
     private $updateAt;
     private $status;
+    private $in_stock;
+    private $saleable;
 
 
     public function __construct($data = null)
@@ -54,7 +56,8 @@ class CatalogproductsEntity
         $this->createdAt = (isset($data["createdAt"]) ? $data["createdAt"] : null);
         $this->updateAt = (isset($data["updateAt"]) ? $data["updateAt"] : null);
         $this->status = (isset($data["status"]) ? $data["status"] : null);
-
+        $this->in_stock = (isset($data["in_stock"]) ? $data["in_stock"] : null);
+        $this->saleable = (isset($data["saleable"]) ? $data["saleable"] : null);
     }
 
     public function getArrayCopy()
@@ -109,5 +112,10 @@ class CatalogproductsEntity
     public function updateAt($updateAt = null){ if($updateAt !== null){ $this->updateAt=$updateAt; }else{ return $this->updateAt; } }
 
     public function status($status = null){ if($status !== null){ $this->status=$status; }else{ return $this->status; } }
+   
+    public function in_stock($in_stock = null){ if($in_stock !== null){ $this->in_stock=$in_stock; }else{ return $this->in_stock; } }
+
+    public function saleable($saleable = null){ if($saleable !== null){ $this->saleable=$saleable; }else{ return $this->saleable; } }
+
 }
 ?>

@@ -76,4 +76,14 @@ function getFotoCatalogProduct($album,$foto,$token,$principal)
     return $html;
 }
 
+
+function getCatalogBuscadorPrincipal()
+{
+    global $MyRequest;
+    $BuscadorPrincipalForm =  new \Catalog\Form\BuscadorPrincipalForm('buscadorPrincipal');
+    $BuscadorPrincipalForm->setAtributo('action',$MyRequest->url(CATALOG_SEARCH));
+    
+    return render('widget.buscador.phtml',['BuscadorPrincipalForm' => $BuscadorPrincipalForm]);
+}
+
 ?>

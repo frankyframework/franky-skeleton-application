@@ -35,7 +35,7 @@ function previewBlog($txt)
     $img = "";
     $p = $doc->getElementsByTagName('p');
     foreach ($p as $_p) {
-            $data["p"] = limitePalabras(200,strip_tags($doc->saveHTML()));
+            $data["p"] = limitePalabras(getCoreConfig('blog/articulo/descripcion-length'),strip_tags($doc->saveHTML()));
             break;
     }
 
