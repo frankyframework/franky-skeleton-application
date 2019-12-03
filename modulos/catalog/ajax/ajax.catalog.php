@@ -262,7 +262,7 @@ function catalog_EliminarWhislist($id,$status)
             }
             else
             {
-		            $respuesta[] = array("message" => $MyMessageAlert->Message(($status == 1 ? "activar" : "eliminar")."_generico_error"));
+		        $respuesta[] = array("message" => $MyMessageAlert->Message(($status == 1 ? "activar" : "eliminar")."_generico_error"));
             }
         }
         else

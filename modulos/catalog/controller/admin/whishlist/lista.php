@@ -3,17 +3,17 @@ use Base\Form\filtrosForm;
 use Franky\Core\paginacion;
 use Catalog\model\CatalogwhishlistModel;
 use Catalog\entity\CatalogwhishlistEntity;
-use Catalog\entity\CatalogexperienciaEntity;
+use Catalog\entity\CatalogproductsEntity;
 use Franky\Haxor\Tokenizer;
 
 
 $Tokenizer = new Tokenizer();
 $MyPaginacion = new paginacion();
-$CatalogexperienciaEntity = new CatalogexperienciaEntity();
+$CatalogproductsEntity = new CatalogproductsEntity();
 
 
 $MyPaginacion->setPage($MyRequest->getRequest('page',1));
-$MyPaginacion->setCampoOrden($MyRequest->getRequest('por',"Catalog_whishlist.fecha"));
+$MyPaginacion->setCampoOrden($MyRequest->getRequest('por',"catalog_whishlist.fecha"));
 $MyPaginacion->setOrden($MyRequest->getRequest('order',"DESC"));
 $MyPaginacion->setTampageDefault($MyRequest->getRequest('tampag',25));
 $busca_b	= $MyRequest->getRequest('busca_b');
@@ -45,7 +45,7 @@ $CatalogwhishlistModel->setOrdensql($MyPaginacion->getCampoOrden()." ".$MyPagina
 
 $CatalogwhishlistEntity->uid($MySession->GetVar('id'));
 
-$result	 = $CatalogwhishlistModel->getData($CatalogwhishlistEntity->getArrayCopy(),$CatalogexperienciaEntity->getArrayCopy(),$busca_b,$rango);
+$result	 = $CatalogwhishlistModel->getData($CatalogwhishlistEntity->getArrayCopy(),$CatalogproductsEntity->getArrayCopy(),$busca_b,$rango);
 $MyPaginacion->setTotal($CatalogwhishlistModel->getTotal());
 
 
@@ -78,7 +78,7 @@ $MyFiltrosForm = new filtrosForm('paginar');
 $MyFiltrosForm->setMobile($Mobile_detect->isMobile());
 $MyFiltrosForm->addBusca();
 
-$deleteFunction ="Catalog_EliminarWhislist";
+$deleteFunction ="catalog_EliminarWhislist";
 $MyFiltrosForm->addFecha('rango_inicial');
 $MyFiltrosForm->addFecha('rango_final');
 $MyFiltrosForm->addSubmit();

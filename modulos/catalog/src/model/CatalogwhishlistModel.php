@@ -37,7 +37,7 @@ class CatalogwhishlistModel  extends \Franky\Database\Mysql\objectOperations
               $this->where()->concat(')');
         }
 
-        $this->from()->addInner("catalog_products","catalog_whishlist.products_id","catalog_products.id");
+        $this->from()->addInner("catalog_products","catalog_whishlist.product_id","catalog_products.id");
         $this->from()->addInner("users","users.id","catalog_whishlist.uid");
 
 
