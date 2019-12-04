@@ -64,11 +64,9 @@ $CatalogproductsModel->setOrdensql($MyPaginacion->getCampoOrden()." ".$MyPaginac
 $CatalogproductsEntity->status(1);
 $CatalogproductsModel->setBusca($q);
 $resultados_pagina = array();
-if($CatalogproductsModel->getData($CatalogproductsEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+if($CatalogproductsModel->getDataSearch($CatalogproductsEntity->getArrayCopy()) == REGISTRO_SUCCESS)
 {
     $MyPaginacion->setTotal($CatalogproductsModel->getTotal());
-
-
 
     if($CatalogproductsModel->getTotal() > 0)
     {
@@ -110,7 +108,7 @@ if($CatalogproductsModel->getData($CatalogproductsEntity->getArrayCopy()) == REG
 
 if($MyRequest->isAjax())
 {
-  echo render(PROJECT_DIR.'/modulos/Catalog/diseno/products/lista.phtml');
+  echo render(PROJECT_DIR.'/modulos/catalog/diseno/products/lista.phtml');
   die;
 }
 

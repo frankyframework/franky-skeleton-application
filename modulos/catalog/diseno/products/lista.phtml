@@ -16,6 +16,8 @@
                     <?php foreach($resultados_pagina as $data): ?>
                         <?=render('products/card.phtml',['data' => $data]);?>
                     <?php endforeach ;?>
+                    <div class="w-xxxx-12 cont-paginar"><?php echo render("widget.paginar.phtml"); ?></div>
+
                 <?php else: ?>
                     <p>Sin resultados</p>
                 <?php endif; ?>

@@ -5,6 +5,9 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
 {
 
     private $busca;
+    private $precio;
+    private $categoria_array;
+
     public function __construct()
     {
       parent::__construct();
@@ -15,6 +18,14 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
         $this->busca=$busca;
     }
 
+    public function setPrecioArray($data)
+    {
+        $this->precio = $data;
+    }
+    public function setCategoriaArray($data)
+    {
+        $this->categoria_array = $data;
+    }
 
     function getData($data = array())
     {
@@ -37,8 +48,72 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
         }
 
         return $this->getColeccion($campos);
-
     }
+
+    function getDataSearch($data = array())
+    {
+        $data = $this->optimizeEntity($data);
+        $campos = ["catalog_products.id","catalog_products.name","sku","category",
+        "catalog_products.visible_in_search","catalog_products.description",
+        "images","videos","catalog_products.url_key","catalog_products.meta_title",
+        "catalog_products.meta_keyword","catalog_products.meta_description",
+        "price","stock","iva","incluye_iva","catalog_products.createdAt",
+        "catalog_products.updateAt","catalog_products.status",
+        "in_stock","saleable"];
+
+        foreach($data as $k => $v)
+        {
+            $this->where()->addAnd("catalog_products.".$k,$v,'=');
+        }
+
+        if(!empty($this->busca) )
+        {
+
+            $this->where()->concat("AND (MATCH(catalog_products.name) "
+                . "AGAINST('$busca' in boolean mode) "
+                . "or "
+                . "MATCH(catalog_products.meta_keyword) "
+                . "AGAINST('$busca' in boolean mode) ");
+           
+                $this->where()->addOr('catalog_products.name',"%$this->busca%",'like');
+                $this->where()->addOr('catalog_products.meta_keyword',"%$this->busca%",'like');
+        
+                $this->where()->concat(')');
+
+        }
+      
+
+          if(!empty($this->precio)){
+                  if(is_array($this->precio))
+                  {
+                    $this->where()->concat("AND (");
+                    $this->where()->addAnd("catalog_products.price ",trim($this->precio[0]),'>=');
+                    $this->where()->addAnd("catalog_products.price ",trim($this->precio[1]),'<=');
+                    $this->where()->concat(')');
+                  }
+                }
+
+
+        if(!empty($this->categoria_array)){
+          if(is_array($this->categoria_array))
+          {
+            $this->where()->concat("AND (");
+            foreach($this->categoria_array as $id)
+            {
+                  $this->where()->addOr("catalog_category.url_key",'%'.$id.'%','like');
+            }
+              $this->where()->concat(')');
+          }
+         
+          $this->from()->addInner('catalog_subcategory_product','catalog_subcategory_product.id_product','catalog_products.id');
+          $this->from()->addInner('catalog_subcategory','catalog_subcategory_product.id_subcategory','catalog_subcategory.id');
+          $this->from()->addInner('catalog_category','catalog_subcategory.id_category','catalog_category.id');
+          $this->setGrupo('catalog_products.id');
+        }
+
+        return $this->getColeccion($campos);
+    }
+
 
 
     function getInfoProdcuto($id)
