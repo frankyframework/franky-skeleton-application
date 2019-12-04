@@ -1,8 +1,9 @@
 <?php
 return array(
-    //'blog',
+    'blog',
     'seo',
     //'sociallogin',
     'developer',
+    'ecommerce',
     'catalog'
 );

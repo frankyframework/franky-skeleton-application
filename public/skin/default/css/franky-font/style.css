@@ -1,12 +1,13 @@
 @font-face {
   font-family: 'franky-font';
-  src:  url('fonts/franky-font.eot?dukrc');
-  src:  url('fonts/franky-font.eot?dukrc#iefix') format('embedded-opentype'),
-    url('fonts/franky-font.ttf?dukrc') format('truetype'),
-    url('fonts/franky-font.woff?dukrc') format('woff'),
-    url('fonts/franky-font.svg?dukrc#franky-font') format('svg');
+  src:  url('fonts/franky-font.eot?natuyu');
+  src:  url('fonts/franky-font.eot?natuyu#iefix') format('embedded-opentype'),
+    url('fonts/franky-font.ttf?natuyu') format('truetype'),
+    url('fonts/franky-font.woff?natuyu') format('woff'),
+    url('fonts/franky-font.svg?natuyu#franky-font') format('svg');
   font-weight: normal;
   font-style: normal;
+  font-display: block;
 }
 
 .icon {
@@ -24,6 +25,90 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-estrella-01:before {
+  content: "\e921";
+}
+.icon-estrella-02:before {
+  content: "\e922";
+}
+.icon-libro:before {
+  content: "\e91d";
+}
+.icon-escuela:before {
+  content: "\e91e";
+}
+.icon-calendario:before {
+  content: "\e91f";
+}
+.icon-reloj:before {
+  content: "\e920";
+}
+.icon-estancia:before {
+  content: "\e918";
+}
+.icon-idioma:before {
+  content: "\e919";
+}
+.icon-incluye:before {
+  content: "\e91a";
+}
+.icon-persona:before {
+  content: "\e91b";
+}
+.icon-Telefono:before {
+  content: "\e91c";
+}
+.icon-bullet11:before {
+  content: "\e90d";
+}
+.icon-bullet2:before {
+  content: "\e90e";
+}
+.icon-bullet3:before {
+  content: "\e90f";
+}
+.icon-bullet4:before {
+  content: "\e910";
+}
+.icon-bandera:before {
+  content: "\e915";
+}
+.icon-costo:before {
+  content: "\e911";
+}
+.icon-diplomado:before {
+  content: "\e912";
+}
+.icon-edad:before {
+  content: "\e913";
+}
+.icon-pin:before {
+  content: "\e914";
+}
+.icon-bullet1:before {
+  content: "\e90c";
+}
+.icon-icon_btn_arrow:before {
+  content: "\e90b";
+}
+.icon-Instagram:before {
+  content: "\e916";
+}
+.icon-linkedin:before {
+  content: "\e917";
+}
+.icon-icon_phone:before {
+  content: "\e90a";
+}
+.icon-icon_face:before {
+  content: "\e907";
+}
+.icon-icon_twitter:before {
+  content: "\e908";
+}
+.icon-whats_app:before {
+  content: "\e909";
+}
 .icon-salir:before {
   content: "\e905";
 }

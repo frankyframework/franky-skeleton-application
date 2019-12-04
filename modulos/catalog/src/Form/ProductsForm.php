@@ -166,6 +166,30 @@ class ProductsForm  extends \Franky\Form\Form
         );
 
         $this->add(array(
+            'name' => 'in_stock',
+            'type'  => 'checkbox',
+            'atributos' => array(
+                'class' => ''
+            ),
+            'options' =>  array("1" => "Producto en stock"),
+
+
+            )
+        );
+
+        $this->add(array(
+            'name' => 'saleable',
+            'type'  => 'checkbox',
+            'atributos' => array(
+                'class' => ''
+            ),
+            'options' =>  array("1" => "Este producto se puede vender"),
+
+
+            )
+        );
+
+        $this->add(array(
             'name' => 'visible_in_search',
                 'type'  => 'checkbox',
                 'atributos' => array(

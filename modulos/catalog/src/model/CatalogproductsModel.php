@@ -19,7 +19,8 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
     function getData($data = array())
     {
         $data = $this->optimizeEntity($data);
-        $campos = ["id","name","sku","category","visible_in_search","description","images","videos","url_key","meta_title","meta_keyword","meta_description","price","stock","iva","incluye_iva","createdAt","updateAt","status"];
+        $campos = ["id","name","sku","category","visible_in_search","description","images","videos","url_key","meta_title","meta_keyword","meta_description","price","stock","iva","incluye_iva","createdAt","updateAt","status",
+        "in_stock","saleable"];
 
         foreach($data as $k => $v)
         {
@@ -38,6 +39,21 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
         return $this->getColeccion($campos);
 
     }
+
+
+    function getInfoProdcuto($id)
+    {
+
+        $campos = ["precio","incluye_iva","iva","name as nombre","image as imagen"];
+
+        $this->where()->addAnd("catalog_products.id",$id,'=');
+
+        $this->from()->addLeft('ecommerce_precios','catalog_products.id','ecommerce_precios.id_producto');
+
+        return $this->getColeccion($campos);
+    }
+
+
 
     private function optimizeEntity($array)
     {
