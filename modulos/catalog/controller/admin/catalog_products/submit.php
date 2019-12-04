@@ -11,7 +11,8 @@ use Base\model\CustomattributesModel;
 use Base\entity\CustomattributesEntity;
 use Base\model\CustomattributesvaluesModel;
 use Base\entity\CustomattributesvaluesEntity;
-
+use Ecommerce\model\PreciosModel;
+use Ecommerce\entity\PreciosEntity;
 
 $Tokenizer = new Tokenizer();
 $CatalogsubcategoryproductEntity    = new CatalogsubcategoryproductEntity();
@@ -22,6 +23,10 @@ $CustomattributesModel              = new CustomattributesModel();
 $CustomattributesEntity             = new CustomattributesEntity();
 $CustomattributesvaluesModel              = new CustomattributesvaluesModel();
 $CustomattributesvaluesEntity             = new CustomattributesvaluesEntity();
+$PreciosModel   = new PreciosModel();
+$PreciosEntity  = new PreciosEntity();
+$PreciosEntity2  = new PreciosEntity();
+
 
 $callback = $Tokenizer->decode($MyRequest->getRequest('callback'));
 $CatalogproductsEntity->id($Tokenizer->decode($MyRequest->getRequest('id')));
@@ -156,6 +161,26 @@ if(!$error)
            
              $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("editar_generico_success"));
         }
+        $location = (!empty($callback) ? ($callback) : $MyRequest->url(ADMIN_CATALOG_PRODUCTS));
+       
+        if($CatalogproductsEntity->saleable() == 1)
+        {
+            $PreciosEntity->precio($CatalogproductsEntity->price());
+            $PreciosEntity->iva($CatalogproductsEntity->iva());
+            $PreciosEntity->incluye_iva($CatalogproductsEntity->incluye_iva());
+            $PreciosEntity2->id_producto($id);
+            $PreciosEntity->id_moneda(1);
+            $PreciosEntity->id_producto($id);
+        
+            if($PreciosModel->getData($PreciosEntity2->getArrayCopy()) == REGISTRO_SUCCESS)
+            {
+                $result2 = $PreciosModel->updateByIdProdcuto($PreciosEntity->getArrayCopy());
+            }
+            else {
+                $result2 = $PreciosModel->save($PreciosEntity->getArrayCopy());
+            }
+
+        }
         $CatalogsubcategoryproductEntity->id_product($id);
         $CatalogsubcategoryproductModel->remove($CatalogsubcategoryproductEntity->getArrayCopy());     
         foreach($category_subcategory as $cat => $subcat)
@@ -181,8 +206,7 @@ if(!$error)
         }
 
 
-        $location = (!empty($callback) ? ($callback) : $MyRequest->url(ADMIN_CATALOG_PRODUCTS));
-
+        
         $MySession->UnsetVar('album_'.$album);
         $MySession->UnsetVar('addProduct');
 

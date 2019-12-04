@@ -29,5 +29,9 @@
         <llave>empty_subcategory</llave>
         <valor>Selecciona almenos una subcategoria</valor>
     </mensaje>
+     <mensaje>
+        <llave>price_not_save</llave>
+        <valor>Hubo un error al intentar guardar el precio intente nuevamente</valor>
+    </mensaje>
   
 </mensajes>
