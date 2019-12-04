@@ -53,8 +53,8 @@ if(empty($por))
 $MyPaginacion->setPage($MyRequest->getRequest('page',1));
 $MyPaginacion->setCampoOrden($por);
 $MyPaginacion->setOrden($MyRequest->getRequest('order',$order));
-$MyPaginacion->setTampageDefault($MyRequest->getRequest('tampag',25));
-
+$MyPaginacion->setTampageDefault($MyRequest->getRequest('tampag',12));
+$MyPaginacion->setTamanosValidos([12,24,48]);
 
 $CatalogproductsModel->setPage($MyPaginacion->getPage());
 $CatalogproductsModel->setTampag($MyPaginacion->getTampageDefault());
@@ -75,7 +75,7 @@ if($CatalogproductsModel->getDataSearch($CatalogproductsEntity->getArrayCopy()) 
 
 
 
-          $registro['link'] = $MyRequest->url(CATALOG_SEARCH,['friendly' => $registro['url_key']]);
+          $registro['link'] = $MyRequest->url(CATALOG_VIEW,['friendly' => $registro['url_key']]);
             $registro['id'] = $Tokenizer->token('catalog_products',$registro["id"]);
             $registro['thumb_resize'] =  "";
           $img = "";
