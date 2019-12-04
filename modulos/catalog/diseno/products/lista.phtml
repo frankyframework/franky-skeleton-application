@@ -4,27 +4,32 @@
         <?=getCatalogBuscadorPrincipal()?>
         </div>
         <div class="w-xxxx-12">
+            <?php if(getCoreConfig('catalog/product/buscadorlateral') == 1):?>
             <div class="cont_widget_catalog_filter">
                 <h3>Filtros</h3>
-            </div>
-            <div class="cont_widget_catalog_results">
-                <div class="_card_widget_catalog_product_result">
-                    <a class="_widget_catalog_add_wishlist" href="javascript:void(0);"></a>
-                    <a href="http://local.franky/productos/detalle/" class="_img_widget_catalog_product_result"><?php echo makeHTMLImg(getImg('demo/tshirt.jpg'),"","","","class='image_100'"); ?></a>
-                    <h2 class="_h2_widget_catalog_product_result"><a href="http://local.franky/productos/detalle/" >Nombre del producto</a></h2>
-                    <span class="price">Precio</span>
-                    <a class="_btn _widget_catalog_view_more" href="http://local.franky/productos/detalle/">Ver detalles</a>
-                </div>
-                <div class="_card_widget_catalog_product_result">
-                    <a class="_widget_catalog_add_wishlist" href="javascript:void(0);"></a>
-                    <a href="http://local.franky/productos/detalle/" class="_img_widget_catalog_product_result"><?php echo makeHTMLImg(getImg('demo/tshirt2.jpg'),"","","","class='image_100'"); ?></a>
-                    <h2 class="_h2_widget_catalog_product_result"><a href="http://local.franky/productos/detalle/" >Nombre del producto</a></h2>
-                    <span class="price">Precio</span>
-                    <a class="_btn _widget_catalog_view_more" href="http://local.franky/productos/detalle/">Ver detalles</a>
-                </div>
 
+                <?=catalog_getBuscadorLateral()?>
+            </div>
+            <?php endif; ?>
+            <div class="cont_widget_catalog_results <?=(getCoreConfig('catalog/product/buscadorlateral') == 1 ? '' : '_no_filters')?>">
+                <?php if(!empty($resultados_pagina)): ?>
+                    <?php foreach($resultados_pagina as $data): ?>
+                        <?=render('products/card.phtml',['data' => $data]);?>
+                    <?php endforeach ;?>
+                <?php else: ?>
+                    <p>Sin resultados</p>
+                <?php endif; ?>
+             
 
             </div>
         </div>
     </div>
 </div>
+<script>
+  $(document).ready(function(){
+        $('[data-idlove]').click(function(){
+            catalog_addWhishlist($(this).attr('data-idlove'),($(this).attr('class').search('active') > -1 ? 0 : 1));
+        });
+        catalog_getWhishlist();
+  });
+</script>

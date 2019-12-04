@@ -299,7 +299,7 @@ function catalog_getWhishlist()
             $respuesta = [];
               while($registro = $CatalogwhishlistModel->getRows())
               {
-                  $respuesta[] = $Tokenizer->token('products',$registro['product_id']);
+                  $respuesta[] = $Tokenizer->token('catalog_products',$registro['product_id']);
               }
          }
        }

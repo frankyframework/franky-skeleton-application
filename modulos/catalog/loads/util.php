@@ -87,6 +87,26 @@ function getCatalogBuscadorPrincipal()
 }
 
 
+function catalog_getBuscadorLateral()
+{
+    global $MyRequest;
+    global $MyFrankyMonster;
+    $BuscadorLateralForm =  new \Catalog\Form\BuscadorLateralForm('buscadorLateral');
+    $BuscadorLateralForm->setAtributo('action',$MyRequest->url(CATALOG_SEARCH));
+    $categorias = getCatalogCategorys('interface');
+    $BuscadorLateralForm->setOptionsInput("categoria[]", $categorias);
+    $categorias = [];
+    $clasificaciones = [];
+    $detalle_clasificacion = [];
+
+
+    return render('widget.buscador.lateral.phtml',[
+    'MyFrankyMonster' => $MyFrankyMonster,
+    'MyRequest'  => $MyRequest,
+    'BuscadorLateralForm' => $BuscadorLateralForm,
+    ]);
+}
+
 
 function catalog_completarTareas()
 {
@@ -121,5 +141,26 @@ function catalog_completarTareas()
 
 
 
+function catalog_getPriceMaxMinProduct()
+{
+    $CatalogproductsModel = new \Catalog\model\CatalogproductsModel;
+    $CatalogproductsEntity = new \Catalog\entity\CatalogproductsEntity;
+    $CatalogproductsModel->setOrdensql("price ASC");
+    $precio = [0,0];
+    if($CatalogproductsModel->getData($CatalogproductsEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+    {
+            $registro = $CatalogproductsModel->getRows();
+            $precio[0] = $registro['price'];
 
+    }
+    $CatalogproductsModel->setOrdensql("price DESC");
+    if($CatalogproductsModel->getData($CatalogproductsEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+    {
+            $registro = $CatalogproductsModel->getRows();
+            $precio[1] = $registro['price'];
+
+    }
+
+    return $precio;
+}
 ?>

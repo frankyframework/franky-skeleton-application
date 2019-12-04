@@ -10,6 +10,12 @@ return array(
                              'validation' => array('image' => true),
                             'value' => ''
                           ),
+                    array('path' => 'catalog/product/buscadorlateral',
+                    'type' => 'select',
+                    'label' => 'Habilitar buscador lateral',
+                    'data' => ['0' => 'No', '1' => 'Si'],
+                    'value' => 1
+                  ),
                    
               
           )

@@ -1,0 +1,7 @@
+<div class="_card_widget_catalog_product_result">
+    <a class="_widget_catalog_add_wishlist ilove"  data-idlove="<?= $data['id']; ?>" href="javascript:void(0);"></a>
+    <a href="http://local.franky/productos/detalle/" class="_img_widget_catalog_product_result"><?php echo makeHTMLImg($data['thumb_resize'],"","",$data['name'],"class='image_100'"); ?></a>
+    <h2 class="_h2_widget_catalog_product_result"><a href="http://local.franky/productos/detalle/" ><?=$data['name']?></a></h2>
+    <span class="price"><?=getFormatoPrecio($data['price'],false)?></span>
+    <a class="_btn _widget_catalog_view_more" href="http://local.franky/productos/detalle/">Ver detalles</a>
+</div>

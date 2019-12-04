@@ -1,0 +1,103 @@
+<?php
+
+$categoria      = $MyRequest->getUrlParam('categoria',$MyRequest->getRequest('categoria'));
+$precio	= $MyRequest->getRequest('precio');
+$precio_rango = catalog_getPriceMaxMinProduct();
+if(!empty($precio))
+{
+    $precio = explode("-", $precio);
+    if(is_array($precio))
+    {
+        $precio[0] = intval(preg_replace('/[^0-9]+/', '',  $precio[0]), 10);
+        $precio[1] = intval(preg_replace('/[^0-9]+/', '', $precio[1]), 10);
+    }
+}
+
+$data = $MyRequest->getRequest();
+if(!empty($categoria)):
+   $data['categoria[]'] = (is_array($categoria) ? $categoria: [$categoria]);
+endif;
+
+
+?>
+<?php echo $BuscadorLateralForm->openTag(); ?>
+<?php $BuscadorLateralForm->setData($data); ?>
+    <?php  echo $BuscadorLateralForm->get("q"); ?>
+     <div class="btn_filters"></div>
+    <div class="cont_filter">
+
+    <ul>
+        <li>
+          <label for="amount"><span class="title_filter">Precio:</span></label>
+            <?php  echo $BuscadorLateralForm->get("precio"); ?>
+          <span class="w-xxxx-12 w-xxx-12 w-xx-12 w-x-12" id="slider-range"></span>
+        </li>
+
+        <?php if(!in_array($MyFrankyMonster->MySeccion(),[RESULTADOS_DE_BUSQUEDA_CATEGORIA])): ?>
+        <li class="area_categoria"><span class="title_filter">Categorías</span>
+          <?php  echo $BuscadorLateralForm->get("categoria[]"); ?>
+        </li>
+      <?php endif; ?>
+
+     
+    </ul>
+    </div>
+ <?php echo $BuscadorLateralForm->endTag(); ?>
+
+ <script>
+     $(document).ready(function(){
+         $("form[name=buscadorLateral]").find("input[type=checkbox]").change(function(){
+               $.ajax({
+                       type: 'GET',
+                       url: "<?php echo $MyRequest->url(CATALOG_SEARCH); ?>",
+                       data: $("form[name=buscadorLateral]").serialize(),
+                       cache: false,
+                       beforeSend: function(){
+
+                           var loader = $('<div>').attr('id',"preloaderfullpageAjaxSearch").css({position: 'fixed',top:0,left:0,right:0, bottom:0,'z-index': 100});
+                          loader.append($('<div>').css({width: '100px',height: '100px',position: 'absolute',left:'50%', top:'50%',background: "url('/public/skin/default/images/loader.gif') no-repeat center 0", margin:'-50px 0 0 -50px'}));
+
+                           $('body').prepend(loader);
+                           $('body').css({'overflow':'hidden'});
+
+                       },
+                       success: function(response){
+                           $("._body").html(response);
+                           if($('#preloaderfullpageAjaxSearch'))
+                           {
+                               $('#preloaderfullpageAjaxSearch').fadeOut('slow',function(){
+                                   $(this).remove();
+                                   $('body').css({'overflow':'visible'});
+                               });
+
+                           }
+                       },
+                       error: function(){
+                         if($('#preloaderfullpageAjaxSearch'))
+                         {
+                           $('#preloaderfullpageAjaxSearch').fadeOut('slow',function(){
+                               $(this).remove();
+                               $('body').css({'overflow':'visible'});
+                           });
+
+                         }
+                         _alert("Error de peticion AJAX","Error"); }
+               });
+         })
+
+         $( "#slider-range" ).slider({
+            range: true,
+            min:  <?=$precio_rango[0]; ?>,
+            max: <?=$precio_rango[1]; ?>,
+            values: [ <?=(isset($precio[0]) ? $precio[0] : $precio_rango[0]); ?>, <?=(isset($precio[1]) ? $precio[1] : $precio_rango[1]); ?> ],
+            stop: function( event, ui ) {
+                $("form[name=buscadorLateral]").find("input[type=checkbox]").eq(0).change();
+            },
+            slide: function( event, ui ) {
+              $( "#filtro_precio" ).val(getFormatoPrecio(ui.values[ 0 ]) + " - " + getFormatoPrecio(ui.values[ 1 ]) );
+            }
+          });
+          $( "#filtro_precio" ).val( getFormatoPrecio($( "#slider-range" ).slider( "values", 0 )) +
+            " - " + getFormatoPrecio($( "#slider-range" ).slider( "values", 1 )) );
+     });
+ </script>
