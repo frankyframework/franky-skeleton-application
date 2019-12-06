@@ -1,18 +1,18 @@
 
-function catalog_addWhishlist(id,status)
+function catalog_addWishlist(id,status)
 {
 
      var var_query = {
-          "function": "catalog_addWhishlist",
+          "function": "catalog_addWishlist",
           "vars_ajax":[id,status]
     };
 
     var var_function = [id,status];
 
-    pasarelaAjax('GET',var_query,"catalog_addWhishlistHTML",var_function);
+    pasarelaAjax('GET',var_query,"catalog_addWishlistHTML",var_function);
 }
 
-function catalog_addWhishlistHTML(response,id, status)
+function catalog_addWishlistHTML(response,id, status)
 {
 
     var respuesta = null;
@@ -42,20 +42,20 @@ function catalog_addWhishlistHTML(response,id, status)
 }
 
 
-function catalog_getWhishlist()
+function catalog_getWishlist()
 {
 
      var var_query = {
-          "function": "catalog_getWhishlist",
+          "function": "catalog_getWishlist",
           "vars_ajax":[]
     };
 
     var var_function = [];
 
-    pasarelaAjax('GET',var_query,"catalog_getWhishlistHTML",var_function);
+    pasarelaAjax('GET',var_query,"catalog_getWishlistHTML",var_function);
 }
 
-function catalog_getWhishlistHTML(response)
+function catalog_getWishlistHTML(response)
 {
 
     var respuesta = null;

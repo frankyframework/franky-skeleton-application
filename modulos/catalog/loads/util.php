@@ -117,20 +117,20 @@ function catalog_completarTareas()
     $eventos_pendientes = $MySession->GetVar('catalog_eventos_pendientes');
 
 
-    if(isset($eventos_pendientes['whishlist']))
+    if(isset($eventos_pendientes['wishlist']))
     {
-        $CatalogwhishlistModel = new Catalog\model\CatalogwhishlistModel;
-        $CatalogwhishlistEntity = new Catalog\entity\CatalogwhishlistEntity($eventos_pendientes['whishlist']);
+        $CatalogwishlistModel = new Catalog\model\CatalogwishlistModel;
+        $CatalogwishlistEntity = new Catalog\entity\CatalogwishlistEntity($eventos_pendientes['wishlist']);
 
-        if($CatalogwhishlistEntity->status() == 1)
+        if($CatalogwishlistEntity->status() == 1)
         {
-          $CatalogwhishlistEntity->fecha(date('Y-m-d H:i:s'));
-          $CatalogwhishlistEntity->uid($MySession->GetVar('id'));
-          $result = $CatalogwhishlistModel->save($CatalogwhishlistEntity->getArrayCopy());
+          $CatalogwishlistEntity->fecha(date('Y-m-d H:i:s'));
+          $CatalogwishlistEntity->uid($MySession->GetVar('id'));
+          $result = $CatalogwishlistModel->save($CatalogwishlistEntity->getArrayCopy());
         }
         else{
-          $CatalogwhishlistEntity->uid($MySession->GetVar('id'));
-          $CatalogwhishlistModel->delete($CatalogwhishlistEntity->getArrayCopy());
+          $CatalogwishlistEntity->uid($MySession->GetVar('id'));
+          $CatalogwishlistModel->delete($CatalogwishlistEntity->getArrayCopy());
         }
 
     }

@@ -13,9 +13,12 @@ if (function_exists('bind_textdomain_codeset'))
 }
 
 $ObserverManager->addObserver('login_user','catalog_completarTareas');
-$ObserverManager->addObserver('save_catalog_product','catalog_setPriceEcommerce');
-$ObserverManager->addObserver('edit_catalog_product','catalog_setPriceEcommerce');
-
+$modulos = getModulos();
+if(in_array('ecommerce',$modulos))
+{
+    $ObserverManager->addObserver('save_catalog_product','catalog_setPriceEcommerce');
+    $ObserverManager->addObserver('edit_catalog_product','catalog_setPriceEcommerce');
+}
 define("OBJETO_PRODUCTOS", '\Catalog\model\CatalogproductsModel');
 define("DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE","catalog/products/");
 define("DETALLE_PRODUCTOS_ECOMMERCE", "");

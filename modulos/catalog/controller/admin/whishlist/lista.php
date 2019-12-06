@@ -1,8 +1,8 @@
 <?php
 use Base\Form\filtrosForm;
 use Franky\Core\paginacion;
-use Catalog\model\CatalogwhishlistModel;
-use Catalog\entity\CatalogwhishlistEntity;
+use Catalog\model\CatalogwishlistModel;
+use Catalog\entity\CatalogwishlistEntity;
 use Catalog\entity\CatalogproductsEntity;
 use Franky\Haxor\Tokenizer;
 
@@ -13,7 +13,7 @@ $CatalogproductsEntity = new CatalogproductsEntity();
 
 
 $MyPaginacion->setPage($MyRequest->getRequest('page',1));
-$MyPaginacion->setCampoOrden($MyRequest->getRequest('por',"catalog_whishlist.fecha"));
+$MyPaginacion->setCampoOrden($MyRequest->getRequest('por',"catalog_wishlist.fecha"));
 $MyPaginacion->setOrden($MyRequest->getRequest('order',"DESC"));
 $MyPaginacion->setTampageDefault($MyRequest->getRequest('tampag',25));
 $busca_b	= $MyRequest->getRequest('busca_b');
@@ -35,28 +35,28 @@ if(empty($rango_inicial) && !empty($rango_final))
     $rango = ['1900-01-01',$rango_final];
 }
 
-$CatalogwhishlistModel = new CatalogwhishlistModel();
-$CatalogwhishlistEntity = new CatalogwhishlistEntity();
+$CatalogwishlistModel = new CatalogwishlistModel();
+$CatalogwishlistEntity = new CatalogwishlistEntity();
 
-$CatalogwhishlistModel->setPage($MyPaginacion->getPage());
-$CatalogwhishlistModel->setTampag($MyPaginacion->getTampageDefault());
-$CatalogwhishlistModel->setOrdensql($MyPaginacion->getCampoOrden()." ".$MyPaginacion->getOrden());
+$CatalogwishlistModel->setPage($MyPaginacion->getPage());
+$CatalogwishlistModel->setTampag($MyPaginacion->getTampageDefault());
+$CatalogwishlistModel->setOrdensql($MyPaginacion->getCampoOrden()." ".$MyPaginacion->getOrden());
 
 
-$CatalogwhishlistEntity->uid($MySession->GetVar('id'));
+$CatalogwishlistEntity->uid($MySession->GetVar('id'));
 
-$result	 = $CatalogwhishlistModel->getData($CatalogwhishlistEntity->getArrayCopy(),$CatalogproductsEntity->getArrayCopy(),$busca_b,$rango);
-$MyPaginacion->setTotal($CatalogwhishlistModel->getTotal());
+$result	 = $CatalogwishlistModel->getData($CatalogwishlistEntity->getArrayCopy(),$CatalogproductsEntity->getArrayCopy(),$busca_b,$rango);
+$MyPaginacion->setTotal($CatalogwishlistModel->getTotal());
 
 
 $lista_admin_data = array();
 $data_new_group = array();
-if($CatalogwhishlistModel->getTotal() > 0)
+if($CatalogwishlistModel->getTotal() > 0)
 {
 
 	$iRow = 0;
 
-	while($registro = $CatalogwhishlistModel->getRows())
+	while($registro = $CatalogwishlistModel->getRows())
 	{
 		  $thisClass  = ((($iRow % 2) == 0) ? "formFieldDk" : "formFieldLt");
 

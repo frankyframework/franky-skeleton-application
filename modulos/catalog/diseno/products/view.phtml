@@ -26,8 +26,8 @@
 <script>
   $(document).ready(function(){
         $('[data-idlove]').click(function(){
-            catalog_addWhishlist($(this).attr('data-idlove'),($(this).attr('class').search('active') > -1 ? 0 : 1));
+            catalog_addWishlist($(this).attr('data-idlove'),($(this).attr('class').search('active') > -1 ? 0 : 1));
         });
-        catalog_getWhishlist();
+        catalog_getWishlist();
   });
 </script>

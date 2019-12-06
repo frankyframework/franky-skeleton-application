@@ -92,9 +92,9 @@ CREATE TABLE `catalog_subcategory_product` (
 
 
 
-DROP TABLE IF EXISTS `catalog_whishlist`;
+DROP TABLE IF EXISTS `catalog_wishlist`;
 
-CREATE TABLE `catalog_whishlist` (
+CREATE TABLE `catalog_wishlist` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
@@ -112,4 +112,4 @@ insert into `franky` ( `php`, `css`, `js`, `jquery`, `permisos`, `constante`, `u
 insert into `franky` ( `php`, `css`, `js`, `jquery`, `permisos`, `constante`, `url`, `nombre`, `ajax`, `status`, `editable`, `modulo`) values('admin/catalog_products/form.php','','[\"validaciones.js\"]','[\"jquery-validate\",\"tags\"]','[1,2]','FRM_CATALOG_PRODUCTS','admin/catalog-products/frm/','Alta de productos','[\"base/ajax.admin.js\",\"catalog/ajax.admin.js\"]','1','0','catalog');
 insert into `franky` ( `php`, `css`, `js`, `jquery`, `permisos`, `constante`, `url`, `nombre`, `ajax`, `status`, `editable`, `modulo`) values('products/lista.php','','','','','CATALOG_SEARCH','productos/buscar/','Lista de resultados de productos','','1','1','catalog');
 insert into `franky` ( `php`, `css`, `js`, `jquery`, `permisos`, `constante`, `url`, `nombre`, `ajax`, `status`, `editable`, `modulo`) values('products/view.php','','','[\"jquery-validate\"]','','CATALOG_VIEW','productos/[friendly]/','Detalle del producto','','1','1','catalog');
-insert into `franky` ( `php`, `css`, `js`, `jquery`, `permisos`, `constante`, `url`, `nombre`, `ajax`, `status`, `editable`, `modulo`) values('admin/whishlist/lista.php','','','[]','[1,2]','ADMIN_WHISHLIST','admin/whishlist/','Lista de deseos','[\"base/ajax.admin.js\"]','1','0','catalog');
+insert into `franky` ( `php`, `css`, `js`, `jquery`, `permisos`, `constante`, `url`, `nombre`, `ajax`, `status`, `editable`, `modulo`) values('admin/wishlist/lista.php','','','[]','[1,2]','ADMIN_WHISHLIST','admin/wishlist/','Lista de deseos','[\"base/ajax.admin.js\"]','1','0','catalog');

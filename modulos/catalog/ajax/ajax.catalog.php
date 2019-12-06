@@ -196,10 +196,10 @@ function eliminarFotoCatalogProduct($token,$status)
 
 
 
-function catalog_addWhishlist($id,$status)
+function catalog_addWishlist($id,$status)
 {
-	    $CatalogwhishlistModel = new Catalog\model\CatalogwhishlistModel;
-        $CatalogwhishlistEntity = new Catalog\entity\CatalogwhishlistEntity;
+	    $CatalogwishlistModel = new Catalog\model\CatalogwishlistModel;
+        $CatalogwishlistEntity = new Catalog\entity\CatalogwishlistEntity;
         $Tokenizer = new \Franky\Haxor\Tokenizer;
         global $MyAccessList;
         global $MyMessageAlert;
@@ -207,34 +207,34 @@ function catalog_addWhishlist($id,$status)
         global $MyRequest;
         $respuesta = null;
 
-        $CatalogwhishlistEntity->product_id($Tokenizer->decode($id));
+        $CatalogwishlistEntity->product_id($Tokenizer->decode($id));
  
 
         if(!$MySession->LoggedIn())
         {
-            $CatalogwhishlistEntity->status($status);
-            $MySession->SetVar('catalog_eventos_pendientes',['whishlist' => $CatalogwhishlistEntity->getArrayCopy()]);
+            $CatalogwishlistEntity->status($status);
+            $MySession->SetVar('catalog_eventos_pendientes',['wishlist' => $CatalogwishlistEntity->getArrayCopy()]);
 
             $respuesta[] = array("message" => "login","path" => $MyRequest->url(LOGIN)."?callback=".urlencode($MyRequest->getReferer()));
         }
         else {
             if($status == 1)
             {
-              $CatalogwhishlistEntity->status($status);
+              $CatalogwishlistEntity->status($status);
 
-              $CatalogwhishlistEntity->uid($MySession->GetVar('id'));
+              $CatalogwishlistEntity->uid($MySession->GetVar('id'));
 
-              if($CatalogwhishlistModel->getData($CatalogwhishlistEntity->getArrayCopy()) != REGISTRO_SUCCESS)
+              if($CatalogwishlistModel->getData($CatalogwishlistEntity->getArrayCopy()) != REGISTRO_SUCCESS)
               {
-                  $CatalogwhishlistEntity->fecha(date('Y-m-d H:i:s'));
-                  $result = $CatalogwhishlistModel->save($CatalogwhishlistEntity->getArrayCopy());
+                  $CatalogwishlistEntity->fecha(date('Y-m-d H:i:s'));
+                  $result = $CatalogwishlistModel->save($CatalogwishlistEntity->getArrayCopy());
               }
 
             }
             else{
 
-              $CatalogwhishlistEntity->uid($MySession->GetVar('id'));
-              $result = $CatalogwhishlistModel->delete($CatalogwhishlistEntity->getArrayCopy());
+              $CatalogwishlistEntity->uid($MySession->GetVar('id'));
+              $result = $CatalogwishlistModel->delete($CatalogwishlistEntity->getArrayCopy());
             }
 
 
@@ -246,16 +246,16 @@ function catalog_addWhishlist($id,$status)
 function catalog_EliminarWhislist($id,$status)
 {
 
-	    $CatalogwhishlistModel = new Catalog\model\CatalogwhishlistModel;
-        $CatalogwhishlistEntity = new Catalog\entity\CatalogwhishlistEntity;
+	    $CatalogwishlistModel = new Catalog\model\CatalogwishlistModel;
+        $CatalogwishlistEntity = new Catalog\entity\CatalogwishlistEntity;
         $Tokenizer = new \Franky\Haxor\Tokenizer;
         global $MyAccessList;
         global $MyMessageAlert;
         $respuesta = null;
         if($MyAccessList->MeDasChancePasar(ADMINISTRAR_CATALOG_WHISHLIST))
         {
-            $CatalogwhishlistEntity->id($Tokenizer->decode($id));
-            if($CatalogwhishlistModel->delete($CatalogwhishlistEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+            $CatalogwishlistEntity->id($Tokenizer->decode($id));
+            if($CatalogwishlistModel->delete($CatalogwishlistEntity->getArrayCopy()) == REGISTRO_SUCCESS)
             {
 
 
@@ -274,11 +274,11 @@ function catalog_EliminarWhislist($id,$status)
 }
 
 
-function catalog_getWhishlist()
+function catalog_getWishlist()
 {
 
-    $CatalogwhishlistModel = new Catalog\model\CatalogwhishlistModel;
-    $CatalogwhishlistEntity = new Catalog\entity\CatalogwhishlistEntity;
+    $CatalogwishlistModel = new Catalog\model\CatalogwishlistModel;
+    $CatalogwishlistEntity = new Catalog\entity\CatalogwishlistEntity;
     $Tokenizer = new \Franky\Haxor\Tokenizer;
     global $MyAccessList;
     global $MyMessageAlert;
@@ -290,14 +290,14 @@ function catalog_getWhishlist()
     if($MySession->LoggedIn())
     {
 
-         $CatalogwhishlistEntity->status(1);
+         $CatalogwishlistEntity->status(1);
 
-         $CatalogwhishlistEntity->uid($MySession->GetVar('id'));
-         $CatalogwhishlistModel->setTampag(1000);
-         if($CatalogwhishlistModel->getData($CatalogwhishlistEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+         $CatalogwishlistEntity->uid($MySession->GetVar('id'));
+         $CatalogwishlistModel->setTampag(1000);
+         if($CatalogwishlistModel->getData($CatalogwishlistEntity->getArrayCopy()) == REGISTRO_SUCCESS)
          {
             $respuesta = [];
-              while($registro = $CatalogwhishlistModel->getRows())
+              while($registro = $CatalogwishlistModel->getRows())
               {
                   $respuesta[] = $Tokenizer->token('catalog_products',$registro['product_id']);
               }
@@ -381,8 +381,8 @@ $MyAjax->register("DeleteCatalogSubcategory");
 $MyAjax->register("DeleteCatalogProduct");
 $MyAjax->register("setOrdenImagesProducts");
 $MyAjax->register("eliminarFotoCatalogProduct");
-$MyAjax->register("catalog_addWhishlist");
+$MyAjax->register("catalog_addWishlist");
 $MyAjax->register("catalog_EliminarWhislist");
-$MyAjax->register("catalog_getWhishlist");
+$MyAjax->register("catalog_getWishlist");
 $MyAjax->register("catalog_addProductoCarrito");
 ?>

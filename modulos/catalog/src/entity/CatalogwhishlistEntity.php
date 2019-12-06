@@ -2,7 +2,7 @@
 namespace Catalog\entity;
 
 
-class CatalogwhishlistEntity
+class CatalogwishlistEntity
 {
     private $id;
     private $uid;

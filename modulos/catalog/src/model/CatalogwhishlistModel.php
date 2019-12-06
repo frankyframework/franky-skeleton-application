@@ -1,24 +1,24 @@
 <?php
 namespace Catalog\model;
 
-class CatalogwhishlistModel  extends \Franky\Database\Mysql\objectOperations
+class CatalogwishlistModel  extends \Franky\Database\Mysql\objectOperations
 {
 
     public function __construct()
     {
       parent::__construct();
-      $this->from()->addTable('catalog_whishlist');
+      $this->from()->addTable('catalog_wishlist');
     }
 
     function getData($data = array(), $products = array(),$busca='',$rango=array())
     {
         $products = $this->optimizeEntity($products);
         $data = $this->optimizeEntity($data);
-        $campos = ["catalog_whishlist.id","catalog_whishlist.uid","product_id","catalog_whishlist.fecha","catalog_whishlist.status","name","catalog_products.url_key"];
+        $campos = ["catalog_wishlist.id","catalog_wishlist.uid","product_id","catalog_wishlist.fecha","catalog_wishlist.status","name","catalog_products.url_key"];
 
         foreach($data as $k => $v)
         {
-            $this->where()->addAnd("catalog_whishlist.".$k,$v,'=');
+            $this->where()->addAnd("catalog_wishlist.".$k,$v,'=');
         }
          foreach($products as $k => $v)
         {
@@ -37,8 +37,8 @@ class CatalogwhishlistModel  extends \Franky\Database\Mysql\objectOperations
               $this->where()->concat(')');
         }
 
-        $this->from()->addInner("catalog_products","catalog_whishlist.product_id","catalog_products.id");
-        $this->from()->addInner("users","users.id","catalog_whishlist.uid");
+        $this->from()->addInner("catalog_products","catalog_wishlist.product_id","catalog_products.id");
+        $this->from()->addInner("users","users.id","catalog_wishlist.uid");
 
 
         return $this->getColeccion($campos);
@@ -80,7 +80,7 @@ class CatalogwhishlistModel  extends \Franky\Database\Mysql\objectOperations
       $data = $this->optimizeEntity($data);
       foreach($data as $k => $v)
       {
-          $this->where()->addAnd("catalog_whishlist.".$k,$v,'=');
+          $this->where()->addAnd("catalog_wishlist.".$k,$v,'=');
       }
 
       return $this->eliminarRegistro($data);

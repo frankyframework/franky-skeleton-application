@@ -108,6 +108,7 @@ if(!$error)
     }
     $CatalogproductsEntity->category(json_encode($category_subcategory));
 
+    
     if(isset($_SESSION['album_'.$album]) && !empty($_SESSION['album_'.$album]))
     {
 
@@ -123,7 +124,7 @@ if(!$error)
         }
     }
     
-    
+ 
     $CatalogproductsEntity->images(json_encode($_SESSION['album_'.$album]));
     
     if(empty($id))
