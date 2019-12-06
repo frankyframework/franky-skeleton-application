@@ -252,7 +252,7 @@ function catalog_EliminarWhislist($id,$status)
         global $MyAccessList;
         global $MyMessageAlert;
         $respuesta = null;
-        if($MyAccessList->MeDasChancePasar(ADMINISTRAR_CATALOG_WHISHLIST))
+        if($MyAccessList->MeDasChancePasar(ADMINISTRAR_CATALOG_WISHLIST))
         {
             $CatalogwishlistEntity->id($Tokenizer->decode($id));
             if($CatalogwishlistModel->delete($CatalogwishlistEntity->getArrayCopy()) == REGISTRO_SUCCESS)

@@ -17,8 +17,8 @@ return array(
      "etiqueta" => "Subcategorias"
     ),
     array(
-        "permiso" =>   ADMINISTRAR_CATALOG_WHISHLIST,
-        "url" => $MyRequest->url(ADMIN_WHISHLIST),
+        "permiso" =>   ADMINISTRAR_CATALOG_WISHLIST,
+        "url" => $MyRequest->url(ADMIN_WISHLIST),
         "etiqueta" => "Favoritos"
       )
    
