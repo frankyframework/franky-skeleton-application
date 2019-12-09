@@ -177,14 +177,39 @@ function getInfoCarrito()
             $MyProducto->getInfoProdcuto($registro["id_producto"]);
             $_registro = $MyProducto->getRows();
 
-            $imagen = $_registro["imagen"];
-            if(file_exists($MyConfigure->getServerUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE."/".$registro["id_producto"]."/". $imagen))
+            $imagen = "";
+            $_img = getCoreConfig('ecommerce/product/placeholder');
+            if($_img != "" && file_exists(PROJECT_DIR.$_img))
             {
-              $imagen = imageResize($MyConfigure->getUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE."/".$registro["id_producto"]."/".$imagen,50,50);
+              $imagen = imageResize($_img,50,50, true);
             }
-            else{
-              $imagen = imageResize(getImg('ecommerce/producto_default.jpg'),50,50);
+           
+            if(!empty($_registro["imagen"]))
+            {
+                $_imagen = json_decode($_registro["imagen"],true);
+                
+                if(is_array($_imagen))
+                {
+                    if(!empty($_imagen)){
+                    
+                        foreach($_imagen as $foto)
+                        {
+                           
+                            if($foto['principal'] == 1)
+                            {
+                                if(!empty($foto["img"]) && file_exists($MyConfigure->getServerUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE.'/'.$registro["id_producto"].'/'.$foto['img']))
+                                {
+                                    $imagen = imageResize($MyConfigure->getUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE."/".$registro["id_producto"].'/'.$foto['img'],50,50, true);  
+                                }
+                            }
+                        }
+                    }
+                }
+                else{
+                    $imagen = imageResize($MyConfigure->getUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE."/".$registro["id_producto"].'/'.$_registro['imagen'],50,50, true);
+                }
             }
+
             $respuesta["qty"] += $registro["qty"];
 
             $respuesta["subtotal"] += $_registro["precio"] * $registro["qty"];
@@ -243,6 +268,9 @@ function addProductoCarrito($producto,$qty=1,$caracteristicas=array())
 
             }
 
+            $ObserverManager = new \Franky\Core\ObserverManager;
+            $ObserverManager->dispatch('prepara_producto_carrito',['id' => $Tokenizer->decode($producto),'qty' => $qty]);
+
             $MyCarritoProductoEntity->setId_producto($Tokenizer->decode($producto));
             $MyCarritoProductoEntity->setQty($qty);
             $MyCarritoProductoEntity->setCaracteristicas($caracteristicas);
@@ -285,6 +313,11 @@ function setQTYProductoCarrido($id,$qty)
             $id_carrito = getMyIdCarrito();
             if($MyCarritoProducto->getData($Tokenizer->decode($id), $id_carrito) == REGISTRO_SUCCESS)
             {
+                $registro = $MyCarritoProducto->getRows();
+                $ObserverManager = new \Franky\Core\ObserverManager;
+                
+                $ObserverManager->dispatch('prepara_producto_carrito',['id' => $registro['id_producto'],'qty' => $qty]);
+    
                 $MyCarritoProdcutoEntity->setId($Tokenizer->decode($id));
                 $MyCarritoProdcutoEntity->setQty($qty);
                 $MyCarritoProdcutoEntity->setId_carrito($id_carrito);

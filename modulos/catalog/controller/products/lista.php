@@ -76,7 +76,6 @@ if($CatalogproductsModel->getDataSearch($CatalogproductsEntity->getArrayCopy()) 
 
 
           $registro['link'] = $MyRequest->url(CATALOG_VIEW,['friendly' => $registro['url_key']]);
-            $registro['id'] = $Tokenizer->token('catalog_products',$registro["id"]);
             $registro['thumb_resize'] =  "";
           $img = "";
           $_img = getCoreConfig('catalog/product/placeholder');
@@ -85,14 +84,18 @@ if($CatalogproductsModel->getDataSearch($CatalogproductsEntity->getArrayCopy()) 
             $registro['thumb_resize'] = imageResize($_img,400,400, true);
           }
           $registro["images"] = json_decode($registro["images"],true);
+          
           if(!empty($registro['images']))
           {
               foreach($registro["images"] as $foto)
               {
+               
                   if($foto['principal'] == 1)
                   {
-                       if(!empty($foto["img"]) && file_exists($MyConfigure->getServerUploadDir()."/catalog/products/".$registro["id"].'/'.$foto['img']))
+                   
+                      if(!empty($foto["img"]) && file_exists($MyConfigure->getServerUploadDir()."/catalog/products/".$registro["id"].'/'.$foto['img']))
                       {
+                   
                             $registro['thumb_resize'] = imageResize($MyConfigure->getUploadDir()."/catalog/products/".$registro["id"].'/'.$foto['img'],400,400, true);
                           
                       }
@@ -100,6 +103,9 @@ if($CatalogproductsModel->getDataSearch($CatalogproductsEntity->getArrayCopy()) 
   
               }
           }
+          $registro['id'] = $Tokenizer->token('catalog_products',$registro["id"]);
+       
+
 
           $resultados_pagina[] = $registro;
       }

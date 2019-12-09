@@ -16,7 +16,14 @@
     <?php echo getFormatoPrecio($data_detalle['price'],false); ?>
 </div>
 <div style="border:solid 1px #E7E7E7;" class="align_center">  
-    <?php echo render(PROJECT_DIR.'/modulos/catalog/diseno/ecommerce/boton.add.phtml',array("id_producto" => $data_detalle["id"],'MyAccessList' => $MyAccessList)); ?>
+    <?php echo render(PROJECT_DIR.'/modulos/catalog/diseno/ecommerce/boton.add.phtml',
+    array("id_producto" => $data_detalle["id"],
+    "in_stock" => $data_detalle["in_stock"],
+    "min_qty" => $data_detalle["min_qty"],
+    "saleable" => $data_detalle["saleable"],
+    "stock" => $data_detalle["stock"],
+    "stock_infinito" => $data_detalle["stock_infinito"],
+    'MyAccessList' => $MyAccessList)); ?>
 </div>
 </div>
 

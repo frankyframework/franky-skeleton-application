@@ -39,6 +39,12 @@ if(getCoreConfig('ecommerce/openpay/enabled') == 1)
 $ObserverManager->addObserver('login_user_'.NIVEL_USERSUSCRIPTOR,'setCarritoUser');
 $ObserverManager->addObserver('register_new_user','setCarritoUser');
 
+define("OBJETO_PRODUCTOS", getCoreConfig('ecommerce/product/object')); // \Catalog\model\CatalogproductsModel
+define("DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE", getCoreConfig('ecommerce/product/path_images')); // catalog/products/
+define("DETALLE_PRODUCTOS_ECOMMERCE", getCoreConfig('ecommerce/product/url-detalle'));
+
+
+
 $MyMetatag->setJs("/public/js/ecommerce.js");
 $MyMetatag->setJs("/public/ajax/ecommerce/ajax.ecommerce.js");
 $MyMetatag->setCss("/public/skin/ecommerce/css/cart.css");

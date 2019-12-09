@@ -307,74 +307,6 @@ function catalog_getWishlist()
     return $respuesta;
 }
 
-
-function catalog_addProductoCarrito($producto,$qty=1,$caracteristicas=array())
-{
-            $MyCarritoEntity =  new \Ecommerce\entity\carrito();
-            $MyCarritoCompras =  new \Ecommerce\model\carrito();
-            $MyCarritoProducto =  new \Ecommerce\model\carrito_producto();
-            $MyCarritoProductoEntity =  new \Ecommerce\entity\carrito_producto();
-            $Tokenizer = new \Franky\Haxor\Tokenizer;
-            global $MyAccessList;
-            global $MyMessageAlert;
-            global $MySession;
-            global $MyRequest;
-
-            $respuesta = array("error" => false);
-
-            if($MyAccessList->MeDasChancePasar(CARRITO_ECOMMERCE))
-            {
-                $id_carrito = getMyIdCarrito();
-                if($id_carrito == 0)
-                {
-                    $MyCarritoEntity->setCookie_id(session_id());
-                    if($MySession->LoggedIn())
-                    {
-                        $MyCarritoEntity->setUid($MySession->GetVar("id"));
-
-                    }
-                    $MyCarritoCompras->save($MyCarritoEntity->getArrayCopy());
-                    $id_carrito = $MyCarritoCompras->getUltimoID();
-                }
-                //echo $id_carrito;
-                if($MyCarritoProducto->getData("", $id_carrito,$Tokenizer->decode($producto),$caracteristicas) == REGISTRO_SUCCESS)
-                {
-                    $registro = $MyCarritoProducto->getRows();
-
-                    $qty += $registro["qty"];
-                    $MyCarritoProductoEntity->setId($registro["id"]);
-
-
-                }
-
-                $MyCarritoProductoEntity->setId_producto($Tokenizer->decode($producto));
-                $MyCarritoProductoEntity->setQty($qty);
-                $MyCarritoProductoEntity->setCaracteristicas($caracteristicas);
-                $MyCarritoProductoEntity->setId_carrito($id_carrito);
-
-                if($MyCarritoProducto->save($MyCarritoProductoEntity->getArrayCopy()) == REGISTRO_SUCCESS)
-                {
-
-                    $respuesta = getInfoCarrito();
-
-                }
-                else
-                {
-                    $respuesta["message"] = $MyMessageAlert->Message("ecommerce_carrito_error_add");
-                    $respuesta["error"] = true;
-
-                }
-            }
-            else
-            {
-                 $respuesta["message"] = $MyMessageAlert->Message("sin_privilegios");
-                 $respuesta["error"] = true;
-            }
-
-    	return $respuesta;
-    }
-
-
 /******************************** EJECUTA *************************/
 $MyAjax->register("DeleteCatalogCategory");
 $MyAjax->register("DeleteCatalogSubcategory");
@@ -384,5 +316,4 @@ $MyAjax->register("eliminarFotoCatalogProduct");
 $MyAjax->register("catalog_addWishlist");
 $MyAjax->register("catalog_EliminarWhislist");
 $MyAjax->register("catalog_getWishlist");
-$MyAjax->register("catalog_addProductoCarrito");
 ?>

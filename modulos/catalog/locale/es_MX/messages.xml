@@ -33,5 +33,17 @@
         <llave>price_not_save</llave>
         <valor>Hubo un error al intentar guardar el precio intente nuevamente</valor>
     </mensaje>
+    <mensaje>
+        <llave>stock_no_disponible</llave>
+        <valor>Favor de revisar tu compra, el producto %s no cuenta con stock disponible</valor>
+    </mensaje>
+    <mensaje>
+        <llave>produt_no_saleable</llave>
+        <valor>El producto %s no se puede vender</valor>
+    </mensaje>
+    <mensaje>
+        <llave>stock_minimo</llave>
+        <valor>No se puede vender esta cantidad para este producto</valor>
+    </mensaje>
   
 </mensajes>

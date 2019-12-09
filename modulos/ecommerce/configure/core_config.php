@@ -1,5 +1,40 @@
 <?php
 return array(
+'ecommerce-product' => array(
+        'menu' => "ECOMMERCE PRODUCTOS",
+        'title' => "Configuración de productos",
+        'config' =>  array(
+                        array('path' => 'ecommerce/product/placeholder',
+                                'type' => 'file',
+                                'label' => 'Placeholder del producto',
+                                'validation' => array('image' => true),
+                                'value' => ''
+                        ),
+       
+
+                array('path' => 'ecommerce/product/object',
+                        'type' => 'text',
+                        'label' => 'Clase del producto',
+                        'validation' => array('require' => true),
+                        'value' => ''
+                        )    ,
+
+        array('path' => 'ecommerce/product/path_images',
+                'type' => 'text',
+                'label' => 'Path base de imagenes del producto',
+                'validation' => array('require' => true),
+                'value' => ''
+                ),
+         
+        array('path' => 'ecommerce/product/url-detalle',
+                'type' => 'text',
+                'label' => 'Constante detalle',
+                'validation' => array('require' => true),
+                'value' => ''
+                )   
+        ), 
+        
+),
   'ecommerce-conekta' => array(
           'menu' => "ECOMMERCE API CONEKTA",
           'title' => "Configuración de conekta",

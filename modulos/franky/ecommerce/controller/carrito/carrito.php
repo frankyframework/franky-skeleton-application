@@ -55,13 +55,16 @@ $MyCarritoProducto->setOrdensql("id");
                 }
             }
 
-
+            $_registro['friendly'] = $_registro['url_key'];
             $carrito_compras[] = array(
                 "id"                => $Tokenizer->token("productos",$registro["id"]),
                 "id_producto"       =>  $Tokenizer->token("productos", $registro["id_producto"]),
                 "id_producto_ori"       =>  $registro["id_producto"],
                 "caracteristicas"   => "",
                 "qty"               => $registro["qty"],
+                "stock"               => $_registro["stock"],
+                "min_qty"               => $_registro["min_qty"],
+                "stock_infinito"               => $_registro["stock_infinito"],
                 "precio"            => $_registro["precio"],
                 "iva"               => $_registro["iva"],
                 "nombre"            => $_registro["nombre"],

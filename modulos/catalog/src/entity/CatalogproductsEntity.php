@@ -25,6 +25,8 @@ class CatalogproductsEntity
     private $status;
     private $in_stock;
     private $saleable;
+    private $min_qty;
+    private $stock_infinito;
 
 
     public function __construct($data = null)
@@ -58,6 +60,8 @@ class CatalogproductsEntity
         $this->status = (isset($data["status"]) ? $data["status"] : null);
         $this->in_stock = (isset($data["in_stock"]) ? $data["in_stock"] : null);
         $this->saleable = (isset($data["saleable"]) ? $data["saleable"] : null);
+        $this->min_qty = (isset($data["min_qty"]) ? $data["min_qty"] : null);
+        $this->stock_infinito = (isset($data["stock_infinito"]) ? $data["stock_infinito"] : null);
     }
 
     public function getArrayCopy()
@@ -116,6 +120,10 @@ class CatalogproductsEntity
     public function in_stock($in_stock = null){ if($in_stock !== null){ $this->in_stock=$in_stock; }else{ return $this->in_stock; } }
 
     public function saleable($saleable = null){ if($saleable !== null){ $this->saleable=$saleable; }else{ return $this->saleable; } }
+
+    public function min_qty($min_qty = null){ if($min_qty !== null){ $this->min_qty=$min_qty; }else{ return $this->min_qty; } }
+
+    public function stock_infinito($stock_infinito = null){ if($stock_infinito !== null){ $this->stock_infinito=$stock_infinito; }else{ return $this->stock_infinito; } }
 
 }
 ?>

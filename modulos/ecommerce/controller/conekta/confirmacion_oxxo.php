@@ -20,6 +20,9 @@ if($MySession->GetVar('oxxo_pay') != $MyRequest->getRequest('token_oxxo'))
 {
     $MyRequest->redirect();
 }
+$ObserverManager = new ObserverManager;
+$ObserverManager->dispatch('prepara_orden_ecommerce',[]);
+
 
 $MySession->UnsetVar('oxxo_pay');
 
@@ -163,7 +166,7 @@ if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)
 
     sendEmail($campos,$registro);
 
-    $ObserverManager = new ObserverManager;
+    
 
     $ObserverManager->dispatch('finalizar_orden_ecommerce',[$pedido]);
 }

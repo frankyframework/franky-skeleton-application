@@ -9,6 +9,9 @@ function pago_paypal()
 
         $MyCarritoCompras =  new \Ecommerce\model\carrito();
         $MyCarritoProducto =  new \Ecommerce\model\carrito_producto();
+        $ObserverManager = new \Franky\Core\ObserverManager;
+        
+        $ObserverManager->dispatch('prepara_orden_ajax_ecommerce',[]);
 
         $respuesta = array("error" => false,"html" => "");
 

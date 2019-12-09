@@ -31,7 +31,7 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
     {
         $data = $this->optimizeEntity($data);
         $campos = ["id","name","sku","category","visible_in_search","description","images","videos","url_key","meta_title","meta_keyword","meta_description","price","stock","iva","incluye_iva","createdAt","updateAt","status",
-        "in_stock","saleable"];
+        "in_stock","saleable","min_qty","stock_infinito"];
 
         foreach($data as $k => $v)
         {
@@ -59,7 +59,7 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
         "catalog_products.meta_keyword","catalog_products.meta_description",
         "price","stock","iva","incluye_iva","catalog_products.createdAt",
         "catalog_products.updateAt","catalog_products.status",
-        "in_stock","saleable"];
+        "in_stock","saleable","min_qty","stock_infinito"];
 
         foreach($data as $k => $v)
         {
@@ -119,7 +119,7 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
     function getInfoProdcuto($id)
     {
 
-        $campos = ["precio","incluye_iva","iva","name as nombre","image as imagen"];
+        $campos = ["catalog_products.id","precio","ecommerce_precios.incluye_iva","ecommerce_precios.iva","name as nombre","images as imagen","stock","url_key","min_qty","stock_infinito","saleable","in_stock","min_qty"];
 
         $this->where()->addAnd("catalog_products.id",$id,'=');
 

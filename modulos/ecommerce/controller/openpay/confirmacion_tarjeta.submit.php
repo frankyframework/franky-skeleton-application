@@ -15,6 +15,8 @@ use Franky\Core\ObserverManager;
 
 $CardsModel        = new CardsModel();
 $CardsEntity       = new CardsEntity();
+$ObserverManager = new ObserverManager;
+$ObserverManager->dispatch('prepara_orden_ecommerce',[]);
 
 $id_tarjeta = $MyRequest->getRequest('id_tarjeta');
 $error = false;

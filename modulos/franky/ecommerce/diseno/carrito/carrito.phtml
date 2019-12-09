@@ -21,9 +21,9 @@
 
 
                         <div class='_col_mycart_resume control_qty'>
-                            <a class="menos_qty" data-id='<?php echo $_carrito_compras["id"]; ?>' href="#"><i class='icon icon-c-eliminar'></i></a>
+                            <a class="menos_qty" data-min='<?php echo $_carrito_compras["min_qty"]; ?>' data-id='<?php echo $_carrito_compras["id"]; ?>' href="#"><i class='icon icon-c-eliminar'></i></a>
                             <input type="text" data-id='<?php echo $_carrito_compras["id"]; ?>' value="<?php echo $_carrito_compras["qty"]; ?>" name="qty_<?php echo $_carrito_compras["id"]; ?>" />
-                            <a class="mas_qty"  data-id='<?php echo $_carrito_compras["id"]; ?>'  href="#"><i class='icon icon-c-agregar'></i></a>
+                            <a class="mas_qty" data-infinite='<?php echo $_carrito_compras["stock_infinito"]; ?>' data-max='<?php echo $_carrito_compras["stock"]; ?>' data-id='<?php echo $_carrito_compras["id"]; ?>'  href="#"><i class='icon icon-c-agregar'></i></a>
 
                         </div>
                         <div class="_col_mycart_resume subtotal_producto">
@@ -99,7 +99,7 @@ $(document).ready(function(){
         }
         var id = $(this).attr('data-id');
         var qty = parseInt($("input[name=qty_"+id+"]").val());
-        if(qty > 1)
+        if(qty >  parseInt($(this).attr('data-min')))
         {
             $("input[name=qty_"+id+"]").val(qty-1);
             time_event_carrito = setTimeout(function(){
@@ -116,11 +116,13 @@ $(document).ready(function(){
         }
         var id = $(this).attr('data-id');
         var qty = parseInt($("input[name=qty_"+id+"]").val());
-
-        $("input[name=qty_"+id+"]").val(qty+1);
-        time_event_carrito = setTimeout(function(){
-        setQTYProductoCarrido(id,parseInt($("input[name=qty_"+id+"]").val()))
-         }, 3000);
+        if(parseInt($(this).attr('data-infinite')) == 1 || qty <  parseInt($(this).attr('data-max')))
+        {
+            $("input[name=qty_"+id+"]").val(qty+1);
+            time_event_carrito = setTimeout(function(){
+            setQTYProductoCarrido(id,parseInt($("input[name=qty_"+id+"]").val()))
+            }, 3000);
+        }
 
     });
     $("input[name^='qty_']").keyup(function(e){

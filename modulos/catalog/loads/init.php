@@ -18,11 +18,9 @@ if(in_array('ecommerce',$modulos))
 {
     $ObserverManager->addObserver('save_catalog_product','catalog_setPriceEcommerce');
     $ObserverManager->addObserver('edit_catalog_product','catalog_setPriceEcommerce');
+    $ObserverManager->addObserver('prepara_producto_carrito','catalog_validaStockCarrito');
+    
 }
-define("OBJETO_PRODUCTOS", '\Catalog\model\CatalogproductsModel');
-define("DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE","catalog/products/");
-define("DETALLE_PRODUCTOS_ECOMMERCE", "");
-
 
 $MyMetatag->setCss("/public/skin/catalog/css/catalog.css");
 $MyMetatag->setJs("/public/ajax/catalog/ajax.catalog.js");

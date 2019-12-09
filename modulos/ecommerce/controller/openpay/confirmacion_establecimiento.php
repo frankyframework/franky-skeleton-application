@@ -20,7 +20,8 @@ if($MySession->GetVar('establecimiento_pay') != $MyRequest->getRequest('establec
 {
     $MyRequest->redirect();
 }
-
+$ObserverManager = new ObserverManager;
+$ObserverManager->dispatch('prepara_orden_ecommerce',[]);
 $MySession->UnsetVar('establecimiento_pay');
 
 $productos =  OBJETO_PRODUCTOS;
@@ -178,8 +179,6 @@ if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)
     $registro  = $TemplateemailModel->getRows();
 
     sendEmail($campos,$registro);
-
-    $ObserverManager = new ObserverManager;
 
     $ObserverManager->dispatch('finalizar_orden_ecommerce',[$pedido]);
 }

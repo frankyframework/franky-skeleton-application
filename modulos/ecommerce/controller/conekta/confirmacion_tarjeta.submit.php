@@ -13,8 +13,11 @@ use Ecommerce\model\CardsModel;
 use Ecommerce\entity\CardsEntity;
 use Franky\Core\ObserverManager;
 
+$ObserverManager    = new ObserverManager;
 $CardsModel        = new CardsModel();
 $CardsEntity       = new CardsEntity();
+
+$ObserverManager->dispatch('prepara_orden_ecommerce',[]);
 
 $id_tarjeta = $MyRequest->getRequest('id_tarjeta');
 $error = false;
@@ -256,7 +259,6 @@ if(!$error)
 
         sendEmail($campos,$registro);
 
-         $ObserverManager = new ObserverManager;
 
         $ObserverManager->dispatch('finalizar_orden_ecommerce',[$pedido]);
 
