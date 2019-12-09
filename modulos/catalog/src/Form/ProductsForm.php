@@ -190,6 +190,34 @@ class ProductsForm  extends \Franky\Form\Form
         );
 
         $this->add(array(
+            'name' => 'stock_infinito',
+            'type'  => 'checkbox',
+            'atributos' => array(
+                'class' => ''
+            ),
+            'options' =>  array("1" => "Stock infinito"),
+
+
+            )
+        );
+
+        $this->add(array(
+            'name' => 'min_qty',
+            'label' => 'Minimo para vender',
+            'type'  => 'text',
+            'required'  => false,
+            'value' => 1,
+            'atributos' => array(
+                    'class'       => '',
+                    'maxlength' => 5
+                ),
+                'label_atributos' => array(
+                    'class'       => 'desc_form_obligatorio'
+                )
+            )
+        );
+
+        $this->add(array(
             'name' => 'visible_in_search',
                 'type'  => 'checkbox',
                 'atributos' => array(
