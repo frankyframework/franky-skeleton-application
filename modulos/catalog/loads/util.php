@@ -276,7 +276,36 @@ function catalog_validaStockCompra()
 
 function catalog_restaStock()
 {
-    
+    global $MySession;
+    $CatalogproductsModel          = new \Catalog\model\CatalogproductsModel();
+    $CatalogproductsEntity         = new \Catalog\entity\CatalogproductsEntity();
+    $USERS =  new \Base\model\USERS;
+    $entityUser = new \Base\entity\users;
+
+    $detalle_pedido = getPedido($pedido);
+
+    foreach($detalle_pedido['productos'] as $producto)
+    {
+        $CatalogproductsEntity->exchangeArray([]);
+        
+        $CatalogproductsModel->getInfoProdcuto($producto['id']);
+        $registro = $CatalogproductsModel->getRows();
+
+        if($registro['stock_infinito'] == 0)
+        {
+            $stock = $registro['stock'] - $producto['qty'];
+            $CatalogproductsEntity->stock($stock);
+            if($stock == 0)
+            {
+                $CatalogproductsEntity->in_stock(0);
+            }
+            $CatalogproductsEntity->id($producto['id']);
+
+            $CatalogproductsEntity->save($CatalogproductsEntity->getArrayCopy());
+        }
+        
+        
+    }
 }
 
 function catalog_addStock()
