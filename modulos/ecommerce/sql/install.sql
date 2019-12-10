@@ -115,10 +115,8 @@ insert  into `templates_email`(`nombre`,`status`,`fecha`,`Asunto`,`destinatario`
     `id_categoria` int(11) NOT NULL,
     PRIMARY KEY (`id`),
     KEY `id_user` (`id_user`),
-    KEY `id_categoria` (`id_categoria`),
-    CONSTRAINT `ecommerce_customers_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT `ecommerce_customers_ibfk_2` FOREIGN KEY (`id_categoria`) REFERENCES `ecommerce_categorias_customers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-  ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
+    KEY `id_categoria` (`id_categoria`)) 
+    ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
 
   /*Table structure for table `ecommerce_direcciones` */

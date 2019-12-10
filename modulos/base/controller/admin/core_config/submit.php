@@ -13,7 +13,7 @@ $validaciones =  new validaciones();
 $modulo = $modulos = getModulos("DESC");
 $File = new File();
 $core_config = [];
-$core_config_db = [];
+
 if(!empty($modulos))
 {
     foreach($modulos as $modulo)
@@ -96,7 +96,7 @@ if($error == false)
                       {
 
 
-                          if($core_config_db_actual[$config['path']] != $CoreConfigEntity->value())
+                          if($core_config_db_actual[$config['path']] != stripslashes($CoreConfigEntity->value()))
                           {
                             $result = $CoreConfigModel->updateByPath($CoreConfigEntity->getArrayCopy());
                           }
@@ -108,8 +108,6 @@ if($error == false)
                       {
                           $result = $CoreConfigModel->save($CoreConfigEntity->getArrayCopy());
                       }
-
-                      $core_config_db[$config['path']] = $MyRequest->getRequest(str_replace("/","_",$config['path']));
 
                   }
                   else {
@@ -163,8 +161,7 @@ if($error == false)
                                   {
                                       $result = $CoreConfigModel->save($CoreConfigEntity->getArrayCopy());
                                   }
-                                  $core_config_db[$config['path']] = $CoreConfigEntity->value();
-
+                          
                               }
                               else
                               {
@@ -180,7 +177,6 @@ if($error == false)
                           $MyFlashMessage->setMsg("error",'La imagen es requerida en '.$config['label'].' de '.$val_config['menu']);
                           $MyRequest->redirect($MyRequest->getReferer());
                         }
-                        $core_config_db[$config['path']] = $core_config_db_actual[$config['path']];
                         $result = REGISTRO_SUCCESS;
                       }
                   }
@@ -212,14 +208,8 @@ if($error == false)
           endforeach;
         endif;
 
-        $dir = $MyConfigure->getServerUploadDir()."/core_config/";
-        $File = new File();
-        $File->mkdir($dir);
+    unlink($CoreConfig->getServerUploadDir().'/core_config/core_config.php');
 
-
-        $fopen = fopen($CoreConfig->getServerUploadDir().'/core_config/core_config.php', 'w');
-        fwrite($fopen,'<?php return '.var_export($core_config_db,true).' ?>');
-        fclose($fopen);
 
 
       $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("guardar_generico_success"));

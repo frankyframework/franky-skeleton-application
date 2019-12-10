@@ -50,17 +50,42 @@
     <h4>Productos</h4>
 
     <?php foreach($detalle_pedido['productos'] as $producto): ?>
+      
         <ul class="_ul_txt_standar">
-          <?php
-          $imagen = $producto["imagen"];
-          if(file_exists($MyConfigure->getServerUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE."/".$registro["id_producto"]."/". $imagen))
-          {
-            $imagen = imageResize($MyConfigure->getUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE."/".$registro["id_producto"]."/".$imagen,50,50);
-          }
-          else{
-            $imagen = imageResize(getImg('ecommerce/producto_default.jpg'),50,50);
-          }
-          ?>
+        <?php
+        $imagen = "";
+            $_img = getCoreConfig('ecommerce/product/placeholder');
+            if($_img != "" && file_exists(PROJECT_DIR.$_img))
+            {
+              $imagen = imageResize($_img,50,50, true);
+            }
+           
+            if(!empty($producto["imagen"]))
+            {
+                $_imagen = json_decode($producto["imagen"],true);
+                if(is_array($_imagen))
+                {
+                    if(!empty($_imagen)){
+                    
+                        foreach($_imagen as $foto)
+                        {
+                            if($foto['principal'] == 1)
+                            {
+                                if(!empty($foto["img"]) && file_exists($MyConfigure->getServerUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE.'/'.$producto["id"].'/'.$foto['img']))
+                                {
+                                    $imagen = imageResize($MyConfigure->getUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE."/".$producto["id"].'/'.$foto['img'],50,50, true);  
+                                }
+                            }
+                        }
+                    }
+                }
+                else{
+                    $imagen = imageResize($MyConfigure->getUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE."/".$producto["id"].'/'.$producto['imagen'],50,50, true);
+                }
+            }
+
+
+            ?>
           <li><?=makeHTMLImg($imagen,50,50,$producto['nombre'])?></li>
             <li><strong>Nombre:</strong> <?php echo $producto['nombre']; ?></li>
             <li><strong>Cantidad:</strong> <?php echo $producto['qty']; ?></li>
@@ -114,7 +139,7 @@
     </script>
 
     <?php endif; ?>
-    <?php if($MyAccessList->MeDasChancePasar(ADMINISTRAR_PEDIDOS)): ?>
+    <?php if($MyAccessList->MeDasChancePasar(ADMINISTRAR_PEDIDOS) && $detalle_pedido['status'] != 'canceled'): ?>
     <?php echo $StatusPagoForm->openTag(); ?>
 
     <?php echo $StatusPagoForm->getRow('id'); ?>
@@ -134,15 +159,10 @@
     {
         $( "form[name=frmStatus]" ).find('select[name=status]').change(function(){
 
-                if($(this).val() == "partially-refunded" )
-                {
+               
                     $('.content_monto').show();
-                }
-                else
-                {
-                    $('.content_monto').hide();
-                }
-
+              
+                
 
                 if($(this).val() == "partially-refunded" ||
                 $(this).val() == "refunded" ||

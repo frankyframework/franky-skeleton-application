@@ -137,12 +137,7 @@ return array(
                               'validation' => array('required' => false),
                               'value' => ''
                             ),
-              array('path' => 'ecommerce/paypal/limitcards',
-                            'type' => 'text',
-                            'label' => 'Limite de tarjetas',
-                            'validation' => array('required' => true,'numeric' => true),
-                            'value' => '3'
-                          )
+             
           )
   ),
   'ecommerce-openpay' => array(
@@ -209,6 +204,12 @@ return array(
                               ),
                               'multiple' => true
                             ),
+                            array('path' => 'ecommerce/openpay/limitcards',
+                            'type' => 'text',
+                            'label' => 'Limite de tarjetas',
+                            'validation' => array('required' => true,'numeric' => true),
+                            'value' => '3'
+                          )
           )
   ),
 );
