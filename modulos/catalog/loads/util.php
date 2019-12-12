@@ -274,7 +274,7 @@ function catalog_validaStockCompra()
     
 }
 
-function catalog_restaStock()
+function catalog_restaStock($pedido)
 {
     global $MySession;
     $CatalogproductsModel          = new \Catalog\model\CatalogproductsModel();
@@ -301,15 +301,48 @@ function catalog_restaStock()
             }
             $CatalogproductsEntity->id($producto['id']);
 
-            $CatalogproductsEntity->save($CatalogproductsEntity->getArrayCopy());
+            $CatalogproductsModel->save($CatalogproductsEntity->getArrayCopy());
         }
         
         
     }
 }
 
-function catalog_addStock()
+function catalog_addStock($pedido)
 {
-    
+    global $MySession;
+    $CatalogproductsModel          = new \Catalog\model\CatalogproductsModel();
+    $CatalogproductsEntity         = new \Catalog\entity\CatalogproductsEntity();
+    $USERS =  new \Base\model\USERS;
+    $entityUser = new \Base\entity\users;
+
+    $detalle_pedido = getPedido($pedido);
+    if($detalle_pedido['status'] == 'canceled')
+    {
+        if(!empty($detalle_pedido['productos']))
+        {
+            foreach($detalle_pedido['productos'] as $producto)
+            {
+                $CatalogproductsEntity->exchangeArray([]);
+
+                $CatalogproductsModel->getInfoProdcuto($producto['id']);
+                $registro = $CatalogproductsModel->getRows();
+
+                if($registro['stock_infinito'] == 0)
+                {
+                    $stock = $registro['stock'] + $producto['qty'];
+                    $CatalogproductsEntity->stock($stock);
+                    if($stock > 0)
+                    {
+                        $CatalogproductsEntity->in_stock(1);
+                    }
+                    $CatalogproductsEntity->id($producto['id']);
+
+                    $CatalogproductsModel->save($CatalogproductsEntity->getArrayCopy());
+                }
+
+            }
+        }
+    }
 }
 ?>

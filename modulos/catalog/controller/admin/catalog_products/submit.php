@@ -32,7 +32,7 @@ $category  = $MyRequest->getRequest('category');
 $subcategory  = $MyRequest->getRequest('subcategory');
 $description  = $MyRequest->getRequest('description','',true);
 $principal  = $MyRequest->getRequest('principal');
-
+$CatalogproductsEntity->description($description);
 $error = false;
 
 if($CatalogproductsEntity->url_key() === "")

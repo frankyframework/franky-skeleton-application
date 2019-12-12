@@ -98,7 +98,7 @@ function SetStatusPagoEcommerce()
                         $("form[name=frmStatus]").find('input[name=cantidad]').val()]
                   };
 
-                  pasarelaAjax('POST',var_query,"SetStatusPagoEcommerceHTML","");
+                  pasarelaAjax('POST',var_query,"SetStatusPagoEcommerceHTML",var_query.vars_ajax);
                     $( this ).dialog( "close" );
 
                 },
@@ -112,7 +112,7 @@ function SetStatusPagoEcommerce()
 }
 
 
-function SetStatusPagoEcommerceHTML(response)
+function SetStatusPagoEcommerceHTML(response,id,status,nota,cantidad)
 {
     var respuesta = null;
 
@@ -128,6 +128,10 @@ function SetStatusPagoEcommerceHTML(response)
             $("form[name=frmStatus]").find('input[name=cantidad]').val('');
             $('.content_monto').hide();
             $('.content_nota').hide();
+            if(status == 'canceled')
+            {
+                $( "form[name=frmStatus]" ).remove();
+            }
         }
         else
         {
