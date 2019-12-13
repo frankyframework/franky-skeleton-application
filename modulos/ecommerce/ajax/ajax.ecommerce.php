@@ -402,7 +402,7 @@ function setconfigPago($id_pago)
 function setDireccionCheckout($id_envio)
 {
     global $MySession;
-    $data = array("id_envio" => $id_envio);
+    $data = array('id_envio' => $id_envio,'direccion_envio' => '');
     $MyDireccion = new Ecommerce\model\direcciones();
 
     $MyDireccion->setTampag(1000);
@@ -417,6 +417,7 @@ function setDireccionCheckout($id_envio)
 
         while($direccion_envio = $MyDireccion->getRows())
         {
+            $data['direccion_envio'] = $direccion_envio;
             if($direccion_envio['id'] == $id_envio)
             {
 
@@ -453,8 +454,8 @@ function setFacturacionCheckout($id_facturacion)
     global $MySession;
 
     $data = $MySession->GetVar('checkout');
-    $data["id_facturacion"] = $id_facturacion;
-
+    $data['direccion_facturacion'] = $id_facturacion;
+    $data['direccion_facturacion'] = '';
     $MyDireccion = new Ecommerce\model\direcciones_facturacion();
 
     $MyDireccion->setTampag(1000);
@@ -469,6 +470,7 @@ function setFacturacionCheckout($id_facturacion)
 
         while($direccion_facturacion = $MyDireccion->getRows())
         {
+            $data['direccion_facturacion'] = $direccion_facturacion;
             if($direccion_facturacion['id'] == $id_facturacion)
             {
 
@@ -496,6 +498,7 @@ function setNuevaFacturacionCheckout($data)
     $data2 = $MySession->GetVar('checkout');
     $data = json_decode($data,true);
     $data3 = array();
+    $data2["direccion_facturacion"] = '';
     foreach($data as $node){
         $data3[$node["name"]] = $node["value"];
     }

@@ -53,7 +53,7 @@ if(isset($data["id_facturacion"]))
 {
     if(is_numeric($data["id_facturacion"]))
     {
-        $id_direccion_facturacion = $data["id_facturacion"];
+        $id_direccion_facturacion = $data["direccion_facturacion"];
     }
 }
 else {
@@ -65,14 +65,14 @@ else {
         $DireccionesFacturacionEntity->setFecha(date('Y-m-d H:i:s'));
         $DireccionesFacturacionEntity->setStatus(1);
         $direcciones_facturacion->save($DireccionesFacturacionEntity->getArrayCopy());
-        $id_direccion_facturacion = $direcciones_facturacion->getUltimoID();
+        $id_direccion_facturacion = $data["direccion_facturacion"];
 
     }
 }
 
 if(isset($data["id_envio"]))
 {
-    $direccion_envio = $data["id_envio"];
+    $direccion_envio = $data["direccion_envio"];
 
 }
 else {
@@ -84,12 +84,12 @@ else {
         $DireccionesEnvioEntity->setFecha(date('Y-m-d H:i:s'));
         $DireccionesEnvioEntity->setStatus(1);
         $direcciones_envio->save($DireccionesEnvioEntity->getArrayCopy());
-        $direccion_envio = $direcciones_envio->getUltimoID();
+        $direccion_envio = $data["direccion_envio"];
     }
 }
 $MySession->SetVar('checkout',array());
-$MyPedidoEntity->setId_direccion_envio($direccion_envio);
-$MyPedidoEntity->setId_direccion_facturacion($id_direccion_facturacion);
+$MyPedidoEntity->setId_direccion_envio(json_encode($direccion_envio));
+$MyPedidoEntity->setId_direccion_facturacion(json_encode($id_direccion_facturacion));
 $MyPedidoEntity->setFecha(date('Y-m-d H:i:s'));
 $MyPedidoEntity->setUid($MySession->GetVar('id'));
 $MyPedidoEntity->setStatus($status_pago);
