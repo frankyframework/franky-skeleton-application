@@ -217,52 +217,49 @@ function getCarrito()
 
 function getPedido($id,$uid=""){
 
-  $pedidosModel             = new \Ecommerce\model\pedidos();
-  $producto_pedidoModel             = new \Ecommerce\model\producto_pedidoModel();
-  $producto_pedidoEntity          = new \Ecommerce\entity\producto_pedido();
-  $MyDirecciones = new \Ecommerce\model\direcciones_facturacion;
+    $pedidosModel             = new \Ecommerce\model\pedidos();
+    $producto_pedidoModel             = new \Ecommerce\model\producto_pedidoModel();
+    $producto_pedidoEntity          = new \Ecommerce\entity\producto_pedido();
+    $MyDirecciones = new \Ecommerce\model\direcciones_facturacion;
 
 
-  $productos =  OBJETO_PRODUCTOS;
-  $MyProducto =  new $productos();
+    $productos =  OBJETO_PRODUCTOS;
+    $MyProducto =  new $productos();
 
-  $result	 		= $pedidosModel->getData($id,$uid);
-  $detalle_pedido = array();
-  if($pedidosModel->getTotal() > 0)
-  {
-      $detalle_pedido = $pedidosModel->getRows();
-  }
+    $result	 		= $pedidosModel->getData($id,$uid);
+    $detalle_pedido = array();
+    if($pedidosModel->getTotal() > 0)
+    {
+        $detalle_pedido = $pedidosModel->getRows();
+      
+        $detalle_pedido["envio"] = json_decode($detalle_pedido["id_direccion_envio"],true);
+        $detalle_pedido["facturacion"] = json_decode($detalle_pedido["id_direccion_facturacion"],true);
 
-  $producto_pedidoEntity->setId_pedido($detalle_pedido['id']);
-  $producto_pedidoModel->setTampag(100);
-  $producto_pedidoModel->getData($producto_pedidoEntity->getArrayCopy());
-
-
-  while($registro = $producto_pedidoModel->getRows())
-  {
-
-      $MyProducto->getInfoProdcuto($registro["id_producto"]);
-      $_registro = $MyProducto->getRows();
-
-      $detalle_pedido['productos'][] = array("id" => $registro["id_producto"],
-          "qty" => $registro["qty"],
-          "nombre" => $_registro["nombre"],
-          "caracteristicas" => json_decode($registro["caracteristicas"],true),
-          "precio" => $registro["precio"],
-          "imagen" => $_registro["imagen"]
-      );
-  }
-  if(!empty($detalle_pedido['id_direccion_facturacion']))
-  {
-    if($MyDirecciones->getData($detalle_pedido['id_direccion_facturacion'])){
-        $data = $MyDirecciones->getRows();
-        $detalle_pedido['facturacion'] = $data;
     }
 
-  }
+    $producto_pedidoEntity->setId_pedido($detalle_pedido['id']);
+    $producto_pedidoModel->setTampag(100);
+    $producto_pedidoModel->getData($producto_pedidoEntity->getArrayCopy());
 
 
-  return $detalle_pedido;
+    while($registro = $producto_pedidoModel->getRows())
+    {
+
+        $MyProducto->getInfoProdcuto($registro["id_producto"]);
+        $_registro = $MyProducto->getRows();
+
+        $detalle_pedido['productos'][] = array("id" => $registro["id_producto"],
+            "qty" => $registro["qty"],
+            "nombre" => $_registro["nombre"],
+            "caracteristicas" => json_decode($registro["caracteristicas"],true),
+            "precio" => $registro["precio"],
+            "imagen" => $_registro["imagen"]
+        );
+    }
+
+
+
+    return $detalle_pedido;
 
 }
 
