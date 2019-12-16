@@ -22,32 +22,13 @@ if($CatalogproductsModel->getData($CatalogproductsEntity->getArrayCopy()) == REG
 
   $data_detalle = $CatalogproductsModel->getRows();
   $data_detalle["videos"] = json_decode($data_detalle["videos"],true);
-  $data_detalle["galeria"] = json_decode($data_detalle["images"],true);
+  $data_detalle["images"] = json_decode($data_detalle["images"],true);
   $data_detalle["tags"] = explode(",",$data_detalle["meta_keyword"]);
   $data_detalle["id_categoria"] = json_decode($data_detalle["category"],true);
+  
+  
  
-  $img = "";
-  $_img = getCoreConfig('catalog/product/placeholder');
-  if($_img != "" && file_exists(PROJECT_DIR.$_img))
-  {
-    $data_detalle["thumb"] = imageResize($_img,271,176, true);
-  }
- 
-  if(!empty($data_detalle["galeria"]))
-  {
-      foreach($data_detalle["galeria"] as $foto)
-      {
-          if($foto['principal'] == 1)
-          {
-               if(!empty($foto["img"]) && file_exists($MyConfigure->getServerUploadDir()."/catalog/products/".$registro["id"].'/'.$foto['img']))
-              {
-                $data_detalle["thumb"]  = imageResize($MyConfigure->getUploadDir()."/catalog/products/".$registro["id"].'/'.$foto['img'],271,176, true);
-              }
-          }
 
-      }
-
-    }
   $MyMetatag->setTitulo($data_detalle['meta_title']);
   $MyMetatag->setDescripcion($data_detalle['meta_description']);
   $MyMetatag->setKeywords($data_detalle['meta_keywords']);

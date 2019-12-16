@@ -6,43 +6,9 @@
         <div class="w-xxxx-12">
             <div class="content">
                 <div class="w-xxxx-6">
-                    <div>
-
-                        <div class="slider slider-for">
-                                <div>
-                                        <h3>1</h3>
-                                </div>
-                                <div>
-                                        <h3>2</h3>
-                                </div>
-                                <div>
-                                        <h3>3</h3>
-                                </div>
-                                <div>
-                                        <h3>4</h3>
-                                </div>
-                                <div>
-                                        <h3>5</h3>
-                                </div>
-                        </div>
-                        <div class="slider slider-nav">
-                                <div>
-                                        <h3>1</h3>
-                                </div>
-                                <div>
-                                        <h3>2</h3>
-                                </div>
-                                <div>
-                                        <h3>3</h3>
-                                </div>
-                                <div>
-                                        <h3>4</h3>
-                                </div>
-                                <div>
-                                        <h3>5</h3>
-                                </div>
-                        </div>
-                    </div>
+                    <?=render("products/widget.images.phtml",['data_detalle' => $data_detalle,'MyConfigure' => $MyConfigure])?>
+                   
+                 
                 </div>
                 <div class="w-xxxx-6">
                     <h1><?=$data_detalle['name']?></h1>
@@ -82,21 +48,5 @@
             catalog_addWishlist($(this).attr('data-idlove'),($(this).attr('class').search('active') > -1 ? 0 : 1));
         });
         catalog_getWishlist();
-
-        $('.slider-for').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: false,
-            fade: true,
-            asNavFor: '.slider-nav'
-          });
-          $('.slider-nav').slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            asNavFor: '.slider-for',
-            dots: false,
-            centerMode: true,
-            focusOnSelect: true
-          });
   });
 </script>
