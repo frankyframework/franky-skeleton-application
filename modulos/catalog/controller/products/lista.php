@@ -8,6 +8,8 @@ use Franky\Core\paginacion;
 
 $q = $MyRequest->getRequest('q');
 $categoria      = $MyRequest->getUrlParam('categoria',$MyRequest->getRequest('categoria'));
+$subcategoria      = $MyRequest->getUrlParam('subcategoria',$MyRequest->getRequest('subcategoria'));
+
 $precio	= $MyRequest->getRequest('precio');
 
 
@@ -21,7 +23,14 @@ $Tokenizer = new Tokenizer();
 
 if(!empty($categoria))
 {
+  if(is_array($categoria))
+  {
     $CatalogproductsModel->setCategoriaArray($categoria);
+
+  }else {
+    $CatalogproductsModel->setCategoriaArray([$categoria]);
+  }
+    
 }
 
 
@@ -74,9 +83,14 @@ if($CatalogproductsModel->getDataSearch($CatalogproductsEntity->getArrayCopy()) 
     	{
 
 
+        if(in_array($MyFrankyMonster->MySeccion(),[CATALOG_SEARCH_CATEGORY])):
 
+          $registro['link'] = $MyRequest->url(CATALOG_VIEW_CAT,['categoria'  =>$categoria, 'friendly' => $registro['url_key']]);
+        else:
           $registro['link'] = $MyRequest->url(CATALOG_VIEW,['friendly' => $registro['url_key']]);
-            $registro['thumb_resize'] =  "";
+  
+        endif; 
+          $registro['thumb_resize'] =  "";
           $img = "";
           $_img = getCoreConfig('catalog/product/placeholder');
           if($_img != "" && file_exists(PROJECT_DIR.$_img))

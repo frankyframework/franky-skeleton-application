@@ -33,7 +33,7 @@ endif;
           <span class="w-xxxx-12 w-xxx-12 w-xx-12 w-x-12" id="slider-range"></span>
         </li>
 
-        <?php if(!in_array($MyFrankyMonster->MySeccion(),[RESULTADOS_DE_BUSQUEDA_CATEGORIA])): ?>
+        <?php if(!in_array($MyFrankyMonster->MySeccion(),[CATALOG_SEARCH_CATEGORY,CATALOG_SEARCH_SUBCATEGORY])): ?>
         <li class="area_categoria"><span class="title_filter">Categorías</span>
           <?php  echo $BuscadorLateralForm->get("categoria[]"); ?>
         </li>

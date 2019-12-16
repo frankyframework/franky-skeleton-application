@@ -51,6 +51,7 @@ if($CatalogproductsModel->getData($CatalogproductsEntity->getArrayCopy()) == REG
   $MyMetatag->setTitulo($data_detalle['meta_title']);
   $MyMetatag->setDescripcion($data_detalle['meta_description']);
   $MyMetatag->setKeywords($data_detalle['meta_keywords']);
+  $MyMetatag->setCode('<link rel="canonical" href="'. $MyRequest->url(CATALOG_VIEW,['friendly' => $friendly],true).'" />');
 
 }
 else{
