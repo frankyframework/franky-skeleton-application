@@ -4,79 +4,76 @@
             <?=getCatalogBuscadorPrincipal()?>
         </div>
         <div class="w-xxxx-12">
-<h1><?=$data_detalle['name']?></h1>
- <span class="price"><?=getFormatoPrecio($data_detalle['price'],false)?></span>
-<div>SKU: <?=$data_detalle['sku']?></div>
-<div>Stock: <?=$data_detalle['stock']?></div>
+            <div class="content">
+                <div class="w-xxxx-6">
+                    <div>
 
+                        <div class="slider slider-for">
+                                <div>
+                                        <h3>1</h3>
+                                </div>
+                                <div>
+                                        <h3>2</h3>
+                                </div>
+                                <div>
+                                        <h3>3</h3>
+                                </div>
+                                <div>
+                                        <h3>4</h3>
+                                </div>
+                                <div>
+                                        <h3>5</h3>
+                                </div>
+                        </div>
+                        <div class="slider slider-nav">
+                                <div>
+                                        <h3>1</h3>
+                                </div>
+                                <div>
+                                        <h3>2</h3>
+                                </div>
+                                <div>
+                                        <h3>3</h3>
+                                </div>
+                                <div>
+                                        <h3>4</h3>
+                                </div>
+                                <div>
+                                        <h3>5</h3>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-xxxx-6">
+                    <h1><?=$data_detalle['name']?></h1>
+                    <div>SKU: <?=$data_detalle['sku']?></div>
+                    <div>Stock: <?=$data_detalle['stock']?></div>
+                    <h2>Descripcion</h2>
+                    <div><?=$data_detalle['description']?></div>
+                    <div class="w-xxxx-12 ">
+                    <div class="w-xxxx-12 align_center">
+                        <a href="javascript:void(0);" data-idlove="<?= $data_detalle['id']; ?>" class="ilove"> <span>Guardar favorito</span></a>
+                    </div>
+                    <div class="precio">
+                        <?php echo getFormatoPrecio($data_detalle['price'],false); ?>
+                    </div>
+                    <div style="border:solid 1px #E7E7E7;" class="align_center">
+                        <?php echo render(PROJECT_DIR.'/modulos/catalog/diseno/ecommerce/boton.add.phtml',
+                        array("id_producto" => $data_detalle["id"],
+                        "in_stock" => $data_detalle["in_stock"],
+                        "min_qty" => $data_detalle["min_qty"],
+                        "saleable" => $data_detalle["saleable"],
+                        "stock" => $data_detalle["stock"],
+                        "stock_infinito" => $data_detalle["stock_infinito"],
+                        'MyAccessList' => $MyAccessList)); ?>
+                    </div>
+                    </div>
+                </div>
 
-<h2>Descripcion</h2>
-<div><?=$data_detalle['description']?></div>
+            </div>
+        </div>
 
-<div>
-    
-    <div class="slider slider-for">
-            <div>
-                    <h3>1</h3>
-            </div>
-            <div>
-                    <h3>2</h3>
-            </div>
-            <div>
-                    <h3>3</h3>
-            </div>
-            <div>
-                    <h3>4</h3>
-            </div>
-            <div>
-                    <h3>5</h3>
-            </div>
     </div>
-    <div class="slider slider-nav">
-            <div>
-                    <h3>1</h3>
-            </div>
-            <div>
-                    <h3>2</h3>
-            </div>
-            <div>
-                    <h3>3</h3>
-            </div>
-            <div>
-                    <h3>4</h3>
-            </div>
-            <div>
-                    <h3>5</h3>
-            </div>
-    </div>    
-</div>
-
-
-<div class="w-xxxx-12 ">
-
-<div class="w-xxxx-12 align_center">
-    <a href="javascript:void(0);" data-idlove="<?= $data_detalle['id']; ?>" class="ilove"> <span>Guardar favorito</span></a>
-</div>
-
-
-<div class="precio">
-    <?php echo getFormatoPrecio($data_detalle['price'],false); ?>
-</div>
-<div style="border:solid 1px #E7E7E7;" class="align_center">  
-    <?php echo render(PROJECT_DIR.'/modulos/catalog/diseno/ecommerce/boton.add.phtml',
-    array("id_producto" => $data_detalle["id"],
-    "in_stock" => $data_detalle["in_stock"],
-    "min_qty" => $data_detalle["min_qty"],
-    "saleable" => $data_detalle["saleable"],
-    "stock" => $data_detalle["stock"],
-    "stock_infinito" => $data_detalle["stock_infinito"],
-    'MyAccessList' => $MyAccessList)); ?>
-</div>
-</div>
-
-</div>
-
- </div>
 </div>
 
 <script>
@@ -85,7 +82,7 @@
             catalog_addWishlist($(this).attr('data-idlove'),($(this).attr('class').search('active') > -1 ? 0 : 1));
         });
         catalog_getWishlist();
-        
+
         $('.slider-for').slick({
             slidesToShow: 1,
             slidesToScroll: 1,

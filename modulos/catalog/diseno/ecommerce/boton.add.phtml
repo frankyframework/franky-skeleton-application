@@ -1,21 +1,21 @@
 <?php if($MyAccessList->MeDasChancePasar(CARRITO_ECOMMERCE)): ?>
 <?php if($saleable == 1 && $in_stock == 1): ?>
-    
+
 <form name="addCartForm" action="">
   <div class='control_qty'>
 
       <div class='w-xxxx-12'>
           <h3>QTY:</h3>
-          <div class='w-xxxx-2'><a class="menos_qty" data-id='' href="#"><i class='icon icon-c-eliminar'></i></a></div>
+          <div class='w-xxxx-2'><a class="menos_qty" data-id='' href="#"><i class='icon icon-icon_menos'></i></a></div>
           <div class='w-xxxx-8'><input type="text" data-id='' value="<?=$min_qty; ?>" name="qty"  class="required"  /></div>
-          <div class='w-xxxx-2'><a class="mas_qty"  data-id=''  href="#"><i class='icon icon-c-agregar'></i></a></div>
+          <div class='w-xxxx-2'><a class="mas_qty"  data-id=''  href="#"><i class='icon icon-icon_mas'></i></a></div>
       </div>
       <label id="qty-error" class="error" for="qty" style="display:none;"></label>
   </div>
 
 
 
-   <div class='w-xxxx-12'><a class="_btn_add" href="javascript:void(0)" onclick="validateAddCart();"><i class='icon icon-mi-carrito'></i> Agregar a carrito</a></div>
+   <div class='w-xxxx-12'><a class="_btn _primary _btn_add" href="javascript:void(0)" onclick="validateAddCart();"> Agregar a carrito</a></div>
 </form>
 
 <script >
@@ -37,7 +37,7 @@ $(document).ready(function(){
         {
             $("input[name=qty]").val(qty+1);
         }
-        
+
     });
 
 });

@@ -13,6 +13,12 @@
 		el.innerHTML = '<span style="font-family: \'franky-font\'">' + entity + '</span>' + html;
 	}
 	var icons = {
+		'icon-icon_borrar_light': '&#xe923;',
+		'icon-icon_borrar': '&#xe924;',
+		'icon-icon_mas_light': '&#xe925;',
+		'icon-icon_mas': '&#xe926;',
+		'icon-icon_menos_light': '&#xe927;',
+		'icon-icon_menos': '&#xe928;',
 		'icon-estrella-01': '&#xe921;',
 		'icon-estrella-02': '&#xe922;',
 		'icon-libro': '&#xe91d;',
