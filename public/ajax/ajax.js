@@ -14,15 +14,16 @@ function peticion_ajax(method,query,funcion,function_vars,area_loader)
                   if(area_loader == 'body')
                   {
                        var loader = $('<div id="preloaderfullpage'+rand_id+'" style="position: '+(area_loader == 'body' ? 'fixed' :'absolute')+';top:0;left:0;right:0; bottom:0;z-index: 100;">\
-                       <div style="width: 100px;height: 100px;position: absolute;left:50%; top:50%;background: url(\'/public/skin/default/images/SVG/loader.svg\') no-repeat center 0; margin:-50px 0 0 -50px;">&nbsp;</div>\
-                    </div>');
+                       <div style="'+window.loaderStyle+'">&nbsp;</div>\
+                        </div>');
                         $(area_loader).prepend(loader);
 
                         $(area_loader).css({'overflow':'hidden'});
+                       
                   }
                   else
                   {
-                       var loader = $('<div id="preloaderfullpage'+rand_id+'" style="width: 100px;height: 100px;position: absolute;left:50%; top:50%;background: url(\'/public/skin/default/images/SVG/loader.svg\') no-repeat center 0; margin:-50px 0 0 -50px;">&nbsp;</div>');
+                       var loader = $('<div id="preloaderfullpage'+rand_id+'" style="'+window.loaderStyle.replace('absolute','relative')+'">&nbsp;</div>');
 
                         $(area_loader).prepend(loader);
 

@@ -425,10 +425,11 @@ $(document).ready(function(){
     $("form[name=users],form[name=frmContacto]").find("[placeholder]").keyup(function(){  $(this).newplaceholder();});
 
 });
-
+window.loaderStyle = $('#loader').attr('style');
 $(window).load(function() {
 
-
+    
+    
     if($('#preloaderfullpage'))
     {
 	     $('#preloaderfullpage').fadeOut('slow',function(){
