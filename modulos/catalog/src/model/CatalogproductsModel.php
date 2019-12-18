@@ -7,6 +7,7 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
     private $busca;
     private $precio;
     private $categoria_array;
+    private $subcategoria_array;
 
     public function __construct()
     {
@@ -25,6 +26,11 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
     public function setCategoriaArray($data)
     {
         $this->categoria_array = $data;
+    }
+
+    public function setSubcategoriaArray($data)
+    {
+        $this->subcategoria_array = $data;
     }
 
     function getData($data = array())
@@ -100,10 +106,21 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
             $this->where()->concat("AND (");
             foreach($this->categoria_array as $id)
             {
-                  $this->where()->addOr("catalog_category.url_key",'%'.$id.'%','like');
+                  $this->where()->addOr("catalog_category.url_key",$id,'=');
             }
               $this->where()->concat(')');
           }
+          if(!empty($this->subcategoria_array)){
+            if(is_array($this->subcategoria_array))
+            {
+              $this->where()->concat("AND (");
+              foreach($this->subcategoria_array as $id)
+              {
+                    $this->where()->addOr("catalog_subcategory.url_key",$id,'=');
+              }
+                $this->where()->concat(')');
+            }
+            }
          
           $this->from()->addInner('catalog_subcategory_product','catalog_subcategory_product.id_product','catalog_products.id');
           $this->from()->addInner('catalog_subcategory','catalog_subcategory_product.id_subcategory','catalog_subcategory.id');

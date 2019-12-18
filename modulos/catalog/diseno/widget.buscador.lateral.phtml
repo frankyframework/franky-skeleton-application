@@ -1,6 +1,8 @@
 <?php
 
 $categoria      = $MyRequest->getUrlParam('categoria',$MyRequest->getRequest('categoria'));
+$subcategoria      = $MyRequest->getUrlParam('subcategoria',$MyRequest->getRequest('subcategoria'));
+
 $precio	= $MyRequest->getRequest('precio');
 $precio_rango = catalog_getPriceMaxMinProduct();
 if(!empty($precio))
@@ -18,6 +20,11 @@ if(!empty($categoria)):
    $data['categoria[]'] = (is_array($categoria) ? $categoria: [$categoria]);
 endif;
 
+if(!empty($subcategoria)):
+  $data['subcategoria[]'] = (is_array($subcategoria) ? $subcategoria: [$subcategoria]);
+endif;
+
+
 
 ?>
 <?php echo $BuscadorLateralForm->openTag(); ?>
@@ -34,10 +41,53 @@ endif;
         </li>
 
         <?php if(!in_array($MyFrankyMonster->MySeccion(),[CATALOG_SEARCH_CATEGORY,CATALOG_SEARCH_SUBCATEGORY])): ?>
-        <li class="area_categoria"><span class="title_filter">Categorías</span>
+       <?php
+          $cat_in_search = [];
+          $cat_id_in_search = [];
+
+          if(!empty($categorias)): 
+            foreach($categorias as $k => $cat):
+              if(!empty($categoria) && in_array($k,$categoria)):
+                $cat_in_search[] = $cat;
+              endif; 
+            endforeach;
+          endif;
+
+          if(!empty($_categorias)): 
+            foreach($_categorias as $k => $_cat):
+              if(in_array($_cat,$cat_in_search)):
+                $cat_id_in_search[] = $k;
+              endif; 
+            endforeach;
+          endif; ?>
+          <li class="area_categoria"><span class="title_filter">Categorías</span>
           <?php  echo $BuscadorLateralForm->get("categoria[]"); ?>
-        </li>
-      <?php endif; ?>
+          </li>
+              <?php if(!empty($categoria)) :?>
+              <li class="area_subcategoria">
+                <span class="title_filter">Subcategorías</span>
+                <?php if(!empty($cat_id_in_search)): ?>
+                  <ul>
+                <?php foreach($cat_id_in_search as $id_cat):?>
+
+                
+                  <?php if(!empty($subcategorias[$id_cat])): ?>
+                    <li class="area_subcategoria"><span class="subtitle_filter"><?=$_categorias[$id_cat]?></span></li>
+               
+                    <?php foreach($subcategorias[$id_cat] as $value => $label):?>
+                      <li><label>
+                        <input type="checkbox" name="subcategoria[]" value="<?=$value?>" <?=(!empty($subcategoria) && in_array($value,$subcategoria) ? 'checked="checked"' : '')?> /><?=$label?>
+                        </label></li>
+                    <?php endforeach;?>
+                  <?php endif;?>
+                
+                  
+                  <?php endforeach;?>
+                </ul>
+                <?php endif; ?>
+              </li>
+              <?php endif; ?>
+        <?php endif; ?>
 
      
     </ul>
