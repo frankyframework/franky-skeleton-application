@@ -1,5 +1,5 @@
-<?php if($MyAccessList->MeDasChancePasar(CARRITO_ECOMMERCE)): ?>
-<?php if($saleable == 1 && $in_stock == 1): ?>
+<?php if($MyAccessList->MeDasChancePasar(CARRITO_ECOMMERCE) && $saleable == 1 && $in_stock == 1): ?>
+
 
 <form name="addCartForm" action="">
   <div class='control_qty'>
@@ -51,5 +51,18 @@ function validateAddCart()
 }
 // -->
 </script>
+<?php else: ?>
+    <div class='w-xxxx-12'><a class="_btn _primary _btn_add link_form_info_product" href="javascript:void(0)" >Solicitar información</a></div>
+    <div class='w-xxxx-12 content_form_info_product' style='display:none;' >
+    <?php echo $contactanosForm->openTag(); ?>
+    <?php echo $contactanosForm->getAllRow(); ?>
+    <?php echo $contactanosForm->endTag(); ?>
+    </div>
+    <script >
+    $("textarea[name=comentarios]").maximaLongitud(1000,"contador_opina");
+    $('.link_form_info_product').click(function(){
+        $('.content_form_info_product').slideToggle();
+    });
+    </script>
 <?php endif; ?>
-<?php endif; ?>
+

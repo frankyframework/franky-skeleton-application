@@ -2,6 +2,8 @@
 use Catalog\model\CatalogproductsModel;
 use Catalog\entity\CatalogproductsEntity;
 use Franky\Haxor\Tokenizer;
+use Base\Form\contactanosForm;
+
 
 $Tokenizer = new Tokenizer();
 
@@ -38,9 +40,23 @@ if($CatalogproductsModel->getData($CatalogproductsEntity->getArrayCopy()) == REG
 else{
     $MyRequest->redirect($MyRequest->url(CATALOG_SEARCH),"301");
 }
-
+$data_detalle['link'] = $MyRequest->url(CATALOG_VIEW,['friendly' => $data_detalle['url_key']]);
+  
 $data_detalle['id_ori'] =$data_detalle['id'];
 $data_detalle['id'] = $Tokenizer->token('catalog_products', $data_detalle['id']);
+
+$contactanosForm = new contactanosForm("frmContacto");
+$contactanosForm->setMobile($Mobile_detect->isMobile());
+
+$contactanosForm->setData($MyFlashMessage->getResponse());
+$contactanosForm->setAtributoInput('token_xsrf', 'value',$Tokenizer->token('cantactanos_xsrf', time()));
+$contactanosForm->setAtributoInput('asunto', 'value','SKU'.$data_detalle['sku'].': '.$data_detalle['name']);
+$contactanosForm->setAtributoBase('asunto', 'type','hidden');
+$contactanosForm->setAtributoBase('asunto', 'atributos',array(
+  'class'       => 'required',
+  'maxlength' => 200,
+  'minlength' => 5,
+));
 
 
 //print_r($data_detalle);
