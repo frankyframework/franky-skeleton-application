@@ -16,8 +16,8 @@ DROP TABLE IF EXISTS `categorias_blog`;
 CREATE TABLE `categorias_blog` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) NOT NULL,
-  `imagen` varchar(255) NOT NULL,
-  `imagen_portada` varchar(255) NOT NULL,
+  `imagen` varchar(255)  NULL,
+  `imagen_portada` varchar(255)  NULL,
   `friendly` varchar(255) NOT NULL,
   `status` int(11) NOT NULL,
   `visible` int(11) NOT NULL DEFAULT '1',
