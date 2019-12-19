@@ -33,6 +33,18 @@ if(!empty($categoria))
     
 }
 
+if(!empty($subcategoria))
+{
+  if(is_array($subcategoria))
+  {
+    $CatalogproductsModel->setSubcategoriaArray($subcategoria);
+
+  }else {
+    $CatalogproductsModel->setSubcategoriaArray([$subcategoria]);
+  }
+    
+}
+
 
 if(!empty($precio))
 {
@@ -86,6 +98,10 @@ if($CatalogproductsModel->getDataSearch($CatalogproductsEntity->getArrayCopy()) 
         if(in_array($MyFrankyMonster->MySeccion(),[CATALOG_SEARCH_CATEGORY])):
 
           $registro['link'] = $MyRequest->url(CATALOG_VIEW_CAT,['categoria'  =>$categoria, 'friendly' => $registro['url_key']]);
+        elseif(in_array($MyFrankyMonster->MySeccion(),[CATALOG_SEARCH_SUBCATEGORY])):
+
+            $registro['link'] = $MyRequest->url(CATALOG_VIEW_SUBCAT,['categoria'  =>$categoria,'subcategoria'  =>$subcategoria, 'friendly' => $registro['url_key']]);
+         
         else:
           $registro['link'] = $MyRequest->url(CATALOG_VIEW,['friendly' => $registro['url_key']]);
   

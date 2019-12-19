@@ -94,16 +94,19 @@ function catalog_getBuscadorLateral()
     $BuscadorLateralForm =  new \Catalog\Form\BuscadorLateralForm('buscadorLateral');
     $BuscadorLateralForm->setAtributo('action',$MyRequest->url(CATALOG_SEARCH));
     $categorias = getCatalogCategorys('interface');
+    $_categorias = getCatalogCategorys('sql');
+    $subcategorias = getCatalogSubcategorys(null,'interface');
     $BuscadorLateralForm->setOptionsInput("categoria[]", $categorias);
-    $categorias = [];
-    $clasificaciones = [];
-    $detalle_clasificacion = [];
+
 
 
     return render('widget.buscador.lateral.phtml',[
     'MyFrankyMonster' => $MyFrankyMonster,
     'MyRequest'  => $MyRequest,
     'BuscadorLateralForm' => $BuscadorLateralForm,
+    'categorias' => $categorias,
+    '_categorias' => $_categorias,
+    'subcategorias' => $subcategorias
     ]);
 }
 
