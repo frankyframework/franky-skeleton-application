@@ -111,7 +111,7 @@ function DeleteCatalogProduct($id,$status)
 function setOrdenImagesProducts($album, $orden)
 {
 	
-	$MyFoto = new Galeria\model\fotos();
+	
         global $MyAccessList;
         global $MyMessageAlert;
         $respuesta =null;
