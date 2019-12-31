@@ -26,7 +26,7 @@ if(!empty($id))
 $paginas = selectPagina();
 
 $idiomas = array();
-$idiomas_disponibles = getCoreConfig('base/theme/baselang');
+$idiomas_disponibles = getCoreConfig('base/theme/langs');
 foreach($idiomas_disponibles as $idioma)
 {
     $idiomas[$idioma] = $idioma;
