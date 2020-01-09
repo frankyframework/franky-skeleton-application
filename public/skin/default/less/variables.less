@@ -47,6 +47,13 @@
 @names  : error, success, attention, info;
 @length : length(@notificationColors);
 
+/* ****** Estilos Botones ******** */
+.btn.btn-text, a.btn.btn-text, button.btn.btn-text, input.btn.btn-text { cursor: pointer; display: inline-block; padding: 10px; font-size: @font_size_txt; font-weight: bold; color: @enfasis_color; }
+.btn.btn-text:hover, a:hover.btn.btn-text, button:hover.btn.btn-text, input:hover.btn.btn-text { color: @theme_color;  }
+.btn.btn-default, a.btn.btn-default, button.btn.btn-default { cursor: pointer; display: inline-block; padding: 10px; font-size: @font_size_txt; font-weight: bold; color: #000000; background: lighten(@theme_color, 20%); }
+.btn.btn-primary, a.btn.btn-primary, button.btn.btn-primary, input.btn.btn-primary { cursor: pointer; display: inline-block; padding: 10px; font-size: @font_size_txt; font-weight: bold; color: @white; background: @enfasis_color;  }
+.btn.btn-default:hover, a:hover.btn.btn-default, button:hover.btn.btn-default, input:hover.btn.btn-default, .btn.btn-primary:hover, a:hover.btn.btn-primary, button:hover.btn.btn-primary, input:hover.btn.btn-primary { background: darken(@enfasis_color, 10); color: @white; }
+
 .opacity (@opacity: 0.5) {
 	-webkit-opacity: 	@opacity;
 	-moz-opacity: 		@opacity;
