@@ -10,6 +10,9 @@ $(window).load(function(){
     selector: 'textarea',
     height: 500,
     menubar: false,
+    <?php if(getCoreConfig('blog/articulo/script') == 1): ?>
+    extended_valid_elements : "script[src|async|defer|type|charset]",
+    <?php endif; ?>
     codesample_dialog_width: '600',
     codesample_dialog_height: '400',
     plugins: [
