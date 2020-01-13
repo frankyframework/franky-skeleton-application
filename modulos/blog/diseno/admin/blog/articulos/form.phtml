@@ -34,14 +34,7 @@ $(window).load(function(){
     <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
     <div class="w-xxxx-12">
          <div class="w-xxxx-12">
-           <div>
-          <?php if(!empty($id)): ?>
-           <a href="#" class="guardar_borrador">Guardar Borrador</a>
-          <?php endif; ?>
-          <?php if($borrador == 1): ?>
-           <a href="#" class="descartar_borrador">Descartar Borrador</a>
-          <?php endif; ?>
-          </div>
+       
              <h1><?php echo $title_form; ?></h1>
 
             <?php echo $adminForm->openTag(); ?>
@@ -101,21 +94,20 @@ $(window).load(function(){
              <?php echo $adminForm->getRow('destacado'); ?>
              <?php echo $adminForm->getRow('visible_in_search'); ?>
              <?php echo $adminForm->getRow('permisos[]'); ?>
-             <?php echo $adminForm->getRow('guardar'); ?>
-
+             <div>
+             <?php echo $adminForm->get('guardar'); ?>
+              
              <?php if(!empty($id)): ?>
-                <?php echo $adminForm->getRow('guardar_borrador'); ?>
+                <?php echo $adminForm->get('guardar_borrador'); ?>
              <?php endif; ?>
-
+             <?php if($borrador == 1): ?>
+                <?php echo $adminForm->get('descartar_borrador'); ?>
+             <?php endif; ?>
+              </div>
 
             <?php echo $adminForm->endTag(); ?>
             <div>
-           <?php if(!empty($id)): ?>
-            <a href="#" class="guardar_borrador">Guardar Borrador</a>
-           <?php endif; ?>
-           <?php if($borrador == 1): ?>
-            <a href="#" class="descartar_borrador">Descartar Borrador</a>
-           <?php endif; ?>
+          
            </div>
        </div>
     </div>
@@ -147,12 +139,12 @@ $(document).ready(function(){
 
         $("#frmarticulosblog").validate();
         $('#keywords').tagsInput({width:'auto'});
-        $('a.guardar_borrador').click(function(e){
+        $('.guardar_borrador').click(function(e){
             e.preventDefault();
             $('form[name=frmarticulosblog]').attr('action','/admin/blog/articulos/submit.borrador.php').submit();
         });
 
-        $('a.descartar_borrador').click(function(e){
+        $('.descartar_borrador').click(function(e){
             e.preventDefault();
             EliminarRegistro('descartarBorradorBlog','<?=$id?>',0,'¿Estas seguro que ya no quieres este borrador?','RedirectListaBlog');
         });

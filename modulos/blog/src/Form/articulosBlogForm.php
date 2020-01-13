@@ -208,13 +208,25 @@ class articulosBlogForm extends \Franky\Form\Form
                 'name' => 'guardar_borrador',
                 'type'  => 'submit',
                 'atributos' => array(
-                    'class'       => 'btn btn-primary btn-big float_right',
+                    'class'       => 'btn btn-primary btn-big float_right guardar_borrador',
                     'value' => "Guardar borrador"
                  )
 
 
             )
         );
+
+        $this->add(array(
+            'name' => 'descartar_borrador',
+            'type'  => 'submit',
+            'atributos' => array(
+                'class'       => 'btn btn-primary btn-big float_right descartar_borrador',
+                'value' => "Descartar borrador"
+             )
+
+
+        )
+    );
 
            
     }

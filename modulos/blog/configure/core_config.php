@@ -17,6 +17,13 @@ return array(
                           'data' => ['0' => 'No', '1' => 'Si'],
                           'value' => '0'
                         ),
+                        array('path' => 'blog/registers/showdelete',
+                        'type' => 'select',
+                        'label' => '¿Mostrar registros eliminados?',
+                        'validation' => array('required' => false),
+                        'data' => ['0' => 'No', '1' => 'Si'],
+                        'value' => '0'
+                      ),
    
           )
   )
