@@ -17,11 +17,11 @@
 
 
 // Formularios
-html { font-size: 62.5%; }
-body.admin { padding: 0; margin: 0; background: darken(@white, 20); font-size: 1.3rem;
-    .content { max-width: 1400px; }
+html { font-size: 62.5%;
+    body.admin { font-family: @font_gral; font-size: @font_size_txt; margin:0px; padding: 0; color: @gray; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-smoothing: antialiased; background: darken(@white, 20);
+        .content { max-width: 1400px; }
+    }
 }
-
 h1 { font-size: 2.4rem; }
 h2 { font-size: 2rem; }
 h3, h4, h5, h6 { font-size: 1.6rem; }
@@ -145,6 +145,8 @@ main { float: left; width:100%;
             }
     }
     ._panel_content { float: left; width: 80%;background-color: @white; min-height: 100vh; padding: 10px 30px; box-sizing: border-box;
+        @media @large { width: 75%; }
+        @media @medium { width: 75%; }
         @media @small { padding: 10px; width: 100%; }
     }
     ._wrapp_form_serch { float: left; max-width: 1000px; margin-bottom: 20px; box-sizing: border-box; padding: 10px ; border:1px solid @soft_gray; .radius;
@@ -211,7 +213,8 @@ main { float: left; width:100%;
         label { position: relative; }
         label, input, textarea select { float: left; }
         &#paginar { float: left; width: auto; }
-        label { box-sizing: border-box; padding: 5px 10px; margin: 5px; }
+        label { box-sizing: border-box; padding: 5px 10px; }
+        img { max-width: 100%; height: auto; }
     }
     .form_guardar { text-align: center; }
 

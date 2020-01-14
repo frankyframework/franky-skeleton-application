@@ -64,7 +64,7 @@ if($MyBlog->getTotal() > 0)
 
                 if(!empty($registro["imagen"]) && file_exists($MyConfigure->getServerUploadDir()."/blog/".$registro["id"]."/".$registro["imagen"]))
                 {
-                    $img = imageResize($MyConfigure->getUploadDir()."/blog/".$registro["id"]."/".$registro["imagen"],500,400, true);
+                    $img = imageResize($MyConfigure->getUploadDir()."/blog/".$registro["id"]."/".$registro["imagen"],600,400, true);
                     $lista_articulos_blog[$iRow]['contenido']["img"] = $img;
                 }
                 $iRow++;

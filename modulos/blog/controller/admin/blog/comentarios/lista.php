@@ -18,8 +18,11 @@ $MyComentariosBlog->setPage($MyPaginacion->getPage());
 $MyComentariosBlog->setTampag($MyPaginacion->getTampageDefault());
 $MyComentariosBlog->setOrdensql($MyPaginacion->getCampoOrden()." ".$MyPaginacion->getOrden());
 
-
-$result	 = $MyComentariosBlog->getData('', $articulo_b,($MyAccessList->MeDasChancePasar(ADMINISTRAR_COMENTARIOS_ARTICULOS_BLOG) ? "" : $MySession->GetVar('id')), $busca_b);
+$status_b = "";
+if(getCoreConfig('blog/registers/showdelete') == 0){
+        $status_b = 1;
+}
+$result	 = $MyComentariosBlog->getData('', $articulo_b,($MyAccessList->MeDasChancePasar(ADMINISTRAR_COMENTARIOS_ARTICULOS_BLOG) ? "" : $MySession->GetVar('id')), $busca_b,$status_b);
 $MyPaginacion->setTotal($MyComentariosBlog->getTotal());
 $lista_admin_data = array();
 if($MyComentariosBlog->getTotal() > 0)

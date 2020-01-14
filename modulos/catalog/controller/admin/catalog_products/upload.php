@@ -58,6 +58,12 @@ foreach ($files as $file)
             //$handle->image_ratio_fill = true; // Agrega cuadro para completar la medida
             //$handle->image_watermark       = "../imags/pie-foto.png";
             //$handle->image_watermark_position = 'BR';
+            if($handle->image_src_x > 2000 || $handle->image_src_y > 2000)
+            {
+                $handle->image_resize = true;
+                $handle->image_x = 2000;
+                $handle->image_y = 2000;
+            }
             $handle->file_auto_rename = true;
             $handle->file_overwrite = false;
 

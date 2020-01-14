@@ -17,8 +17,12 @@ $MyCategoriaBlog->setPage($MyPaginacion->getPage());
 $MyCategoriaBlog->setTampag($MyPaginacion->getTampageDefault());
 $MyCategoriaBlog->setOrdensql($MyPaginacion->getCampoOrden()." ".$MyPaginacion->getOrden());
 
+$status_b = "";
+if(getCoreConfig('blog/registers/showdelete') == 0){
+        $status_b = 1;
+}
 
-$result	 = $MyCategoriaBlog->getData('',"",$busca_b);
+$result	 = $MyCategoriaBlog->getData('',$status_b,$busca_b);
 $MyPaginacion->setTotal($MyCategoriaBlog->getTotal());
 
 $lista_admin_data = array();
@@ -41,7 +45,7 @@ if($MyCategoriaBlog->getTotal() > 0)
 
 
 
-$MyFrankyMonster->setPHPFile(getVista("admin/template/grid.phtml"));
+//$MyFrankyMonster->setPHPFile(getVista("admin/template/grid.phtml"));
 $title_grid = "Categorias";
 $class_grid = "cont_categorias_blog";
 $error_grid = "No hay categorias registradas";

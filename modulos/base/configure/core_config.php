@@ -57,7 +57,7 @@ return array(
           )
   ),
   'contactanos' => array(
-    'menu' => "Contactanos",
+    'menu' => "CONTACTANOS",
     'title' => "Configuración de contactanos",
     'config' =>  array(
                 array('path' => 'base/contactanos/user-notification',

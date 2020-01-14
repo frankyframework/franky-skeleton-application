@@ -35,6 +35,10 @@ $destacado_b = $MyRequest->getRequest('destacado_b');
 $status_b = $MyRequest->getRequest('status_b');
 $categoria_b = $MyRequest->getRequest('categoria_b');
 
+if(getCoreConfig('blog/registers/showdelete') == 0){
+    $status_b = 1;
+}
+
 $MyBlog->setPage($MyPaginacion->getPage());
 $MyBlog->setTampag($MyPaginacion->getTampageDefault());
 $MyBlog->setOrdensql($MyPaginacion->getCampoOrden()." ".$MyPaginacion->getOrden());
