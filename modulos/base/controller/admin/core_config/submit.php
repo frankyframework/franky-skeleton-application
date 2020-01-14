@@ -131,12 +131,17 @@ if($error == false)
 
 
                               $handle->file_max_size = "2024288"; //1k(1024) x 512
-                              $handle->image_resize= true;
+                              
                               $handle->image_ratio_fill = false;
                               $handle->file_auto_rename = true;
                               $handle->file_overwrite = false;
                               $handle->image_x = 2500;
                               $handle->image_y = 2500;
+                              $handle->image_ratio           = true;
+                              if($handle->image_src_x > 2500 || $handle->image_src_y > 2500)
+                                {
+                                    $handle->image_resize = true;
+                                }
 
                               $handle->Process($MyConfigure->getServerUploadDir()."/core_config/".$config['path']);
 
