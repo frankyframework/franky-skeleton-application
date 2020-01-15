@@ -4,7 +4,7 @@
                 <div class="div_autor avatar_autor">
                   <?php //if(!empty($blog_detalle["m_info_google"]['link'])): <a href="<?php echo $blog_detalle["m_info_google"]['link']; ?rel=author" target="_blank" > echo $blog_detalle["autor"];</a> ?> 
                   <?php //else: ?>
-                    <span ><?php echo $blog_detalle["autor"]; ?></span>
+                    <span ><?=(!empty($blog_detalle["autortext"]) ? $blog_detalle["autortext"] : $blog_detalle["autor"])?></span>
                   <?php //endif; ?></div>
                     <?php if(!empty($blog_detalle["bio"])): ?>
                 <div class="div_autor"><p><?php echo $blog_detalle["bio"]; ?></p></div>

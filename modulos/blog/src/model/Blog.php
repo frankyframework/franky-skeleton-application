@@ -38,49 +38,49 @@ class Blog  extends \Franky\Database\Mysql\objectOperations
             $campos = array("blog.id","blog.categoria","titulo","contenido","destacado","blog.friendly","comentarios","blog.fecha","fecha_modificado",
                 "blog.status","autor","keywords","meta_titulo","meta_descripcion","visible_in_search","blog.permisos","blog.imagen","blog.imagen_portada",
                 "categorias_blog.nombre as categoria_nombre","categorias_blog.friendly as amigable_categoria","categorias_blog.visible","categorias_blog.permisos"
-                ,"users.nombre as nombre_user","usuario","biografia","users.id as id_user");
+                ,"users.nombre as nombre_user","usuario","biografia","users.id as id_user","autortext");
 
             
             if(!empty($busca))
             {
-								$this->where()->concat('AND (');
-								$this->where()->addOr("blog.titulo","%$busca%",'like');
-								$this->where()->addOr("blog.contenido","%$busca%",'like');
-								$this->where()->addOr("blog.keywords","%$busca%",'like');
-								$this->where()->addOr("categorias_blog.nombre","%$busca%",'like');
-								$this->where()->concat(')');
-							}
+                    $this->where()->concat('AND (');
+                    $this->where()->addOr("blog.titulo","%$busca%",'like');
+                    $this->where()->addOr("blog.contenido","%$busca%",'like');
+                    $this->where()->addOr("blog.keywords","%$busca%",'like');
+                    $this->where()->addOr("categorias_blog.nombre","%$busca%",'like');
+                    $this->where()->concat(')');
+            }
             if(!empty($autor))
             {
                 if(is_numeric($autor))
                 {
-									$this->where()->addAnd('autor',$autor,'=');
+                    $this->where()->addAnd('autor',$autor,'=');
                 }
                 else
                 {
-									$this->where()->addAnd('usuario',$autor,'=');
+                    $this->where()->addAnd('usuario',$autor,'=');
 
                 }
             }
              if(!empty($destacado))
             {
-							$this->where()->addAnd('destacado',$destacado,'=');
+                $this->where()->addAnd('destacado',$destacado,'=');
             }
 
             if($status != "")
             {
-							$this->where()->addAnd('blog.status',$status,'=');
+                $this->where()->addAnd('blog.status',$status,'=');
             }
 
             if($categoria != "")
             {
                if(is_numeric($categoria))
                {
-								 $this->where()->addAnd('blog.categoria',$categoria,'=');
+                    $this->where()->addAnd('blog.categoria',$categoria,'=');
                }
                else
                {
-								 $this->where()->addAnd('categorias_blog.friendly',$categoria,'=');
+                    $this->where()->addAnd('categorias_blog.friendly',$categoria,'=');
                }
 
 
@@ -137,7 +137,7 @@ class Blog  extends \Franky\Database\Mysql\objectOperations
 
         }
 
-        function save($categoria,$titulo,$friendly,$contenido,$comentarios,$autor,$keywords,$destacado,$imagen,$imagen_portada,$visible_in_search,$permisos,$meta_titulo="", $meta_descripcion="")
+        function save($categoria,$titulo,$friendly,$autortext,$contenido,$comentarios,$autor,$keywords,$destacado,$imagen,$imagen_portada,$visible_in_search,$permisos,$meta_titulo="", $meta_descripcion="")
         {
             $nvoregistro = array(
                 "categoria" => $categoria,
@@ -150,6 +150,7 @@ class Blog  extends \Franky\Database\Mysql\objectOperations
                 "keywords" => $keywords,
                 "status" => "1",
                 "destacado" => $destacado,
+                "autortext" => $autortext,
                 "imagen" => $imagen,
                 "imagen_portada" => $imagen_portada,
                 "visible_in_search" => $visible_in_search,
@@ -161,11 +162,12 @@ class Blog  extends \Franky\Database\Mysql\objectOperations
             return $this->guardarRegistro( $nvoregistro);
         }
 
-        function edit($id,$categoria,$titulo,$friendly,$contenido,$comentarios,$keywords,$destacado,$imagen,$imagen_portada,$visible_in_search,$permisos,$meta_titulo="", $meta_descripcion="")
+        function edit($id,$categoria,$titulo,$friendly,$autortext,$contenido,$comentarios,$keywords,$destacado,$imagen,$imagen_portada,$visible_in_search,$permisos,$meta_titulo="", $meta_descripcion="")
         {
            $nvoregistro = array(
                 "categoria" => $categoria,
                 "titulo" => $titulo,
+               "autortext" => $autortext,
                 "contenido" => $contenido,
                 "friendly" => $friendly,
                 "comentarios" => $comentarios,

@@ -57,6 +57,7 @@ if($MyBlog->getTotal() > 0)
                     "status"    	=> $registro["status"],
                     "friendly_categoria"=> $registro["amigable_categoria"],
                     "friendly"          => $registro["friendly"],
+                    "autortext"          => $registro["autortext"],
                     "fecha"             => getFechaUI($registro["fecha"]),
                     "link"              => $MyRequest->url(BLOG_DETALLE,array("categoria" => $registro["amigable_categoria"],"articulo" =>$registro["friendly"]))
 

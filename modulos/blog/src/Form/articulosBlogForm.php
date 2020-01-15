@@ -77,7 +77,20 @@ class articulosBlogForm extends \Franky\Form\Form
             )
         );
 
-
+        $this->add(array(
+                'name' => 'autortext',
+                'label' => 'Autor:',
+                'type'  => 'text',
+                'required'  => false,
+                'atributos' => array(
+                    'class'       => '',
+                    'maxlength' => 255
+                 ),
+                'label_atributos' => array(
+                    'class'       => 'desc_form_no_obligatorio'
+                 )
+            )
+        );
            $this->add(array(
                 'name' => 'contenido',
                 'label' => 'Contenido:',
@@ -98,14 +111,14 @@ class articulosBlogForm extends \Franky\Form\Form
                 'name' => 'keywords',
                 'label' => 'Keywords:',
                 'type'  => 'text',
-                'required'  => true,
+                'required'  => false,
                 'atributos' => array(
-                    'class'       => 'required',
+                    'class'       => '',
                     'maxlength' => 255,
                     'id'    => "keywords"
                  ),
                 'label_atributos' => array(
-                    'class'       => 'desc_form_obligatorio'
+                    'class'       => 'desc_form_no_obligatorio'
                  )
             )
         );

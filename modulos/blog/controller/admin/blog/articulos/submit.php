@@ -26,6 +26,7 @@ $keywords           = $MyRequest->getRequest('keywords');
 $destacado          = $MyRequest->getRequest('destacado',0);
 $meta_titulo        = $MyRequest->getRequest('meta_titulo');
 $meta_descripcion   = $MyRequest->getRequest('meta_descripcion');
+$autortext   = $MyRequest->getRequest('autortext');
 
 $data_img   = json_decode(stripslashes($MyRequest->getRequest('data_img')),true);
 
@@ -36,7 +37,7 @@ $rules = array(
             "Titulo" => array("valor" => $titulo,"required","length" => array("max" => "255")),
             "Categoria" => array("valor" => $categoria,"required","numeric"),
             "Articulo" => array("valor" => $contenido,"required"),
-            "Keywords" => array("valor" => $keywords,"required","length" => array("max" => "255"))
+            "Keywords" => array("valor" => $keywords,"length" => array("max" => "255"))
             );
 
 
@@ -122,7 +123,7 @@ if($error == false)
 {
     if(empty($id))
     {
-        $result = $MyBlog->save($categoria,$titulo,  getFriendly($titulo),$contenido,$comentarios,$MySession->GetVar('id'),$keywords,$destacado,$imagen,$imagen_portada,$visible_in_search,json_encode($permisos),$meta_titulo, $meta_descripcion);
+        $result = $MyBlog->save($categoria,$titulo,  getFriendly($titulo),$autortext,$contenido,$comentarios,$MySession->GetVar('id'),$keywords,$destacado,$imagen,$imagen_portada,$visible_in_search,json_encode($permisos),$meta_titulo, $meta_descripcion);
         if($result == REGISTRO_SUCCESS)
         {
 
@@ -154,7 +155,7 @@ if($error == false)
 
 
 
-        $result = $MyBlog->edit($id,$categoria,$titulo,  getFriendly($titulo),$contenido,$comentarios,$keywords,$destacado,$imagen,$imagen_portada,$visible_in_search, json_encode($permisos),$meta_titulo, $meta_descripcion);
+        $result = $MyBlog->edit($id,$categoria,$titulo,  getFriendly($titulo),$autortext,$contenido,$comentarios,$keywords,$destacado,$imagen,$imagen_portada,$visible_in_search, json_encode($permisos),$meta_titulo, $meta_descripcion);
         if($result == REGISTRO_SUCCESS)
         {
 
