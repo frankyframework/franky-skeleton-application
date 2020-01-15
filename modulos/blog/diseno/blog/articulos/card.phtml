@@ -1,0 +1,19 @@
+<div class="w-xxxx-6 _cont_card_blog">
+                    <h3><a href="<?php echo $articulo["link"]; ?>"><?php echo $articulo["titulo"]; ?></a></h3>
+
+                    <!--  <li><span><?php // echo $articulo["fecha"]; ?></span></li> -->
+                    <!-- <li>Autor: <?php // echo $articulo["autor"]; ?></li> -->
+                        <?php if(isset($articulo["contenido"]["img"])): ?>
+                                <a href="<?php echo $articulo["link"]; ?>"><?php echo makeHTMLImg($articulo["contenido"]["img"],"","", $articulo["titulo"],'class="image_100"',1); ?></a>
+                        <?php endif;  ?>
+
+                        <?php if(isset($articulo["contenido"]["p"])): ?>
+
+                                <p><?php echo $articulo["contenido"]["p"]; ?></p>
+                        <?php endif; ?>
+                        <ul class="_ul_tag">
+                        <li><?=$articulo["categoria"]?></li>
+                        </ul>
+
+                        <a class="float_right" href="<?php echo $articulo["link"]; ?>">ver más<i class="icon icon-flecha-r-1"></i></a>
+            </div>

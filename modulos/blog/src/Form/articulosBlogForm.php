@@ -191,7 +191,7 @@ class articulosBlogForm extends \Franky\Form\Form
                 'atributos' => array(
                     'class' => ''
                  ),
-                'options' =>  array("1" => "Esta articulo es visible en busquedas"),
+                'options' =>  array("1" => "Esta articulo aparece en listas de resultados"),
 
 
             )

@@ -12,7 +12,7 @@ $amigable_categoria_context =  $MyRequest->getUrlParam("categoria");;
 
 
 $MyPaginacion->setPage($MyRequest->getRequest('page',1));
-$MyPaginacion->setCampoOrden($MyRequest->getRequest('por',"blog.fecha"));
+$MyPaginacion->setCampoOrden($MyRequest->getRequest('por',"blog.destacado DESC, blog.fecha"));
 $MyPaginacion->setOrden($MyRequest->getRequest('order',"DESC"));
 $MyPaginacion->setTampageDefault($MyRequest->getRequest('tampag',25));
 $busca_b	= $MyRequest->getRequest('busca_b');
@@ -58,15 +58,26 @@ if($MyBlog->getTotal() > 0)
                     "friendly_categoria"=> $registro["amigable_categoria"],
                     "friendly"          => $registro["friendly"],
                     "autortext"          => $registro["autortext"],
+                    "destacado"          => $registro["destacado"],
                     "fecha"             => getFechaUI($registro["fecha"]),
                     "link"              => $MyRequest->url(BLOG_DETALLE,array("categoria" => $registro["amigable_categoria"],"articulo" =>$registro["friendly"]))
 
                 );
-
-                if(!empty($registro["imagen"]) && file_exists($MyConfigure->getServerUploadDir()."/blog/".$registro["id"]."/".$registro["imagen"]))
+                if($registro['destacado'] == 1)
                 {
-                    $img = imageResize($MyConfigure->getUploadDir()."/blog/".$registro["id"]."/".$registro["imagen"],600,400, true);
-                    $lista_articulos_blog[$iRow]['contenido']["img"] = $img;
+                    if(!empty($registro["imagen_portada"]) && file_exists($MyConfigure->getServerUploadDir()."/blog/".$registro["id"]."/".$registro["imagen_portada"]))
+                    {
+                        $img = imageResize($MyConfigure->getUploadDir()."/blog/".$registro["id"]."/".$registro["imagen_portada"],1500,750, true);
+                        $lista_articulos_blog[$iRow]['contenido']["img"] = $img;
+                    }
+                }
+                else
+                {
+                    if(!empty($registro["imagen"]) && file_exists($MyConfigure->getServerUploadDir()."/blog/".$registro["id"]."/".$registro["imagen"]))
+                    {
+                        $img = imageResize($MyConfigure->getUploadDir()."/blog/".$registro["id"]."/".$registro["imagen"],600,400, true);
+                        $lista_articulos_blog[$iRow]['contenido']["img"] = $img;
+                    }
                 }
                 $iRow++;
 

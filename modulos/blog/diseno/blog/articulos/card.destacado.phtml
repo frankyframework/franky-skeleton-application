@@ -1,0 +1,18 @@
+<div class="w-xxxx-12">
+            <div class="content">
+                <?php if(isset($articulo["contenido"]["img"])): ?>
+                        <a href="<?php echo $articulo["link"]; ?>"><?php echo makeHTMLImg($articulo["contenido"]["img"],"","", $articulo["titulo"],'class="image_100"',1); ?></a>
+                <?php endif;  ?>
+
+                <div class="_blog_txt_principal_article">
+                    <h2> <a href="<?php echo $articulo["link"]; ?>"><?php echo $articulo["titulo"]; ?></a></h2>
+                    <?php if(isset($articulo["contenido"]["p"])): ?>
+                        <p><?php echo $articulo["contenido"]["p"]; ?></p>
+                    <?php endif; ?>
+                    <ul class="_ul_tag">
+                        <li><?=$articulo["categoria"]?></li>
+                        </ul>
+                    <a class="_ver_mas link_detalle_revista" href="<?php echo $articulo["link"]; ?>">Ver más</a>
+                </div>
+            </div>
+        </div>
