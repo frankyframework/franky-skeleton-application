@@ -5,15 +5,27 @@
    </div>
     <div class="w-xxxx-10 w-xxx-9 w-xx-8 cont-cont-gral">
         <h1><?php echo _blog("Blog"); ?></h1>
+        <div class="w-xxxx-12">
+            <div class="content">
+                <?php echo makeHTMLImg(getImg('article.jpg'),"","","","class='image_100'"); ?>
+                <div class="_blog_txt_principal_article">
+                    <h2>Tutilo del artículo</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, numquam?</p>
+                    <ul class="_ul_tag">
+                        <li>Tag 1</li>
+                        <li>Tag 1</li>
+                    </ul>
+                    <a class="_ver_mas link_detalle_revista" href="/">Ver más</a>
+                </div>
+            </div>
+        </div>
         <?php if(!empty($lista_articulos_blog)): ?>
         <?php foreach ($lista_articulos_blog as $articulo): ?>
             <div class="w-xxxx-6 _cont_card_blog">
-                <ul class="w-xxxx-12 ul_result_categorias">
-                    <li><a href="<?php echo $articulo["link"]; ?>"><h3><?php echo $articulo["titulo"]; ?></h3></a></li>
+                    <h3><a href="<?php echo $articulo["link"]; ?>"><?php echo $articulo["titulo"]; ?></a></h3>
                     <!-- <li>Categoria: <?php // echo $articulo["categoria"]; ?></li> -->
                     <!--  <li><span><?php // echo $articulo["fecha"]; ?></span></li> -->
                     <!-- <li>Autor: <?php // echo $articulo["autor"]; ?></li> -->
-                    <li class="w-xxxx-12">
                         <?php if(isset($articulo["contenido"]["img"])): ?>
                                 <a href="<?php echo $articulo["link"]; ?>"><?php echo makeHTMLImg($articulo["contenido"]["img"],"","", $articulo["titulo"],'class="image_100"',1); ?></a>
                         <?php endif;  ?>
@@ -25,8 +37,6 @@
 
 
                         <a class="float_right" href="<?php echo $articulo["link"]; ?>">ver más<i class="icon icon-flecha-r-1"></i></a>
-                    </li>
-                </ul>
             </div>
         <?php endforeach; ?>
         <div class="w-xxxx-12 cont-paginar"><?php echo render("widget.paginar.phtml"); ?></div>
