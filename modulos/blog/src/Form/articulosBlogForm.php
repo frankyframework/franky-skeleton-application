@@ -198,14 +198,14 @@ class articulosBlogForm extends \Franky\Form\Form
         );
         $this->add(array(
                 'label' => 'Restringir acceso a:',
-                'name' => 'permisos[]',                
-                'type'  => 'checkbox',                
+                'name' => 'permisos[]',
+                'type'  => 'checkbox',
                 'options' => array(
                 ),
-             
+
             )
         );
-        
+
          $this->add(array(
                 'name' => 'guardar',
                 'type'  => 'submit',
@@ -221,7 +221,7 @@ class articulosBlogForm extends \Franky\Form\Form
                 'name' => 'guardar_borrador',
                 'type'  => 'submit',
                 'atributos' => array(
-                    'class'       => 'btn btn-primary btn-big float_right guardar_borrador',
+                    'class'       => 'btn btn-secondary btn-big float_right guardar_borrador',
                     'value' => "Guardar borrador"
                  )
 
@@ -241,7 +241,7 @@ class articulosBlogForm extends \Franky\Form\Form
         )
     );
 
-           
+
     }
 
 }

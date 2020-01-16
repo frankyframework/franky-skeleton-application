@@ -1,11 +1,8 @@
 <div class="w-xxxx-12">
       <div class="content">
-   <div class="w-xxxx-2 w-xxx-3 w-xx-4 cont-submenu">
-       <?php echo render("blog/lateral.phtml"); ?>
-   </div>
-    <div class="w-xxxx-10 w-xxx-9 w-xx-8 cont-cont-gral">
+    <div class="w-xxxx-10 w-xxx-9 w-xx-8 cont-cont-gral float_right_switch">
         <h1><?php echo _blog("Blog"); ?></h1>
-        
+
         <?php if(!empty($lista_articulos_blog)): ?>
         <?php foreach ($lista_articulos_blog as $articulo): ?>
 
@@ -14,12 +11,15 @@
             <?php else: ?>
                 <?=render('blog/articulos/card.phtml',['articulo' => $articulo])?>
             <?php endif; ?>
-            
+
         <?php endforeach; ?>
         <div class="w-xxxx-12 cont-paginar"><?php echo render("widget.paginar.phtml"); ?></div>
         <?php else: ?>
         <p class="error">No existen articulos registrados</p>
         <?php endif; ?>
+    </div>
+    <div class="w-xxxx-2 w-xxx-3 w-xx-4 cont-submenu">
+        <?php echo render("blog/lateral.phtml"); ?>
     </div>
     </div>
 </div>

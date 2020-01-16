@@ -9,9 +9,12 @@
                     <?php if(isset($articulo["contenido"]["p"])): ?>
                         <p><?php echo $articulo["contenido"]["p"]; ?></p>
                     <?php endif; ?>
-                    <ul class="_ul_tag">
-                        <li><?=$articulo["categoria"]?></li>
+                    <div class="_cont_res_category">
+                        <h4><?=_blog('Categoría')?>:</h4>
+                        <ul class="_ul_tag">
+                            <li><?=$articulo["categoria"]?></li>
                         </ul>
+                    </div>
                     <a class="_ver_mas link_detalle_revista" href="<?php echo $articulo["link"]; ?>">Ver más</a>
                 </div>
             </div>
