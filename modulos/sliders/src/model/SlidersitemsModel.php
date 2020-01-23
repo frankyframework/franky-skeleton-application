@@ -20,6 +20,7 @@ class SlidersitemsModel  extends \Franky\Database\Mysql\objectOperations
             $this->where()->addAnd("sliders_sliders_items.".$k,$v,'=');
         }
 
+
         return $this->getColeccion($campos);
 
     }

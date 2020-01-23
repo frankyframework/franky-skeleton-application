@@ -79,6 +79,8 @@ if($MyBlog->getTotal() > 0)
                         $lista_articulos_blog[$iRow]['contenido']["img"] = $img;
                     }
                 }
+              
+    
                 $iRow++;
 
         }
@@ -89,8 +91,13 @@ if($MyBlog->getTotal() > 0)
 $MyCategoriaBlog->getData($amigable_categoria_context);
 $registro = $MyCategoriaBlog->getRows();
 
+
+
 if(!empty($amigable_categoria_context))
 {
+    $registro['url'] = $MyRequest->url(BLOG_CATEGORIA,['categoria' => $registro['friendly']],true);
+    $MyMetatag->setVars($registro);
+    
     $permisos = json_decode($registro['permisos'],true);
     if(!empty($permisos) && !$MySession->LoggedIn())
     {
