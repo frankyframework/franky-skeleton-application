@@ -88,13 +88,11 @@ if($MyBlog->getTotal() > 0)
 
 }
 
-$MyCategoriaBlog->getData($amigable_categoria_context);
-$registro = $MyCategoriaBlog->getRows();
-
-
-
 if(!empty($amigable_categoria_context))
 {
+    $MyCategoriaBlog->getData($amigable_categoria_context);
+    $registro = $MyCategoriaBlog->getRows();
+
     $registro['url'] = $MyRequest->url(BLOG_CATEGORIA,['categoria' => $registro['friendly']],true);
     $MyMetatag->setVars($registro);
     
