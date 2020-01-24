@@ -1,0 +1,20 @@
+<div class="w-xxxx-6 _cont_card_blog">
+
+<!--  <li><span><?php // echo $articulo["fecha"]; ?></span></li> -->
+<!-- <li>Autor: <?php // echo $articulo["autor"]; ?></li> -->
+    <?php if(isset($articulo["contenido"]["img"])): ?>
+        <a href="<?php echo $articulo["link"]; ?>"><?php echo makeHTMLImg($articulo["contenido"]["img"],"","", $articulo["titulo"],'class="image_100"',1); ?></a>
+    <?php endif;  ?>
+    <h2><a href="<?php echo $articulo["link"]; ?>"><?php echo $articulo["titulo"]; ?></a></h2>
+    <?php if(isset($articulo["contenido"]["p"])): ?>
+
+            <p><?php echo $articulo["contenido"]["p"]; ?></p>
+    <?php endif; ?>
+    <div class="_cont_res_category">
+        <h4><?=_blog('Categoría')?>:</h4>
+        <ul class="_ul_tag">
+            <li><?=$articulo["categoria"]?></li>
+        </ul>
+    </div>
+    <a class="_ver_mas" href="<?php echo $articulo["link"]; ?>">ver más</a>
+</div>

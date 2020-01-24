@@ -81,49 +81,16 @@ object { pointer-events: none; }
 /********** Header **********/
 
 header {
-
-     .a_logo { position: absolute; left: 10px; top: -40px; z-index: 11; display: block;
-          img { max-width: 90px; height: auto; }
-     }
-     .cont_login { z-index: 5; }
-     .cont_nav_bg { position: relative; width: 100%; height: 40px; left: 0; top: 40px; background: lighten(@theme_color, 10); z-index: 10; }
-
-     .datos_contacto {
-     position: absolute; right: 10px; top: 10px; list-style: none; margin:0; padding: 0; z-index: 10;
-     li { float: left; margin: 0 3px;
-          a {
-                    color: @white;
-                    text-decoration: none;
-               }
-               &.li_phone { color: @white; font-size: 1.6em; margin-left: 10px; .text-shadow; font-weight: 600; white-space: nowrap;
-                    a { float: none; font-size: 1em;
-                         &:hover { background: transparent; }
-                         &:before { content: ""; margin-right: 0; }
-                    }
-               }
-          }
-     }
-     .cont_nav_movil { display: none; }
-
-// Nav
-
-     .menu_web {
-          margin-left: 150px;
-          ul { position: absolute; top: 0px; float: left; margin: 0; padding: 0; list-style: none;
-               li { float: left; margin: 0 ; padding: 0; list-style: none; font-size: 1.2em;
-                    &.first a:before { content: ""; margin-right: 0px; }
-                    a { float: left; margin: 0 ; padding: 0 5px; height: 40px; line-height: 35px;  color: @white; text-decoration: none;
-                         &:hover { background: darken(@enfasis_color, 10); }
-                         &:before { content: "·"; margin-right: 10px;
-                         }
-                    }
-                    &.li_phone {
-                      a { color: @enfasis_color; }
-                    }
-               }
-          }
-     }
-
+    .header_wrapper { background-color: @theme_color; min-height: 60px;
+        ._brand { position: absolute; width: 40px; left: 10px; top: 10px;
+            img { max-width: 100%; height: auto;}
+        }
+        ul { .ul-reset; float: right;
+            li { .ul-reset; display: inline-block;
+                a { display: inline-block; color: @white; }
+            }
+        }
+    }
 
 }
 
@@ -182,19 +149,6 @@ footer { font-size: .9em;
 /* Media Escritorio */
 @media @xlarge {
 
-     /*  Header  */
-header {
-     #logo { float: left; margin: 5px 0; width: 25%; height: auto; }
-     .cont_login { position: absolute; right: 10px; top: 10px; display: block; }
-
-     .datos_contacto {
-     position: absolute; right: 10px; top: 10px; list-style: none; margin:0; padding: 0; z-index: 10;
-     li { float: left; margin: 0 3px;
-          &.li_phone { position: absolute; right: 0; top: -40px; line-height: 40px; }
-          }
-     }
-
-     }
 
 }
 
@@ -202,17 +156,6 @@ header {
 /* Media Tableta */
 @media @large {
 
-     /*  Header  */
-
-     header {
-          #logo { float: left; margin: 5px 0; width: 25%; height: auto; }
-          .cont_login { position: absolute; right: 10px; top: 10px; display: block; }
-          .menu_web {
-               .datos_contacto { top: -30px;
-                a { color: @white; line-height: 15px; }
-               }
-          }
-     }
 
       main {
           p.margin_home, h2.margin_home { margin-left: 50px; margin-right: 50px; }
@@ -226,20 +169,7 @@ header {
 /* Media Tableta Vertical */
 @media @medium {
 
-     /*  Header  */
-      header {
-          #logo { float: left; margin: 5px 0; width: 25%; height: auto; }
-          .cont_login { position: absolute; right: 10px; top: 10px; display: block; }
 
-          .menu_web {
-               ul {
-                    li { font-size: 1.1em; }
-               }
-               .datos_contacto { top: -30px;
-                a { color: @white; line-height: 15px; }
-               }
-          }
-     }
 
      main {
           p.margin_home, h2.margin_home { margin-left: 50px; margin-right: 50px; }
@@ -253,32 +183,7 @@ header {
 @media @small {
 
      /*  Header  */
-     header {
-          .cont_nav_bg { position: relative; top: 0;  }
-          .cont_nav_movil { position: fixed; right: 20px; top: 20px; display: block; z-index: 13;
-               &:after { font-family: @ico_font; content: "\e85f"; font-size: 2em; background: @theme_color; color: @white; padding: 10px; .radius(50%);
-               }
-               &.active:after { content: "\e80f" }
-          }
-          .menu_web {
-               position: fixed; top: 0; left: 0; display: none; margin: 0; padding: 0; float: left; width: 100%; height: 110vh; background: @bkg_nav; z-index: 12;
-               ul { position: relative; margin-top: 90px;  width: 100%;
-                    li {
-                         float: left; width: 100%;
-                         a { float: left; width: 100%; text-align: center; }
-                    }
-                }
-                .datos_contacto { margin-top: 10px; text-align: center;
-                    li.li_phone { text-shadow:none; margin-top: 20px; }
-                }
-          }
-          .a_logo { top: 0; width: 80px; }
-          #banners_header { float: left; display: none; margin: 5px 1%; width: 73%; height: auto; }
-          .cont_login { position: relative; right: auto; top: auto; display: none; }
 
-          // Nav
-          nav { background:#2eabff; padding-left: 0px; }
-     }
 
           .wrap.push { margin-left: 0px; }
           .panel { left: -260px;

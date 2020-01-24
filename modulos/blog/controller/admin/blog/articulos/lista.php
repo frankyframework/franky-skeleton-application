@@ -58,15 +58,18 @@ if($MyBlog->getTotal() > 0)
 		$thisClass  = ((($iRow % 2) == 0) ? "formFieldDk" : "formFieldLt");
 		   
                 
-		$lista_admin_data[$iRow] = array_merge($registro,array(
+		$lista_admin_data[$iRow] = array(
                     "id" => $Tokenizer->token('articulo_blog',$registro["id"]),
                     "fecha"             => getFechaUI($registro["fecha"]),
                     "link"              => $MyRequest->url(BLOG_DETALLE,array("categoria" => $registro["amigable_categoria"],"articulo" => $registro["friendly"])),
                     "thisClass"     => $thisClass,
                     "nuevo_estado"  =>($registro["status"] == 1 ?  "desactivar" : "activar"),
                     "borrador" =>'',
-                    "callback" => $Tokenizer->token('anuncios',$MyRequest->getURI())
-                ));
+                    "callback" => $Tokenizer->token('anuncios',$MyRequest->getURI()),
+                    "titulo" => '<a href="'.$MyRequest->url(BLOG_DETALLE,array("categoria" => $registro["amigable_categoria"],"articulo" => $registro["friendly"])).'" target="_blank">'.$registro['titulo'].'</a>',
+                    "categoria_nombre" => $registro['categoria_nombre'],
+                    "usuario" => $registro['usuario']
+                );
                 
                 
                 if(in_array($registro['id'],$borrador)){

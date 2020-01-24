@@ -64,8 +64,9 @@ if($total > 0)
         "keywords"          => $registro["keywords"],
         "bio"          => $registro["biografia"],
         "visible_in_search"          => $registro["visible_in_search"],
-        "permisos"  => json_decode($registro["permisos"],true)
-
+        "permisos"  => json_decode($registro["permisos"],true),
+        "meta_titulo"                => $registro["meta_titulo"],
+        "meta_descripcion"                => $registro["meta_descripcion"]
         );
 
         if(!empty($registro["imagen_portada"]) && file_exists($MyConfigure->getServerUploadDir()."/blog/".$registro["id"]."/".$registro["imagen_portada"]))
@@ -111,6 +112,10 @@ if($total > 0)
         $MyMetatag->setImage($MyRequest->link($blog_detalle["imagen_portada"],false,true));
         $schema->setAuthor(json_decode($personSchema->get(false),true));
 
+        $blog_detalle['url'] = $MyRequest->url(BLOG_DETALLE,['categoria' => $blog_detalle['categoria_friendly'],'articulo' => $blog_detalle['friendly']],true);
+        $blog_detalle["thumb_resize"] = $MyRequest->link($blog_detalle["imagen_portada"],false,true);
+       
+        $MyMetatag->setVars($blog_detalle);
 
 
         /*

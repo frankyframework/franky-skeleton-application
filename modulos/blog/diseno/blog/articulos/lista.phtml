@@ -1,38 +1,25 @@
 <div class="w-xxxx-12">
       <div class="content">
-   <div class="w-xxxx-2 w-xxx-3 w-xx-4 cont-submenu">
-       <?php echo render("blog/lateral.phtml"); ?>
-   </div>
-    <div class="w-xxxx-10 w-xxx-9 w-xx-8 cont-cont-gral">
+    <div class="w-xxxx-10 w-xxx-9 w-xx-8 cont-cont-gral float_right_switch">
         <h1><?php echo _blog("Blog"); ?></h1>
+
         <?php if(!empty($lista_articulos_blog)): ?>
         <?php foreach ($lista_articulos_blog as $articulo): ?>
-            <div class="w-xxxx-6 _cont_card_blog">
-                <ul class="w-xxxx-12 ul_result_categorias">
-                    <li><a href="<?php echo $articulo["link"]; ?>"><h3><?php echo $articulo["titulo"]; ?></h3></a></li>
-                    <!-- <li>Categoria: <?php // echo $articulo["categoria"]; ?></li> -->
-                    <!--  <li><span><?php // echo $articulo["fecha"]; ?></span></li> -->
-                    <!-- <li>Autor: <?php // echo $articulo["autor"]; ?></li> -->
-                    <li class="w-xxxx-12">
-                        <?php if(isset($articulo["contenido"]["img"])): ?>
-                                <a href="<?php echo $articulo["link"]; ?>"><?php echo makeHTMLImg($articulo["contenido"]["img"],"","", $articulo["titulo"],'class="image_100"',1); ?></a>
-                        <?php endif;  ?>
 
-                        <?php if(isset($articulo["contenido"]["p"])): ?>
+            <?php if($articulo['destacado'] == 1): ?>
+                <?=render('blog/articulos/card.destacado.phtml',['articulo' => $articulo])?>
+            <?php else: ?>
+                <?=render('blog/articulos/card.phtml',['articulo' => $articulo])?>
+            <?php endif; ?>
 
-                                <p><?php echo $articulo["contenido"]["p"]; ?></p>
-                        <?php endif; ?>
-
-
-                        <a class="float_right" href="<?php echo $articulo["link"]; ?>">ver más<i class="icon icon-flecha-r-1"></i></a>
-                    </li>
-                </ul>
-            </div>
         <?php endforeach; ?>
         <div class="w-xxxx-12 cont-paginar"><?php echo render("widget.paginar.phtml"); ?></div>
         <?php else: ?>
         <p class="error">No existen articulos registrados</p>
         <?php endif; ?>
+    </div>
+    <div class="w-xxxx-2 w-xxx-3 w-xx-4 cont-submenu">
+        <?php echo render("blog/lateral.phtml"); ?>
     </div>
     </div>
 </div>

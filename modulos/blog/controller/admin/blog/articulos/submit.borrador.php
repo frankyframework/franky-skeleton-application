@@ -119,7 +119,7 @@ if($error == false)
         unset($data['data_img']);
         $data['id'] = $id;
         $data['contenido'] = ($contenido);
-        $BorradorblogEntity->data(json_encode($data));
+        $BorradorblogEntity->data(addslashes(json_encode($data)));
 
         $result = $BorradorblogModel->save($BorradorblogEntity->getArrayCopy());
         if($result == REGISTRO_SUCCESS)

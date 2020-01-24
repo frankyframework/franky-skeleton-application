@@ -1,6 +1,16 @@
 @import "../../default/less/variables"; // variables.less
 /////////////// Blog
     .cont-cont-gral { padding: 0 10px 0 0; box-sizing: border-box;
+////////// Destacados
+        ._card_res_destacado { padding: 0 10px; box-sizing: border-box; margin-bottom: 15px;
+            ._blog_txt_principal_article { position: absolute; bottom: 20px; left: 20px; background: @white; padding: 10px; box-sizing: border-box; font-size: @font_size_txt;
+                h2, p, a { padding: 4px 0; margin: 0; }
+                a { color: @black; text-decoration: none; display: inline-block;
+                    &:hover { color: @enfasis_color; }
+                }
+            }
+        }
+
         ._p_blog p { font-size: 1.8rem; line-height: 2.4rem;}
         img { max-width: 100%; height: auto; }
         ._card { padding: 0 10px; box-sizing: border-box; }
@@ -10,20 +20,46 @@
                 h3 p, a { color: @enfasis_color; }
             }
             li { .ul-reset;
-                h3, p { margin: 3px 0; padding: 0;
+                h3, p { margin: 0; padding: 0;
                     a { text-decoration: none; color: @gray; }
                 }
                 h3 a { font-size: 2.1rem; }
                 a { text-decoration: none; }
             }
         }
-        ._cont_card_blog { padding: 10px; box-sizing: border-box; }
+        ._ul_tag { .ul-reset; text-align: left; display: inline-block;
+            li { display: inline-block; line-height: 22px; text-decoration: none; height: 30px; font-size: @font_size_txt*.8; background: @soft_gray; color: @gray; padding: 3px 5px; .radius; box-sizing: border-box;
+                a {  display: inline-block; line-height: 20px; text-decoration: none; height: 30px; font-size: @font_size_txt*.8; background: @soft_gray; color: @gray; padding: 3px 5px; .radius; box-sizing: border-box;
+                    &:hover { color: @enfasis_color; }
+                }
+            }
+        }
+        ._cont_card_blog { padding: 10px 10px 0 10px; box-sizing: border-box;
+            h2, p, a { padding: 0; margin: 0; }
+            a { color: @black; text-decoration: none; display: inline-block; font-size: @font_size_txt;
+                &:hover { color: @enfasis_color; }
+            }
+        }
+        ._cont_res_category {
+            h4 { display: inline-block; margin: 0;padding: 0;font-size: @font_size_txt; }
+        }
+        ._ver_mas { float: right;
+            &:after { font-family: @ico_font; content: "\e833"; }
+        }
     }
-    .cont-submenu { padding: 0 10px; box-sizing: border-box;
-        h3 { margin: 10px 0; }
-        ul { .ul-reset;
-            li { .ul-reset; font-size: @font_size_txt;
-                a { color: @gray; font-size: @font_size_txt;
+
+////////////// Submenu
+
+    .cont-submenu { margin-top: 20px; padding: 0 10px; box-sizing: border-box;
+        ._cont_buscador {
+            input[name="busca_b"],input[name="buscar"] {height: 40px; box-sizing: border-box; }
+            input[name="busca_b"] { z-index: 1; }
+            input[name="buscar"] { position: absolute; right: 0; top: 0; z-index: 2; .radius( 0 6px 6px 0); }
+        }
+        h3 { margin: 10px 0 4px 0; font-size: @font_size_txt*1.2; }
+        ul { .ul-reset; margin-left: 10px;
+            li { font-size: @font_size_txt; word-wrap: break-word;
+                a { color: @gray; font-size: @font_size_txt*.9; color: lighten(@black,40);
                     &:hover { color: @enfasis_color; }
                 }
             }
