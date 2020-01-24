@@ -59,7 +59,7 @@ $(document).ready(function(){
                         $('select[name="extra_type[]"]').eq(<?=$key+1?>).val('<?=$metats['type']; ?>');
                         $('input[name="extra_name[]"]').eq(<?=$key+1?>).val('<?=$metats['name']; ?>');
                         $('input[name="extra_scheme[]"]').eq(<?=$key+1?>).val('<?=$metats['scheme']; ?>');
-                        $('textarea[name="extra_value[]"]').eq(<?=$key+1?>).val('<?=htmlentities($metats['value']) ?>');
+                              $('textarea[name="extra_value[]"]').eq(<?=$key+1?>).val('<?= (utf8_decode($metats['value'])) ?>');
                 <?php endforeach; ?>
         
         <?php endif;?>
