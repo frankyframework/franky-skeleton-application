@@ -26,8 +26,10 @@ if($MySeo->getTotal() > 0)
 
     $data_extra_metats = json_decode($metatags_seo['extra'],true);
     if(!empty($data_extra_metats)): 
+        
         foreach($data_extra_metats as $key => $metats): 
-            $MyMetatag->setCode('<meta name="'.$metats['name'].'" '.(!empty($metats['scheme']) ? 'scheme="'.$metats['scheme'].'"' : '').' content="'.$metats['value'].'" />');
+        
+            $MyMetatag->setCode('<meta '.$metats['type'].'="'.$metats['name'].'" '.(!empty($metats['scheme']) ? 'scheme="'.$metats['scheme'].'"' : '').' content="'.$metats['value'].'" />');
         endforeach;
     endif;
 }
