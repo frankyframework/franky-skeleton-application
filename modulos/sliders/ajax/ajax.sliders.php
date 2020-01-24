@@ -57,7 +57,7 @@ function DeleteSlidersItems($id,$status)
         }
         else
         {
-              $respuesta["message"] = $MyMessageAlert->Message("sliders_sliders_error_delete");
+              $respuesta["message"] = $MyMessageAlert->Message("sliders_sliders_items_error_delete");
               $respuesta["error"] = true;
         }
     }
@@ -70,6 +70,41 @@ function DeleteSlidersItems($id,$status)
     return $respuesta;
 }
 
+function setOrdenSlidersItems($orden)
+{
+	
+	$SlidersitemsModel =  new \Catalog\model\SlidersitemsModel();
+    $SlidersitemsEntity =  new \Catalog\entity\SlidersitemsEntity();
+    $Tokenizer = new Franky\Haxor\Tokenizer();
+    global $MyAccessList;
+    global $MyMessageAlert;
+    $respuesta =null;
+    if($MyAccessList->MeDasChancePasar(ADMINISTRAR_SLIDERS))
+    {
+        $orden = explode(",",str_replace("cat_","",$orden));
+
+        $v = "";
+        $new_order = [];
+        
+        foreach($orden as $key => $val)
+        {
+            $v .= ($key)." -> $val,";
+            $SlidersitemsEntity->id($Tokenizer->decode($val));
+            $SlidersitemsEntity->orden($key);
+            $SlidersitemsModel->save($SlidersitemsEntity->getArrayCopy());
+    
+        } 
+        
+    }
+    else
+    {
+            $respuesta[] = array("message" => $MyMessageAlert->Message("sin_privilegios"));
+    }
+
+	return $respuesta;
+}
+
 
 $MyAjax->register("DeleteSliders");
 $MyAjax->register("DeleteSlidersItems");
+$MyAjax->register("setOrdenSlidersItems");

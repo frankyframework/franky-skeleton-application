@@ -13,7 +13,7 @@ class SlidersModel  extends \Franky\Database\Mysql\objectOperations
     function getData($data = array())
     {
         $data = $this->optimizeEntity($data);
-        $campos = ["id","code","class","controlnav","loop","name","status","createdAt","updateAt"];
+        $campos = ["id","code","auto","controlnav","loop","name","status","createdAt","updateAt"];
 
         foreach($data as $k => $v)
         {

@@ -1,0 +1,16 @@
+<?xml version='1.0' standalone='yes'?>
+<mensajes>
+    <prefijo>sliders_</prefijo>
+        <mensaje>
+        <llave>sliders_error_delete</llave>
+        <valor>No se pudo eliminar el slider</valor>
+    </mensaje>
+    <mensaje>
+        <llave>sliders_items_error_delete</llave>
+        <valor>No se pudo eliminar el item del slider</valor>
+    </mensaje>
+    <mensaje>
+        <llave>slider_duplicado</llave>
+        <valor>Ya existe una slider con este identificador</valor>
+    </mensaje>
+</mensajes>

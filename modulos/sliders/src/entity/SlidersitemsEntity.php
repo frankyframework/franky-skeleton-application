@@ -8,9 +8,12 @@ class SlidersitemsEntity
     private $id_slider;
     private $tipo;
     private $file;
+    private $file_responsive;
+    private $code;
     private $titulo;
     private $descripcion;
     private $url;
+    private $orden;
     private $status;
     private $createdAt;
     private $updateAt;
@@ -30,9 +33,12 @@ class SlidersitemsEntity
         $this->id_slider = (isset($data["id_slider"]) ? $data["id_slider"] : null);
         $this->tipo = (isset($data["tipo"]) ? $data["tipo"] : null);
         $this->file = (isset($data["file"]) ? $data["file"] : null);
+        $this->file_responsive = (isset($data["file_responsive"]) ? $data["file_responsive"] : null);
+        $this->code = (isset($data["code"]) ? $data["code"] : null);
         $this->titulo = (isset($data["titulo"]) ? $data["titulo"] : null);
         $this->descripcion = (isset($data["descripcion"]) ? $data["descripcion"] : null);
         $this->url = (isset($data["url"]) ? $data["url"] : null);
+        $this->orden = (isset($data["orden"]) ? $data["orden"] : null);
         $this->status = (isset($data["status"]) ? $data["status"] : null);
         $this->createdAt = (isset($data["createdAt"]) ? $data["createdAt"] : null);
         $this->updateAt = (isset($data["updateAt"]) ? $data["updateAt"] : null);
@@ -62,11 +68,17 @@ class SlidersitemsEntity
 
     public function file($file = null){ if($file !== null){ $this->file=$file; }else{ return $this->file; } }
 
+    public function file_responsive($file_responsive = null){ if($file_responsive !== null){ $this->file_responsive=$file_responsive; }else{ return $this->file_responsive; } }
+
+    public function code($code = null){ if($code !== null){ $this->code=$code; }else{ return $this->code; } }
+
     public function titulo($titulo = null){ if($titulo !== null){ $this->titulo=$titulo; }else{ return $this->titulo; } }
 
     public function descripcion($descripcion = null){ if($descripcion !== null){ $this->descripcion=$descripcion; }else{ return $this->descripcion; } }
 
     public function url($url = null){ if($url !== null){ $this->url=$url; }else{ return $this->url; } }
+
+    public function orden($orden = null){ if($orden !== null){ $this->orden=$orden; }else{ return $this->orden; } }
 
     public function status($status = null){ if($status !== null){ $this->status=$status; }else{ return $this->status; } }
 
