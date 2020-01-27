@@ -7,7 +7,7 @@ class SlidersEntity
     private $id;
     private $code;
     private $controlnav;
-    private $loop;
+    private $infinito;
     private $name;
     private $auto;
     private $status;
@@ -28,7 +28,7 @@ class SlidersEntity
         $this->id = (isset($data["id"]) ? $data["id"] : null);
         $this->code = (isset($data["code"]) ? $data["code"] : null);
         $this->controlnav = (isset($data["controlnav"]) ? $data["controlnav"] : null);
-        $this->loop = (isset($data["loop"]) ? $data["loop"] : null);
+        $this->infinito = (isset($data["infinito"]) ? $data["infinito"] : null);
         $this->name = (isset($data["name"]) ? $data["name"] : null);
         $this->auto = (isset($data["auto"]) ? $data["auto"] : null);
         $this->status = (isset($data["status"]) ? $data["status"] : null);
@@ -58,7 +58,7 @@ class SlidersEntity
 
     public function controlnav($controlnav = null){ if($controlnav !== null){ $this->controlnav=$controlnav; }else{ return $this->controlnav; } }
 
-    public function loop($loop = null){ if($loop !== null){ $this->loop=$loop; }else{ return $this->loop; } }
+    public function infinito($infinito = null){ if($infinito !== null){ $this->infinito=$infinito; }else{ return $this->infinito; } }
 
     public function name($name = null){ if($name !== null){ $this->name=$name; }else{ return $this->name; } }
 

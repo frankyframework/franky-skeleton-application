@@ -1,5 +1,5 @@
 <?php
-namespace sliders\model;
+namespace Sliders\model;
 
 class SlidersModel  extends \Franky\Database\Mysql\objectOperations
 {
@@ -13,7 +13,7 @@ class SlidersModel  extends \Franky\Database\Mysql\objectOperations
     function getData($data = array())
     {
         $data = $this->optimizeEntity($data);
-        $campos = ["id","code","auto","controlnav","loop","name","status","createdAt","updateAt"];
+        $campos = ["id","code","auto","controlnav","infinito","name","status","createdAt","updateAt"];
 
         foreach($data as $k => $v)
         {
@@ -51,6 +51,17 @@ class SlidersModel  extends \Franky\Database\Mysql\objectOperations
             return $this->guardarRegistro($data);
     	}
 
+    }
+    
+    function existe($code,$id='')
+    {
+        $campos = array("id");
+        $this->where()->addAnd('code',$code,'=');
+        if(!empty($id))
+        {
+                        $this->where()->addAnd('id',$id,'<>');
+        }
+        return $this->getColeccion($campos);
     }
 }
 ?>

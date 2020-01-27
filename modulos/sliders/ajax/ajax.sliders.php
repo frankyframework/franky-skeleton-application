@@ -3,8 +3,8 @@
 function DeleteSliders($id,$status)
 {
     global $MySession;
-    $SlidersModel =  new \Catalog\model\SlidersModel();
-    $SlidersEntity =  new \Catalog\entity\SlidersEntity();
+    $SlidersModel =  new \Sliders\model\SlidersModel();
+    $SlidersEntity =  new \Sliders\entity\SlidersEntity();
     $Tokenizer = new \Franky\Haxor\Tokenizer;
     global $MyAccessList;
     global $MyMessageAlert;
@@ -38,8 +38,8 @@ function DeleteSliders($id,$status)
 function DeleteSlidersItems($id,$status)
 {
     global $MySession;
-    $SlidersitemsModel =  new \Catalog\model\SlidersitemsModel();
-    $SlidersitemsEntity =  new \Catalog\entity\SlidersitemsEntity();
+    $SlidersitemsModel =  new \Sliders\model\SlidersitemsModel();
+    $SlidersitemsEntity =  new \Sliders\entity\SlidersitemsEntity();
     $Tokenizer = new \Franky\Haxor\Tokenizer;
     global $MyAccessList;
     global $MyMessageAlert;
@@ -73,8 +73,8 @@ function DeleteSlidersItems($id,$status)
 function setOrdenSlidersItems($orden)
 {
 	
-	$SlidersitemsModel =  new \Catalog\model\SlidersitemsModel();
-    $SlidersitemsEntity =  new \Catalog\entity\SlidersitemsEntity();
+	$SlidersitemsModel =  new \Sliders\model\SlidersitemsModel();
+    $SlidersitemsEntity =  new \Sliders\entity\SlidersitemsEntity();
     $Tokenizer = new Franky\Haxor\Tokenizer();
     global $MyAccessList;
     global $MyMessageAlert;

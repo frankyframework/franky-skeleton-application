@@ -33,6 +33,7 @@
                 "Sociallogin\\": "modulos/sociallogin/src",
                 "Ecommerce\\": "modulos/ecommerce/src",
                 "Catalog\\": "modulos/catalog/src",
+                "Sliders\\": "modulos/sliders/src",
                 "Franky\\": "modulos/franky/src"
             }
     }

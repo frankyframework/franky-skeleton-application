@@ -1,6 +1,6 @@
 <?php
 use Base\Form\filtrosForm;
-use SlidersModel\model\SlidersModel;
+use Sliders\model\SlidersModel;
 use Franky\Core\paginacion;
 use Franky\Haxor\Tokenizer;
 
@@ -21,7 +21,7 @@ $SlidersModel->setPage($MyPaginacion->getPage());
 $SlidersModel->setTampag($MyPaginacion->getTampageDefault());
 $SlidersModel->setOrdensql($MyPaginacion->getCampoOrden()." ".$MyPaginacion->getOrden());
 
-$SlidersModel->setBusca($busca_b);
+
 $result	 = $SlidersModel->getData([]);
 $MyPaginacion->setTotal($SlidersModel->getTotal());
 
@@ -36,8 +36,8 @@ if($SlidersModel->getTotal() > 0)
                 
 
 		$lista_admin_data[] = array_merge($registro,array(
-                "id" => $Tokenizer->token("category", $registro["id"]),
-                "callback" => $Tokenizer->token("category", $MyRequest->getURI()),    
+                "id" => $Tokenizer->token("sliders", $registro["id"]),
+                "callback" => $Tokenizer->token("sliders", $MyRequest->getURI()),    
                 "createdAt" 	=> getFechaUI($registro["createdAt"]),
                 "thisClass"     => $thisClass,
                 "nuevo_estado"  => ($registro["status"] == 1 ?"desactivar" : "activar"),
@@ -48,22 +48,18 @@ if($SlidersModel->getTotal() > 0)
 
 
 
-$MyFrankyMonster->setPHPFile(getVista("admin/template/grid.phtml"));
+//$MyFrankyMonster->setPHPFile(getVista("admin/template/grid.phtml"));
 $title_grid = "Sliders";
 $class_grid = "cont_sliders";
 $error_grid = "No hay sliders registrados";
 $deleteFunction = "DeleteSliders";
 $frm_constante_link = FRM_SLIDERS;
-$titulo_columnas_grid = array("createdAt" => "Fecha","name" => "Nombre");
-$value_columnas_grid = array("createdAt", "name","image" );
+$titulo_columnas_grid = array("createdAt" => "Fecha","name" => "Nombre","code" => "Code");
+$value_columnas_grid = array("createdAt", "name","code" );
 
-$css_columnas_grid = array("createdAt" => "w-xxxx-4" ,"name" => "w-xxxx-5" );
+$css_columnas_grid = array("createdAt" => "w-xxxx-3" ,"name" => "w-xxxx-3" ,"code" => "w-xxxx-3" );
 
 $permisos_grid = ADMINISTRAR_SLIDERS;
 $MyFiltrosForm = new filtrosForm('paginar');
 $MyFiltrosForm->setMobile($Mobile_detect->isMobile());
-$MyFiltrosForm->addBusca();
-$MyFiltrosForm->addSubmit();
-
-$MyFiltrosForm->setAtributoInput("busca_b", "value",$busca_b);
 ?>

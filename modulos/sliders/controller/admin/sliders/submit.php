@@ -12,23 +12,11 @@ $SlidersEntity = new SlidersEntity($MyRequest->getRequest());
 
 $id       = $Tokenizer->decode($MyRequest->getRequest('id'));
 $callback = $Tokenizer->decode($MyRequest->getRequest('callback'));
-$SlidersEntity->users(json_encode($MyRequest->getRequest('users',array())));
 
-if($Tokenizer->decode($MyRequest->getRequest('id')) != false)
-{
-    $SlidersEntity->id($id);
-}
-
+$SlidersEntity->id($id);
 
 $error = false;
-
-if($SlidersEntity->url_key() === "")
-{
-    $SlidersEntity->url_key(getFriendly($SlidersEntity->name()));
-}
-else{
-    $SlidersEntity->url_key(getFriendly($SlidersEntity->url_key()));
-}
+$SlidersEntity->code(getFriendly($SlidersEntity->code()));
 
 $validaciones =  new validaciones();
 $valid = $validaciones->validRules($SlidersEntity->setValidation());
@@ -38,64 +26,18 @@ if(!$valid)
     $error = true;
 }
 
-if($SlidersModel->existe($nombre,$id) == REGISTRO_SUCCESS)
+if($SlidersModel->existe($SlidersEntity->code(),$id) == REGISTRO_SUCCESS)
 {
-    $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("project_categoria_duplicado"));
+    $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("sliders_sliders_duplicado"));
     $error = true;
 }
 
-if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_CATEGORY_CATALOG))
+if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_SLIDERS))
 {
     $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("sin_privilegios"));
     $error = true;
 }
 
-
-$dir = $MyConfigure->getServerUploadDir()."/catalog/category/";
-$File = new File();
-$File->mkdir($dir);
-
-
-$handle = new \Franky\Filesystem\Upload($_FILES['image']);
-if ($handle->uploaded)
-{
-    if($handle->file_is_image)
-    {
-        $handle->file_max_size = "2024288"; //1k(1024) x 512
-
-        if($handle->image_src_x > 1600 || $handle->image_src_y > 1600)
-        {
-            $handle->image_resize = true;
-        }
-        $handle->image_x = 1600;
-        $handle->image_y = 1600;
-        $handle->image_ratio           = true;
-    //    $handle->image_ratio_fill = true;
-        $handle->file_auto_rename = true;
-        $handle->file_overwrite = false;
-        $handle->image_background_color = '#FFFFFF';
-
-
-        $handle->Process($dir);
-
-        if ($handle->processed)
-        {
-            $SlidersEntity->image($handle->file_dst_name);
-
-        }
-        else
-        {
-            $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("imagen_error",$handle->error));
-            $error = true;
-        }
-    }
-    else
-    {
-        $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("solo_imagen"));
-        $error = true;
-
-    }
-}
 
 if($error == false)        
 {
@@ -121,7 +63,7 @@ if($error == false)
              $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("editar_generico_success"));
         }
 
-        $location = (!empty($callback) ? ($callback) : $MyRequest->url(ADMIN_CATALOG_CATEGORY));
+        $location = (!empty($callback) ? ($callback) : $MyRequest->url(ADMIN_SLIDERS));
 
     }
     elseif($result == REGISTRO_ERROR)

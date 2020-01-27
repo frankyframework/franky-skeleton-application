@@ -1,10 +1,8 @@
 <?php
-global $MySession;
-
 return array(
     "title" => "SLIDERS",
     array(
-     "permiso" =>   ADMINISTRAR_SLIDES,
+     "permiso" =>   ADMINISTRAR_SLIDERS,
      "url" => $MyRequest->url(ADMIN_SLIDERS),
      "etiqueta" => _("Administrar Sliders")
     )

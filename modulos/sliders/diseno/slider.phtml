@@ -1,0 +1,41 @@
+
+<?php if(!empty($slider)): ?>
+<div class="flexslider <?=$slider['code']?>">
+    <ul class="slides">
+        <?php if(!empty($slider['items'])): ?>
+            <?php foreach($slider['items'] as $item): ?>
+                <?php if($item['tipo'] == 'imagen'): ?>
+                <li>
+                    <a href="<?php echo $MyRequest->url(CONTACTANOS) ?>">
+                        <?php echo makeHTMLImg(getImg('home/chile.jpg'),"","","",""); ?>
+                    </a>
+                </li>
+                <?php endif; ?>
+                <?php if($item['tipo'] == 'video'): ?>
+                <li>
+                    <a href="<?php echo $MyRequest->url(CONTACTANOS) ?>">
+                        <?php echo makeHTMLImg(getImg('home/chile.jpg'),"","","",""); ?>
+                    </a>
+                </li>
+                <?php endif; ?>  
+                <?php if($item['tipo'] == 'video-embebed'): ?>
+                <li>
+                    <a href="<?php echo $MyRequest->url(CONTACTANOS) ?>">
+                        <?php echo makeHTMLImg(getImg('home/chile.jpg'),"","","",""); ?>
+                    </a>
+                </li>
+                <?php endif; ?>
+                 <?php endforeach; ?>
+            <?php endif; ?>
+    </ul>
+</div>
+<script  >
+    $(window).load(function() {
+        $('.<?=$slider['code']?>').flexslider({
+            controlNav: <?=($slider['controlnav'] == 1 ? 'true' : 'false')?>,
+            animationLoop: <?=($slider['infinito'] == 1 ? 'true' : 'false')?>,
+            slideshow: <?=($slider['autp'] == 1 ? 'true' : 'false')?>,
+        });
+    });    
+</script>
+<?php endif; ?>

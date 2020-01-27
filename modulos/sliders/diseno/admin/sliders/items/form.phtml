@@ -1,0 +1,128 @@
+<div class="w-xxxx-12">
+    <div class="content">
+        <h1 class="align_center"></h1>
+        <h3 class="align_center"></h3>
+        <?php echo $adminForm->openTag(); ?>
+        <?php  echo $adminForm->get("callback"); ?>
+
+
+        <?php if(!empty($id)): ?>
+        <?php  echo $adminForm->get("id"); ?>
+          <?php endif; ?>
+        <?php  echo $adminForm->get("id_slider"); ?>
+        <?php  echo $adminForm->getRow("titulo"); ?>
+        <?php  echo $adminForm->getRow("descripcion"); ?>
+        <?php  echo $adminForm->getRow("url"); ?>
+        <?php  echo $adminForm->getRow("tipo"); ?>
+        <div class="content_upload" style="display:none;">
+        <div id="imagen_previa">
+            <?php if(!empty($data['imagen'])): ?>
+              <?=makeHTMLImg($data['imagen'], "", "", "");?>
+            <?php endif; ?>
+            <?php if(!empty($data['video'])): ?>
+                <video class="w_video" loop="loop" muted="muted" playsinline="playsinline" width="150">
+                    <source src="<?=$data['video'];?>" />
+                </video>
+            <?php endif; ?>
+            
+     
+        </div>
+        <?php  echo $adminForm->getRow("file"); ?>
+        <div id="imagen_previa_responsive">
+            <?php if(!empty($data['imagen_responsive'])): ?>
+              <?=makeHTMLImg($data['imagen_responsive'], "", "", "");?>
+            <?php endif; ?>
+              <?php if(!empty($data['video_responsive'])): ?>
+                <video class="w_video" loop="loop" muted="muted" playsinline="playsinline" width="150">
+                    <source src="<?=$data['video_responsive'];?>" />
+                </video>
+            <?php endif; ?>
+        </div>
+        <?php  echo $adminForm->getRow("file_responsive"); ?>
+        </div>
+        <div class="content_code" style="display:none;">
+        <?php  echo $adminForm->getRow("code"); ?>
+        </div>
+
+        <?php  echo $adminForm->getRow("guardar"); ?>
+
+        <?php echo $adminForm->endTag(); ?>
+
+    </div>
+
+  
+
+</div>
+
+
+
+<script >
+$(document).ready(function()
+{
+  $( "#frmslidersitems" ).validate();
+});
+$('#file').change(function(){
+    
+    if (this.files && this.files[0])
+    {
+        var reader = new FileReader();
+        reader.onload = function (e)
+        {
+            if($('select[name=tipo]').val() == 'imagen')
+            {
+                 $('#imagen_previa').html('<img style="width: 150px" src="'+e.target.result+'" alt="Preview" />');
+       
+            }
+            if($('select[name=tipo]').val() == 'video')
+            {
+                 $('#imagen_previa').html('<video class="w_video" loop="loop" muted="muted" playsinline="playsinline" width="150">\
+                    <source src="'+e.target.result+'">\
+                </'+'video>');
+       
+            }
+                
+        }
+        reader.readAsDataURL(this.files[0]);
+    }
+});
+$('#file_responsive').change(function(){
+    if (this.files && this.files[0] )
+    {
+        var reader = new FileReader();
+        reader.onload = function (e)
+        {
+            if($('select[name=tipo]').val() == 'imagen')
+            {
+                $('#imagen_previa_responsive').html('<img style="width: 150px" src="'+e.target.result+'" alt="Preview" />');
+            }
+            if($('select[name=tipo]').val() == 'video')
+            {
+                 $('#imagen_previa_responsive').html('<video class="w_video" loop="loop" muted="muted" playsinline="playsinline" width="150">\
+                    <source src="'+e.target.result+'">\
+                </'+'video>');
+       
+            }
+        }
+        reader.readAsDataURL(this.files[0]);
+    }
+});
+
+$('select[name=tipo]').change(function(){
+
+    if($(this).val() == 'imagen' || $(this).val() == 'video' )
+    {
+        $('.content_upload').show(); 
+    }
+    else{
+        $('.content_upload').hide(); 
+    }
+    if($(this).val() == 'video-embebed' )
+    {
+        $('.content_code').show(); 
+    }
+    else{
+        $('.content_code').hide(); 
+    }
+});
+$('select[name=tipo]').trigger('change');
+</script>

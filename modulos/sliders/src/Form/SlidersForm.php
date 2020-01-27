@@ -1,7 +1,7 @@
 <?php
-namespace Catalog\Form;
+namespace Sliders\Form;
 
-class CatalogCategoryForm extends \Franky\Form\Form
+class SlidersForm extends \Franky\Form\Form
 {
     public function __construct($name)
     {
@@ -73,7 +73,7 @@ class CatalogCategoryForm extends \Franky\Form\Form
         );
 
         $this->add(array(
-            'name' => 'loop',
+            'name' => 'infinito',
             'type'  => 'checkbox',
             'options' =>  array("1" => "Loop infinito"),
             )

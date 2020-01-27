@@ -1,5 +1,5 @@
 <?php
-namespace sliders\model;
+namespace Sliders\model;
 
 class SlidersitemsModel  extends \Franky\Database\Mysql\objectOperations
 {

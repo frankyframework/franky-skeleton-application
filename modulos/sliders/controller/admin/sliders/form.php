@@ -21,7 +21,7 @@ if(!empty($id))
     $data['id'] = $Tokenizer->token('category', $data['id']);
 }
 
-$adminForm = new CatalogCategoryForm("frmsliders");
+$adminForm = new SlidersForm("frmsliders");
 $adminForm->setData($data);
 $adminForm->setAtributoInput("callback","value", urldecode($callback));
 $title_form = "Sliders";

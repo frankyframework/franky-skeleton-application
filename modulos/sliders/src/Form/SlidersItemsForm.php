@@ -1,7 +1,7 @@
 <?php
-namespace Catalog\Form;
+namespace Sliders\Form;
 
-class CatalogCategoryForm extends \Franky\Form\Form
+class SlidersItemsForm extends \Franky\Form\Form
 {
     public function __construct($name)
     {
@@ -89,7 +89,7 @@ class CatalogCategoryForm extends \Franky\Form\Form
              ),
             'options' => array(
                 'video' => 'Video local',
-                'Video-embebito' => 'Video embebido',
+                'video-embebed' => 'Código embebido',
                 'imagen' => 'imagen'
             ),
             'label_atributos' => array(
@@ -103,7 +103,7 @@ class CatalogCategoryForm extends \Franky\Form\Form
             'label' => _('Archivo Slider'),
             'type'  => 'file',
             'atributos' => array(
-                'id' => "image_category"
+                'id' => "file"
                 )
             )
         );
@@ -113,7 +113,7 @@ class CatalogCategoryForm extends \Franky\Form\Form
             'label' => _('Archivo Slider mobile'),
             'type'  => 'file',
             'atributos' => array(
-                'id' => "image_category"
+                'id' => "file_responsive"
                 )
             )
         );

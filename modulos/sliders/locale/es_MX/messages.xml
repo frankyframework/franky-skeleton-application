@@ -13,4 +13,16 @@
         <llave>slider_duplicado</llave>
         <valor>Ya existe una slider con este identificador</valor>
     </mensaje>
+     <mensaje>
+        <llave>imagen_responseive_error</llave>
+        <valor>Error al subir la imagen responsiva</valor>
+    </mensaje>
+     <mensaje>
+        <llave>video_error</llave>
+        <valor>Error al subir el video</valor>
+    </mensaje>
+    <mensaje>
+        <llave>video_responsive_error</llave>
+        <valor>Error al subir el video responsivo</valor>
+    </mensaje>
 </mensajes>
