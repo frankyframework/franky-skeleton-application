@@ -9,6 +9,25 @@ function _sliders($txt)
 function getSlider($code)
 {
     global $MyConfigure;
+    global $MyFrankyMonster;
+    global $MyMetatag;
+
+    $uiCommand = $MyFrankyMonster->getUiCommand($MyFrankyMonster->MySeccion());
+  
+    if (is_array($uiCommand[3])) {
+        if (!in_array('flexslider',$jquery)) 
+        {
+            $MyMetatag->setJs("/public/jquery/flexslider/js/jquery.flexslider.min.js");
+            $MyMetatag->setCss("/public/jquery/flexslider/css/flexslider.css");
+        }     
+    }
+    else{
+        $MyMetatag->setJs("/public/jquery/flexslider/js/jquery.flexslider.min.js");
+        $MyMetatag->setCss("/public/jquery/flexslider/css/flexslider.css");
+    }
+      
+
+
     $SlidersModel = new \Sliders\model\SlidersModel();
     $SlidersEntity = new \Sliders\entity\SlidersEntity();
     $SlidersitemsModel = new \Sliders\model\SlidersitemsModel();
@@ -28,6 +47,7 @@ function getSlider($code)
         $SlidersitemsModel->getData($SlidersitemsEntity->getArrayCopy());
 
 
+
         if($SlidersitemsModel->getTotal() > 0)
         {
             while($registro = $SlidersitemsModel->getRows())
@@ -37,6 +57,7 @@ function getSlider($code)
             
             return render(PROJECT_DIR.'/modulos/sliders/diseno/slider.phtml',['slider' => $slider,'MyConfigure' => $MyConfigure]);
         }
+      
         
     }
     return  '';
