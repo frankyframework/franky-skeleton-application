@@ -8,6 +8,7 @@ function _sliders($txt)
 
 function getSlider($code)
 {
+    global $MyConfigure;
     $SlidersModel = new \Sliders\model\SlidersModel();
     $SlidersEntity = new \Sliders\entity\SlidersEntity();
     $SlidersitemsModel = new \Sliders\model\SlidersitemsModel();
@@ -34,7 +35,7 @@ function getSlider($code)
                 $slider['items'][] = $registro;
             }  
             
-            return render(PROJECT_DIR.'/modulos/sliders/diseno/slider.phtml',['slider' => $slider]);
+            return render(PROJECT_DIR.'/modulos/sliders/diseno/slider.phtml',['slider' => $slider,'MyConfigure' => $MyConfigure]);
         }
         
     }

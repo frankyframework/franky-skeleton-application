@@ -4,32 +4,101 @@
     <ul class="slides">
         <?php if(!empty($slider['items'])): ?>
             <?php foreach($slider['items'] as $item): ?>
+                <li class="item_<?=$item['id']?>" >
                 <?php if($item['tipo'] == 'imagen'): ?>
-                <li>
-                    <a href="<?php echo $MyRequest->url(CONTACTANOS) ?>">
-                        <?php echo makeHTMLImg(getImg('home/chile.jpg'),"","","",""); ?>
-                    </a>
-                </li>
+                <?php
+                    $item['imagen'] = '';
+                    $item['imagen_responsive'] = '';
+                    if(!empty($item["file"]) && file_exists($MyConfigure->getServerUploadDir()."/sliders/".$item['id_slider']."/".$item["file"]))
+                    {
+                        $item['imagen'] = $MyConfigure->getUploadDir()."/sliders/".$item["id_slider"]."/".$item["file"];
+
+                    }
+                    if(!empty($item["file_responsive"]) && file_exists($MyConfigure->getServerUploadDir()."/sliders/".$item['id_slider']."/".$item["file_responsive"]))
+                    {
+                        $item['imagen_responsive'] = $MyConfigure->getUploadDir()."/sliders/".$item["id_slider"]."/".$item["file_responsive"];
+                    }
+                ?>
+                <?=makeHTMLImg($item['imagen_responsive'],"","",$item['titulo'],"data-mobile='".$item['imagen_responsive']."' data-desktop='".$item['imagen']."'"); ?>
+                    <script>
+                    $(window).load(function(){
+                        if($(this).width() < 768)
+                        {
+                            $('.item_<?=$item['id']?>').find('img').attr('src',$('.item_<?=$item['id']?>').find('img').attr('data-mobile'));
+                        }
+                        else{
+                            $('.item_<?=$item['id']?>').find('img').attr('src',$('.item_<?=$item['id']?>').find('img').attr('data-desktop'))
+                        }
+                    });
+                    $(window).resize(function(){
+                        if($(this).width() < 768)
+                        {
+                            $('.item_<?=$item['id']?>').find('img').attr('src',$('.item_<?=$item['id']?>').find('img').attr('data-mobile'));
+                        }
+                        else{
+                            $('.item_<?=$item['id']?>').find('img').attr('src',$('.item_<?=$item['id']?>').find('img').attr('data-desktop'))
+                        }
+                    });
+                    </script>
                 <?php endif; ?>
                 <?php if($item['tipo'] == 'video'): ?>
-                <li>
-                    <a href="<?php echo $MyRequest->url(CONTACTANOS) ?>">
-                        <?php echo makeHTMLImg(getImg('home/chile.jpg'),"","","",""); ?>
-                    </a>
-                </li>
+                    <?php
+                    $item['video'] = "";
+                    $item['video_responsive'] = "";
+                    if(!empty($item["file"]) && file_exists($MyConfigure->getServerUploadDir()."/sliders/".$item['id_slider']."/".$item["file"]))
+                    {
+                        $item['video'] = $MyConfigure->getUploadDir()."/sliders/".$item["id_slider"]."/".$item["file"];
+
+                    }
+                    if(!empty($item["file_responsive"]) && file_exists($MyConfigure->getServerUploadDir()."/sliders/".$item['id_slider']."/".$item["file_responsive"]))
+                    {
+                        $item['video_responsive'] = $MyConfigure->getUploadDir()."/sliders/".$item["id_slider"]."/".$item["file_responsive"];
+                    }
+                    ?>
+                
+                    <video class="w_video" id="video_<?=$item['id']?>" loop="loop" muted="muted" playsinline="playsinline" width="100%" controls>
+                        <source id="item_<?=$item['id']?>" src="<?=$item['video_responsive'];?>" data-mobile="<?=$item['imagen_responsive']?>" data-desktop="<?=$item['imagen']?>" />
+                    </video>
+                    <script>
+                    var v<?=$item['id']?> = document.getElementById("video_<?=$item['id']?>");
+                    $(window).load(function(){
+                        if($(this).width() < 768)
+                        {
+                            $('#item_<?=$item['id']?>').attr('src',$('.item_<?=$item['id']?>').find('img').attr('data-mobile'));
+                        }
+                        else{
+                            $('#item_<?=$item['id']?>').attr('src',$('.item_<?=$item['id']?>').find('img').attr('data-desktop'))
+                        }
+                        v<?=$item['id']?>.load();
+                    });
+                    $(window).resize(function(){
+                        if($(this).width() < 768)
+                        {
+                            $('.item_<?=$item['id']?>').find('img').attr('src',$('.item_<?=$item['id']?>').find('img').attr('data-mobile'));
+                        }
+                        else{
+                            $('.item_<?=$item['id']?>').find('img').attr('src',$('.item_<?=$item['id']?>').find('img').attr('data-desktop'))
+                        }
+                        v<?=$item['id']?>.load();
+                    });
+                    </script>
                 <?php endif; ?>  
                 <?php if($item['tipo'] == 'video-embebed'): ?>
-                <li>
-                    <a href="<?php echo $MyRequest->url(CONTACTANOS) ?>">
-                        <?php echo makeHTMLImg(getImg('home/chile.jpg'),"","","",""); ?>
-                    </a>
-                </li>
+                    <div class="videoWrapper">
+                        <?=$item['code']?>
+                    </div>
                 <?php endif; ?>
-                 <?php endforeach; ?>
+                    <h3><?=$item['titulo']?></h3>
+                    <p><?=$item['descripcion']?></p>
+                    <?php if(!empty($item['url'])): ?>
+                        <a href="<?=$item['url']?>" target="blank">Ver mas</a>
+                    <?php endif; ?>
+                </li>
+                <?php endforeach; ?>
             <?php endif; ?>
     </ul>
 </div>
-<script  >
+<script>
     $(window).load(function() {
         $('.<?=$slider['code']?>').flexslider({
             controlNav: <?=($slider['controlnav'] == 1 ? 'true' : 'false')?>,
