@@ -24,19 +24,31 @@
                     $(window).load(function(){
                         if($(this).width() < 768)
                         {
-                            $('.item_<?=$item['id']?>').find('img').attr('src',$('.item_<?=$item['id']?>').find('img').attr('data-mobile'));
+                            if($('.item_<?=$item['id']?>').find('img').attr('data-mobile').length > 0)
+                            {
+                                $('.item_<?=$item['id']?>').find('img').attr('src',$('.item_<?=$item['id']?>').find('img').attr('data-mobile'));
+                            }
                         }
                         else{
-                            $('.item_<?=$item['id']?>').find('img').attr('src',$('.item_<?=$item['id']?>').find('img').attr('data-desktop'))
+                            if($('.item_<?=$item['id']?>').find('img').attr('data-desktop').length > 0)
+                            {
+                                $('.item_<?=$item['id']?>').find('img').attr('src',$('.item_<?=$item['id']?>').find('img').attr('data-desktop'))
+                            }
                         }
                     });
                     $(window).resize(function(){
                         if($(this).width() < 768)
                         {
-                            $('.item_<?=$item['id']?>').find('img').attr('src',$('.item_<?=$item['id']?>').find('img').attr('data-mobile'));
+                            if($('.item_<?=$item['id']?>').find('img').attr('data-mobile').length > 0)
+                            {
+                                $('.item_<?=$item['id']?>').find('img').attr('src',$('.item_<?=$item['id']?>').find('img').attr('data-mobile'));
+                            }
                         }
                         else{
-                            $('.item_<?=$item['id']?>').find('img').attr('src',$('.item_<?=$item['id']?>').find('img').attr('data-desktop'))
+                            if($('.item_<?=$item['id']?>').find('img').attr('data-desktop').length > 0)
+                            {
+                                $('.item_<?=$item['id']?>').find('img').attr('src',$('.item_<?=$item['id']?>').find('img').attr('data-desktop'))
+                            }
                         }
                     });
                     </script>
@@ -64,20 +76,32 @@
                     $(window).load(function(){
                         if($(this).width() < 768)
                         {
-                            $('#item_<?=$item['id']?>').attr('src',$('.item_<?=$item['id']?>').find('img').attr('data-mobile'));
+                            if($('#item_<?=$item['id']?>').attr('data-mobile').length > 0)
+                            {
+                                $('#item_<?=$item['id']?>').attr('src',$('#item_<?=$item['id']?>').attr('data-mobile'));
+                            }
                         }
                         else{
-                            $('#item_<?=$item['id']?>').attr('src',$('.item_<?=$item['id']?>').find('img').attr('data-desktop'))
+                            if($('#item_<?=$item['id']?>').attr('data-desktop').length > 0)
+                            {
+                                $('#item_<?=$item['id']?>').attr('src',$('#item_<?=$item['id']?>').attr('data-desktop'))
+                            }
                         }
                         v<?=$item['id']?>.load();
                     });
                     $(window).resize(function(){
                         if($(this).width() < 768)
                         {
-                            $('.item_<?=$item['id']?>').find('img').attr('src',$('.item_<?=$item['id']?>').find('img').attr('data-mobile'));
+                            if($('#item_<?=$item['id']?>').attr('data-mobile').length > 0)
+                            {
+                                $('.item_<?=$item['id']?>').find('img').attr('src',$('.item_<?=$item['id']?>').find('img').attr('data-mobile'));
+                            }
                         }
                         else{
-                            $('.item_<?=$item['id']?>').find('img').attr('src',$('.item_<?=$item['id']?>').find('img').attr('data-desktop'))
+                            if($('#item_<?=$item['id']?>').attr('data-desktop').length > 0)
+                            {
+                                $('.item_<?=$item['id']?>').find('img').attr('src',$('.item_<?=$item['id']?>').find('img').attr('data-desktop'))
+                            }
                         }
                         v<?=$item['id']?>.load();
                     });
