@@ -1,7 +1,8 @@
 @import "../../default/less/variables"; // variables.less
 
 .flexslider {
-   ._cont_txt_slider { position: absolute; bottom: 20px; left: 20px; width:900px; background-color: fade(@black,60); color: @white;
+    .flex-direction-nav a::before { color: @white; background-color: fade(@black,70); font-size: 2.4rem; width: 36px; height: 36px; text-align: center; line-height: 36px; .radius(18px); }
+   ._cont_txt_slider { position: absolute; bottom: 10%; left: 20px; width:900px; background-color: fade(@black,60); color: @white; z-index: 10;
        @media @medium { width: 500px ; }
        @media @small { position: relative; bottom: auto; left: auto; padding: 10px; box-sizing: border-box; background-color: transparent; color: @black; width: calc(~'100% - 40px');
            h3 { font-size: 1.8rem; margin: 0; padding: 0; }
