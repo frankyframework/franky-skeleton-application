@@ -58,7 +58,7 @@ if ($handle->uploaded)
         $fileinfo = @getimagesize($_FILES["imagen"]["tmp_name"]);
         $width = $fileinfo[0];
         $height = $fileinfo[1];
-        $handle->file_max_size = "2024288"; //1k(1024) x 512
+        $handle->file_max_size = "22024288"; //1k(1024) x 512
         $handle->image_resize= false;
         $handle->image_ratio_fill = true;
         $handle->file_auto_rename = true;
@@ -119,7 +119,7 @@ if($error == false)
         unset($data['data_img']);
         $data['id'] = $id;
         $data['contenido'] = ($contenido);
-        $BorradorblogEntity->data(addslashes(json_encode($data)));
+        $BorradorblogEntity->data((json_encode($data)));
 
         $result = $BorradorblogModel->save($BorradorblogEntity->getArrayCopy());
         if($result == REGISTRO_SUCCESS)

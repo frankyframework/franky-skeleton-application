@@ -101,6 +101,10 @@
         <llave>error_pass_actual</llave>
         <valor>La contraseña actual no es válida.</valor>
     </mensaje>
+       <mensaje>
+     <llave>error_pass_admin</llave>
+     <valor>La contraseña de administrador no es válida.</valor>
+    </mensaje>
     <mensaje>
         <llave>delete_suscriptor_success</llave>
         <valor>El usuario se eliminó correctamente</valor>
@@ -283,4 +287,7 @@
      <llave>password_level_4</llave>
      <valor>La contraseña debe tener al menos una mayúscula, un número y un simbolo #?!@$%^&amp;*-.</valor>
  </mensaje>
+
+ 
+ 
 </mensajes>

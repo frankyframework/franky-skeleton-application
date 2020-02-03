@@ -27,8 +27,13 @@ if(!empty($id))
 }
 
 $adminForm = new contrasenaForm("userspass");
-if(!empty($contrasena_db) && !$MyAccessList->MeDasChancePasar(ADMINISTRAR_OTRA_CONTRASENA)):
+if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_OTRA_CONTRASENA)):
+    if(!empty($contrasena_db)):
+        $adminForm->addContrasenaAnterior();
+    endif;   
+else:
     $adminForm->addContrasenaAnterior();
+    $adminForm->setAtributoBaseInput("contrasena_ant","label", __("Contraseña de administrador"));
 endif; 
 $adminForm->addSubmit();
 $adminForm->setAtributoInput("id","value", $id);

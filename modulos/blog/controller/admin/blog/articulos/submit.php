@@ -73,7 +73,7 @@ if ($handle->uploaded)
         $fileinfo = @getimagesize($_FILES["imagen"]["tmp_name"]);
         $width = $fileinfo[0];
         $height = $fileinfo[1];
-        $handle->file_max_size = "2024288"; //1k(1024) x 512
+        $handle->file_max_size = "22024288"; //1k(1024) x 512
         $handle->image_resize= false;
         $handle->image_ratio_fill = true;
         $handle->file_auto_rename = true;
@@ -195,7 +195,7 @@ if($error == false)
 
                 $MyRedireccion->free();
 
-                if($MyRedireccion->existe($url) == REGISTRO_SUCCESS)
+                if($MyRedireccion->existe($url,'',$urln) == REGISTRO_SUCCESS)
                 {
                     $registro = $MyRedireccion->getRows();
                     $redireciconesEntity->setId($registro["id"]);
@@ -204,17 +204,14 @@ if($error == false)
                 }
                 else
                 {
+                    $redireciconesEntity->exchangeArray([]);
                     $redireciconesEntity->setUrl($url);
                     $redireciconesEntity->setRedireccion($urln);
                     $redireciconesEntity->setStatus(1);
                      $redireciconesEntity->setFecha(date('Y-m-d H:i:s'));
                     $MyRedireccion->save($redireciconesEntity->getArrayCopy());
                 }
-
-
             }
-
-
 	}
         else
         {

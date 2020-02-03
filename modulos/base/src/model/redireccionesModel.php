@@ -36,15 +36,18 @@ class redireccionesModel  extends \Franky\Database\Mysql\objectOperations
         }
 
 
-        function existe($url,$id='')
+        function existe($url,$id='',$urln='')
         {
                 $campos = array("id");
                 $this->where()->addAnd('url',$url,'=');
-                $this->where()->addAnd('status',$status,'=');
 
                 if(!empty($id))
                 {
                   $this->where()->addAnd('id',$id,'<>');
+                }
+                if(!empty($urln))
+                {
+                  $this->where()->addAnd('redireccion',$urln,'=');
                 }
 
                 return $this->getColeccion($campos);

@@ -19,7 +19,7 @@ if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_OTRA_CONTRASENA))
 	$id= $MySession->GetVar('id');
 }
 
-$result     = $MyUser->getData($id);
+$result     = $MyUser->getData($MySession->GetVar('id'));
 $registro   = $MyUser->getRows();
 $usuario_db = $registro["usuario"];
 $contrasena_db = $registro["contrasena"];
@@ -52,11 +52,15 @@ if($contrasena != $contrasena1)
     $error = true;
 }
 
-if(!empty($contrasena_db) && !empty($usuario_db) && !$MyAccessList->MeDasChancePasar(ADMINISTRAR_OTRA_CONTRASENA))
+if(!empty($contrasena_db) && !empty($usuario_db))
 {
     if($MyUser->findUserPass($usuario_db,md5($contrasena_ant)) != REGISTRO_SUCCESS)
     {
-        $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("error_pass_actual"));
+        if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_OTRA_CONTRASENA)):
+            $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("error_pass_actual"));
+        else:
+            $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("error_pass_admin"));
+        endif;
         $error = true;
     }
 }
