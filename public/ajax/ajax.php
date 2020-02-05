@@ -9,7 +9,8 @@ if(!empty($modulos))
 {
     foreach($modulos as $modulo)
     {
-        $files = \Franky\Filesystem\File::getFiles(PROJECT_DIR."/modulos/$modulo/ajax/","file");
+        $File = new \Franky\Filesystem\File();
+        $files = $File->getFiles(PROJECT_DIR."/modulos/$modulo/ajax/","file");
 
         if(count($files) > 0)
         {
