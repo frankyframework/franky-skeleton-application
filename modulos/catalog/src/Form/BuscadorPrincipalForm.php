@@ -25,7 +25,7 @@ class BuscadorPrincipalForm  extends \Franky\Form\Form
                   'maxlength' => 50,
                   'class' => '_buscardor required',
                   'type_mobile'  => 'search',
-                  'placeholder' => 'Buscar'
+                  'placeholder' => 'Buscar productos...'
                ),
               'label_atributos' => array(
                   'class'       => 'desc_form_no_obligatorio'
