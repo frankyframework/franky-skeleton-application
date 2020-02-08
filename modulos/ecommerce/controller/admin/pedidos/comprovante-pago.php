@@ -100,9 +100,9 @@ if(!$error)
 
             $campos = array("orden" =>$id,"nombre" =>$detalle_pedido['nombre'],'productos' =>$productos_html,"email" => $dataUser['email'],
             'gran_total' => getFormatoPrecio($detalle_pedido['monto_compra']),'metodo_pago' =>$detalle_pedido['metodo_pago'],"status" => getStatusTransaccion($status),
-            'comprovante' => makeHTMLImg( $MyRequest->link(imageResize($MyConfigure->getUploadDir()."/ecommerce/pedidos/".$detalle_pedido['uid']."/".$detalle_pedido['id']."/".$newtestigo,400,400),false,true))
+            'comprovante' => makeHTMLImg( $MyRequest->link(imageResize($MyConfigure->getUploadDir()."/ecommerce/pedidos/".$detalle_pedido['uid']."/".$detalle_pedido['id']."/".$newtestigo,500,500),false,true))
 );
-           
+
             $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
             $SecciontransaccionalEntity->frinedly('agregar-comprovante-de-pago');
             $TemplateemailModel->setOrdensql('id DESC');
@@ -111,8 +111,8 @@ if(!$error)
             $registro  = $TemplateemailModel->getRows();
 
             sendEmail($campos,$registro);
-            
-        
+
+
         }
 
         $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("ecommerce_comprovante_success"));

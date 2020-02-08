@@ -50,7 +50,7 @@
     <h4>Productos</h4>
 
     <?php foreach($detalle_pedido['productos'] as $producto): ?>
-      
+
         <ul class="_ul_txt_standar">
         <?php
         $imagen = "";
@@ -59,21 +59,21 @@
             {
               $imagen = imageResize($_img,50,50, true);
             }
-           
+
             if(!empty($producto["imagen"]))
             {
                 $_imagen = json_decode($producto["imagen"],true);
                 if(is_array($_imagen))
                 {
                     if(!empty($_imagen)){
-                    
+
                         foreach($_imagen as $foto)
                         {
                             if($foto['principal'] == 1)
                             {
                                 if(!empty($foto["img"]) && file_exists($MyConfigure->getServerUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE.'/'.$producto["id"].'/'.$foto['img']))
                                 {
-                                    $imagen = imageResize($MyConfigure->getUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE."/".$producto["id"].'/'.$foto['img'],50,50, true);  
+                                    $imagen = imageResize($MyConfigure->getUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE."/".$producto["id"].'/'.$foto['img'],50,50, true);
                                 }
                             }
                         }
@@ -96,17 +96,17 @@
     <?php endif; ?>
     <hr />
     <?php endforeach; ?>
-    
+
     <?php if(isset($detalle_pedido['envio']) && !empty($detalle_pedido['envio'])): ?>
       <h4>Dirección de envío</h4>
       <?php $direccion = "%s: calle %s #%s, Colonia %s, municipio %s,%s C.P. %d"; ?>
       <div>
         <?php echo sprintf($direccion,$detalle_pedido['envio']["nombre"],$detalle_pedido['envio']["calle"],$detalle_pedido['envio']["numero"],$detalle_pedido['envio']["colonia"],$detalle_pedido['envio']["municipio"],$detalle_pedido['envio']["estado"],$detalle_pedido['envio']["cp"]); ?>
       </div>
-   
+
     <?php endif; ?>
-      
-      
+
+
 
     <?php if(isset($detalle_pedido['facturacion']) && !empty($detalle_pedido['facturacion'])): ?>
       <h4>Dirección de facturación</h4>
@@ -170,10 +170,10 @@
     {
         $( "form[name=frmStatus]" ).find('select[name=status]').change(function(){
 
-               
+
                     $('.content_monto').show();
-              
-                
+
+
 
                 if($(this).val() == "partially-refunded" ||
                 $(this).val() == "refunded" ||
@@ -213,7 +213,7 @@
     <?php
     $n = 1;
     foreach($testigo as $comprovante): ?>
-    <?php echo makeHTMLImg(imageResize($MyConfigure->getUploadDir()."/ecommerce/pedidos/".$detalle_pedido['uid']."/".$detalle_pedido['id']."/".$comprovante,400,400)); ?>
+    <?php echo makeHTMLImg(imageResize($MyConfigure->getUploadDir()."/ecommerce/pedidos/".$detalle_pedido['uid']."/".$detalle_pedido['id']."/".$comprovante,500,500)); ?>
     <?php
     $n++;
     endforeach; ?>

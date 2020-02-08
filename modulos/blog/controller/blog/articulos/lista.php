@@ -75,12 +75,12 @@ if($MyBlog->getTotal() > 0)
                 {
                     if(!empty($registro["imagen"]) && file_exists($MyConfigure->getServerUploadDir()."/blog/".$registro["id"]."/".$registro["imagen"]))
                     {
-                        $img = imageResize($MyConfigure->getUploadDir()."/blog/".$registro["id"]."/".$registro["imagen"],600,400, true);
+                        $img = imageResize($MyConfigure->getUploadDir()."/blog/".$registro["id"]."/".$registro["imagen"],400,400, true);
                         $lista_articulos_blog[$iRow]['contenido']["img"] = $img;
                     }
                 }
-              
-    
+
+
                 $iRow++;
 
         }
@@ -95,7 +95,7 @@ if(!empty($amigable_categoria_context))
 
     $registro['url'] = $MyRequest->url(BLOG_CATEGORIA,['categoria' => $registro['friendly']],true);
     $MyMetatag->setVars($registro);
-    
+
     $permisos = json_decode($registro['permisos'],true);
     if(!empty($permisos) && !$MySession->LoggedIn())
     {

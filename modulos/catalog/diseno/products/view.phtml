@@ -1,16 +1,14 @@
 <div class="w-xxxx-12">
     <div class="content">
-        <div class="w-xxxx-12 cont_search_bar">
+        <div class="w-xxxx-12 cont_search_bar_ecommerce">
             <?=getCatalogBuscadorPrincipal()?>
         </div>
         <div class="w-xxxx-12">
             <div class="content">
-                <div class="w-xxxx-6">
+                <div class="w-xxxx-6 _catalog_gallery">
                     <?=render("products/widget.images.phtml",['data_detalle' => $data_detalle,'MyConfigure' => $MyConfigure])?>
-                   
-                 
                 </div>
-                <div class="w-xxxx-6">
+                <div class="w-xxxx-6 _catalog_data">
                     <h1><?=$data_detalle['name']?></h1>
                     <div>SKU: <?=$data_detalle['sku']?></div>
                     <div>Stock: <?=$data_detalle['stock']?></div>

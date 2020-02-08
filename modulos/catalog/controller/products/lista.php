@@ -111,7 +111,7 @@ if($CatalogproductsModel->getDataSearch($CatalogproductsEntity->getArrayCopy()) 
           $_img = getCoreConfig('catalog/product/placeholder');
           if($_img != "" && file_exists(PROJECT_DIR.$_img))
           {
-            $registro['thumb_resize'] = imageResize($_img,400,400, true);
+            $registro['thumb_resize'] = imageResize($_img,500,500, true);
           }
           $registro["images"] = json_decode($registro["images"],true);
 
@@ -126,7 +126,7 @@ if($CatalogproductsModel->getDataSearch($CatalogproductsEntity->getArrayCopy()) 
                       if(!empty($foto["img"]) && file_exists($MyConfigure->getServerUploadDir()."/catalog/products/".$registro["id"].'/'.$foto['img']))
                       {
 
-                            $registro['thumb_resize'] = imageResize($MyConfigure->getUploadDir()."/catalog/products/".$registro["id"].'/'.$foto['img'],400,400, true);
+                            $registro['thumb_resize'] = imageResize($MyConfigure->getUploadDir()."/catalog/products/".$registro["id"].'/'.$foto['img'],500,500, true);
 
                       }
                   }

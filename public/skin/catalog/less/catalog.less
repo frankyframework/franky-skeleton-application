@@ -1,9 +1,11 @@
 @import "../../default/less/variables"; // variables.less
-.cont_search_bar_ecommerce { position: relative; margin: 10px;
+.cont_search_bar_ecommerce { position: relative; margin: 10px 0;
     input[type="text"] { width: 100%; padding: 5px 10px; height: 40px; box-sizing: border-box; }
     input[type="submit"] { position: absolute; width: auto; height: 40px; box-sizing: border-box; background: @enfasis_color; right: 0; top: 0; .radius(0 6px 6px 0); }
 }
 main {
+
+///////////////// Resultados
     .cont_widget_catalog_filter { float: left; position: relative; width: 20%; box-sizing: border-box;
         h3 { margin: 0; padding: 0; }
     }
@@ -41,4 +43,21 @@ main {
             }
         }
     }
+///////////////// Detalle
+    ._catalog_gallery {
+        img { max-width: 100%; height: auto; }
+        .slick-slider {
+            &:hover {
+                .slick-prev::before, .slick-next::before { background: fade(@enfasis_color, 100); }
+            }
+             .slick-prev::before, .slick-next::before { display: block; font-family: @ico_font; content: "\e838"; font-size: 2.4rem; padding: 5px; height: 24px; width: 24px; .radius(20px); }
+             .slick-next::before { content: "\e833"; }
+             .slick-prev { z-index: 10; left: 20px; }
+             .slick-next { z-index: 10; right: 30px; }
+             .slick-dots { bottom: -60px;  }
+             .slick-dots li button::before { color: darken(@soft_gray, 20); font-size: 1.4rem;  }
+             .slick-dots li.slick-active button::before { color: @enfasis_color;  }
+        }
+    }
+
 }

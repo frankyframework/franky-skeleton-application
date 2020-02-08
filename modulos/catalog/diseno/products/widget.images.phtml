@@ -1,12 +1,12 @@
-<?php 
+<?php
 $_img = getCoreConfig('catalog/product/placeholder');
 $principal = "";
 if($_img != "" && file_exists(PROJECT_DIR.$_img))
 {
-    $principal =  makeHTMLImg(imageResize($_img,400,400, true),"","",$data_detalle['name'],"id='img_zoom'");;
+    $principal =  makeHTMLImg(imageResize($_img,700,700, true),"","",$data_detalle['name'],"id='img_zoom'");;
 }
 ?>
- 
+
 <div>
 <div class="slider slider-for">
 <?php
@@ -18,7 +18,7 @@ if(!empty($data_detalle['images']))
         {
             if(!empty($foto["img"]) && file_exists($MyConfigure->getServerUploadDir()."/catalog/products/".$data_detalle["id_ori"].'/'.$foto['img']))
             {
-                    echo makeHTMLImg(imageResize($MyConfigure->getUploadDir()."/catalog/products/".$data_detalle["id_ori"].'/'.$foto['img'],400,400, true),"","",$data_detalle['name'],"id='img_zoom'");
+                    echo makeHTMLImg(imageResize($MyConfigure->getUploadDir()."/catalog/products/".$data_detalle["id_ori"].'/'.$foto['img'],700,700, true),"","",$data_detalle['name'],"id='img_zoom'");
             }
             else
             {
@@ -39,12 +39,12 @@ else{
 if(!empty($data_detalle['images']))
 {
     foreach($data_detalle["images"] as $foto)
-    {   
+    {
         //  echo $MyConfigure->getServerUploadDir()."/catalog/products/".$data_detalle["id_ori"].'/'.$foto['img'];
         if(!empty($foto["img"]) && file_exists($MyConfigure->getServerUploadDir()."/catalog/products/".$data_detalle["id_ori"].'/'.$foto['img']))
         { ?>
             <div>
-            <a href="javascript:void(0);" onclick="setImgZoom('<?=imageResize($MyConfigure->getUploadDir()."/catalog/products/".$data_detalle["id_ori"].'/'.$foto['img'],400,400, true)?>')">
+            <a href="javascript:void(0);" onclick="setImgZoom('<?=imageResize($MyConfigure->getUploadDir()."/catalog/products/".$data_detalle["id_ori"].'/'.$foto['img'],700,700, true)?>')">
             <?=makeHTMLImg(imageResize($MyConfigure->getUploadDir()."/catalog/products/".$data_detalle["id_ori"].'/'.$foto['img'],200,200, true),"","",$data_detalle['name'],'');?>
             </a>
             </div>
