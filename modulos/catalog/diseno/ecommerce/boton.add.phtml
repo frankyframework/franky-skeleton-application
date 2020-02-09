@@ -15,7 +15,7 @@
 
 
 
-   <div class='w-xxxx-12'><a class="_btn _primary _btn_add" href="javascript:void(0)" onclick="validateAddCart();"> Agregar a carrito</a></div>
+   <div class='w-xxxx-12'><a class="_btn _btn-primary _btn_add" href="javascript:void(0)" onclick="validateAddCart();"> Agregar a carrito</a></div>
 </form>
 
 <script >
@@ -52,7 +52,7 @@ function validateAddCart()
 // -->
 </script>
 <?php else: ?>
-    <div class='w-xxxx-12'><a class="_btn _primary _btn_add link_form_info_product" href="javascript:void(0)" >Solicitar información</a></div>
+    <div class='w-xxxx-12'><a class="_btn _btn-primary _btn_add link_form_info_product" href="javascript:void(0)" >Solicitar información</a></div>
     <div class='w-xxxx-12 content_form_info_product' style='display:none;' >
     <?php echo $contactanosForm->openTag(); ?>
     <?php echo $contactanosForm->getAllRow(); ?>
@@ -65,4 +65,3 @@ function validateAddCart()
     });
     </script>
 <?php endif; ?>
-

@@ -1,5 +1,5 @@
 // Generales
-@font_gral : "Helvetica Neue", Helvetica, Arial, sans-serif;
+@font_gral : Trebuchet MS, Helvetica, Sans-Serif;
 @ico_font : ~"'franky-font'";
 @ico_font_ext : ~"'franky-font-extended'";
 @enfasis_color : #ea5b5b;
@@ -50,11 +50,16 @@
 @length : length(@notificationColors);
 
 /* ****** Estilos Botones ******** */
+.btn.btn-text, a.btn.btn-text, button.btn.btn-text, input.btn.btn-text,
 .btn.btn-text, a.btn.btn-text, button.btn.btn-text, input.btn.btn-text { cursor: pointer; display: inline-block; padding: 10px; font-size: @font_size_txt; font-weight: bold; color: @enfasis_color; }
-.btn.btn-text:hover, a:hover.btn.btn-text, button:hover.btn.btn-text, input:hover.btn.btn-text { color: @theme_color;  }
-.btn.btn-default, a.btn.btn-default, button.btn.btn-default { cursor: pointer; display: inline-block; padding: 10px; font-size: @font_size_txt; font-weight: bold; color: #000000; background: lighten(@theme_color, 20%); }
-.btn.btn-primary, a.btn.btn-primary, button.btn.btn-primary, input.btn.btn-primary { cursor: pointer; display: inline-block; padding: 10px; font-size: @font_size_txt; font-weight: bold; color: @white; background: @enfasis_color;  }
-.btn.btn-default:hover, a:hover.btn.btn-default, button:hover.btn.btn-default, input:hover.btn.btn-default, .btn.btn-primary:hover, a:hover.btn.btn-primary, button:hover.btn.btn-primary, input:hover.btn.btn-primary { background: darken(@enfasis_color, 10); color: @white; }
+.btn.btn-text:hover, a:hover.btn.btn-text, button:hover.btn.btn-text, input:hover.btn.btn-text,
+._btn._btn-text:hover, a:hover._btn._btn-text, button:hover._btn._btn-text, input:hover._btn._btn-text { color: @theme_color;  }
+.btn.btn-default, a.btn.btn-default, button.btn.btn-default,
+._btn._btn-default, a._btn._btn-default, button._btn._btn-default { cursor: pointer; display: inline-block; padding: 10px; font-size: @font_size_txt; font-weight: bold; color: @black; background: lighten(@theme_color, 40%); text-decoration: none; .radius; }
+.btn.btn-primary, a.btn.btn-primary, button.btn.btn-primary, input.btn.btn-primary,
+._btn._btn-primary, a._btn._btn-primary, button._btn._btn-primary, input._btn._btn-primary { cursor: pointer; display: inline-block; padding: 10px; font-size: @font_size_txt; font-weight: bold; color: @white; background: @enfasis_color; text-decoration: none; .radius; }
+.btn.btn-default:hover, a:hover.btn.btn-default, button:hover.btn.btn-default, input:hover.btn.btn-default, .btn.btn-primary:hover, a:hover.btn.btn-primary, button:hover.btn.btn-primary, input:hover.btn.btn-primary,
+._btn._btn-default:hover, a:hover._btn._btn-default, button:hover._btn._btn-default, input:hover._btn._btn-default, ._btn._btn-primary:hover, a:hover._btn._btn-primary, button:hover._btn._btn-primary, input:hover._btn._btn-primary { background: darken(@enfasis_color, 10); color: @white; }
 
 .opacity (@opacity: 0.5) {
 	-webkit-opacity: 	@opacity;

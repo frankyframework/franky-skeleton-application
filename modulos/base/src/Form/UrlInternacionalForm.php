@@ -75,7 +75,7 @@ class UrlInternacionalForm extends \Franky\Form\Form
                 'name' => 'guardar',
                 'type'  => 'submit',
                 'atributos' => array(
-                    'class'       => '_btn _primary',
+                    'class'       => '_btn _btn-primary',
                     'value' => "Guardar"
                  )
 

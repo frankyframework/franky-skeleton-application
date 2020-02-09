@@ -34,7 +34,7 @@ class forgotForm extends \Franky\Form\Form
                 'name' => 'recuperar',
                 'type'  => 'submit',
                 'atributos' => array(
-                    'class'       => '_btn _primary',
+                    'class'       => '_btn _btn-primary',
                     'value' => "Recuperar contraseña"
                  )
 

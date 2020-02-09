@@ -56,7 +56,7 @@ class loginForm extends \Franky\Form\Form
                 'name' => 'login',
                 'type'  => 'submit',
                 'atributos' => array(
-                    'class'       => '_btn _primary',
+                    'class'       => '_btn _btn-primary',
                     'value' => "Entrar"
                  )
 

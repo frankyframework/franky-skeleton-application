@@ -109,7 +109,7 @@ class contactanosForm extends \Franky\Form\Form
                'name' => 'send',
                'type'  => 'submit',
                'atributos' => array(
-                   'class'       => '_btn _primary',
+                   'class'       => '_btn _btn-primary',
                    'value' => _("ENVIAR")
                 )
 

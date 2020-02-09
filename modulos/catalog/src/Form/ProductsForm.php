@@ -321,12 +321,12 @@ class ProductsForm  extends \Franky\Form\Form
                 )
             )
         );
-         
+
         $this->add(array(
                 'name' => 'guardar',
                 'type'  => 'submit',
                 'atributos' => array(
-                    'class'       => '_btn _primary',
+                    'class'       => '_btn _btn-primary',
                     'value' => "Guardar"
                 )
 
