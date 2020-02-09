@@ -45,11 +45,7 @@ main {
     }
 ///////////////// Detalle
     ._product_view {
-        ._sku, ._price, ._stock { display: block; }
-        ._sku { font-size: @font_size_txt; }
-        ._stock { font-size: @font_size_txt; }
-        ._price { font-size: @font_size_txt*2; font-weight: bold; }
-        ._catalog_gallery {
+        ._catalog_gallery { padding-left: 10px; box-sizing: border-box;
             img { max-width: 100%; height: auto; }
             .slick-slider {
                 &:hover {
@@ -64,16 +60,26 @@ main {
                  .slick-dots li.slick-active button::before { color: @enfasis_color;  }
             }
         }
-        ._catalog_gallery { padding-left: 10px; box-sizing: border-box; }
-        ._product_info { padding: 0 10px; box-sizing: border-box; }
-        ._cont_more_info { position: relative;
-            ._btn_whislist { position: absolute; top: 0; left: 180px; z-index: 2; background-color: @soft_gray;
+
+        ._product_info { padding: 0 10px; box-sizing: border-box;
+
+            ._cont_buy { position: relative; float: left; width: 400px; padding: 20px; box-sizing: border-box; margin: 20px 0; border: solid 1px @soft_gray; .box-shadow(0px 0px 5px 5px rgba(0, 0, 0, 0.05)); .radius(8px);
+                @media @small { width: 320px; }
+            }
+            ._btn_whislist { position: absolute; top: 10px; right: 10px; z-index: 2; background-color: transparent;
                 &:hover { color: @black; }
-                &:before { font-family: @ico_font; content: "\e81c"; }
+                &:before { font-family: @ico_font; content: "\e81c"; font-size: 2rem; }
                 &.active { color: @enfasis_color;
                     &:before { color: @enfasis_color; }
                 }
             }
+            ._sku, ._price, ._stock { display: block; }
+            ._name { margin-bottom: 0; padding-bottom: 0; }
+            ._h2_description { padding-top: 20px; margin-top: 20px; border-top: 1px solid @ultra_soft_gray; }
+            ._sku { font-size: @font_size_txt; color: lighten(@black,50); font-style: italic; }
+            ._stock { font-size: @font_size_txt; }
+            ._price { font-size: @font_size_txt*2; font-weight: bold; margin: 10px 0; }
+            ._cont_more_info { position: relative; }
         }
     }
 

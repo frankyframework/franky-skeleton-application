@@ -9,24 +9,32 @@
                     <?=render("products/widget.images.phtml",['data_detalle' => $data_detalle,'MyConfigure' => $MyConfigure])?>
                 </div>
                 <div class="w-xxxx-6 _product_info">
-                    <h1 class="_name"><?=$data_detalle['name']?></h1>
-                    <span class="_sku">SKU: <?=$data_detalle['sku']?></span>
-                    <span class="_stock">Stock: <?=$data_detalle['stock']?></span>
-                    <span class="_price"><?php echo getFormatoPrecio($data_detalle['price'],false); ?></span>
-                    <div class="_cont_more_info">
-                        <a href="javascript:void(0);" data-idlove="<?= $data_detalle['id']; ?>" class="_btn _btn-default ilove _btn_whislist"> <span>Guardar como favorito</span></a>
-                        <?php echo render(PROJECT_DIR.'/modulos/catalog/diseno/ecommerce/boton.add.phtml',
-                        array("id_producto" => $data_detalle["id"],
-                        "in_stock" => $data_detalle["in_stock"],
-                        "min_qty" => $data_detalle["min_qty"],
-                        "saleable" => $data_detalle["saleable"],
-                        "stock" => $data_detalle["stock"],
-                        "stock_infinito" => $data_detalle["stock_infinito"],
-                        'MyAccessList' => $MyAccessList,
-                        'contactanosForm' => $contactanosForm)); ?>
+                    <div class="w-xxxx-12">
+                        <h1 class="_name"><?=$data_detalle['name']?></h1>
+                        <span class="_sku">SKU: <?=$data_detalle['sku']?></span>
                     </div>
-                    <h2>Descripcion</h2>
-                    <div class="_description"><?=$data_detalle['description']?></div>
+                    <div class="w-xxxx-12">
+                        <div class="_cont_buy">
+                            <span class="_stock">Stock: <?=$data_detalle['stock']?></span>
+                            <span class="_price"><?php echo getFormatoPrecio($data_detalle['price'],false); ?></span>
+                            <div class="_cont_more_info">
+                                <?php echo render(PROJECT_DIR.'/modulos/catalog/diseno/ecommerce/boton.add.phtml',
+                                array("id_producto" => $data_detalle["id"],
+                                "in_stock" => $data_detalle["in_stock"],
+                                "min_qty" => $data_detalle["min_qty"],
+                                "saleable" => $data_detalle["saleable"],
+                                "stock" => $data_detalle["stock"],
+                                "stock_infinito" => $data_detalle["stock_infinito"],
+                                'MyAccessList' => $MyAccessList,
+                                'contactanosForm' => $contactanosForm)); ?>
+                            </div>
+                            <a title="Agregar a mis favoritos" href="javascript:void(0);" data-idlove="<?= $data_detalle['id']; ?>" class="_btn _btn-default ilove _btn_whislist"></a>
+                        </div>
+                    </div>
+                    <div class="w-xxxx-12">
+                        <h2 class="_h2_description">Descripcion</h2>
+                        <div class="_description"><?=$data_detalle['description']?></div>
+                    </div>
                 </div>
 
             </div>
