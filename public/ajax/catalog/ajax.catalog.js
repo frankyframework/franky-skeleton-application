@@ -33,10 +33,10 @@ function catalog_addWishlistHTML(response,id, status)
     {
       if(status == 1)
       {
-          $('[data-idlove='+id+']').addClass('active');
+          $('[data-idlove='+id+']').addClass('active').children('span').text('Quitar de favorito');
       }
       else{
-          $('[data-idlove='+id+']').removeClass('active');
+          $('[data-idlove='+id+']').removeClass('active').children('span').text('Guardar como favorito');
       }
     }
 }
@@ -65,7 +65,7 @@ function catalog_getWishlistHTML(response)
 
         for(var i=0;i<respuesta.length;i++)
         {
-          $('[data-idlove='+respuesta[i]+']').addClass('active');
+          $('[data-idlove='+respuesta[i]+']').addClass('active').children('span').text('Quitar de favorito');
         }
     }
 }
