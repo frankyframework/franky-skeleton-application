@@ -3,12 +3,11 @@
 
 <form name="addCartForm" action="">
   <div class='control_qty'>
-
-      <div class='w-xxxx-12'>
-          <h3>QTY:</h3>
-          <div class='w-xxxx-2'><a class="menos_qty" data-id='' href="#"><i class='icon icon-icon_menos'></i></a></div>
-          <div class='w-xxxx-8'><input type="text" data-id='' value="<?=$min_qty; ?>" name="qty"  class="required"  /></div>
-          <div class='w-xxxx-2'><a class="mas_qty"  data-id=''  href="#"><i class='icon icon-icon_mas'></i></a></div>
+    <h3>QTY:</h3>
+      <div class='_cont_quantity'>
+          <a class="menos_qty" data-id='' href="#"><i class='icon icon-icon_menos'></i></a>
+          <input type="text" data-id='' value="<?=$min_qty; ?>" name="qty"  class="required" />
+          <a class="mas_qty"  data-id=''  href="#"><i class='icon icon-icon_mas'></i></a>
       </div>
       <label id="qty-error" class="error" for="qty" style="display:none;"></label>
   </div>

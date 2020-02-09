@@ -45,7 +45,7 @@ if(!empty($data_detalle['images']))
         { ?>
             <div>
             <a href="javascript:void(0);" onclick="setImgZoom('<?=imageResize($MyConfigure->getUploadDir()."/catalog/products/".$data_detalle["id_ori"].'/'.$foto['img'],700,700, true)?>')">
-            <?=makeHTMLImg(imageResize($MyConfigure->getUploadDir()."/catalog/products/".$data_detalle["id_ori"].'/'.$foto['img'],200,200, true),"","",$data_detalle['name'],'');?>
+            <?=makeHTMLImg(imageResize($MyConfigure->getUploadDir()."/catalog/products/".$data_detalle["id_ori"].'/'.$foto['img'],100,100, true),"","",$data_detalle['name'],'');?>
             </a>
             </div>
         <?php
@@ -59,8 +59,8 @@ if(!empty($data_detalle['images']))
 <script>
   $(document).ready(function(){
           $('.slider-nav').slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
+            slidesToShow: 4,
+            slidesToScroll: 4,
             //asNavFor: '.slider-for',
             dots: false,
             centerMode: true,

@@ -1,7 +1,8 @@
 @import "../../default/less/variables"; // variables.less
-.cont_search_bar_ecommerce { position: relative; margin: 10px 0;
+.cont_search_bar_ecommerce { position: relative;
+    ._search_bar_pipe { float: left; width: 100%; padding: 10px; box-sizing: border-box; }
     input[type="text"] { width: 100%; padding: 5px 10px; height: 40px; box-sizing: border-box; }
-    input[type="submit"] { position: absolute; width: auto; height: 40px; box-sizing: border-box; background: @enfasis_color; right: 0; top: 0; .radius(0 6px 6px 0); }
+    input[type="submit"] { position: absolute; width: auto; height: 40px; right: 10px; top: 10px; box-sizing: border-box; background: @enfasis_color; .radius(0 6px 6px 0); }
 }
 main {
 
@@ -46,6 +47,7 @@ main {
 ///////////////// Detalle
     ._product_view {
         ._catalog_gallery { padding-left: 10px; box-sizing: border-box;
+            @media @small { padding-left: 0; }
             img { max-width: 100%; height: auto; }
             .slick-slider {
                 &:hover {
@@ -61,10 +63,10 @@ main {
             }
         }
 
-        ._product_info { padding: 0 10px; box-sizing: border-box;
-
-            ._cont_buy { position: relative; float: left; width: 400px; padding: 20px; box-sizing: border-box; margin: 20px 0; border: solid 1px @soft_gray; .box-shadow(0px 0px 5px 5px rgba(0, 0, 0, 0.05)); .radius(8px);
-                @media @small { width: 320px; }
+        ._product_info { padding: 0 10px 0 40px; box-sizing: border-box;
+            @media @small { padding: 0 10px; }
+            ._cont_buy { position: relative; float: left; width: 400px; padding: 20px; box-sizing: border-box; margin: 20px 0 0 0; border: solid 1px @soft_gray; .box-shadow(0px 0px 5px 5px rgba(0, 0, 0, 0.05)); .radius(8px);
+                @media @small { width: 100%; }
             }
             ._btn_whislist { position: absolute; top: 10px; right: 10px; z-index: 2; background-color: transparent;
                 &:hover { color: @black; }
@@ -80,6 +82,10 @@ main {
             ._stock { font-size: @font_size_txt; }
             ._price { font-size: @font_size_txt*2; font-weight: bold; margin: 10px 0; }
             ._cont_more_info { position: relative; }
+            ._cont_quantity { float: left; background-color: @ultra_soft_gray; width: 120px; margin-bottom: 10px; padding: 4px; .radius;
+                a { float: left; width: 30px; height: 30px; text-align: center; line-height: 30px; color: @black; text-decoration: none; }
+                input { float: left; width: calc(~"100%" - 60px); height: 30px; background-color: @white; text-align: center; box-sizing: border-box; }
+            }
         }
     }
 
