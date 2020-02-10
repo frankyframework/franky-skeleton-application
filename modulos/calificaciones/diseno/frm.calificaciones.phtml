@@ -1,0 +1,27 @@
+<?php echo $CalificacionesForm->openTag(); ?>
+<?php echo $CalificacionesForm->get('callback'); ?>
+<?php echo $CalificacionesForm->get('seccion'); ?>
+
+
+<?php if(!$MySession->LoggedIn()): ?>
+    <?php echo $CalificacionesForm->getRow('nombre'); ?>
+    <?php echo $CalificacionesForm->getRow('email'); ?>
+<?php endif; ?>
+
+<?php echo $CalificacionesForm->get('calificacion'); ?>
+<div id="rater" class="rater">
+<div id="stars"></div>
+<div class="clear"></div>
+</div>
+
+<?php echo $CalificacionesForm->getRow('titulo'); ?>
+<?php echo $CalificacionesForm->getRow('comentario'); ?>
+
+<?php echo $CalificacionesForm->getRow('guardar'); ?>
+
+<?php echo $CalificacionesForm->endTag(); ?>
+
+<script>
+    var r = new rating('stars', 5,  '' || 0 , true, 'calificacion');
+    $("#frmreview").validate();
+</script>

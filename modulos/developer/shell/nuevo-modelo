@@ -99,7 +99,7 @@ if(is_numeric(substr($modulo,0,1)))
 
 $plantilla = new Plantilla();
 
-$plantilla->asigna_variables(array("nombre" => $nombre,"campos" => $campos, "modulo" => $modulo,"tabla" => $tabla));
+$plantilla->asigna_variables(array("nombre" => $nombre,"campos" => $campos, "modulo" => ucwords($modulo),"tabla" => $tabla));
 
 
 $fopen = fopen($path."/src/model/".$nombre."Model.php", 'w');

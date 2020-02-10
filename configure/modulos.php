@@ -6,6 +6,7 @@ return array(
     //'sociallogin',
     'developer',
     'ecommerce',
-    'catalog'
+    'catalog',
+    'calificaciones'
     
 );
