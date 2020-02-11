@@ -3,17 +3,32 @@ namespace Calificaciones\model;
 
 class CalificacionesModel  extends \Franky\Database\Mysql\objectOperations
 {
+    private $campos;
 
     public function __construct()
     {
       parent::__construct();
       $this->from()->addTable('calificaciones_calificaciones');
     }
+    
+    function setCampos($campos)
+    {
+        $this->campos = $campos;
+    }
 
     function getData($data = array())
     {
         $data = $this->optimizeEntity($data);
-        $campos = ["id","id_item","tabla","createdAt","updateAt","status","aprovado","calificacion","titulo","comentario"];
+        $campos = ["calificaciones_calificaciones.id",
+            "calificaciones_calificaciones.id_item",
+            "calificaciones_calificaciones.tabla",
+            "calificaciones_calificaciones.createdAt",
+            "calificaciones_calificaciones.updateAt",
+            "calificaciones_calificaciones.status",
+            "calificaciones_calificaciones.aprovado",
+            "calificaciones_calificaciones.calificacion",
+            "calificaciones_calificaciones.titulo",
+            "calificaciones_calificaciones.comentario"];
 
         foreach($data as $k => $v)
         {

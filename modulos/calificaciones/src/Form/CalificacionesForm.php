@@ -20,6 +20,11 @@ class CalificacionesForm extends \Franky\Form\Form
                 )
         );
         $this->add(array(
+                    'name' => 'id_item',
+                    'type'  => 'hidden',
+                )
+        );
+        $this->add(array(
             'name' => 'calificacion',
             'type'  => 'hidden',
         )

@@ -1,23 +1,23 @@
 <?php
-namespace calificaciones\model;
+namespace Calificaciones\model;
 
-class CalificacionesuserModel  extends \Franky\Database\Mysql\objectOperations
+class CalificacionesusersModel  extends \Franky\Database\Mysql\objectOperations
 {
 
     public function __construct()
     {
       parent::__construct();
-      $this->from()->addTable('calificaciones_user');
+      $this->from()->addTable('calificaciones_users');
     }
 
     function getData($data = array())
     {
         $data = $this->optimizeEntity($data);
-        $campos = [];
+        $campos = ["id_calificacion","id_user"];
 
         foreach($data as $k => $v)
         {
-            $this->where()->addAnd("calificaciones_user.".$k,$v,'=');
+            $this->where()->addAnd("calificaciones_users.".$k,$v,'=');
         }
 
         return $this->getColeccion($campos);

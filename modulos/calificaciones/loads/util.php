@@ -5,9 +5,12 @@ function _calificaciones($txt)
     return dgettext("calificaciones",$txt);
 }
 
-function getFrmCalificacion($seccion,$tabla)
+function getFrmCalificacion($seccion,$tabla,$id)
 {
-    global $MyConfigure;
+    if(getCoreConfig($seccion.'/calificaciones/enabled') == 0)
+    {
+        return '';
+    }
     global $MyMetatag;
     global $MySession;
     global $MyRequest;
@@ -26,11 +29,11 @@ function getFrmCalificacion($seccion,$tabla)
         $MyMetatag->setCss("/public/jquery/jquery-validate/css/validate.css");
     }
     $CalificacionesForm = new \Calificaciones\Form\CalificacionesForm('frmreview');
+    $Tokenizer = new Franky\Haxor\Tokenizer;
 
-    $seccion = '';
-    $CalificacionesForm->setAtributoInput('callback','value',$MyRequest->getURI());
-    $CalificacionesForm->setAtributoInput('seccion','value',$seccion);
-
+    $CalificacionesForm->setAtributoInput('callback','value',$Tokenizer->token("calificaciones", $MyRequest->getURI()));
+    $CalificacionesForm->setAtributoInput('seccion','value',$Tokenizer->token("calificaciones", $tabla));
+    $CalificacionesForm->setAtributoInput('id_item','value',$Tokenizer->token("calificaciones", $id));
     $MyMetatag->setJs("/public/plugins/calificacion/rating.js");
     $MyMetatag->setCss("/public/plugins/calificacion/rating.css"); 
     
@@ -38,6 +41,7 @@ function getFrmCalificacion($seccion,$tabla)
     [
         'MySession' => $MySession,
         'CalificacionesForm' => $CalificacionesForm,
+        'seccion' => $seccion
 
     ]);   
 }
