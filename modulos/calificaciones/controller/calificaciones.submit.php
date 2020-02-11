@@ -2,11 +2,11 @@
 use Franky\Core\validaciones; 
 use Calificaciones\model\CalificacionesModel;
 use Calificaciones\model\CalificacionesgeneralesModel;
-use calificaciones\model\CalificacionesuserModel;
-use calificaciones\model\CalificacionesguestModel;
+use Calificaciones\model\CalificacionesusersModel;
+use Calificaciones\model\CalificacionesguestModel;
 use Calificaciones\entity\CalificacionesEntity;
 use Calificaciones\entity\CalificacionesgeneralesEntity;
-use Calificaciones\entity\CalificacionesuserEntity;
+use Calificaciones\entity\CalificacionesusersEntity;
 use Calificaciones\entity\CalificacionesguestEntity;
 use Franky\Haxor\Tokenizer;
 
@@ -14,12 +14,12 @@ $Tokenizer = new Tokenizer();
 
 $CalificacionesModel = new CalificacionesModel();
 $CalificacionesgeneralesModel = new CalificacionesgeneralesModel();
-$CalificacionesuserModel = new CalificacionesuserModel();
+$CalificacionesuserModel = new CalificacionesusersModel();
 $CalificacionesguestModel = new CalificacionesguestModel();
 
 $CalificacionesEntity = new CalificacionesEntity($MyRequest->getRequest());
 $CalificacionesguestEntity = new CalificacionesguestEntity($MyRequest->getRequest());
-$CalificacionesuserEntity = new CalificacionesuserEntity();
+$CalificacionesuserEntity = new CalificacionesusersEntity();
 $CalificacionesgeneralesEntity = new CalificacionesgeneralesEntity();
 
 
@@ -41,17 +41,17 @@ $validaciones =  new validaciones();
 if(getCoreConfig('catalog/calificaciones/tipo') == 'calificacion')
 {
     $CalificacionesEntity->calificacion($calificacion);
-    $validaciones = $CalificacionesEntity->setValidationCalificacion();
+    $rules = $CalificacionesEntity->setValidationCalificacion();
 }
 if(getCoreConfig('catalog/calificaciones/tipo') == 'comentario'){
-    $validaciones = $CalificacionesEntity->setValidationComentario();
+    $rules = $CalificacionesEntity->setValidationComentario();
 }
 if(getCoreConfig('catalog/calificaciones/tipo') == 'calificacion-comentario'){
     $CalificacionesEntity->calificacion($calificacion);
-    $validaciones = $CalificacionesEntity->setValidationCalificacionComentario();
+    $rules = $CalificacionesEntity->setValidationCalificacionComentario();
 }
 
-$valid = $validaciones->validRules($validaciones);
+$valid = $validaciones->validRules($rules);
 if(!$valid)
 {
     $MyFlashMessage->setMsg("error",$validaciones->getMsg());
@@ -78,29 +78,48 @@ endif;
 
 if($error == false)        
 {
-    if(empty($id))
-    {
-
-        $CalificacionesEntity->createdAt(date('Y-m-d H:i:s'));
-        $CalificacionesEntity->status(1);
-        $CalificacionesEntity->aprovado(0);
-    }
-    else
-    {
-        $CalificacionesEntity->updateAt(date('Y-m-d H:i:s'));
-    }
+    $CalificacionesEntity->createdAt(date('Y-m-d H:i:s'));
+    $CalificacionesEntity->status(1);
+    $CalificacionesEntity->aprovado(0);
+      
     $result = $CalificacionesModel->save($CalificacionesEntity->getArrayCopy());
     if($result == REGISTRO_SUCCESS)
     {
-        if(empty($id))
+        
+        $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("guardar_generico_success"));
+        $id = $CalificacionesModel->getUltimoId();
+
+        $CalificacionesModel->exchangeArray([]);
+        $CalificacionesModel->tabla($seccion);
+        $CalificacionesModel->id_item($id_item);
+        $CalificacionesModel->status(1);
+        $CalificacionesEntity->aprovado(1);
+        $CalificacionesModel->setTampag(1000000000000000);
+        $total = 0;
+        if($CalificacionesModel->getData($CalificacionesEntity->getArrayCopy()) == REGISTRO_SUCCESS)
         {
-            $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("guardar_generico_success"));
+            while($registro = $CalificacionesModel->getRows())
+            {
+                $total += $registro['calificacion'];
+            }
+        }
+
+        $CalificacionesgeneralesEntity->calificacion($total/$CalificacionesModel->getTotal());
+        $CalificacionesgeneralesEntity->tabla($seccion);
+        $CalificacionesgeneralesEntity->id_item($id_item);  
+        $CalificacionesgeneralesModel->save($CalificacionesgeneralesEntity->getArrayCopy());      
+
+        if(!$MySession->LoggedIn())
+        {
+            $CalificacionesguestEntity->id_calificacion($id);
+            $CalificacionesguestModel->save($CalificacionesguestEntity->getArrayCopy());
         }
         else
         {
-             $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("editar_generico_success"));
+            $CalificacionesusersEntity->id_calificacion($id);
+            $CalificacionesusersEntity->id_user($seccion);
+            $CalificacionesusersModel->save($CalificacionesusersEntity->getArrayCopy());      
         }
-
         $location = $callback;
 
     }

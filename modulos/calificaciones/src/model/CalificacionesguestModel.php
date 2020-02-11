@@ -1,7 +1,7 @@
 <?php
 namespace Calificaciones\model;
 
-class CalificacioneguestModel  extends \Franky\Database\Mysql\objectOperations
+class CalificacionesguestModel  extends \Franky\Database\Mysql\objectOperations
 {
 
     public function __construct()
