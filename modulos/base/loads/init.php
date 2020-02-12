@@ -18,6 +18,7 @@ include_once(PROJECT_DIR."/modulos/base/loads/autoload.php");
 
 $MyConfigure        = new \Franky\Core\configure();
 
+
 $available_debug_ip = explode(",",getCoreConfig('base/debug/ip'));
 $enable_debug_php = getCoreConfig('base/debug/display_errors');
 $enable_debug_site = getCoreConfig('base/debug/debug');
