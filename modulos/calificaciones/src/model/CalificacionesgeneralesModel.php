@@ -38,18 +38,15 @@ class CalificacionesgeneralesModel  extends \Franky\Database\Mysql\objectOperati
     public function save($data)
     {
         $data = $this->optimizeEntity($data);
-
-
-    	if (isset($data['id']))
-    	{
-            $this->where()->addAnd('id',$data['id'],'=');
-
+        return $this->guardarRegistro($data);
+    }
+    public function update($data)
+    {
+        $data = $this->optimizeEntity($data);
+            $this->where()->addAnd('id_item',$data['id_item'],'=');
+            $this->where()->addAnd('tabla',$data['tabla'],'=');
             return $this->editarRegistro($data);
-    	}
-    	else {
-
-            return $this->guardarRegistro($data);
-    	}
+    	
 
     }
 }

@@ -33,6 +33,7 @@ function getFrmCalificacion($seccion,$tabla,$id)
 
     $CalificacionesForm->setAtributoInput('callback','value',$Tokenizer->token("calificaciones", $MyRequest->getURI()));
     $CalificacionesForm->setAtributoInput('seccion','value',$Tokenizer->token("calificaciones", $tabla));
+    $CalificacionesForm->setAtributoInput('seccion_config','value',$Tokenizer->token("calificaciones", $seccion));
     $CalificacionesForm->setAtributoInput('id_item','value',$Tokenizer->token("calificaciones", $id));
     $MyMetatag->setJs("/public/plugins/calificacion/rating.js");
     $MyMetatag->setCss("/public/plugins/calificacion/rating.css"); 
@@ -47,7 +48,7 @@ function getFrmCalificacion($seccion,$tabla,$id)
 }
 
 
-function catalog_completarTareas()
+function calificaciones_completarTareas()
 {
     global $MySession;
     global $MyRequest;
@@ -58,20 +59,22 @@ function catalog_completarTareas()
 
     if(isset($eventos_pendientes['calificaciones']))
     {
-        $CatalogwishlistModel = new Calificaciones\model\CatalogwishlistModel;
-        $CatalogwishlistEntity = new Calificaciones\entity\CatalogwishlistEntity($eventos_pendientes['wishlist']);
-
+        $seccion_config = $eventos_pendientes['seccion_config'];
         $CalificacionesModel = new \Calificaciones\model\CalificacionesModel();
         $CalificacionesgeneralesModel =  new \Calificaciones\model\CalificacionesgeneralesModel();
-        $CalificacionesuserModel = new \Calificaciones\model\CalificacionesusersModel();
+        $CalificacionesusersModel = new \Calificaciones\model\CalificacionesusersModel();
         
-        $CalificacionesEntity = new \Calificaciones\entity\CalificacionesEntity($MyRequest->getRequest());
-        $CalificacionesuserEntity = new Calificaciones\entity\CalificacionesusersEntity();
+        $CalificacionesEntity = new \Calificaciones\entity\CalificacionesEntity($eventos_pendientes['calificaciones']);
+        $CalificacionesusersEntity = new Calificaciones\entity\CalificacionesusersEntity();
         $CalificacionesgeneralesEntity = new Calificaciones\entity\CalificacionesgeneralesEntity();
         
         $CalificacionesEntity->createdAt(date('Y-m-d H:i:s'));
         $CalificacionesEntity->status(1);
-        $CalificacionesEntity->aprovado(0);
+        $CalificacionesEntity->aprovado((getCoreConfig($seccion_config.'/calificaciones/moderado') == 1 ? 0 : 1));
+        
+        $CalificacionesgeneralesEntity->tabla($CalificacionesEntity->tabla());
+        $CalificacionesgeneralesEntity->id_item($CalificacionesEntity->id_item());
+       
 
         $result = $CalificacionesModel->save($CalificacionesEntity->getArrayCopy());
         if($result == REGISTRO_SUCCESS)
@@ -92,15 +95,34 @@ function catalog_completarTareas()
                 $total = $total/$CalificacionesModel->getTotal();
             }
 
-            $CalificacionesgeneralesEntity->calificacion($total);
+          
+            
             $CalificacionesgeneralesEntity->tabla($CalificacionesEntity->tabla());
-            $CalificacionesgeneralesEntity->id_item($CalificacionesEntity->id_item());  
-            $CalificacionesgeneralesModel->save($CalificacionesgeneralesEntity->getArrayCopy());      
+            $CalificacionesgeneralesEntity->id_item($CalificacionesEntity->id_item());
+            $resultgeneral = $CalificacionesgeneralesModel->getData($CalificacionesgeneralesEntity->getArrayCopy());
 
-            $CalificacionesusersEntity->id_calificacion($CalificacionesEntity->id_item());
-            $CalificacionesusersEntity->id_user($CalificacionesEntity->tabla());
+            $CalificacionesgeneralesEntity->calificacion(round($total));
+
+            
+            if($resultgeneral == REGISTRO_SUCCESS)
+            {
+                $CalificacionesgeneralesModel->update($CalificacionesgeneralesEntity->getArrayCopy());      
+            }
+            else{
+                $CalificacionesgeneralesModel->save($CalificacionesgeneralesEntity->getArrayCopy());      
+            }
+            $CalificacionesusersEntity->id_calificacion($id);
+            $CalificacionesusersEntity->id_user($MySession->GetVar('id'));
             $CalificacionesusersModel->save($CalificacionesusersEntity->getArrayCopy());      
-
+            if(getCoreConfig($seccion_config.'/calificaciones/moderado') == 1):
+                $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("calificacion_calificacion_moderada_guardada"));
+            else:
+                $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("calificacion_calificacion_guardada"));
+            endif;
+        }
+        else
+        {
+            $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("guardar_generico_error"));
         }
 
     }
@@ -108,5 +130,6 @@ function catalog_completarTareas()
     $MySession->UnsetVar('calificaciones_eventos_pendientes');
 
 }
+
 
 ?>

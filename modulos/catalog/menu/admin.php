@@ -1,5 +1,5 @@
 <?php
-return array(
+$menucatalog = array(
     'title'=> "Catalogo",
     array(
      "permiso" =>   ADMINISTRAR_PRODUCTS_CATALOG,
@@ -20,7 +20,30 @@ return array(
         "permiso" =>   ADMINISTRAR_CATALOG_WISHLIST,
         "url" => $MyRequest->url(ADMIN_WISHLIST),
         "etiqueta" => "Favoritos"
-      )
+    )
    
 );
+if(getCoreConfig('catalog/calificaciones/enabled') == 1):
+  if(getCoreConfig('catalog/calificaciones/moderado') == 1):
+    $menucatalog[] = array(
+      "permiso" =>   ADMINISTRAR_CATALOG_CALIFICACIONES_PENDIENTES,
+      "url" => $MyRequest->url(ADMIN_CALIFICACIONES_PENDIENTES),
+      "etiqueta" => "Calificaciones y comentarios pendientes"
+    );
+  endif;
+
+  $menucatalog[] = array(
+    "permiso" =>   ADMINISTRAR_CATALOG_CALIFICACIONES,
+    "url" => $MyRequest->url(ADMIN_CALIFICACIONES),
+    "etiqueta" => "Calificaciones y comentarios"
+  );
+
+  $menucatalog[] = array(
+    "permiso" =>   ADMINISTRAR_CATALOG_MIS_CALIFICACIONES,
+    "url" => $MyRequest->url(ADMIN_MIS_CALIFICACIONES),
+    "etiqueta" => "Mis Calificaciones y comentarios"
+  );
+endif;
+
+return $menucatalog;
 ?>

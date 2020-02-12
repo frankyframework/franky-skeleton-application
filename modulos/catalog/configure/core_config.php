@@ -45,6 +45,12 @@ return array(
                         ],
                     'value' => ''
                   ),
+                  array('path' => 'catalog/calificaciones/moderado',
+                            'type' => 'select',
+                            'label' => 'Moderar calificaciones y comentarios',
+                            'data' => ['0' => 'No', '1' => 'Si'],
+                            'value' => 1
+                          ),
                    
               
           )

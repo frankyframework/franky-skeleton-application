@@ -27,11 +27,19 @@ class CalificacionesForm extends \Franky\Form\Form
         $this->add(array(
             'name' => 'calificacion',
             'type'  => 'hidden',
+            'atributos' => array(
+                'id'       => 'calificacion'
+             ),
         )
         );
 
         $this->add(array(
             'name' => 'seccion',
+            'type'  => 'hidden',
+        )
+        );
+        $this->add(array(
+            'name' => 'seccion_config',
             'type'  => 'hidden',
         )
         );

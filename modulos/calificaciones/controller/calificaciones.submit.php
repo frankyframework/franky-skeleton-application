@@ -14,17 +14,19 @@ $Tokenizer = new Tokenizer();
 
 $CalificacionesModel = new CalificacionesModel();
 $CalificacionesgeneralesModel = new CalificacionesgeneralesModel();
-$CalificacionesuserModel = new CalificacionesusersModel();
+$CalificacionesusersModel = new CalificacionesusersModel();
 $CalificacionesguestModel = new CalificacionesguestModel();
 
 $CalificacionesEntity = new CalificacionesEntity($MyRequest->getRequest());
 $CalificacionesguestEntity = new CalificacionesguestEntity($MyRequest->getRequest());
-$CalificacionesuserEntity = new CalificacionesusersEntity();
+$CalificacionesusersEntity = new CalificacionesusersEntity();
 $CalificacionesgeneralesEntity = new CalificacionesgeneralesEntity();
 
 
 $calificacion       = $MyRequest->getRequest('calificacion');
 $seccion       = $Tokenizer->decode($MyRequest->getRequest('seccion'));
+$seccion_config       = $Tokenizer->decode($MyRequest->getRequest('seccion_config'));
+
 $callback = $Tokenizer->decode($MyRequest->getRequest('callback'));
 $id_item = $Tokenizer->decode($MyRequest->getRequest('id_item'));
 $CalificacionesEntity->id_item($id_item);
@@ -38,15 +40,15 @@ $error = false;
 
 $validaciones =  new validaciones();
 
-if(getCoreConfig('catalog/calificaciones/tipo') == 'calificacion')
+if(getCoreConfig($seccion_config.'/calificaciones/tipo') == 'calificacion')
 {
     $CalificacionesEntity->calificacion($calificacion);
     $rules = $CalificacionesEntity->setValidationCalificacion();
 }
-if(getCoreConfig('catalog/calificaciones/tipo') == 'comentario'){
+if(getCoreConfig($seccion_config.'/calificaciones/tipo') == 'comentario'){
     $rules = $CalificacionesEntity->setValidationComentario();
 }
-if(getCoreConfig('catalog/calificaciones/tipo') == 'calificacion-comentario'){
+if(getCoreConfig($seccion_config.'/calificaciones/tipo') == 'calificacion-comentario'){
     $CalificacionesEntity->calificacion($calificacion);
     $rules = $CalificacionesEntity->setValidationCalificacionComentario();
 }
@@ -59,7 +61,7 @@ if(!$valid)
 }
 
 
-if(!$MySession->LoggedIn() && getCoreConfig('catalog/calificaciones/guest') == 1):
+if(!$MySession->LoggedIn() && getCoreConfig($seccion_config.'/calificaciones/guest') == 1):
     $valid = $validaciones->validRules($CalificacionesguestEntity->setValidation());
     if(!$valid)
     {
@@ -68,25 +70,35 @@ if(!$MySession->LoggedIn() && getCoreConfig('catalog/calificaciones/guest') == 1
     }
 endif;
 
-if(!$MySession->LoggedIn() && getCoreConfig('catalog/calificaciones/guest') == 0):
-    //pendiente.
-    $MySession->SetVar('calificaciones_eventos_pendientes',[
-        'calificaciones' => $CalificacionesEntity->getArrayCopy()
-    ]);
-    $MyRequest->redirect(LOGIN);
-endif;
+if(empty($seccion_config))
+{
+    $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("guardar_generico_error"));
+    $error = true;
+}
+
 
 if($error == false)        
 {
+    if(!$MySession->LoggedIn() && getCoreConfig($seccion_config.'/calificaciones/guest') == 0):
+        //pendiente.
+        $MySession->SetVar('calificaciones_eventos_pendientes',[
+            'calificaciones' => $CalificacionesEntity->getArrayCopy(),'seccion_config' => $seccion_config
+        ]);
+        $MyRequest->redirect(LOGIN.'?callback='.$callback);
+    endif;
+    
     $CalificacionesEntity->createdAt(date('Y-m-d H:i:s'));
     $CalificacionesEntity->status(1);
-    $CalificacionesEntity->aprovado(0);
+    $CalificacionesEntity->aprovado((getCoreConfig($seccion_config.'/calificaciones/moderado') == 1 ? 0 : 1));
       
     $result = $CalificacionesModel->save($CalificacionesEntity->getArrayCopy());
     if($result == REGISTRO_SUCCESS)
     {
-        
-        $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("guardar_generico_success"));
+        if(getCoreConfig($seccion_config.'/calificaciones/moderado') == 1):
+            $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("calificacion_calificacion_moderada_guardada"));
+        else:
+            $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("calificacion_calificacion_guardada"));
+        endif;
         $id = $CalificacionesModel->getUltimoId();
 
         $CalificacionesEntity->exchangeArray([]);
@@ -105,11 +117,20 @@ if($error == false)
             $total = $total/$CalificacionesModel->getTotal();
         }
 
-        $CalificacionesgeneralesEntity->calificacion($total);
+        
         $CalificacionesgeneralesEntity->tabla($seccion);
         $CalificacionesgeneralesEntity->id_item($id_item);  
-        $CalificacionesgeneralesModel->save($CalificacionesgeneralesEntity->getArrayCopy());      
+        $resultgeneral = $CalificacionesgeneralesModel->getData($CalificacionesgeneralesEntity->getArrayCopy());
+        $CalificacionesgeneralesEntity->calificacion(round($total));
 
+
+        if($resultgeneral == REGISTRO_SUCCESS)
+        {
+            $CalificacionesgeneralesModel->update($CalificacionesgeneralesEntity->getArrayCopy());      
+        }
+        else{
+            $CalificacionesgeneralesModel->save($CalificacionesgeneralesEntity->getArrayCopy());      
+        }
         if(!$MySession->LoggedIn())
         {
             $CalificacionesguestEntity->id_calificacion($id);
@@ -118,7 +139,7 @@ if($error == false)
         else
         {
             $CalificacionesusersEntity->id_calificacion($id);
-            $CalificacionesusersEntity->id_user($seccion);
+            $CalificacionesusersEntity->id_user($MySession->GetVar('id'));
             $CalificacionesusersModel->save($CalificacionesusersEntity->getArrayCopy());      
         }
         $location = $callback;
@@ -127,14 +148,9 @@ if($error == false)
     elseif($result == REGISTRO_ERROR)
     {
 
-        if(empty($id))
-        {
-            $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("guardar_generico_error"));
-        }
-        else
-        {
-            $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("editar_generico_error"));
-        }
+       
+        $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("guardar_generico_error"));
+       
         $location = $MyRequest->getReferer();
     }
     else

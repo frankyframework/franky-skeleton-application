@@ -1,0 +1,12 @@
+<?xml version='1.0' standalone='yes'?>
+<mensajes>
+    <prefijo>calificaciones_</prefijo>
+        <mensaje>
+        <llave>calificacion_guardada</llave>
+        <valor>La calificación y/o comentario se guardo correctamente</valor>
+    </mensaje>
+    <mensaje>
+        <llave>calificacion_moderada_guardada</llave>
+        <valor>La calificación y/o comentario se guardo correctamente, en breve un moderador la revisará para su publicación</valor>
+    </mensaje>
+</mensajes>
