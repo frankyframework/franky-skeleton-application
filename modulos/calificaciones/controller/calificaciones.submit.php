@@ -89,10 +89,10 @@ if($error == false)
         $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("guardar_generico_success"));
         $id = $CalificacionesModel->getUltimoId();
 
-        $CalificacionesModel->exchangeArray([]);
-        $CalificacionesModel->tabla($seccion);
-        $CalificacionesModel->id_item($id_item);
-        $CalificacionesModel->status(1);
+        $CalificacionesEntity->exchangeArray([]);
+        $CalificacionesEntity->tabla($seccion);
+        $CalificacionesEntity->id_item($id_item);
+        $CalificacionesEntity->status(1);
         $CalificacionesEntity->aprovado(1);
         $CalificacionesModel->setTampag(1000000000000000);
         $total = 0;
@@ -102,9 +102,10 @@ if($error == false)
             {
                 $total += $registro['calificacion'];
             }
+            $total = $total/$CalificacionesModel->getTotal();
         }
 
-        $CalificacionesgeneralesEntity->calificacion($total/$CalificacionesModel->getTotal());
+        $CalificacionesgeneralesEntity->calificacion($total);
         $CalificacionesgeneralesEntity->tabla($seccion);
         $CalificacionesgeneralesEntity->id_item($id_item);  
         $CalificacionesgeneralesModel->save($CalificacionesgeneralesEntity->getArrayCopy());      

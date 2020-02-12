@@ -45,4 +45,68 @@ function getFrmCalificacion($seccion,$tabla,$id)
 
     ]);   
 }
+
+
+function catalog_completarTareas()
+{
+    global $MySession;
+    global $MyRequest;
+    global $MyFlashMessage;
+    global $MyMessageAlert;
+    $eventos_pendientes = $MySession->GetVar('calificaciones_eventos_pendientes');
+
+
+    if(isset($eventos_pendientes['calificaciones']))
+    {
+        $CatalogwishlistModel = new Calificaciones\model\CatalogwishlistModel;
+        $CatalogwishlistEntity = new Calificaciones\entity\CatalogwishlistEntity($eventos_pendientes['wishlist']);
+
+        $CalificacionesModel = new \Calificaciones\model\CalificacionesModel();
+        $CalificacionesgeneralesModel =  new \Calificaciones\model\CalificacionesgeneralesModel();
+        $CalificacionesuserModel = new \Calificaciones\model\CalificacionesusersModel();
+        
+        $CalificacionesEntity = new \Calificaciones\entity\CalificacionesEntity($MyRequest->getRequest());
+        $CalificacionesuserEntity = new Calificaciones\entity\CalificacionesusersEntity();
+        $CalificacionesgeneralesEntity = new Calificaciones\entity\CalificacionesgeneralesEntity();
+        
+        $CalificacionesEntity->createdAt(date('Y-m-d H:i:s'));
+        $CalificacionesEntity->status(1);
+        $CalificacionesEntity->aprovado(0);
+
+        $result = $CalificacionesModel->save($CalificacionesEntity->getArrayCopy());
+        if($result == REGISTRO_SUCCESS)
+        {
+            $id = $CalificacionesModel->getUltimoId();
+
+            $CalificacionesEntity->exchangeArray([]);
+            $CalificacionesEntity->status(1);
+            $CalificacionesEntity->aprovado(1);
+            $CalificacionesModel->setTampag(1000000000000000);
+            $total = 0;
+            if($CalificacionesModel->getData($CalificacionesEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+            {
+                while($registro = $CalificacionesModel->getRows())
+                {
+                    $total += $registro['calificacion'];
+                }
+                $total = $total/$CalificacionesModel->getTotal();
+            }
+
+            $CalificacionesgeneralesEntity->calificacion($total);
+            $CalificacionesgeneralesEntity->tabla($CalificacionesEntity->tabla());
+            $CalificacionesgeneralesEntity->id_item($CalificacionesEntity->id_item());  
+            $CalificacionesgeneralesModel->save($CalificacionesgeneralesEntity->getArrayCopy());      
+
+            $CalificacionesusersEntity->id_calificacion($CalificacionesEntity->id_item());
+            $CalificacionesusersEntity->id_user($CalificacionesEntity->tabla());
+            $CalificacionesusersModel->save($CalificacionesusersEntity->getArrayCopy());      
+
+        }
+
+    }
+
+    $MySession->UnsetVar('calificaciones_eventos_pendientes');
+
+}
+
 ?>
