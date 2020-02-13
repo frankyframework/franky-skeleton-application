@@ -70,7 +70,7 @@ class CalificacionesModel  extends \Franky\Database\Mysql\objectOperations
             "calificaciones_calificaciones.titulo",
             "calificaciones_calificaciones.comentario",
             $this->tabla_item.'.'.$this->campo_item,
-            "calificaciones_guest.nombre",
+            "calificaciones_guest.nombre as nombre_guest",
             "calificaciones_guest.email",
             "users.nombre"
         ];
@@ -84,7 +84,7 @@ class CalificacionesModel  extends \Franky\Database\Mysql\objectOperations
         $this->from()->addInner($this->tabla_item,'calificaciones_calificaciones.id_item',$this->tabla_item.'.'.$this->campo_item_id);
         $this->from()->addLeft("calificaciones_guest",'calificaciones_calificaciones.id','calificaciones_guest.id_calificacion');
         $this->from()->addLeft("calificaciones_users",'calificaciones_calificaciones.id','calificaciones_users.id_calificacion');
-        $this->from()->addInner("users",'calificaciones_users.id_user','users.id');
+        $this->from()->addLeft("users",'calificaciones_users.id_user','users.id');
 
         return $this->getColeccion($campos);
 
@@ -117,6 +117,12 @@ class CalificacionesModel  extends \Franky\Database\Mysql\objectOperations
             return $this->guardarRegistro($data);
     	}
 
+    }
+
+    public function delete($id)
+    {
+        $this->where()->addAnd('id',$id,'=');
+        return $this->eliminarRegistro();
     }
 }
 ?>

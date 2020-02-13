@@ -29,4 +29,5 @@ if(in_array('ecommerce',$modulos))
 
 $MyMetatag->setCss("/public/skin/catalog/css/catalog.css");
 $MyMetatag->setJs("/public/ajax/catalog/ajax.catalog.js");
+
 ?>

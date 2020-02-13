@@ -81,3 +81,7 @@ function catalog_addProductoCarrito(id,qty)
 
     pasarelaAjax('GET',var_query,"addProductoCarritoHTML",[qty]);
 }
+
+$(window).load(function(){
+    ajax_calificaciones_getPendientesRevisar('administrar_catalog_calificaciones_pendientes','catalog_products','catalog');
+});

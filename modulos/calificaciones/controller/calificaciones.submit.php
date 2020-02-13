@@ -95,9 +95,9 @@ if($error == false)
     if($result == REGISTRO_SUCCESS)
     {
         if(getCoreConfig($seccion_config.'/calificaciones/moderado') == 1):
-            $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("calificacion_calificacion_moderada_guardada"));
+            $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("calificaciones_calificacion_moderada_guardada"));
         else:
-            $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("calificacion_calificacion_guardada"));
+            $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("calificaciones_calificacion_guardada"));
         endif;
         $id = $CalificacionesModel->getUltimoId();
 

@@ -132,4 +132,52 @@ function calificaciones_completarTareas()
 }
 
 
+function calificaciones_getStarsHTML($cal)
+{
+
+
+
+	if ($cal >= 5.0)
+	{
+		$cal= 5.0;
+	}
+	if ($cal <= 0)
+	{
+		$cal= 0;
+	}
+
+        $alt = $cal;
+        $html = "<div class=\"rating\">";
+	for($x=1; $x <= 5; $x++)
+	{
+		if($cal <= 0)
+		{
+			$html .= "<i class='icon icon-estrella-llena _alpha'></i>";
+		}
+		elseif($cal > 0 && $cal < .4)
+		{
+			$html .= "<i class='icon icon-estrella-llena _alpha'></i>";
+			$cal = 0;
+		}
+                elseif($cal == .5)
+		{
+			$html .= "<i class='icon icon-estrella-llena'></i>";
+			$cal = 0;
+		}
+                elseif($cal >.5 && $cal < 1)
+		{
+			$html .= "<i class='icon icon-estrella-llena'></i>";
+			$cal = 0;
+		}
+                elseif($cal >= 1)
+		{
+			$html .= "<i class='icon icon-estrella-llena'></i>";
+			$cal--;
+		}
+	}
+
+	return $html.'</div>';
+}
+
+
 ?>

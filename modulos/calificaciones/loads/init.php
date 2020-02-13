@@ -12,4 +12,6 @@ if (function_exists('bind_textdomain_codeset'))
 }
 
 $ObserverManager->addObserver('login_user','calificaciones_completarTareas');
+
+$MyMetatag->setJs("/public/js/calificaciones.js");
 ?>

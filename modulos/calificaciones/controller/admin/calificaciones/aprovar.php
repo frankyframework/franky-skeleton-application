@@ -44,6 +44,8 @@ if($CalificacionesModel->getTotal() > 0)
         
         $lista_admin_data[$iRow] = array_merge($registro,array(
                 "thisClass"     => $thisClass,
+                "calificacion" => calificaciones_getStarsHTML($registro['calificacion']),
+                "nombre" => (!empty($registro['nombre_guest']) ? $registro['nombre_guest'] : $registro['nombre']),
                 "id" => $Tokenizer->token('calificaciones',$registro["id"]),
                 "callback" => $Tokenizer->token('calificaciones',$MyRequest->getURI())
         ));

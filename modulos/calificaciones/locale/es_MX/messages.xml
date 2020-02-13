@@ -9,4 +9,9 @@
         <llave>calificacion_moderada_guardada</llave>
         <valor>La calificación y/o comentario se guardo correctamente, en breve un moderador la revisará para su publicación</valor>
     </mensaje>
+    <mensaje>
+        <llave>status_aprovado</llave>
+        <valor>No fue posible cambiar el status de la calificacion y/o comentario</valor>
+    </mensaje>
+    
 </mensajes>
