@@ -10,6 +10,7 @@ class CalificacionesEntity
     private $createdAt;
     private $updateAt;
     private $status;
+    private $status_admin;
     private $aprovado;
     private $calificacion;
     private $titulo;
@@ -32,6 +33,7 @@ class CalificacionesEntity
         $this->createdAt = (isset($data["createdAt"]) ? $data["createdAt"] : null);
         $this->updateAt = (isset($data["updateAt"]) ? $data["updateAt"] : null);
         $this->status = (isset($data["status"]) ? $data["status"] : null);
+        $this->status_admin = (isset($data["status_admin"]) ? $data["status_admin"] : null);
         $this->aprovado = (isset($data["aprovado"]) ? $data["aprovado"] : null);
         $this->calificacion = (isset($data["calificacion"]) ? $data["calificacion"] : null);
         $this->titulo = (isset($data["titulo"]) ? $data["titulo"] : null);
@@ -83,6 +85,8 @@ class CalificacionesEntity
     public function updateAt($updateAt = null){ if($updateAt !== null){ $this->updateAt=$updateAt; }else{ return $this->updateAt; } }
 
     public function status($status = null){ if($status !== null){ $this->status=$status; }else{ return $this->status; } }
+
+    public function status_admin($status_admin = null){ if($status_admin !== null){ $this->status_admin=$status_admin; }else{ return $this->status_admin; } }
 
     public function aprovado($aprovado = null){ if($aprovado !== null){ $this->aprovado=$aprovado; }else{ return $this->aprovado; } }
 

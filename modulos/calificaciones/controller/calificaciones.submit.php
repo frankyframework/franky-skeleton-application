@@ -89,6 +89,7 @@ if($error == false)
     
     $CalificacionesEntity->createdAt(date('Y-m-d H:i:s'));
     $CalificacionesEntity->status(1);
+    $CalificacionesEntity->status_admin(1);
     $CalificacionesEntity->aprovado((getCoreConfig($seccion_config.'/calificaciones/moderado') == 1 ? 0 : 1));
       
     $result = $CalificacionesModel->save($CalificacionesEntity->getArrayCopy());
@@ -105,6 +106,7 @@ if($error == false)
         $CalificacionesEntity->tabla($seccion);
         $CalificacionesEntity->id_item($id_item);
         $CalificacionesEntity->status(1);
+        $CalificacionesEntity->status_admin(1);
         $CalificacionesEntity->aprovado(1);
         $CalificacionesModel->setTampag(1000000000000000);
         $total = 0;

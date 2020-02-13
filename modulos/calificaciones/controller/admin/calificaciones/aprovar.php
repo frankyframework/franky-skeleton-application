@@ -25,6 +25,7 @@ $CalificacionesModel->setOrdensql($orden." ".$MyPaginacion->getOrden());
 
 $CalificacionesEntity->aprovado(0);
 $CalificacionesEntity->status(1);
+$CalificacionesEntity->status_admin(1);
 $CalificacionesModel->setCampoItem($campo_item);
 $CalificacionesModel->setTablaItem($tabla);
 $CalificacionesModel->setCampoItemId($campo_item_id);

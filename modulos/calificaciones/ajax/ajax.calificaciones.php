@@ -48,6 +48,7 @@ function Calificaciones_AprovarCalificacion($id,$status)
 
         $CalificacionesEntity->exchangeArray([]);
         $CalificacionesEntity->status(1);
+        $CalificacionesEntity->status_admin(1);
         $CalificacionesEntity->aprovado(1);
         $CalificacionesEntity->id_item($registro['id_item']);
         $CalificacionesEntity->tabla($registro['tabla']);

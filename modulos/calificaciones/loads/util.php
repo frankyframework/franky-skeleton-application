@@ -70,6 +70,7 @@ function calificaciones_completarTareas()
         
         $CalificacionesEntity->createdAt(date('Y-m-d H:i:s'));
         $CalificacionesEntity->status(1);
+        $CalificacionesEntity->status_admin(1);
         $CalificacionesEntity->aprovado((getCoreConfig($seccion_config.'/calificaciones/moderado') == 1 ? 0 : 1));
         
         $CalificacionesgeneralesEntity->tabla($CalificacionesEntity->tabla());
@@ -83,6 +84,7 @@ function calificaciones_completarTareas()
 
             $CalificacionesEntity->exchangeArray([]);
             $CalificacionesEntity->status(1);
+            $CalificacionesEntity->status_admin(1);
             $CalificacionesEntity->aprovado(1);
             $CalificacionesModel->setTampag(1000000000000000);
             $total = 0;
