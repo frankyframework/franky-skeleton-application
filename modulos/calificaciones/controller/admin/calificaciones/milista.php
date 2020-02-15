@@ -1,6 +1,7 @@
 <?php
 $CalificacionesModel = new \Calificaciones\model\CalificacionesModel();
 $CalificacionesEntity = new \Calificaciones\entity\CalificacionesEntity();
+$CalificacionesusersEntity = new \Calificaciones\entity\CalificacionesusersEntity();
 $Tokenizer = new \Franky\Haxor\Tokenizer();
 $MyPaginacion = new \Franky\Core\paginacion();   
 
@@ -23,13 +24,15 @@ $CalificacionesModel->setPage($MyPaginacion->getPage());
 $CalificacionesModel->setTampag($MyPaginacion->getTampageDefault());
 $CalificacionesModel->setOrdensql($orden." ".$MyPaginacion->getOrden());
 $CalificacionesEntity->tabla($tabla);
-$CalificacionesEntity->aprovado(0);
-$CalificacionesEntity->status(1);
+$CalificacionesEntity->aprovado(1);
 $CalificacionesEntity->status_admin(1);
+$CalificacionesModel->setBusca($busca_b);
 $CalificacionesModel->setCampoItem($campo_item);
 $CalificacionesModel->setTablaItem($tabla);
-$CalificacionesModel->setBusca($busca_b);
 $CalificacionesModel->setCampoItemId($campo_item_id);
+
+$CalificacionesusersEntity->id_user($MySession->GetVar('id'));
+$CalificacionesModel->setUserData($CalificacionesusersEntity->getArrayCopy());
 $result	 = $CalificacionesModel->getFullData($CalificacionesEntity->getArrayCopy());
 $MyPaginacion->setTotal($CalificacionesModel->getTotal());
 $lista_admin_data = array();
@@ -49,7 +52,8 @@ if($CalificacionesModel->getTotal() > 0)
                 "calificacion" => calificaciones_getStarsHTML($registro['calificacion']),
                 "nombre" => (!empty($registro['nombre_guest']) ? $registro['nombre_guest'] : $registro['nombre']),
                 "id" => $Tokenizer->token('calificaciones',$registro["id"]),
-                "callback" => $Tokenizer->token('calificaciones',$MyRequest->getURI())
+                "callback" => $Tokenizer->token('calificaciones',$MyRequest->getURI()),
+                "nuevo_estado"  => ($registro["status"] == 1 ?"desactivar" : "activar"),
         ));
 
 
@@ -59,14 +63,14 @@ if($CalificacionesModel->getTotal() > 0)
 $title_grid = "Calificaciones y comentarios";
 $class_grid = "calificaciones";
 $error_grid = "No hay calificaciones y/o comentarios registrados";
-$deleteFunction = "Calificaciones_AprovarCalificacion";
+$deleteFunction = "Calificaciones_StatusCalificacion";
 
 $frm_constante_link = "";
-$MyFrankyMonster->setPHPFile(PROJECT_DIR."/modulos/calificaciones/diseno/admin/calificaciones/aprovar.phtml");
+$MyFrankyMonster->setPHPFile(PROJECT_DIR."/modulos/calificaciones/diseno/admin/calificaciones/lista_admin.phtml");
 
 $titulo_columnas_grid = array("createdAt" => "Fecha",'item' => "Item", "nombre" =>  "Nombre","titulo" => "Titulo","calificacion" => "Calificacion");
 $value_columnas_grid = array("createdAt" ,'item', "nombre","titulo","calificacion");
-$css_columnas_grid = array("createdAt" => "w-xxxx-1" ,'item' => "w-xxxx-3" ,"nombre" => "w-xxxx-2", "titulo" => "w-xxxx-3", "calificacion" => "w-xxxx-1");
+$css_columnas_grid = array("createdAt" => "w-xxxx-1" ,'item'=> "w-xxxx-3" ,"nombre" => "w-xxxx-2", "titulo" => "w-xxxx-3", "calificacion" => "w-xxxx-1");
 
 
 $permisos_grid = $permisos_grid;

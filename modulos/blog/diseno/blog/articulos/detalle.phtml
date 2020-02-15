@@ -23,12 +23,9 @@
 
              <?php  echo render("blog/autor.phtml"); ?>
 
-             <?php
-             if(!empty($blog_detalle["permitircomentarios"]))
-             {
-                 echo render("blog/calificacion.phtml");
-                 echo render("blog/comentarios.phtml");
-              } ?>
+            <div class="w-xxxx-12">
+            <?=getFrmCalificacion('blog','blog',$blog_detalle['id']); ?>
+            </div>
         </div>
     </div>
 </div>

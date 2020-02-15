@@ -13,5 +13,11 @@
         <llave>status_aprovado</llave>
         <valor>No fue posible cambiar el status de la calificacion y/o comentario</valor>
     </mensaje>
+     <mensaje>
+        <llave>calificacion_error_delete</llave>
+        <valor>No fue posible cambiar el status de la calificacion y/o comentario</valor>
+    </mensaje>
+    
+    
     
 </mensajes>

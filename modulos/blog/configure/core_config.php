@@ -25,7 +25,42 @@ return array(
                         'value' => '0'
                       ),
    
-          )
+          ),
+         ),
+       'blog-calificaciones' => array(
+          'menu' => "BLOG REVIEWS",
+          'title' => "Calificación y comentarios de articulos",
+          'config' =>  array(
+                    array('path' => 'blog/calificaciones/enabled',
+                            'type' => 'select',
+                            'label' => 'Habilitar calificaciones y comentarios',
+                            'data' => ['0' => 'No', '1' => 'Si'],
+                            'value' => 1
+                          ),
+                    array('path' => 'blog/calificaciones/guest',
+                            'type' => 'select',
+                            'label' => 'Habilitar para usuarios invitados',
+                            'data' => ['0' => 'No', '1' => 'Si'],
+                            'value' => 1
+                          ),
+                    array('path' => 'blog/calificaciones/tipo',
+                    'type' => 'select',
+                    'label' => 'Tipo de comentario',
+                    'data' => ['calificacion' => 'Solo calificacion',
+                        'comentario' => 'Solo comentario',
+                        'calificacion-comentario' => 'Calificacion y comentario',
+                        ],
+                    'value' => ''
+                  ),
+                  array('path' => 'blog/calificaciones/moderado',
+                            'type' => 'select',
+                            'label' => 'Moderar calificaciones y comentarios',
+                            'data' => ['0' => 'No', '1' => 'Si'],
+                            'value' => 1
+                          ),
+                   
+          )    
+       
   )
 );
 

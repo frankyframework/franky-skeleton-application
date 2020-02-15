@@ -1,7 +1,5 @@
 <?php
 use Blog\model\Blog;
-use Blog\model\calificacionBlog;
-use Blog\model\comentariosBlog;
 use Blog\schema\blogPostingSchema;
 use Franky\Schema\aggregateRatingSchema;
 use Franky\Schema\personSchema;
@@ -13,8 +11,7 @@ $MyBuscadorBlog->setAtributo("action", $MyRequest->url(BLOG));
 
 $MyUser             = new USERS();
 $MyBlog = new Blog();
-$MyCalificacionBlog = new calificacionBlog();
-$MyComentariosBlog = new comentariosBlog();
+
 $schema = new blogPostingSchema();
 $ratingSchema =  new aggregateRatingSchema();
 $personSchema =  new personSchema();
@@ -82,14 +79,7 @@ if($total > 0)
 
         }
 
-        $c = explode(":",$MyCalificacionBlog->getCalificacion($registro["id"]));
-        $blog_detalle["cal"] = $c[0];
-        $blog_detalle["t_cal"] =$c[1];
-        $blog_detalle["calificable"] = true;
-        if($MySession->LoggedIn() && $MyCalificacionBlog->getData("", $registro["id"],$MySession->GetVar('id')) == REGISTRO_SUCCESS)
-        {
-            $blog_detalle["calificable"] = false;
-        }
+     
 
         $ratingSchema->setBestRating("5");
         $ratingSchema->setRatingValue($blog_detalle["cal"]);
@@ -99,7 +89,7 @@ if($total > 0)
         $schema->setHeadline($registro["titulo"]);
         $schema->setKeywords($registro["keywords"]);
         $schema->setDatePublished($registro["fecha"]);
-        $schema->setImage($blog_detalle["imagen_portada"]);
+        $schema->setImage($MyRequest->link($blog_detalle["imagen_portada"],false,true));
         $schema->setArticleSection($registro["categoria_nombre"]);
         $schema->setAggregateRating(json_decode($ratingSchema->get(false),true));
         $schema->setDateModified((empty($fecham) ? $registro["fecha"] : $registro["fecha_modificado"]));
@@ -138,32 +128,7 @@ if($total > 0)
             $social_data = $MySession->GetVar('social');
 
         endif;
-        $MyComentariosBlog->setTampag(1000);
-        $MyComentariosBlog->setOrdensql("comentarios_blog.fecha desc");
-        $MyComentariosBlog->getData("", $registro["id"],"","",1);
-
-        $blog_detalle["comentarios"] = array();
-        if($MyComentariosBlog->getTotal() > 0)
-        {
-            while($__registro = $MyComentariosBlog->getRows())
-            {
-                $pb		= explode(" ",$__registro["fecha"]);
-                $fb = explode("-",$pb[0]);
-                $fecha_comment = $fb[2]." ".$_Months[$fb[1]]." ".$fb[0]." ".substr($pb[1],0,-3)." Hrs.";
-
-                $_avatar = getAvatar($__registro["user_id"]);
-
-                $blog_detalle["comentarios"][] = array(
-                    "fecha_comment" => $fecha_comment,
-                    "usuario" => $__registro["autor"],
-										"nombre" => $__registro["nombre"],
-                    "comentario" => $__registro["comentario"],
-                     "id_user" => $__registro["id_user"],
-                    "avatar" =>$_avatar,
-                    "fecha_explode" =>$fb,
-                );
-            }
-        }
+       
 
     if(!empty($blog_detalle["permisos"]) && !$MySession->LoggedIn())
     {

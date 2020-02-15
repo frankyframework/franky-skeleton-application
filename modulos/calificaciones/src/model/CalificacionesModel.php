@@ -7,6 +7,8 @@ class CalificacionesModel  extends \Franky\Database\Mysql\objectOperations
     private $campo_item;
     private $campo_item_id;
     private $tabla_item;
+    private $busca;
+    private $userData;
 
     public function __construct()
     {
@@ -14,6 +16,11 @@ class CalificacionesModel  extends \Franky\Database\Mysql\objectOperations
       $this->from()->addTable('calificaciones_calificaciones');
     }
     
+    
+    function setUserData($data){
+        $this->userData = $this->optimizeEntity($data);
+        
+    }
     function setCampos($campos)
     {
         $this->campos = $campos;
@@ -31,6 +38,10 @@ class CalificacionesModel  extends \Franky\Database\Mysql\objectOperations
     function setTablaItem($tabla)
     {
         $this->tabla_item = $tabla;
+    }
+    function setBusca($busca)
+    {
+        $this->busca = $busca;
     }
 
     function getData($data = array())
@@ -71,7 +82,7 @@ class CalificacionesModel  extends \Franky\Database\Mysql\objectOperations
             "calificaciones_calificaciones.calificacion",
             "calificaciones_calificaciones.titulo",
             "calificaciones_calificaciones.comentario",
-            $this->tabla_item.'.'.$this->campo_item,
+            $this->tabla_item.'.'.$this->campo_item.' as item',
             "calificaciones_guest.nombre as nombre_guest",
             "calificaciones_guest.email",
             "users.nombre"
@@ -83,6 +94,24 @@ class CalificacionesModel  extends \Franky\Database\Mysql\objectOperations
             $this->where()->addAnd("calificaciones_calificaciones.".$k,$v,'=');
         }
 
+        if(!empty( $this->userData ))
+        {
+            foreach($this->userData as $k => $v)
+            {
+                $this->where()->addAnd("calificaciones_users.".$k,$v,'=');
+            }
+        }
+         if(!empty($this->busca) )
+        {
+
+            $this->where()->concat("AND (");
+           
+                $this->where()->addOr('calificaciones_calificaciones.titulo',"%$this->busca%",'like');
+                $this->where()->addOr($this->tabla_item.'.'.$this->campo_item,"%$this->busca%",'like');
+                $this->where()->addOr('calificaciones_calificaciones.comentario',"%$this->busca%",'like');
+                $this->where()->concat(')');
+
+        }
         $this->from()->addInner($this->tabla_item,'calificaciones_calificaciones.id_item',$this->tabla_item.'.'.$this->campo_item_id);
         $this->from()->addLeft("calificaciones_guest",'calificaciones_calificaciones.id','calificaciones_guest.id_calificacion');
         $this->from()->addLeft("calificaciones_users",'calificaciones_calificaciones.id','calificaciones_users.id_calificacion');
