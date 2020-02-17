@@ -7,6 +7,7 @@ return array(
     'developer',
     'ecommerce',
     'catalog',
+    'wishlist',
     'calificaciones'
     
 );

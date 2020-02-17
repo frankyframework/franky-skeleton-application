@@ -111,37 +111,6 @@ function catalog_getBuscadorLateral()
 }
 
 
-function catalog_completarTareas()
-{
-    global $MySession;
-    global $MyRequest;
-    global $MyFlashMessage;
-    global $MyMessageAlert;
-    $eventos_pendientes = $MySession->GetVar('catalog_eventos_pendientes');
-
-
-    if(isset($eventos_pendientes['wishlist']))
-    {
-        $CatalogwishlistModel = new Catalog\model\CatalogwishlistModel;
-        $CatalogwishlistEntity = new Catalog\entity\CatalogwishlistEntity($eventos_pendientes['wishlist']);
-
-        if($CatalogwishlistEntity->status() == 1)
-        {
-          $CatalogwishlistEntity->fecha(date('Y-m-d H:i:s'));
-          $CatalogwishlistEntity->uid($MySession->GetVar('id'));
-          $result = $CatalogwishlistModel->save($CatalogwishlistEntity->getArrayCopy());
-        }
-        else{
-          $CatalogwishlistEntity->uid($MySession->GetVar('id'));
-          $CatalogwishlistModel->delete($CatalogwishlistEntity->getArrayCopy());
-        }
-
-    }
-
-    $MySession->UnsetVar('catalog_eventos_pendientes');
-
-}
-
 
 
 function catalog_getPriceMaxMinProduct()

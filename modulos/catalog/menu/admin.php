@@ -15,14 +15,17 @@ $menucatalog = array(
      "permiso" =>   ADMINISTRAR_CATEGORY_CATALOG,
      "url" => $MyRequest->url(ADMIN_CATALOG_SUBCATEGORY),
      "etiqueta" => "Subcategorias"
-    ),
-    array(
-        "permiso" =>   ADMINISTRAR_CATALOG_WISHLIST,
-        "url" => $MyRequest->url(ADMIN_WISHLIST),
-        "etiqueta" => "Favoritos"
     )
    
+   
 );
+if(getCoreConfig('catalog/wishlist/enabled') == 1):
+    $menucatalog[] = array(
+        "permiso" =>   ADMINISTRAR_CATALOG_WISHLIST,
+        "url" => $MyRequest->url(ADMIN_CATALOG_WISHLIST),
+        "etiqueta" => "Favoritos"
+    );
+endif;
 if(getCoreConfig('catalog/calificaciones/enabled') == 1):
   if(getCoreConfig('catalog/calificaciones/moderado') == 1):
       

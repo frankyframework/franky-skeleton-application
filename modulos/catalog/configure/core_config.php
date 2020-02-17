@@ -55,6 +55,18 @@ return array(
               
           )
   ),
+    'catalog-wishlist' => array(
+         'menu' => "CATALOGO WISHLIST",
+         'title' => "Favoritos",
+         'config' =>  array(
+               array('path' => 'catalog/wishlist/enabled',
+                       'type' => 'select',
+                       'label' => 'Habilitar wishlist',
+                       'data' => ['0' => 'No', '1' => 'Si'],
+                       'value' => 1
+                     )
+         )
+  ),
 );
 
 ?>

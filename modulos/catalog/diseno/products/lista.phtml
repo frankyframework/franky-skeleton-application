@@ -29,11 +29,3 @@
         </div>
     </div>
 </div>
-<script>
-  $(document).ready(function(){
-        $('[data-idlove]').click(function(){
-            catalog_addWishlist($(this).attr('data-idlove'),($(this).attr('class').search('active') > -1 ? 0 : 1));
-        });
-        catalog_getWishlist();
-  });
-</script>

@@ -30,7 +30,7 @@
                                 'MyAccessList' => $MyAccessList,
                                 'contactanosForm' => $contactanosForm)); ?>
                             </div>
-                            <a title="Agregar a mis favoritos" href="javascript:void(0);" data-idlove="<?= $data_detalle['id']; ?>" class="_btn _btn-default ilove _btn_whislist"></a>
+                             <?=render(PROJECT_DIR.'/modulos/wishlist/diseno/widget.wishlist.phtml',['id' =>$data_detalle['id_wishlist'],'seccion' => 'catalog_products'])?>
                         </div>
                     </div>
                     <div class="w-xxxx-12">
@@ -47,12 +47,3 @@
 
     </div>
 </div>
-
-<script>
-  $(document).ready(function(){
-        $('[data-idlove]').click(function(){
-            catalog_addWishlist($(this).attr('data-idlove'),($(this).attr('class').search('active') > -1 ? 0 : 1));
-        });
-        catalog_getWishlist();
-  });
-</script>

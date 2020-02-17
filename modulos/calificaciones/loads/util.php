@@ -136,9 +136,6 @@ function calificaciones_completarTareas()
 
 function calificaciones_getStarsHTML($cal)
 {
-
-
-
 	if ($cal >= 5.0)
 	{
 		$cal= 5.0;

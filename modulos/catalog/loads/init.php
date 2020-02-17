@@ -12,7 +12,6 @@ if (function_exists('bind_textdomain_codeset'))
     bind_textdomain_codeset("catalog", 'UTF-8');
 }
 
-$ObserverManager->addObserver('login_user','catalog_completarTareas');
 $modulos = getModulos();
 if(in_array('ecommerce',$modulos))
 {
@@ -29,5 +28,4 @@ if(in_array('ecommerce',$modulos))
 
 $MyMetatag->setCss("/public/skin/catalog/css/catalog.css");
 $MyMetatag->setJs("/public/ajax/catalog/ajax.catalog.js");
-
 ?>

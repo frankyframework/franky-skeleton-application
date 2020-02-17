@@ -43,6 +43,8 @@ else{
 $data_detalle['link'] = $MyRequest->url(CATALOG_VIEW,['friendly' => $data_detalle['url_key']]);
   
 $data_detalle['id_ori'] =$data_detalle['id'];
+$data_detalle['id_wishlist'] = $Tokenizer->token('wishlist',$data_detalle["id"]);
+
 $data_detalle['id'] = $Tokenizer->token('catalog_products', $data_detalle['id']);
 
 $contactanosForm = new contactanosForm("frmContacto");

@@ -16,8 +16,8 @@
             <div >
                 <div class="w-xxxx-12">
                     <div class="w-xxxx-12 contenedor_titulo_columnas">
-                        <div class="w-xxxx-2"><?php echo makeHTMLOrder( "catalog_wishlist.fecha", "Fecha"); ?></div>
-                        <div class="w-xxxx-8"><?php echo makeHTMLOrder( "name", "Nombre"); ?></div>
+                        <div class="w-xxxx-2"><?php echo makeHTMLOrder( "wishlist.createdAt", "Fecha"); ?></div>
+                        <div class="w-xxxx-8"><?php echo makeHTMLOrder( "item", "Item"); ?></div>
                         <div class="w-xxxx-2">Eliminar</div>
                     </div>
                     <div class="contenedor_columnas_info"  >
@@ -27,7 +27,7 @@
 
                         <div class='{{_data.thisClass}} w-xxxx-8'><a href="{{_data.link}}" target="_blank">{{_data.name}}</a></div>
                         <div class='{{_data.thisClass}} w-xxxx-2'>
-                          <?php if($MyAccessList->MeDasChancePasar(ADMINISTRAR_CATALOG_WISHLIST)):  ?>
+                          <?php if($MyAccessList->MeDasChancePasar($permisos_grid)):  ?>
                               <a class="btn_adm_eliminar" id="{{_data.id}}" href="#{{_data.nuevo_estado}}" ></a>
                           <?php endif; ?>
                         </div>

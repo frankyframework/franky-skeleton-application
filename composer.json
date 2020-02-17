@@ -35,6 +35,7 @@
                 "Catalog\\": "modulos/catalog/src",
                 "Sliders\\": "modulos/sliders/src",
                 "Calificaciones\\": "modulos/calificaciones/src",
+                "Wishlist\\": "modulos/wishlist/src",
                 "Franky\\": "modulos/franky/src"
             }
     }

@@ -133,9 +133,10 @@ if($CatalogproductsModel->getDataSearch($CatalogproductsEntity->getArrayCopy()) 
 
               }
           }
-          $registro['id'] = $Tokenizer->token('catalog_products',$registro["id"]);
+         
+           $registro['id_wishlist'] = $Tokenizer->token('wishlist',$registro["id"]);
 
-
+            $registro['id'] = $Tokenizer->token('catalog_products',$registro["id"]);
 
           $resultados_pagina[] = $registro;
       }
