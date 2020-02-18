@@ -88,8 +88,8 @@ class WishlistModel  extends \Franky\Database\Mysql\objectOperations
         if(!empty($this->rango))
         {
               $this->where()->concat('AND (');
-              $this->where()->addAnd('wishlist.createdAt',$this->rango[0],'>=');
-              $this->where()->addAnd('wishlist.createdAt',$this->rango[1],'<=');
+              $this->where()->addAnd('wishlist.createdAt',$this->rango[0].' 00:00:00','>=');
+              $this->where()->addAnd('wishlist.createdAt',$this->rango[1].' 23:59:59','<=');
               $this->where()->concat(')');
         }
 

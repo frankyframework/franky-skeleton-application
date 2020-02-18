@@ -12,7 +12,7 @@ $MyPaginacion = new paginacion();
 
 
 $MyPaginacion->setPage($MyRequest->getRequest('page',1));
-$MyPaginacion->setCampoOrden($MyRequest->getRequest('por',"catalog_wishlist.fecha"));
+$MyPaginacion->setCampoOrden($MyRequest->getRequest('por',"wishlist.createdAt"));
 $MyPaginacion->setOrden($MyRequest->getRequest('order',"DESC"));
 $MyPaginacion->setTampageDefault($MyRequest->getRequest('tampag',25));
 $busca_b	= $MyRequest->getRequest('busca_b');
@@ -87,7 +87,7 @@ $MyFiltrosForm->addBusca();
 $frm_constante_link = "";
 $MyFrankyMonster->setPHPFile(PROJECT_DIR."/modulos/wishlist/diseno/admin/wishlist/lista.phtml");
 $permisos_grid = $permisos_grid;
-$deleteFunction ="whislist_EliminarWhislist";
+$deleteFunction ="wishlist_EliminarWhislist";
 $MyFiltrosForm->addFecha('rango_inicial');
 $MyFiltrosForm->addFecha('rango_final');
 $MyFiltrosForm->addSubmit();
