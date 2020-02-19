@@ -83,7 +83,7 @@ function getCatalogBuscadorPrincipal()
     $BuscadorPrincipalForm =  new \Catalog\Form\BuscadorPrincipalForm('buscadorPrincipal');
     $BuscadorPrincipalForm->setAtributo('action',$MyRequest->url(CATALOG_SEARCH));
     
-    return render('widget.buscador.phtml',['BuscadorPrincipalForm' => $BuscadorPrincipalForm]);
+    return render(PROJECT_DIR.'/modulos/catalog/diseno/widget.buscador.phtml',['BuscadorPrincipalForm' => $BuscadorPrincipalForm]);
 }
 
 
