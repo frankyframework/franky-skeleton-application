@@ -109,16 +109,16 @@ $maxPage		= ceil($MyPaginacion->getTotal() / $MyPaginacion->getTampageDefault())
             url: url,
             beforeSend: function(){
                 var loader = $('<div id="preloaderfullpageBlog" style="'+window.loaderStyle.replace('absolute','relative')+'">&nbsp;<'+'/div>');
-                $('.content_result_blog').prepend(loader);
-                $('.content_result_blog').css({'overflow':'hidden'});
+                $('.content_result_data_list').prepend(loader);
+                $('.content_result_data_list').css({'overflow':'hidden'});
             },
             success: function (data) {
-                $('.content_result_blog').append(data);
+                $('.content_result_data_list').append(data);
                 
 
                 $('#preloaderfullpageBlog').fadeOut('slow',function(){
                         $(this).remove();
-                        $('.content_result_blog').css({'overflow':'visible'});
+                        $('.content_result_data_list').css({'overflow':'visible'});
                         getPaginar();
                 });
                 controlPAgeAjax = true;
@@ -127,7 +127,7 @@ $maxPage		= ceil($MyPaginacion->getTotal() / $MyPaginacion->getTampageDefault())
                 controlPAgeAjax = true;
                 $('#preloaderfullpageBlog').fadeOut('slow',function(){
                         $(this).remove();
-                        $('.content_result_blog').css({'overflow':'visible'});
+                        $('.content_result_data_list').css({'overflow':'visible'});
                 });
             }
         });
