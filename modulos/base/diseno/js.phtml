@@ -80,8 +80,9 @@ if (is_array($MyMetatag->getJs(false))) {
             $blocks = include(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/configure/blocks.php");
             echo 'var blocks_html = '.$blocks.';';
         }
-        
-        
+        else{
+            echo 'var blocks_html ={};';
+        }   
         ?>
      // -->
     </script>
