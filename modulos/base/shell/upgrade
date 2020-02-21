@@ -86,6 +86,7 @@ if ($zip->open($destination) === TRUE) {
       }
 
       $archivos = array(
+                    $path."/public/js/blocks.js",
                       $path."/public/js/analytics.js",
                       $path."/public/js/funciones.js",
                       $path."/public/js/validaciones.js",
