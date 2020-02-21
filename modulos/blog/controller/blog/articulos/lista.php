@@ -107,4 +107,22 @@ if(!empty($amigable_categoria_context))
     }
 }
 
+
+if($MyRequest->isAjax())
+{
+ 
+    if(!empty($lista_articulos_blog)):
+        
+        foreach ($lista_articulos_blog as $articulo):
+
+        if($articulo['destacado'] == 1):
+           echo render(PROJECT_DIR.'/modulos/blog/diseno/blog/articulos/card.destacado.phtml',['articulo' => $articulo]);
+        else:
+           echo render(PROJECT_DIR.'/modulos/blog/diseno/blog/articulos/card.phtml',['articulo' => $articulo]);
+        endif;
+
+        endforeach;
+    endif;
+    die;
+}
 ?>

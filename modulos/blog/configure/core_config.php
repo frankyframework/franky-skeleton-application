@@ -24,6 +24,12 @@ return array(
                         'data' => ['0' => 'No', '1' => 'Si'],
                         'value' => '0'
                       ),
+                      array('path' => 'blog/paginacion/tipo',
+                      'type' => 'select',
+                      'label' => 'Tipo de paginación',
+                      'data' => ['normal' => 'Normal', 'ajax' => 'Ajax'],
+                      'value' => 'normal'
+                    )  
    
           ),
          ),
@@ -61,7 +67,7 @@ return array(
                    
           )    
        
-  )
+      )
 );
 
 ?>
