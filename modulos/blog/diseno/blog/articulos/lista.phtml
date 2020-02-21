@@ -15,7 +15,7 @@
 
         <?php endforeach; ?>
                 </div>
-                <?php if(getCoreConfig('base/debug/ip') == 'normal'): ?>
+                <?php if(getCoreConfig('blog/paginacion/tipo') == 'normal'): ?>
                 <div class="w-xxxx-12 cont-paginar"><?php echo render("widget.paginar.phtml"); ?></div>
                 <?php else: ?>
                     <div class="w-xxxx-12 cont-paginar"><?php echo render("widget.paginar.ajax.phtml"); ?></div>
