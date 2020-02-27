@@ -39,6 +39,7 @@ if (is_array($MyFrankyMonster->MyJQueyfile())) {
 
 $js[] = "/public/js/viewport.js";
 $js[] = "/public/js/funciones.js";
+$js[] = "/public/js/blocks.js";
 $js[] = "/public/js/franky.mobile.js";
 
 if (is_array($MyFrankyMonster->MyJSFile())) {
@@ -73,7 +74,17 @@ if (is_array($MyMetatag->getJs(false))) {
 
         function isMobile(){ return <?php echo ($Mobile_detect->isMobile() ? 'true' : 'false'); ?>; };
 
-     -->
+        <?php
+        if(file_exists(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/configure/blocks.php"))
+        {
+            $blocks = include(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/configure/blocks.php");
+            echo 'var blocks_html = '.$blocks.';';
+        }
+        else{
+            echo 'var blocks_html ={};';
+        }   
+        ?>
+     // -->
     </script>
 <?php
 if(getCoreConfig('base/debug/production')){

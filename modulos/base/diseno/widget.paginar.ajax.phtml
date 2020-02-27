@@ -1,0 +1,138 @@
+<?php
+$u = parse_url($MyRequest->getURI());
+$uri = $u["path"]."?";
+
+$request = $MyRequest->getRequest();
+if(!empty($request))
+{
+    unset($request["my_url_friendly"]);
+    foreach ($request as $k => $v)
+    {
+      if(!in_array(strtolower($k),array("my_url_friendly","page","tampag","order","por")))
+      {
+        if(is_array($v))
+        {
+          foreach($v as $_v)
+          {
+            $uri .= $MyRequest->Sanitizacion($k)."[]=".$_v."&amp;";
+          }
+
+        }
+        else {
+            $uri .= $MyRequest->Sanitizacion($k)."=".$v."&amp;";
+        }
+
+      }
+        elseif(strtolower($k) == "order")
+        {
+            $uri .= "order=".$MyPaginacion->getOrden()."&";
+        }
+        elseif(strtolower($k) == "por")
+        {
+            $uri .= "por=".$MyPaginacion->getCampoOrden()."&";
+        }
+        elseif(strtolower($k) == "tampag")
+        {
+            $uri .= "tampag=".$MyPaginacion->getTampageDefault()."&";
+        }
+    }
+}
+
+$terminamosconel        = $MyPaginacion->getPage() * $MyPaginacion->getTampageDefault();
+$maxPage		= ceil($MyPaginacion->getTotal() / $MyPaginacion->getTampageDefault());
+
+
+?>
+<div class="cont_paginar_ajax">
+
+</div>
+        
+<script>
+    var maxPage = <?=$maxPage?>;
+    var page = <?=$MyPaginacion->getPage()?>;
+    var controlPAgeAjax = true;
+    function getPaginar()
+    {
+        if(page < maxPage)
+        {
+            if(page == 1)
+            {
+                page++;
+                $('.cont_paginar_ajax').html('<a  class="nav_right paginar_net_ajax"  href="<?=$uri?>page='+(page)+'">Siguiente </a>');
+                $('.paginar_net_ajax').click(function(e){
+                    e.preventDefault();
+                    getDataAjaxPaginar($(this).attr('href'));
+                });
+            }
+            else if(page == 2)
+            {
+                page++;
+                $('.cont_paginar_ajax').html('<a  class="nav_right paginar_net_ajax"  href="<?=$uri?>page='+(page)+'">Ver todos </a>');
+                $('.paginar_net_ajax').click(function(e){
+                    e.preventDefault();
+                    getDataAjaxPaginar($(this).attr('href'));
+                });
+            }
+            else{
+                page++;
+                
+                $('.cont_paginar_ajax').empty();
+                
+                $(window).scroll(function () {
+                    if(controlPAgeAjax == true)
+                    {
+                        if ($(this).scrollTop() > $('.cont_paginar_ajax').offset().top-300) {
+                            getDataAjaxPaginar('<?=$uri?>page='+(page));
+                            controlPAgeAjax = false;
+                        } 
+                    }
+                });
+            
+            }
+        }
+        else{
+            $('.cont_paginar_ajax').empty();
+            controlPAgeAjax = false;
+        }
+    }
+    
+
+    getPaginar();
+
+    var getDataAjaxPaginar = function(url)
+    {
+        $.ajax({
+            type: "GET",
+            headers: {
+             
+            },
+            url: url,
+            beforeSend: function(){
+                var loader = $('<div id="preloaderfullpageBlog" style="'+window.loaderStyle.replace('absolute','relative')+'">&nbsp;<'+'/div>');
+                $('.content_result_data_list').prepend(loader);
+                $('.content_result_data_list').css({'overflow':'hidden'});
+            },
+            success: function (data) {
+                $('.content_result_data_list').append(data);
+                
+
+                $('#preloaderfullpageBlog').fadeOut('slow',function(){
+                        $(this).remove();
+                        $('.content_result_data_list').css({'overflow':'visible'});
+                        getPaginar();
+                });
+                controlPAgeAjax = true;
+            },
+            error: function (data) {
+                controlPAgeAjax = true;
+                $('#preloaderfullpageBlog').fadeOut('slow',function(){
+                        $(this).remove();
+                        $('.content_result_data_list').css({'overflow':'visible'});
+                });
+            }
+        });
+
+
+    };
+</script>
+

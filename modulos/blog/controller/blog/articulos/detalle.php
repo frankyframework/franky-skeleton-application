@@ -82,8 +82,8 @@ if($total > 0)
      
 
         $ratingSchema->setBestRating("5");
-        $ratingSchema->setRatingValue($blog_detalle["cal"]);
-        $ratingSchema->setReviewCount($blog_detalle["t_cal"]);
+       // $ratingSchema->setRatingValue($blog_detalle["cal"]);
+       // $ratingSchema->setReviewCount($blog_detalle["t_cal"]);
         $personSchema->setName($registro["usuario"]);
 
         $schema->setHeadline($registro["titulo"]);

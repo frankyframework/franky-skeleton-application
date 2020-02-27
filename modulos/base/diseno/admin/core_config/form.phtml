@@ -67,6 +67,9 @@
                       <?php echo makeHTMLImg($core_config_db[$config['path']],"","","",'style="max-width: 100px;"'); ?>
                   <?php endif; ?>
                 </div>
+              <?php endif; 
+               if(isset($config['html'])): ?>  
+               <?=$config['html']?>
               <?php endif;
 
 
