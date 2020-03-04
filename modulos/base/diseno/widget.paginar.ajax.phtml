@@ -43,10 +43,10 @@ $maxPage		= ceil($MyPaginacion->getTotal() / $MyPaginacion->getTampageDefault())
 
 
 ?>
-<div class="cont_paginar_ajax">
+<div class="cont_paginar_ajax w-xxxx-12">
 
 </div>
-        
+
 <script>
     var maxPage = <?=$maxPage?>;
     var page = <?=$MyPaginacion->getPage()?>;
@@ -58,7 +58,7 @@ $maxPage		= ceil($MyPaginacion->getTotal() / $MyPaginacion->getTampageDefault())
             if(page == 1)
             {
                 page++;
-                $('.cont_paginar_ajax').html('<a  class="nav_right paginar_net_ajax"  href="<?=$uri?>page='+(page)+'">Siguiente </a>');
+                $('.cont_paginar_ajax').html('<a  class="nav_right paginar_net_ajax"  href="<?=$uri?>page='+(page)+'">Mostrar m&aacute;s </a>');
                 $('.paginar_net_ajax').click(function(e){
                     e.preventDefault();
                     getDataAjaxPaginar($(this).attr('href'));
@@ -67,7 +67,7 @@ $maxPage		= ceil($MyPaginacion->getTotal() / $MyPaginacion->getTampageDefault())
             else if(page == 2)
             {
                 page++;
-                $('.cont_paginar_ajax').html('<a  class="nav_right paginar_net_ajax"  href="<?=$uri?>page='+(page)+'">Ver todos </a>');
+                $('.cont_paginar_ajax').html('<a  class="nav_right paginar_net_ajax"  href="<?=$uri?>page='+(page)+'">Mostrar todo </a>');
                 $('.paginar_net_ajax').click(function(e){
                     e.preventDefault();
                     getDataAjaxPaginar($(this).attr('href'));
@@ -75,19 +75,19 @@ $maxPage		= ceil($MyPaginacion->getTotal() / $MyPaginacion->getTampageDefault())
             }
             else{
                 page++;
-                
+
                 $('.cont_paginar_ajax').empty();
-                
+
                 $(window).scroll(function () {
                     if(controlPAgeAjax == true)
                     {
                         if ($(this).scrollTop() > $('.cont_paginar_ajax').offset().top-300) {
                             getDataAjaxPaginar('<?=$uri?>page='+(page));
                             controlPAgeAjax = false;
-                        } 
+                        }
                     }
                 });
-            
+
             }
         }
         else{
@@ -95,7 +95,7 @@ $maxPage		= ceil($MyPaginacion->getTotal() / $MyPaginacion->getTampageDefault())
             controlPAgeAjax = false;
         }
     }
-    
+
 
     getPaginar();
 
@@ -104,7 +104,7 @@ $maxPage		= ceil($MyPaginacion->getTotal() / $MyPaginacion->getTampageDefault())
         $.ajax({
             type: "GET",
             headers: {
-             
+
             },
             url: url,
             beforeSend: function(){
@@ -114,7 +114,7 @@ $maxPage		= ceil($MyPaginacion->getTotal() / $MyPaginacion->getTampageDefault())
             },
             success: function (data) {
                 $('.content_result_data_list').append(data);
-                
+
 
                 $('#preloaderfullpageBlog').fadeOut('slow',function(){
                         $(this).remove();
@@ -135,4 +135,3 @@ $maxPage		= ceil($MyPaginacion->getTotal() / $MyPaginacion->getTampageDefault())
 
     };
 </script>
-
