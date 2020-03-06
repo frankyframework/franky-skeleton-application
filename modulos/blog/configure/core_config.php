@@ -33,6 +33,30 @@ return array(
    
           ),
          ),
+         'blog-rss' => array(
+          'menu' => "BLOG RSS",
+          'title' => "RSS de articulos",
+          'config' =>  array(
+                      array('path' => 'blog/rss/titulo',
+                        'type' => 'text',
+                        'label' => 'Titulo',
+                        'validation' => array(),
+                        'value' => 'Titulo RSS'
+                      ),
+                      array('path' => 'blog/rss/descripcion',
+                      'type' => 'text',
+                      'label' => 'Descripcion',
+                      'validation' => array(),
+                      'value' => 'Descripcion RSS'
+                      ),
+                      array('path' => 'blog/rss/autor',
+                      'type' => 'text',
+                      'label' => 'Generador RSS',
+                      'validation' => array(),
+                      'value' => 'Generador RSS'
+                      ),
+                    )
+            ),
        'blog-calificaciones' => array(
           'menu' => "BLOG REVIEWS",
           'title' => "Calificación y comentarios de articulos",
