@@ -58,7 +58,7 @@ $maxPage		= ceil($MyPaginacion->getTotal() / $MyPaginacion->getTampageDefault())
             if(page == 1)
             {
                 page++;
-                $('.cont_paginar_ajax').html('<a  class="nav_right paginar_net_ajax"  href="<?=$uri?>page='+(page)+'">Mostrar m&aacute;s </a>');
+                $('.cont_paginar_ajax').html('<a  class="nav_right paginar_net_ajax"  href="<?=$uri?>page='+(page)+'">Mostrar m&aacute;s </'+'a>');
                 $('.paginar_net_ajax').click(function(e){
                     e.preventDefault();
                     getDataAjaxPaginar($(this).attr('href'));
@@ -67,7 +67,7 @@ $maxPage		= ceil($MyPaginacion->getTotal() / $MyPaginacion->getTampageDefault())
             else if(page == 2)
             {
                 page++;
-                $('.cont_paginar_ajax').html('<a  class="nav_right paginar_net_ajax"  href="<?=$uri?>page='+(page)+'">Mostrar todo </a>');
+                $('.cont_paginar_ajax').html('<a  class="nav_right paginar_net_ajax"  href="<?=$uri?>page='+(page)+'">Mostrar todo </'+'a>');
                 $('.paginar_net_ajax').click(function(e){
                     e.preventDefault();
                     getDataAjaxPaginar($(this).attr('href'));
