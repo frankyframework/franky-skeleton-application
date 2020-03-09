@@ -14,13 +14,21 @@
               <li><a href="<?=$MyRequest->url(CONTACTANOS)?>">CONTACTO</a></li>
           </ul>
       </li>
+      <?php if(getCoreConfig('base/empresa/redes')): ?>
       <li class="_share">
           <ul class="_ul_redes">
-              <li><a class="_li_share _face" target="_blank" href="https://www.facebook.com//"></a></li>
-              <li><a class="_li_share _instagram" target="_blank"  href="https://www.instagram.com//"></a></li>
-              <li><a class="_li_share _twitter" target="_blank"  href="https://twitter.com/"></a></li>
-          </ul>
+              <?php if(getCoreConfig('base/empresa/facebook')): ?>
+              <li><a class="_li_share _face" target="_blank" href="<?=getCoreConfig('base/empresa/facebook')?>"></a></li>
+              <?php endif; ?>
+              <?php if(getCoreConfig('base/empresa/instagram')): ?>
+              <li><a class="_li_share _instagram" target="_blank"  href="<?=getCoreConfig('base/empresa/instagram')?>"></a></li>
+              <?php endif; ?>
+              <?php if(getCoreConfig('base/empresa/twitter')): ?>
+              <li><a class="_li_share _twitter" target="_blank"  href="<?=getCoreConfig('base/empresa/twitter')?>"></a></li>
+              <?php endif; ?>
+            </ul>
       </li>
+      <?php endif; ?>
       <li class="_login">
           <ul>
               <?php echo render( "widget_login.phtml"); ?>

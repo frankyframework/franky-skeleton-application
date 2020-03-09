@@ -35,6 +35,99 @@ return array(
 
           )
   ),
+  'empresa' => array(
+      'menu' => "EMPRESA",
+      'title' => "Configuración Empresa",
+      'config' =>  array(
+          array('path' => 'base/empresa/contacto',
+          'type' => 'select',
+          'label' => 'Mostrar medios de contato',
+          'validation' => array('required' => true),
+          'data' => ['0' => 'No','1' => 'Sí'],
+          'value' => '1'
+          ),
+          array('path' => 'base/empresa/ciudad',
+          'type' => 'text',
+          'label' => 'Ciudad',
+          'validation' => array('required' => false),
+          'value' => 'Ciudad de México'
+        ),
+        array('path' => 'base/empresa/municipio',
+          'type' => 'text',
+          'label' => 'Municipio',
+          'validation' => array('required' => false),
+          'value' => 'CDMX'
+        ),
+        array('path' => 'base/empresa/pais',
+          'type' => 'text',
+          'label' => 'Pais',
+          'validation' => array('required' => false),
+          'value' => 'Mexico'
+        ),
+          array('path' => 'base/empresa/calle',
+          'type' => 'text',
+          'label' => 'Calle',
+          'validation' => array('required' => false),
+          'value' => 'Calle'
+        ),
+        array('path' => 'base/empresa/numero',
+          'type' => 'text',
+          'label' => 'Número',
+          'validation' => array('required' => false),
+          'value' => '666'
+        ),
+        array('path' => 'base/empresa/colonia',
+          'type' => 'text',
+          'label' => 'Colonia',
+          'validation' => array('required' => false),
+          'value' => 'Colonia'
+        ),
+        array('path' => 'base/empresa/cp',
+          'type' => 'text',
+          'label' => 'Código postal',
+          'validation' => array('required' => false),
+          'value' => '0000'
+        ),
+          array('path' => 'base/empresa/email',
+          'type' => 'text',
+          'label' => 'E-mail',
+          'validation' => array('email' => true),
+          'value' => 'contacto@cloudstudio.mx'
+        ),
+          array('path' => 'base/empresa/telefono',
+          'type' => 'text',
+          'label' => 'Teléfono',
+          'validation' => array('required' => false),
+          'value' => '+52 (55) 00-00-00-00'
+        ),
+        array('path' => 'base/empresa/redes',
+                  'type' => 'select',
+                  'label' => 'Mostrar redes sociales',
+                  'validation' => array('required' => true),
+                  'data' => ['0' => 'No','1' => 'Sí'],
+                  'value' => '1'
+                  ),
+        array('path' => 'base/empresa/facebook',
+          'type' => 'text',
+          'label' => 'Facebook',
+          'validation' => array('url' => true),
+          'value' => 'https://www.facebook.com/'
+        ),
+        array('path' => 'base/empresa/twitter',
+        'type' => 'text',
+        'label' => 'Twitter',
+        'validation' => array('url' => true),
+        'value' => 'https://www.twitter.com/'
+        ),
+        array('path' => 'base/empresa/instagram',
+        'type' => 'text',
+        'label' => 'Instagram',
+        'validation' => array('url' => true),
+        'value' => 'https://www.instagram.com/'
+      ),
+
+    )
+),
   'user' => array(
           'menu' => "USUARIO",
           'title' => "Configuración de usuario",
