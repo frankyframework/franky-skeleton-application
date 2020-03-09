@@ -28,8 +28,11 @@
       </li>
       <li class="_languaje">
           <ul>
-              <?php if($_SESSION["lang"] == "es_MX"): ?><li class="first"><a href="/lang.php?lang=en_US&amp;callback=<?php echo $callbacks_idioma["en_US"]; ?>">EN</a></li><?php endif; ?>
-              <?php if($_SESSION["lang"] == "en_US"): ?><li class="first"><a href="/lang.php?lang=es_MX&amp;callback=<?php echo $callbacks_idioma["es_MX"]; ?>">ES</a></li><?php endif; ?>
+              <?php if(!empty($callbacks_idioma)): ?>
+                <?php foreach($callbacks_idioma as $key_lang => $url): ?>
+                     <?php if($_SESSION["lang"] != $key_lang): ?><li class="first"><a href="/lang.php?lang=<?=$key_lang?>&amp;callback=<?php echo $callbacks_idioma[$key_lang]; ?>"><?= strtoupper(substr($key_lang,0,2))?></a></li><?php endif; ?>
+                <?php endforeach; ?>
+              <?php endif; ?>
           </ul>
       </li>
     </ul>

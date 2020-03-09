@@ -4,5 +4,7 @@
         <li  class=""><a class="" href="/logout.php"><?php echo _("Salir"); ?></a></li>
 	<?php else: ?>
 		<li  class="first"><a class="" href="<?php echo $MyRequest->url(LOGIN); ?>">Entrar</a></li>
-		<li  class=""><a class="" href="<?php echo $MyRequest->url(REGISTRO); ?>">Crear cuenta</a></li>
+                <?php if(defined('REGISTRO')): ?> 	
+                    <li  class=""><a class="" href="<?php echo $MyRequest->url(REGISTRO); ?>">Crear cuenta</a></li>
+                <?php endif; ?>
 	<?php endif; ?>

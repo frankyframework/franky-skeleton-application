@@ -1,9 +1,12 @@
 <div class="content">
     <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
     <h1 class="titulo_seccion_admin">Configuracion de sistema</h1>
-    <div class="w-xxxx-12">
     <?php echo $Form->openTag(); ?>
+    <div class="w-xxxx-12">
+    
     <?php echo $Form->getRow('guardar'); ?>
+    </div>
+    <div class="w-xxxx-12">
     <?php
     if(!empty($core_config)):
       foreach($core_config as $key_config => $val_config):
@@ -79,9 +82,12 @@
       endforeach;
     endif;
     ?>
+    </div>
+    <div class="w-xxxx-12">
     <?php echo $Form->getRow('guardar'); ?>
-    <?php echo $Form->endTag(); ?>
+    
    </div>
+    <?php echo $Form->endTag(); ?>
 </div>
 
 <script>
