@@ -1,6 +1,7 @@
 <?php
 return array
 (
+    "sitemap.xml" => PROJECT_DIR."/modulos/base/controller/sitemap.php",
     "lang.php" => PROJECT_DIR."/modulos/base/controller/lang.php",
     "login.php" => PROJECT_DIR."/modulos/base/controller/login.php",
     "logout.php" => PROJECT_DIR."/modulos/base/controller/logout.php",

@@ -59,9 +59,6 @@ if(!empty($amigable_categoria_context))
     $MyCategoriaBlog->getData($amigable_categoria_context);
     $registro = $MyCategoriaBlog->getRows();
 
-    $registro['url'] = $MyRequest->url(BLOG_CATEGORIA,['categoria' => $registro['friendly']],true);
-    $MyMetatag->setVars($registro);
-
     $permisos = json_decode($registro['permisos'],true);
     if(!empty($permisos) && !$MySession->LoggedIn())
     {
@@ -84,6 +81,7 @@ echo '<?xml version="1.0" encoding="iso-8859-1"?>';
     <language><?=$locale?></language>
     <description><?=getCoreConfig('blog/rss/descripcion')?></description>
     <generator><?=getCoreConfig('blog/rss/autor')?></generator>
+    <?php if(!empty($lista_articulos_blog)): ?>
     <?php foreach($lista_articulos_blog as $articulo): ?>
     <item>
         <title><?=$articulo['titulo']?></title>
@@ -96,5 +94,6 @@ echo '<?xml version="1.0" encoding="iso-8859-1"?>';
       <?php /*  <content:encoded><![CDATA[<?=$articulo['articulo']?>]]></content:encoded> */ ?>
     </item>
     <?php endforeach; ?>
+    <?php endif; ?>
 </channel>
 </rss>
