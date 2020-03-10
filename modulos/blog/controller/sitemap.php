@@ -9,23 +9,25 @@ $blog = [
     ["loc" => BLOG, "vars" => array(),"priority" => "1.0","changefreq" => "daily"],
 ];
 
-$MyCategoriaBlog->setPage(1);
-$MyCategoriaBlog->setTampag(10000);
-$MyCategoriaBlog->getData();
-while($registro = $MyCategoriaBlog->getRows()){
+if (defined('BLOG_CATEGORIA')) {
+    $MyCategoriaBlog->setPage(1);
+    $MyCategoriaBlog->setTampag(10000);
+    $MyCategoriaBlog->getData();
+    while($registro = $MyCategoriaBlog->getRows()){
 
- 
-    $permisos = json_decode($registro['permisos'],true);
-    if(!empty($permisos) && !$MySession->LoggedIn())
-    {
-        continue;
-    }
-    if(!empty($permisos) && !in_array($MySession->GetVar('nivel'),$permisos))
-    {
-        continue;
-    }
+    
+        $permisos = json_decode($registro['permisos'],true);
+        if(!empty($permisos) && !$MySession->LoggedIn())
+        {
+            continue;
+        }
+        if(!empty($permisos) && !in_array($MySession->GetVar('nivel'),$permisos))
+        {
+            continue;
+        }
 
-    $blog[] = ["loc" => BLOG_CATEGORIA, "vars" =>['categoria' => $registro['amigable_categoria']],"priority" => "0.8","changefreq" => "daily"];  
+        $blog[] = ["loc" => BLOG_CATEGORIA, "vars" =>['categoria' => $registro['amigable_categoria']],"priority" => "0.8","changefreq" => "daily"];  
+    }
 }
 
 
