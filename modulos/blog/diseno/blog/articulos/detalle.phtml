@@ -6,11 +6,12 @@
             <?php echo render("blog/lateral.phtml"); ?>
         </div>
         <div class="w-xxxx-9 w-xxx-9 w-xx-8 cont-cont-gral">
+            <?php if(!empty($blog_detalle["imagen_portada"])): ?>
           <div class="blog_thumbnail_single_page mb-30">
               <img src="<?php echo $blog_detalle["imagen_portada"]; ?>" alt="">
             
           </div>
-
+            <?php endif; ?>
              <h1><?php print $blog_detalle["titulo"]; ?></h1>
              <div class="cont_articulos">
                  <?php echo $blog_detalle["contenido"]; ?>
