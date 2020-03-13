@@ -34,10 +34,13 @@ else{
 ?>
 </div>
 
-<div class="slider slider-nav">
+
 <?php
-if(!empty($data_detalle['images']))
+if(!empty($data_detalle['images'])   && count($data_detalle['images']) > 1)
 {
+    ?>
+    <div class="slider slider-nav">
+    <?php
     foreach($data_detalle["images"] as $foto)
     {
         //  echo $MyConfigure->getServerUploadDir()."/catalog/products/".$data_detalle["id_ori"].'/'.$foto['img'];
@@ -51,9 +54,12 @@ if(!empty($data_detalle['images']))
         <?php
         }
     }
+    ?>
+    </div>
+    <?php
 }
 ?>
-</div>
+
 </div>
 
 <script>

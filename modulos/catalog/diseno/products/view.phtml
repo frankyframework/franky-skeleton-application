@@ -33,7 +33,9 @@
                         <div class="_description"><?=$data_detalle['description']?></div>
                     </div>
                 </div>
-
+                <?php if(isset($catalogo_relacionados) && !empty($catalogo_relacionados)): ?>
+                    <?=render('products/relacionados.phtml',['catalogo_relacionados' =>$catalogo_relacionados])?>
+                <?php endif; ?>
                 <div class="w-xxxx-12">
                 <?=getFrmCalificacion('catalog','catalog_products',$data_detalle['id_ori']); ?>
                 </div>
