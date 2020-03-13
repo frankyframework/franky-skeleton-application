@@ -1,8 +1,8 @@
 <div class="w-xxxx-12 _catalog_result">
     <div class="content">
         <?php if(!empty($image_category)): ?>
-        <?= makeHTMLImg($image_category, "", "", "")?>
-        
+        <?= makeHTMLImg($image_category, "", "", "","class='image_100'")?>
+
         <?php endif; ?>
         <div class="w-xxxx-12">
             <?php if(getCoreConfig('catalog/product/buscadorlateral') == 1):?>
@@ -20,7 +20,8 @@
                     <div class="w-xxxx-12 cont-paginar"><?php echo render("widget.paginar.phtml"); ?></div>
 
                 <?php else: ?>
-                    <p>Sin resultados</p>
+                    <h2>No se encontraron pruductos</h2>
+                    <p>Intenta con otros términos de búsqueda.</p>
                 <?php endif; ?>
 
 
