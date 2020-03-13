@@ -246,7 +246,7 @@ function catalog_validaStockCarrito($id,$n)
     global $MyRequest;
     global $MyMessageAlert;
     $CatalogproductsModel = new \Catalog\model\CatalogproductsModel;
-    $CatalogproductsModel->getInfoProdcuto($id);
+    $CatalogproductsModel->getInfoProducto($id);
     $registro = $CatalogproductsModel->getRows();
 
     if($registro['in_stock'] == 0 || $registro['saleable'] == 0)
@@ -287,7 +287,7 @@ function catalog_validaStockCompra()
     if(!empty($productos_comprados)){
         foreach($productos_comprados['productos'] as $producto)
         {
-            $CatalogproductsModel->getInfoProdcuto($producto['id']);
+            $CatalogproductsModel->getInfoProducto($producto['id']);
             $registro = $CatalogproductsModel->getRows();
             if($registro['in_stock'] ==  0 || $registro["saleable"] == 0)
             {
@@ -337,7 +337,7 @@ function catalog_restaStock($pedido)
     {
         $CatalogproductsEntity->exchangeArray([]);
 
-        $CatalogproductsModel->getInfoProdcuto($producto['id']);
+        $CatalogproductsModel->getInfoProducto($producto['id']);
         $registro = $CatalogproductsModel->getRows();
 
         if($registro['stock_infinito'] == 0)
@@ -374,7 +374,7 @@ function catalog_addStock($pedido)
             {
                 $CatalogproductsEntity->exchangeArray([]);
 
-                $CatalogproductsModel->getInfoProdcuto($producto['id']);
+                $CatalogproductsModel->getInfoProducto($producto['id']);
                 $registro = $CatalogproductsModel->getRows();
 
                 if($registro['stock_infinito'] == 0)

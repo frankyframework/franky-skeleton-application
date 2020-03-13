@@ -186,7 +186,7 @@ function getCarrito()
   while($registro = $MyCarritoProducto->getRows())
   {
 
-      $MyProducto->getInfoProdcuto($registro["id_producto"]);
+      $MyProducto->getInfoProducto($registro["id_producto"]);
       $_registro = $MyProducto->getRows();
 
 
@@ -245,7 +245,7 @@ function getPedido($id,$uid=""){
     while($registro = $producto_pedidoModel->getRows())
     {
 
-        $MyProducto->getInfoProdcuto($registro["id_producto"]);
+        $MyProducto->getInfoProducto($registro["id_producto"]);
         $_registro = $MyProducto->getRows();
 
         $detalle_pedido['productos'][] = array("id" => $registro["id_producto"],

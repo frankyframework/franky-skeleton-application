@@ -14,7 +14,7 @@ class productos_inyectados  extends \Franky\Database\Mysql\objectOperations
     function getData($id)
     {
     /*   alias: nombre, precio, precio_descuento,imagen,link*/
-        return $this->objProductos->getInfoProdcuto($id);
+        return $this->objProductos->getInfoProducto($id);
     }
 }
 

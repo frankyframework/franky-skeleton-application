@@ -133,7 +133,7 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
 
 
 
-    function getInfoProdcuto($id)
+    function getInfoProducto($id)
     {
 
         $campos = ["catalog_products.id","precio","ecommerce_precios.incluye_iva","ecommerce_precios.iva","name as nombre","images as imagen","stock","url_key","min_qty","stock_infinito","saleable","in_stock","min_qty"];

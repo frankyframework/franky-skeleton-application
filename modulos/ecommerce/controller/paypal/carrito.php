@@ -18,7 +18,7 @@ $MyCarritoProducto->setOrdensql("id");
     {
         while($registro = $MyCarritoProducto->getRows())
         {
-            $MyProducto->getInfoProdcuto($registro["id_producto"]);
+            $MyProducto->getInfoProducto($registro["id_producto"]);
             $_registro = $MyProducto->getRows();
 
             $imagen = json_decode($_registro["imagen"],true);
