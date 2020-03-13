@@ -14,6 +14,7 @@
               <li><a href="<?=$MyRequest->url(CONTACTANOS)?>">CONTACTO</a></li>
           </ul>
       </li>
+     
       <?php if(getCoreConfig('base/empresa/redes')): ?>
       <li class="_share">
           <ul class="_ul_redes">
@@ -36,7 +37,7 @@
       </li>
       <li class="_languaje">
           <ul>
-              
+
               <?php if(!empty(getCoreConfig('base/theme/langs'))): ?>
                 <?php foreach(getCoreConfig('base/theme/langs') as $key_lang): ?>
                      <?php if($_SESSION["lang"] != $key_lang): ?><li class="first"><a href="/lang.php?lang=<?=$key_lang?>&amp;callback=<?php echo $callbacks_idioma[$key_lang]; ?>"><?= strtoupper(substr($key_lang,0,2))?></a></li><?php endif; ?>
