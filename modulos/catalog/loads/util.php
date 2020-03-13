@@ -5,6 +5,59 @@ function _catalog($txt)
     return dgettext("catalog",$txt);
 }
 
+function getImageCategorys($id)
+{
+    global $MyConfigure;
+    $CatalogcategoryModel = new Catalog\model\CatalogcategoryModel();
+    $CatalogcategoryEntity = new Catalog\entity\CatalogcategoryEntity();
+    $CatalogcategoryEntity->url_key($id);
+    $CatalogcategoryModel->setTampag(1);
+    $CatalogcategoryModel->setOrdensql("name ASC");
+    $CatalogcategoryModel->getData($CatalogcategoryEntity->getArrayCopy());
+    $total	= $CatalogcategoryModel->getTotal();
+
+    if($total > 0)
+    {
+
+        $data = $CatalogcategoryModel->getRows();
+        
+        if(!empty($data["image"]) && file_exists($MyConfigure->getServerUploadDir()."/catalog/category/".$data["image"]))
+        {
+            return imageResize($MyConfigure->getUploadDir()."/catalog/category/".$data["image"],1200,700, true);
+
+        }
+     
+    }
+    return '';
+}
+
+
+function getCategoryMenu()
+{
+    global $MyRequest;
+    $CatalogcategoryModel = new Catalog\model\CatalogcategoryModel();
+    $CatalogcategoryModel->setTampag(1000);
+    $CatalogcategoryModel->setOrdensql("name ASC");
+    $CatalogcategoryModel->getData();
+    $total			= $CatalogcategoryModel->getTotal();
+    $menu = '<li class="_nav_catalog">
+        <ul class="_ul_nav_catalog">';
+
+    if($total > 0)
+    {
+        while($registro = $CatalogcategoryModel->getRows())
+        {
+            $menu .= '<li><a href="'. $MyRequest->url(CATALOG_SEARCH_CATEGORY,[ 'categoria' => $registro['url_key']]).'">'.$registro['name'].'</a></li>';
+	    }
+    }
+
+    $menu .= '</ul>
+    </li>';
+
+    return $menu;
+}
+
+
 
 function getCatalogCategorys( $type="interface")
 {
@@ -26,6 +79,30 @@ function getCatalogCategorys( $type="interface")
     return $categorias;
 }
 
+function getImageSubcategorys($id)
+{
+    global $MyConfigure;
+    $CatalogsubcategoryModel = new Catalog\model\CatalogsubcategoryModel();
+    $CatalogsubcategoryEntity = new Catalog\entity\CatalogsubcategoryEntity();
+    $CatalogsubcategoryModel->setTampag(1);
+    $CatalogsubcategoryModel->setOrdensql("catalog_subcategory.name ASC");
+    $CatalogsubcategoryEntity->url_key($id);
+    $CatalogsubcategoryModel->getData($CatalogsubcategoryEntity->getArrayCopy());
+    $total	= $CatalogsubcategoryModel->getTotal();
+    
+
+    if($total > 0)
+    {
+        $data = $CatalogsubcategoryModel->getRows();
+        if(!empty($data["image"]) && file_exists($MyConfigure->getServerUploadDir()."/catalog/category/".$data["image"]))
+        {
+            return imageResize($MyConfigure->getUploadDir()."/catalog/category/".$data["image"],1200,700, true);
+        
+        }
+	
+    }
+    return '';
+}
 
 function getCatalogSubcategorys($id=null, $type="interface")
 {
@@ -50,7 +127,7 @@ function getCatalogSubcategorys($id=null, $type="interface")
             else
             {
                  $subcategorias[$registro["id_category"]][($type == "interface" ? $registro["url_key"] : $registro['id'])] = $registro["name"];
-          
+
             }
 	}
     }
@@ -82,7 +159,7 @@ function getCatalogBuscadorPrincipal()
     global $MyRequest;
     $BuscadorPrincipalForm =  new \Catalog\Form\BuscadorPrincipalForm('buscadorPrincipal');
     $BuscadorPrincipalForm->setAtributo('action',$MyRequest->url(CATALOG_SEARCH));
-    
+
     return render(PROJECT_DIR.'/modulos/catalog/diseno/widget.buscador.phtml',['BuscadorPrincipalForm' => $BuscadorPrincipalForm]);
 }
 
@@ -138,8 +215,8 @@ function catalog_getPriceMaxMinProduct()
 
 function catalog_setPriceEcommerce($data)
 {
-    
- 
+
+
     $PreciosModel   = new \Ecommerce\model\PreciosModel();
     $PreciosEntity  = new \Ecommerce\entity\PreciosEntity();
     $PreciosEntity2  = new \Ecommerce\entity\PreciosEntity();
@@ -152,7 +229,7 @@ function catalog_setPriceEcommerce($data)
         $PreciosEntity2->id_producto($data['id']);
         $PreciosEntity->id_moneda(1);
         $PreciosEntity->id_producto($data['id']);
-    
+
         if($PreciosModel->getData($PreciosEntity2->getArrayCopy()) == REGISTRO_SUCCESS)
         {
             $result2 = $PreciosModel->updateByIdProdcuto($PreciosEntity->getArrayCopy());
@@ -169,31 +246,31 @@ function catalog_validaStockCarrito($id,$n)
     global $MyRequest;
     global $MyMessageAlert;
     $CatalogproductsModel = new \Catalog\model\CatalogproductsModel;
-    $CatalogproductsModel->getInfoProdcuto($id);
+    $CatalogproductsModel->getInfoProducto($id);
     $registro = $CatalogproductsModel->getRows();
 
     if($registro['in_stock'] == 0 || $registro['saleable'] == 0)
     {
-        
+
         echo json_encode(array("error" => true,"message" => $MyMessageAlert->Message("catalog_produt_no_saleable",$registro['nombre'])));
-        
+
 
         die;
     }
 
     if($registro['stock_infinito'] ==  0 && $n > $registro['stock'])
     {
-        
+
         echo json_encode(array("error" => true,"message" => $MyMessageAlert->Message("catalog_stock_no_disponible",$registro['nombre'])));
-        
+
 
         die;
     }
     if( $n < $registro['min_qty'])
     {
-        
+
         echo json_encode(array("error" => true,"message" => $MyMessageAlert->Message("catalog_stock_minimo",$registro['nombre'])));
-        
+
 
         die;
     }
@@ -205,12 +282,12 @@ function catalog_validaStockCompra()
     global $MyMessageAlert;
     $Tokenizer = new \Franky\Haxor\Tokenizer;
     $productos_comprados = getCarrito();
-  
+
     $CatalogproductsModel = new \Catalog\model\CatalogproductsModel;
     if(!empty($productos_comprados)){
         foreach($productos_comprados['productos'] as $producto)
         {
-            $CatalogproductsModel->getInfoProdcuto($producto['id']);
+            $CatalogproductsModel->getInfoProducto($producto['id']);
             $registro = $CatalogproductsModel->getRows();
             if($registro['in_stock'] ==  0 || $registro["saleable"] == 0)
             {
@@ -219,7 +296,7 @@ function catalog_validaStockCompra()
                 {
                     $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("catalog_produt_no_saleable",$registro['nombre']));
                     $MyRequest->redirect($MyRequest->url(CATALOG_VIEW,['friendly' => $registro['url_key']]));
-                    
+
                 }else{
                     echo json_encode(array("error" => true,"message" => $MyMessageAlert->Message("catalog_produt_no_saleables",$registro['nombre'])));
                 }
@@ -233,7 +310,7 @@ function catalog_validaStockCompra()
                 {
                     $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("catalog_stock_no_disponible",$registro['nombre']));
                     $MyRequest->redirect($MyRequest->url(CATALOG_VIEW,['friendly' => $registro['url_key']]));
-                    
+
                 }else{
                     echo json_encode(array("error" => true,"message" => $MyMessageAlert->Message("catalog_stock_no_disponible",$registro['nombre'])));
                 }
@@ -242,8 +319,8 @@ function catalog_validaStockCompra()
             }
         }
     }
-  
-    
+
+
 }
 
 function catalog_restaStock($pedido)
@@ -259,8 +336,8 @@ function catalog_restaStock($pedido)
     foreach($detalle_pedido['productos'] as $producto)
     {
         $CatalogproductsEntity->exchangeArray([]);
-        
-        $CatalogproductsModel->getInfoProdcuto($producto['id']);
+
+        $CatalogproductsModel->getInfoProducto($producto['id']);
         $registro = $CatalogproductsModel->getRows();
 
         if($registro['stock_infinito'] == 0)
@@ -275,8 +352,8 @@ function catalog_restaStock($pedido)
 
             $CatalogproductsModel->save($CatalogproductsEntity->getArrayCopy());
         }
-        
-        
+
+
     }
 }
 
@@ -297,7 +374,7 @@ function catalog_addStock($pedido)
             {
                 $CatalogproductsEntity->exchangeArray([]);
 
-                $CatalogproductsModel->getInfoProdcuto($producto['id']);
+                $CatalogproductsModel->getInfoProducto($producto['id']);
                 $registro = $CatalogproductsModel->getRows();
 
                 if($registro['stock_infinito'] == 0)

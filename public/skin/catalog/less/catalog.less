@@ -16,7 +16,7 @@ main {
                 @media @medium { width: 30%; margin: 10px 1.66%; }
                 @media @small { width: 48%; margin: 10px 1%; }
 
-                ._widget_catalog_add_wishlist { position: absolute; right: 10px; top: 10px; z-index: 2;
+                ._widget_catalog_add_wishlist { position: absolute; right: 10px; top: 10px; z-index: 2; background-color: transparent; padding: 0; .box-shadow(none);
                     &:after { float: left; width: 32px; height: 32px; background: fade(@black, 50); text-align: center; line-height: 32px; font-family: @ico_font; content: "\e81c"; font-size: 2rem; color: @white; text-decoration: none; .radius(16px); }
                     &.active:after { color: @enfasis_color; background: fade(@white, 50); }
                 }
@@ -30,7 +30,7 @@ main {
                 a {  color: @black; text-decoration: none;
                     &:hover { color: @enfasis_color; }
                 }
-                ._widget_catalog_view_more { .opacity(0); position: absolute; right: 20px; top:70%; font-size: @font_size_txt; background-color: @enfasis_color; color: @white; display: inline-block; padding: 4px 8px; .transition; .box-shadow; .radius;
+                ._widget_catalog_view_more { .opacity(0); position: absolute; right: 20px; top:70%; font-size: @font_size_txt; line-height: 1rem; background-color: @enfasis_color; color: @white; display: inline-block; padding: 4px 8px; .transition; .box-shadow; .radius;
                     @media @small { .opacity(1); font-size: @font_size_txt*.8; top: 70%; right: 10px; }
                 }
                 &:hover {
@@ -66,9 +66,11 @@ main {
         ._product_info { padding: 0 10px 0 40px; box-sizing: border-box;
             @media @small { padding: 0 10px; }
             ._cont_buy { position: relative; float: left; width: 400px; padding: 20px; box-sizing: border-box; margin: 20px 0 0 0; border: solid 1px @soft_gray; .box-shadow(0px 0px 5px 5px rgba(0, 0, 0, 0.05)); .radius(8px);
+                @media @large { width: 310px; }
+                @media @medium { width: 310px; }
                 @media @small { width: 100%; }
             }
-            ._btn_whislist { position: absolute; top: 10px; right: 10px; z-index: 2; background-color: transparent;
+            ._btn_whislist { position: absolute; top: 10px; right: 10px; z-index: 2; background-color: transparent; .box-shadow(none);
                 &:hover { color: @black; }
                 &:before { font-family: @ico_font; content: "\e81c"; font-size: 2rem; }
                 &.active { color: @enfasis_color;
@@ -83,6 +85,7 @@ main {
             ._price { font-size: @font_size_txt*2; font-weight: bold; margin: 10px 0; }
             ._cont_more_info { position: relative; }
             ._cont_quantity { float: left; background-color: @ultra_soft_gray; width: 120px; margin-bottom: 10px; padding: 4px; .radius;
+                i { color: lighten(@black,50); }
                 a { float: left; width: 30px; height: 30px; text-align: center; line-height: 30px; color: @black; text-decoration: none; }
                 input { float: left; width: calc(~"100%" - 60px); height: 30px; background-color: @white; text-align: center; box-sizing: border-box; }
             }

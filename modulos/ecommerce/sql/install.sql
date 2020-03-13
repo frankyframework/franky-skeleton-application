@@ -173,23 +173,6 @@ insert  into `templates_email`(`nombre`,`status`,`fecha`,`Asunto`,`destinatario`
     CONSTRAINT `ecommerce_direccionesf_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
   ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
-  /*Table structure for table `ecommerce_log_status` */
-
-  DROP TABLE IF EXISTS `ecommerce_log_status`;
-
-  CREATE TABLE `ecommerce_log_status` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `id_pedido` int(11) NOT NULL,
-    `id_user` int(11) NOT NULL,
-    `status` varchar(30) NOT NULL,
-    `fecha` datetime NOT NULL,
-    `auto` int(11) NOT NULL,
-    `info` text,
-    PRIMARY KEY (`id`),
-    KEY `id_pedido` (`id_pedido`),
-    KEY `id_user` (`id_user`),
-    CONSTRAINT `ecommerce_log_status_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `ecommerce_pedidos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-  ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
   /*Table structure for table `ecommerce_monedas` */
 
@@ -224,11 +207,27 @@ insert  into `templates_email`(`nombre`,`status`,`fecha`,`Asunto`,`destinatario`
     `subtotal` float NOT NULL,
     `iva` float NOT NULL,
     PRIMARY KEY (`id`),
-    KEY `id_direccion_envio` (`id_direccion_envio`),
-    KEY `id_direccion_facturacion` (`id_direccion_facturacion`),
     KEY `uid` (`uid`),
     CONSTRAINT `ecommerce_pedidos_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`id`)
   ) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+
+  /*Table structure for table `ecommerce_log_status` */
+
+  DROP TABLE IF EXISTS `ecommerce_log_status`;
+
+  CREATE TABLE `ecommerce_log_status` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `id_pedido` int(11) NOT NULL,
+    `id_user` int(11) NOT NULL,
+    `status` varchar(30) NOT NULL,
+    `fecha` datetime NOT NULL,
+    `auto` int(11) NOT NULL,
+    `info` text,
+    PRIMARY KEY (`id`),
+    KEY `id_pedido` (`id_pedido`),
+    KEY `id_user` (`id_user`),
+    CONSTRAINT `ecommerce_log_status_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `ecommerce_pedidos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
   /*Table structure for table `ecommerce_precios` */
 
