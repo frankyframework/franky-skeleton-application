@@ -5,6 +5,31 @@ function _catalog($txt)
     return dgettext("catalog",$txt);
 }
 
+function getImageCategorys($id)
+{
+    global $MyConfigure;
+    $CatalogcategoryModel = new Catalog\model\CatalogcategoryModel();
+    $CatalogcategoryEntity = new Catalog\entity\CatalogcategoryEntity();
+    $CatalogcategoryEntity->url_key($id);
+    $CatalogcategoryModel->setTampag(1);
+    $CatalogcategoryModel->setOrdensql("name ASC");
+    $CatalogcategoryModel->getData($CatalogcategoryEntity->getArrayCopy());
+    $total	= $CatalogcategoryModel->getTotal();
+
+    if($total > 0)
+    {
+
+        $data = $CatalogcategoryModel->getRows();
+        
+        if(!empty($data["image"]) && file_exists($MyConfigure->getServerUploadDir()."/catalog/category/".$data["image"]))
+        {
+            return imageResize($MyConfigure->getUploadDir()."/catalog/category/".$data["image"],1200,700, true);
+
+        }
+     
+    }
+    return '';
+}
 
 
 function getCategoryMenu()
@@ -54,6 +79,30 @@ function getCatalogCategorys( $type="interface")
     return $categorias;
 }
 
+function getImageSubcategorys($id)
+{
+    global $MyConfigure;
+    $CatalogsubcategoryModel = new Catalog\model\CatalogsubcategoryModel();
+    $CatalogsubcategoryEntity = new Catalog\entity\CatalogsubcategoryEntity();
+    $CatalogsubcategoryModel->setTampag(1);
+    $CatalogsubcategoryModel->setOrdensql("catalog_subcategory.name ASC");
+    $CatalogsubcategoryEntity->url_key($id);
+    $CatalogsubcategoryModel->getData($CatalogsubcategoryEntity->getArrayCopy());
+    $total	= $CatalogsubcategoryModel->getTotal();
+    
+
+    if($total > 0)
+    {
+        $data = $CatalogsubcategoryModel->getRows();
+        if(!empty($data["image"]) && file_exists($MyConfigure->getServerUploadDir()."/catalog/category/".$data["image"]))
+        {
+            return imageResize($MyConfigure->getUploadDir()."/catalog/category/".$data["image"],1200,700, true);
+        
+        }
+	
+    }
+    return '';
+}
 
 function getCatalogSubcategorys($id=null, $type="interface")
 {

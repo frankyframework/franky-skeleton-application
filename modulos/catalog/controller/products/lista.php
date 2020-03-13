@@ -13,7 +13,6 @@ $subcategoria      = $MyRequest->getUrlParam('subcategoria',$MyRequest->getReque
 $precio	= $MyRequest->getRequest('precio');
 
 
-$MyPaginacion = new paginacion();
 $CatalogproductsModel = new CatalogproductsModel();
 $CatalogproductsEntity = new CatalogproductsEntity();
 $CatalogcategoryModel = new CatalogcategoryModel();
@@ -43,6 +42,15 @@ if(!empty($subcategoria))
     $CatalogproductsModel->setSubcategoriaArray([$subcategoria]);
   }
 
+}
+$image_category = '';
+if($MyFrankyMonster->MySeccion() == CATALOG_SEARCH_CATEGORY)
+{
+    $image_category = getImageCategorys($categoria);   
+}
+if($MyFrankyMonster->MySeccion() == CATALOG_SEARCH_SUBCATEGORY)
+{
+    $image_category = getImageSubcategorys($subcategoria);   
 }
 
 
