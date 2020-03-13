@@ -1,0 +1,8 @@
+<div class="w-xxxx-12">
+    <h3>Productos relacionados</a>
+</div>
+<div class="w-xxxx-12 carrucel_catalogo_home">
+<?php foreach($catalogo_relacionados as $data): ?>
+    <?=render(PROJECT_DIR.'/modulos/catalog/diseno/products/card.phtml',['data' => $data]);?>
+<?php endforeach ;?>
+</div>
