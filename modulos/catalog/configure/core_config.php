@@ -17,7 +17,13 @@ return array(
                     'value' => 1
                   ),
                    
-              
+                  array('path' => 'catalog/product/showprice',
+                    'type' => 'select',
+                    'label' => 'Mostrar precios',
+                    'data' => ['0' => 'No', '1' => 'Si'],
+                    'value' => 1
+                  ),
+                   
           )
   ),
     'catalog-calificaciones' => array(
