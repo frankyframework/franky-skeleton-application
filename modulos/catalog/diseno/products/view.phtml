@@ -15,7 +15,7 @@
                             <span class="_stock">Stock: <?=$data_detalle['stock']?></span>
                             <?php if(getCoreConfig('catalog/product/showprice')== 1): ?>
                             <span class="_price"><?php echo getFormatoPrecio($data_detalle['price'],false); ?></span>
-                            
+                            <?php endif ;?>
                             <div class="_cont_more_info">
                                 <?php echo render(PROJECT_DIR.'/modulos/catalog/diseno/ecommerce/boton.add.phtml',
                                 array("id_producto" => $data_detalle["id"],
@@ -27,7 +27,7 @@
                                 'MyAccessList' => $MyAccessList,
                                 'contactanosForm' => $contactanosForm)); ?>
                             </div>
-                            <?php endif ;?>
+                            
                             <?php if(getCoreConfig('catalog/wishlist/enabled')== 1): ?>
                                 <?=render(PROJECT_DIR.'/modulos/wishlist/diseno/widget.wishlist.phtml',['id' =>$data_detalle['id_wishlist'],'seccion' => 'catalog_products'])?>
                             <?php endif ;?>
