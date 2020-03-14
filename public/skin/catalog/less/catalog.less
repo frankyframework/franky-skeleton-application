@@ -7,11 +7,20 @@
 main {
 
 ///////////////// Resultados
+    .cont_filter {
+        ul { .ul-reset; padding-left: 10px;
+            li { float: left; width: 100%; .ul-reset; margin-bottom: 10px;
+                .title_filter { display: inline-block; width: calc(~"100%" - 20px); border: 1px solid @soft_gray; padding: 10px; box-sizing: border-box; .radius; }
+                input#filtro_precio { color: @black !important; width: 90%; }
+                .ui-widget.ui-widget-content { width: 90%; }
+            }
+        }
+    }
     .cont_widget_catalog_filter { float: left; position: relative; width: 20%; box-sizing: border-box;
         h3 { margin: 0; padding: 0; }
     }
     .cont_widget_catalog_results { float: left; position: relative; width: 80%; box-sizing: border-box;
-        &._no_filters { width: 100%;
+
             ._card_widget_catalog_product_result { float: left; position: relative; width: 23%; margin: 10px 1%;
                 @media @medium { width: 30%; margin: 10px 1.66%; }
                 @media @small { width: 48%; margin: 10px 1%; }
@@ -42,7 +51,9 @@ main {
                     @media @small { font-size: @font_size_txt; }
                 }
             }
-        }
+            &._no_filters { width: 100%;
+
+            }
     }
 ///////////////// Detalle
     ._product_view {
