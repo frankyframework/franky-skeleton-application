@@ -12,7 +12,15 @@
                     </div>
                     <div class="w-xxxx-12">
                         <div class="_cont_buy">
-                            <span class="_stock">Stock: <?=$data_detalle['stock']?></span>
+                            <?php if($data_detalle["in_stock"] == 1):?>
+                                <?php if($data_detalle["stock_infinito"] == 1): ?>
+                                <span class="_stock">En stock</span>
+                                <?php else: ?>
+                                <span class="_stock">Stock: <?=$data_detalle['stock']?></span>
+                                <?php endif; ?>
+                            <?php else: ?>
+                            <span class="_stock">Sin stock</span>
+                            <?php endif; ?>
                             <?php if(getCoreConfig('catalog/product/showprice')== 1): ?>
                             <span class="_price"><?php echo getFormatoPrecio($data_detalle['price'],false); ?></span>
                             <?php endif ;?>
