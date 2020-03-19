@@ -32,9 +32,24 @@ $category  = $MyRequest->getRequest('category');
 $subcategory  = $MyRequest->getRequest('subcategory');
 $description  = $MyRequest->getRequest('description','',true);
 $principal  = $MyRequest->getRequest('principal');
+$stock  = $MyRequest->getRequest('stock');
+$price  = $MyRequest->getRequest('price');
+$iva  = $MyRequest->getRequest('iva');
 $CatalogproductsEntity->description($description);
 $error = false;
 
+if(empty($iva))
+{
+    $CatalogproductsEntity->iva(0);
+}
+if(empty($price))
+{
+    $CatalogproductsEntity->price(0);
+}
+if(empty($stock))
+{
+    $CatalogproductsEntity->stock(0);
+}
 if($CatalogproductsEntity->url_key() === "")
 {
     $CatalogproductsEntity->url_key(getFriendly($CatalogproductsEntity->name()));
