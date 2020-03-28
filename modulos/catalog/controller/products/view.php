@@ -56,5 +56,5 @@ $contactanosForm->setAtributoInput('asunto', 'value','SKU'.$data_detalle['sku'].
 $contactanosForm->setAtributoBase('asunto', 'type','hidden');
 
 
-
+$MyFrankyMonster->setPHPFile(getVista("products/view.phtml"));
 //print_r($data_detalle);

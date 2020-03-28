@@ -35,6 +35,7 @@ $principal  = $MyRequest->getRequest('principal');
 $stock  = $MyRequest->getRequest('stock');
 $price  = $MyRequest->getRequest('price');
 $iva  = $MyRequest->getRequest('iva');
+$visible_in_search  = $MyRequest->getRequest('visible_in_search');
 $CatalogproductsEntity->description($description);
 $error = false;
 
@@ -49,6 +50,10 @@ if(empty($price))
 if(empty($stock))
 {
     $CatalogproductsEntity->stock(0);
+}
+if(empty($visible_in_search))
+{
+    $CatalogproductsEntity->visible_in_search(0);
 }
 if($CatalogproductsEntity->url_key() === "")
 {

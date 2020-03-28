@@ -47,7 +47,7 @@ function getCategoryMenu()
     {
         while($registro = $CatalogcategoryModel->getRows())
         {
-            $menu .= '<li><a href="'. $MyRequest->url(CATALOG_SEARCH_CATEGORY,[ 'categoria' => $registro['url_key']]).'">'.$registro['name'].'</a></li>';
+            $menu .= '<li><a href="'. $MyRequest->url(CATALOG_SEARCH_CATEGORY,[ 'friendly' => $registro['url_key']]).'">'.$registro['name'].'</a></li>';
 	    }
     }
 
@@ -108,9 +108,19 @@ function getCatalogSubcategorys($id=null, $type="interface")
 {
     $CatalogsubcategoryModel = new Catalog\model\CatalogsubcategoryModel();
     $CatalogsubcategoryEntity = new Catalog\entity\CatalogsubcategoryEntity();
+    $CatalogcategoryEntity = new Catalog\entity\CatalogcategoryEntity();
+    
     $CatalogsubcategoryModel->setTampag(1000);
     $CatalogsubcategoryModel->setOrdensql("catalog_subcategory.name ASC");
-    $CatalogsubcategoryEntity->id_category($id);
+    if(!empty($id)):
+        if(is_numeric($id)):
+            $CatalogsubcategoryEntity->id_category($id);
+        else:
+            $CatalogcategoryEntity->url_key($id);
+        endif;
+    endif;
+    $CatalogsubcategoryEntity->status(1);
+    $CatalogsubcategoryModel->setDataCategoria($CatalogcategoryEntity->getArrayCopy());
     $CatalogsubcategoryModel->getData($CatalogsubcategoryEntity->getArrayCopy());
     $total	= $CatalogsubcategoryModel->getTotal();
     $subcategorias = array();

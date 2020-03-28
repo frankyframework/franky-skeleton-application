@@ -5,7 +5,7 @@ class CatalogsubcategoryModel  extends \Franky\Database\Mysql\objectOperations
 {
 
     private $busca;
-
+    private $data_categoria;
     public function __construct()
     {
       parent::__construct();
@@ -16,6 +16,11 @@ class CatalogsubcategoryModel  extends \Franky\Database\Mysql\objectOperations
         $this->busca=$busca;
     }
 
+    public function setDataCategoria($data){
+        $this->data_categoria = $this->optimizeEntity($data);
+    }
+
+    
     function getData($data = array())
     {
         $data = $this->optimizeEntity($data);
@@ -31,11 +36,20 @@ class CatalogsubcategoryModel  extends \Franky\Database\Mysql\objectOperations
         "catalog_subcategory.createdAt",
         "catalog_category.name as categoria"];
 
-        foreach($data as $k => $v)
+        if(!empty($data))
         {
-            $this->where()->addAnd("catalog_subcategory.".$k,$v,'=');
+            foreach($data as $k => $v)
+            {
+                $this->where()->addAnd("catalog_subcategory.".$k,$v,'=');
+            }
         }
-
+        if(!empty($this->data_categoria))
+        {
+            foreach($this->data_categoria as $k => $v)
+            {
+                $this->where()->addAnd("catalog_category.".$k,$v,'=');
+            }
+        }
         if($this->busca != "")
         {
           $this->where()->concat('AND (');

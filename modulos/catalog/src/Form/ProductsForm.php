@@ -206,10 +206,11 @@ class ProductsForm  extends \Franky\Form\Form
             'label' => 'Minimo para vender',
             'type'  => 'text',
             'required'  => false,
-            'value' => 1,
+            
             'atributos' => array(
                     'class'       => '',
-                    'maxlength' => 5
+                    'maxlength' => 5,
+                    'value' => 1,
                 ),
                 'label_atributos' => array(
                     'class'       => 'desc_form_obligatorio'
@@ -221,8 +222,10 @@ class ProductsForm  extends \Franky\Form\Form
             'name' => 'visible_in_search',
                 'type'  => 'checkbox',
                 'atributos' => array(
-                    'class' => ''
+                    'class' => '',
+                    'value' => 1
                 ),
+                
                 'options' =>  array("1" => "Este item es visible en busquedas"),
             )
         );
