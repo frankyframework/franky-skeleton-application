@@ -1,5 +1,4 @@
 <?php
-use Franky\Core\validaciones;
 use Ecommerce\model\pedidos;
 use Ecommerce\entity\pedidos as PedidosEntity;
 use Ecommerce\model\producto_pedidoModel;
@@ -7,10 +6,15 @@ use Ecommerce\entity\producto_pedido as producto_pedidoEntity;
 use Base\model\USERS;
 use Ecommerce\model\EcommercelogstatusModel;
 use Ecommerce\entity\EcommercelogstatusEntity;
+use \Base\model\CoreConfigModel;
+use \Base\entity\CoreConfigEntity;
+
+$CoreConfigModel      = new CoreConfigModel();
+$CoreConfigEntity     = new CoreConfigEntity();
 
 $body = @file_get_contents('php://input');
-$data_conketa = json_decode($body);
-$referencia = (isset($data_conketa->data->object->order_id) ? $data_conketa->data->object->order_id : -1);
+$data_openpay = json_decode($body,true);
+$referencia = (isset($data_openpay['transaction']['order_id']) ? $data_openpay['transaction']['order_id'] : -1);
 
 $USERS = new USERS();
 $pedidosModel = new pedidos();
@@ -20,8 +24,13 @@ $producto_pedidoEntity = new producto_pedidoEntity();
 $EcommercelogstatusModel    = new EcommercelogstatusModel();
 $EcommercelogstatusEntity   = new EcommercelogstatusEntity();
 
-
-if ($data_conketa->type == 'charge.paid'){
+if ($data_openpay['type']== 'verification'){ 
+   $CoreConfigEntity->path('ecommerce/openpay/codewebhook');
+   $CoreConfigEntity->value($data_openpay['verification_code']);
+                                
+   $result = $CoreConfigModel->updateByPath($CoreConfigEntity->getArrayCopy());
+}
+if ($data_openpay['type'] == 'charge.succeeded'){
 
   if($pedidosModel->getData('', '','','',$referencia) == REGISTRO_SUCCESS)
   {
@@ -41,8 +50,8 @@ if ($data_conketa->type == 'charge.paid'){
 
 
 
-        $status_pago = normalizeStatusTransaccion($data_conketa->data->object->status);
-        $total = $data_conketa->data->object->amount;
+        $status_pago = normalizeStatusTransaccion($data_openpay['transaction']['status']);
+        $total = $data_openpay['transaction']['amount'];
 
         if($status_pago == "paid")
         {

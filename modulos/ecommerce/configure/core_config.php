@@ -209,7 +209,13 @@ return array(
                             'label' => 'Limite de tarjetas',
                             'validation' => array('required' => true,'numeric' => true),
                             'value' => '3'
-                          )
+                          ),
+               array('path' => 'ecommerce/openpay/codewebhook',
+                                    'type' => 'text',
+                                    'label' => 'Codigo activación WebHook',
+                                    'validation' => array('required' => false),
+                                    'value' => ''
+                                  ),
           )
   ),
 );

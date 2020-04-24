@@ -23,7 +23,7 @@ $EcommercelogstatusEntity   = new EcommercelogstatusEntity();
 
 if ($data_conketa->type == 'charge.paid'){
 
-  $referencia= "\"id\":\"ord_2kLKVrGW6rZ9uvVJh\"";
+  
   if($pedidosModel->getData('', '','','',$referencia) == REGISTRO_SUCCESS)
   {
     $pedido = $pedidosModel->getRows();
