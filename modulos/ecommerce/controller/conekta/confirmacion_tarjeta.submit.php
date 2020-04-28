@@ -16,7 +16,7 @@ use Franky\Core\ObserverManager;
 $ObserverManager    = new ObserverManager;
 $CardsModel        = new CardsModel();
 $CardsEntity       = new CardsEntity();
-
+$data = $MySession->GetVar('checkout');
 $ObserverManager->dispatch('prepara_orden_ecommerce',[]);
 
 $id_tarjeta = $MyRequest->getRequest('id_tarjeta');
@@ -130,6 +130,10 @@ if(!$error)
   {
       $items[] = array("name" => $producto["nombre"],"unit_price" => $producto["precio"]*100,"quantity" => $producto["qty"]);
   }
+  if($data['monto_envio'] > 0)
+    {
+        $items[] = array("name" => "Servicio de envio","unit_price" => $data["monto_envio"]*100,"quantity" => 1); 
+    }
 }
 
 /*Aqui conecta*/
@@ -170,7 +174,7 @@ if(!$error)
     $status_pago = normalizeStatusTransaccion($order->payment_status);
 
        $MySession->SetVar('status_pago',$status_pago);
-    $data = $MySession->GetVar('checkout');
+    
 
     if(isset($data["id_facturacion"]))
     {
@@ -217,12 +221,12 @@ if(!$error)
     $MyPedidoEntity->setUid($MySession->GetVar('id'));
     $MyPedidoEntity->setStatus($status_pago);
     $MyPedidoEntity->setMetodo_pago("conekta_tarjeta");
-    $MyPedidoEntity->setMetodo_envio(0);
+    $MyPedidoEntity->setMetodo_envio($data['id_metodo_envio']);
     $MyPedidoEntity->setMonto_compra($productos_comprados['gran_total']);
-    $MyPedidoEntity->setMonto_pagado($productos_comprados['gran_total']);
+    $MyPedidoEntity->setMonto_pagado($productos_comprados['gran_total']+$data['monto_envio']);
     $MyPedidoEntity->setSubtotal($productos_comprados['subtotal']);
     $MyPedidoEntity->setIva($productos_comprados['iva_total']);
-    $MyPedidoEntity->setMonto_envio(0);
+    $MyPedidoEntity->setMonto_envio($data['monto_envio']);
     $MyPedidoEntity->setReferencia($referencia);
 
     if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)

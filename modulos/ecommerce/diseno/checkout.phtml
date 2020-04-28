@@ -115,9 +115,10 @@
 
                     <h2 class='metodo_envio disabled _tab_step _nono'>Selecciona tu método de envio</h2>
 
-                    <div  style="display:none;">
-
+                    <div id="content_metodo_envio" style="display:none;">
+                        
                     </div>
+                    <div id="resumen_metodo_envio"></div>
                 </div>
 
 
@@ -125,25 +126,8 @@
 
                     <h2 class='metodo_pago _tab_step _nono'>Selecciona tu método de pago</h2>
 
-                    <div  style="display:none;">
-                        <?php echo $PagoCheckoutForm->openTag(); ?>
-                        <?php echo $PagoCheckoutForm->getRow("id_pago"); ?>
-                         <label for="id_pago" class="error" style="display:none;"></label>
-                        <?php echo $PagoCheckoutForm->getRow("continuar"); ?>
-                        <?php echo $PagoCheckoutForm->endTag(); ?>
-
-
-                        <script >
-                        $(document).ready(function(){
-                            $( "#frm_pago" ).validate({
-                                submitHandler: function(form)
-                                {
-                                     setconfigPago();
-                                     return false;
-                                }
-                            });
-                        });
-                        </script>
+                    <div  id="content_metodo_pago" style="display:none;">
+                       
                     </div>
                 </div>
 
@@ -178,7 +162,8 @@
                   <?php endforeach; ?>
                   <div class="_coin _checkout_subtotal"><strong>Subtotal</strong>: <span><?=getFormatoPrecio($productos_comprados['subtotal']);?></span></div>
                   <div class="_coin _checkout_iva"><strong>IVA</strong>: <span><?=getFormatoPrecio($productos_comprados['iva_total']);?></span></div>
-                  <div class="_coin _checkout_total"><strong>Total</strong>: <span><?=getFormatoPrecio($productos_comprados['gran_total']);?></span></div>
+                  <div class="_coin _checkout_envio" style="display:none;"><strong>Envio</strong>: <span class="price"></span></div>
+                  <div class="_coin _checkout_total"><strong>Total</strong>: <span class="price"><?=getFormatoPrecio($productos_comprados['gran_total']);?></span></div>
 
             </div>
 
@@ -219,11 +204,11 @@
   });
   </script>
   <?php
-  if(in_array('conekta_tarjeta',getCoreConfig('ecommerce/conekta/methods')))
+  if(getCoreConfig('ecommerce/conekta/enabled') == 1 && in_array('conekta_tarjeta',getCoreConfig('ecommerce/conekta/methods')))
   {
     echo render("checkout/validate.conekta.phtml");
   }
-  elseif(in_array('openpay_tarjeta',getCoreConfig('ecommerce/openpay/methods')))
+  elseif(getCoreConfig('ecommerce/openpay/enabled') == 1 && in_array('openpay_tarjeta',getCoreConfig('ecommerce/openpay/methods')))
   {
     echo render("checkout/validate.openpay.phtml");
   }

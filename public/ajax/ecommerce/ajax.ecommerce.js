@@ -274,8 +274,9 @@ function setFacturacionCheckoutHTML(response)
         {
             $(".direccion_facturacion").next("div").hide();
             $(".direccion_facturacion").toggleClass("_nono").toggleClass("_sisi").toggleClass('_active');
-            $(".metodo_pago").toggleClass('_active').next("div").show();
+            $(".metodo_envio").toggleClass('_active').next("div").show();
             $("#resumen_checkout_facturacion").html(respuesta.resumen_facturacion);
+            loadMetodosEnvio();
         }
         else
         {
@@ -309,8 +310,9 @@ function setNuevaFacturacionCheckoutHTML(response)
         {
             $(".direccion_facturacion").next("div").hide();
             $(".direccion_facturacion").toggleClass("_nono").toggleClass("_sisi").toggleClass('_active');
-            $(".metodo_pago").toggleClass('_active').next("div").show();
+            $(".metodo_envio").toggleClass('_active').next("div").show();
             $("#resumen_checkout_facturacion").html(respuesta.resumen_facturacion);
+            loadMetodosEnvio();
         }
         else
         {
@@ -389,6 +391,113 @@ function setDireccionCheckoutHTML(response)
             _alert(respuesta["message"],"Error")
         }
 
+    }
+    return true;
+}
+
+
+function loadMetodosEnvio()
+{
+    var var_query = {
+        function: "loadMetodosEnvio",
+        vars_ajax:[]
+    };
+    var var_function = [];
+    pasarelaAjax('GET',var_query,"loadMetodosEnvioHTML",var_function);
+}
+
+
+function loadMetodosEnvioHTML(response)
+{
+    var respuesta = null;
+    if(response != "null")
+    {
+        respuesta = JSON.parse(response);
+
+        
+        $("#content_metodo_envio").html(respuesta.html);
+        $( "#frm_metodo_envio" ).validate({
+                submitHandler: function(form)
+                {
+                     setMetodoEnvioCheckout();
+                     return false;
+                }
+        });
+       
+    }
+    return true;
+}
+
+
+function setMetodoEnvioCheckout()
+{
+    var id_metodo_envio= $("input[name=id_metodo_envio]:checked").val();
+
+    var var_query = {
+        function: "setMetodoEnvioCheckout",
+        vars_ajax:[id_metodo_envio]
+    };
+    var var_function = [];
+    pasarelaAjax('GET',var_query,"setMetodoEnvioCheckoutHTML",var_function);
+}
+
+
+function setMetodoEnvioCheckoutHTML(response)
+{
+    var respuesta = null;
+    if(response != "null")
+    {
+        respuesta = JSON.parse(response);
+
+        if(!respuesta.error)
+        {
+            $(".metodo_envio").next("div").hide();
+            $(".metodo_envio").toggleClass("_nono").toggleClass("_sisi").toggleClass('_active');
+            $(".metodo_pago").toggleClass('_active').next("div").show();
+            $("#resumen_metodo_envio").html(respuesta.resumen_metodo_envio);
+            $("._checkout_envio").children('.price').html(respuesta.monto_envio_html);
+            $("._checkout_envio").show();
+            $("._checkout_total").children('.price').html(respuesta.gran_total_html);
+            loadMetodosPago();
+        }
+        else
+        {
+            _alert(respuesta["message"],"Error")
+        }
+
+    }
+    return true;
+}
+
+
+function loadMetodosPago()
+{
+    var var_query = {
+        function: "loadMetodosPago",
+        vars_ajax:[]
+    };
+    var var_function = [];
+    pasarelaAjax('GET',var_query,"loadMetodosPagoHTML",var_function);
+}
+
+
+function loadMetodosPagoHTML(response)
+{
+    var respuesta = null;
+    if(response != "null")
+    {
+        respuesta = JSON.parse(response);
+
+        
+        $("#content_metodo_pago").html(respuesta.html);
+        $( "#frm_pago" ).validate({
+                submitHandler: function(form)
+                {
+                     setconfigPago();
+                     return false;
+                }
+        });
+       
     }
     return true;
 }

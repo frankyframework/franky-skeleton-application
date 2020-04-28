@@ -1,40 +1,99 @@
 <?php
 return array(
-'ecommerce-product' => array(
+    'ecommerce-product' => array(
         'menu' => "ECOMMERCE PRODUCTOS",
         'title' => "Configuración de productos",
         'config' =>  array(
-                        array('path' => 'ecommerce/product/placeholder',
-                                'type' => 'file',
-                                'label' => 'Placeholder del producto',
-                                'validation' => array('image' => true),
-                                'value' => ''
-                        ),
+            array('path' => 'ecommerce/product/placeholder',
+                    'type' => 'file',
+                    'label' => 'Placeholder del producto',
+                    'validation' => array('image' => true),
+                    'value' => ''
+            ),
        
 
-                array('path' => 'ecommerce/product/object',
-                        'type' => 'text',
-                        'label' => 'Clase del producto',
-                        'validation' => array('require' => true),
-                        'value' => ''
-                        )    ,
+            array('path' => 'ecommerce/product/object',
+                    'type' => 'text',
+                    'label' => 'Clase del producto',
+                    'validation' => array('require' => true),
+                    'value' => ''
+                    )    ,
 
-        array('path' => 'ecommerce/product/path_images',
-                'type' => 'text',
-                'label' => 'Path base de imagenes del producto',
-                'validation' => array('require' => true),
-                'value' => ''
-                ),
+            array('path' => 'ecommerce/product/path_images',
+                    'type' => 'text',
+                    'label' => 'Path base de imagenes del producto',
+                    'validation' => array('require' => true),
+                    'value' => ''
+                    ),
+
+            array('path' => 'ecommerce/product/url-detalle',
+                    'type' => 'text',
+                    'label' => 'Constante detalle',
+                    'validation' => array('require' => true),
+                    'value' => ''
+                    )   
+            ), 
+
+    ),
+    'ecommerce-envios-tarifa-plana' => array(
+        'menu' => "ECOMMERCE ENVIO TARIFA PLANA",
+        'title' => "Configuración de productos",
+        'config' =>  array(
          
-        array('path' => 'ecommerce/product/url-detalle',
-                'type' => 'text',
-                'label' => 'Constante detalle',
-                'validation' => array('require' => true),
-                'value' => ''
-                )   
-        ), 
-        
-),
+            array('path' => 'ecommerce/envios-tarifa-plana/enabled',
+                            'type' => 'select',
+                            'label' => 'Habilitar metodo de envio',
+                            'validation' => array('required' => true),
+                            'data' => ['0' => 'No','1' => 'Sí'],
+                            'value' => '0'
+                          ),
+            array('path' => 'ecommerce/envios-tarifa-plana/titulo',
+                    'type' => 'text',
+                    'label' => 'Titulo metodo de envio',
+                    'validation' => array('required' => true),
+                    'value' => ''
+                    ),
+            array('path' => 'ecommerce/envios-tarifa-plana/precio',
+                    'type' => 'text',
+                    'label' => 'Precio o porcentaje de envio',
+                    'validation' => array('required' => true),
+                    'value' => ''
+                    ),
+              array('path' => 'ecommerce/envios-tarifa-plana/tipo',
+                            'type' => 'select',
+                            'label' => 'Tipo de tarifa',
+                            'validation' => array('required' => true),
+                            'data' => ['plana' => 'Plana','porcentaje' => 'Porcentaje'],
+                            'value' => 'plana'
+                    ),
+            )
+    ),
+    'ecommerce-envios-free' => array(
+        'menu' => "ECOMMERCE ENVIO GRATUITO",
+        'title' => "Configuración de productos",
+        'config' =>  array(
+         
+            array('path' => 'ecommerce/envios-free/enabled',
+                            'type' => 'select',
+                            'label' => 'Habilitar metodo de envio',
+                            'validation' => array('required' => true),
+                            'data' => ['0' => 'No','1' => 'Sí'],
+                            'value' => '0'
+                          ),
+            array('path' => 'ecommerce/envios-free/titulo',
+                    'type' => 'text',
+                    'label' => 'Titulo metodo de envio',
+                    'validation' => array('required' => true),
+                    'value' => ''
+                    ),
+            array('path' => 'ecommerce/envios-free/minimo',
+                    'type' => 'text',
+                    'label' => 'Precio minimo',
+                    'validation' => array('required' => true),
+                    'value' => ''
+                    )
+            )
+    ),
   'ecommerce-conekta' => array(
           'menu' => "ECOMMERCE API CONEKTA",
           'title' => "Configuración de conekta",

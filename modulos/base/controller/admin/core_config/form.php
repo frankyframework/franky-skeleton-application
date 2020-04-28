@@ -9,6 +9,7 @@ $CoreConfigModel      = new CoreConfigModel();
 $CoreConfigEntity     = new CoreConfigEntity();
 $Form     = new Form();
 
+$seccion = $MyRequest->getUrlParam('seccion');
 
 $modulo = $modulos = getModulos("DESC");
 $core_config = [];

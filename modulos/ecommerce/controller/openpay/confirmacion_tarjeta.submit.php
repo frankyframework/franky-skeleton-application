@@ -18,6 +18,9 @@ $CardsEntity       = new CardsEntity();
 $ObserverManager = new ObserverManager;
 $ObserverManager->dispatch('prepara_orden_ecommerce',[]);
 
+$data = $MySession->GetVar('checkout');
+
+
 $id_tarjeta = $MyRequest->getRequest('id_tarjeta');
 $error = false;
 if($MySession->GetVar('tarjeta_openpay') == "" )
@@ -80,6 +83,7 @@ if(empty($id_tarjeta))
       elseif($result == REGISTRO_ERROR)
       {
         $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("guardar_generico_error"));
+        
         $error = true;
       }
       else
@@ -146,7 +150,7 @@ if(!$error)
             array(
               'method' => 'card',
                'source_id' => $id_tarjeta,
-               'amount' => $productos_comprados['gran_total'],
+               'amount' => $productos_comprados['gran_total']+$data['monto_envio'],
                'currency' => 'MXN',
                'description' => 'Cargo a tarjeta',
                'order_id' => $order_id,
@@ -173,8 +177,8 @@ if(!$error)
             );
     $status_pago = normalizeStatusTransaccion($order->status);
 
-       $MySession->SetVar('status_pago',$status_pago);
-    $data = $MySession->GetVar('checkout');
+    $MySession->SetVar('status_pago',$status_pago);
+    
 
     if(isset($data["id_facturacion"]))
     {
@@ -221,12 +225,12 @@ if(!$error)
     $MyPedidoEntity->setUid($MySession->GetVar('id'));
     $MyPedidoEntity->setStatus($status_pago);
     $MyPedidoEntity->setMetodo_pago("openpay_tarjeta");
-    $MyPedidoEntity->setMetodo_envio(0);
+    $MyPedidoEntity->setMetodo_envio($data['id_metodo_envio']);
     $MyPedidoEntity->setMonto_compra($productos_comprados['gran_total']);
-    $MyPedidoEntity->setMonto_pagado($productos_comprados['gran_total']);
+    $MyPedidoEntity->setMonto_pagado($productos_comprados['gran_total']+$data['monto_envio']);
     $MyPedidoEntity->setSubtotal($productos_comprados['subtotal']);
     $MyPedidoEntity->setIva($productos_comprados['iva_total']);
-    $MyPedidoEntity->setMonto_envio(0);
+    $MyPedidoEntity->setMonto_envio($data['monto_envio']);
     $MyPedidoEntity->setReferencia($referencia);
 
     if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)

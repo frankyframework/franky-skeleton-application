@@ -11,6 +11,7 @@ $CoreConfigModel      = new CoreConfigModel();
 $CoreConfigEntity     = new CoreConfigEntity();
 $validaciones =  new validaciones();
 $modulo = $modulos = getModulos("DESC");
+$path = $MyRequest->getRequest('path');
 $File = new File();
 $core_config = [];
 
@@ -56,6 +57,8 @@ if($error == false)
         if(!empty($core_config)):
           foreach($core_config as $key_config => $val_config):
 
+            if($key_config == $path)
+            {
               foreach($val_config['config'] as $key =>$config):
                   if($config['type'] != 'file')
                   {
@@ -210,7 +213,9 @@ if($error == false)
 
 
               endforeach;
+            }
           endforeach;
+            
         endif;
 
     unlink($CoreConfig->getServerUploadDir().'/core_config/core_config.php');

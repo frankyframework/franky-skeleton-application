@@ -57,12 +57,14 @@ if($status_pago == "pending" || $status_pago == "paid")
         if(!empty($productos_comprados['productos']))
         {
 
+            $data = $MySession->GetVar('checkout');
+            
             if($status_pago == "paid")
             {
-                $status_pago = ($productos_comprados['gran_total'] > $total ? "pago_incompleto" : $status_pago);
+                $status_pago = ($productos_comprados['gran_total'] + $data['monto_envio'] > $total ? "pago_incompleto" : $status_pago);
             }
 
-            $data = $MySession->GetVar('checkout');
+            
 
             if(isset($data["id_facturacion"]))
             {
@@ -115,12 +117,12 @@ if($status_pago == "pending" || $status_pago == "paid")
             $MyPedidoEntity->setUid($MySession->GetVar('id'));
             $MyPedidoEntity->setStatus($status_pago);
             $MyPedidoEntity->setMetodo_pago("paypal");
-            $MyPedidoEntity->setMetodo_envio(0);
+            $MyPedidoEntity->setMetodo_envio($data['id_metodo_envio']);
             $MyPedidoEntity->setMonto_compra($productos_comprados['gran_total']);
             $MyPedidoEntity->setSubtotal($productos_comprados['subtotal']);
             $MyPedidoEntity->setIva($productos_comprados['iva_total']);
             $MyPedidoEntity->setMonto_pagado($total);
-            $MyPedidoEntity->setMonto_envio(0);
+            $MyPedidoEntity->setMonto_envio($data['monto_envio']);
             $MyPedidoEntity->setReferencia(json_encode($referencia));
 
             if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)

@@ -152,6 +152,69 @@ function makeHTMLDireccion($type="envio",$uid = "")
     return $direcciones;
 }
 
+
+function makeHTMLMetodosEnvio($id = null)
+{
+    $EcommerceenviosModel = new Ecommerce\model\EcommerceenviosModel();
+    
+    $EcommerceenviosModel->setTampag(20);
+    $EcommerceenviosModel->setOrdensql("nombre ASC");
+    $EcommerceenviosModel->getData();
+    $total	= $EcommerceenviosModel->getTotal();
+    $metodos_envio = array();
+    $metodoenviohtml = "<span class='envio price'>%s</span> <span class='envio_name'>%s</span>";
+    if($total > 0)
+    {
+        while($registro = $EcommerceenviosModel->getRows())
+        {
+            if(getCoreConfig('ecommerce/'.$registro['path'].'/enabled'))
+            {
+                $MetodoEnvio = new $registro['dataClass'];
+                
+                $tarifa = $MetodoEnvio->getData();
+                if($tarifa !== false)
+                {
+                    $metodos_envio[$registro['id']] = sprintf($metodoenviohtml, 
+                        getFormatoPrecio($tarifa),
+                        getCoreConfig('ecommerce/'.$registro['path'].'/titulo'));
+                }
+            }
+	}
+    }
+    
+    if(!empty($id)){
+       return $metodos_envio[$id];
+    }
+
+ 
+    return $metodos_envio;
+}
+
+
+function getMetodosEnvio($id)
+{
+    $EcommerceenviosModel = new Ecommerce\model\EcommerceenviosModel();
+    $EcommerceenviosEntity = new Ecommerce\entity\EcommerceenviosEntity();
+    
+    $EcommerceenviosEntity->id($id);
+    $EcommerceenviosModel->getData($EcommerceenviosEntity->getArrayCopy());
+    $total	= $EcommerceenviosModel->getTotal();
+    
+    if($total > 0)
+    {
+        while($registro = $EcommerceenviosModel->getRows())
+        {
+            if(getCoreConfig('ecommerce/'.$registro['path'].'/enabled'))
+            {
+                $MetodoEnvio = new $registro['dataClass'];
+                
+                return $MetodoEnvio->getData();
+            }
+	}
+    }
+    return false;
+}
+
 /*
 function getCustomer($id)
 {

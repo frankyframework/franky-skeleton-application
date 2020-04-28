@@ -93,6 +93,7 @@ values
 (21,'admin/url_internacional/form.php','','[\"validaciones.js\"]','[\"jquery-validate\"]','[1,2]','FRM_URL_INTERNACIONAL','admin/url-internacional/frm/','Alta de URL internacional','',1,0,'base');
 insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values('admin/users/avatar.php','','','[]','[\"1\",\"2\",\"3\"]','ADMIN_AVATAR','admin/avatar/','Administracion de avatar','[\"base/ajax.common.js\"]','1','0','base');
 insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values('admin/core_config/form.php','','','[\"jquery-validate\"]','[\"1\"]','ADMIN_CORE_CONFIG','admin/core-config/','Administracion de sistema','','1','0','base');
+insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values('admin/core_config/form.php','','','[\"jquery-validate\"]','[\"1\"]','ADMIN_CORE_CONFIG_SECCION','admin/core-config/[seccion]/','Administracion de sistema','','1','0','base');
 insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values('admin/devices/lista.php','','','','[\"1\",\"2\",\"3\"]','ADMIN_DEVICES','admin/devices/','Administracion de dispositivos','','1','0','base');
 
 /*Table structure for table 'seo' */

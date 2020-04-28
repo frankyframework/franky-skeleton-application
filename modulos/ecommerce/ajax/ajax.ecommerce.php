@@ -431,7 +431,24 @@ function setDireccionCheckout($id_envio)
     return $data;
 }
 
+function setMetodoEnvioCheckout($id){
+    global $MySession;
+    $metodo_envio = getMetodosEnvio($id);
+    $data = $MySession->GetVar('checkout');
+    $data = array_merge($data,
+            array('id_metodo_envio' => $id,'monto_envio' => $metodo_envio,'monto_envio_html' => getFormatoPrecio($metodo_envio)));
+    $metodo_envio = makeHTMLMetodosEnvio($id);
+    
+    
+    $data['resumen_metodo_envio'] =   render(PROJECT_DIR.'/modulos/ecommerce/diseno/checkout/resumen.metodo_envio.phtml',['metodo_envio' =>$metodo_envio]);   
+    
+    $productos_comprados = getCarrito();
+    $data['gran_total_html'] = getFormatoPrecio($productos_comprados['gran_total'] + $data['monto_envio']);
+    $data['gran_total'] = $productos_comprados['gran_total'] + $data['monto_envio'];
+    $MySession->SetVar('checkout',$data);
 
+    return $data;
+}
 function setNuevaDireccionCheckout($data)
 {
     global $MySession;
@@ -620,6 +637,78 @@ function pay_free()
 
 	return $respuesta;
 }
+
+function loadMetodosEnvio(){
+    $metodos_envio = makeHTMLMetodosEnvio();
+    
+    $MetodoEnvioCheckoutForm = new \Ecommerce\Form\checkoutForm("frm_metodo_envio");
+    $MetodoEnvioCheckoutForm->addMetodoEnvio($metodos_envio);
+    $MetodoEnvioCheckoutForm->addSubmit();
+    
+    return array('html' => render(PROJECT_DIR.'/modulos/ecommerce/diseno/checkout/frm.metodos_envio.phtml',['MetodoEnvioCheckoutForm' => $MetodoEnvioCheckoutForm]));
+}
+
+function loadMetodosPago(){
+    global $MySession;
+    $data = $MySession->GetVar('checkout');
+    $PagoCheckoutForm = new \Ecommerce\Form\checkoutForm("frm_pago");
+    
+    
+    $CoreConfig           = new \Base\model\CoreConfig();
+    $core_config = $CoreConfig->getMap('ecommerce');
+    foreach($core_config as $key_config => $val_config):
+
+        foreach($val_config['config'] as $key =>$config):
+              if($config['path'] == "ecommerce/conekta/methods"):
+                  $metodos_conekta = $config['data'];
+              endif;
+              if($config['path'] == "ecommerce/openpay/methods"):
+                  $metodos_openpay = $config['data'];
+              endif;
+        endforeach;
+    endforeach;
+
+
+    $metodos_de_pago = array();
+
+    if($data['gran_total'] > 0)
+    {
+        if(getCoreConfig('ecommerce/paypal/enabled') == 1)
+        {
+            $metodos_de_pago["pago_paypal"] = "payPal";
+        }
+        if(getCoreConfig('ecommerce/conekta/enabled') == 1)
+        {
+            $metodos = getCoreConfig('ecommerce/conekta/methods');
+            if(!empty($metodos)):
+                foreach($metodos as $k)
+                {
+                  $metodos_de_pago[$k] = $metodos_conekta[$k];
+                }
+
+            endif;
+        }
+        if(getCoreConfig('ecommerce/openpay/enabled') == 1)
+        {
+            $metodos = getCoreConfig('ecommerce/openpay/methods');
+            if(!empty($metodos)):
+                foreach($metodos as $k)
+                {
+                  $metodos_de_pago[$k] = $metodos_openpay[$k];
+                }
+
+            endif;
+        }
+    }
+    else{
+        $metodos_de_pago["pay_free"] = "No requiere pago";
+        $PagoCheckoutForm->setAtributoInput('id_pago','value','pay_free');
+    }
+    $PagoCheckoutForm->addMetodoPago($metodos_de_pago);
+    $PagoCheckoutForm->addSubmit();
+    
+    return array('html' => render(PROJECT_DIR.'/modulos/ecommerce/diseno/checkout/frm.metodos_pago.phtml',['PagoCheckoutForm' => $PagoCheckoutForm]));
+}
 /******************************** EJECUTA *************************/
 $MyAjax->register("EliminarDireccionEcommerce");
 $MyAjax->register("EliminarDireccionFacturacionEcommerce");
@@ -635,4 +724,8 @@ $MyAjax->register("setFacturacionCheckout");
 $MyAjax->register("setNuevaFacturacionCheckout");
 $MyAjax->register("SetStatusPagoEcommerce");
 $MyAjax->register("pay_free");
+$MyAjax->register("loadMetodosEnvio");
+$MyAjax->register("setMetodoEnvioCheckout");
+$MyAjax->register("loadMetodosPago");
+
 ?>

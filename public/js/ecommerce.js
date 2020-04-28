@@ -92,6 +92,7 @@ var paypalCheckout = function(sandbox,idsb,idlive,gran_total)
 };
 
 
+
 var changeShippingAddress = function(){
 
     $("._sisi").removeClass("_sisi");
@@ -99,15 +100,26 @@ var changeShippingAddress = function(){
     $(".direccion_entrega").addClass("_nono").addClass('_active').next("div").show();
     $("#resumen_checkout_envio").empty();
     $("#resumen_checkout_facturacion").empty();
+    $("#resumen_metodo_envio").empty();
 
 }
 
 var changeBillingAddress = function(){
     $(".direccion_facturacion").addClass("_nono").addClass('_active').removeClass("_sisi").next("div").show();
-    $("#resumen_checkout_facturacion").empty();
-
+    $(".metodo_envio").addClass("_nono").removeClass('_active').removeClass("_sisi").next("div").hide();
     $(".paga_ahora").addClass("_nono").removeClass('_active').removeClass("_sisi").next("div").hide();
     $(".metodo_pago").addClass("_nono").removeClass('_active').removeClass("_sisi").next("div").hide();
+    $("#resumen_checkout_facturacion").empty();
+    $("#resumen_metodo_envio").empty();
+}
+
+var changeMetodoEnvio = function(){
+
+    $(".metodo_envio").addClass("_nono").addClass('_active').removeClass("_sisi").next("div").show();
+    $(".paga_ahora").addClass("_nono").removeClass('_active').removeClass("_sisi").next("div").hide();
+    $(".metodo_pago").addClass("_nono").removeClass('_active').removeClass("_sisi").next("div").hide();
+    $("#resumen_metodo_envio").empty();
+
 }
 
 var changePaimentMethod = function(){
@@ -115,6 +127,7 @@ var changePaimentMethod = function(){
     $(".metodo_pago").addClass("_nono").addClass('_active').removeClass("_sisi").next("div").show();
     $("#contenedor_frm_pago").empty();
 }
+
 
 
 

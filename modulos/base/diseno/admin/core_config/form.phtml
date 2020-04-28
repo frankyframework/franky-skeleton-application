@@ -2,17 +2,24 @@
     <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
     <h1 class="titulo_seccion_admin">Configuracion de sistema</h1>
     <?php echo $Form->openTag(); ?>
-    <div class="w-xxxx-12">
-    
-    <?php echo $Form->getRow('guardar'); ?>
-    </div>
+  
     <div class="w-xxxx-12">
     <?php
     if(!empty($core_config)):
       foreach($core_config as $key_config => $val_config):
+        
+            if(empty($seccion)){
+                $seccion = $key_config;
+            }
+           
+      
+         
+        
           ?>
-          <div class="title_menu"><h3><?=$val_config['menu']?></h3></div>
-            <div class="content_menu" style="display:none;">
+          <div id="<?=$key_config?>" class="title_menu"><h3><a href="<?=$MyRequest->url(ADMIN_CORE_CONFIG_SECCION,['seccion' => $key_config])?>"><?=$val_config['menu']?></a></h3></div>
+            
+          <?php if($seccion == $key_config): ?>
+          <div class="content_menu" >
           <?php
           foreach($val_config['config'] as $key =>$config):
 
@@ -77,16 +84,24 @@
 
 
           endforeach; ?>
+                <div class="w-xxxx-12">
+            <?php echo $Form->getRow('guardar'); ?>
+
+           </div>
         </div>
           <?php
+          endif;
       endforeach;
+         $Form->add(array(
+               'name' => 'path', 'type'  =>'hidden',
+               'atributos' => array(
+                   'value' => $seccion
+            ))); 
+            echo $Form->getRow('path');
     endif;
     ?>
     </div>
-    <div class="w-xxxx-12">
-    <?php echo $Form->getRow('guardar'); ?>
-    
-   </div>
+  
     <?php echo $Form->endTag(); ?>
 </div>
 
@@ -110,10 +125,13 @@ $(document).ready(function(){
           			}
 
          });
-
-         $('.title_menu').click(function(){
-                    $('.content_menu').hide();
-                    $(this).next('.content_menu').show();
-         });
+        
+});
+$(window).load(function(){ 
+    setTimeout(function(){
+        $('html, body').animate({
+            scrollTop: $("#<?=$seccion?>").offset().top
+        }, 500,
+    'linear')},1000);
 });
 </script>

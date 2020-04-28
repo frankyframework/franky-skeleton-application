@@ -11,7 +11,9 @@
         <li><strong>Pedido:</strong> #<?php echo $detalle_pedido['id']; ?></li>
         <li><strong>Método de pago:</strong> <?php echo $detalle_pedido['metodo_pago']; ?></li>
         <li><strong>Estatus de pago:</strong> <span class='set-status'><?php echo getStatusTransaccion($detalle_pedido['status']); ?></span></li>
-        <li class="_total"><strong>Total:</strong> <?php echo getFormatoPrecio($detalle_pedido['monto_compra']); ?></li>
+        <li><strong>Monto envio:</strong> <?php echo getFormatoPrecio($detalle_pedido['monto_envio']); ?></li>
+        <li><strong>Monto de compra:</strong> <?php echo getFormatoPrecio($detalle_pedido['monto_compra']); ?></li>
+        <li class="_total"><strong>Monto pagado:</strong> <?php echo getFormatoPrecio($detalle_pedido['monto_pagado']); ?></li>
         <?php
         $referencia = json_decode($detalle_pedido['referencia'],true);
         if($MyAccessList->MeDasChancePasar(ADMINISTRAR_PEDIDOS))
@@ -136,7 +138,7 @@
   <p>Sin actualizaciones recientes</p>
 <?php endif; ?>
 
-        <?php if($MyAccessList->MeDasChancePasar(ADMINISTRAR_MIS_PEDIDOS)): ?>
+        <?php if($MyAccessList->MeDasChancePasar(ADMINISTRAR_MIS_PEDIDOS) &&  in_array($detalle_pedido['status'],['pending','in-progress','pago_incompleto'])): ?>
     <?php echo $ComprovantePagoForm->openTag(); ?>
     <?php echo $ComprovantePagoForm->getAllRow(); ?>
     <?php echo $ComprovantePagoForm->endTag(); ?>

@@ -33,6 +33,7 @@ $MyPedidoEntity = new pedidos();
 $MyPedidoProducto = new producto_pedidoModel();
 $MyPedidoProductoEntity = new producto_pedido();
 
+$data = $MySession->GetVar('checkout');
 $productos_comprados = getCarrito();
 $items = array();
 
@@ -62,7 +63,7 @@ Openpay::setProductionMode((getCoreConfig('ecommerce/openpay/sandbox') == 1 ? fa
     $order = $customer->charges->create(
       array(
         'method' => 'store',
-         'amount' => $productos_comprados['gran_total'],
+         'amount' => $productos_comprados['gran_total']+$data['monto_envio'],
          'currency' => 'MXN',
          'description' => 'Cargo a establecimiento',
          'order_id' => $order_id,
@@ -89,7 +90,7 @@ $referencia =
         ]
         ];
 $status_pago = normalizeStatusTransaccion($order->status);
-$data = $MySession->GetVar('checkout');
+
 
 
 
@@ -138,12 +139,12 @@ $MyPedidoEntity->setFecha(date('Y-m-d H:i:s'));
 $MyPedidoEntity->setUid($MySession->GetVar('id'));
 $MyPedidoEntity->setStatus($status_pago);
 $MyPedidoEntity->setMetodo_pago("openpay_establecimiento");
-$MyPedidoEntity->setMetodo_envio(0);
+$MyPedidoEntity->setMetodo_envio($data['id_metodo_envio']);
 $MyPedidoEntity->setMonto_compra($productos_comprados['gran_total']);
 $MyPedidoEntity->setSubtotal($productos_comprados['subtotal']);
 $MyPedidoEntity->setIva($productos_comprados['iva_total']);
 $MyPedidoEntity->setMonto_pagado(0);
-$MyPedidoEntity->setMonto_envio(0);
+$MyPedidoEntity->setMonto_envio($data['monto_envio']);
 $MyPedidoEntity->setReferencia(json_encode($referencia));
 
 if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)

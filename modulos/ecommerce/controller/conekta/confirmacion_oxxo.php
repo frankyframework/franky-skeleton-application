@@ -22,7 +22,7 @@ if($MySession->GetVar('oxxo_pay') != $MyRequest->getRequest('token_oxxo'))
 }
 $ObserverManager = new ObserverManager;
 $ObserverManager->dispatch('prepara_orden_ecommerce',[]);
-
+$data = $MySession->GetVar('checkout');
 
 $MySession->UnsetVar('oxxo_pay');
 
@@ -46,6 +46,10 @@ if(empty($productos_comprados)){
 foreach($productos_comprados['productos'] as $producto)
 {
     $items[] = array("name" => $producto["nombre"],"unit_price" => $producto["precio"]*100,"quantity" => $producto["qty"]);
+}
+if($data['monto_envio'] > 0)
+{
+    $items[] = array("name" => "Servicio de envio","unit_price" => $data["monto_envio"]*100,"quantity" => 1); 
 }
 
 /*Aqui conecta*/
@@ -75,7 +79,7 @@ try{
 
 $referencia = ['id' => $order->id,'referencia' => $order->charges[0]->payment_method->reference];
 $status_pago = normalizeStatusTransaccion($order->payment_status);
-$data = $MySession->GetVar('checkout');
+
 
 
 
@@ -124,12 +128,12 @@ $MyPedidoEntity->setFecha(date('Y-m-d H:i:s'));
 $MyPedidoEntity->setUid($MySession->GetVar('id'));
 $MyPedidoEntity->setStatus($status_pago);
 $MyPedidoEntity->setMetodo_pago("conekta_oxxo");
-$MyPedidoEntity->setMetodo_envio(0);
+$MyPedidoEntity->setMetodo_envio($data['id_metodo_envio']);
 $MyPedidoEntity->setMonto_compra($productos_comprados['gran_total']);
 $MyPedidoEntity->setSubtotal($productos_comprados['subtotal']);
 $MyPedidoEntity->setIva($productos_comprados['iva_total']);
 $MyPedidoEntity->setMonto_pagado(0);
-$MyPedidoEntity->setMonto_envio(0);
+$MyPedidoEntity->setMonto_envio($data['monto_envio']);
 $MyPedidoEntity->setReferencia(json_encode($referencia));
 
 if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)

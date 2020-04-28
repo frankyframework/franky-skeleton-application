@@ -4,17 +4,14 @@ function pago_paypal()
         global $MyMessageAlert;
         global $MySession;
         global $MyRequest;
-        $productos =  OBJETO_PRODUCTOS;
-        $MyProducto =  new $productos();
-
-        $MyCarritoCompras =  new \Ecommerce\model\carrito();
-        $MyCarritoProducto =  new \Ecommerce\model\carrito_producto();
+        
         $ObserverManager = new \Franky\Core\ObserverManager;
         
         $ObserverManager->dispatch('prepara_orden_ajax_ecommerce',[]);
 
         $respuesta = array("error" => false,"html" => "");
 
+        $data = $MySession->GetVar('checkout');
 
         $productos_comprados = getCarrito();
         if(!empty($productos_comprados['productos']))
@@ -23,7 +20,7 @@ function pago_paypal()
             {
                 $respuesta["html"] = render(PROJECT_DIR.'/modulos/ecommerce/diseno/paypal/paypal.button.phtml');
 
-                $respuesta["js"] = 'paypalCheckout(\''.getCoreConfig('ecommerce/paypal/sandbox').'\',\''.getCoreConfig('ecommerce/paypal/keysandbox').'\',\''.getCoreConfig('ecommerce/paypal/key').'\',\''.$productos_comprados['gran_total'].'\')';
+                $respuesta["js"] = 'paypalCheckout(\''.getCoreConfig('ecommerce/paypal/sandbox').'\',\''.getCoreConfig('ecommerce/paypal/keysandbox').'\',\''.getCoreConfig('ecommerce/paypal/key').'\',\''.$data['gran_total'].'\')';
             }
             else
             {
