@@ -46,7 +46,12 @@ header {
 }
 
 ///////////////// main ///////////////////////////////
-main { float: left; width:100%;
+main {
+    .page_wrapper {
+        margin: 0 20px;
+        width: calc(~'100% - 40px');
+    }
+     float: left; width:100%;
 //////////// WYSIWYG
     #mceu_50, #mceu_50-body {
         [class*="w-"] { width: auto; }
