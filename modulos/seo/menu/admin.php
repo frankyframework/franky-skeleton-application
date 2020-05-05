@@ -2,7 +2,10 @@
 global $MySession;
 
 return array(
-    "title" => "SEO",
+      array('title'=> "SEO",
+            'children' =>  array(
+   
+
     array(
      "permiso" =>   ADMINISTRAR_SEO,
      "url" => $MyRequest->url(ADMIN_SEO),
@@ -14,6 +17,7 @@ return array(
      "etiqueta" => _("Administrar redirecciones 301")
     ),
     
-
+                )
+          )
 );
 ?>

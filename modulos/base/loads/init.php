@@ -297,6 +297,7 @@ if(isset($_SESSION["cookie_http_vars"]) && !empty($_SESSION["cookie_http_vars"])
 $_SESSION["cookie_http_vars"]=array();
  endif;
 
+
 $MyMenuFront = new \Franky\Core\menuSitio();
 $modulos = getModulos();
 if(!empty($modulos))
