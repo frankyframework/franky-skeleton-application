@@ -1,8 +1,32 @@
 <script>
-    $(document).ajaxComplete(function(){
+var conektaSuccessResponseHandler = function(token) {
+  var $form = $("#card-form");
+  $form.append($("<input name=\"token\" type=\"hidden\">").val(token.id));
+  $form.get(0).submit();
+};
 
+var conektaErrorResponseHandler = function(response) {
+   var $form = $("#card-form");
+  // console.log(response);
+  _alert(response.message_to_purchaser,"Error");
+  $form.find("input[type=submit]").prop("disabled", false);
 
-
+  return false;
+};
+    $("input[name=id_tarjeta]").change(function()
+    {
+        if($(this).val() == 0)
+        {
+            $("#form_new_card").show();
+            $("form[name=frm_tarjeta_checkout] input[name=continuar]").hide();
+        }
+        else
+        {
+            $("#form_new_card").hide();
+            $("form[name=frm_tarjeta_checkout] input[name=continuar]").show();
+        }
+    });
+      
         $( "#card-form").validate({
             ignore: [],
             rules: {
@@ -73,9 +97,16 @@
 
             },
             onkeyup: false,
-            errorClass: "error",
+            errorClass: "error invalid-input",
             validClass: "valid-input"
         });
+        
+        
+    $( "#frm_tarjeta_checkout").validate({
+        submitHandler: function(form)
+        {
 
+             return true;
+        }
     });
 </script>

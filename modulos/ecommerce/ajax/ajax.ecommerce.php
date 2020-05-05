@@ -371,18 +371,6 @@ function setconfigPago($id_pago)
             $data = $MySession->GetVar('checkout');
             $data["id_pago"] = $id_pago;
             $MySession->SetVar('checkout',$data);
-
-            /*$registro = $MyCarritoModel->getRows();
-            $id_carrito = $registro["id"];
-            $MyCarritoEntity->setId($id_carrito);
-            $MyCarritoEntity->setId_envio($id_envio);
-            $MyCarritoEntity->setId_facturacion($id_facturacion);
-            $MyCarritoEntity->setId_pago($id_pago);
-            //$MyCarritoEntity->setId_metodo_envio($id_metodo_envio);
-
-            $MyCarritoModel->save($MyCarritoEntity->getArrayCopy());
-            */
-
         }
         else
         {
@@ -639,13 +627,22 @@ function pay_free()
 }
 
 function loadMetodosEnvio(){
+    global $MySession;
     $metodos_envio = makeHTMLMetodosEnvio();
+    $carrito = getCarrito();
+    $data = $MySession->GetVar('checkout');
     
-    $MetodoEnvioCheckoutForm = new \Ecommerce\Form\checkoutForm("frm_metodo_envio");
-    $MetodoEnvioCheckoutForm->addMetodoEnvio($metodos_envio);
-    $MetodoEnvioCheckoutForm->addSubmit();
+    $data['gran_total'] = $carrito['gran_total'];
+    $MySession->SetVar('checkout',$data);
+    if($carrito['envio_requerido'] == 1)
+    {
+        $MetodoEnvioCheckoutForm = new \Ecommerce\Form\checkoutForm("frm_metodo_envio");
+        $MetodoEnvioCheckoutForm->addMetodoEnvio($metodos_envio);
+        $MetodoEnvioCheckoutForm->addSubmit();
+        return array('envio_requerido' => 1,'html' => render(PROJECT_DIR.'/modulos/ecommerce/diseno/checkout/frm.metodos_envio.phtml',['MetodoEnvioCheckoutForm' => $MetodoEnvioCheckoutForm]));
+    }
+    return array('envio_requerido' => 0,'html' => '');
     
-    return array('html' => render(PROJECT_DIR.'/modulos/ecommerce/diseno/checkout/frm.metodos_envio.phtml',['MetodoEnvioCheckoutForm' => $MetodoEnvioCheckoutForm]));
 }
 
 function loadMetodosPago(){
@@ -654,7 +651,7 @@ function loadMetodosPago(){
     $PagoCheckoutForm = new \Ecommerce\Form\checkoutForm("frm_pago");
     
     
-    $CoreConfig           = new \Base\model\CoreConfig();
+    $CoreConfig  = new \Base\model\CoreConfig();
     $core_config = $CoreConfig->getMap('ecommerce');
     foreach($core_config as $key_config => $val_config):
 

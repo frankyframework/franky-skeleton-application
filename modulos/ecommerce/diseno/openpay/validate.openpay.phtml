@@ -1,8 +1,35 @@
 <script>
-    $(document).ajaxComplete(function(){
+var openpaySuccessResponseHandler = function(response) {
+   var $form = $("#card-form");
+   $form.append($("<input name=\"token\" type=\"hidden\">").val(response.data.id));
+   console.log(response);
+   $form.get(0).submit();
+};
 
-
-      $("form[name=card-form]").validate({
+var openpayErrorResponseHandler = function(response) {
+   var desc = response.data.description != undefined ? response.data.description : response.message;
+   var $form = $("#card-form");
+   console.log(response);
+   _alert("ERROR [" + response.status + "] " + desc);
+   $form.find("input[type=submit]").prop("disabled", false);
+   return false;
+};
+ 
+    $("input[name=id_tarjeta]").change(function()
+      {
+          if($(this).val() == 0)
+          {
+              $("#form_new_card").show();
+              $("form[name=frm_tarjeta_checkout] input[name=continuar]").hide();
+          }
+          else
+          {
+              $("#form_new_card").hide();
+              $("form[name=frm_tarjeta_checkout] input[name=continuar]").show();
+          }
+      })
+      
+    $("form[name=card-form]").validate({
         ignore: [],
           rules: {
 
@@ -69,14 +96,32 @@
               $form.find("input[type=submit]").prop("disabled", true);
 
               OpenPay.token.extractFormAndCreate('card-form', openpaySuccessResponseHandler, openpayErrorResponseHandler);
-
+              
               return false
 
           },
           onkeyup: false,
-          errorClass: "invalid-input",
+          errorClass: "error invalid-input",
           validClass: "valid-input"
 
       });
-    });
+      
+    $("form[name=frm_tarjeta_checkout]").validate({
+    ignore: [],
+
+      submitHandler: function() {
+
+        OpenPay.setId('<?php echo (getCoreConfig('ecommerce/openpay/sandbox') == 1 ? getCoreConfig('ecommerce/openpay/idsandbox') :  getCoreConfig('ecommerce/openpay/id')); ?>');
+        OpenPay.setApiKey('<?php echo (getCoreConfig('ecommerce/openpay/sandbox') == 1 ? getCoreConfig('ecommerce/openpay/publicsandbox') :  getCoreConfig('ecommerce/openpay/public')); ?>');
+        OpenPay.setSandboxMode(<?=(bool)getCoreConfig('ecommerce/openpay/sandbox')?>);
+        //jQuery generate the token on submit.
+        var $form = $("form[name=frm_tarjeta_checkout]");
+        // Prevents double clic
+
+       
+        var deviceSessionId = OpenPay.deviceData.setup("frm_tarjeta_checkout", "device_session_id");
+        return true;
+      }
+
+  });
 </script>

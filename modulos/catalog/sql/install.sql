@@ -55,6 +55,7 @@ CREATE TABLE `catalog_products` (
   `updateAt` datetime DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT 1,
   `in_stock` int(11) NOT NULL DEFAULT 1,
+  `envio_requerido` int(1) NOT NULL DEFAULT 0,
   `saleable` int(11) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;

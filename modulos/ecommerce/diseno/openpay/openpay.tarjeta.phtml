@@ -26,24 +26,3 @@
     </div>
   </div>
 
-
-  <script>
-  $("form[name=frm_tarjeta_checkout]").validate({
-    ignore: [],
-
-      submitHandler: function() {
-
-        OpenPay.setId('<?php echo (getCoreConfig('ecommerce/openpay/sandbox') == 1 ? getCoreConfig('ecommerce/openpay/idsandbox') :  getCoreConfig('ecommerce/openpay/id')); ?>');
-        OpenPay.setApiKey('<?php echo (getCoreConfig('ecommerce/openpay/sandbox') == 1 ? getCoreConfig('ecommerce/openpay/publicsandbox') :  getCoreConfig('ecommerce/openpay/public')); ?>');
-        OpenPay.setSandboxMode(<?=(bool)getCoreConfig('ecommerce/openpay/sandbox')?>);
-        //jQuery generate the token on submit.
-        var $form = $("form[name=frm_tarjeta_checkout]");
-        // Prevents double clic
-
-
-        var deviceSessionId = OpenPay.deviceData.setup("frm_tarjeta_checkout", "device_session_id");
-        return true;
-      }
-
-  });
-  </script>

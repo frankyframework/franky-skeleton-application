@@ -21,7 +21,7 @@ function conekta_tarjeta()
 
         $checkoutForm->addSubmit();
         $respuesta["html"] =  render(PROJECT_DIR.'/modulos/ecommerce/diseno/conekta/conekta.tarjeta.phtml',['checkoutForm' =>$checkoutForm,'MyForm' => $MyForm,'cards' => $cards]);
-
+         $respuesta["js"] = getJSEmbebed(render(PROJECT_DIR.'/modulos/ecommerce/diseno/conekta/validate.conekta.phtml'));
     }
     else
     {

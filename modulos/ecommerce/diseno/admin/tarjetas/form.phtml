@@ -1,10 +1,10 @@
 <?php echo render("admin/template/form.phtml"); ?>
 <?php
-if(in_array('conekta_tarjeta',getCoreConfig('ecommerce/conekta/methods')))
+if(getCoreConfig('ecommerce/conekta/enabled') == 1 && in_array('conekta_tarjeta',getCoreConfig('ecommerce/conekta/methods')))
 {
 	echo render("admin/tarjetas/validate.conekta.phtml");
 }
-elseif(in_array('openpay_tarjeta',getCoreConfig('ecommerce/openpay/methods')))
+elseif(getCoreConfig('ecommerce/openpay/enabled') == 1 && in_array('openpay_tarjeta',getCoreConfig('ecommerce/openpay/methods')))
 {
 	echo render("admin/tarjetas/validate.openpay.phtml");
 }

@@ -27,6 +27,7 @@ class CatalogproductsEntity
     private $saleable;
     private $min_qty;
     private $stock_infinito;
+    private $envio_requerido;
 
 
     public function __construct($data = null)
@@ -62,6 +63,7 @@ class CatalogproductsEntity
         $this->saleable = (isset($data["saleable"]) ? $data["saleable"] : null);
         $this->min_qty = (isset($data["min_qty"]) ? $data["min_qty"] : null);
         $this->stock_infinito = (isset($data["stock_infinito"]) ? $data["stock_infinito"] : null);
+        $this->envio_requerido = (isset($data["envio_requerido"]) ? $data["envio_requerido"] : null);
     }
 
     public function getArrayCopy()
@@ -124,6 +126,8 @@ class CatalogproductsEntity
     public function min_qty($min_qty = null){ if($min_qty !== null){ $this->min_qty=$min_qty; }else{ return $this->min_qty; } }
 
     public function stock_infinito($stock_infinito = null){ if($stock_infinito !== null){ $this->stock_infinito=$stock_infinito; }else{ return $this->stock_infinito; } }
+
+    public function envio_requerido($envio_requerido = null){ if($envio_requerido !== null){ $this->envio_requerido=$envio_requerido; }else{ return $this->envio_requerido; } }
 
 }
 ?>

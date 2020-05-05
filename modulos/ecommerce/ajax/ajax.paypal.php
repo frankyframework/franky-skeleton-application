@@ -19,8 +19,8 @@ function pago_paypal()
             if($MySession->LoggedIn())
             {
                 $respuesta["html"] = render(PROJECT_DIR.'/modulos/ecommerce/diseno/paypal/paypal.button.phtml');
-
-                $respuesta["js"] = 'paypalCheckout(\''.getCoreConfig('ecommerce/paypal/sandbox').'\',\''.getCoreConfig('ecommerce/paypal/keysandbox').'\',\''.getCoreConfig('ecommerce/paypal/key').'\',\''.$data['gran_total'].'\')';
+                
+                $respuesta["js"] = getJSEmbebed(render(PROJECT_DIR.'/modulos/ecommerce/diseno/paypal/validate.paypal.phtml',['data' => $data]));
             }
             else
             {

@@ -268,3 +268,21 @@ insert  into `ecommerce_categorias_customers`(`id`,`categoria`,`status`,`fecha`)
 /*Data for the table `ecommerce_monedas` */
 
 insert  into `ecommerce_monedas`(`id`,`nombre`) values (1,'MXN'),(2,'USD');
+
+
+/*Table structure for table `ecommerce_envios` */
+
+DROP TABLE IF EXISTS `ecommerce_envios`;
+
+CREATE TABLE `ecommerce_envios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) NOT NULL,
+  `dataClass` text NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `path` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+/*Data for the table `ecommerce_envios` */
+
+insert  into `ecommerce_envios`(`id`,`nombre`,`dataClass`,`createdAt`,`path`) values (1,'Tarifa plana','\\Ecommerce\\Data\\TarifaPlanaData','2020-04-28 11:53:57','envios-tarifa-plana'),(2,'Envio gratuito','\\Ecommerce\\Data\\FreeData','2020-04-28 16:53:46','envios-free');

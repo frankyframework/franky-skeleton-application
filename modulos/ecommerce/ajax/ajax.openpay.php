@@ -23,7 +23,7 @@ function openpay_tarjeta()
 
          $checkoutForm->addSubmit();
         $respuesta["html"] =  render(PROJECT_DIR.'/modulos/ecommerce/diseno/openpay/openpay.tarjeta.phtml',['checkoutForm' =>$checkoutForm,'MyForm' => $MyForm,'cards' => $cards]);
-
+        $respuesta["js"] = getJSEmbebed(render(PROJECT_DIR.'/modulos/ecommerce/diseno/openpay/validate.openpay.phtml'));
     }
     else
     {
@@ -48,6 +48,8 @@ function openpay_establecimiento()
            $token = getToken("establecimiento_pay");
            $MySession->SetVar('establecimiento_pay',$token);
            $respuesta["html"] = render(PROJECT_DIR."/modulos/ecommerce/diseno/openpay/button.establecimiento.phtml",['MyRequest' => $MyRequest,'token' => $token]);
+        
+           
         }
         else
         {

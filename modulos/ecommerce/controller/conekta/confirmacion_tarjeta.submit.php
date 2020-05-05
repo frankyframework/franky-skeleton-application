@@ -59,7 +59,6 @@ if(empty($id_tarjeta))
 
     $CardsEntity->uid($MySession->GetVar('id'));
     $CardsEntity->status(1);
-
     $CardsEntity->numero(substr($data["number"],-4));
 
     if($CardsModel->getData($CardsEntity->getArrayCopy())!= REGISTRO_SUCCESS)

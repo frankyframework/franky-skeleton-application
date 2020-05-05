@@ -414,15 +414,23 @@ function loadMetodosEnvioHTML(response)
     {
         respuesta = JSON.parse(response);
 
-        
-        $("#content_metodo_envio").html(respuesta.html);
-        $( "#frm_metodo_envio" ).validate({
+        if(respuesta.envio_requerido == 1)
+        {
+            $("#content_metodo_envio").html(respuesta.html);
+            $( "#frm_metodo_envio" ).validate({
                 submitHandler: function(form)
                 {
                      setMetodoEnvioCheckout();
                      return false;
                 }
-        });
+            });
+        }
+        else{
+            $(".metodo_envio").next("div").hide();
+            $(".metodo_envio").toggleClass("_nono").toggleClass("_sisi").toggleClass('_active');
+            $(".metodo_pago").toggleClass('_active').next("div").show();
+            loadMetodosPago();
+        }
        
     }
     return true;
@@ -496,6 +504,9 @@ function loadMetodosPagoHTML(response)
                      setconfigPago();
                      return false;
                 }
+        });
+        $('input[name=id_pago]').each(function(index,val){
+          $(this).next('span').addClass($(this).val());
         });
        
     }

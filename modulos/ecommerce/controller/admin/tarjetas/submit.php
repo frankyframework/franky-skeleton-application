@@ -89,12 +89,12 @@ if(!$error)
       {
         if(in_array('openpay_tarjeta',getCoreConfig('ecommerce/openpay/methods')))
         {
+           
       	  $source = addCardOpenpay($MyRequest->getRequest("token"),$MySession->GetVar('id'),$MyRequest->getRequest("device_session_id"));
         }
       }
 
-
-
+  
       $CardsEntity->fecha(date('Y-m-d H:i:s'));
 
       $CardsEntity->token($source['id']);
