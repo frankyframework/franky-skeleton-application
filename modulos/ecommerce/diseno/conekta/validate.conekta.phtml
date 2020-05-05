@@ -1,4 +1,6 @@
 <script>
+$("#card-form").find("input[type=submit]").prop("disabled", true);
+$("form[name=frm_tarjeta_checkout] input[name=continuar]").prop("disabled", true);
 var conektaSuccessResponseHandler = function(token) {
   var $form = $("#card-form");
   $form.append($("<input name=\"token\" type=\"hidden\">").val(token.id));
@@ -13,20 +15,20 @@ var conektaErrorResponseHandler = function(response) {
 
   return false;
 };
-    $("input[name=id_tarjeta]").change(function()
+$("input[name=id_tarjeta]").change(function()
+{
+    if($(this).val() == 0)
     {
-        if($(this).val() == 0)
-        {
-            $("#form_new_card").show();
-            $("form[name=frm_tarjeta_checkout] input[name=continuar]").hide();
-        }
-        else
-        {
-            $("#form_new_card").hide();
-            $("form[name=frm_tarjeta_checkout] input[name=continuar]").show();
-        }
-    });
-      
+        $("#form_new_card").show();
+        $("form[name=frm_tarjeta_checkout] input[name=continuar]").hide();
+    }
+    else
+    {
+        $("#form_new_card").hide();
+        $("form[name=frm_tarjeta_checkout] input[name=continuar]").show();
+    }
+});
+var validacionesConekta  = function(){    
         $( "#card-form").validate({
             ignore: [],
             rules: {
@@ -109,4 +111,13 @@ var conektaErrorResponseHandler = function(response) {
              return true;
         }
     });
+}
+
+importarScript('https://cdn.conekta.io/js/latest/conekta.js',function(){
+
+    Conekta.setPublicKey('<?=(getCoreConfig('ecommerce/conekta/sandbox') == 1 ? getCoreConfig('ecommerce/conekta/publicsandbox') : getCoreConfig('ecommerce/conekta/public'))?>');
+    $("#card-form").find("input[type=submit]").prop("disabled", false);
+    $("form[name=frm_tarjeta_checkout] input[name=continuar]").prop("disabled", false);
+    validacionesConekta();
+});
 </script>

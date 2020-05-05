@@ -62,7 +62,8 @@ var paypalCheckout = function(sandbox,idsb,idlive,gran_total)
     }, '#paypal-button-container');
 };
 
+importarScript('https://www.paypalobjects.com/api/checkout.js',function(){
+    paypalCheckout('<?=getCoreConfig('ecommerce/paypal/sandbox')?>','<?=getCoreConfig('ecommerce/paypal/keysandbox')?>','<?=getCoreConfig('ecommerce/paypal/key')?>','<?=$data['gran_total']?>');
+});
 
-
-paypalCheckout('<?=getCoreConfig('ecommerce/paypal/sandbox')?>','<?=getCoreConfig('ecommerce/paypal/keysandbox')?>','<?=getCoreConfig('ecommerce/paypal/key')?>','<?=$data['gran_total']?>');
 </script>

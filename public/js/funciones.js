@@ -321,7 +321,14 @@ var getFormatoPrecio = function(number, fractional=true,simbol = true) {
     }
     number = number.toString().split(".");
     return (simbol ? '$MXN ' : '')+number[0]+((number[1]) ? '.<sup>'+number[1]+'</sup>': '');
-}
+};
+
+var importarScript = function(nombre, callback) {
+    var s = document.createElement("script");
+    s.onload = callback;
+    s.src = nombre;
+    document.querySelector("head").appendChild(s);
+};
 
 $(document).ready(function(){
     

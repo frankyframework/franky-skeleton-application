@@ -1,4 +1,6 @@
 <script>
+$("#card-form").find("input[type=submit]").prop("disabled", true);
+$("form[name=frm_tarjeta_checkout] input[name=continuar]").prop("disabled", true);
 var openpaySuccessResponseHandler = function(response) {
    var $form = $("#card-form");
    $form.append($("<input name=\"token\" type=\"hidden\">").val(response.data.id));
@@ -14,22 +16,23 @@ var openpayErrorResponseHandler = function(response) {
    $form.find("input[type=submit]").prop("disabled", false);
    return false;
 };
- 
-    $("input[name=id_tarjeta]").change(function()
-      {
-          if($(this).val() == 0)
-          {
-              $("#form_new_card").show();
-              $("form[name=frm_tarjeta_checkout] input[name=continuar]").hide();
-          }
-          else
-          {
-              $("#form_new_card").hide();
-              $("form[name=frm_tarjeta_checkout] input[name=continuar]").show();
-          }
-      })
-      
-    $("form[name=card-form]").validate({
+
+$("input[name=id_tarjeta]").change(function()
+{
+    if($(this).val() == 0)
+    {
+        $("#form_new_card").show();
+        $("form[name=frm_tarjeta_checkout] input[name=continuar]").hide();
+    }
+    else
+    {
+        $("#form_new_card").hide();
+        $("form[name=frm_tarjeta_checkout] input[name=continuar]").show();
+    }
+});
+
+var validacionesOpenpay  = function(){
+      $("form[name=card-form]").validate({
         ignore: [],
           rules: {
 
@@ -94,10 +97,10 @@ var openpayErrorResponseHandler = function(response) {
               // Prevents double clic
               var deviceSessionId = OpenPay.deviceData.setup("card-form", "device_session_id");
               $form.find("input[type=submit]").prop("disabled", true);
-
+              
               OpenPay.token.extractFormAndCreate('card-form', openpaySuccessResponseHandler, openpayErrorResponseHandler);
               
-              return false
+              return false;
 
           },
           onkeyup: false,
@@ -124,4 +127,13 @@ var openpayErrorResponseHandler = function(response) {
       }
 
   });
+};
+
+importarScript('https://openpay.s3.amazonaws.com/openpay.v1.min.js',function(){
+    importarScript('https://openpay.s3.amazonaws.com/openpay-data.v1.min.js',function(){
+        $("#card-form").find("input[type=submit]").prop("disabled", false);
+        $("form[name=frm_tarjeta_checkout] input[name=continuar]").prop("disabled", false);
+        validacionesOpenpay()
+    });
+});
 </script>
