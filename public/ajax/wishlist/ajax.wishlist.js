@@ -52,7 +52,7 @@ function wishlist_getWishlist(seccion)
 
     var var_function = [seccion];
 
-    pasarelaAjax('GET',var_query,"wishlist_getWishlistHTML",var_function);
+    pasarelaAjax('GET',var_query,"wishlist_getWishlistHTML",var_function,null);
 }
 
 function wishlist_getWishlistHTML(response,seccion)

@@ -49,25 +49,24 @@ if(empty($id_tarjeta))
       $error = true;
   }
 
-
-
+  
 
   if(!$error)
   {
+      
 
     $CardsEntity->uid($MySession->GetVar('id'));
     $CardsEntity->status(1);
-
+    $CardsEntity->numero(substr($MyRequest->getRequest("card_number"),-4));
 
 
     if($CardsModel->getData($CardsEntity->getArrayCopy())!= REGISTRO_SUCCESS)
     {
 
-    
-      $CardsEntity->numero(substr($MyRequest->getRequest("card_number"),-4));
       $CardsEntity->nombre($MyRequest->getRequest("holder_name"));
       $source = addCardOpenpay($MyRequest->getRequest("token"),$MySession->GetVar('id'),$MyRequest->getRequest("device_session_id"));
-    
+      
+  
      
       $CardsEntity->fecha(date('Y-m-d H:i:s'));
       $CardsEntity->token($source['id']);
@@ -107,6 +106,7 @@ else
     $registro = $CardsModel->getRows();
     $id_tarjeta = $registro["token"];
 }
+
 if(!$error)
 {
   $productos =  OBJETO_PRODUCTOS;

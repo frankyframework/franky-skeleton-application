@@ -10,6 +10,9 @@ function catalog_addProductoCarrito(id,qty)
 }
 
 $(window).load(function(){
-     wishlist_getWishlist('catalog_products');
+    if($('[data-idlove]').length > 0)
+    {
+        wishlist_getWishlist('catalog_products');
+    }
     ajax_calificaciones_getPendientesRevisar('administrar_catalog_calificaciones_pendientes','catalog_products','catalog');
 });

@@ -37,7 +37,7 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
     {
         $data = $this->optimizeEntity($data);
         $campos = ["id","name","sku","category","visible_in_search","description","images","videos","url_key","meta_title","meta_keyword","meta_description","price","stock","iva","incluye_iva","createdAt","updateAt","status",
-        "in_stock","saleable","min_qty","stock_infinito"];
+        "in_stock","saleable","min_qty","stock_infinito","envio_requerido"];
 
         foreach($data as $k => $v)
         {
@@ -65,7 +65,7 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
         "catalog_products.meta_keyword","catalog_products.meta_description",
         "price","stock","iva","incluye_iva","catalog_products.createdAt",
         "catalog_products.updateAt","catalog_products.status",
-        "in_stock","saleable","min_qty","stock_infinito"];
+        "in_stock","saleable","min_qty","stock_infinito","envio_requerido"];
 
         foreach($data as $k => $v)
         {
@@ -136,7 +136,7 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
     function getInfoProducto($id)
     {
 
-        $campos = ["catalog_products.id","precio","ecommerce_precios.incluye_iva","ecommerce_precios.iva","name as nombre","images as imagen","stock","url_key","min_qty","stock_infinito","saleable","in_stock","min_qty"];
+        $campos = ["catalog_products.id","precio","ecommerce_precios.incluye_iva","ecommerce_precios.iva","name as nombre","images as imagen","stock","url_key","min_qty","stock_infinito","saleable","in_stock","min_qty","envio_requerido"];
 
         $this->where()->addAnd("catalog_products.id",$id,'=');
 
@@ -186,7 +186,7 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
         }
         return $this->getColeccion($campos);
     }
-    function existeSQKU($sku,$id='')
+    function existeSKU($sku,$id='')
     {
         $campos = array("id");
         $this->where()->addAnd('sku',$sku,'=');

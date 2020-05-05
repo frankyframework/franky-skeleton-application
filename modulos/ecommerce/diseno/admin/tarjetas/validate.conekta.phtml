@@ -1,6 +1,19 @@
 
 <script >
-<!--
+var conektaSuccessResponseHandler = function(token) {
+  var $form = $("#card-form");
+  $form.append($("<input name=\"token\" type=\"hidden\">").val(token.id));
+  $form.get(0).submit();
+};
+
+var conektaErrorResponseHandler = function(response) {
+   var $form = $("#card-form");
+  // console.log(response);
+  _alert(response.message_to_purchaser,"Error");
+  $form.find("input[type=submit]").prop("disabled", false);
+
+  return false;
+};
 $(document).ready(function()
 {
 
@@ -79,5 +92,4 @@ $(document).ready(function()
 
     });
 });
-// -->
 </script>

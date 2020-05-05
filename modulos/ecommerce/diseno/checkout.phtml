@@ -3,8 +3,13 @@
         <div class="w-xxxx-12 wrapper_white">
             <h1>Finalizar compra</h1>
             <div class='w-xxxx-9 contenedor_checkout'>
+              
+            <?php 
+            $active_class='_active';
+            if($productos_comprados['envio_requerido'] == 1): ?>
+    
                 <div class="_mycart_step _first">
-                    <h2 class='direccion_entrega _tab_step _nono _active'>Dirección de entrega</h2>
+                    <h2 class='direccion_entrega _tab_step _nono <?=$active_class?>'>Dirección de entrega</h2>
                     <div>
                       <?php if(isset($DireccionEnvioCheckoutForm)): ?>
                         <?php echo $DireccionEnvioCheckoutForm->openTag(); ?>
@@ -19,47 +24,17 @@
                             <?php echo $direccionesForm->endTag(); ?>
                         </div>
 
-                        <script >
-                        $(document).ready(function(){
-
-                            $( "#frm_direccion_envio" ).validate({
-                                submitHandler: function(form)
-                                {
-                                     setDireccionCheckout();
-                                     return false;
-                                }
-                            });
-
-                            $( "#frmdirecciones" ).validate({
-                                submitHandler: function(form)
-                                {
-                                     setNuevaDireccionCheckout();
-                                     return false;
-                                }
-                            });
-
-                            $("input[name=id_envio]").change(function()
-                            {
-                                if($(this).val() == "otra")
-                                {
-                                    $("#form_direccion_envio").show();
-                                    $("form[name=frm_direccion_envio] input[name=continuar]").hide();
-                                }
-                                else
-                                {
-                                    $("#form_direccion_envio").hide();
-                                    $("form[name=frm_direccion_envio] input[name=continuar]").show();
-                                }
-                            })
-                        });
-                        </script>
+                        
                     </div>
                     <div id="resumen_checkout_envio"></div>
                 </div>
+                <?php 
+                $active_class = '';
+                endif;?>
 
                 <div class="_mycart_step _second">
-                    <h2 class='direccion_facturacion _tab_step _nono'>Dirección de Facturación</h2>
-                    <div style="display:none;">
+                    <h2 class='direccion_facturacion _tab_step _nono  <?=$active_class?>'>Dirección de Facturación</h2>
+                    <div style="display:<?=(empty($active_class) ? 'none' : '')?>;">
                         <?php echo $DireccionCheckoutForm->openTag(); ?>
                         <?php echo $DireccionCheckoutForm->getRow("id_facturacion"); ?>
                         <?php echo $DireccionCheckoutForm->getRow("continuar"); ?>
@@ -71,46 +46,11 @@
                             <?php echo $direccionesFacturacionForm->getAllRow(); ?>
                             <?php echo $direccionesFacturacionForm->endTag(); ?>
                         </div>
-
-                        <script >
-                        $(document).ready(function(){
-
-                            $( "#frm_direccion" ).validate({
-                                submitHandler: function(form)
-                                {
-                                     setFacturacionCheckout();
-                                     return false;
-                                }
-                            });
-
-                            $( "#frmdirecciones_facturacion" ).validate({
-                                submitHandler: function(form)
-                                {
-                                     setNuevaFacturacionCheckout();
-                                     return false;
-                                }
-                            });
-
-                            $("input[name=id_facturacion]").change(function()
-                            {
-                                if($(this).val() == "otra")
-                                {
-                                    $("#form_direccion_facturacion").show();
-                                    $("form[name=frm_direccion] input[name=continuar]").hide();
-                                }
-                                else
-                                {
-                                    $("#form_direccion_facturacion").hide();
-                                    $("form[name=frm_direccion] input[name=continuar]").show();
-                                }
-                            })
-                        });
-                        </script>
                     </div>
                     <div id="resumen_checkout_facturacion"></div>
                 </div>
 
-
+                <?php if($productos_comprados['envio_requerido'] == 1): ?>
                 <div class="_mycart_step _third">
 
                     <h2 class='metodo_envio disabled _tab_step _nono'>Selecciona tu método de envio</h2>
@@ -120,7 +60,7 @@
                     </div>
                     <div id="resumen_metodo_envio"></div>
                 </div>
-
+                <?php endif; ?>
 
                 <div class="_mycart_step fourth">
 
@@ -171,45 +111,73 @@
     </div>
 </div>
 
+
 <script>
-  $(document).ajaxComplete(function(){
+$(document).ready(function(){
 
-      $( "#frm_tarjeta_checkout").validate({
-          submitHandler: function(form)
-          {
+    $( "#frm_direccion_envio" ).validate({
+        submitHandler: function(form)
+        {
+             setDireccionCheckout();
+             return false;
+        }
+    });
 
-               return true;
-          }
-      });
+    $( "#frmdirecciones" ).validate({
+        submitHandler: function(form)
+        {
+             setNuevaDireccionCheckout();
+             return false;
+        }
+    });
 
-      $("input[name=id_tarjeta]").change(function()
-      {
-          if($(this).val() == 0)
-          {
-              $("#form_new_card").show();
-              $("form[name=frm_tarjeta_checkout] input[name=continuar]").hide();
-          }
-          else
-          {
-              $("#form_new_card").hide();
-              $("form[name=frm_tarjeta_checkout] input[name=continuar]").show();
-          }
-      })
-  });
-  
-  $(document).ready(function(){
-      $('input[name=id_pago]').each(function(index,val){
-          $(this).next('span').addClass($(this).val());
-      });
-  });
-  </script>
-  <?php
-  if(getCoreConfig('ecommerce/conekta/enabled') == 1 && in_array('conekta_tarjeta',getCoreConfig('ecommerce/conekta/methods')))
-  {
-    echo render("checkout/validate.conekta.phtml");
-  }
-  elseif(getCoreConfig('ecommerce/openpay/enabled') == 1 && in_array('openpay_tarjeta',getCoreConfig('ecommerce/openpay/methods')))
-  {
-    echo render("checkout/validate.openpay.phtml");
-  }
-  ?>
+    $("input[name=id_envio]").change(function()
+    {
+        if($(this).val() == "otra")
+        {
+            $("#form_direccion_envio").show();
+            $("form[name=frm_direccion_envio] input[name=continuar]").hide();
+        }
+        else
+        {
+            $("#form_direccion_envio").hide();
+            $("form[name=frm_direccion_envio] input[name=continuar]").show();
+        }
+    })
+});
+</script>
+
+ <script>
+$(document).ready(function(){
+
+    $( "#frm_direccion" ).validate({
+        submitHandler: function(form)
+        {
+             setFacturacionCheckout();
+             return false;
+        }
+    });
+
+    $( "#frmdirecciones_facturacion" ).validate({
+        submitHandler: function(form)
+        {
+             setNuevaFacturacionCheckout();
+             return false;
+        }
+    });
+
+    $("input[name=id_facturacion]").change(function()
+    {
+        if($(this).val() == "otra")
+        {
+            $("#form_direccion_facturacion").show();
+            $("form[name=frm_direccion] input[name=continuar]").hide();
+        }
+        else
+        {
+            $("#form_direccion_facturacion").hide();
+            $("form[name=frm_direccion] input[name=continuar]").show();
+        }
+    })
+});
+</script>

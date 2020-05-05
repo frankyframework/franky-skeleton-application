@@ -245,7 +245,7 @@ function getCarrito()
   $gran_total = 0;
   $subtotal = 0;
   $iva_total = 0;
-
+  $envio_requerido = 0;
   while($registro = $MyCarritoProducto->getRows())
   {
 
@@ -264,11 +264,16 @@ function getCarrito()
           "caracteristicas" => $registro["caracteristicas"],
           "precio" => $_registro["precio"]
       );
+      if(isset($_registro["envio_requerido"]) && $_registro["envio_requerido"] == 1)
+      {
+        $envio_requerido = 1;
+      }
   }
 
   $productos_comprados['gran_total'] = $gran_total;
   $productos_comprados['subtotal'] = $subtotal;
   $productos_comprados['iva_total'] = $iva_total;
+  $productos_comprados['envio_requerido'] = $envio_requerido;
 
 
 
