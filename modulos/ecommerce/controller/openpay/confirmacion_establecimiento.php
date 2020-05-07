@@ -178,7 +178,7 @@ if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)
     $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
 
     $registro  = $TemplateemailModel->getRows();
-
+    
     sendEmail($campos,$registro);
 
     $ObserverManager->dispatch('finalizar_orden_ecommerce',[$pedido]);
