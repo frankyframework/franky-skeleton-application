@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'franky-font-extended';
   src:
-    url('fonts/franky-font-extended.ttf?ctcpwk') format('truetype'),
-    url('fonts/franky-font-extended.woff?ctcpwk') format('woff'),
-    url('fonts/franky-font-extended.svg?ctcpwk#franky-font-extended') format('svg');
+    url('/public/skin/default/css/franky-font-extended/fonts/franky-font-extended.ttf?ctcpwk') format('truetype'),
+    url('/public/skin/default/css/franky-font-extended/fonts/franky-font-extended.woff?ctcpwk') format('woff'),
+    url('/public/skin/default/css/franky-font-extended/fonts/franky-font-extended.svg?ctcpwk#franky-font-extended') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
