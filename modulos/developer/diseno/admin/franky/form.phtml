@@ -10,31 +10,38 @@
         <?php echo $adminForm->getRow("id"); ?>
         <!-- Campos ocultos -->
 
-        <div class="w-xxxx-4">
-        <?php echo $adminForm->getRow("nombre"); ?>
+        <div class="w-xxxx-12">
+            <div class="_cont_confit_page_gral">
+                <?php echo $adminForm->getRow("nombre"); ?>
 
-             <?php echo $adminForm->getRow("constante"); ?>
+                 <?php echo $adminForm->getRow("constante"); ?>
 
-             <?php echo $adminForm->getRow("url"); ?>
+                 <?php echo $adminForm->getRow("url"); ?>
 
-             <?php echo $adminForm->getRow("php"); ?>
-             
-             <?php echo $adminForm->getRow("modulo"); ?>
+                 <?php echo $adminForm->getRow("php"); ?>
 
-              <?php echo $adminForm->getRow("css[]"); ?>
-
-              <?php echo $adminForm->getRow("permisos[]"); ?>
+                 <?php echo $adminForm->getRow("modulo"); ?>
+            </div>
         </div>
-        <div class="w-xxxx-4">
-             <?php echo $adminForm->getRow("js[]"); ?>
-        </div>
-        <div class="w-xxxx-4">
-         <?php echo $adminForm->getRow("jquery[]"); ?>
-         </div>
-        <div class="w-xxxx-4">
-             <?php echo $adminForm->getRow("ajax[]"); ?>
-        </div>
+        <div class="w-xxxx-12">
+            <div class="_cont_confit_page _js_css">
+                <?php echo $adminForm->getRow("css[]"); ?>
+            </div>
 
+            <div class="_cont_confit_page _js_css">
+                <?php echo $adminForm->getRow("permisos[]"); ?>
+            </div>
+
+            <div class="_cont_confit_page _js_css">
+                 <?php echo $adminForm->getRow("js[]"); ?>
+            </div>
+            <div class="_cont_confit_page _js_css">
+             <?php echo $adminForm->getRow("jquery[]"); ?>
+             </div>
+            <div class="_cont_confit_page _js_css">
+                 <?php echo $adminForm->getRow("ajax[]"); ?>
+            </div>
+        </div>
         <div class="w-xxxx-12">
              <?php echo $adminForm->getRow("guardar"); ?>
         </div>

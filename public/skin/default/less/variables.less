@@ -101,10 +101,10 @@ a, input, label, button {
 	float: none; display: inline-block; font-weight: 600; text-decoration: none; padding: 5px 20px; margin: 0 5px; box-sizing: border-box; line-height: 32px;  .aparience-reset; .radius;
 }
 ._btn_rules_hover {
-	float: none; display: inline-block; font-weight: 600; text-decoration: none; padding: 5px 20px; margin: 0 5px; box-sizing: border-box; line-height: 32px;  .aparience-reset; .radius;
+	text-decoration: none;
 }
 ._btn_primary_rules {
-	background-color: @enfasis_color; color: @white; border: 1px solid @enfasis_color;
+	background-color: @enfasis_color; color: @white; border: 1px solid @enfasis_color; padding-left: 25px; padding-right: 25px;
 }
 ._btn_primary_rules_hover {
 	background: darken(@enfasis_color,15); color: @white !important; border: 1px solid darken(@enfasis_color,15);
@@ -137,7 +137,7 @@ a, input, label, button {
 	text-shadow: @shadow-string;
 }
 
-.box-shadow (@shadow-string: 0px 3px 5px rgba(0, 0, 0, 0.3)) {
+.box-shadow (@shadow-string: 0px 2px 7px 3px rgba(0, 0, 0, 0.08)) {
 	-webkit-box-shadow: @shadow-string;
 	-moz-box-shadow:    @shadow-string;
 	box-shadow:         @shadow-string;

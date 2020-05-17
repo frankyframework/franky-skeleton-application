@@ -6,7 +6,7 @@
 <body class="<?php echo $MyRequest->getClassBody($lang_root); ?>" <?php echo (!$MyRequest->isAjax() ? 'style="overflow: hidden;"' : ''); ?>>
     <header>
         <div class="w-xxxx-12">
-            <div class="content">
+
                 <?php $logopanel = getImg('logo.png'); ?>
 
                 <?php
@@ -21,7 +21,7 @@
                 ?>
                 <a class="_admin_logo" href="<?php echo $MyRequest->url(ADMIN) ?>"><?php echo makeHTMLImg($logopanel,"","200","200","class='img_logo'"); ?></a>
                 <a target="_blank" class="_btn _txt _my_site" href="/">VISITAR MI SITIO</a>
-            </div>
+
         </div>
     </header>
         <?php if(!$MyRequest->isAjax()): ?>
@@ -31,7 +31,7 @@
         <?php endif; ?>
         <main>
         	<div class="w-xxxx-12 page_wrapper">
-                <div class="content">
+
                     <div class="w-xxxx-12 cont_admin">
                         <div class="_left_menu">
 
@@ -39,9 +39,11 @@
                                 <li><span class="avatar_mask"><?php echo makeHTMLImg(getAvatar($MySession->GetVar('id'))); ?></span></li>
                                 <li><a class="_btn _editar_avatar" href="<?=$MyRequest->url(ADMIN_AVATAR); ?>">Editar</a></li>
                             </ul>
+                            <ul>
                            <?php
                            echo $MyMenuAdmin->getMenu();
                            ?>
+                           </ul>
                            <?php if($MySession->LoggedIn()): ?>
                                <ul class="wrapp_access">
                                    <li>
@@ -59,9 +61,12 @@
                             </div>
 
                     </div>
-                </div>
+
         	</div>
         </main>
+        <footer>
+            <p><a target="_blank" href="www.cloudstudio.mx">Todos los derechos reservados CloudStudio</a></p>
+        </footer>
         <?php echo render("widget_link_up.phtml"); ?>
         <?php echo render("debug.phtml",$MyDebug->Dump()) ?>
         <?php echo render("admin/layout/css.async.phtml"); ?>
