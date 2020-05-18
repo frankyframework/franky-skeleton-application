@@ -253,6 +253,8 @@ main { float: left; width:100%; margin-top: 100px; min-height: calc(~'100vh - 14
 
 ////////////////////////// End Nav ////////////////////////////////////
 
+////////////////////////// Right content ////////////////////////////////////
+
         ._panel_content { float: left; width: calc(~'100% - 300px'); background-color: @white; margin-left: 300px; padding: 10px 30px 10px 40px; box-sizing: border-box; .radius(0 10px 0 0); .transition;
             &.active {
                 margin-left: 0px; width: calc(~'100% - 0px');
@@ -286,13 +288,27 @@ main { float: left; width:100%; margin-top: 100px; min-height: calc(~'100vh - 14
                 }
             }
 
+            /////////////////// Configuración /////////////
+
+            ._ul_panel_config {
+                li {
+                    a { position: relative; width: calc(~'100% - 20px'); margin-right: 10px; display: inline-block; color: @gray; padding: 5px 10px; box-sizing: border-box; text-decoration: none;
+                        &:hover {
+                            color: @enfasis_color;
+                        }
+                        &.active { background-color: @soft_gray; color: @black;
+                            &:after { position: absolute; right: 10px; top: 50%; .transform-translate(0, -50%); display: block; content: ""; width: 8px; height: 8px; background-color: @enfasis_color; .radius(4px); }
+                        }
+                    }
+                }
+            }
+
             /////////////////// Dashboard /////////////
 
             ._cont_dashboard { float: left; width: calc(~'50% - 20px'); margin: 10px; padding: 5px 20px 30px 20px; box-sizing: border-box; background-color: @white; .radius; .box-shadow;
                 @media @small { width: calc(~'100% - 20px'); }
             }
 
-            /////////////////// End Dashboard /////////////
 
             /////////////////// Page edit /////////////
 
@@ -323,83 +339,83 @@ main { float: left; width:100%; margin-top: 100px; min-height: calc(~'100vh - 14
                     label { line-height: 43px; }
                 }
             }
-            /////////////////// End Page edit /////////////
+
+            /////// Form
+                form {
+                    label { position: relative; }
+                    label, input, textarea select { float: left; }
+                    &#paginar { float: left; width: auto; }
+                    label { box-sizing: border-box; padding: 5px 10px; }
+                    img { max-width: 100%; height: auto; }
+                }
+                .form_guardar { text-align: center; width: 100% !important;
+                    label { float: none; display: inline-block; width: auto; text-align: center;
+                        input { float: none !important; }
+                    }
+                }
+
+            //// Contact US
+
+                .email { text-align: center;
+                    a { font-size: 2.4rem; line-height: 2.4rem;
+                        &:after { display: block; content: " Responder"; font-size: 1rem; line-height:1rem }
+                    }
+                }
+                ._open_comment {
+                    &.active {
+                        a {
+                            &:after { content: "\e82f"; }
+                        }
+                    }
+                    a {
+                        &:after { font-family: @ico_font; content: "\e82e"; }
+                    }
+                    div { padding: 0 20px 10px 20px; box-sizing: border-box; color: @black; }
+                }
+                ._table_delete { text-align: center; }
+
+            //// Botones
+
+                input._btn:hover { cursor: pointer; }
+
+                .input_home_searcher { position: relative;
+                    #ubicacion { padding-left: 30px; }
+                    .gps_address { position: absolute; left: 15px; bottom: 13px; width: 24px; height: auto; }
+                }
+                /////// Orders
+                .cont_header_panel {
+                    &._orders {
+                        &._calendar {
+                            div { float: left; width: auto; }
+                        }
+                        input[type="submit"] { padding-top: 0; padding-bottom: 0; background-color: @enfasis_color; }
+                    }
+                }
+                ._ul_txt_standar { .ul-reset; font-size: @font_size_txt; margin: 10px 0;
+                    li { .ul-reset; margin: 4px 0;
+                        &._total { font-size: 1.6rem; font-weight: 600; }
+                    }
+                }
+                ._ul_resume_art { .ul-reset;
+                    li { position: relative; float: left; width: 33.3%; .ul-reset; padding: 10px; box-sizing: border-box;
+                        @media @small { width: 50%; }
+                        img { max-width: 100%; height: auto; }
+                        span {
+                            &._count { position: absolute; display: block; left: 0; top: 0; text-align: center; width: 32px; height: 32px; line-height: 32px; font-size: @font_size_txt; background: @enfasis_color; color: @white; padding: 4px; .radius(30px) }
+                        }
+                    }
+                }
+                ._map {
+                    img { max-width: 100%; height: auto; }
+                }
+
+                /////////// Orden Listas
+                .ui-sortable-handle { float: left; width: 100%; cursor: move; }
+                .ui-sortable-placeholder.ui-state-highlight { border-bottom: 3px solid @soft_gray; }
 
         }
     }
-
-/////// Form
-    form {
-        label { position: relative; }
-        label, input, textarea select { float: left; }
-        &#paginar { float: left; width: auto; }
-        label { box-sizing: border-box; padding: 5px 10px; }
-        img { max-width: 100%; height: auto; }
-    }
-    .form_guardar { text-align: center; width: 100% !important;
-        label { float: none; display: inline-block; width: auto; text-align: center;
-            input { float: none !important; }
-        }
-    }
-
-//// Contact US
-
-    .email { text-align: center;
-        a { font-size: 2.4rem; line-height: 2.4rem;
-            &:after { display: block; content: " Responder"; font-size: 1rem; line-height:1rem }
-        }
-    }
-    ._open_comment {
-        &.active {
-            a {
-                &:after { content: "\e82f"; }
-            }
-        }
-        a {
-            &:after { font-family: @ico_font; content: "\e82e"; }
-        }
-        div { padding: 0 20px 10px 20px; box-sizing: border-box; color: @black; }
-    }
-    ._table_delete { text-align: center; }
-
-//// Botones
-
-    input._btn:hover { cursor: pointer; }
-
-    .input_home_searcher { position: relative;
-        #ubicacion { padding-left: 30px; }
-        .gps_address { position: absolute; left: 15px; bottom: 13px; width: 24px; height: auto; }
-    }
-    /////// Orders
-    .cont_header_panel {
-        &._orders {
-            &._calendar {
-                div { float: left; width: auto; }
-            }
-            input[type="submit"] { padding-top: 0; padding-bottom: 0; background-color: @enfasis_color; }
-        }
-    }
-    ._ul_txt_standar { .ul-reset; font-size: @font_size_txt; margin: 10px 0;
-        li { .ul-reset; margin: 4px 0;
-            &._total { font-size: 1.6rem; font-weight: 600; }
-        }
-    }
-    ._ul_resume_art { .ul-reset;
-        li { position: relative; float: left; width: 33.3%; .ul-reset; padding: 10px; box-sizing: border-box;
-            @media @small { width: 50%; }
-            img { max-width: 100%; height: auto; }
-            span {
-                &._count { position: absolute; display: block; left: 0; top: 0; text-align: center; width: 32px; height: 32px; line-height: 32px; font-size: @font_size_txt; background: @enfasis_color; color: @white; padding: 4px; .radius(30px) }
-            }
-        }
-    }
-    ._map {
-        img { max-width: 100%; height: auto; }
-    }
-
-    /////////// Orden Listas
-    .ui-sortable-handle { float: left; width: 100%; cursor: move; }
-    .ui-sortable-placeholder.ui-state-highlight { border-bottom: 3px solid @soft_gray; }
+    ////////////////////////// End Right content ////////////////////////////////////
 
             // ------------------------ END MAIN All styles before this line ------------------------------- //
 }
