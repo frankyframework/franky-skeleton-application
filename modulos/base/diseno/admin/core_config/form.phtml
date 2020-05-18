@@ -6,11 +6,15 @@
         <?php
         if(!empty($core_config)):
         foreach($core_config as $key_config => $val_config):
+
         ?>
-        <li  class="title_menu">
-            <a href="<?=$MyRequest->url(ADMIN_CORE_CONFIG_SECCION,['seccion' => $key_config])?>"><?=$val_config['menu']?></a>
-        </li>
+            <li  class="title_menu <?=(empty($seccion) ? active : '')?>">
+                <a href="<?=$MyRequest->url(ADMIN_CORE_CONFIG_SECCION,['seccion' => $key_config])?>"  <?=(empty($seccion) ? 'class="active"' : '')?>><?=$val_config['menu']?></a>
+            </li>
         <?php
+            if(empty($seccion)){
+                $seccion = $key_config;
+            }
         endforeach;
         endif;
         ?>
@@ -23,13 +27,6 @@
     <?php
     if(!empty($core_config)):
       foreach($core_config as $key_config => $val_config):
-
-            if(empty($seccion)){
-                $seccion = $key_config;
-            }
-
-
-
 
           ?>
 
