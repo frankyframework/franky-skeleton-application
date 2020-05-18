@@ -68,29 +68,28 @@ CREATE TABLE franky (
 
 /*Data for the table 'franky' */
 
-insert  into franky(id,php,css,js,jquery,permisos,constante,url,nombre,ajax,status,editable,modulo)
-values
-(1,'home.php','','','[\"flexslider\"]','[]','HOME','home','home','',1,0,'base'),
-(2,'404.php','','','','','ERR_404','404/','404','',1,0,'base'),
-(3,'frmlogin.php','','[\"validaciones.js\"]','[\"jquery-validate\"]','','LOGIN','login/','login','',1,0,'base'),
-(4,'frmforgot.php','','[\"validaciones.js\"]','[\"jquery-validate\"]','','FORGOT','forgot/','Olvido su contraseña','',1,0,'base'),
-(5,'contactanos.php','','[\"validaciones.js\"]','[\"jquery-validate\"]','[]','CONTACTANOS','contactanos/','Contactanos','',1,0,'base'),
-(6,'admin/index.php','','','[]','[\"1\",\"2\",\"3\"]','ADMIN','admin/','Administracion','[\"base/ajax.common.js\"]',1,0,'base'),
-(7,'admin/users/lista.php','','','[]','[\"1\"]','LISTA_OPERADORES','admin/operadores/','Usuaruis','[\"base/ajax.admin.js\"]',1,0,'base'),
-(8,'admin/users/form.users.php','','[\"validaciones.js\"]','[\"jquery-validate\"]','[\"1\",\"2\",\"3\"]','FRM_OPERADORES','admin/operadores/frm/','Alta de usuarios','',1,0,'base'),
-(9,'registro/form.users.php','','[\"validaciones.js\"]','[\"jquery-validate\"]','','REGISTRO','registro/','Registro de usuarios','',1,0,'base'),
-(10,'admin/users/form.pass.php','','[\"validaciones.js\"]','[\"jquery-validate\"]','[\"1\",\"2\",\"3\"]','FRM_PASS_OPERADORES','admin/operadores/pass/','Cambiar contraseña','',1,0,'base'),
-(11,'/admin/mailing/lista.php','','','','[\"1\"]','MAILING','admin/mailing/','Newsletter','[\"base/ajax.admin.js\"]',1,0,'base'),
-(12,'admin/contacto/lista.php','','','','[\"1\"]','CONTACTOS_LIST','admin/contactanos/','Contactanos','[\"base/ajax.admin.js\"]',1,0,'base'),
-(13,'/admin/users/form.delete.php','','[\"validaciones.js\"]','[\"jquery-validate\"]','[\"1\",\"2\",\"3\"]','FRM_ELIMINAR_USER','admin/operadores/eliminar-cuenta/','Eliminar cuenta','',1,0,'base'),
-(14,'admin/template_email/lista.php','','','[]','[1]','LISTA_EMAIL_TEMPLATE','admin/email-template/','Transaccionales','[\"base/ajax.admin.js\"]',1,0,'base'),
-(15,'admin/template_email/form.php','','[\"validaciones.js\"]','[\"jquery-validate\"]','[1]','FRM_EMAIL_TEMPLATE','admin/email-template/frm/','Alta transaccionales','',1,0,'base'),
-(16,'admin/cms/lista.php','','','[]','[1,2]','LISTA_CMS_TEMPLATE','admin/cms/','CMS','[\"base/ajax.admin.js\"]',1,0,'base'),
-(17,'admin/cms/form.php','','[\"validaciones.js\"]','[\"jquery-validate\",\"flexslider\"]','[1,2]','FRM_CMS_TEMPLATE','admin/cms/frm/','Alta CMS','',1,0,'base'),
-(18,'cms.php','','','[\"flexslider\"]','','CMS','cms/','CMS','',1,0,'base'),
-(19,'gracias.php','','','','','GRACIAS','gracias/','gracias','',1,0,'base'),
-(20,'admin/url_internacional/lista.php','','','[]','[1,2]','ADMIN_URL_INTERNACIONAL','admin/url-internacional/','URL internacional','[\"base/ajax.admin.js\"]',1,0,'base'),
-(21,'admin/url_internacional/form.php','','[\"validaciones.js\"]','[\"jquery-validate\"]','[1,2]','FRM_URL_INTERNACIONAL','admin/url-internacional/frm/','Alta de URL internacional','',1,0,'base');
+insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values ('home.php','','','[\"flexslider\"]','[]','HOME','home','home','',1,0,'base');
+insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values ('404.php','','','','','ERR_404','404/','404','',1,0,'base');
+insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values ('frmlogin.php','','[\"validaciones.js\"]','[\"jquery-validate\"]','','LOGIN','login/','login','',1,0,'base');
+insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values ('frmforgot.php','','[\"validaciones.js\"]','[\"jquery-validate\"]','','FORGOT','forgot/','Olvido su contraseña','',1,0,'base');
+insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values ('contactanos.php','','[\"validaciones.js\"]','[\"jquery-validate\"]','[]','CONTACTANOS','contactanos/','Contactanos','',1,0,'base');
+insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values ('admin/index.php','','','[]','[\"1\",\"2\",\"3\"]','ADMIN','admin/','Administracion','[\"base/ajax.common.js\"]',1,0,'base');
+insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values ('admin/users/lista.php','','','[]','[\"1\"]','LISTA_OPERADORES','admin/operadores/','Usuaruis','[\"base/ajax.admin.js\"]',1,0,'base');
+insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values ('admin/users/form.users.php','','[\"validaciones.js\"]','[\"jquery-validate\"]','[\"1\",\"2\",\"3\"]','FRM_OPERADORES','admin/operadores/frm/','Alta de usuarios','',1,0,'base');
+insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values ('registro/form.users.php','','[\"validaciones.js\"]','[\"jquery-validate\"]','','REGISTRO','registro/','Registro de usuarios','',1,0,'base');
+insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values ('admin/users/form.pass.php','','[\"validaciones.js\"]','[\"jquery-validate\"]','[\"1\"]','FRM_PASS_OPERADORES','admin/operadores/cambiar-contrasena/','Cambiar contraseña','',1,0,'base');
+insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values ('admin/users/form.pass.php','','[\"validaciones.js\"]','[\"jquery-validate\"]','[\"1\",\"2\",\"3\"]','FRM_MY_PASSWORD','admin/cambiar-mi-contrasena/','Cambiar mi contraseña','',1,0,'base');
+insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values ('/admin/mailing/lista.php','','','','[\"1\"]','MAILING','admin/mailing/','Newsletter','[\"base/ajax.admin.js\"]',1,0,'base');
+insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values ('admin/contacto/lista.php','','','','[\"1\"]','CONTACTOS_LIST','admin/contactanos/','Contactanos','[\"base/ajax.admin.js\"]',1,0,'base');
+insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values ('/admin/users/form.delete.php','','[\"validaciones.js\"]','[\"jquery-validate\"]','[\"1\",\"2\",\"3\"]','FRM_ELIMINAR_USER','admin/operadores/eliminar-cuenta/','Eliminar cuenta','',1,0,'base');
+insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values ('admin/template_email/lista.php','','','[]','[1]','LISTA_EMAIL_TEMPLATE','admin/email-template/','Transaccionales','[\"base/ajax.admin.js\"]',1,0,'base');
+insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values ('admin/template_email/form.php','','[\"validaciones.js\"]','[\"jquery-validate\"]','[1]','FRM_EMAIL_TEMPLATE','admin/email-template/frm/','Alta transaccionales','',1,0,'base');
+insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values ('admin/cms/lista.php','','','[]','[1,2]','LISTA_CMS_TEMPLATE','admin/cms/','CMS','[\"base/ajax.admin.js\"]',1,0,'base');
+insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values ('admin/cms/form.php','','[\"validaciones.js\"]','[\"jquery-validate\",\"flexslider\"]','[1,2]','FRM_CMS_TEMPLATE','admin/cms/frm/','Alta CMS','',1,0,'base');
+insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values ('cms.php','','','[\"flexslider\"]','','CMS','cms/','CMS','',1,0,'base');
+insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values ('gracias.php','','','','','GRACIAS','gracias/','gracias','',1,0,'base');
+insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values ('admin/url_internacional/lista.php','','','[]','[1,2]','ADMIN_URL_INTERNACIONAL','admin/url-internacional/','URL internacional','[\"base/ajax.admin.js\"]',1,0,'base');
+insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values ('admin/url_internacional/form.php','','[\"validaciones.js\"]','[\"jquery-validate\"]','[1,2]','FRM_URL_INTERNACIONAL','admin/url-internacional/frm/','Alta de URL internacional','',1,0,'base');
 insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values('admin/users/avatar.php','','','[]','[\"1\",\"2\",\"3\"]','ADMIN_AVATAR','admin/avatar/','Administracion de avatar','[\"base/ajax.common.js\"]','1','0','base');
 insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values('admin/core_config/form.php','','','[\"jquery-validate\"]','[\"1\"]','ADMIN_CORE_CONFIG','admin/core-config/','Administracion de sistema','','1','0','base');
 insert into franky (php, css, js, jquery, permisos, constante, url, nombre, ajax, status, editable, modulo) values('admin/core_config/form.php','','','[\"jquery-validate\"]','[\"1\"]','ADMIN_CORE_CONFIG_SECCION','admin/core-config/[seccion]/','Administracion de sistema','','1','0','base');

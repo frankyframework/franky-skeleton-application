@@ -16,7 +16,7 @@ return array(
                 ),
                  array(
                  "permiso" =>   ADMINISTRAR_MI_CONTRASENA,
-                 "url" => $MyRequest->url(FRM_PASS_OPERADORES),
+                 "url" => $MyRequest->url(FRM_MY_PASSWORD),
                  "etiqueta" => _("Cambiar mi contraseña")
                 ),
                
