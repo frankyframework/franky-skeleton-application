@@ -129,34 +129,45 @@ main { float: left; width:100%; margin-top: 100px; min-height: calc(~'100vh - 14
 
     .cont_admin { position: relative; background: @white;
 
-        ._btn_collapse_panel { position: fixed; content: ""; height: 36px; width: 36px; left: 0px; margin-top: 20px; text-align: center; line-height: 36px; background-color: @black; .radius(0 4px 4px 0); cursor: pointer; z-index: 12;
-            &:after { font-family: @ico_font; content: "\e838";font-size: 2rem; color: @white; }
+        ._btn_collapse_panel { position: fixed; content: ""; height: 36px; width: 36px; left: 0px; margin-top: 20px; text-align: center; line-height: 36px; background-color: fade(@theme_color, 70); .radius(0 4px 4px 0); cursor: pointer; z-index: 12;
+            &:after { font-family: @ico_font; content: "\e838";font-size: 2rem; color: @black; }
             &.active {
                 &:after { content: "\e833"; }
             }
         }
 
         .cont_gral_admin {
-            a { text-decoration: none; color: @enfasis_color; }
+            a { text-decoration: none; color: @black;
+                &.btn_adm_editar {
+                    color: @success;
+                }
+                &.btn_adm_eliminar  {
+                    color: @error;
+                }
+            }
+            .email,
+            .telephone { text-align: center;
+                a {
+                    color: @success;
+                }
+            }
         }
 
-
-            .contenedor_titulo_columnas { padding: 10px ; min-height: 35px; margin-bottom: 20px; box-sizing: border-box; background: @soft_gray; font-weight: 600; .radius;
-                a { color: @gray; text-decoration: none;
-                    &:after { font-family: @ico_font; content: "\e83d";
-                    }
+        .contenedor_titulo_columnas { padding: 10px ; min-height: 35px; margin-bottom: 20px; box-sizing: border-box; background: @soft_gray; text-align: center; font-weight: 600; .radius;
+            a { color: @gray; text-decoration: none;
+                &:after { font-family: @ico_font; content: "\e83d";
                 }
-                .ASC {
-                    a {
-                        &:after { content: "\e832"; }
-                    }
+            }
+            .ASC {
+                a {
+                    &:after { content: "\e832"; }
                 }
-
-
             }
-            .contenedor_columnas { float: left; width: 100%; border-bottom: 1px solid @soft_gray; padding: 5px 0; box-sizing: border-box;
-                &:hover { background: @soft_gray; }
-            }
+        }
+
+        .contenedor_columnas { float: left; width: 100%; border-bottom: 1px solid @soft_gray; padding: 5px 0; box-sizing: border-box;
+            &:hover { background: @soft_gray; }
+        }
 
 ////////////////////////// Nav ////////////////////////////////////
 
@@ -189,7 +200,7 @@ main { float: left; width:100%; margin-top: 100px; min-height: calc(~'100vh - 14
                         &._logout { border-bottom: 0;
                             &:before { margin-right: 4px; font-family: @ico_font; content: "\e905"; }
                         }
-                        &:hover { background-color: @theme_color; color: @white; }
+                        &:hover { background-color: darken(@soft_gray, 5); color: @black; }
                         &.active { background-color: @soft_gray; color: @black;
                             &:after { position: absolute; right: 10px; top: 50%; .transform-translate(0, -50%); display: block; content: ""; width: 8px; height: 8px; background-color: @enfasis_color; .radius(4px); }
                         }
