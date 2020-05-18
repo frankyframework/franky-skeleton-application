@@ -210,6 +210,15 @@ $.fn.navFixed = function(altura_personalizada,altura_inicial,modify_margin)
     });
 }
 
+$(document).ready(function(){
+    $("._btn_collapse_panel").click(function(){
+        $(this).toggleClass( "active" );
+        $('._left_menu').toggleClass( "active" );
+        $('._panel_content').toggleClass( "active" );
+    });
+
+});
+
 $.fn.htmlDataDum = function(data,fail)
 {
     var data = JSON.parse(JSON.stringify(data));
@@ -331,7 +340,7 @@ var importarScript = function(nombre, callback) {
 };
 
 $(document).ready(function(){
-    
+
     $(".imprimible").addAllParentClass("imprimible");
     $(".hide_render_debug").click(function(e){
         e.preventDefault();
@@ -362,7 +371,7 @@ $(document).ready(function(){
             })
     });
 
-   
+
 
 
     $("#up").hide();
@@ -435,8 +444,8 @@ $(document).ready(function(){
 window.loaderStyle = $('#loader').attr('style');
 $(window).load(function() {
 
-    
-    
+
+
     if($('#preloaderfullpage'))
     {
 	     $('#preloaderfullpage').fadeOut('slow',function(){

@@ -3,6 +3,13 @@
 <head>
    <?php  include(getVista("admin/layout/widget.headers.phtml")); ?>
 </head>
+
+<?php if(!$MyRequest->isAjax()): ?>
+<div id="preloaderfullpage" style="position: fixed;top:0;left:0;right:0; bottom:0;background: #f7f7f7;z-index: 100;">
+    <div id="loader" style="width: 100px;height: 100px;position: absolute;left:50%; top:50%;background: url('<?php echo getImg('SVG/loader.svg'); ?>') no-repeat center 0; margin:-50px 0 0 -50px;">&nbsp;</div>
+</div>
+<?php endif; ?>
+
 <body class="<?php echo $MyRequest->getClassBody($lang_root); ?>" <?php echo (!$MyRequest->isAjax() ? 'style="overflow: hidden;"' : ''); ?>>
     <header>
         <div class="w-xxxx-12">
@@ -24,17 +31,13 @@
 
         </div>
     </header>
-        <?php if(!$MyRequest->isAjax()): ?>
-        <div id="preloaderfullpage" style="position: fixed;top:0;left:0;right:0; bottom:0;background: #f7f7f7;z-index: 100;">
-            <div id="loader" style="width: 100px;height: 100px;position: absolute;left:50%; top:50%;background: url('<?php echo getImg('SVG/loader.svg'); ?>') no-repeat center 0; margin:-50px 0 0 -50px;">&nbsp;</div>
-        </div>
-        <?php endif; ?>
         <main>
+
         	<div class="w-xxxx-12 page_wrapper">
 
                     <div class="w-xxxx-12 cont_admin">
+                        <div class="_btn_collapse_panel"></div>
                         <div class="_left_menu">
-
                             <ul class="_img_perfil">
                                 <li><span class="avatar_mask"><?php echo makeHTMLImg(getAvatar($MySession->GetVar('id'))); ?></span></li>
                                 <li><a class="_btn _editar_avatar" href="<?=$MyRequest->url(ADMIN_AVATAR); ?>">Editar</a></li>
@@ -52,13 +55,14 @@
                                </ul>
                            <?php endif; ?>
                        </div>
-                            <div class="_panel_content">
-                                <?php
-                                    $centro = $MyFrankyMonster->MyPHPFile();
-                                    $render_phtml = render(str_replace(".php",".phtml",$centro));
-                                    echo stripJS($render_phtml);
-                                ?>
-                            </div>
+
+                        <div class="_panel_content">
+                            <?php
+                                $centro = $MyFrankyMonster->MyPHPFile();
+                                $render_phtml = render(str_replace(".php",".phtml",$centro));
+                                echo stripJS($render_phtml);
+                            ?>
+                        </div>
 
                     </div>
 

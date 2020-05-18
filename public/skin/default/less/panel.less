@@ -105,7 +105,7 @@ header { position: fixed; left: 0; top: 0; float: left; width: 100%; height: 100
 
 /////////////////////// END Hader ///////////////////////////////
 
-main { float: left; width:100%; margin-top: 100px; min-height: calc(~'100vh - 100px');
+main { float: left; width:100%; margin-top: 100px; min-height: calc(~'100vh - 140px');
 
 //////////// WYSIWYG
     #mceu_50, #mceu_50-body {
@@ -127,11 +127,19 @@ main { float: left; width:100%; margin-top: 100px; min-height: calc(~'100vh - 10
         }
     }
 
-    .cont_admin { position: relative; background: @white; z-index: 1;
+    .cont_admin { position: relative; background: @white;
+
+        ._btn_collapse_panel { position: fixed; content: ""; height: 36px; width: 36px; left: 0px; margin-top: 20px; text-align: center; line-height: 36px; background-color: @black; .radius(0 4px 4px 0); cursor: pointer; z-index: 12;
+            &:after { font-family: @ico_font; content: "\e838";font-size: 2rem; color: @white; }
+            &.active {
+                &:after { content: "\e833"; }
+            }
+        }
+
         .cont_gral_admin {
             a { text-decoration: none; color: @enfasis_color; }
         }
-        //////// Grid
+
 
             .contenedor_titulo_columnas { padding: 10px ; min-height: 35px; margin-bottom: 20px; box-sizing: border-box; background: @soft_gray; font-weight: 600; .radius;
                 a { color: @gray; text-decoration: none;
@@ -152,7 +160,10 @@ main { float: left; width:100%; margin-top: 100px; min-height: calc(~'100vh - 10
 
 ////////////////////////// Nav ////////////////////////////////////
 
-        ._left_menu { float: left; position: fixed; width: 300px; overflow: auto; height: calc(~'100vh - 100px'); left: 0; top: 100px; padding: 0; background: lighten(@soft_gray, 50); border-right: 1px solid lighten(@black, 90); box-sizing: border-box; z-index: 1;
+        ._left_menu { float: left; position: fixed; width: 300px; overflow: auto; height: calc(~'100vh - 100px'); left: 0; top: 100px; padding: 0; background: lighten(@soft_gray, 50); border-right: 1px solid lighten(@black, 90); box-sizing: border-box; .transition; z-index: 1;
+            &.active {
+                margin-left: -300px;
+            }
             @media @small { padding: relative; width: 100%; height: auto; top: auto; }
 
              ._my_account { display: block; position: absolute; right: 10px; top: 10px; text-decoration: none;
@@ -174,7 +185,7 @@ main { float: left; width:100%; margin-top: 100px; min-height: calc(~'100vh - 10
                 }
                 li { .ul-reset; position: relative;
                     ._counter { position: absolute; right: 10px; top: 5px; padding: 5px 10px; background: @error; color: @white; .radius(30px); font-weight: 600; }
-                    a { position: relative; display: block; width: 100%; margin: 2px 0; padding: 10px 10px 10px 20px; color: @gray; border-bottom:1px solid lighten(@black, 90); box-sizing: border-box; text-decoration: none;
+                    a { position: relative; display: block; width: 100%; margin: 0; padding: 10px 10px 10px 20px; color: @gray; border-bottom:1px solid lighten(@black, 90); box-sizing: border-box; text-decoration: none;
                         &._logout { border-bottom: 0;
                             &:before { margin-right: 4px; font-family: @ico_font; content: "\e905"; }
                         }
@@ -183,7 +194,39 @@ main { float: left; width:100%; margin-top: 100px; min-height: calc(~'100vh - 10
                             &:after { position: absolute; right: 10px; top: 50%; .transform-translate(0, -50%); display: block; content: ""; width: 8px; height: 8px; background-color: @enfasis_color; .radius(4px); }
                         }
                     }
-                    b { display: block; padding: 10px; text-transform: uppercase; }
+                    h3 { display: block; padding: 10px; text-transform: uppercase;
+                        &:before {
+                            font-family: @ico_font; content: "\e82e"; margin-right: 3px;
+                        }
+                    }
+                    &.perfil {
+                        h3 { &:before { font-family: @ico_font; content: "\e87c"; } }
+                    }
+                    &.contenido {
+                        h3 { &:before { font-family: @ico_font; content: "\e823"; } }
+                    }
+                    &.configuracion {
+                        h3 { &:before { font-family: @ico_font; content: "\e804"; } }
+                    }
+                    &.blog {
+                        h3 { &:before { font-family: @ico_font; content: "\e859"; } }
+                    }
+                    &.seo {
+                        h3 { &:before { font-family: @ico_font; content: "\e84e"; } }
+                    }
+                    &.sliders {
+                        h3 { &:before { font-family: @ico_font; content: "\e849"; } }
+                    }
+                    &.desarrolladores {
+                        h3 { &:before { font-family: @ico_font; content: "\e821"; } }
+                    }
+                    &.ecommerce {
+                        h3 { &:before { font-family: @ico_font; content: "\e813"; } }
+                    }
+                    &.catalogo {
+                        h3 { &:before { font-family: @ico_font; content: "\e874"; } }
+                    }
+
                 }
             }
 
@@ -193,7 +236,10 @@ main { float: left; width:100%; margin-top: 100px; min-height: calc(~'100vh - 10
 
 ////////////////////////// End Nav ////////////////////////////////////
 
-        ._panel_content { float: left; width: calc(~'100% - 300px'); background-color: @white; margin-left: 300px; padding: 10px 30px; box-sizing: border-box; .radius(0 10px 0 0);
+        ._panel_content { float: left; width: calc(~'100% - 300px'); background-color: @white; margin-left: 300px; padding: 10px 30px 10px 40px; box-sizing: border-box; .radius(0 10px 0 0); .transition;
+            &.active {
+                margin-left: 0px; width: calc(~'100% - 0px');
+            }
             @media @small { padding: 10px; width: 100%; margin: 0; }
             ._wrapp_form_serch { float: left; max-width: 1000px; margin-bottom: 20px; box-sizing: border-box; padding: 10px ; border:1px solid @soft_gray; .radius;
                 .form-group { width: auto; }
