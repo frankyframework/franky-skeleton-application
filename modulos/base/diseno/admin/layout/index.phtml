@@ -41,19 +41,17 @@
                             <ul class="_img_perfil">
                                 <li><span class="avatar_mask"><?php echo makeHTMLImg(getAvatar($MySession->GetVar('id'))); ?></span></li>
                                 <li><a class="_btn _editar_avatar" href="<?=$MyRequest->url(ADMIN_AVATAR); ?>">Editar</a></li>
+                                <?php if($MySession->LoggedIn()): ?>
+                                    <li>
+                                        <a class="_access _logout" href="/logout.php"><?php echo _("Cerrar sesión"); ?></a>
+                                    </li>
+                                <?php endif; ?>
                             </ul>
-                            <ul>
+                            <ul class="_ul_nav_admin">
                            <?php
                            echo $MyMenuAdmin->getMenu();
                            ?>
                            </ul>
-                           <?php if($MySession->LoggedIn()): ?>
-                               <ul class="wrapp_access">
-                                   <li>
-                                       <a class="_access _logout" href="/logout.php"><?php echo _("Cerrar sesión"); ?></a>
-                                   </li>
-                               </ul>
-                           <?php endif; ?>
                        </div>
 
                         <div class="_panel_content">
