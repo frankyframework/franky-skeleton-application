@@ -69,5 +69,14 @@
         <llave>limit_cards</llave>
         <valor>Puedes guardar maximo %s tarjetas</valor>
     </mensaje>
+    <mensaje>
+        <llave>codigo_cupon_duplicado</llave>
+        <valor>Ya existe un cupon con este código</valor>
+    </mensaje>
+    <mensaje>
+        <llave>cupon_error_delete</llave>
+        <valor>Error al eliminar el cúpon intenta mas tarde</valor>
+    </mensaje>
+    
 
 </mensajes>

@@ -706,6 +706,86 @@ function loadMetodosPago(){
     
     return array('html' => render(PROJECT_DIR.'/modulos/ecommerce/diseno/checkout/frm.metodos_pago.phtml',['PagoCheckoutForm' => $PagoCheckoutForm]));
 }
+
+
+function ajax_setInputsConfigPromo($id,$promocion){
+    global $MySession;
+    
+    $respuesta = ['html' => ''];
+    
+    $EcommercecuponesModel             = new \Ecommerce\model\EcommercecuponesModel();
+    $EcommercecuponesEntity             = new \Ecommerce\entity\EcommercecuponesEntity();
+    $EcommercepromocionesclassModel = new Ecommerce\model\EcommercepromocionesclassModel();
+    $EcommercepromocionesclassEntity = new Ecommerce\entity\EcommercepromocionesclassEntity();
+   
+    
+    $Form = new \Franky\Form\Form();
+    
+    $_data = $MySession->GetVar('data_cupon');
+    if(!empty($id))
+    {
+        $EcommercecuponesEntity->id($id);
+        $EcommercecuponesModel->getData($EcommercecuponesEntity->getArrayCopy());
+        $data = $EcommercecuponesModel->getRows();	
+        $_data = json_decode($data['data'],true);
+    }
+    
+   
+    $EcommercepromocionesclassEntity->id($promocion);
+    $EcommercepromocionesclassModel->getData($EcommercepromocionesclassEntity->getArrayCopy());
+    $registro = $EcommercepromocionesclassModel->getRows();
+  
+    $class = new $registro['dataClass'];
+    $form = $class->getForm();
+    if(!empty($form))
+    {
+        foreach ($form as $input):
+        $Form->add($input);
+        endforeach;
+        
+        $Form->setData($_data);
+        
+        $respuesta['html'] = $Form->getAllRow();
+    }
+    return $respuesta;
+    
+}
+
+function EliminarCuponesEcommerce($id,$status)
+{
+    global $MySession;
+    $EcommercecuponesModel             = new \Ecommerce\model\EcommercecuponesModel();
+    $EcommercecuponesEntity             = new \Ecommerce\entity\EcommercecuponesEntity();
+    $Tokenizer = new \Franky\Haxor\Tokenizer;
+    global $MyAccessList;
+    global $MyMessageAlert;
+
+    $respuesta = null;
+
+    if($MyAccessList->MeDasChancePasar(ADMINISTRAR_CUPONES_ECOMMERCE))
+    {
+        $EcommercecuponesEntity->id(addslashes($Tokenizer->decode($id)));
+        $EcommercecuponesEntity->status($status);
+
+        if($EcommercecuponesModel->save($EcommercecuponesEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+        {
+
+        }
+        else
+        {
+              $respuesta["message"] = $MyMessageAlert->Message("ecommerce_cupon_error_delete");
+              $respuesta["error"] = true;
+        }
+    }
+    else
+    {
+         $respuesta["message"] = $MyMessageAlert->Message("sin_privilegios");
+         $respuesta["error"] = true;
+    }
+
+    return $respuesta;
+}
+
 /******************************** EJECUTA *************************/
 $MyAjax->register("EliminarDireccionEcommerce");
 $MyAjax->register("EliminarDireccionFacturacionEcommerce");
@@ -724,5 +804,7 @@ $MyAjax->register("pay_free");
 $MyAjax->register("loadMetodosEnvio");
 $MyAjax->register("setMetodoEnvioCheckout");
 $MyAjax->register("loadMetodosPago");
+$MyAjax->register("ajax_setInputsConfigPromo");
+$MyAjax->register("EliminarCuponesEcommerce");
 
 ?>

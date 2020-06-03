@@ -115,7 +115,7 @@ if(!empty($id))
     $galeria_frm = "";
     $album = $data['id'];
     $CatalogproductsEntity->id($id);
-    $data['id'] = $Tokenizer->token('experiencia', $data['id']);;
+    $data['id'] = $Tokenizer->token('catalog_products', $data['id']);;
   
     $title = "Editar producto";
     //$data["videos"] = (!empty($data['videos']) ? implode(",",json_decode($data["videos"],true)) : '');

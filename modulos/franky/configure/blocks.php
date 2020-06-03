@@ -7,6 +7,12 @@ return json_encode([
     ], */
     [
         'position' => 'after',
+        'reference' => '.menu_web',
+        'html' => getHTMLRenderMinicart()
+        
+    ], 
+    [
+        'position' => 'after',
         'reference' => '._menu',
         'html' => getCategoryMenu()
     ],

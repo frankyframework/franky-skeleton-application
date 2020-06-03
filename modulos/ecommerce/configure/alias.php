@@ -11,5 +11,6 @@ return array
     "ecommerce/openpay/tarjeta/confirmacion.submit.php" => PROJECT_DIR."/modulos/ecommerce/controller/openpay/confirmacion_tarjeta.submit.php",
     "ecommerce/openpay/webhooks.php" => PROJECT_DIR."/modulos/ecommerce/controller/openpay/webhooks.php",
     "ecommerce/admin/pedidos/comprovante-pago.php" => PROJECT_DIR."/modulos/ecommerce/controller/admin/pedidos/comprovante-pago.php",
-);
+    "ecommerce/admin/cupones/submit.php" => PROJECT_DIR."/modulos/ecommerce/controller/admin/cupones/submit.php",
+    );
 ?>

@@ -140,3 +140,38 @@ function SetStatusPagoEcommerceHTML(response,id,status,nota,cantidad)
 
     }
 }
+
+
+function ajax_setInputsConfigPromo(id,promocion)
+{
+
+        var var_query = {
+          "function": "ajax_setInputsConfigPromo",
+          "vars_ajax":[id,promocion]
+        };
+
+        pasarelaAjax('GET',var_query,"ajax_setInputsConfigPromoHTML",var_query.vars_ajax,'.content_config_promo');
+    
+
+}
+
+function ajax_setInputsConfigPromoHTML(response,id,promocion)
+{
+    var respuesta = null;
+
+    if(response != "null")
+    {
+        respuesta = JSON.parse(response);
+
+        if(!respuesta.error)
+        {
+            $('.content_config_promo').html(respuesta.html);
+             $( "#frmcupones" ).validate();
+        }
+        else
+        {
+             _alert(respuesta["message"],"Error");
+        }
+
+    }
+}

@@ -390,4 +390,39 @@ function setCarritoUser(){
 
 
 }
+
+
+function getPromocionesClass()
+{
+    $EcommercepromocionesclassModel = new Ecommerce\model\EcommercepromocionesclassModel();
+    $EcommercepromocionesclassEntity = new Ecommerce\entity\EcommercepromocionesclassEntity();
+    
+    $EcommercepromocionesclassModel->setTampag(100);
+    $EcommercepromocionesclassModel->getData($EcommercepromocionesclassEntity->getArrayCopy());
+    $total	= $EcommercepromocionesclassModel->getTotal();
+    $promociones = [];
+    if($total > 0)
+    {
+        while($registro = $EcommercepromocionesclassModel->getRows())
+        {
+            $promociones[$registro['id']] =  $registro['nombre'];
+	}
+    }
+    return $promociones;
+}
+
+function getHTMLRenderMinicart(){
+    global $MyAccessList;
+    global $MySession;
+    global $MyFrankyMonster;
+    global $MyRequest;
+    
+    return render(PROJECT_DIR.'/modulos/ecommerce/diseno/carrito/widget.carrito.phtml',
+            [
+            'MyAccessList' => $MyAccessList,
+            'MySession' => $MySession,
+            'MyFrankyMonster' => $MyFrankyMonster,
+            'MyRequest' => $MyRequest]);
+}
+        
 ?>

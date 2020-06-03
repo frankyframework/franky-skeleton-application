@@ -146,7 +146,7 @@ $Ftp = new Ftp();
 
 if(!$Ftp->connect(getCoreConfig('developer/ftp/host'),getCoreConfig('developer/ftp/user'),getCoreConfig('developer/ftp/password')))
 {
-    echo "\t".shellFontColor("[error] No se pudo conectar con el servidor","rojo")."\n";
+    echo "\t".shellFontColor("[error] No se pudo conectar con el servidor [user: ".getCoreConfig('developer/ftp/user').", password: ".getCoreConfig('developer/ftp/password')."]","rojo")."\n";
     exit;
 }
 

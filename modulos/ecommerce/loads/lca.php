@@ -20,4 +20,11 @@ $MyAccessList->addRoll(NIVEL_USERDEVELOPER,     ADMINISTRAR_PEDIDOS);
 define("ADMINISTRAR_TARJETAS_ECOMMERCE",      "administrar_tarjetas_ecommerce");
 $MyAccessList->addRoll(NIVEL_USERSUSCRIPTOR,     ADMINISTRAR_TARJETAS_ECOMMERCE);
 
+
+
+define("ADMINISTRAR_CUPONES_ECOMMERCE",      "administrar_cupones_ecommerce");
+$MyAccessList->addRoll(NIVEL_USERADMIN,     ADMINISTRAR_CUPONES_ECOMMERCE);
+$MyAccessList->addRoll(NIVEL_USERDEVELOPER,     ADMINISTRAR_CUPONES_ECOMMERCE);
+
+
 ?>
