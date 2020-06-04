@@ -5,7 +5,7 @@ class DescuentoPorcentajeData implements \Ecommerce\interfaces\EcommercePromocio
 {
     private $data;
     private $user;    
-    private $productos;
+    private $carrito;
     
     public function getForm()
     {
@@ -22,6 +22,32 @@ class DescuentoPorcentajeData implements \Ecommerce\interfaces\EcommercePromocio
                'label_atributos' => array(
                    'class'       => 'desc_form_obligatorio'
                 )
+           ),
+              array(
+               'name' => 'maximo',
+               'label' => 'Maximo de compra',
+               'type'  => 'text',
+               'required'  => true,
+               'atributos' => array(
+                   'maxlength' => 10,
+                   'class' => 'required'
+                ),
+               'label_atributos' => array(
+                   'class'       => 'desc_form_obligatorio'
+                )
+           ),
+            array(
+               'name' => 'porcentaje',
+               'label' => 'Porcentaje de descuento',
+               'type'  => 'text',
+               'required'  => true,
+               'atributos' => array(
+                   'maxlength' => 3,
+                   'class' => 'required'
+                ),
+               'label_atributos' => array(
+                   'class'       => 'desc_form_obligatorio'
+                )
            )
         );
         
@@ -30,7 +56,26 @@ class DescuentoPorcentajeData implements \Ecommerce\interfaces\EcommercePromocio
     
     public function getDiscount()
     {
-        return 0;
+        
+        $total = $this->carrito['gran_total'];
+        if( $this->data['minimo'] > 0)
+        {
+            if($total < $this->data['minimo'])
+            {
+                return false;
+            }
+        }
+        if( $this->data['maximo'] > 0)
+        {
+            if($total > $this->data['maximo'])
+            {
+                return false;
+            }
+        }
+        
+        $descuento = $total - ($total * ($this->data['porcentaje']/100));
+        
+        return $descuento;
     }
     
     public function setConfig($data){
@@ -41,8 +86,8 @@ class DescuentoPorcentajeData implements \Ecommerce\interfaces\EcommercePromocio
         $this->user=$user;
     }
     
-    public function setProducts($products){
-        $this->productos = $products;
+    public function setCarrito($carrito){
+        $this->carrito = $carrito;
     }
 }
 

@@ -15,7 +15,18 @@ $callback = $Tokenizer->decode($MyRequest->getRequest('callback'));
 $EcommercecuponesEntity->id($id);
 $error = false;
 
+if($MyRequest->getRequest('fecha_inicio') == '')
+{
+    $EcommercecuponesEntity->fecha_inicio('0000-00-00');
+}
+if($MyRequest->getRequest('fecha_fin') == '')
+{
+    $EcommercecuponesEntity->fecha_fin('0000-00-00');
+}
+
+
 $data = $MyRequest->getRequest();
+unset($data['id']);
 unset($data['titulo']);
 unset($data['codigo_promocion']);
 unset($data['fecha_inicio']);

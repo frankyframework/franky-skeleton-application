@@ -77,6 +77,17 @@
         <llave>cupon_error_delete</llave>
         <valor>Error al eliminar el cúpon intenta mas tarde</valor>
     </mensaje>
-    
+    <mensaje>
+        <llave>cupon_no_exist</llave>
+        <valor>El cupon ingresado no existe</valor>
+    </mensaje>
+    <mensaje>
+        <llave>cupon_expired</llave>
+        <valor>El cupon ingresado a expirado</valor>
+    </mensaje>
+    <mensaje>
+        <llave>cupon_no_aplica</llave>
+        <valor>Tu compra no aplica para esta promoción</valor>
+    </mensaje>
 
 </mensajes>

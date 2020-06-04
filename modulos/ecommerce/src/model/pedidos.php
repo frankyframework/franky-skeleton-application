@@ -14,7 +14,8 @@ class pedidos  extends \Franky\Database\Mysql\objectOperations
     function getData($id='',$uid='',$fecha='',$status='',$referencia='',$metodo_pago='')
     {
         $campos = array("ecommerce_pedidos.id","ecommerce_pedidos.id as pedido","uid","ecommerce_pedidos.fecha","ecommerce_pedidos.status","metodo_pago","metodo_envio","monto_envio",
-            "monto_compra","id_direccion_envio","id_direccion_facturacion","cupon","referencia","fecha_pago","testigo","monto_pagado","subtotal","iva",
+            "monto_compra","id_direccion_envio","id_direccion_facturacion","cupon","data_cupon",
+            "referencia","fecha_pago","testigo","monto_pagado","subtotal","iva","descuento",
             "users.nombre as nombre_user");
         if(!empty($id))
         {

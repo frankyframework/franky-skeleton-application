@@ -11,7 +11,7 @@ interface EcommercePromocionInterface
     
     public function setUser($user);
     
-    public function setProducts($products);
+    public function setCarrito($carrito);
     
 }
 

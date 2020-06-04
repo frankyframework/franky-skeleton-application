@@ -22,6 +22,8 @@ namespace Ecommerce\entity;
     private $testigo;
     private $subtotal;
     private $iva;
+    private $descuento;
+    private $data_cupon;
     
     public function __construct($data = null)
     {
@@ -51,6 +53,8 @@ namespace Ecommerce\entity;
         $this->testigo  = (isset($data['testigo']))      ? $data['testigo']  : null;
         $this->subtotal  = (isset($data['subtotal']))      ? $data['subtotal']  : null;
         $this->iva  = (isset($data['iva']))      ? $data['iva']  : null;
+        $this->descuento  = (isset($data['descuento']))      ? $data['descuento']  : null;
+        $this->data_cupon  = (isset($data['data_cupon']))      ? $data['data_cupon']  : null;
     }
 
     public function getArrayCopy()
@@ -143,6 +147,15 @@ namespace Ecommerce\entity;
     {
         return $this->iva;
     }
+    public function getDescuento()
+    {
+        return $this->descuento;
+    }
+    
+    public function getData_cupon()
+    {
+        return $this->data_cupon;
+    }
 
 
     public function setId($id)
@@ -226,7 +239,14 @@ namespace Ecommerce\entity;
       {
           return $this->iva = $iva;
       }
-
+    public function setDescuento($descuento)
+    {
+        return $this->descuento = $descuento;
+    }
+    public function setData_cupon($data_cupon)
+    {
+        return $this->data_cupon = $data_cupon;
+    }
 
 
  }

@@ -598,3 +598,60 @@ function getFrmPagoHTML(response)
     }
     return true;
 }
+
+
+function ecommerce_setCupon(cupon){
+    var var_query = {
+              function: "ecommerce_setCupon",
+              vars_ajax:[cupon]
+    };
+    
+    pasarelaAjax('GET',var_query,"ecommerce_setCuponHTML",var_query.vars_ajax);
+}
+
+
+function ecommerce_setCuponHTML(response,cupon)
+{
+    var respuesta = null;
+    console.log('?');
+    if(response != "null")
+    {
+        respuesta = JSON.parse(response);
+
+        if(!respuesta.error)
+        {
+            $('.content_cupon_activo').html(respuesta.html);
+            $('.content_form_cupon').hide();
+            $('#frmcupon').trigger('reset');
+            
+            $('.content_cupon_activo').find('a.remove').click(function(e){
+                e.preventDefault();
+                ecommerce_removeCupon();
+            });
+        }
+        else
+        {
+             _alert(respuesta["message"],"Error");
+        }
+
+    }
+}
+
+
+
+
+function ecommerce_removeCupon(){
+    var var_query = {
+              function: "ecommerce_removeCupon",
+              vars_ajax:[]
+    };
+
+    pasarelaAjax('GET',var_query,"ecommerce_removeCuponHTML",[]);
+}
+
+
+function ecommerce_removeCuponHTML(response)
+{  
+    $('.content_cupon_activo').empty();      
+    $('.content_form_cupon').show();
+}

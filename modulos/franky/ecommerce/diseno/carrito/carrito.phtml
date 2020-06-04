@@ -41,19 +41,8 @@
             ?>
             <?php endforeach; ?>
 
-               <div class="w-xxxx-6">
-                   
-                    <div class="content_cupon_activo">
-                        Cupon:
-                        <div>XXXXXXXX<span class="remove"><a href="#">(X)</a></span></div>
-                    </div>
-                    <div class="content_form_cupon">
-                        <form name="frmcupon"  id="frmcupon" action="" method="post" >
-                        <div>¿Tienes un cupon? </div>
-                        <div><input type="text" name="codigo_cupon"  value="" class="required" maxlength="32" /></div>
-                        <div><input type="submit" name="enviaCupon" value="Aplicar cupon" /></div>
-                        </form>
-                    </div>
+               <div class="w-xxxx-6">       
+                    <?=render('carrito/frm.cupon.phtml')?>
                 </div>
 
             <div class="_mycart_checkout">
@@ -61,6 +50,7 @@
                   <?php       $parse_precio =  getCarrito(); ?>
                   <div class="_mycart_resume _subtotal">Subtotal: <span class="subtotal"><?php echo getFormatoPrecio($parse_precio['subtotal']); ?></span></div>
                   <div class="_mycart_resume _iva">IVA: <span class="iva"><?php echo getFormatoPrecio($parse_precio['iva_total']); ?></span></div>
+                  <div class="_mycart_resume _descuento" style="display:none;">Descuento: <span class="descuento"><?php echo getFormatoPrecio($parse_precio['descuento']); ?></span></div>
                   <div class="_mycart_resume _total">Total: <span class="total"><?php echo getFormatoPrecio($parse_precio['gran_total']); ?></span></div>
                 </div>
                 <div>
@@ -91,11 +81,11 @@
     </div>
 </div>
 <script >
-<!--
+
 $(document).ready(function(){
 
-    $("#frmcupon").validate();
-      var time_event_carrito = null;
+
+    var time_event_carrito = null;
     $("a.menos_qty").click(function(e){
         e.preventDefault();
         if(time_event_carrito != null)
@@ -151,5 +141,4 @@ $(document).ready(function(){
         eliminarProductoCarrito(id);
     });
 });
-// -->
 </script>

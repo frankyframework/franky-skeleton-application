@@ -81,7 +81,10 @@
             </div>
 
             <div class="w-xxxx-3 _checkout_resume">
-
+                     <div class="w-xxxx-12">
+                     <?=render('carrito/frm.cupon.phtml')?>
+                    </div>
+                
                     <h2>Resumen de compra</h2>
                     <?php foreach($productos_comprados['productos'] as $producto): ?>
                       <?php
@@ -104,7 +107,7 @@
                   <div class="_coin _checkout_iva"><strong>IVA</strong>: <span><?=getFormatoPrecio($productos_comprados['iva_total']);?></span></div>
                   <div class="_coin _checkout_envio" style="display:none;"><strong>Envio</strong>: <span class="price"></span></div>
                   <div class="_coin _checkout_total"><strong>Total</strong>: <span class="price"><?=getFormatoPrecio($productos_comprados['gran_total']);?></span></div>
-
+                   
             </div>
 
         </div>
