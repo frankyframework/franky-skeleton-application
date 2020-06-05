@@ -12,7 +12,9 @@
         <li><strong>Método de pago:</strong> <?php echo $detalle_pedido['metodo_pago']; ?></li>
         <li><strong>Estatus de pago:</strong> <span class='set-status'><?php echo getStatusTransaccion($detalle_pedido['status']); ?></span></li>
         <li><strong>Monto envio:</strong> <?php echo getFormatoPrecio($detalle_pedido['monto_envio']); ?></li>
-        <li><strong>Monto de compra:</strong> <?php echo getFormatoPrecio($detalle_pedido['monto_compra']); ?></li>
+        <li><strong>Descuento:</strong> <?php echo getFormatoPrecio($detalle_pedido['descuento']); ?></li>
+        <li><strong>Total productos:</strong> <?php echo getFormatoPrecio($detalle_pedido['monto_compra']); ?></li>
+        <li><strong>Total a pagar:</strong> <?php echo getFormatoPrecio($detalle_pedido['monto_compra']-$detalle_pedido['descuento']+$detalle_pedido['monto_envio']); ?></li>
         <li class="_total"><strong>Monto pagado:</strong> <?php echo getFormatoPrecio($detalle_pedido['monto_pagado']); ?></li>
         <?php
         $referencia = json_decode($detalle_pedido['referencia'],true);

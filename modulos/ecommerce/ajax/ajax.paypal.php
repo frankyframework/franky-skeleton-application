@@ -14,6 +14,7 @@ function pago_paypal()
         $data = $MySession->GetVar('checkout');
 
         $productos_comprados = getCarrito();
+        $data['descuento'] = $productos_comprados['descuento'];
         if(!empty($productos_comprados['productos']))
         {
             if($MySession->LoggedIn())

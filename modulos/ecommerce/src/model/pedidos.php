@@ -3,13 +3,17 @@ namespace Ecommerce\model;
 
 class pedidos  extends \Franky\Database\Mysql\objectOperations
 {
-
+    private $cupon;
 
 
     public function __construct()
     {
       parent::__construct();
       $this->from()->addTable('ecommerce_pedidos');
+    }
+    
+    public function setCupon($cupon){
+        $this->cupon = $cupon;
     }
     function getData($id='',$uid='',$fecha='',$status='',$referencia='',$metodo_pago='')
     {
@@ -34,7 +38,10 @@ class pedidos  extends \Franky\Database\Mysql\objectOperations
         {
               $this->where()->addAnd('metodo_pago',$metodo_pago,'=');
         }
-
+        if(!empty($this->cupon))
+        {
+              $this->where()->addAnd('cupon',$this->cupon,'=');
+        }
         if(!empty($fecha))
         {
             $this->where()->concat('AND (');

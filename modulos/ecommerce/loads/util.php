@@ -231,8 +231,9 @@ function getCustomer($id)
     return false;
 }
 */
-function getCarrito()
+function getCarrito($descuentos = 0)
 {
+  global $MySession;
   $productos =  OBJETO_PRODUCTOS;
   $MyProducto =  new $productos();
   $MyCarritoProducto =  new \Ecommerce\model\carrito_producto();
@@ -270,11 +271,19 @@ function getCarrito()
       }
   }
 
-  $productos_comprados['gran_total'] = $gran_total;
-  $productos_comprados['subtotal'] = $subtotal;
-  $productos_comprados['iva_total'] = $iva_total;
-  $productos_comprados['envio_requerido'] = $envio_requerido;
+    $productos_comprados['gran_total'] = $gran_total;
+  
+    $productos_comprados['subtotal'] = $subtotal;
+    $productos_comprados['iva_total'] = $iva_total;
+    $productos_comprados['envio_requerido'] = $envio_requerido;
 
+    
+    $cupon = $MySession->GetVar('cupon_checkout');
+
+    if($cupon  != false){
+        $productos_comprados['descuento'] = $cupon['descuento'];
+
+    }
 
 
   return $productos_comprados;
@@ -425,4 +434,114 @@ function getHTMLRenderMinicart(){
             'MyRequest' => $MyRequest]);
 }
         
+
+
+    
+
+function validaCuponEcommerce($cupon)
+{
+    global $MySession;
+    
+    $descuento = 0;
+    
+    $EcommercecuponesModel             = new Ecommerce\model\EcommercecuponesModel();
+    $EcommercecuponesEntity             = new Ecommerce\entity\EcommercecuponesEntity();
+    
+    $EcommercecuponesEntity->codigo_promocion($cupon);
+    $EcommercecuponesEntity->status(1);
+    if($EcommercecuponesModel->getData($EcommercecuponesEntity->getArrayCopy()) ==REGISTRO_SUCCESS)
+    {
+        
+        $registro = $EcommercecuponesModel->getRows();
+        $id_cupon = $registro['id'];
+        $numero_usos = $registro['numero_usos'];
+        $numero_usos_usuario = $registro['numero_usos_usuario'];
+        if($registro['fecha_inicio'] !='0000-00-00')
+        {
+            if(strtotime(date('Y-m-d')) < strtotime($registro['fecha_inicio']))
+            {
+                $respuesta['error'] =true;
+                $respuesta['message'] = "ecommerce_cupon_no_exist";
+                return $respuesta;
+            }
+        }
+        if($registro['fecha_fin'] != '0000-00-00')
+        {
+            if(strtotime(date('Y-m-d')) > strtotime($registro['fecha_fin']))
+            {
+                
+                $respuesta['error'] =true;
+                $respuesta['message'] = "ecommerce_cupon_expired";
+                return $respuesta;
+            }
+        }
+        
+        if($numero_usos > 0){
+        
+            $pedidosModel             = new Ecommerce\model\pedidos();
+
+            $pedidosModel->setCupon($id_cupon);
+
+            $pedidosModel->setTampag(1000000);
+            $pedidosModel->getData();
+            if($pedidosModel->getTotal() >= $numero_usos){
+                $respuesta['error'] =true;
+                $respuesta['message'] = "ecommerce_cupon_numero_usos";
+                return $respuesta;
+            }
+        }
+        if($numero_usos_usuario > 0){
+        
+            $pedidosModel             = new Ecommerce\model\pedidos();
+
+            $pedidosModel->setCupon($id_cupon);
+
+            $pedidosModel->setTampag(1000000);
+            $pedidosModel->getData('',$MySession->GetVar('id'));
+            if($pedidosModel->getTotal() >= $numero_usos_usuario){
+                $respuesta['error'] =true;
+                $respuesta['message'] = "ecommerce_cupon_numero_usos";
+                return $respuesta;
+            }
+        }
+        
+        $EcommercepromocionesclassModel = new Ecommerce\model\EcommercepromocionesclassModel();
+        $EcommercepromocionesclassEntity = new Ecommerce\entity\EcommercepromocionesclassEntity();
+        
+        $EcommercepromocionesclassEntity->id($registro['id_promocion']);
+        $EcommercepromocionesclassModel->getData($EcommercepromocionesclassEntity->getArrayCopy());
+        $_registro = $EcommercepromocionesclassModel->getRows();
+
+        $class = new $_registro['dataClass'];
+
+        $class->setUser($MySession->GetVar('id'));
+        $class->setConfig(json_decode($registro['data'],true));
+        $carrito = getCarrito();
+        $class->setCarrito($carrito);
+        
+        $descuento = $class->getDiscount();
+        if($descuento == false)
+        {
+            $respuesta['error'] =true;
+            $respuesta['message'] = "ecommerce_cupon_no_aplica";
+            return $respuesta;
+        }
+        
+        
+        $data = ['id' => $id_cupon,'cupon' => $cupon, 'descuento' => $descuento];
+
+        $MySession->SetVar('cupon_checkout',$data);
+        
+        $respuesta['error'] = false;
+        
+        
+    }
+    else{
+        $respuesta['error'] =true;
+        $respuesta['message'] = ecommerce_cupon_no_exist;
+    }
+    return $respuesta;
+}
+
+
 ?>

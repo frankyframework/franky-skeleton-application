@@ -63,7 +63,7 @@ var paypalCheckout = function(sandbox,idsb,idlive,gran_total)
 };
 
 importarScript('https://www.paypalobjects.com/api/checkout.js',function(){
-    paypalCheckout('<?=getCoreConfig('ecommerce/paypal/sandbox')?>','<?=getCoreConfig('ecommerce/paypal/keysandbox')?>','<?=getCoreConfig('ecommerce/paypal/key')?>','<?=$data['gran_total']?>');
+    paypalCheckout('<?=getCoreConfig('ecommerce/paypal/sandbox')?>','<?=getCoreConfig('ecommerce/paypal/keysandbox')?>','<?=getCoreConfig('ecommerce/paypal/key')?>','<?=$data['gran_total']+(isset($data['monto_envio']) ? $data['monto_envio']: 0)-(isset($data['descuento'])? $data['descuento'] : 0)?>');
 });
 
 </script>

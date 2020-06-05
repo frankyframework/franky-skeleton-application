@@ -47,7 +47,7 @@ if ($data_conketa->type == 'charge.paid'){
 
         if($status_pago == "paid")
         {
-            $status_pago = ($gran_total+$pedido['monto_envio'] > $total ? "pago_incompleto" : $status_pago);
+            $status_pago = ($gran_total+$pedido['monto_envio']-$pedido['descuento'] > $total ? "pago_incompleto" : $status_pago);
         }
         if($status_pago != $pedido['status'])
         {

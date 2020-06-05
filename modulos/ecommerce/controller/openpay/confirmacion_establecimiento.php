@@ -20,6 +20,17 @@ if($MySession->GetVar('establecimiento_pay') != $MyRequest->getRequest('establec
 {
     $MyRequest->redirect();
 }
+
+$cupon = $MySession->GetVar('cupon_checkout');
+if($cupon != false)
+{
+    $valida_cupo = validaCuponEcommerce($cupon['cupon']);
+    if($valida_cupo['error'] == true){
+        ecommerce_removeCupon();
+    }
+}
+
+
 $ObserverManager = new ObserverManager;
 $ObserverManager->dispatch('prepara_orden_ecommerce',[]);
 $MySession->UnsetVar('establecimiento_pay');
@@ -63,7 +74,7 @@ Openpay::setProductionMode((getCoreConfig('ecommerce/openpay/sandbox') == 1 ? fa
     $order = $customer->charges->create(
       array(
         'method' => 'store',
-         'amount' => $productos_comprados['gran_total']+$data['monto_envio'],
+         'amount' => $productos_comprados['gran_total']+$data['monto_envio'] - (isset($productos_comprados['descuento']) ? $productos_comprados['descuento'] : 0),
          'currency' => 'MXN',
          'description' => 'Cargo a establecimiento',
          'order_id' => $order_id,
@@ -133,6 +144,7 @@ else {
     }
 }
 $MySession->SetVar('checkout',array());
+$MySession->SetVar('cupon_checkout',array());
 $MyPedidoEntity->setId_direccion_envio(json_encode($direccion_envio));
 $MyPedidoEntity->setId_direccion_facturacion(json_encode($id_direccion_facturacion));
 $MyPedidoEntity->setFecha(date('Y-m-d H:i:s'));
@@ -145,6 +157,9 @@ $MyPedidoEntity->setSubtotal($productos_comprados['subtotal']);
 $MyPedidoEntity->setIva($productos_comprados['iva_total']);
 $MyPedidoEntity->setMonto_pagado(0);
 $MyPedidoEntity->setMonto_envio($data['monto_envio']);
+$MyPedidoEntity->setDescuento($productos_comprados['descuento']);
+$MyPedidoEntity->setCupon($cupon['id']);
+$MyPedidoEntity->setData_cupon(json_encode($cupon));
 $MyPedidoEntity->setReferencia(json_encode($referencia));
 
 if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)
@@ -166,7 +181,9 @@ if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)
 
     $campos = array("orden" => $pedido,"nombre" =>$MySession->GetVar('nombre'),"email" =>$MySession->GetVar('email'),'productos' =>$productos_html,'subtotal' => getFormatoPrecio($productos_comprados['subtotal']),
     'iva' => getFormatoPrecio($productos_comprados['iva_total']),
-   'gran_total' => getFormatoPrecio($productos_comprados['gran_total']),'metodo_pago' =>'Pago en Establecimiento','status' => getStatusTransaccion($status_pago),'referencia' => $referencia);
+        'envio' => getFormatoPrecio($data['monto_envio']),
+    'descuento' => getFormatoPrecio($productos_comprados['descuento']),
+    'gran_total' => getFormatoPrecio($productos_comprados['gran_total']+$data['monto_envio']-$productos_comprados['descuento']),'metodo_pago' =>'Pago en Establecimiento','status' => getStatusTransaccion($status_pago),'referencia' => $referencia);
 
     $campos['ticket_establecimiento'] = render(PROJECT_DIR.'/modulos/ecommerce/diseno/email/ticket_establecimiento.phtml',
             [ 'due_date' => $limit[0].' '.$limit[1],'productos_comprados' =>$productos_comprados,'referencia' => $referencia,'MyRequest' => $MyRequest,'MySession' => $MySession]);

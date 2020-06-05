@@ -18,6 +18,14 @@ $CardsModel        = new CardsModel();
 $CardsEntity       = new CardsEntity();
 $data = $MySession->GetVar('checkout');
 $ObserverManager->dispatch('prepara_orden_ecommerce',[]);
+$cupon = $MySession->GetVar('cupon_checkout');
+if($cupon != false)
+{
+    $valida_cupo = validaCuponEcommerce($cupon['cupon']);
+    if($valida_cupo['error'] == true){
+        ecommerce_removeCupon();
+    }
+}
 
 $id_tarjeta = $MyRequest->getRequest('id_tarjeta');
 $error = false;
@@ -213,6 +221,7 @@ if(!$error)
             $direccion_envio = $data["direccion_envio"];
         }
     }
+     $MySession->SetVar('cupon_checkout',array());
     $MySession->SetVar('checkout',array());
     $MyPedidoEntity->setId_direccion_envio(json_encode($direccion_envio));
     $MyPedidoEntity->setId_direccion_facturacion(json_encode($id_direccion_facturacion));
@@ -226,6 +235,9 @@ if(!$error)
     $MyPedidoEntity->setSubtotal($productos_comprados['subtotal']);
     $MyPedidoEntity->setIva($productos_comprados['iva_total']);
     $MyPedidoEntity->setMonto_envio($data['monto_envio']);
+    $MyPedidoEntity->setDescuento($productos_comprados['descuento']);
+    $MyPedidoEntity->setCupon($cupon['id']);
+    $MyPedidoEntity->setData_cupon(json_encode($cupon));
     $MyPedidoEntity->setReferencia($referencia);
 
     if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)
@@ -248,8 +260,10 @@ if(!$error)
 
 
         $campos = array("orden" => $pedido,"nombre" =>$MySession->GetVar('nombre'),"email" =>$MySession->GetVar('email'),'productos' =>$productos_html,'subtotal' => getFormatoPrecio($productos_comprados['subtotal']),
+        'descuento' => getFormatoPrecio($productos_comprados['descuento']),
+        'envio' => getFormatoPrecio($data['monto_envio']),
         'iva' => getFormatoPrecio($productos_comprados['iva_total']),
-       'gran_total' => getFormatoPrecio($productos_comprados['gran_total']),'metodo_pago' =>'Pago con tarjeta','status' => getStatusTransaccion($status_pago));
+       'gran_total' => getFormatoPrecio($productos_comprados['gran_total']+$data['monto_envio']-$productos_comprados['descuento']),'metodo_pago' =>'Pago con tarjeta','status' => getStatusTransaccion($status_pago));
 
 
         $TemplateemailModel    = new \Base\model\TemplateemailModel;

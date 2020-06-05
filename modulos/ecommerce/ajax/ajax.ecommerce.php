@@ -122,6 +122,7 @@ function EliminarDireccionFacturacionEcommerce($id,$status)
 
 function eliminarProductoCarrito($id)
 {
+    global $MySession;
     $MyCarritoProducto =  new \Ecommerce\model\carrito_producto();
     $Tokenizer = new \Franky\Haxor\Tokenizer;
     global $MyAccessList;
@@ -134,6 +135,14 @@ function eliminarProductoCarrito($id)
         if($MyCarritoProducto->delete(addslashes($Tokenizer->decode($id)),getMyIdCarrito()) == REGISTRO_SUCCESS)
         {
                $respuesta = getInfoCarrito();
+               $cupon = $MySession->GetVar('cupon_checkout');
+                if($cupon != false)
+                {
+                    $valida_cupo = validaCuponEcommerce($cupon['cupon']);
+                    if($valida_cupo['error'] == true){
+                        ecommerce_removeCupon();
+                    }
+                }
         }
         else
         {
@@ -222,6 +231,7 @@ function getInfoCarrito()
         $respuesta["total"] = getFormatoPrecio($parse_precio['gran_total']);
         $respuesta["subtotal"] = getFormatoPrecio($parse_precio['subtotal']);
         $respuesta["iva"] = getFormatoPrecio($parse_precio['iva_total']);
+        
 
     }
 
@@ -325,7 +335,15 @@ function setQTYProductoCarrido($id,$qty)
                 if($MyCarritoProducto->save($MyCarritoProdcutoEntity->getArrayCopy())  == REGISTRO_SUCCESS)
                 {
 
-                   $respuesta = getInfoCarrito();
+                    $respuesta = getInfoCarrito();
+                    $cupon = $MySession->GetVar('cupon_checkout');
+                    if($cupon != false)
+                    {
+                        $valida_cupo = validaCuponEcommerce($cupon['cupon']);
+                        if($valida_cupo['error'] == true){
+                            ecommerce_removeCupon();
+                        }
+                    }
 
                 }
                 else
@@ -431,12 +449,8 @@ function setMetodoEnvioCheckout($id){
             array('id_metodo_envio' => $id,'monto_envio' => $metodo_envio,'monto_envio_html' => getFormatoPrecio($metodo_envio)));
     $metodo_envio = makeHTMLMetodosEnvio($id);
     
-    
     $data['resumen_metodo_envio'] =   render(PROJECT_DIR.'/modulos/ecommerce/diseno/checkout/resumen.metodo_envio.phtml',['metodo_envio' =>$metodo_envio]);   
     
-    $productos_comprados = getCarrito();
-    $data['gran_total_html'] = getFormatoPrecio($productos_comprados['gran_total'] + $data['monto_envio']);
-    $data['gran_total'] = $productos_comprados['gran_total'] + $data['monto_envio'];
     $MySession->SetVar('checkout',$data);
 
     return $data;
@@ -794,74 +808,18 @@ function EliminarCuponesEcommerce($id,$status)
 
 function ecommerce_setCupon($cupon)
 {
-    global $MySession;
+
     global $MyMessageAlert;
     $respuesta = ['html' => ''];
-    $error = false;
-    $descuento = 0;
     
-    $EcommercecuponesModel             = new Ecommerce\model\EcommercecuponesModel();
-    $EcommercecuponesEntity             = new Ecommerce\entity\EcommercecuponesEntity();
-    
-    $EcommercecuponesEntity->codigo_promocion($cupon);
-    $EcommercecuponesEntity->status(1);
-    if($EcommercecuponesModel->getData($EcommercecuponesEntity->getArrayCopy()) ==REGISTRO_SUCCESS)
-    {
-        
-        $registro = $EcommercecuponesModel->getRows();
-    
-        if($registro['fecha_inicio'] !='0000-00-00')
-        {
-            if(strtotime(date('Y-m-d')) < strtotime($registro['fecha_inicio']))
-            {
-                $respuesta['error'] =true;
-                $respuesta['message'] = $MyMessageAlert->Message("ecommerce_cupon_no_exist");
-                return $respuesta;
-            }
-        }
-        if($registro['fecha_fin'] != '0000-00-00')
-        {
-            if(strtotime(date('Y-m-d')) > strtotime($registro['fecha_fin']))
-            {
-                
-                $respuesta['error'] =true;
-                $respuesta['message'] = $MyMessageAlert->Message("ecommerce_cupon_expired");
-                return $respuesta;
-            }
-        }
-        
-        $EcommercepromocionesclassModel = new Ecommerce\model\EcommercepromocionesclassModel();
-        $EcommercepromocionesclassEntity = new Ecommerce\entity\EcommercepromocionesclassEntity();
-        
-        $EcommercepromocionesclassEntity->id($registro['id_promocion']);
-        $EcommercepromocionesclassModel->getData($EcommercepromocionesclassEntity->getArrayCopy());
-        $_registro = $EcommercepromocionesclassModel->getRows();
-
-        $class = new $_registro['dataClass'];
-
-        $class->setUser($MySession->GetVar('id'));
-        $class->setConfig(json_decode($registro['data'],true));
-        $carrito = getCarrito();
-        $class->setCarrito($carrito);
-        
-        $descuento = $class->getDiscount();
-        if($descuento == false)
-        {
-            $respuesta['error'] =true;
-            $respuesta['message'] = $MyMessageAlert->Message("ecommerce_cupon_no_aplica");
-            return $respuesta;
-        }
-        $data = ['cupon' => $cupon, 'descuento' => $descuento];
-
-        $MySession->SetVar('cupon_checkout',$data);
-
-        $respuesta['html'] = render(PROJECT_DIR.'/modulos/ecommerce/diseno/carrito/cupon.phtml',['cupon' => $cupon]);
-        
-    }
-    else{
+    $valida_cupo = validaCuponEcommerce($cupon);
+    if($valida_cupo['error'] == true){
         $respuesta['error'] =true;
-        $respuesta['message'] = $MyMessageAlert->Message("ecommerce_cupon_no_exist");
+        $respuesta['message'] = $MyMessageAlert->Message($valida_cupo['message']);
+        return $respuesta;
     }
+    $respuesta['html'] = render(PROJECT_DIR.'/modulos/ecommerce/diseno/carrito/cupon.phtml',['cupon' => $cupon]);
+    
     return $respuesta;
 }
 
@@ -870,6 +828,77 @@ function ecommerce_removeCupon()
     global $MySession;
     $MySession->UnsetVar('cupon_checkout');
     return null;
+}
+
+
+function getInfoTotalsCheckout()
+{
+    global $MySession;
+    $respuesta = null;
+    
+    $cupon = $MySession->GetVar('cupon_checkout');
+    if($cupon != false)
+    {
+        $valida_cupo = validaCuponEcommerce($cupon['cupon']);
+        if($valida_cupo['error'] == true){
+            ecommerce_removeCupon();
+        }
+    }
+    $parse_precio   =  getCarrito();
+    $respuesta["total"] =$parse_precio['gran_total'];
+    $respuesta["subtotal"] = getFormatoPrecio($parse_precio['subtotal']);
+    $respuesta["iva"] = getFormatoPrecio($parse_precio['iva_total']);
+    
+    if($parse_precio['descuento'] > 0)
+    {
+        $respuesta["total"] = $respuesta['total']-$parse_precio['descuento'];
+        $respuesta['descuento'] = getFormatoPrecio($parse_precio['descuento']);
+    }
+    $respuesta["total"] = getFormatoPrecio($respuesta['total']);
+    return $respuesta;
+}
+
+
+
+function getInfoTotalsCheckout2()
+{
+    global $MySession;
+    $respuesta = null;
+    
+    $cupon = $MySession->GetVar('cupon_checkout');
+    if($cupon != false)
+    {
+        $valida_cupo = validaCuponEcommerce($cupon['cupon']);
+        if($valida_cupo['error'] == true){
+            ecommerce_removeCupon();
+        }
+    }
+    $data = $MySession->GetVar('checkout');
+    
+    $productos_comprados = getCarrito();
+    
+    $respuesta['gran_total'] = $productos_comprados['gran_total']; 
+     
+    if($productos_comprados['descuento'] > 0)
+    {
+        $respuesta['gran_total'] -= $productos_comprados['descuento']; 
+        $respuesta['descuento'] = getFormatoPrecio($productos_comprados['descuento']);
+    }
+    
+    if(isset($data['monto_envio']))
+    {
+        $respuesta['gran_total'] += $data['monto_envio']; 
+        $respuesta["monto_envio"] = getFormatoPrecio($data['monto_envio']);
+        
+    }
+    $respuesta['gran_total'] = getFormatoPrecio($respuesta['gran_total']); 
+     
+    $respuesta["subtotal"] = getFormatoPrecio($productos_comprados['subtotal']);
+    $respuesta["iva"] = getFormatoPrecio($productos_comprados['iva_total']);
+   
+    
+
+    return $respuesta;
 }
 /******************************** EJECUTA *************************/
 $MyAjax->register("EliminarDireccionEcommerce");
@@ -893,4 +922,6 @@ $MyAjax->register("ajax_setInputsConfigPromo");
 $MyAjax->register("EliminarCuponesEcommerce");
 $MyAjax->register("ecommerce_setCupon");
 $MyAjax->register("ecommerce_removeCupon");
+$MyAjax->register("getInfoTotalsCheckout");
+$MyAjax->register("getInfoTotalsCheckout2");
 ?>

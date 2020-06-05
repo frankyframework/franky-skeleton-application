@@ -77,6 +77,7 @@ function eliminarProductoCarritoHTML(response,id)
                 $(this).remove();
                 setQTYProductoCarridoHTML(response);
                 addProductoCarritoHTML(response,0);
+                getInfoTotalsCheckout();
             })
 
         }
@@ -195,10 +196,7 @@ function setQTYProductoCarridoHTML(response,id)
                     $(".contenedor_producto_"+respuesta["productos"][i]["id"]).find('.subtotal_producto').html(respuesta["productos"][i]["subtotal"]);
                     $(".contenedor_producto_"+respuesta["productos"][i]["id"]).find('.precio_producto').html(respuesta["productos"][i]["precio"]);
                 }
-                $(".resumen_page_carrito .subtotal").html(respuesta.subtotal);
-                $(".resumen_page_carrito .iva").html(respuesta.iva);
-                $(".resumen_page_carrito .total").html(respuesta.total);
-
+                getInfoTotalsCheckout();
                 addProductoCarritoHTML(response,0)
             }
             else
@@ -463,9 +461,7 @@ function setMetodoEnvioCheckoutHTML(response)
             $(".metodo_envio").toggleClass("_nono").toggleClass("_sisi").toggleClass('_active');
             $(".metodo_pago").toggleClass('_active').next("div").show();
             $("#resumen_metodo_envio").html(respuesta.resumen_metodo_envio);
-            $("._checkout_envio").children('.price').html(respuesta.monto_envio_html);
-            $("._checkout_envio").show();
-            $("._checkout_total").children('.price').html(respuesta.gran_total_html);
+            getInfoTotalsCheckout2();
             loadMetodosPago();
         }
         else
@@ -613,7 +609,7 @@ function ecommerce_setCupon(cupon){
 function ecommerce_setCuponHTML(response,cupon)
 {
     var respuesta = null;
-    console.log('?');
+    
     if(response != "null")
     {
         respuesta = JSON.parse(response);
@@ -628,6 +624,10 @@ function ecommerce_setCuponHTML(response,cupon)
                 e.preventDefault();
                 ecommerce_removeCupon();
             });
+            
+            
+            getInfoTotalsCheckout();
+            
         }
         else
         {
@@ -654,4 +654,142 @@ function ecommerce_removeCuponHTML(response)
 {  
     $('.content_cupon_activo').empty();      
     $('.content_form_cupon').show();
+    getInfoTotalsCheckout();
+}
+
+function getInfoTotalsCheckout(){
+    var var_query = {
+              function: "getInfoTotalsCheckout",
+              vars_ajax:[]
+    };
+
+    pasarelaAjax('GET',var_query,"getInfoTotalsCheckoutHTML",[]);
+}
+
+
+function getInfoTotalsCheckoutHTML(response)
+{  
+    var respuesta = null;
+    
+    if(response != "null")
+    {
+        respuesta = JSON.parse(response);
+        $(".resumen_page_carrito .subtotal").html(respuesta.subtotal);
+        $(".resumen_page_carrito .iva").html(respuesta.iva);
+        $(".resumen_page_carrito .total").html(respuesta.total);
+        if(respuesta.descuento){
+            $(".resumen_page_carrito .descuento").html(respuesta.descuento);
+            $(".resumen_page_carrito ._descuento").show();
+        }
+        else{
+            $(".resumen_page_carrito .descuento").html('');
+            $(".resumen_page_carrito ._descuento").hide();
+        }
+    }
+}
+
+/*** Cupon checkout ****/
+
+
+function ecommerce_setCuponCheckout(cupon){
+    var var_query = {
+              function: "ecommerce_setCupon",
+              vars_ajax:[cupon]
+    };
+    
+    pasarelaAjax('GET',var_query,"ecommerce_setCuponCheckoutHTML",var_query.vars_ajax);
+}
+
+
+function ecommerce_setCuponCheckoutHTML(response,cupon)
+{
+    var respuesta = null;
+    
+    if(response != "null")
+    {
+        respuesta = JSON.parse(response);
+
+        if(!respuesta.error)
+        {
+            $('.content_cupon_activo').html(respuesta.html);
+            $('.content_form_cupon').hide();
+            $('#frmcupon').trigger('reset');
+            
+            $('.content_cupon_activo').find('a.remove').click(function(e){
+                e.preventDefault();
+                ecommerce_removeCuponCheckout();
+            });
+            
+            
+            getInfoTotalsCheckout2();
+            
+        }
+        else
+        {
+             _alert(respuesta["message"],"Error");
+        }
+
+    }
+}
+
+
+
+
+function ecommerce_removeCuponCheckout(){
+    var var_query = {
+              function: "ecommerce_removeCupon",
+              vars_ajax:[]
+    };
+
+    pasarelaAjax('GET',var_query,"ecommerce_removeCuponCheckoutHTML",[]);
+}
+
+
+function ecommerce_removeCuponCheckoutHTML(response)
+{  
+    $('.content_cupon_activo').empty();      
+    $('.content_form_cupon').show();
+    getInfoTotalsCheckout2();
+}
+
+function getInfoTotalsCheckout2(){
+    var var_query = {
+              function: "getInfoTotalsCheckout2",
+              vars_ajax:[]
+    };
+
+    pasarelaAjax('GET',var_query,"getInfoTotalsCheckout2HTML",[]);
+}
+
+
+function getInfoTotalsCheckout2HTML(response)
+{  
+    var respuesta = null;
+    
+    if(response != "null")
+    {
+        respuesta = JSON.parse(response);
+        
+        
+        $("._checkout_subtotal").children('.price').html(respuesta.subtotal);
+        $("._checkout_iva").children('.price').html(respuesta.iva_html);
+        $("._checkout_total").children('.price').html(respuesta.gran_total);
+            
+         if(respuesta.monto_envio){
+            $("._checkout_envio").children('.price').html(respuesta.monto_envio);
+            $("._checkout_envio").show();
+        }
+        else{
+            $("._checkout_envio").children('.price').empty();
+            $("._checkout_envio").hide();
+        }   
+        if(respuesta.descuento){
+            $("._checkout_descuento").children('.price').html(respuesta.descuento);
+            $("._checkout_descuento").show();
+        }
+        else{
+            $("._checkout_descuento").children('.price').empty();
+            $("._checkout_descuento").hide();
+        }
+    }
 }

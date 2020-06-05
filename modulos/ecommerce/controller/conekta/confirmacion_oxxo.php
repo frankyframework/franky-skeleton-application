@@ -20,6 +20,17 @@ if($MySession->GetVar('oxxo_pay') != $MyRequest->getRequest('token_oxxo'))
 {
     $MyRequest->redirect();
 }
+
+$cupon = $MySession->GetVar('cupon_checkout');
+if($cupon != false)
+{
+    $valida_cupo = validaCuponEcommerce($cupon['cupon']);
+    if($valida_cupo['error'] == true){
+        ecommerce_removeCupon();
+    }
+}
+
+
 $ObserverManager = new ObserverManager;
 $ObserverManager->dispatch('prepara_orden_ecommerce',[]);
 $data = $MySession->GetVar('checkout');
@@ -122,6 +133,7 @@ else {
     }
 }
 $MySession->SetVar('checkout',array());
+$MySession->SetVar('cupon_checkout',array());
 $MyPedidoEntity->setId_direccion_envio(json_encode($direccion_envio));
 $MyPedidoEntity->setId_direccion_facturacion(json_encode($id_direccion_facturacion));
 $MyPedidoEntity->setFecha(date('Y-m-d H:i:s'));
@@ -134,6 +146,10 @@ $MyPedidoEntity->setSubtotal($productos_comprados['subtotal']);
 $MyPedidoEntity->setIva($productos_comprados['iva_total']);
 $MyPedidoEntity->setMonto_pagado(0);
 $MyPedidoEntity->setMonto_envio($data['monto_envio']);
+$MyPedidoEntity->setCupon($cupon['id']);
+$MyPedidoEntity->setDescuento($productos_comprados['descuento']);
+$MyPedidoEntity->setData_cupon(json_encode($cupon));
+
 $MyPedidoEntity->setReferencia(json_encode($referencia));
 
 if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)
@@ -155,7 +171,9 @@ if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)
 
     $campos = array("orden" => $pedido,"nombre" =>$MySession->GetVar('nombre'),"email" =>$MySession->GetVar('email'),'productos' =>$productos_html,'subtotal' => getFormatoPrecio($productos_comprados['subtotal']),
     'iva' => getFormatoPrecio($productos_comprados['iva_total']),
-   'gran_total' => getFormatoPrecio($productos_comprados['gran_total']),'metodo_pago' =>'Pago en OXXO','status' => getStatusTransaccion($status_pago),'referencia' => $referencia['id']);
+        'envio' => getFormatoPrecio($data['monto_envio']),
+        'descuento' => getFormatoPrecio($productos_comprados['descuento']),
+        'gran_total' => getFormatoPrecio($productos_comprados['gran_total']-$productos_comprados['descuento']+$data['monto_envio']),'metodo_pago' =>'Pago en OXXO','status' => getStatusTransaccion($status_pago),'referencia' => $referencia['id']);
 
    $campos['ticket_oxxo'] = render(PROJECT_DIR.'/modulos/ecommerce/diseno/email/ticket_oxxo.phtml',
            ['productos_comprados' =>$productos_comprados,'referencia' => $referencia['id'],'MyRequest' => $MyRequest,"code_referencia" => $order->charges[0]->payment_method->reference]);

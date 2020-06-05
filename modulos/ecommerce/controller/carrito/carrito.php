@@ -70,7 +70,15 @@ $MyCarritoProducto->setOrdensql("id");
 
             );
         }
+        
+        $cupon = $MySession->GetVar('cupon_checkout');
+        if($cupon != false)
+        {
+            $valida_cupo = validaCuponEcommerce($cupon['cupon']);
+            if($valida_cupo['error'] == true){
+                $MySession->UnsetVar('cupon_checkout');
+            }
+        }
 
     }
-
 ?>

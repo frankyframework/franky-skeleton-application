@@ -89,5 +89,10 @@
         <llave>cupon_no_aplica</llave>
         <valor>Tu compra no aplica para esta promoción</valor>
     </mensaje>
+    <mensaje>
+        <llave>cupon_numero_usos</llave>
+        <valor>El cupon esta agotado</valor>
+    </mensaje>
+
 
 </mensajes>

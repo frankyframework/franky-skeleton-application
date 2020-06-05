@@ -52,8 +52,8 @@
                   <?php       $parse_precio =  getCarrito(); ?>
                   <div class="_mycart_resume _subtotal">Subtotal: <span class="subtotal"><?php echo getFormatoPrecio($parse_precio['subtotal']); ?></span></div>
                   <div class="_mycart_resume _iva">IVA: <span class="iva"><?php echo getFormatoPrecio($parse_precio['iva_total']); ?></span></div>
-                  <div class="_mycart_resume _descuento" style="display:none;">Descuento: <span class="descuento"><?php echo getFormatoPrecio($parse_precio['descuento']); ?></span></div>
-                  <div class="_mycart_resume _total">Total: <span class="total"><?php echo getFormatoPrecio($parse_precio['gran_total']); ?></span></div>
+                  <div class="_mycart_resume _descuento" <?=(isset($parse_precio['descuento']) ? '' : 'style="display:none;"')?>>Descuento: <span class="descuento"><?php echo getFormatoPrecio($parse_precio['descuento']); ?></span></div>
+                  <div class="_mycart_resume _total">Total: <span class="total"><?php echo getFormatoPrecio($parse_precio['gran_total']-(isset($parse_precio['descuento']) ? $parse_precio['descuento'] : 0)); ?></span></div>
                 </div>
                 <div>
                     <?php

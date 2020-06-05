@@ -73,7 +73,7 @@ class DescuentoPorcentajeData implements \Ecommerce\interfaces\EcommercePromocio
             }
         }
         
-        $descuento = $total - ($total * ($this->data['porcentaje']/100));
+        $descuento = ($total * ($this->data['porcentaje']/100));
         
         return $descuento;
     }

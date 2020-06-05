@@ -26,7 +26,15 @@ $MyPedidoEntity = new pedidos();
 $MyPedidoProducto = new producto_pedidoModel();
 $MyPedidoProductoEntity = new producto_pedido();
 
-
+$cupon = $MySession->GetVar('cupon_checkout');
+if($cupon != false)
+{
+    $valida_cupo = validaCuponEcommerce($cupon['cupon']);
+    if($valida_cupo['error'] == true){
+        ecommerce_removeCupon();
+    }
+}
+    
 if(!empty($paymentID) && !empty($payerID) && !empty($token))
 {
     $productos_comprados = getCarrito();
@@ -61,7 +69,7 @@ if($status_pago == "pending" || $status_pago == "paid")
             
             if($status_pago == "paid")
             {
-                $status_pago = ($productos_comprados['gran_total'] + $data['monto_envio'] > $total ? "pago_incompleto" : $status_pago);
+                $status_pago = ($productos_comprados['gran_total'] -$productos_comprados['descuento'] + $data['monto_envio'] > $total ? "pago_incompleto" : $status_pago);
             }
 
             
@@ -110,7 +118,9 @@ if($status_pago == "pending" || $status_pago == "paid")
 
                 }
             }
+            
             $MySession->SetVar('checkout',array());
+            $MySession->SetVar('cupon_checkout',array());
             $MyPedidoEntity->setId_direccion_envio(json_encode($direccion_envio));
             $MyPedidoEntity->setId_direccion_facturacion(json_encode($id_direccion_facturacion));
             $MyPedidoEntity->setFecha(date('Y-m-d H:i:s'));
@@ -123,6 +133,9 @@ if($status_pago == "pending" || $status_pago == "paid")
             $MyPedidoEntity->setIva($productos_comprados['iva_total']);
             $MyPedidoEntity->setMonto_pagado($total);
             $MyPedidoEntity->setMonto_envio($data['monto_envio']);
+            $MyPedidoEntity->setDescuento($productos_comprados['descuento']);
+            $MyPedidoEntity->setData_cupon(json_encode($cupon));
+            $MyPedidoEntity->setCupon($cupon['id']);
             $MyPedidoEntity->setReferencia(json_encode($referencia));
 
             if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)
@@ -146,7 +159,9 @@ if($status_pago == "pending" || $status_pago == "paid")
 
                 $campos = array("orden" => $pedido,"nombre" =>$MySession->GetVar('nombre'),"email" =>$MySession->GetVar('email'),'productos' =>$productos_html,'subtotal' => getFormatoPrecio($productos_comprados['subtotal']),
                 'iva' => getFormatoPrecio($productos_comprados['iva_total']),
-                 'gran_total' => getFormatoPrecio($productos_comprados['gran_total']),'metodo_pago' =>'PayPal','status' => getStatusTransaccion($status_pago));
+                    'envio' => getFormatoPrecio($data['monto_envio']),
+                'descuento' => getFormatoPrecio($productos_comprados['descuento']),
+                'gran_total' => getFormatoPrecio($productos_comprados['gran_total']+$data['monto_envio']-$productos_comprados['descuento']),'metodo_pago' =>'PayPal','status' => getStatusTransaccion($status_pago));
 
 
                 $TemplateemailModel    = new \Base\model\TemplateemailModel;

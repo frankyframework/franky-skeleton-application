@@ -40,4 +40,13 @@ $direccionesForm->addSubmit();
 $direccionesFacturacionForm = new direccionesForm("frmdirecciones_facturacion");
 $direccionesFacturacionForm->addRFC();
 $direccionesFacturacionForm->addSubmit();
+$MySession->UnsetVar('checkout');
+$cupon = $MySession->GetVar('cupon_checkout');
+if($cupon != false)
+{
+    $valida_cupo = validaCuponEcommerce($cupon['cupon']);
+    if($valida_cupo['error'] == true){
+        $MySession->UnsetVar('cupon_checkout');
+    }
+}
 ?>
