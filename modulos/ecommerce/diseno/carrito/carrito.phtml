@@ -30,7 +30,7 @@
                             <?php $precio =  $_carrito_compras["precio"] * $_carrito_compras["qty"]; ?>
                             <?php echo getFormatoPrecio($precio); ?>
                         </div>
-                        <div class="_col_mycart_resume"><a href="#" data-id='<?php echo $_carrito_compras["id"]; ?>' class="eliminar_producto_carrito _btn_eliminar">Eliminar</a></div>
+                        <div class="_col_mycart_resume _eliminar"><a href="#" data-id='<?php echo $_carrito_compras["id"]; ?>' class="eliminar_producto_carrito _btn_eliminar">Eliminar</a></div>
                     </div>
 
                 </div>
@@ -41,11 +41,11 @@
             ?>
             <?php endforeach; ?>
 
-             
+
                 <div class="w-xxxx-6">
                      <?=render('carrito/frm.cupon.phtml')?>
                 </div>
-            
+
 
             <div class="_mycart_checkout">
                 <div class='resumen_page_carrito'>
@@ -86,7 +86,7 @@
 
 $(document).ready(function(){
 
-    
+
     var time_event_carrito = null;
     $("a.menos_qty").click(function(e){
         e.preventDefault();

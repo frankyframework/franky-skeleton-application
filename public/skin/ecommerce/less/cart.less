@@ -1,9 +1,27 @@
 @import "public/skin/default/less/variables"; // variables.less
 
 header {
-    #widget_carrito {
-        .cerrar_carrito { position: absolute; right: 10px; top: 10px; color: @black; font-size: 2rem; z-index: 20;
-            &:hover { color: @enfasis_color; }
+    #widget_carrito { position: absolute; right: 30px; top: 10px; width:300px; text-align: right;
+        ._mini_cart,
+        .cont_vacio { position: absolute; top: 50px; right: -15px; padding: 20px 10px 10px 10px; background-color: @white; .box-shadow; .radius(6px); }
+        .abrir_carrito { position: relative; display: block; font-size: 0; text-decoration: none;
+            &:after { font-family: @ico_font; content: '\e813'; color: @white; font-size: 2.8rem; cursor: pointer; }
+            .count_productos { position: absolute; display: inline-block; right: -15px; top: -5px; width: 24px; height: 24px; line-height: 24px; .radius(14px); text-align: center; font-size: 1rem; color: @white; background: @enfasis_color; }
+            &:hover {
+                &:after { color: @enfasis_color; }
+            }
+        }
+        .cerrar_carrito { position: absolute; right: -4px; top: -4px; color: @black; text-decoration: none; font-size: 2rem; z-index: 20;
+            &:after { font-family: @ico_font; padding: 5px; background-color: @black; content: '\e924'; color: @white; font-size: 1.2rem; cursor: pointer;  .radius(16px); }
+            &:hover {
+                &:after {color: @enfasis_color; }
+            }
+        }
+        ._btn_eliminar { text-decoration: none;
+            &:after { font-family: @ico_font; padding: 5px; content: '\e929'; color: lighten(@black, 50); font-size: 1.8rem; cursor: pointer;  .radius(16px); }
+            &:after {
+                &:hover { color: @black; }
+            }
         }
         ._minicart { display: block; margin: 10px 0; padding: 10px 20px; text-decoration: none; text-transform: uppercase; font-weight: 600; .radius;
             &._checkout { background: @enfasis_color; color: @white; }
@@ -87,7 +105,14 @@ main {
             &._total { font-size: 2rem; }
         }
     }
-    ._list_mycart_product { float: left; width: 100%; border-bottom: 1px solid @enfasis_color; margin-bottom: 10px; padding: 20px 0; }
+    ._list_mycart_product { float: left; width: 100%; border-bottom: 1px solid @enfasis_color; margin-bottom: 10px; padding: 20px 0;
+        .eliminar_producto_carrito { font-size: 0; text-decoration: none;
+            &:after { font-family: @ico_font; content: '\e929'; color: lighten(@black, 50); font-size: 1.4rem; cursor: pointer; }
+            &:after {
+                &:hover { color: @black; }
+            }
+        }
+    }
     ._mycart_resume {
         ._col_mycart_resume { float: left; width: 20%; padding:5px; box-sizing: border-box;
             &._img_product { width: 10%; text-align: center;
@@ -106,6 +131,9 @@ main {
             }
             &.subtotal_producto { text-align: center;
                 @media @small { width: 40%; }
+            }
+            &._eliminar { text-align: center;
+                @media @small { width: 10%; }
             }
         }
         ._row_mycart_resume { float: left; width: 100%; padding: 10px; box-sizing: border-box; }

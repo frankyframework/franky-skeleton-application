@@ -162,4 +162,5 @@
 <glyph unicode="&#xe926;" glyph-name="icon_mas" d="M1024 496h-464v464h-96v-464h-464v-96h464v-464h96v464h464v96z" />
 <glyph unicode="&#xe927;" glyph-name="icon_menos_light" d="M0 472h1024v-48h-1024v48z" />
 <glyph unicode="&#xe928;" glyph-name="icon_menos" d="M0 496h1024v-96h-1024v96z" />
+<glyph unicode="&#xe929;" glyph-name="icon_trash" d="M1032 887.36h-365.76v80.64h-308.48v-80.64h-365.76v-132.64h1040v132.64zM-9.44 711.36l130.72-783.36h781.44l130.72 783.36h-1042.88z" />
 </font></defs></svg>

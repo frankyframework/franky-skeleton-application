@@ -135,10 +135,10 @@ function addProductoCarritoHTML(response,show)
                                         "</div><div> x<span>"+respuesta["productos"][i]["qty"]+
                                         "</span> <span class='_unit_price'>"+respuesta["productos"][i]["precio"]+
                                 "</span></div>\
-                                <div class='w-xxxx-1 _minicart_delete'>\
-                                    <a href=\"javascript:void(0);\" onclick=\"eliminarProductoCarrito('"+respuesta["productos"][i]["id"]+"')\" ><i class=\"icon icon-r-eliminar\"></i></a>\
-                                <div>\
                                 </div>\
+                                <div class='w-xxxx-1 _minicart_delete'>\
+                                <a class=\"_btn_eliminar\" href=\"javascript:void(0);\" onclick=\"eliminarProductoCarrito('"+respuesta["productos"][i]["id"]+"')\" ></a>\
+                                <div>\
                             </div>");
 
                 }
@@ -429,7 +429,7 @@ function loadMetodosEnvioHTML(response)
             $(".metodo_pago").toggleClass('_active').next("div").show();
             loadMetodosPago();
         }
-       
+
     }
     return true;
 }
@@ -492,7 +492,7 @@ function loadMetodosPagoHTML(response)
     {
         respuesta = JSON.parse(response);
 
-        
+
         $("#content_metodo_pago").html(respuesta.html);
         $( "#frm_pago" ).validate({
                 submitHandler: function(form)
@@ -504,7 +504,7 @@ function loadMetodosPagoHTML(response)
         $('input[name=id_pago]').each(function(index,val){
           $(this).next('span').addClass($(this).val());
         });
-       
+
     }
     return true;
 }
@@ -601,7 +601,7 @@ function ecommerce_setCupon(cupon){
               function: "ecommerce_setCupon",
               vars_ajax:[cupon]
     };
-    
+
     pasarelaAjax('GET',var_query,"ecommerce_setCuponHTML",var_query.vars_ajax);
 }
 
@@ -609,7 +609,7 @@ function ecommerce_setCupon(cupon){
 function ecommerce_setCuponHTML(response,cupon)
 {
     var respuesta = null;
-    
+
     if(response != "null")
     {
         respuesta = JSON.parse(response);
@@ -619,15 +619,15 @@ function ecommerce_setCuponHTML(response,cupon)
             $('.content_cupon_activo').html(respuesta.html);
             $('.content_form_cupon').hide();
             $('#frmcupon').trigger('reset');
-            
+
             $('.content_cupon_activo').find('a.remove').click(function(e){
                 e.preventDefault();
                 ecommerce_removeCupon();
             });
-            
-            
+
+
             getInfoTotalsCheckout();
-            
+
         }
         else
         {
@@ -651,8 +651,8 @@ function ecommerce_removeCupon(){
 
 
 function ecommerce_removeCuponHTML(response)
-{  
-    $('.content_cupon_activo').empty();      
+{
+    $('.content_cupon_activo').empty();
     $('.content_form_cupon').show();
     getInfoTotalsCheckout();
 }
@@ -668,9 +668,9 @@ function getInfoTotalsCheckout(){
 
 
 function getInfoTotalsCheckoutHTML(response)
-{  
+{
     var respuesta = null;
-    
+
     if(response != "null")
     {
         respuesta = JSON.parse(response);
@@ -696,7 +696,7 @@ function ecommerce_setCuponCheckout(cupon){
               function: "ecommerce_setCupon",
               vars_ajax:[cupon]
     };
-    
+
     pasarelaAjax('GET',var_query,"ecommerce_setCuponCheckoutHTML",var_query.vars_ajax);
 }
 
@@ -704,7 +704,7 @@ function ecommerce_setCuponCheckout(cupon){
 function ecommerce_setCuponCheckoutHTML(response,cupon)
 {
     var respuesta = null;
-    
+
     if(response != "null")
     {
         respuesta = JSON.parse(response);
@@ -714,15 +714,15 @@ function ecommerce_setCuponCheckoutHTML(response,cupon)
             $('.content_cupon_activo').html(respuesta.html);
             $('.content_form_cupon').hide();
             $('#frmcupon').trigger('reset');
-            
+
             $('.content_cupon_activo').find('a.remove').click(function(e){
                 e.preventDefault();
                 ecommerce_removeCuponCheckout();
             });
-            
-            
+
+
             getInfoTotalsCheckout2();
-            
+
         }
         else
         {
@@ -746,8 +746,8 @@ function ecommerce_removeCuponCheckout(){
 
 
 function ecommerce_removeCuponCheckoutHTML(response)
-{  
-    $('.content_cupon_activo').empty();      
+{
+    $('.content_cupon_activo').empty();
     $('.content_form_cupon').show();
     getInfoTotalsCheckout2();
 }
@@ -763,18 +763,18 @@ function getInfoTotalsCheckout2(){
 
 
 function getInfoTotalsCheckout2HTML(response)
-{  
+{
     var respuesta = null;
-    
+
     if(response != "null")
     {
         respuesta = JSON.parse(response);
-        
-        
+
+
         $("._checkout_subtotal").children('.price').html(respuesta.subtotal);
         $("._checkout_iva").children('.price').html(respuesta.iva_html);
         $("._checkout_total").children('.price').html(respuesta.gran_total);
-            
+
          if(respuesta.monto_envio){
             $("._checkout_envio").children('.price').html(respuesta.monto_envio);
             $("._checkout_envio").show();
@@ -782,7 +782,7 @@ function getInfoTotalsCheckout2HTML(response)
         else{
             $("._checkout_envio").children('.price').empty();
             $("._checkout_envio").hide();
-        }   
+        }
         if(respuesta.descuento){
             $("._checkout_descuento").children('.price').html(respuesta.descuento);
             $("._checkout_descuento").show();
