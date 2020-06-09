@@ -106,13 +106,15 @@ echo "===============================================\n\n";
 
 function helpShell($rules)
 {
-    $html =  "AYUDA PARA IDIOTAS:\n\n";
-
-    foreach($rules as $rule)
+    if(!empty($rules))
     {
-        $html .= ($rule["required"] == true ? "[*]" : "[ ]").$rule["var"].": ".$rule["description"]." \n";
-    }
+        $html =  "AYUDA PARA IDIOTAS:\n\n";
 
+        foreach($rules as $rule)
+        {
+            $html .= ($rule["required"] == true ? "[*]" : "[ ]").$rule["var"].": ".$rule["description"]." \n";
+        }
+    }
     return $html;
 }
 
