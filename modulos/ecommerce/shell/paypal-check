@@ -8,7 +8,7 @@ use Base\model\USERS;
 use Ecommerce\model\EcommercelogstatusModel;
 use Ecommerce\entity\EcommercelogstatusEntity;
 
-include(PROJECT_DIR."/modulos/ecommerce/loads/init.php");
+//include(PROJECT_DIR."/modulos/ecommerce/loads/init.php");
 
 if($MySession->getVar('nivel') != NIVEL_USERDEVELOPER)
 {
@@ -16,32 +16,21 @@ if($MySession->getVar('nivel') != NIVEL_USERDEVELOPER)
     exit;
 }
 
-$site = $MyRequest->getRequest("site");
-$class = str_replace("_","\\",$MyRequest->getRequest("class"));
 
+$ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Database\Debug);
 
-if(!empty($site))
-{
-    $_SERVER["SERVER_NAME"] = $site;
-    $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Core\MYDEBUG);
-}
 
 headerShell();
-$help = helpShell([
-    ["var" => "site", "required" => true, "description" => "url del sitio que se revisaran los pedidos"],
-      ["var" => "class", "required" => true, "description" => "Class  PHP con la informacion del producto"],
-]);
+$help = helpShell([]);
 
 
 $validaciones =  new validaciones();
-$valid = $validaciones->validRules(array("Sitio" => array("valor" => $site,"required"),"Class" => array("valor" => $class,"required")));
+$valid = $validaciones->validRules();
 if(!$valid)
 {
     echo shellFontColor($validaciones->getMsg(),"rojo")."\n\n".$help;
     exit;
 }
-
-define("OBJETO_PRODUCTOS", $class);
 
 
 $USERS = new USERS();
@@ -119,8 +108,15 @@ foreach($pedidos as $pedido)
             $productos_html = render(PROJECT_DIR.'/modulos/ecommerce/diseno/email/productos.phtml',['items' =>$detalle_pedido['productos']]);
 
 
-            $campos = array("orden" => $PedidosEntity->getId(),"nombre" =>$detalle_pedido['nombre'],'productos' =>$productos_html,"email" => $dataUser['email'],
-            'gran_total' => getFormatoPrecio($detalle_pedido['monto_compra']),'metodo_pago' =>$detalle_pedido['metodo_pago'],"status" => getStatusTransaccion($status_pago));
+            $campos = array("orden" => $PedidosEntity->getId(),
+            "nombre" =>$detalle_pedido['nombre'],
+            'productos' =>$productos_html,
+            "email" => $dataUser['email'],
+            'gran_total' => getFormatoPrecio($detalle_pedido['monto_compra']),
+            'monto_envio' =>getFormatoPrecio($detalle_pedido['monto_envio']),
+            'descuento' =>getFormatoPrecio($detalle_pedido['descuento']),
+            'metodo_pago' =>$detalle_pedido['metodo_pago'],
+            "status" => getStatusTransaccion($status_pago));
 
             $TemplateemailModel    = new \Base\model\TemplateemailModel;
             $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
