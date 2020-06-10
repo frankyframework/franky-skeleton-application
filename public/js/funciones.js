@@ -359,7 +359,7 @@ $(document).ready(function(){
         $(this).toggleClass( "active" );
         $('._left_menu').toggleClass( "active" );
         $('._panel_content').toggleClass( "active" );
-        
+
         if($('._left_menu').attr('class').search('active') > -1)
         {
             setCookie('menu_panel', 'active', 30)
@@ -376,7 +376,7 @@ $(document).ready(function(){
             $("._btn_collapse_panel").click();
         }
     }
-    
+
 
 });
 
@@ -404,6 +404,7 @@ $(document).ready(function(){
             $(".menu_web").fadeToggle("fast",function()
             {
                 $(".cont_nav_movil").toggleClass("active")
+                $(".hamburguer").toggleClass("active")
                 $("body").toggleClass("active_nav")
 
                 $(".menu_web").toggleClass("despliegue")
