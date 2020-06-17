@@ -3,12 +3,17 @@ use Catalog\model\CatalogproductsModel;
 use Catalog\entity\CatalogproductsEntity;
 use Franky\Haxor\Tokenizer;
 use Base\Form\contactanosForm;
-
+use Catalog\model\CatalogproductrelatedModel;
+use Catalog\entity\CatalogproductrelatedEntity;
+ 
 
 $Tokenizer = new Tokenizer();
 
 $CatalogproductsModel  = new CatalogproductsModel();
 $CatalogproductsEntity = new CatalogproductsEntity();
+$CatalogproductrelatedModel =  new CatalogproductrelatedModel();
+$CatalogproductrelatedEntity =  new CatalogproductrelatedEntity();
+
 $categorys = getCatalogCategorys('sql');
 $subcategorys = getCatalogSubcategorys(null,'sql');
 
@@ -58,3 +63,51 @@ $contactanosForm->setAtributoBase('asunto', 'type','hidden');
 
 $MyFrankyMonster->setPHPFile(getVista("products/view.phtml"));
 //print_r($data_detalle);
+
+
+$CatalogproductrelatedEntity->id_parent($data_detalle['id_ori']);
+$CatalogproductrelatedModel->setTampag(10000);
+$lista_relacionados_data =[];
+if($CatalogproductrelatedModel->getData($CatalogproductrelatedEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+{
+
+    while($registro = $CatalogproductrelatedModel->getRows())
+    {
+        
+        $registro['link'] = $MyRequest->url(CATALOG_SEARCH_CATEGORY,['friendly' => $registro['url_key']]);
+        
+        $registro['thumb_resize'] =  "";
+        $img = "";
+        $_img = getCoreConfig('catalog/product/placeholder');
+        if($_img != "" && file_exists(PROJECT_DIR.$_img))
+        {
+          $registro['thumb_resize'] = imageResize($_img,500,500, true);
+        }
+        $registro["images"] = json_decode($registro["images"],true);
+
+        if(!empty($registro['images']))
+        {
+            foreach($registro["images"] as $foto)
+            {
+
+                if($foto['principal'] == 1)
+                {
+
+                    if(!empty($foto["img"]) && file_exists($MyConfigure->getServerUploadDir()."/catalog/products/".$registro["id_product"].'/'.$foto['img']))
+                    {
+
+                          $registro['thumb_resize'] = imageResize($MyConfigure->getUploadDir()."/catalog/products/".$registro["id_product"].'/'.$foto['img'],500,500, true);
+
+                    }
+                }
+
+            }
+        }
+
+        $registro['id_wishlist'] = $Tokenizer->token('wishlist',$registro["id_product"]);
+
+        $registro['id'] = $Tokenizer->token('catalog_products',$registro["id_product"]);
+        $lista_relacionados_data[] = $registro;
+      
+    }
+}

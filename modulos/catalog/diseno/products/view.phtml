@@ -46,13 +46,14 @@
                         <div class="_description"><?=$data_detalle['description']?></div>
                     </div>
                 </div>
-                <?php if(isset($catalogo_relacionados) && !empty($catalogo_relacionados)): ?>
-                    <?=render('products/relacionados.phtml',['catalogo_relacionados' =>$catalogo_relacionados])?>
+                <?php if(isset($lista_relacionados_data) && !empty($lista_relacionados_data)): ?>
+                    <?=render('products/relacionados.phtml',['catalogo_relacionados' =>$lista_relacionados_data])?>
                 <?php endif; ?>
                 <div class="w-xxxx-12">
                 <?=getFrmCalificacion('catalog','catalog_products',$data_detalle['id_ori']); ?>
                 </div>
             </div>
+            
         </div>
 
     </div>

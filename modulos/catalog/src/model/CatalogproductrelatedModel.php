@@ -13,12 +13,14 @@ class CatalogproductrelatedModel  extends \Franky\Database\Mysql\objectOperation
     function getData($data = array())
     {
         $data = $this->optimizeEntity($data);
-        $campos = ["id_parent","id_product"];
+        $campos = ["id_parent","id_product","name","sku",'images','url_key',
+            "price","stock","iva","incluye_iva"];
 
         foreach($data as $k => $v)
         {
             $this->where()->addAnd("catalog_product_related.".$k,$v,'=');
         }
+        $this->from()->addInner('catalog_products','catalog_products.id','catalog_product_related.id_product');
 
         return $this->getColeccion($campos);
 
@@ -61,5 +63,23 @@ class CatalogproductrelatedModel  extends \Franky\Database\Mysql\objectOperation
         
         return $this->getColeccion($campos);
     }
+    
+    function eliminar($data)
+    {
+        $data = $this->optimizeEntity($data);
+        if(!empty($data))
+        {
+            foreach($data as $k => $v)
+            {
+                $this->where()->addAnd("catalog_product_related.".$k,$v,'=');
+            }
+        }
+      
+        
+        return $this->eliminarRegistro();
+    }
+    
+    
+    
 }
 ?>
