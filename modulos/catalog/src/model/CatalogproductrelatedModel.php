@@ -3,13 +3,21 @@ namespace Catalog\model;
 
 class CatalogproductrelatedModel  extends \Franky\Database\Mysql\objectOperations
 {
-
+    private $dataProduct;
+    
+    
     public function __construct()
     {
       parent::__construct();
       $this->from()->addTable('catalog_product_related');
     }
 
+    
+    function setDataProduct($data)
+    {
+        $data = $this->optimizeEntity($data);
+        $this->dataProduct = $data;
+    }
     function getData($data = array())
     {
         $data = $this->optimizeEntity($data);
@@ -20,6 +28,16 @@ class CatalogproductrelatedModel  extends \Franky\Database\Mysql\objectOperation
         {
             $this->where()->addAnd("catalog_product_related.".$k,$v,'=');
         }
+        
+        if(!empty($this->dataProduct))
+        {
+            foreach($this->dataProduct as $k => $v)
+            {
+                $this->where()->addAnd("catalog_products.".$k,$v,'=');
+            }
+        }
+       
+        
         $this->from()->addInner('catalog_products','catalog_products.id','catalog_product_related.id_product');
 
         return $this->getColeccion($campos);

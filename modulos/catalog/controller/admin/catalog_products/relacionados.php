@@ -37,7 +37,7 @@ else{
     $orden = $MyPaginacion->getCampoOrden();
 }
 
-
+$CatalogproductsModel->setExcludeId($Tokenizer->decode($id));
 $CatalogproductsModel->setPage($MyPaginacion->getPage());
 $CatalogproductsModel->setTampag($MyPaginacion->getTampageDefault());
 $CatalogproductsModel->setOrdensql($orden." ".$MyPaginacion->getOrden());
@@ -90,6 +90,18 @@ if($CatalogproductsModel->getTotal() > 0)
         $iRow++;
     }
 }
+
+
+
+$CatalogproductsModel->setExcludeId('');
+$CatalogproductsEntity->exchangeArray([]);
+$CatalogproductsEntity->id($Tokenizer->decode($id));
+if($CatalogproductsModel->getData($CatalogproductsEntity->getArrayCopy(),$busca_b) == REGISTRO_SUCCESS)
+{
+    $producto_actual = $CatalogproductsModel->getRows();
+}
+
+
 //$MyFrankyMonster->setPHPFile(getVista("admin/template/grid.phtml"));
 $title_grid = "Productos Relacionados";
 $class_grid = "products_related";

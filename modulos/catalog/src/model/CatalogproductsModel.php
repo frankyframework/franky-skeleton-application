@@ -8,13 +8,19 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
     private $precio;
     private $categoria_array;
     private $subcategoria_array;
-
+    private $excludeId;
+    
     public function __construct()
     {
       parent::__construct();
       $this->from()->addTable('catalog_products');
     }
 
+    function setExcludeId($id)
+    {
+        $this->excludeId = $id;
+    }
+    
     public function setBusca($busca){
         $this->busca=$busca;
     }
@@ -51,6 +57,11 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
           $this->where()->addOr('description','%'.$this->busca.'%','like');
           $this->where()->addOr('sku','%'.$this->busca.'%','like');
           $this->where()->concat(')');
+        }
+        
+        if(!empty($this->excludeId))
+        {
+            $this->where()->addAnd("catalog_products.id",$this->excludeId,'!=');
         }
 
         return $this->getColeccion($campos);
