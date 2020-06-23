@@ -39,6 +39,7 @@ if ($zip->open($destination) === TRUE) {
         "/bin",
         "/public/skin/default/css",
         "/public/skin/default/images",
+        "/public/skin/default/less",
     );
     foreach($modulos as $modulo)
     {
@@ -46,6 +47,7 @@ if ($zip->open($destination) === TRUE) {
             $fullmkdir[] = '/modulos/'.$modulo;
             $fullmkdir[] = '/public/skin/'.$modulo.'/css';
             $fullmkdir[] = '/public/skin/'.$modulo.'/images';
+            $fullmkdir[] = '/public/skin/'.$modulo.'/less';
             $fullmkdir[] = '/public/ajax/'.$modulo;
         endif; 
     }
