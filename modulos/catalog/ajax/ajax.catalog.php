@@ -504,6 +504,41 @@ function ajax_products_cargarProductosRelacionados($id)
     return $respuesta;
 }
 
+
+function DeleteCatalogVitrina($id,$status)
+{
+    global $MySession;
+    $CatalogvitrinaModel = new \Catalog\model\CatalogvitrinaModel;
+    $CatalogvitrinaEntity = new \Catalog\entity\CatalogvitrinaEntity;
+    $Tokenizer = new \Franky\Haxor\Tokenizer;
+    global $MyAccessList;
+    global $MyMessageAlert;
+
+    $respuesta = null;
+
+    if($MyAccessList->MeDasChancePasar(ADMINISTRAR_CATEGORY_CATALOG))
+    {
+        $CatalogvitrinaEntity->id(addslashes($Tokenizer->decode($id)));
+        $CatalogvitrinaEntity->status($status);
+
+        if($CatalogvitrinaModel->save($CatalogvitrinaEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+        {
+
+        }
+        else
+        {
+              $respuesta["message"] = $MyMessageAlert->Message("catalog_vitrina_error_delete");
+              $respuesta["error"] = true;
+        }
+    }
+    else
+    {
+         $respuesta["message"] = $MyMessageAlert->Message("sin_privilegios");
+         $respuesta["error"] = true;
+    }
+
+    return $respuesta;
+}
 /******************************** EJECUTA *************************/
 $MyAjax->register("DeleteCatalogCategory");
 $MyAjax->register("DeleteCatalogSubcategory");
@@ -516,5 +551,6 @@ $MyAjax->register("ajax_products_cargarProductosRelacionados");
 $MyAjax->register("ajax_products_agregarProductoRelacionadoVitrina");
 $MyAjax->register("ajax_products_quitarProductoRelacionadoVitrina");
 $MyAjax->register("ajax_products_cargarProductosRelacionadosVitrina");
+$MyAjax->register("DeleteCatalogVitrina");
 
 ?>

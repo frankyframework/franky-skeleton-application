@@ -57,4 +57,10 @@
         <llave>vitrina_duplicada</llave>
         <valor>Ya existe un vitrina con este nombre</valor>
     </mensaje>
+    <mensaje>
+        <llave>vitrina_error_delete</llave>
+        <valor>Error al eliminar la vitrina</valor>
+    </mensaje>
+    
+    
 </mensajes>

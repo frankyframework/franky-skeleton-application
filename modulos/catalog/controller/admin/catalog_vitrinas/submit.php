@@ -79,6 +79,7 @@ if(!$error)
     {
         $category_subcategory['productos'] = $MySession->GetVar('vitrina');
     }
+    
     $CatalogvitrinaEntity->items(json_encode($category_subcategory));
 
 
