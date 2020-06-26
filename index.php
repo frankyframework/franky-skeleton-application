@@ -9,12 +9,24 @@ require(getController(str_replace(".phtml",".php",$controller)));
 if($MyFrankyMonster->isAdmin())
 {
 
-  require(getController("admin/layout/index.php"));
-  $dump_hmtl = render(getVista("admin/layout/index.phtml"));
+    require(getController("admin/layout/index.php"));
+    if($MyFrankyMonster->MyLayout() != "")
+    {
+        $dump_hmtl = render($MyFrankyMonster->MyLayout());
+    }
+    else{
+        $dump_hmtl = render(getVista("admin/layout/index.phtml"));
+    }
 }
 else {
   require(getController("index.php"));
-  $dump_hmtl = render(getVista("index.phtml"));
+  if($MyFrankyMonster->MyLayout() != "")
+    {
+        $dump_hmtl = render($MyFrankyMonster->MyLayout());
+    }
+    else{
+        $dump_hmtl = render(getVista("index.phtml"));
+    }
 }
 
 

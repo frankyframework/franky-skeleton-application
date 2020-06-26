@@ -404,4 +404,135 @@ function catalog_addStock($pedido)
         }
     }
 }
+
+
+
+
+function getCatalogVitrina($clave)
+{
+    global $MyConfigure;
+    global $MyFrankyMonster;
+    global $MyMetatag;
+    global $MyRequest;
+
+    $uiCommand = $MyFrankyMonster->getUiCommand($MyFrankyMonster->MySeccion());
+  
+    if (is_array($uiCommand[3])) {
+        if (!in_array('slick',$uiCommand[3])) 
+        {
+            $MyMetatag->setJs("/public/jquery/slick/js/slick.min.js");
+            $MyMetatag->setCss("/public/jquery/slick/css/slick-theme.css");
+            $MyMetatag->setCss("/public/jquery/slick/css/slick.css");
+        }     
+    }
+    else{
+        $MyMetatag->setJs("/public/jquery/slick/js/slick.min.js");
+        $MyMetatag->setCss("/public/jquery/slick/css/slick-theme.css");
+        $MyMetatag->setCss("/public/jquery/slick/css/slick.css");
+    }
+      
+
+
+    $CatalogvitrinaModel = new \Catalog\model\CatalogvitrinaModel();
+    $CatalogvitrinaEntity = new \Catalog\entity\CatalogvitrinaEntity();
+    $CatalogproductsModel = new \Catalog\model\CatalogproductsModel();
+    $CatalogproductsEntity = new \Catalog\entity\CatalogproductsEntity();
+    $Tokenizer = new \Franky\Haxor\Tokenizer;
+    $CatalogproductsEntity->status(1);
+    $CatalogvitrinaEntity->status(1);
+    $CatalogvitrinaEntity->clave($clave);
+    $result	 = $CatalogvitrinaModel->getData($CatalogvitrinaEntity->getArrayCopy());
+    
+    if($result == REGISTRO_SUCCESS){
+        
+        $vitrina = $CatalogvitrinaModel->getRows();
+        
+        
+        $CatalogproductsModel->setTampag($vitrina['numero']);
+        if($vitrina['random'] ==1)
+        {
+            $CatalogproductsModel->setOrdensql("RAND()");
+        }
+        else{
+            $CatalogproductsModel->setOrdensql("name ASC");
+        }
+        
+        $filtro_items = json_decode($vitrina['items'],true);
+        $categorias = [];
+        $subcategorias = [];
+        if(!empty($filtro_items['category']))
+        {
+            foreach ($filtro_items['category'] as $cat => $sub)
+            {
+                $categorias[] = $cat;
+                if(!empty($sub))
+                {
+                    foreach($sub as $_sub)
+                    {
+                        $subcategorias[] = $_sub;
+                    }
+                }
+            }
+        }
+        
+        $CatalogproductsModel->setCategoriaArray($categorias);
+        $CatalogproductsModel->setSubCategoriaArray($subcategorias);
+        
+        
+        if(isset($filtro_items['productos'])):
+            $CatalogproductsModel->setsearchIds($filtro_items['productos']);
+        endif;
+        
+        $resultados_pagina = [];
+        $CatalogproductsModel->getDataVitrina($CatalogproductsEntity->getArrayCopy());
+
+        if($CatalogproductsModel->getTotal() > 0)
+        {
+            while($registro = $CatalogproductsModel->getRows())
+            {
+                $registro['link'] = $MyRequest->url(CATALOG_SEARCH_CATEGORY,['friendly' => $registro['url_key']]);
+
+                $registro['thumb_resize'] =  "";
+                $img = "";
+                $_img = getCoreConfig('catalog/product/placeholder');
+                if($_img != "" && file_exists(PROJECT_DIR.$_img))
+                {
+                  $registro['thumb_resize'] = imageResize($_img,500,500, true);
+                }
+                $registro["images"] = json_decode($registro["images"],true);
+
+                if(!empty($registro['images']))
+                {
+                    foreach($registro["images"] as $foto)
+                    {
+
+                        if($foto['principal'] == 1)
+                        {
+
+                            if(!empty($foto["img"]) && file_exists($MyConfigure->getServerUploadDir()."/catalog/products/".$registro["id"].'/'.$foto['img']))
+                            {
+
+                                  $registro['thumb_resize'] = imageResize($MyConfigure->getUploadDir()."/catalog/products/".$registro["id"].'/'.$foto['img'],500,500, true);
+
+                            }
+                        }
+
+                    }
+                }
+
+                $registro['id_wishlist'] = $Tokenizer->token('wishlist',$registro["id"]);
+
+                $registro['id'] = $Tokenizer->token('catalog_products',$registro["id"]);
+
+                $resultados_pagina[] = $registro;
+            }  
+            
+            return render(PROJECT_DIR.'/modulos/catalog/diseno/widget.vitrina.phtml',['resultados_pagina' => $resultados_pagina,'titulo'=>$vitrina['titulo'],'clave'=>$clave['titulo']]);
+        }
+      
+        
+    }
+    return  '';
+}
+
 ?>

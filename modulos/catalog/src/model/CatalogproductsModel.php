@@ -9,7 +9,7 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
     private $categoria_array;
     private $subcategoria_array;
     private $excludeId;
-    
+    private $search_ids;
     public function __construct()
     {
       parent::__construct();
@@ -38,6 +38,15 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
     {
         $this->subcategoria_array = $data;
     }
+    
+    public function setsearchIds($data)
+    {
+        if(is_array($data)){
+            if(!empty($data)){
+            $this->search_ids = implode(',',$data);
+            }
+        }
+    }
 
     function getData($data = array())
     {
@@ -62,6 +71,11 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
         if(!empty($this->excludeId))
         {
             $this->where()->addAnd("catalog_products.id",$this->excludeId,'!=');
+        }
+        
+        if(!empty($this->search_ids))
+        {
+            $this->where()->concat(" AND catalog_products.id in (".$this->search_ids.") ");
         }
 
         return $this->getColeccion($campos);
@@ -117,7 +131,13 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
             $this->where()->concat("AND (");
             foreach($this->categoria_array as $id)
             {
-                  $this->where()->addOr("catalog_category.url_key",$id,'=');
+                if(is_numeric($id))
+                {
+                    $this->where()->addOr("catalog_category.id",$id,'=');
+                }
+                else{
+                    $this->where()->addOr("catalog_category.url_key",$id,'=');
+                }
             }
               $this->where()->concat(')');
           }
@@ -127,22 +147,103 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
               $this->where()->concat("AND (");
               foreach($this->subcategoria_array as $id)
               {
+                if(is_numeric($id))
+                {
+                    $this->where()->addOr("catalog_subcategory.id",$id,'=');
+                }
+                else{
                     $this->where()->addOr("catalog_subcategory.url_key",$id,'=');
+                }
+                   
               }
                 $this->where()->concat(')');
             }
             }
-         
+            
+           
           $this->from()->addInner('catalog_subcategory_product','catalog_subcategory_product.id_product','catalog_products.id');
           $this->from()->addInner('catalog_subcategory','catalog_subcategory_product.id_subcategory','catalog_subcategory.id');
           $this->from()->addInner('catalog_category','catalog_subcategory.id_category','catalog_category.id');
           $this->setGrupo('catalog_products.id');
         }
 
+        if(!empty($this->search_ids))
+        {
+            $this->where()->concat(" AND catalog_products.id in (".$this->search_ids.") ");
+        }
+
         return $this->getColeccion($campos);
     }
 
 
+    function getDataVitrina($data = array())
+    {
+        $data = $this->optimizeEntity($data);
+        $campos = ["catalog_products.id","catalog_products.name","sku","category",
+        "catalog_products.visible_in_search","catalog_products.description",
+        "images","videos","catalog_products.url_key","catalog_products.meta_title",
+        "catalog_products.meta_keyword","catalog_products.meta_description",
+        "price","stock","iva","incluye_iva","catalog_products.createdAt",
+        "catalog_products.updateAt","catalog_products.status",
+        "in_stock","saleable","min_qty","stock_infinito","envio_requerido"];
+
+   
+        if(!empty($this->categoria_array)){
+          if(is_array($this->categoria_array))
+          {
+            $this->where()->concat("AND (");
+            foreach($this->categoria_array as $id)
+            {
+                if(is_numeric($id))
+                {
+                    $this->where()->addOr("catalog_category.id",$id,'=');
+                }
+                else{
+                    $this->where()->addOr("catalog_category.url_key",$id,'=');
+                }
+            }
+              $this->where()->concat(')');
+          }
+          if(!empty($this->subcategoria_array)){
+            if(is_array($this->subcategoria_array))
+            {
+              $this->where()->concat("AND (");
+              foreach($this->subcategoria_array as $id)
+              {
+                if(is_numeric($id))
+                {
+                    $this->where()->addOr("catalog_subcategory.id",$id,'=');
+                }
+                else{
+                    $this->where()->addOr("catalog_subcategory.url_key",$id,'=');
+                }
+                   
+              }
+                $this->where()->concat(')');
+            }
+            }
+            
+            if(!empty($this->search_ids))
+            {
+                $this->where()->concat(" OR catalog_products.id in (".$this->search_ids.") ");
+            }
+            
+            $this->from()->addInner('catalog_subcategory_product','catalog_subcategory_product.id_product','catalog_products.id');
+            $this->from()->addInner('catalog_subcategory','catalog_subcategory_product.id_subcategory','catalog_subcategory.id');
+            $this->from()->addInner('catalog_category','catalog_subcategory.id_category','catalog_category.id');
+            $this->setGrupo('catalog_products.id');
+        }
+        else{
+            if(!empty($this->search_ids))
+            {
+                $this->where()->concat(" AND catalog_products.id in (".$this->search_ids.") ");
+            }
+        }
+
+        
+
+        return $this->getColeccion($campos);
+    }
 
     function getInfoProducto($id)
     {

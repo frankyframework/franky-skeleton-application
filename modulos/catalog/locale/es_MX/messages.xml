@@ -53,5 +53,8 @@
         <llave>products_error_relacionar_eliminar</llave>
         <valor>Error al quitar este producto</valor>
     </mensaje>
-
+    <mensaje>
+        <llave>vitrina_duplicada</llave>
+        <valor>Ya existe un vitrina con este nombre</valor>
+    </mensaje>
 </mensajes>

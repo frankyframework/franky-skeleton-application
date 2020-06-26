@@ -68,7 +68,7 @@ $CatalogproductsEntity->exchangeArray([]);
 $CatalogproductrelatedEntity->id_parent($data_detalle['id_ori']);
 $CatalogproductrelatedModel->setTampag(10000);
 $CatalogproductrelatedModel->setOrdensql('RAND()');
-//$CatalogproductsEntity->status(1);
+$CatalogproductsEntity->status(1);
 $CatalogproductrelatedModel->setDataProduct($CatalogproductsEntity->getArrayCopy());
 $lista_relacionados_data =[];
 if($CatalogproductrelatedModel->getData($CatalogproductrelatedEntity->getArrayCopy()) == REGISTRO_SUCCESS)

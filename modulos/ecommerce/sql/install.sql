@@ -15,7 +15,7 @@ insert into `franky` (`php`, `css`, `js`, `jquery`, `permisos`, `constante`, `ur
 insert into `franky` (`php`, `css`, `js`, `jquery`, `permisos`, `constante`, `url`, `nombre`, `ajax`, `status`, `editable`, `modulo`) values('openpay/confirmacion_tarjeta.php','','','','[3]','CONFIRMACION_OPENPAY_TARJETA','ecommerce/openpay/tarjeta/confirmacion/','Confirmacion openpay tarjeta','','1','0','ecommerce');
 insert into `franky` (`php`, `css`, `js`, `jquery`, `permisos`, `constante`, `url`, `nombre`, `ajax`, `status`, `editable`, `modulo`) values('openpay/confirmacion_establecimiento.php','[\"openpay.css\"]','','','[3]','CONFIRMACION_OPENPAY_ESTABLECIMIENTO','ecommerce/openpay/est/confirmacion/','Confirmacion openpay establecimiento','','1','0','ecommerce');
 insert into `franky` (`php`, `css`, `js`, `jquery`, `permisos`, `constante`, `url`, `nombre`, `ajax`, `status`, `editable`, `modulo`) values('admin/cupones/form.php','','','[\"jquery-validate\"]','[1]','ADMIN_FRM_CUPONES_ECOMMERCE','admin/ecommerce/cupones/form/','Alta y edicion de cupones','','1','0','ecommerce');
-insert into `franky` (`php`, `css`, `js`, `jquery`, `permisos`, `constante`, `url`, `nombre`, `ajax`, `status`, `editable`, `modulo`) values('admin/cupones/lista.php','','','[]','[3]','ADMIN_LISTA_CUPONES_ECOMMERCE','admin/ecommerce/cupones/','Administrar cupones','[\"base/ajax.admin.js\",\"ecommerce/ajax.admin.js\"]','1','0','ecommerce');
+insert into `franky` (`php`, `css`, `js`, `jquery`, `permisos`, `constante`, `url`, `nombre`, `ajax`, `status`, `editable`, `modulo`) values('admin/cupones/lista.php','','','[]','[1]','ADMIN_LISTA_CUPONES_ECOMMERCE','admin/ecommerce/cupones/','Administrar cupones','[\"base/ajax.admin.js\",\"ecommerce/ajax.admin.js\"]','1','0','ecommerce');
 
 
 
