@@ -52,9 +52,9 @@ if($contrasena != $contrasena1)
     $error = true;
 }
 
-if(!empty($contrasena_db) && !empty($usuario_db))
+if(!empty($contrasena_db))
 {
-    if($MyUser->findUserPass($usuario_db,md5($contrasena_ant)) != REGISTRO_SUCCESS)
+    if(!password_verify($contrasena_ant,$contrasena_db))
     {
         if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_OTRA_CONTRASENA)):
             $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("error_pass_actual"));
@@ -72,7 +72,7 @@ if(!$error)
 {
 
     $MyUserEntity    = new entityUser($MyRequest->getRequest());
-    $MyUserEntity->setContrasena(md5($contrasena));
+    $MyUserEntity->setContrasena(password_hash($contrasena,PASSWORD_DEFAULT));
     $MyUserEntity->setId($id);
     $result = $MyUser->save($MyUserEntity->getArrayCopy());
 

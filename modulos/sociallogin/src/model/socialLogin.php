@@ -40,7 +40,7 @@ class socialLogin extends \Franky\Core\LOGIN
                    
                     $this->m_social_data[$registro["red"]] = json_decode($registro["info"],true);
                   
-                    if($this->setLogin($registro[$this->m_user], $registro[$this->m_pass]) != LOGIN_SUCCESS)
+                    if($this->setLogin($registro[$this->m_user], 1) != LOGIN_SUCCESS)
                     {
                         
                         return LOGIN_DBFAILURE;

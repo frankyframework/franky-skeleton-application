@@ -117,16 +117,7 @@ class USERS  extends \Franky\Database\Mysql\objectOperations
         return $this->getColeccion($campos);
 
     }
-    function findUserPass($usuario,$password)
-    {
-        //echo ($password); exit;
-        $campos = array("usuario");
-        $this->where()->addAnd('usuario',$usuario,'=');
-        $this->where()->addAnd('contrasena',$password,'=');
-
-        return $this->getColeccion($campos);
-    }
-
+   
 
     private function optimizeEntity($array)
     {

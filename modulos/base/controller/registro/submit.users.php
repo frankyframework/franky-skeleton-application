@@ -76,7 +76,7 @@ if($MyUserEntity->getTelefono() != "" && $MyUser->findTelefono($MyUserEntity->ge
         }
 
         $MyUserEntity->setNivel(NIVEL_USERSUSCRIPTOR);
-        $MyUserEntity->setContrasena(md5($MyUserEntity->getContrasena()));
+        $MyUserEntity->setContrasena(password_hash($MyUserEntity->getContrasena(),PASSWORD_DEFAULT));
         $MyUserEntity->setVerificado($varificado);
         $MyUserEntity->setFecha(date('Y-m-d H:i:s'));
         $MyUserEntity->setUltimoAcceso(date('Y-m-d'));
@@ -101,8 +101,8 @@ if($MyUserEntity->getTelefono() != "" && $MyUser->findTelefono($MyUserEntity->ge
             $VerificacionesPendientes   = new VerificacionesPendientes();
             $VerificacionesPendientes->addVerifica($id_user, $token );
 
-            $MyLogin = new \Franky\Core\LOGIN("users",array("usuario","email"),"contrasena",array("status" => "1"));
-            $MyLogin->setLogin($MyUserEntity->getUsuario(), $MyUserEntity->getContrasena());
+            $MyLogin = new \Franky\Core\LOGIN("users",array("usuario","email"),1,array("status" => "1"));
+            $MyLogin->setLogin($MyUserEntity->getUsuario(), 1);
 
 
             $inputs = $MyLogin->getInputs();

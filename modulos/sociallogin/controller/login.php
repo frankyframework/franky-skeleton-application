@@ -5,7 +5,7 @@ use Base\entity\AvataresEntity;
 use Franky\Core\ObserverManager;
 $MyUser             = new \Base\model\USERS();
 $ObserverManager = new ObserverManager;
-$MySocialLogin = new \Sociallogin\model\socialLogin("users","usuario","contrasena",array("status" => "1"));
+$MySocialLogin = new \Sociallogin\model\socialLogin("users","usuario",1,array("status" => "1"));
 
 
 $usuario	= $MyRequest->getRequest('usuario');
@@ -115,7 +115,7 @@ else
             $MyUserEntity->setFecha(date('Y-m-d H:i:s'));
             $MyUserEntity->setVerificado(1);
             $contrasena = substr(md5(time()),0,8);
-            $MyUserEntity->setContrasena(md5($contrasena));
+            $MyUserEntity->setContrasena(password_hash($contrasena,PASSWORD_DEFAULT));
             $result = $MyUser->save($MyUserEntity->getArrayCopy());
 
 

@@ -27,8 +27,7 @@ if(!empty($contrasena_db))
         $error = true;
     }
 
-
-    if($MyUser->findUserPass($MySession->GetVar('usuario'),md5($contrasena_ant)) != REGISTRO_SUCCESS)
+    if(!password_verify($contrasena_ant,$contrasena_db))
     {
         $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("error_pass_actual"));
         $error = true;

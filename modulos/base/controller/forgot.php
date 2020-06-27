@@ -29,7 +29,7 @@ if($error == false)
         $password	=	substr(md5(uniqid()),0,10);
 
         $MyUserEntity    = new entityUser();
-        $MyUserEntity->setContrasena(md5($password));
+        $MyUserEntity->setContrasena(password_hash($password,PASSWORD_DEFAULT));
         $MyUserEntity->setId($MyLogin->id);
         $result = $MyUser->save($MyUserEntity->getArrayCopy());
 

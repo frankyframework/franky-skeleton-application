@@ -91,16 +91,15 @@ function EliminarCMSTemplate($id,$status)
 
 function EliminarDispositivo($password,$id,$status)
 {
-      global $MySession;
-	     $UserdeviceModel = new \Base\model\UserdeviceModel;
-         $UserdeviceEntity = new \Base\entity\UserdeviceEntity;
-       $MyUser         = new \Base\model\USERS();
-       $Tokenizer = new \Franky\Haxor\Tokenizer;
+        global $MySession;
+        $UserdeviceModel = new \Base\model\UserdeviceModel;
+        $UserdeviceEntity = new \Base\entity\UserdeviceEntity;
+        $MyUser         = new \Base\model\USERS();
+        $Tokenizer = new \Franky\Haxor\Tokenizer;
         global $MyAccessList;
         global $MyMessageAlert;
         $respuesta = null;
-
-        if($MyUser->findUserPass($MySession->GetVar('usuario'),md5($password)) == REGISTRO_SUCCESS)
+        if(password_verify($password,$MySession->GetVar('contrasena')))
         {
           if($MyAccessList->MeDasChancePasar(ADMINISTRAR_DEVICES))
           {
@@ -143,7 +142,7 @@ function BloquearDispositivo($password,$id,$status)
         global $MyMessageAlert;
         $respuesta = null;
 
-        if($MyUser->findUserPass($MySession->GetVar('usuario'),md5($password)) == REGISTRO_SUCCESS)
+        if(password_verify($password,$MySession->GetVar('contrasena')))
         {
           if($MyAccessList->MeDasChancePasar(ADMINISTRAR_DEVICES))
           {

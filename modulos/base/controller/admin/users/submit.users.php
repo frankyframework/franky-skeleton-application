@@ -93,7 +93,7 @@ if(!$error)
 
     if(empty($id_user))
     {
-        $MyUserEntity->setContrasena(md5($contrasena));
+        $MyUserEntity->setContrasena(password_hash($contrasena,PASSWORD_DEFAULT));
         $MyUserEntity->setFecha(date('Y-m-d H:i:s'));
     }
     if($MyUserEntity->getNivel() == "" || !in_array($MyUserEntity->getNivel(),  array_keys($_Niveles_usuarios)))

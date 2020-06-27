@@ -27,7 +27,7 @@ if(empty($contrasena))
 if($error == false)
 {
 
-    if( $MyLogin->setLogin($usuario, md5($contrasena)) == LOGIN_SUCCESS)
+    if( $MyLogin->setLogin($usuario, $contrasena) == LOGIN_SUCCESS)
     {
 
         $inputs = $MyLogin->getInputs();
