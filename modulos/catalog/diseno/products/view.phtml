@@ -25,7 +25,7 @@
                             <span class="_price"><?php echo getFormatoPrecio($data_detalle['price'],false); ?></span>
                             <?php endif ;?>
                             <div class="_cont_more_info">
-                                <?php echo render(PROJECT_DIR.'/modulos/catalog/diseno/ecommerce/boton.add.phtml',
+                                <?php echo render('/ecommerce/boton.add.phtml',
                                 array("id_producto" => $data_detalle["id"],
                                 "in_stock" => $data_detalle["in_stock"],
                                 "min_qty" => $data_detalle["min_qty"],
