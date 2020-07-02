@@ -33,6 +33,41 @@ function EliminarDireccionEcommerce($id,$status)
     return $respuesta;
 }
 
+function EliminarTiendaEcommerce($id,$status)
+{
+    global $MySession;
+    $EcommercetiendasModel =  new \Ecommerce\model\EcommercetiendasModel();
+    $EcommercetiendasEntity =  new \Ecommerce\entity\EcommercetiendasEntity();
+    $Tokenizer = new \Franky\Haxor\Tokenizer;
+    global $MyAccessList;
+    global $MyMessageAlert;
+
+    $respuesta = null;
+
+    if($MyAccessList->MeDasChancePasar(ADMINISTRAR_TIENDAS_ECOMMERCE))
+    {
+        $EcommercetiendasEntity->setId(addslashes($Tokenizer->decode($id)));
+        $EcommercetiendasEntity->setStatus($status);
+        
+        if($EcommercetiendasModel->save($EcommercetiendasEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+        {
+
+        }
+        else
+        {
+              $respuesta["message"] = $MyMessageAlert->Message("ecommerce_tienda_error_delete");
+              $respuesta["error"] = true;
+        }
+    }
+    else
+    {
+         $respuesta["message"] = $MyMessageAlert->Message("sin_privilegios");
+         $respuesta["error"] = true;
+    }
+
+    return $respuesta;
+}
+
 
 function EliminarTarjetaEcommerce($id,$status)
 {
@@ -472,6 +507,27 @@ function setNuevaDireccionCheckout($data)
 
     return $data;
 }
+function setPickUpCheckout($id)
+{
+    global $MySession;
+
+    $EcommercetiendasModel = new Ecommerce\model\EcommercetiendasModel();
+    $EcommercetiendasEntity = new Ecommerce\entity\EcommercetiendasEntity();
+   
+    $EcommercetiendasModel->getData($id);
+    $registro = $EcommercetiendasModel->getRows();
+    $registro['horario'] = json_decode($registro['horario'],true);
+    $EcommercetiendasEntity->exchangeArray($registro);
+    $data =array("id_envio" => 'pickup',"pickup" => $id,'direccion_envio' => $EcommercetiendasEntity->getArrayCopy());
+    
+    $MySession->SetVar('checkout',$data);
+    $data['resumen_envio'] =   render(PROJECT_DIR.'/modulos/ecommerce/diseno/checkout/resumen.pickup.phtml',['pickup' =>$registro]);
+
+
+
+    return $data;
+}
+
 
 function setFacturacionCheckout($id_facturacion)
 {
@@ -650,9 +706,29 @@ function loadMetodosEnvio(){
     $metodos_envio = makeHTMLMetodosEnvio();
     $carrito = getCarrito();
     $data = $MySession->GetVar('checkout');
-    
+  
     $data['gran_total'] = $carrito['gran_total'];
     $MySession->SetVar('checkout',$data);
+  
+    if(isset($data['pickup']))
+    {
+        $metodo_pickup = getMetodoEnvioPickup();
+        $metodo_envio = getMetodosEnvio($metodo_pickup['id']);
+
+        if($metodo_envio == 0)
+        {
+            $data['id_metodo_envio'] = $metodo_pickup['id'];
+            $data['monto_envio'] = $metodo_envio;
+            $data['monto_envio_html'] = getFormatoPrecio($metodo_envio);
+            $MySession->SetVar('checkout',$data);
+            return array('envio_requerido' => 0,'html' => '');
+        }
+        else{
+            $metodos_envio = [$metodo_pickup['id'] => makeHTMLMetodosEnvio($metodo_pickup['id'])];
+        }
+       
+    }
+    
     if($carrito['envio_requerido'] == 1)
     {
         $MetodoEnvioCheckoutForm = new \Ecommerce\Form\checkoutForm("frm_metodo_envio");
@@ -660,6 +736,7 @@ function loadMetodosEnvio(){
         $MetodoEnvioCheckoutForm->addSubmit();
         return array('envio_requerido' => 1,'html' => render(PROJECT_DIR.'/modulos/ecommerce/diseno/checkout/frm.metodos_envio.phtml',['MetodoEnvioCheckoutForm' => $MetodoEnvioCheckoutForm]));
     }
+    
     return array('envio_requerido' => 0,'html' => '');
     
 }
@@ -924,4 +1001,6 @@ $MyAjax->register("ecommerce_setCupon");
 $MyAjax->register("ecommerce_removeCupon");
 $MyAjax->register("getInfoTotalsCheckout");
 $MyAjax->register("getInfoTotalsCheckout2");
+$MyAjax->register("EliminarTiendaEcommerce");
+$MyAjax->register("setPickUpCheckout");
 ?>

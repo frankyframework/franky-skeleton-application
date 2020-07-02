@@ -6,18 +6,18 @@ return array(
         array(
          "permiso" =>   ADMINISTRAR_DIRECCIONES_ECOMMERCE,
          "url" => $MyRequest->url(ADMIN_LISTA_DIRECCIONES_ECOMMERCE),
-         "etiqueta" => _ecommerce("Administrar mis direcciones de entrega")
+         "etiqueta" => _ecommerce("Mis direcciones de entrega")
         ),
         array(
          "permiso" =>   ADMINISTRAR_DIRECCIONES_ECOMMERCE,
          "url" => $MyRequest->url(ADMIN_LISTA_DIRECCIONES_FACTURACION_ECOMMERCE),
-         "etiqueta" => _ecommerce("Administrar mis direcciones de facturacion")
+         "etiqueta" => _ecommerce("Mis direcciones de facturacion")
         ),
 
         array(
          "permiso" =>   ADMINISTRAR_TARJETAS_ECOMMERCE,
          "url" => $MyRequest->url(ADMIN_LISTA_TARJETAS_ECOMMERCE),
-         "etiqueta" => _ecommerce("Administrar mis tarjetas")
+         "etiqueta" => _ecommerce("Mis tarjetas")
         ),
         array(
          "permiso" =>   ADMINISTRAR_MIS_PEDIDOS,
@@ -33,7 +33,12 @@ return array(
          "permiso" =>   ADMINISTRAR_CUPONES_ECOMMERCE,
          "url" => $MyRequest->url(ADMIN_LISTA_CUPONES_ECOMMERCE),
          "etiqueta" => _ecommerce("Administrar cupones")
-        )
+        ),
+         array(
+         "permiso" =>   ADMINISTRAR_TIENDAS_ECOMMERCE,
+         "url" => $MyRequest->url(ADMIN_LISTA_TIENDAS_ECOMMERCE),
+         "etiqueta" => _ecommerce("Administrar tiendas")
+        ),
     )
     )
 

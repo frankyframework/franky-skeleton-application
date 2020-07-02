@@ -1,5 +1,6 @@
 <?php
 use Ecommerce\Form\checkoutForm;
+use Ecommerce\Form\pickupForm;
 use Ecommerce\Form\direccionesForm;
 use Ecommerce\Form\conektaForm;
 use Ecommerce\Form\openpayForm;
@@ -20,8 +21,18 @@ $DireccionCheckoutForm->addDirecionFacturacion($direcciones_facturacion);
 $DireccionCheckoutForm->setAtributoInput("id_facturacion", "value", "no_requiere");
 $DireccionCheckoutForm->addSubmit();
 
+$direcciones_envio = [];
+if(getCoreConfig('ecommerce/pick-up/enabled') == 1)
+{
+    $direcciones_envio["pick-up"] = getCoreConfig('ecommerce/pick-up/titulo');
+    $pickupForm = new pickupForm("frmpickup");
+    $pickuppoints = getPickUpPoints();
+    $pickupForm->addPickuppoints($pickuppoints);
+    $pickupForm->addSubmit();
+}
 
-$direcciones_envio = makeHTMLDireccion("envio",$MySession->GetVar("id"));
+$_direcciones_envio = makeHTMLDireccion("envio",$MySession->GetVar("id"));
+$direcciones_envio = array_merge($direcciones_envio,$_direcciones_envio);
 if(!empty($direcciones_envio))
 {
   $direcciones_envio["otra"] = 'Nueva dirección';
@@ -29,8 +40,9 @@ if(!empty($direcciones_envio))
   $DireccionEnvioCheckoutForm->addDirecionEnvio($direcciones_envio);
   $DireccionEnvioCheckoutForm->addSubmit();
 
-
 }
+
+
 $direccionesForm = new direccionesForm("frmdirecciones");
 $direccionesForm->addOtroTelefono();
 $direccionesForm->addEntrecalles();

@@ -16,8 +16,8 @@ insert into `franky` (`php`, `css`, `js`, `jquery`, `permisos`, `constante`, `ur
 insert into `franky` (`php`, `css`, `js`, `jquery`, `permisos`, `constante`, `url`, `nombre`, `ajax`, `status`, `editable`, `modulo`) values('openpay/confirmacion_establecimiento.php','[\"openpay.css\"]','','','[3]','CONFIRMACION_OPENPAY_ESTABLECIMIENTO','ecommerce/openpay/est/confirmacion/','Confirmacion openpay establecimiento','','1','0','ecommerce');
 insert into `franky` (`php`, `css`, `js`, `jquery`, `permisos`, `constante`, `url`, `nombre`, `ajax`, `status`, `editable`, `modulo`) values('admin/cupones/form.php','','','[\"jquery-validate\"]','[1]','ADMIN_FRM_CUPONES_ECOMMERCE','admin/ecommerce/cupones/form/','Alta y edicion de cupones','','1','0','ecommerce');
 insert into `franky` (`php`, `css`, `js`, `jquery`, `permisos`, `constante`, `url`, `nombre`, `ajax`, `status`, `editable`, `modulo`) values('admin/cupones/lista.php','','','[]','[1]','ADMIN_LISTA_CUPONES_ECOMMERCE','admin/ecommerce/cupones/','Administrar cupones','[\"base/ajax.admin.js\",\"ecommerce/ajax.admin.js\"]','1','0','ecommerce');
-
-
+insert into `franky` (`php`, `css`, `js`, `jquery`, `permisos`, `constante`, `url`, `nombre`, `ajax`, `status`, `editable`, `modulo`) values('admin/tiendas/form.php','','[\"validaciones.js\"]','[\"jquery-validate\"]','[3]','FRM_TIENDAS_ECOMMERCE','admin/ecommerce/tiendas/form/','Formulario administracion tiendas','','1','0','ecommerce');
+insert into `franky` (`php`, `css`, `js`, `jquery`, `permisos`, `constante`, `url`, `nombre`, `ajax`, `status`, `editable`, `modulo`) values('admin/tiendas/lista.php','','','[]','[3]','ADMIN_LISTA_TIENDAS_ECOMMERCE','admin/ecommerce/tiendas/','Administrar lista de tiendas','[\"base/ajax.admin.js\",\"ecommerce/ajax.admin.js\"]','1','0','ecommerce');
 
 insert  into `secciones_transaccionales`(`nombre`,`frinedly`,`status`) values('Nueva orden de compra','nueva-orden-de-compra',1);
 insert  into `secciones_transaccionales`(`nombre`,`frinedly`,`status`) values('Cambio de status pedido','cambio-status-pedido',1);
@@ -26,11 +26,11 @@ insert  into `secciones_transaccionales`(`nombre`,`frinedly`,`status`) values('N
 insert  into `secciones_transaccionales`(`nombre`,`frinedly`,`status`) values('Nueva orden de compra pago establecimiento','nueva-orden-de-compra-establecimiento-openpay',1);
 
 
-insert  into `templates_email`(`nombre`,`id_transaccional`,`status`,`fecha`,`Asunto`,`destinatario`,`cc`,`bcc`,`name_from`,`email_from`,`reply`,`editable`,`html`) values ('Nuevo pedido ecommerce',1,1,'2018-05-28 17:51:00','Nuevo pedido','[\"{email}\"]','[\"ussiel@gmail.com\"]','[\"\"]','Tienda','tienda@tienda.com','tienda@tienda.com',1,'<p>Tu pedido numero #{orden} fue registrado</p>\r\n<p>Hola {nombre} gracias por tu compra</p>\r\n<p>{productos}</p>\r\n<p>Metodo de pago {metodo_pago}</p>\r\n<p>subtotal {subtotal}</p>\r\n<p>IVA {iva}</p><p>Envio {envio}</p><p>Descuento {descuento}</p>\r\n<p>Total {gran_total}</p>\r\n<p>Status pago {status}</p>');
+insert  into `templates_email`(`nombre`,`id_transaccional`,`status`,`fecha`,`Asunto`,`destinatario`,`cc`,`bcc`,`name_from`,`email_from`,`reply`,`editable`,`html`) values ('Nuevo pedido ecommerce',1,1,'2018-05-28 17:51:00','Nuevo pedido','[\"{email}\"]','[\"ussiel@gmail.com\"]','[\"\"]','Tienda','tienda@tienda.com','tienda@tienda.com',1,'<p>Tu pedido numero #{orden} fue registrado</p>\r\n<p>Hola {nombre} gracias por tu compra</p>\r\n<p>{productos}</p>\r\n<p>Metodo de pago {metodo_pago}</p>\r\n<p>subtotal {subtotal}</p>\r\n<p>IVA {iva}</p><p>Envio {envio}</p><p>Descuento {descuento}</p>\r\n<p>Total {gran_total}</p>\r\n<p>Status pago {status}</p><p>{metodo_envio}</p>');
 insert  into `templates_email`(`nombre`,`id_transaccional`,`status`,`fecha`,`Asunto`,`destinatario`,`cc`,`bcc`,`name_from`,`email_from`,`reply`,`editable`,`html`) values ('Cambio de status pedido',1,1,'2018-06-01 17:01:20','El status de tu pedido a cambiado','[\"{email}\"]','[\"\"]','[\"\"]','tienda','tienda@tienda.com','tienda@tienda.com',1,'<p>El status de tuu pedido numero #{orden} a cambiado</p>\r\n<p>Hola {nombre} gracias por tu compra</p>\r\n<p>{productos}</p>\r\n<p>Metodo de pago {metodo_pago}</p>\r\n<p>Total {gran_total}</p>\r\n<p>Status {status}</p>');
 insert  into `templates_email`(`nombre`,`id_transaccional`,`status`,`fecha`,`Asunto`,`destinatario`,`cc`,`bcc`,`name_from`,`email_from`,`reply`,`editable`,`html`) values ('Nuevo comprovante de pago',1,1,'2018-06-02 22:58:55','Se agrego un comprovante de pago a tu orden','[\"{email}\"]','[\"\"]','[\"\"]','tienda','tienda@tienda.com','tienda@tienda.com',1,'<p>Se agrego un comprovante de pago a tu orden #{orden}</p>\r\n<p>Hola {nombre} gracias por tu compra</p>\r\n<p>{productos}</p>\r\n<p>Metodo de pago {metodo_pago}</p>\r\n<p>comprovante {comprovante}</p>');
-insert  into `templates_email`(`nombre`,`id_transaccional`,`status`,`fecha`,`Asunto`,`destinatario`,`cc`,`bcc`,`name_from`,`email_from`,`reply`,`editable`,`html`) values  ('Nuevo pedido ecommerce OXXO',1,1,'2018-06-05 15:44:48','Nuevo pedido pago en OXXO','[\"{email}\"]','[\"ussiel@gmail.com\"]','[\"\"]','Tienda','tienda@tienda.com','tienda@tienda.com',1,'<p>Tu pedido numero #{orden} fue registrado</p>\r\n<p>Hola {nombre} gracias por tu compra</p>\r\n<p>{productos}</p>\r\n<p>Metodo de pago {metodo_pago}</p>\r\n<p>subtotal {subtotal}</p>\r\n<p>IVA {iva}</p><p>Envio {envio}</p><p>Descuento {descuento}</p>\r\n<p>Total {gran_total}</p>\r\n<p>Status pago {status}</p>\r\n<div>{ticket_oxxo}</div>');
-insert  into `templates_email`(`nombre`,`id_transaccional`,`status`,`fecha`,`Asunto`,`destinatario`,`cc`,`bcc`,`name_from`,`email_from`,`reply`,`editable`,`html`) values  ('Nuevo pedido ecommerce pago en establecimiento',1,1,'2018-06-05 15:44:48','Nuevo pedido pago en establecimiento','[\"{email}\"]','[\"ussiel@gmail.com\"]','[\"\"]','Tienda','tienda@tienda.com','tienda@tienda.com',1,'<p>Tu pedido numero #{orden} fue registrado</p>\r\n<p>Hola {nombre} gracias por tu compra</p>\r\n<p>{productos}</p>\r\n<p>Metodo de pago {metodo_pago}</p>\r\n<p>subtotal {subtotal}</p>\r\n<p>IVA {iva}</p><p>Envio {envio}</p><p>Descuento {descuento}</p>\r\n<p>Total {gran_total}</p>\r\n<p>Status pago {status}</p>\r\n<div>{ticket_establecimiento}</div>');
+insert  into `templates_email`(`nombre`,`id_transaccional`,`status`,`fecha`,`Asunto`,`destinatario`,`cc`,`bcc`,`name_from`,`email_from`,`reply`,`editable`,`html`) values  ('Nuevo pedido ecommerce OXXO',1,1,'2018-06-05 15:44:48','Nuevo pedido pago en OXXO','[\"{email}\"]','[\"ussiel@gmail.com\"]','[\"\"]','Tienda','tienda@tienda.com','tienda@tienda.com',1,'<p>Tu pedido numero #{orden} fue registrado</p>\r\n<p>Hola {nombre} gracias por tu compra</p>\r\n<p>{productos}</p>\r\n<p>Metodo de pago {metodo_pago}</p>\r\n<p>subtotal {subtotal}</p>\r\n<p>IVA {iva}</p><p>Envio {envio}</p><p>Descuento {descuento}</p>\r\n<p>Total {gran_total}</p>\r\n<p>Status pago {status}</p><p>{metodo_envio}</p>\r\n<div>{ticket_oxxo}</div>');
+insert  into `templates_email`(`nombre`,`id_transaccional`,`status`,`fecha`,`Asunto`,`destinatario`,`cc`,`bcc`,`name_from`,`email_from`,`reply`,`editable`,`html`) values  ('Nuevo pedido ecommerce pago en establecimiento',1,1,'2018-06-05 15:44:48','Nuevo pedido pago en establecimiento','[\"{email}\"]','[\"ussiel@gmail.com\"]','[\"\"]','Tienda','tienda@tienda.com','tienda@tienda.com',1,'<p>Tu pedido numero #{orden} fue registrado</p>\r\n<p>Hola {nombre} gracias por tu compra</p>\r\n<p>{productos}</p>\r\n<p>Metodo de pago {metodo_pago}</p>\r\n<p>subtotal {subtotal}</p>\r\n<p>IVA {iva}</p><p>Envio {envio}</p><p>Descuento {descuento}</p>\r\n<p>Total {gran_total}</p>\r\n<p>Status pago {status}</p><p>{metodo_envio}</p>\r\n<div>{ticket_establecimiento}</div>');
 
   DROP TABLE IF EXISTS `ecommerce_cards`;
 
@@ -289,4 +289,28 @@ CREATE TABLE `ecommerce_envios` (
 
 /*Data for the table `ecommerce_envios` */
 
-insert  into `ecommerce_envios`(`id`,`nombre`,`dataClass`,`createdAt`,`path`) values (1,'Tarifa plana','\\Ecommerce\\Data\\TarifaPlanaData','2020-04-28 11:53:57','envios-tarifa-plana'),(2,'Envio gratuito','\\Ecommerce\\Data\\FreeData','2020-04-28 16:53:46','envios-free');
+insert  into `ecommerce_envios`(`id`,`nombre`,`dataClass`,`createdAt`,`path`) 
+values (1,'Tarifa plana','\\Ecommerce\\Data\\TarifaPlanaData','2020-04-28 11:53:57','envios-tarifa-plana'),
+(2,'Envio gratuito','\\Ecommerce\\Data\\FreeData','2020-04-28 16:53:46','envios-free'),
+(3,'Pickup','\\Ecommerce\\Data\\PickupData','2020-04-28 16:53:46','pick-up');
+
+
+
+DROP TABLE IF EXISTS `ecommerce_tiendas`;
+
+CREATE TABLE `ecommerce_tiendas` (
+  `id` int(11) NOT NULL DEFAULT 0,
+  `status` int(11) NOT NULL,
+  `fecha` datetime NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `telefono` varchar(21) NOT NULL,
+  `telefono_otro` varchar(21) DEFAULT NULL,
+  `calle` varchar(255) NOT NULL,
+  `numero` varchar(5) NOT NULL,
+  `numeroi` varchar(5) DEFAULT NULL,
+  `cp` varchar(5) NOT NULL,
+  `estado` varchar(255) NOT NULL,
+  `ciudad` varchar(255) NOT NULL,
+  `municipio` varchar(255) NOT NULL,
+  `colonia` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

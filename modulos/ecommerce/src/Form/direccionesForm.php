@@ -293,5 +293,70 @@ class direccionesForm extends \Franky\Form\Form
             )
         );
     }
+    public function addPickupPoint()
+    {
+        $this->add(array(
+               'name' => 'pickup_point',
+               'type'  => 'checkbox',
+               'required'  => false,
+               'atributos' => array(
+                   'class'       => '',
+
+                ),
+               'options' =>  array("1" => "Este es un pick up point"),
+
+               'label_atributos' => array(
+                   'class'       => 'desc_form_no_obligatorio',
+                )
+           )
+        );
+
+    }
+    
+    public function addCheck($name,$label)
+    {
+        $this->add(array(
+               'name' => $name,
+               'type'  => 'checkbox',
+               'required'  => false,
+               'atributos' => array(
+                   'class'       => '',
+
+                ),
+               'options' =>  array("1" => $label),
+
+               'label_atributos' => array(
+                   'class'       => 'desc_form_no_obligatorio',
+                )
+           )
+        );
+
+    }
+    
+    public function addHorario($name)
+    {
+        
+        $horas = [];
+        for($x = 0; $x <= 24; $x++){
+            $horas[$x.':00'] = $x.':00';
+        }
+        $this->add(array(
+               'name' => $name,
+               //'label' => _(''),
+               'type'  => 'select',
+               'required'  => false,
+               'atributos' => array(
+                   'class'       => '',
+
+                ),
+               'options' => $horas,
+               'label_atributos' => array(
+                   'class'       => 'desc_form_no_obligatorio',
+
+                )
+           )
+       );
+
+    }
 }
 ?>

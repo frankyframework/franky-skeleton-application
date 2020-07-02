@@ -7,6 +7,11 @@ $MyAccessList->addRoll(NIVEL_USERSUSCRIPTOR,    CARRITO_ECOMMERCE);
 define("ADMINISTRAR_DIRECCIONES_ECOMMERCE",      "administrar_direcciones_ecommerce");
 $MyAccessList->addRoll(NIVEL_USERSUSCRIPTOR,    ADMINISTRAR_DIRECCIONES_ECOMMERCE);
 
+define("ADMINISTRAR_TIENDAS_ECOMMERCE",      "administrar_tiendas_ecommerce");
+$MyAccessList->addRoll(NIVEL_USERSEO,     ADMINISTRAR_TIENDAS_ECOMMERCE);
+$MyAccessList->addRoll(NIVEL_USERADMIN,     ADMINISTRAR_TIENDAS_ECOMMERCE);
+$MyAccessList->addRoll(NIVEL_USERDEVELOPER,     ADMINISTRAR_TIENDAS_ECOMMERCE);
+
 
 define("ADMINISTRAR_MIS_PEDIDOS",      "administrar_mis_pedidos");
 $MyAccessList->addRoll(NIVEL_USERSUSCRIPTOR,    ADMINISTRAR_MIS_PEDIDOS);

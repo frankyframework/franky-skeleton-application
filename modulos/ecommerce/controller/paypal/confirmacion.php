@@ -155,13 +155,22 @@ if($status_pago == "pending" || $status_pago == "paid")
                 }
 
                 $productos_html = render(PROJECT_DIR.'/modulos/ecommerce/diseno/email/productos.phtml',['items' =>$productos_comprados['productos']]);
+                $envio_html = render(PROJECT_DIR.'/modulos/ecommerce/diseno/email/metodoenvio.phtml',['direccion' =>$direccion_envio,'metodo_envio' => makeHTMLMetodosEnvio($data['id_metodo_envio'],0)]);
 
 
-                $campos = array("orden" => $pedido,"nombre" =>$MySession->GetVar('nombre'),"email" =>$MySession->GetVar('email'),'productos' =>$productos_html,'subtotal' => getFormatoPrecio($productos_comprados['subtotal']),
-                'iva' => getFormatoPrecio($productos_comprados['iva_total']),
+                $campos = array(
+                    "orden" => $pedido,
+                    "nombre" =>$MySession->GetVar('nombre'),
+                    "email" =>$MySession->GetVar('email'),
+                    'productos' =>$productos_html,
+                    'subtotal' => getFormatoPrecio($productos_comprados['subtotal']),
+                    'iva' => getFormatoPrecio($productos_comprados['iva_total']),
                     'envio' => getFormatoPrecio($data['monto_envio']),
-                'descuento' => getFormatoPrecio($productos_comprados['descuento']),
-                'gran_total' => getFormatoPrecio($productos_comprados['gran_total']+$data['monto_envio']-$productos_comprados['descuento']),'metodo_pago' =>'PayPal','status' => getStatusTransaccion($status_pago));
+                    'descuento' => getFormatoPrecio($productos_comprados['descuento']),
+                    'gran_total' => getFormatoPrecio($productos_comprados['gran_total']+$data['monto_envio']-$productos_comprados['descuento']),
+                    'metodo_pago' =>'PayPal',
+                    'metodo_envio' =>$envio_html,
+                    'status' => getStatusTransaccion($status_pago));
 
 
                 $TemplateemailModel    = new \Base\model\TemplateemailModel;

@@ -76,9 +76,11 @@ function eliminarProductoCarritoHTML(response,id)
             $(".contenedor_producto_"+id).fadeOut('fast',function(){
                 $(this).remove();
                 setQTYProductoCarridoHTML(response);
-                addProductoCarritoHTML(response,0);
+                addProductoCarritoHTML(response,1);
                 getInfoTotalsCheckout();
-            })
+            });
+            
+            
 
         }
 
@@ -105,7 +107,7 @@ function addProductoCarrito(id,qty)
           "vars_ajax":[id,qty,caracteristicas]
     };
 
-    pasarelaAjax('GET',var_query,"addProductoCarritoHTML",[qty]);
+    pasarelaAjax('GET',var_query,"addProductoCarritoHTML",[1]);
 }
 
 
@@ -142,19 +144,31 @@ function addProductoCarritoHTML(response,show)
                             </div>");
 
                 }
+            
+                $("#widget_carrito .cont_detalle .productos")
+                .append("<div class='w-xxxx-12 _minicart_resume'>\
+                    <div class='_subtotal'>Subtotal: "+respuesta["subtotal"]+"</div>\
+                      <div class='_subtotal'>IVA: "+respuesta["iva"]+"</div>\
+                    <div class='_total'>Total: "+respuesta["total"]+"</div>\
+                </div>");
+                $(".cont_detalle").hide();
+                if(parseInt(show)== 1)
+                {
+                    $(".cont_detalle").show();
+                }
+                $('.cont_vacio').hide();
             }
-            $("#widget_carrito .cont_detalle .productos")
-            .append("<div class='w-xxxx-12 _minicart_resume'>\
-                <div class='_subtotal'>Subtotal: "+respuesta["subtotal"]+"</div>\
-                  <div class='_subtotal'>IVA: "+respuesta["iva"]+"</div>\
-                <div class='_total'>Total: "+respuesta["total"]+"</div>\
-            </div>");
+            else{
+                $('.cont_vacio').hide();
+                if(parseInt(show)== 1)
+                {
+                    $('.cont_vacio').show();
+                }
+                
+                $(".cont_detalle").hide();
+            }
             $("#widget_carrito .abrir_carrito .count_productos").text(respuesta["qty"]);
-            if(parseInt(show)== 1)
-            {
-                $(".cont_detalle").show();
-            }
-
+                
         }
         else
         {
@@ -182,6 +196,7 @@ function setQTYProductoCarrido(id,qty)
 
 function setQTYProductoCarridoHTML(response,id)
 {
+    
     var respuesta = null;
     if(response != "null")
     {
@@ -189,6 +204,7 @@ function setQTYProductoCarridoHTML(response,id)
 
         if(!respuesta["error"])
         {
+            
             if(respuesta["productos"])
             {
                 for(var i=0; i < respuesta["productos"].length; i++)
@@ -355,6 +371,43 @@ function setNuevaDireccionCheckoutHTML(response)
     }
     return true;
 }
+
+
+function setPickUpCheckout()
+{
+    var var_query = {
+        function: "setPickUpCheckout",
+        vars_ajax:[$("form[name=frmpickup]").find('select[name=id_pickup]').val()]
+    };
+    var var_function = [];
+    pasarelaAjax('GET',var_query,"setPickUpCheckoutHTML",var_function);
+}
+
+
+
+function setPickUpCheckoutHTML(response)
+{
+    var respuesta = null;
+    if(response != "null")
+    {
+        respuesta = JSON.parse(response);
+
+        if(!respuesta.error)
+        {
+            $(".direccion_entrega").next("div").hide();
+            $(".direccion_entrega").toggleClass("_nono").toggleClass("_sisi").toggleClass('_active');
+            $(".direccion_facturacion").toggleClass('_active').next("div").show();
+            $("#resumen_checkout_envio").html(respuesta.resumen_envio);
+        }
+        else
+        {
+            _alert(respuesta["message"],"Error")
+        }
+
+    }
+    return true;
+}
+
 
 
 function setDireccionCheckout()

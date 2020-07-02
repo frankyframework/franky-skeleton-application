@@ -111,7 +111,33 @@ function makeHTMLCards($uid = "")
 
     return $cards;
 }
+function getPickUpPoints(){
+    
+    $EcommercetiendasModel = new Ecommerce\model\EcommercetiendasModel();
+    $direccion = "%s: calle %s #%s, Colonia %s, municipio %s,%s C.P. %d";
+  
+    $EcommercetiendasModel->setTampag(1000);
+    $EcommercetiendasModel->setOrdensql("fecha ASC");
+    $EcommercetiendasModel->pickup(1);
+    $EcommercetiendasModel->getData("","1");
+    $total	= $EcommercetiendasModel->getTotal();
+    $data = array();
 
+
+    if($total > 0)
+    {
+
+        while($registro = $EcommercetiendasModel->getRows())
+        {
+          
+            $data[$registro['id']] = sprintf($direccion,$registro["nombre"],$registro["calle"],$registro["numero"],$registro["colonia"],$registro["municipio"],$registro["estado"],$registro["cp"]);
+            
+	}
+    }
+
+
+    return $data;
+}
 function makeHTMLDireccion($type="envio",$uid = "")
 {
 
@@ -153,7 +179,7 @@ function makeHTMLDireccion($type="envio",$uid = "")
 }
 
 
-function makeHTMLMetodosEnvio($id = null)
+function makeHTMLMetodosEnvio($id = null,$price=1)
 {
     $EcommerceenviosModel = new Ecommerce\model\EcommerceenviosModel();
     
@@ -162,21 +188,24 @@ function makeHTMLMetodosEnvio($id = null)
     $EcommerceenviosModel->getData();
     $total	= $EcommerceenviosModel->getTotal();
     $metodos_envio = array();
-    $metodoenviohtml = "<span class='envio price'>%s</span> <span class='envio_name'>%s</span>";
+    $metodoenviohtml = ($price ==1 ? "<span class='envio price'>%s</span>" : '')." <span class='envio_name'>%s</span>";
     if($total > 0)
     {
         while($registro = $EcommerceenviosModel->getRows())
         {
+            
             if(getCoreConfig('ecommerce/'.$registro['path'].'/enabled'))
             {
+               
                 $MetodoEnvio = new $registro['dataClass'];
                 
                 $tarifa = $MetodoEnvio->getData();
                 if($tarifa !== false)
                 {
-                    $metodos_envio[$registro['id']] = sprintf($metodoenviohtml, 
-                        getFormatoPrecio($tarifa),
-                        getCoreConfig('ecommerce/'.$registro['path'].'/titulo'));
+                    
+                    $metodos_envio[$registro['id']] = ($price ==1 ? sprintf($metodoenviohtml, 
+                        getFormatoPrecio($tarifa),getCoreConfig('ecommerce/'.$registro['path'].'/titulo')) : 
+                        sprintf($metodoenviohtml, getCoreConfig('ecommerce/'.$registro['path'].'/titulo')));
                 }
             }
 	}
@@ -186,7 +215,7 @@ function makeHTMLMetodosEnvio($id = null)
        return $metodos_envio[$id];
     }
 
- 
+    
     return $metodos_envio;
 }
 
@@ -213,6 +242,18 @@ function getMetodosEnvio($id)
 	}
     }
     return false;
+}
+
+function getMetodoEnvioPickup()
+{
+    $EcommerceenviosModel = new Ecommerce\model\EcommerceenviosModel();
+    $EcommerceenviosEntity = new Ecommerce\entity\EcommerceenviosEntity();
+    
+    $EcommerceenviosEntity->path('pick-up');
+    $EcommerceenviosModel->getData($EcommerceenviosEntity->getArrayCopy());
+    
+    return $EcommerceenviosModel->getRows();
+      
 }
 
 /*
@@ -313,6 +354,21 @@ function getPedido($id,$uid=""){
         $detalle_pedido["facturacion"] = json_decode($detalle_pedido["id_direccion_facturacion"],true);
 
     }
+    
+    if(!empty($detalle_pedido['metodo_envio']))
+    {
+            $EcommerceenviosModel = new Ecommerce\model\EcommerceenviosModel();
+            $EcommerceenviosEntity = new Ecommerce\entity\EcommerceenviosEntity();
+
+            $EcommerceenviosEntity->id($detalle_pedido['metodo_envio']);
+            $EcommerceenviosModel->getData($EcommerceenviosEntity->getArrayCopy());
+
+            $metodo_envio =  $EcommerceenviosModel->getRows();
+            
+            $detalle_pedido['metodo_envio'] = $metodo_envio;
+    }
+    
+    
 
     $producto_pedidoEntity->setId_pedido($detalle_pedido['id']);
     $producto_pedidoModel->setTampag(100);

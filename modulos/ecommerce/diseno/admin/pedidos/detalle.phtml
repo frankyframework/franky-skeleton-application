@@ -102,7 +102,11 @@
     <?php endforeach; ?>
 
     <?php if(isset($detalle_pedido['envio']) && !empty($detalle_pedido['envio'])): ?>
-      <h4>Dirección de envío</h4>
+      <?php if(!empty( $detalle_pedido['metodo_envio'] )): ?>
+        <h4>Datos del envio</h4>
+        <?=getCoreConfig('ecommerce/'.$detalle_pedido['metodo_envio']['path'].'/titulo')?>
+      <?php endif; ?>
+      
       <?php $direccion = "%s: calle %s #%s, Colonia %s, municipio %s,%s C.P. %d"; ?>
       <div>
         <?php echo sprintf($direccion,$detalle_pedido['envio']["nombre"],$detalle_pedido['envio']["calle"],$detalle_pedido['envio']["numero"],$detalle_pedido['envio']["colonia"],$detalle_pedido['envio']["municipio"],$detalle_pedido['envio']["estado"],$detalle_pedido['envio']["cp"]); ?>

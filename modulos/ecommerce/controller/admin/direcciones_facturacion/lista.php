@@ -31,10 +31,11 @@ if($MyDirecciones->getTotal() > 0)
 	{
 		$thisClass  = ((($iRow % 2) == 0) ? "formFieldDk" : "formFieldLt");
                 
-                
+                $direccion = "%s: calle %s #%s, Colonia %s, municipio %s,%s C.P. %d";
                 $lista_admin_data[] = array_merge($registro,array(
                 "thisClass"     => $thisClass,
-               "nuevo_estado"  =>($registro["status"] == 1 ? "desactivar" : "activar")
+               "nuevo_estado"  =>($registro["status"] == 1 ? "desactivar" : "activar"),
+                "calle" => sprintf($direccion,$registro["nombre"],$registro["calle"],$registro["numero"],$registro["colonia"],$registro["municipio"],$registro["estado"],$registro["cp"])
                 ));
                 
                 $iRow++;
@@ -54,6 +55,8 @@ $deleteFunction = "EliminarDireccionFacturacionEcommerce";
 $frm_constante_link = FRM_DIRECCIONES_FACTURACION_ECOMMERCE;
 $titulo_columnas_grid = array("nombre" => "Nombre","calle" => "Direccion");
 $value_columnas_grid = array("nombre" ,"calle");
+
+$css_columnas_grid = array("nombre" => 'w-xxxx-3',"calle" => "w-xxxx-6" );
 $permisos_grid = ADMINISTRAR_DIRECCIONES_ECOMMERCE;
 
 $MyFiltrosForm = new filtrosForm('paginar');

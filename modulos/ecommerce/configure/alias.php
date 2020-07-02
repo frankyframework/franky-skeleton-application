@@ -12,5 +12,6 @@ return array
     "ecommerce/openpay/webhooks.php" => PROJECT_DIR."/modulos/ecommerce/controller/openpay/webhooks.php",
     "ecommerce/admin/pedidos/comprovante-pago.php" => PROJECT_DIR."/modulos/ecommerce/controller/admin/pedidos/comprovante-pago.php",
     "ecommerce/admin/cupones/submit.php" => PROJECT_DIR."/modulos/ecommerce/controller/admin/cupones/submit.php",
+    "ecommerce/admin/tiendas/submit.php" => PROJECT_DIR."/modulos/ecommerce/controller/admin/tiendas/submit.php",
     );
 ?>

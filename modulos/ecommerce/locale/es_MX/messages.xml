@@ -93,6 +93,9 @@
         <llave>cupon_numero_usos</llave>
         <valor>El cupon esta agotado</valor>
     </mensaje>
-
+    <mensaje>
+        <llave>tienda_error_delete</llave>
+        <valor>Error al eliminar la tienda</valor>
+    </mensaje>
 
 </mensajes>
