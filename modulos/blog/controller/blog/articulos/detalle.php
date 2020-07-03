@@ -72,14 +72,17 @@ if($total > 0)
             $blog_detalle["imagen_portada"] = $img;
 
         }
+        /*
         else {
             preg_match_all("/<img[^>]*"."src=[\"|\'](.*)[\"|\']/Ui", $registro["contenido"], $imagenes);
             $blog_detalle["imagen_portada"] = (!empty($imagenes[1]) ? $imagenes[1]: '');
 
-
+            if(is_array($blog_detalle["imagen_portada"])){
+                $blog_detalle["imagen_portada"] = $blog_detalle["imagen_portada"][0];
+            }
         }
 
-     
+        */
 
         $ratingSchema->setBestRating("5");
        // $ratingSchema->setRatingValue($blog_detalle["cal"]);
