@@ -36,19 +36,68 @@ function getCategoryMenu()
 {
     global $MyRequest;
     $CatalogcategoryModel = new Catalog\model\CatalogcategoryModel();
+    $CatalogcategoryEntity = new Catalog\entity\CatalogcategoryEntity();
+    
+    $CatalogsubcategoryModel = new Catalog\model\CatalogsubcategoryModel();
+    $CatalogsubcategoryEntity = new Catalog\entity\CatalogsubcategoryEntity();
+    
+    
     $CatalogcategoryModel->setTampag(1000);
     $CatalogcategoryModel->setOrdensql("name ASC");
-    $CatalogcategoryModel->getData();
-    $total			= $CatalogcategoryModel->getTotal();
-    $menu = '<li class="_nav_catalog">
-        <ul class="_ul_nav_catalog">';
-
+    $CatalogcategoryEntity->status(1);
+    $CatalogcategoryEntity->visible_in_search(1);
+    $CatalogcategoryModel->getData($CatalogcategoryEntity->getArrayCopy());
+    $total = $CatalogcategoryModel->getTotal();
+    
+    $categorias= [];
     if($total > 0)
     {
         while($registro = $CatalogcategoryModel->getRows())
         {
-            $menu .= '<li><a href="'. $MyRequest->url(CATALOG_SEARCH_CATEGORY,[ 'friendly' => $registro['url_key']]).'">'.$registro['name'].'</a></li>';
-	    }
+            $categorias[$registro['id']] = $registro;
+        }
+    }
+    
+    $CatalogsubcategoryModel->setTampag(1000);
+    $CatalogsubcategoryModel->setOrdensql("catalog_subcategory.name ASC");
+    $CatalogsubcategoryEntity->status(1);
+    $CatalogsubcategoryEntity->visible_in_search(1);
+    $CatalogsubcategoryModel->getData($CatalogsubcategoryEntity->getArrayCopy());
+    $total = $CatalogsubcategoryModel->getTotal();
+    
+    $subcategorias= [];
+    if($total > 0)
+    {
+        while($registro = $CatalogsubcategoryModel->getRows())
+        {
+            $subcategorias[$registro['id_category']][] = $registro;
+        }
+    }
+    
+    
+    $menu = '<li class="_nav_catalog">
+        <ul class="_ul_nav_catalog">';
+
+    if(!empty($categorias))
+    {
+        foreach ($categorias as $id => $data)
+        {
+            $menu .= '<li class="'.$data['url_key'].'"><a href="'. $MyRequest->url(CATALOG_SEARCH_CATEGORY,[ 'friendly' => $data['url_key']]).'">'.$data['name'].'</a>';
+            if(!empty($subcategorias))
+            {
+                if(isset($subcategorias[$id]) && !empty($subcategorias[$id]))
+                {
+                    $menu .= '<ul class="sub_ul_nav_catalog '.$data['url_key'].'">';
+                    foreach ($subcategorias[$id] as $key => $data_sub)
+                    {
+                        $menu .= '<li  class="'.$data_sub['url_key'].'"><a href="'. $MyRequest->url(CATALOG_SEARCH_SUBCATEGORY,['categoria'  =>$data['url_key'],  'friendly' => $data_sub['url_key']]).'">'.$data_sub['name'].'</a></li>';
+                    }
+                    $menu .= '</ul>';
+                }
+            }
+
+            $menu .= '</li>';
+	}
     }
 
     $menu .= '</ul>
