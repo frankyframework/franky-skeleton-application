@@ -212,6 +212,30 @@ object { pointer-events: none; }
 
 /*  Contenido  */
 main { margin-top: 70px;
+    ._tag_center {
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+    }
+    ._cont_login_register_acount {
+        margin: auto;
+        max-width: 400px;
+        margin-bottom: 32px;
+        display: flex;
+        flex-direction: column;
+        ._space_border {
+            padding-top: 32px;
+            margin-top: 32px;
+            border-top: solid @soft_gray 1px;
+        }
+    }
+    .form_login, .form_guardar {
+        text-align: center;
+        float: none;
+        label {
+            display: inline-block;
+        }
+    }
      .page_wrapper {  }
      // Home
      h2.margin_home { margin-top: 36px; margin-bottom: 36px; font-size: 3em; }
