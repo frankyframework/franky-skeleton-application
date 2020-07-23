@@ -546,7 +546,7 @@ function getCatalogVitrina($clave)
                 $_img = getCoreConfig('catalog/product/placeholder');
                 if($_img != "" && file_exists(PROJECT_DIR.$_img))
                 {
-                  $registro['thumb_resize'] = imageResize($_img,500,500, true);
+                  $registro['thumb_resize'] = imageResize($_img,500,500, false);
                 }
                 $registro["images"] = json_decode($registro["images"],true);
 
@@ -561,7 +561,7 @@ function getCatalogVitrina($clave)
                             if(!empty($foto["img"]) && file_exists($MyConfigure->getServerUploadDir()."/catalog/products/".$registro["id"].'/'.$foto['img']))
                             {
 
-                                  $registro['thumb_resize'] = imageResize($MyConfigure->getUploadDir()."/catalog/products/".$registro["id"].'/'.$foto['img'],500,500, true);
+                                  $registro['thumb_resize'] = imageResize($MyConfigure->getUploadDir()."/catalog/products/".$registro["id"].'/'.$foto['img'],500,500, false);
 
                             }
                         }
