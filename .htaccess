@@ -8,7 +8,9 @@ RewriteEngine on
 RewriteCond %{REQUEST_URI}  !\.(php?|html?|jpg|jpeg|png|bmp|gif|svg|js|css|ttf|woff|xml|txt|swf|jar|zip|kml|eot|json|pdf|ico|mp4|ogg|webm|map|woff2|otf)$
 RewriteRule ^(.*)([^/])$ http://%{HTTP_HOST}/$1$2/ [L,R=301]
 
-
+RewriteCond %{REQUEST_URI} ^.*/sess_tmp/.*$
+RewriteRule .*$ /
+ 
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
