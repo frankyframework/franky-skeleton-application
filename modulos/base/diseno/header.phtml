@@ -1,8 +1,53 @@
 <div class="w-xxxx-12 content_header">
     <div class="content">
-        <a class="_brand" href="<?php echo $MyRequest->url(HOME); ?>">
-            <?php echo makeHTMLImg(getImg("logo.png"),"","","","class=''"); ?>
-        </a>
-        <?php echo render( "cont_nav.phtml"); ?>
+        <div class="cont_nav_movil">
+            <ul class="hamburguer">
+                <li class="_one"></li>
+                <li class="_two"></li>
+                <li class="_three"></li>
+            </ul>
+        </div>
+        <a class="_brand" href="/"><?php echo makeHTMLImg(getImg("logo.png"),"","","","class=''"); ?></a>
+        <nav class="menu_web">
+            <ul>
+                <li class="_menu">
+                    <ul>
+                        <?php echo $MyMenuFront->getItemMenu("<li class=\"btn_nav \"><a href=\"%s\">%s</a></li>"); ?>
+                        <li><a href="<?=$MyRequest->url(CONTACTANOS)?>">CONTACTO</a></li>
+                    </ul>
+                </li>
+                
+                <?php if(getCoreConfig('base/empresa/redes')): ?>
+                <li class="_share">
+                    <ul class="_ul_redes">
+                        <?php if(getCoreConfig('base/empresa/facebook')): ?>
+                        <li><a class="_li_share _face" target="_blank" href="<?=getCoreConfig('base/empresa/facebook')?>"></a></li>
+                        <?php endif; ?>
+                        <?php if(getCoreConfig('base/empresa/instagram')): ?>
+                        <li><a class="_li_share _instagram" target="_blank"  href="<?=getCoreConfig('base/empresa/instagram')?>"></a></li>
+                        <?php endif; ?>
+                        <?php if(getCoreConfig('base/empresa/twitter')): ?>
+                        <li><a class="_li_share _twitter" target="_blank"  href="<?=getCoreConfig('base/empresa/twitter')?>"></a></li>
+                        <?php endif; ?>
+                        </ul>
+                </li>
+                <?php endif; ?>
+                <li class="_login">
+                    <ul>
+                        <?php echo render( "widget_login.phtml"); ?>
+                    </ul>
+                </li>
+                <li class="_languaje">
+                    <ul>
+
+                        <?php if(!empty(getCoreConfig('base/theme/langs'))): ?>
+                            <?php foreach(getCoreConfig('base/theme/langs') as $key_lang): ?>
+                                <?php if($_SESSION["lang"] != $key_lang): ?><li class="first"><a href="/lang.php?lang=<?=$key_lang?>&amp;callback=<?php echo $callbacks_idioma[$key_lang]; ?>"><?= strtoupper(substr($key_lang,0,2))?></a></li><?php endif; ?>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
     </div>
 </div>

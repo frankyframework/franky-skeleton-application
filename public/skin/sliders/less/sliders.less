@@ -1,19 +1,89 @@
 @import "../../default/less/variables"; // variables.less
 
 .flexslider {
-    .flex-direction-nav a::before { color: @white; background-color: fade(@black,70); font-size: 2.4rem; width: 36px; height: 36px; text-align: center; line-height: 36px; .radius(18px); }
-   ._cont_txt_slider { position: absolute; bottom: 10%; left: 20px; width:900px; padding: 10px; box-sizing: border-box; background-color: fade(@black,60); color: @white; z-index: 10; .radius;
-       @media @medium { width: 500px ; }
-       @media @small { position: relative; bottom: auto; left: auto; padding: 10px; box-sizing: border-box; background-color: transparent; color: @black; width: calc(~'100% - 40px');
-           h3 { font-size: 1.8rem; margin: 0; padding: 0; }
-           p { font-size: 1.2rem; margin: 0; padding: 0; }
-       }
-       a { float: right; color: @white; font-size: @fontSize; text-decoration: none;
-           &:hover { color: @enfasis_color; }
-            &:after { font-family: @ico_font; content: "\e833"; }
-       }
-   }
-   .videoWrapper { position: relative; padding-bottom: 56.25%; /* 16:9 */ padding-top: 25px; height: 0;
-       iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-   }
+    .flex-direction-nav a::before {
+        color: @white;
+        background-color: fade(@black,70);
+        font-size: 2.4rem;
+        width: 36px;
+        height: 36px;
+        text-align: center;
+        line-height: 36px;
+        .radius(18px);
+    }
+    ._cont_txt_slider {
+        position: absolute;
+        bottom: 10%;
+        left: 20px;
+        width: 900px;
+        padding: 10px;
+        box-sizing: border-box;
+        background-color: fade(@black,60);
+        color: @white;
+        z-index: 10;
+        .radius;
+        h2,
+        p {
+            color: @white;
+            margin: 0;
+            padding: 0;
+        }
+        h2 {
+            font-size: 1.8rem;               
+        }
+        p {
+            font-size: 1.2rem;
+        }
+        @media @medium {
+            width: 500px;
+        }
+        @media @small {
+            position: relative;
+            bottom: auto;
+            left: auto;
+            padding: 10px;
+            box-sizing: border-box;
+            background-color: transparent;
+            color: @black;
+            width: calc(~'100% - 40px');
+            h2 {
+                font-size: 1.8rem;               
+            }
+            p {
+                font-size: 1.2rem;
+            }
+        }
+        a {
+            float: right;
+            color: @white;
+            font-size: @fontSize;
+            text-decoration: none;
+            &:hover {
+                color: @enfasis_color;
+            }
+            &:after {
+                font-family: @ico_font;
+                content: "\e833";
+            }
+        }
+    }
+    ._simple_button {
+        position: absolute;
+        bottom: 10%;
+        left: 20px;        
+        z-index: 10;
+    }
+    .videoWrapper {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 */
+        padding-top: 25px;
+        height: 0;
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    }
 }
