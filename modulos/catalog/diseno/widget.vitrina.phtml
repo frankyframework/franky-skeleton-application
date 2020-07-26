@@ -1,6 +1,6 @@
 <?php if(!empty($resultados_pagina)): ?>
 <div class="w-xxxx-12">
-    <h2><?=$titulo?></h2>
+    <h2><span><?=$titulo?></span></h2>
     <div class="w-xxxx-12 cont_widget_catalog_results _vitrinas  carrucel_vitrina_<?=$clave?>">
     <?php foreach($resultados_pagina as $data): ?>
         <?=render(PROJECT_DIR.'/modulos/catalog/diseno/products/card.phtml',['data' => $data]);?>
