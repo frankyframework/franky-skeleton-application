@@ -75,7 +75,7 @@ $ordenfunction = "setOrdenSlidersItems";
 $title_grid = "Sliders";
 $class_grid = "cont_sliders";
 $error_grid = "No items para este sliders";
-$deleteFunction = "DeleteSliders";
+$deleteFunction = "DeleteSlidersItems";
 $frm_constante_link = FRM_SLIDERS_ITEMS;
 $titulo_columnas_grid = array("createdAt" => "Fecha","tipo" => "Tipo");
 $value_columnas_grid = array("createdAt", "tipo" );
