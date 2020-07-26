@@ -1,9 +1,4 @@
 <?php
-
-$MyMetatag->setCss("/public/skin/catalog/css/catalog.css");
-$MyMetatag->setJs("/public/js/catalog.js");
-$MyMetatag->setJs("/public/ajax/catalog/ajax.catalog.js");
-
 use Franky\Core\ObserverManager;
 $ObserverManager = new ObserverManager;
 
@@ -31,4 +26,7 @@ if(in_array('ecommerce',$modulos))
     
 }
 
+$MyMetatag->setCss("/public/skin/catalog/css/catalog.css");
+$MyMetatag->setJs("/public/js/catalog.js");
+$MyMetatag->setJs("/public/ajax/catalog/ajax.catalog.js");
 ?>
