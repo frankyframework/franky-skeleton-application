@@ -59,7 +59,7 @@ $contactanosForm->setData($MyFlashMessage->getResponse());
 $contactanosForm->setAtributoInput('token_xsrf', 'value',$Tokenizer->token('cantactanos_xsrf', time()));
 $contactanosForm->setAtributoInput('asunto', 'value','SKU'.$data_detalle['sku'].': '.$data_detalle['name']);
 $contactanosForm->setAtributoBase('asunto', 'type','hidden');
-
+$contactanosForm->setAtributoBase('asunto', 'label','');
 
 $MyFrankyMonster->setPHPFile(getVista("products/view.phtml"));
 //print_r($data_detalle);
