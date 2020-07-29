@@ -1,10 +1,6 @@
 
 	<?php if($MySession->LoggedIn()): ?>
 		<li  class="first"><a class="_account" href="<?php echo $MyRequest->url(ADMIN); ?>">Mi cuenta</a></li>
-        <li  class=""><a class="_logout" href="/logout.php"><?php echo _("Salir"); ?></a></li>
 	<?php else: ?>
 		<li  class="first"><a class="_account" href="<?php echo $MyRequest->url(LOGIN); ?>">Entrar</a></li>
-                <?php if(defined('REGISTRO')): ?> 	
-                    <li  class=""><a class="_register" href="<?php echo $MyRequest->url(REGISTRO); ?>">Crear cuenta</a></li>
-                <?php endif; ?>
 	<?php endif; ?>
