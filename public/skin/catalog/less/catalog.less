@@ -80,8 +80,8 @@ main {
             float: left;
             position: relative;
             min-height: 340px;
-            width: 23%;
-            margin: 10px 1%;
+            width: calc(~"25%" - 20px);
+            margin: 10px;
             @media @large {
                 min-height: 270px;
             }
@@ -208,31 +208,31 @@ main {
                 }
             }
         }
-        &._vitrinas {
-            ._card_widget_catalog_product_result {
-                padding: 10px;
-                margin: 0 10px;
-                background-color: @white;
-                .radius(8px);
-                a {
-                    &._img_widget_catalog_product_result {
-                        .radius(8px);
-                        position: relative;
-                        height: 340px;
-                        width: 100%;
-                        display: inline-block;
-                        overflow: hidden;
-                        img {
-                            max-width: 100%;
-                            height: auto;
-                            position: absolute;
-                            left: 50%;
-                            top: 50%;
-                            .transform-translate(-50%, -50%);
-                        }
+        ._card_widget_catalog_product_result {
+            padding: 10px;
+            box-sizing: border-box;
+            background-color: @white;
+            .radius(8px);
+            a {
+                &._img_widget_catalog_product_result {
+                    .radius(8px);
+                    position: relative;
+                    height: 340px;
+                    width: 100%;
+                    display: inline-block;
+                    overflow: hidden;
+                    img {
+                        max-width: 100%;
+                        width: auto;
+                        min-height: 100%;
+                        height: auto;
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        .transform-translate(-50%, -50%);
                     }
-                }                    
-            }
+                }
+            }                    
         }
 
     }
@@ -257,7 +257,9 @@ main {
                         top: 50%;
                         .transform-translate(-50%, -50%);
                         max-width: 100%;
+                        width: auto;
                         max-height: 100%;
+                        height: auto;
                     }
 
                 }
