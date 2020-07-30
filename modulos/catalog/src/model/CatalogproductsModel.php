@@ -227,6 +227,8 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
             {
                 $this->where()->concat(" OR catalog_products.id in (".$this->search_ids.") ");
             }
+
+            $this->where()->addAnd("catalog_products.status",1,'=');
             
             $this->from()->addInner('catalog_subcategory_product','catalog_subcategory_product.id_product','catalog_products.id');
             $this->from()->addInner('catalog_subcategory','catalog_subcategory_product.id_subcategory','catalog_subcategory.id');
