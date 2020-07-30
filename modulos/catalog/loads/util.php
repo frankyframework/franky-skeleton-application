@@ -108,12 +108,12 @@ function getCategoryMenu()
 
 
 
-function getCatalogCategorys( $type="interface")
+function getCatalogCategorys( $type="interface", $search = [])
 {
     $CatalogcategoryModel = new Catalog\model\CatalogcategoryModel();
     $CatalogcategoryModel->setTampag(1000);
     $CatalogcategoryModel->setOrdensql("name ASC");
-    $CatalogcategoryModel->getData();
+    $CatalogcategoryModel->getData($search);
     $total			= $CatalogcategoryModel->getTotal();
     $categorias = array();
 
@@ -227,10 +227,12 @@ function catalog_getBuscadorLateral()
 {
     global $MyRequest;
     global $MyFrankyMonster;
+    $CatalogcategoryEntity = new Catalog\entity\CatalogcategoryEntity();
     $BuscadorLateralForm =  new \Catalog\Form\BuscadorLateralForm('buscadorLateral');
     $BuscadorLateralForm->setAtributo('action',$MyRequest->url(CATALOG_SEARCH));
-    $categorias = getCatalogCategorys('interface');
-    $_categorias = getCatalogCategorys('sql');
+    $CatalogcategoryEntity->status(1);
+    $categorias = getCatalogCategorys('interface',$CatalogcategoryEntity->getArrayCopy());
+    $_categorias = getCatalogCategorys('sql',$CatalogcategoryEntity->getArrayCopy());
     $subcategorias = getCatalogSubcategorys(null,'interface');
     $BuscadorLateralForm->setOptionsInput("categoria[]", $categorias);
 
