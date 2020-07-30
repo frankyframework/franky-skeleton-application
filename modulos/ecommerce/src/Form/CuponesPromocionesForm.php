@@ -67,7 +67,9 @@ class CuponesPromocionesForm extends \Franky\Form\Form
                 'type'  => 'date',
                 'required'  => false,
                 'atributos' => array(
-                    'type_mobile' => 'date'
+                    'type_mobile' => 'date',
+                    'min_year' => date('Y'),
+                    'max_year' => date('Y') + 5
 
                  ),
                 'label_atributos' => array(
@@ -82,8 +84,9 @@ class CuponesPromocionesForm extends \Franky\Form\Form
                 'type'  => 'date',
                 'required'  => false,
                 'atributos' => array(
-                    'type_mobile' => 'date'
-
+                    'type_mobile' => 'date',
+                    'min_year' => date('Y'),
+                    'max_year' => date('Y') + 5
                  ),
                 'label_atributos' => array(
                     'class'       => 'desc_form_no_obligatorio'

@@ -31,6 +31,9 @@ CREATE TABLE `sliders_sliders_items` (
   `file_responsive` varchar(255) DEFAULT NULL,
   `code` text DEFAULT NULL,
   `orden` int(11) DEFAULT 0,
+  `boton_link` int(11) DEFAULT 0,
+  `fecha_inicio` datetime DEFAULT NULL,
+  `fecha_fin` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_slider` (`id_slider`),
   CONSTRAINT `sliders_sliders_items_ibfk_1` FOREIGN KEY (`id_slider`) REFERENCES `sliders_sliders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE

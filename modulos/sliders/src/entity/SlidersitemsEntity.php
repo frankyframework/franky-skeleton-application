@@ -17,6 +17,9 @@ class SlidersitemsEntity
     private $status;
     private $createdAt;
     private $updateAt;
+    private $boton_link;
+    private $fecha_inicio;
+    private $fecha_fin;
 
 
     public function __construct($data = null)
@@ -42,6 +45,9 @@ class SlidersitemsEntity
         $this->status = (isset($data["status"]) ? $data["status"] : null);
         $this->createdAt = (isset($data["createdAt"]) ? $data["createdAt"] : null);
         $this->updateAt = (isset($data["updateAt"]) ? $data["updateAt"] : null);
+        $this->boton_link = (isset($data["boton_link"]) ? $data["boton_link"] : null);
+        $this->fecha_inicio = (isset($data["fecha_inicio"]) ? $data["fecha_inicio"] : null);
+        $this->fecha_fin = (isset($data["fecha_fin"]) ? $data["fecha_fin"] : null);
 
     }
 
@@ -85,5 +91,11 @@ class SlidersitemsEntity
     public function createdAt($createdAt = null){ if($createdAt !== null){ $this->createdAt=$createdAt; }else{ return $this->createdAt; } }
 
     public function updateAt($updateAt = null){ if($updateAt !== null){ $this->updateAt=$updateAt; }else{ return $this->updateAt; } }
+
+    public function boton_link($boton_link = null){ if($boton_link !== null){ $this->boton_link=$boton_link; }else{ return $this->boton_link; } }
+
+    public function fecha_inicio($fecha_inicio = null){ if($fecha_inicio !== null){ $this->fecha_inicio=$fecha_inicio; }else{ return $this->fecha_inicio; } }
+
+    public function fecha_fin($fecha_fin = null){ if($fecha_fin !== null){ $this->fecha_fin=$fecha_fin; }else{ return $this->fecha_fin; } }
 }
 ?>

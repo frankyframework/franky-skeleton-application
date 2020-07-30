@@ -13,7 +13,8 @@ class SlidersitemsModel  extends \Franky\Database\Mysql\objectOperations
     function getData($data = array())
     {
         $data = $this->optimizeEntity($data);
-        $campos = ["id","id_slider","tipo","file","file_responsive","titulo","descripcion","url","status","createdAt","updateAt","orden","code"];
+        $campos = ["id","id_slider","tipo","file","file_responsive","titulo","descripcion","url","status","createdAt","updateAt",
+        "orden","code","boton_link","fecha_inicio","fecha_fin"];
 
         foreach($data as $k => $v)
         {

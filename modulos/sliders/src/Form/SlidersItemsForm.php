@@ -132,6 +132,49 @@ class SlidersItemsForm extends \Franky\Form\Form
             )
             )
         );
+        $this->add(array(
+            'name' => 'boton_link',
+            'type'  => 'checkbox',
+            'atributos' => array(
+                'class' => ''
+            ),
+            'options' =>  array("1" => "Mostrar boton ver mas"),
+
+
+            )
+        );
+        $this->add(array(
+                'name' => 'fecha_inicio',
+                'label' => 'Fecha de inicio',
+                'type'  => 'date',
+                'required'  => false,
+                'atributos' => array(
+                    'type_mobile' => 'date',
+                    'min_year' => date('Y'),
+                    'max_year' => date('Y') + 5
+                ),
+                'label_atributos' => array(
+                    'class'       => 'desc_form_no_obligatorio'
+                )
+            )
+        );
+    
+        $this->add(array(
+                'name' => 'fecha_fin',
+                'label' => 'Fecha de fin',
+                'type'  => 'date',
+                'required'  => false,
+                'atributos' => array(
+                    'type_mobile' => 'date',
+                    'min_year' => date('Y'),
+                    'max_year' => date('Y') + 5
+
+                ),
+                'label_atributos' => array(
+                    'class'       => 'desc_form_no_obligatorio'
+                )
+            )
+        );
 
          $this->add(array(
                 'name' => 'guardar',

@@ -14,10 +14,12 @@ $id       = $Tokenizer->decode($MyRequest->getRequest('id'));
 $id_slider       = $Tokenizer->decode($MyRequest->getRequest('id_slider'));
 $callback = $Tokenizer->decode($MyRequest->getRequest('callback'));
 $code       = $MyRequest->getRequest('code','',true);
+$boton_link       = $MyRequest->getRequest('boton_link',0);
 
 $SlidersitemsEntity->id($id);
 $SlidersitemsEntity->id_slider($id_slider);
 $SlidersitemsEntity->code($code);
+$SlidersitemsEntity->boton_link($boton_link);
 $error = false;
 
 $validaciones =  new validaciones();

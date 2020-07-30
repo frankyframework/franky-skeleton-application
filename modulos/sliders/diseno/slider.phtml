@@ -4,6 +4,25 @@
     <ul class="slides">
         <?php if(!empty($slider['items'])): ?>
             <?php foreach($slider['items'] as $item): ?>
+
+
+
+            <?php
+            if(!empty($item['fecha_inicio']) && $item['fecha_inicio'] !='0000-00-00')
+            {
+                if(strtotime(date('Y-m-d')) < strtotime($item['fecha_inicio']))
+                {
+                    continue;
+                }
+            }
+            if(!empty($item['fecha_fin']) && $item['fecha_fin'] != '0000-00-00')
+            {
+                if(strtotime(date('Y-m-d')) > strtotime($item['fecha_fin']))
+                {
+                    continue;
+                }
+            } 
+            ?>
                 <li class="item_<?=$item['id']?>" >
                 <?php if($item['tipo'] == 'imagen'): ?>
                 <?php
@@ -20,7 +39,7 @@
                     }
                 ?>
                 <?php if(!empty($item['url'])): ?>
-                    <a href="<?=$item['url']?>" target="blank" class="_btn _primary">
+                    <a href="<?=$item['url']?>" target="blank" class="">
                 <?php endif; ?>
                 <?=makeHTMLImg($item['imagen_responsive'],"","",$item['titulo'],"data-mobile='".$item['imagen_responsive']."' data-desktop='".$item['imagen']."'"); ?>
                 <?php if(!empty($item['url'])): ?>
@@ -120,14 +139,14 @@
                 <?php endif; ?>
 
                 <?php if(!empty($item['titulo']) || !empty($item['descripcion']) || !empty($item['url'])): ?>
-                    <div class="<?=(!empty($item['titulo']) || !empty($item['descripcion']) ? '_cont_txt_slider' : '_simple_button')?>">
+                    <div class="<?=(!empty($item['titulo']) || !empty($item['descripcion']) ? '_cont_txt_slider' : (!empty($item['boton_link']) ?'_simple_button' : ''))?>">
                         <?php if(!empty($item['titulo'])): ?>
                             <h2><?=$item['titulo']?></h2>
                         <?php endif; ?>
                         <?php if(!empty($item['descripcion'])): ?>
                         <p><?=$item['descripcion']?></p>
                         <?php endif; ?>
-                        <?php if(!empty($item['url'])): ?>
+                        <?php if(!empty($item['url']) && !empty($item['boton_link'])): ?>
                             <a href="<?=$item['url']?>" target="blank" class="_btn _primary">Ver mas</a>
                         <?php endif; ?>
                     </div>
