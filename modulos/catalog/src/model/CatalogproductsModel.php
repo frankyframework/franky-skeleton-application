@@ -189,25 +189,29 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
 
    
         if(!empty($this->categoria_array)){
-          if(is_array($this->categoria_array))
-          {
-            $this->where()->concat("AND (");
-            foreach($this->categoria_array as $id)
+            if(is_array($this->categoria_array))
             {
-                if(is_numeric($id))
+                $this->where()->concat("AND (");
+                $this->where()->concat("(");
+                foreach($this->categoria_array as $id)
                 {
-                    $this->where()->addOr("catalog_category.id",$id,'=');
+                    if(is_numeric($id))
+                    {
+                        $this->where()->addOr("catalog_category.id",$id,'=');
+                    }
+                    else{
+                        $this->where()->addOr("catalog_category.url_key",$id,'=');
+                    }
                 }
-                else{
-                    $this->where()->addOr("catalog_category.url_key",$id,'=');
-                }
+                $this->where()->concat(')');
+                $this->where()->addAnd("catalog_products.status",1,'=');
+                $this->where()->concat(')');
             }
-              $this->where()->concat(')');
-          }
           if(!empty($this->subcategoria_array)){
             if(is_array($this->subcategoria_array))
             {
               $this->where()->concat("AND (");
+              $this->where()->concat("(");
               foreach($this->subcategoria_array as $id)
               {
                 if(is_numeric($id))
@@ -219,6 +223,8 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
                 }
                    
               }
+              $this->where()->concat(')');
+              $this->where()->addAnd("catalog_products.status",1,'=');
                 $this->where()->concat(')');
             }
             }
@@ -227,12 +233,16 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
             {
                 if(is_array($this->search_ids))
                 {
-                    $this->where()->concat("AND (");
+                    $this->where()->concat("OR (");
+                    $this->where()->concat("(");
                     foreach($this->search_ids as $id)
                     {
                         if(is_numeric($id))
                         {
+                            
                             $this->where()->addOr("catalog_products.id",$id,'=');
+
+                            
                         }
                         else{
                             $this->where()->addOr("catalog_products.url_key",$id,'=');
@@ -240,11 +250,13 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
                         
                     }
                     $this->where()->concat(')');
+                    $this->where()->addAnd("catalog_products.status",1,'=');
+                    $this->where()->concat(')');
                 }
     
             }
 
-            $this->where()->addAnd("catalog_products.status",1,'=');
+            
             
             $this->from()->addInner('catalog_subcategory_product','catalog_subcategory_product.id_product','catalog_products.id');
             $this->from()->addInner('catalog_subcategory','catalog_subcategory_product.id_subcategory','catalog_subcategory.id');
