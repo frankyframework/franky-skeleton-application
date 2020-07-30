@@ -19,7 +19,13 @@
                         $item['imagen_responsive'] = $MyConfigure->getUploadDir()."/sliders/".$item["id_slider"]."/".$item["file_responsive"];
                     }
                 ?>
+                <?php if(!empty($item['url'])): ?>
+                    <a href="<?=$item['url']?>" target="blank" class="_btn _primary">
+                <?php endif; ?>
                 <?=makeHTMLImg($item['imagen_responsive'],"","",$item['titulo'],"data-mobile='".$item['imagen_responsive']."' data-desktop='".$item['imagen']."'"); ?>
+                <?php if(!empty($item['url'])): ?>
+                    </a>
+                <?php endif; ?>    
                     <script>
                     $(window).load(function(){
                         if($(this).width() < 768)
