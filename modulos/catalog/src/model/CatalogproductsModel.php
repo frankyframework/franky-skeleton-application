@@ -267,6 +267,7 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
             if(!empty($this->search_ids))
             {
                 $this->where()->concat(" AND catalog_products.id in (".$this->search_ids.") ");
+                $this->where()->addAnd("catalog_products.status",1,'=');
             }
         }
 
