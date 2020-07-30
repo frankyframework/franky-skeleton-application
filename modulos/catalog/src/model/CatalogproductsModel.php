@@ -225,7 +225,23 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
             
             if(!empty($this->search_ids))
             {
-                $this->where()->concat(" OR catalog_products.id in (".$this->search_ids.") ");
+                if(is_array($this->search_ids))
+                {
+                    $this->where()->concat("AND (");
+                    foreach($this->search_ids as $id)
+                    {
+                        if(is_numeric($id))
+                        {
+                            $this->where()->addOr("catalog_products.id",$id,'=');
+                        }
+                        else{
+                            $this->where()->addOr("catalog_products.url_key",$id,'=');
+                        }
+                        
+                    }
+                    $this->where()->concat(')');
+                }
+    
             }
 
             $this->where()->addAnd("catalog_products.status",1,'=');
