@@ -95,11 +95,11 @@ endif;
  <?php echo $BuscadorLateralForm->endTag(); ?>
 
  <script>
-     $(document).ready(function(){
-         $("form[name=buscadorLateral]").find("input[type=checkbox]").change(function(){
-               $.ajax({
+
+   var ejecutaBusqueda = function(){
+      $.ajax({
                        type: 'GET',
-                       url: "<?php echo $MyRequest->url(CATALOG_SEARCH); ?>",
+                       url: "<?php echo $MyRequest->url($MyFrankyMonster->MySeccion()); ?>",
                        data: $("form[name=buscadorLateral]").serialize(),
                        cache: false,
                        beforeSend: function(){
@@ -133,6 +133,11 @@ endif;
                          }
                          _alert("Error de peticion AJAX","Error"); }
                });
+
+   };
+     $(document).ready(function(){
+         $("form[name=buscadorLateral]").find("input[type=checkbox]").change(function(){
+          ejecutaBusqueda();
          })
 
          $( "#slider-range" ).slider({
@@ -141,7 +146,7 @@ endif;
             max: <?=$precio_rango[1]; ?>,
             values: [ <?=(isset($precio[0]) ? $precio[0] : $precio_rango[0]); ?>, <?=(isset($precio[1]) ? $precio[1] : $precio_rango[1]); ?> ],
             stop: function( event, ui ) {
-                $("form[name=buscadorLateral]").find("input[type=checkbox]").eq(0).change();
+              ejecutaBusqueda();
             },
             slide: function( event, ui ) {
               $( "#filtro_precio" ).val(getFormatoPrecio(ui.values[ 0 ]) + " - " + getFormatoPrecio(ui.values[ 1 ]) );
