@@ -16,12 +16,17 @@ if($MyFrankyMonster->MySeccion() == CATALOG_SEARCH_CATEGORY)
     $categoria      = $MyRequest->getUrlParam('friendly',$MyRequest->getRequest('categoria'));
     $image_category = getImageCategorys($categoria);   
 }
-if($MyFrankyMonster->MySeccion() == CATALOG_SEARCH_SUBCATEGORY)
+elseif($MyFrankyMonster->MySeccion() == CATALOG_SEARCH_SUBCATEGORY)
 {
     $categoria      = $MyRequest->getUrlParam('categoria',$MyRequest->getRequest('categoria'));
     $subcategoria      = $MyRequest->getUrlParam('friendly',$MyRequest->getRequest('subcategoria'));
     $image_category = getImageSubcategorys($subcategoria);   
 }
+else{
+    $categoria      = $MyRequest->getRequest('categoria');
+    $subcategoria = $MyRequest->getRequest('subcategoria');
+}
+
 
 
 
