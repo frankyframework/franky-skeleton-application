@@ -321,412 +321,306 @@ object {
 }
 
 header {
-    position: fixed;
-    background-color: @theme_color;
-    width: 100%;
-    height: 70px;
-    top: 0;
-    left: 0;
-    box-sizing: border-box;
-    z-index: 11;
-    @media @small {
-        position: fixed;
-        height: 50px;
-        background-color: fade(@black,90);
-    }
-    .cont_nav_movil {
-        position: absolute;
-        display: none;
-        top: 10px;
-        left: 110px;
-        z-index: 999;
-        @media @small {
-            display: block;
+    .content_header {
+        .content {
+            height: 80px;
+            @media @small {
+                height: 70px;
+            }
         }
-        .hamburguer {
-            position: relative;
-            margin-top: 10px;
-            display: block;
-            width: 36px;
-            height: 36px;
-            cursor: pointer;
-            margin: 0;
-            padding: 0;
-            li {
-                position: absolute;
-                left: 0;
-                display: block;
-                width: 36px;
-                height: 3px;
-                background: @white;
-                margin: 5px 0;
-                padding: 0;
-                opacity: 1;
-                .transition(all, 0.5s, ease-in-out);
-                .radius(3px);
-                &._one {
-                    top: 0;
-                }
-                &._two {
-                    top: 10px;
-                }
-                &._three {
-                    top: 20px;
+        position: fixed;
+        background: lighten(@theme_color, 7);
+        width: 100%;
+        top: 0;
+        left: 0;
+        box-sizing: border-box;
+        z-index: 11;
+        @media @small {
+            position: fixed;
+            height: 50px;
+            background-color: fade(@black,90);
+        }
+    /////////////// Brand
+        ._brand {
+            left: 10px;
+            top: 5px;
+            position: absolute;
+            z-index: 11;
+            @media @small {
+                max-width: 90px;
+                top: 15px;
+                left: 10px;
+                z-index: 10;
+            }
+            img {
+                max-width: 60px;
+                height: auto;
+                @media @small {
+                    max-width: 40px;
                 }
             }
-            &.active {
+        } 
+    ////////////// Menu mobile
+
+        .cont_nav_movil {
+            position: absolute;
+            display: none;
+            top: 20px;
+            left: 70px;
+            z-index: 999;
+            @media @small {
+                display: block;
+            }
+            .hamburguer {
+                position: relative;
+                margin-top: 10px;
+                display: block;
+                width: 36px;
+                height: 36px;
+                cursor: pointer;
+                margin: 0;
+                padding: 0;
                 li {
+                    position: absolute;
+                    left: 0;
+                    display: block;
+                    width: 36px;
+                    height: 3px;
+                    background: @white;
+                    margin: 5px 0;
+                    padding: 0;
+                    opacity: 1;
+                    .transition(all, 0.5s, ease-in-out);
+                    .radius(3px);
                     &._one {
-                        top: 10px;
-                        .rotate(45deg);
+                        top: 0;
                     }
                     &._two {
                         top: 10px;
-                        .rotate(-45deg);
                     }
                     &._three {
-                        opacity: 0;
+                        top: 20px;
+                    }
+                }
+                &.active {
+                    li {
+                        &._one {
+                            top: 10px;
+                            .rotate(45deg);
+                        }
+                        &._two {
+                            top: 10px;
+                            .rotate(-45deg);
+                        }
+                        &._three {
+                            opacity: 0;
+                        }
                     }
                 }
             }
         }
-    }
-    .content {
-        height: 70px;
-    }
-    @width_logo: 60;
-    ._brand {
-        position: absolute;
-        height: unit(@width_logo, px);
-        max-width: unit(@width_logo, px);
-        top: 5px;
-        left: 10px;
-        z-index: 11;
-        @media @small {
-            max-width: 90px;
-            top: 8px;
-            left: 10px;
-            z-index: 10;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-    }
-    ////////////////// Buscador header
-    .cont_search_bar {
-        position: absolute;
-        right: 10px;
-        width: 220px;
-        top: 50%;
-        .transform-translate(0,-50%);
-        z-index: 11;
-        @media @medium {
-            top: 50px;
-            .transform-translate(0,0);
-            background-color: @black;
-            padding: 5px;
-            .radius;
-            box-sizing: border-box;
-        }
-        @media @small {
-            display: none;
-            top: 50px;
-            left: 0;
-            width: 100%;
-            padding: 10px;
-            background-color: @black;
-            box-sizing: border-box;
-            .transform-translate(0,0);
-            &.active {
-                display: block;
-            }
-        }
-        i {
-            font-size: 2rem;
-        }
-        input {
-            width: 100%;
-            height: 35px;
-            line-height: 30px;
-            box-sizing: border-box;
-        }
-        button.btn_search_bar {
+
+        .menu_web {
             position: absolute;
-            margin: 0;
-            padding-right: 10px;
-            height: 30px;
             right: 0;
-            top: 0;
-            margin: 0;
-            line-height: 30px;
-            border: 0;
-            .box-shadow(none);
-            background-color: transparent;
-            color: lighten(@black, 50);
-            .aparience-reset;
-            z-index: 2;
+            top: 50%;
+            .transform-translate(0,-50%);
             @media @medium {
                 right: 10px;
-                top: 5px;
-                .transform-translate(0,0);
-                i {
-                    font-size: 1.6rem;
+            }
+            &.despliegue {
+                @media @small {
+                    ul {
+                        display: block;
+                    }
                 }
             }
             @media @small {
-                right: 10px;
-                top: 50%;
-                .transform-translate(0,-50%);
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 100%;
+                .transform-translate(0,0%);
             }
-            &:hover {
-                background: transparent !important;
-                color: @enfasis_color;
-            }
-        }
-    }
-    .menu_web {
-        position: absolute;
-        width: 100%;
-        right: 240px;
-        top: 50%;
-        .transform-translate(0,-50%);
-        width: calc(~"100%" - unit(@width_logo + 50, px));
-        @media @medium {
-            right: 10px;
-        }
-        ._share {
-            ._ul_redes {
+            ._nav_menu {
+                float: left;
+                position: relative;
                 .ul-reset;
+                width: 100%;
+                text-align: right;
                 @media @small {
-                    text-align: left;
-                    margin-left: 20px;
+                    display: none;
+                    height: 100vh;
+                    padding-top: 10vh;
+                    background-color: @black;
                 }
+    ////////////////////// Menú primer nivel
                 li {
-                    display: inline-block;
-                    .ul-reset;
-                    margin: 0;
-                    padding: 10px 0;
+                    ul {
+                        .ul-reset;  
+                    }
+                    color: @white;
+                    float: left;
+                    font-size: 1.4rem;
+                    line-height: 70px;
+                    position: relative;
                     @media @small {
-                        width: auto;
+                        width: 100%;
+                        box-sizing: border-box;
+                        text-align: left;
                     }
                     a {
                         display: inline-block;
                         margin: 0;
-                        font-size: 2.4rem;
-                        padding: 0 2px;
-                        &:before {
-                            font-family: @ico_font_ext;
-                            content: "\e92b";
+                        padding: 0 10px;
+                        height: 30px;
+                        line-height: 30px;
+                        font-weight: 400;
+                        color: @white;
+                        font-size: 1.4rem;
+                        text-decoration: none;
+                        @media @medium {
+                            margin-left: 0;
+                            margin-right: 0;
+                            font-size: 1.2rem;
                         }
-                        &._face {
-                            &:before {
-                                content: "\e9072";
-                            }
+                        &:hover {
+                            color: @enfasis_color;
                         }
-                        &._instagram {
-                            &:before {
-                                content: "\e9162";
-                            }
-                        }
-                        &._twitter {
-                            &:before {
-                                content: "\e9082";
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        &.active {
-            display: block;
-            ul {
-                display: block;
-            }
-        }
-        @media @small {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 100%;
-            .transform-translate(0,0%);
-        }
-        ul {
-            float: left;
-            position: relative;
-            .ul-reset;
-            width: 100%;
-            text-align: right;
-            @media @medium {
-                text-align: center;
-            }
-            @media @small {
-                display: none;
-                height: 100vh;
-                padding-top: 10vh;
-                background-color: @black;
-            }
-            li {
-                position: relative;
-                display: inline-block;
-                .ul-reset;
-                font-size: 1.4rem;
-                color: @white;
-                ul {
-                    height: auto;
-                    padding: 0;
-                }
-                @media @small {
-                    width: 100%;
-                    box-sizing: border-box;
-                    text-align: left;
-                }
-                a {
-                    display: inline-block;
-                    margin: 0;
-                    padding: 0 10px;
-                    height: 30px;
-                    line-height: 30px;
-                    font-weight: 400;
-                    color: @white;
-                    font-size: 1.4rem;
-                    text-decoration: none;
-                    @media @medium {
-                        margin-left: 0;
-                        margin-right: 0;
-                        font-size: 1.2rem;
-                    }
-                    &:hover {
-                        color: @enfasis_color;
-                    }
-                }
-                &._menu {
-                    @media @small {
-                        padding-top: 30px;
-                    }
-                    li {
-                        padding: 10px 0;
-                        &._btn_contactanos {
-                            @media @small {
-                                position: fixed;
-                                bottom: 100px;
-                                left: 10px;
-                            }
-                            a {
-                                margin-left: 50px;
-                                background-color: fade(@enfasis_color,10);
-                                border: solid 1px @enfasis_color;
-                                .radius(10px);
-                                @media @small {
-                                    margin-left: 0;
-                                    background-color: fade(@enfasis_color,10);
-                                    border: solid 1px @enfasis_color;
-                                    .radius(10px);
-                                }
-                            }
-                        }
-                        &._submmenu {
-                            ul {
-                                display: none;
-                                li {
-                                    a {
-                                        &:after {
-                                            content: "";
-                                        }
-                                    }
-                                }
-                            }
-                            &:hover {
-                                ul {
-                                    position: absolute;
-                                    width: auto;
-                                    left: 30px;
-                                    top: 50px;
-                                    .ul-reset;
-                                    display: block;
-                                    background-color: fade(@black,90);
-                                    padding: 10px;
-                                    box-sizing: border-box;
-                                    .radius;
-                                    .box-shadow(0px 3px 5px 5px rgba(0, 0, 0, 0.1));
-                                    @media @small {
-                                        position: relative;
-                                        width: 100%;
-                                        top: auto;
-                                        left: auto;
-                                        background-color: transparent;
-                                    }
-                                    &:after {
-                                        position: absolute;
-                                        top: -14px;
-                                        left: 30px;
-                                        color: fade(@black,90);
-                                        font-size: 2rem;
-                                        font-family: @ico_font;
-                                        content: "\e83a";
-                                        @media @small {
-                                            content: "";
-                                        }
-                                    }
-                                    li {
-                                        .ul-reset;
-                                        display: block;
-                                        text-align: left;
-                                        a {
-                                            width: 100%;
-                                            display: block;
-                                            white-space: nowrap;
-                                            color: @white;
-                                            &:hover {
-                                                color: @enfasis_color;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+    ////////////////////// END Menú primer nivel
+                    }                
+    ////////////////////// Menú segundo nivel
+                    ul {
+                        li {
+                            line-height: 30px;
                             a {
                                 &:after {
-                                    position: absolute;
-                                    right: 0;
-                                    top: 11px;
                                     font-family: @ico_font;
-                                    content: "\e82e";
-                                    margin-left: 4px;
-                                    @media @small {
-                                        right: 20px;
-                                        top: 1px;
-                                    }
+                                    content: "";
                                 }
-                                &:hover {
-                                    color: @white;
+                            }
+                            ul {
+                                background-color: @theme_color;
+                                padding: 10px;
+                                .radius(0 0 8px 8px);
+                                display: none;
+                                position: absolute;                                
+                                li {
+                                    width: 100%;
+                                    text-align: left;
+                                    a {
+                                        width: 100%;
+                                        white-space: nowrap;
+                                    }
                                 }
                             }
                         }
                     }
+                    ul {
+                        li {
+                            &:hover {
+                                ul {
+                                    display: block;
+                                    @media @small {
+                                       display: none;
+                                    }
+                                }
+                            }
+                        }
+                    }
+    ////////////////////// END Menú segundo nivel
+                    &._login {
+                        width: 30px;
+                        margin: 20px 70px 0 0;
+                        ul {
+                            .ul-reset;
+                            li {
+                                a {
+                                    font-size: 0;
+                                    &:before {
+                                        font-family: @ico_font;
+                                        font-size: 3.2rem;
+                                    }
+                                    &._account {
+                                        &:before {
+                                            content: "\e87c";
+                                        }   
+                                    }
+                                    &._register {
+                                        &:before {
+                                            content: "\e87c";
+                                        }   
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    &._nav_catalog {
+                        margin-top: 20px;
+                    }
+                    &._menu_section {
+                        margin-top: 20px;
+                    }
+    ////////////////// Buscador header
+                    .cont_search_bar_ecommerce {
+                        ._search_bar_pipe {
+                            &:after {
+                                content: "";
+                                position: absolute;
+                                background: url('../images/icons/_icon_lupa_2.svg') no-repeat 50% 50%;
+                                background-size: 16px 16px;
+                                height: 16px;
+                                width: 16px;
+                                right: 20px;                                
+                                top: 26px;
+                                z-index: 1;
+                            }
+                        }
+                        #buscadorPrincipal {
+                           input[type="text"] {
+                               border: 0;
+                               color: @white;
+                               width: 260px;
+                               height: 40px;
+                               @media @small {
+                                   width: 100%;
+                               }
+                           }
+                           input[type="submit"] {
+                               font-size: 0;
+                               border: 0;
+                               background-color: transparent;
+                               padding: 0;
+                               width: 40px;
+                               z-index: 2;
+                               &:hover {
+                                   cursor: pointer;
+                                   background-color: fade(@white,10);
+                               }
+                           }
+                        }
+                    }
+    ////////////////// END Buscador header
+                    
                 }
+            }
+        }
 
-            }
-        }
-        &.despliegue {
-            margin-top: 10px;
-            @media @small {
-                display: block;
-                ul {
-                    display: block;
-                }
-            }
-        }
-        &.active {
-            display: block;
-            @media @small {
-                ul {
-                    display: block;
-                }
-            }
+    ////////////// END Menu mobile                  
+    ////////////////// Mini carrito
+    #widget_carrito {
+        right: 20px;
+        top: 30px;
+        width: auto;
+        ._mini_cart,
+        .cont_vacio {
+            width: 300px;
         }
     }
-
+    ////////////////// END Mini carrito
+    
     // ------------------------ END HEADER All styles before this line -------------------------------
+    }
 }
 
 /*  Contenido  */

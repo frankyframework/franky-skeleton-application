@@ -1,10 +1,10 @@
 <?php
 return json_encode([
-/*    [
-        'position' => 'after',
-        'reference' => '.menu_web',
+    [
+        'position' => 'append',
+        'reference' => '._search_bar',
         'html' => getCatalogBuscadorPrincipal()
-    ], */
+    ], 
     [
         'position' => 'after',
         'reference' => '.menu_web',
@@ -12,8 +12,8 @@ return json_encode([
         
     ], 
     [
-        'position' => 'after',
-        'reference' => '._menu',
+        'position' => 'before',
+        'reference' => '._menu_section',
         'html' => getCategoryMenu()
     ],
 ]);
