@@ -95,7 +95,7 @@ endif;
  <?php echo $BuscadorLateralForm->endTag(); ?>
 
  <script>
-
+   var time_event_search = null;
    var ejecutaBusqueda = function(){
       $.ajax({
                        type: 'GET',
@@ -136,17 +136,30 @@ endif;
 
    };
      $(document).ready(function(){
-         $("form[name=buscadorLateral]").find("input[type=checkbox]").change(function(){
-          ejecutaBusqueda();
-         })
+        $("form[name=buscadorLateral]").find("input[type=checkbox]").change(function(){
+          if(time_event_search != null)
+          {
+            clearTimeout(time_event_search);
+          }
+          time_event_search = setTimeout(function(){
+            ejecutaBusqueda();
+          }, 3000);
+          
+        })
 
-         $( "#slider-range" ).slider({
+        $( "#slider-range" ).slider({
             range: true,
             min:  <?=$precio_rango[0]; ?>,
             max: <?=$precio_rango[1]; ?>,
             values: [ <?=(isset($precio[0]) ? $precio[0] : $precio_rango[0]); ?>, <?=(isset($precio[1]) ? $precio[1] : $precio_rango[1]); ?> ],
             stop: function( event, ui ) {
-              ejecutaBusqueda();
+              if(time_event_search != null)
+              {
+                clearTimeout(time_event_search);
+              }
+              time_event_search = setTimeout(function(){
+                ejecutaBusqueda();
+              }, 3000);
             },
             slide: function( event, ui ) {
               $( "#filtro_precio" ).val(getFormatoPrecio(ui.values[ 0 ]) + " - " + getFormatoPrecio(ui.values[ 1 ]) );
