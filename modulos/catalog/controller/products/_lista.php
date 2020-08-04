@@ -5,6 +5,13 @@ use Catalog\model\CatalogcategoryModel;
 use Catalog\entity\CatalogcategoryEntity;
 use Franky\Haxor\Tokenizer;
 use Franky\Core\paginacion;
+use Catalog\schema\productSchema;
+use Catalog\schema\offerSchema;
+use Catalog\schema\itemListSchema;
+
+
+
+$itemListSchema =  new itemListSchema();
 
 $q = $MyRequest->getRequest('q');
 
@@ -105,7 +112,8 @@ $resultados_pagina = array();
 if($CatalogproductsModel->getDataSearch($CatalogproductsEntity->getArrayCopy()) == REGISTRO_SUCCESS)
 {
     $MyPaginacion->setTotal($CatalogproductsModel->getTotal());
-
+    $itemListSchema->setNumberOfItems($CatalogproductsModel->getTotal());
+    $itemListSchema->setUrl($MyRequest->link($MyRequest->getURI().'?'.$MyRequest->getQuery(),false,true));
     if($CatalogproductsModel->getTotal() > 0)
     {
     	while($registro = $CatalogproductsModel->getRows())
@@ -156,6 +164,21 @@ if($CatalogproductsModel->getDataSearch($CatalogproductsEntity->getArrayCopy()) 
             $registro['id'] = $Tokenizer->token('catalog_products',$registro["id"]);
 
           $resultados_pagina[] = $registro;
+
+          $offerSchema =  new offerSchema();
+          $productSchema = new productSchema();
+
+          $offerSchema->setPriceCurrency('MXN');
+          $offerSchema->setPrice($registro['price']);
+          $productSchema->setName($registro['name']);
+          $productSchema->setUrl($MyRequest->link($registro['link'],false,true));
+          $productSchema->setImage($MyRequest->link($registro['thumb_resize'],false,true));
+          $productSchema->setOffers(json_decode($offerSchema->get(false),true));
+
+          $productSchema->setSku($registro['sku']);
+          $itemListSchema->setItemListElement(json_decode($productSchema->get(false),true));
+
+          
       }
   }
 }

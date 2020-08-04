@@ -18,7 +18,7 @@
                         <?=render('products/card.phtml',['data' => $data]);?>
                     <?php endforeach ;?>
                     <div class="w-xxxx-12 cont-paginar"><?php echo render("widget.paginar.phtml"); ?></div>
-
+                    <?php echo $itemListSchema->get(); ?>
                 <?php else: ?>
                     <h2>No se encontraron productos</h2>
                     <p>Intenta con otros términos de búsqueda.</p>
