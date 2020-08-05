@@ -37,5 +37,9 @@ class productSchema extends \Franky\Schema\schema
         $this->json["sku"] = $val;   
     }
     
+    public function setDescription($val)
+    {
+        $this->json["description"] = $val;   
+    }
 }
 ?>

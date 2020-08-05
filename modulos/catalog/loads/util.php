@@ -356,7 +356,7 @@ function catalog_validaStockCompra()
                 if(!$MyRequest->isAjax())
                 {
                     $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("catalog_produt_no_saleable",$registro['nombre']));
-                    $MyRequest->redirect($MyRequest->url(CATALOG_VIEW,['friendly' => $registro['url_key']]));
+                    $MyRequest->redirect($MyRequest->url(CATALOG_VIEW_SUBCAT,['friendly' => $registro['url_key']]));
 
                 }else{
                     echo json_encode(array("error" => true,"message" => $MyMessageAlert->Message("catalog_produt_no_saleables",$registro['nombre'])));
@@ -370,7 +370,7 @@ function catalog_validaStockCompra()
                 if(!$MyRequest->isAjax())
                 {
                     $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("catalog_stock_no_disponible",$registro['nombre']));
-                    $MyRequest->redirect($MyRequest->url(CATALOG_VIEW,['friendly' => $registro['url_key']]));
+                    $MyRequest->redirect($MyRequest->url(CATALOG_VIEW_SUBCAT,['friendly' => $registro['url_key']]));
 
                 }else{
                     echo json_encode(array("error" => true,"message" => $MyMessageAlert->Message("catalog_stock_no_disponible",$registro['nombre'])));

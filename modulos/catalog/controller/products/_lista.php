@@ -174,7 +174,7 @@ if($CatalogproductsModel->getDataSearch($CatalogproductsEntity->getArrayCopy()) 
           $productSchema->setUrl($MyRequest->link($registro['link'],false,true));
           $productSchema->setImage($MyRequest->link($registro['thumb_resize'],false,true));
           $productSchema->setOffers(json_decode($offerSchema->get(false),true));
-
+          $productSchema->setDescription($registro['meta_description']);
           $productSchema->setSku($registro['sku']);
           $itemListSchema->setItemListElement(json_decode($productSchema->get(false),true));
 
