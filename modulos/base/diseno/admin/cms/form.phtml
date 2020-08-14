@@ -51,7 +51,7 @@ file_browser_callback: BrowseFiles
 
 <script>
 $('input[name=guardar_editar]').click(function(e){
-  e.preventDefault();
-  $('input[name=callback]').val('<?= $Tokenizer->token('templates',$MyRequest->getURI())?>');
+
+  $('input[name=callback]').val('<?= $MyRequest->getURI()?>');
 });
 </script>

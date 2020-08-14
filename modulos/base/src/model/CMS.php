@@ -14,7 +14,7 @@ class CMS  extends \Franky\Database\Mysql\objectOperations
 
         function getData($id='',$busca="",$status="",$url="")
         {
-            $campos = array("id","titulo","friendly","template","fecha","status","meta_titulo","meta_descripcion");
+            $campos = array("id","titulo","friendly","template","fecha","status","meta_titulo","meta_descripcion","mostrar_titulo");
 
 
             if(!empty($id))
