@@ -594,7 +594,7 @@ function validaCuponEcommerce($cupon)
     }
     else{
         $respuesta['error'] =true;
-        $respuesta['message'] = ecommerce_cupon_no_exist;
+        $respuesta['message'] = "ecommerce_cupon_no_exist";
     }
     return $respuesta;
 }
