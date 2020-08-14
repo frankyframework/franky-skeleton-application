@@ -47,10 +47,11 @@ class CMS  extends \Franky\Database\Mysql\objectOperations
         }
 
 
-        function save($titulo,$friendly,$template,$meta_titulo,$meta_descripcion)
+        function save($titulo,$friendly,$template,$meta_titulo,$meta_descripcion,$mostrar_titulo)
         {
             $nvoregistro = array(
                 "titulo" => $titulo,
+                "mostrar_titulo" => $mostrar_titulo,
                 "friendly" => $friendly,
                 "template" => $template,
                 "meta_titulo" => $meta_titulo,
@@ -64,10 +65,11 @@ class CMS  extends \Franky\Database\Mysql\objectOperations
             return $this->guardarRegistro( $nvoregistro);
         }
 
-        function edit($id,$titulo,$friendly,$template,$meta_titulo,$meta_descripcion)
+        function edit($id,$titulo,$friendly,$template,$meta_titulo,$meta_descripcion,$mostrar_titulo)
         {
             $nvoregistro = array(
                 "titulo" => "$titulo",
+                "mostrar_titulo" => "$mostrar_titulo",
                 "friendly" => "$friendly",
                 "template" => "$template",
                 "meta_titulo" => "$meta_titulo",

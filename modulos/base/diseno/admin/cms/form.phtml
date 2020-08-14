@@ -32,7 +32,26 @@ file_browser_callback: BrowseFiles
     <h1 class="titulo_seccion_admin"><?php echo $title_form; ?></h1>
     <div class="w-xxxx-12">
     <?php echo $cmsForm->openTag(); ?>
-      <?php echo $cmsForm->getAllRow(); ?>
+      <?php echo $cmsForm->get('id'); ?>
+      <?php echo $cmsForm->get('callback'); ?>
+      <?php echo $cmsForm->getRow('titulo'); ?>
+      <?php echo $cmsForm->getRow('mostrar_titulo'); ?>
+      <?php echo $cmsForm->getRow('template'); ?>
+      <?php echo $cmsForm->getRow('meta_titulo'); ?>
+      <?php echo $cmsForm->getRow('meta_descripcion'); ?>
+      <?php echo $cmsForm->getRow('friendly'); ?>
+      <div class="form-group form_guardar">
+        <?php echo $cmsForm->get('guardar_editar'); ?>
+        <?php echo $cmsForm->get('guardar'); ?>
+      </div>
     <?php echo $cmsForm->endTag(); ?>
    </div>
 </div>
+
+
+<script>
+$('input[name=guardar_editar]').click(function(e){
+  e.preventDefault();
+  $('input[name=callback]').val('<?= $Tokenizer->token('templates',$MyRequest->getURI())?>');
+});
+</script>

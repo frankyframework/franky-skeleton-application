@@ -4,6 +4,7 @@ use Franky\Core\validaciones;
 
 $id             = $MyRequest->getRequest('id');
 $callback       = $MyRequest->getRequest('callback');
+$mostrar_titulo = $MyRequest->getRequest('mostrar_titulo',0);
 $titulo         = $MyRequest->getRequest('titulo');
 $template       = $MyRequest->getRequest('template',"",true);
 $meta_titulo    = $MyRequest->getRequest('meta_titulo');
@@ -74,18 +75,18 @@ if($error == false)
     if(empty($id))
     {
 
-        $result = $MyCMS->save($titulo,$nametemplate,$template,$meta_titulo,$meta_descripcion);
+        $result = $MyCMS->save($titulo,$nametemplate,$template,$meta_titulo,$meta_descripcion,$mostrar_titulo);
         if($result == REGISTRO_SUCCESS)
         {
             $dir_blog = $MyConfigure->getServerUploadDir()."/cms/".$MySession->GetVar('path_img_blog')."/";
             rename($dir_blog,str_replace($MySession->GetVar('path_img_blog'),$MyCMS->getUltimoID(),$dir_blog));
 
             $template = str_replace($MySession->GetVar('path_img_blog'),$MyCMS->getUltimoID(),$template);
-            $MyCMS->edit($MyCMS->getUltimoID(),$titulo,$nametemplate,$template,$meta_titulo,$meta_descripcion);
+            $MyCMS->edit($MyCMS->getUltimoID(),$titulo,$nametemplate,$template,$meta_titulo,$meta_descripcion,$mostrar_titulo);
 
 
             $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("guardar_generico_success"));
-            $location =  $MyRequest->url(LISTA_CMS_TEMPLATE);
+            $location =  (!empty($callback) ? ($callback) : $MyRequest->url(LISTA_CMS_TEMPLATE));
         }
         else
         {
@@ -102,7 +103,7 @@ if($error == false)
 
 
 
-        $result = $MyCMS->edit($id,$titulo,$nametemplate,$template,$meta_titulo,$meta_descripcion);
+        $result = $MyCMS->edit($id,$titulo,$nametemplate,$template,$meta_titulo,$meta_descripcion,$mostrar_titulo);
 
         if($result == REGISTRO_SUCCESS)
         {

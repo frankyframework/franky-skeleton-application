@@ -1,6 +1,8 @@
 <?php
 use Base\Form\cmsForm;
+use Franky\Haxor\Tokenizer;
 
+$Tokenizer = new Tokenizer;
 
 
 $id             = $MyRequest->getRequest('id');

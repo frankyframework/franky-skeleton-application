@@ -32,6 +32,7 @@ if($MyCMS->getTotal() > 0)
 
                 $lista_admin_data[] = array_merge($registro,array(
                     "fecha"        => getFechaUI($registro["fecha"]),
+                    "friendly"     => '<a href="'.$MyRequest->link($registro['friendly']).'" target="_blank">'.$registro['titulo'].'</a>',
                     "thisClass"     => $thisClass,
                     "nuevo_estado"  => ($registro["status"] == 1 ? "desactivar" : "activar")
                 ));

@@ -43,7 +43,17 @@ class cmsForm extends \Franky\Form\Form
             )
         );
 
+        $this->add(array(
+            'name' => 'mostrar_titulo',
+            'type'  => 'checkbox',
+            'atributos' => array(
+                'class' => ''
+             ),
+            'options' =>  array("1" => "Agregar titulo en el CMS"),
 
+
+            )
+        );
 
 
            $this->add(array(
@@ -111,7 +121,16 @@ class cmsForm extends \Franky\Form\Form
         );
 
 
+        $this->add(array(
+            'name' => 'guardar_editar',
+            'type'  => 'submit',
+            'atributos' => array(
+                'class'       => '_btn _btn-primary',
+                'value' => "Guardar y continuar editando"
+             )
 
+        )
+    );
          $this->add(array(
                 'name' => 'guardar',
                 'type'  => 'submit',

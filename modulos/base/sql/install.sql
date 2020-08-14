@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS cms;
 CREATE TABLE cms (
   id int(11) NOT NULL AUTO_INCREMENT,
   titulo varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  mostrar_titulo int(11) DEFAULT '0',
   friendly varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   template text COLLATE utf8_unicode_ci NOT NULL,
   fecha datetime NOT NULL,
