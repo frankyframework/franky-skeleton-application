@@ -1,3 +1,4 @@
+<?php $class_btn = "_primary";?>
 <?php if($MyAccessList->MeDasChancePasar(CARRITO_ECOMMERCE) && $saleable == 1 && $in_stock == 1): ?>
 
 
@@ -14,11 +15,11 @@
 
 
 
-   <div class='w-xxxx-12'><a class="_btn _btn-primary _btn_add" href="javascript:void(0)" onclick="validateAddCart();"> Agregar a carrito</a></div>
+   <div class='w-xxxx-12'><a class="_btn <?=$class_btn?> _btn_add" href="javascript:void(0)" onclick="validateAddCart();"> Agregar a carrito</a></div>
 </form>
 
 <script >
-<!--
+
 var stock_infinito = <?= $stock_infinito?>;
 $(document).ready(function(){
     $("a.menos_qty").click(function(e){
@@ -48,10 +49,11 @@ function validateAddCart()
     }
 
 }
-// -->
+
 </script>
-<?php else: ?>
-    <div class='w-xxxx-12'><a class="_btn _btn-primary _btn_add link_form_info_product" href="javascript:void(0)" >Solicitar información</a></div>
+<?php $class_btn = "_secondary";?>
+<?php endif ;?>
+    <div class='w-xxxx-12'><a class="_btn <?=$class_btn?> _btn_add link_form_info_product" href="javascript:void(0)" >Solicitar información</a></div>
     <div class='w-xxxx-12 content_form_info_product' style='display:none;' >
     <?php echo $contactanosForm->openTag(); ?>
     <?php echo $contactanosForm->getAllRow(); ?>
@@ -63,4 +65,3 @@ function validateAddCart()
         $('.content_form_info_product').slideToggle();
     });
     </script>
-<?php endif; ?>
