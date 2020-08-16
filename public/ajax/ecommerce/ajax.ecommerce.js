@@ -129,16 +129,18 @@ function addProductoCarritoHTML(response,show)
 
                     $("#widget_carrito .cont_detalle .productos")
                     .append("<div class='w-xxxx-12 _minicart_product contenedor_producto_"+respuesta["productos"][i]["id"]+"'>\
-                                <div class='w-xxxx-3 _minicart_image'>\
+                                <div class='w-xxxx-3 w-x-3 _minicart_image'>\
                                     <img src='"+respuesta["productos"][i]["img"]+"'>\
                                     </div>\
-                                    <div class='w-xxxx-8 _minicart_prices'><div>"+
-                                        respuesta["productos"][i]["nombre"]+
-                                        "</div><div> x<span>"+respuesta["productos"][i]["qty"]+
-                                        "</span> <span class='_unit_price'>"+respuesta["productos"][i]["precio"]+
+                                    <div class='w-xxxx-8 w-x-8 _minicart_prices'><div>"+
+                                        "<h3>"+
+                                            respuesta["productos"][i]["nombre"]+
+                                        "</h3>"+
+                                        "</div><div class='_x_qty'> x <span>"+respuesta["productos"][i]["qty"]+
+                                        "</span> <span class='_x_qty'> = <span> <span class='_unit_price'>"+respuesta["productos"][i]["precio"]+
                                 "</span></div>\
                                 </div>\
-                                <div class='w-xxxx-1 _minicart_delete'>\
+                                <div class='w-xxxx-1 w-x-1 _minicart_delete'>\
                                 <a class=\"_btn_eliminar\" href=\"javascript:void(0);\" onclick=\"eliminarProductoCarrito('"+respuesta["productos"][i]["id"]+"')\" ></a>\
                                 <div>\
                             </div>");

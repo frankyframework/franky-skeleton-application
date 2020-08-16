@@ -329,7 +329,7 @@ header {
             }
         }
         position: fixed;
-        background: lighten(@theme_color, 7);
+        background-color: @black;
         width: 100%;
         top: 0;
         left: 0;
@@ -337,8 +337,7 @@ header {
         z-index: 11;
         @media @small {
             position: fixed;
-            height: 50px;
-            background-color: fade(@black,90);
+            height: 70px;
         }
     /////////////// Brand
         ._brand {
@@ -582,7 +581,6 @@ header {
                         #buscadorPrincipal {
                            input[type="text"] {
                                border: 0;
-                               color: @white;
                                width: 260px;
                                height: 40px;
                                @media @small {
@@ -610,17 +608,6 @@ header {
         }
 
     ////////////// END Menu mobile                  
-    ////////////////// Mini carrito
-    #widget_carrito {
-        right: 20px;
-        top: 30px;
-        width: auto;
-        ._mini_cart,
-        .cont_vacio {
-            width: 300px;
-        }
-    }
-    ////////////////// END Mini carrito
     
     // ------------------------ END HEADER All styles before this line -------------------------------
     }
