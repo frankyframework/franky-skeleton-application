@@ -147,6 +147,10 @@ header {
 main {
     /////////////// Checkout
     .contenedor_checkout {
+        @media @small {
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
         form {
             label {
                 min-height: 10px;
@@ -169,7 +173,7 @@ main {
                 ul {
                     li {
                         float: left;
-                        padding: 10px;
+                        padding: 5px;
                         box-sizing: border-box;
                     }
                 }
@@ -187,6 +191,10 @@ main {
         padding-left: 20px;
         box-sizing: border-box;
         font-size: 1.6rem;
+        @media @small {
+            padding: 20px 10px;
+            box-sizing: border-box;
+        }
         ._coin {
             margin: 5px 0;
             strong {
@@ -217,6 +225,12 @@ main {
             float: left;
             width: 100%;
             .radius;
+        }
+        img {
+            float: left;
+            margin: 0 5px 20px 0;
+            width: 70px;
+            height: auto;
         }
     }
 
@@ -292,7 +306,8 @@ main {
     }
     #resumen_checkout_facturacion {
         .w-xxxx-10 {
-            font-size: 2rem;
+            padding: 10px 0;
+            font-size: 1.4rem;
         }
     }
 
@@ -343,10 +358,10 @@ main {
 
         }
         &._sisi {
-            background: lighten(@black, 30);
-            color: @white;
+            background: darken(@soft_gray, 10);
             &:after {
                 content: "\e850";
+                color: @success;
             }
         }
     }
@@ -535,6 +550,7 @@ main {
         &:hover {
             background-color: @gray;
             cursor: pointer;
+            border-color: transparent;
         }
     }
     ._primary_checkout {
