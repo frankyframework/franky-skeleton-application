@@ -1,6 +1,6 @@
 <div class="w-xxxx-12 _my_cart _pt_header">
     <div class="content">
-        <div class="w-xxxx-10 m-l-xxxx-1 wrapper_white">
+        <div class="w-xxxx-12">
             <h1>Mi carrito</h1>
             <?php if(!empty($carrito_compras)) :
             $gran_total = 0;
@@ -15,7 +15,7 @@
                             <?php  echo makeHTMLImg(imageResize($_carrito_compras["imagen"],200,200),"","",$_carrito_compras["nombre"],"class='img_100'"); ?>
                         </div>
                         <div class="_col_mycart_resume _name">
-                            <div class="_row_mycart_resume"><a href="<?php echo $_carrito_compras["link"]; ?>"><?php echo $_carrito_compras["nombre"]; ?></a></div>
+                            <div class="_row_mycart_resume"><h3><a href="<?php echo $_carrito_compras["link"]; ?>"><?php echo $_carrito_compras["nombre"]; ?></a></h3></div>
                             <div class="_row_mycart_resume precio_producto"><?= getFormatoPrecio($_carrito_compras["precio"]); ?></div>
                         </div>
 

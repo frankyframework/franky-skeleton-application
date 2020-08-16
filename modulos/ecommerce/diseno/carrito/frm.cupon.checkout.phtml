@@ -11,9 +11,11 @@
 </div>
 <div class="content_form_cupon" <?=(!$MySession->GetVar('cupon_checkout') ? '' : 'style="display:none;"')?>>
     <form name="frmcupon"  id="frmcupon" action="" method="post" >
-    <div>¿Tienes un cupon? </div>
-    <div><input type="text" name="codigo_cupon"  value="" class="required" maxlength="32" /></div>
-    <div><input type="submit" name="enviaCupon" value="Aplicar cupon" /></div>
+        <h3>¿Tienes un cupon? </h3>
+        <div class="_cont_cupon">
+            <input type="text" name="codigo_cupon"  value="" class="required" maxlength="32" />
+            <input class="_btn _secondary _btn_cupon"  type="submit" name="enviaCupon" value="Aplicar cupon" />
+        </div>
     </form>
 </div>
 

@@ -87,11 +87,7 @@
                 </div>
             </div>
 
-            <div class="w-xxxx-3 _checkout_resume">
-                     <div class="w-xxxx-12">
-                     <?=render('carrito/frm.cupon.checkout.phtml')?>
-                    </div>
-                
+            <div class="w-xxxx-3 _checkout_resume">                     
                     <h2>Resumen de compra</h2>
                     <?php foreach($productos_comprados['productos'] as $producto): ?>
                       <?php
@@ -103,19 +99,19 @@
                       }
                       ?>
                     <ul>
-
-                    <li class="align_center"><?php // echo makeHTMLImg(imageResize($imagen,200,200),"","",$producto["nombre"],"class='img_100'"); ?></li>
-                    <li><h3><?=$producto['nombre']; ?></h3></li>
-                    <li><strong><?=getFormatoPrecio($producto['precio']); ?></strong> <span class="_x_number">(x<?=$producto['qty']; ?>)</span></li>
-
+                        <li class="align_center"><?php // echo makeHTMLImg(imageResize($imagen,200,200),"","",$producto["nombre"],"class='img_100'"); ?></li>
+                        <li><h3><?=$producto['nombre']; ?></h3></li>
+                        <li>x <span class="_x_number"><?=$producto['qty']; ?> = </span><strong><?=getFormatoPrecio($producto['precio']); ?></strong> </li>
                     </ul>
-                  <?php endforeach; ?>
-                  <div class="_coin _checkout_subtotal"><strong>Subtotal</strong>: <span class="price"><?=getFormatoPrecio($productos_comprados['subtotal']);?></span></div>
-                  <div class="_coin _checkout_iva"><strong>IVA</strong>: <span class="price"><?=getFormatoPrecio($productos_comprados['iva_total']);?></span></div>
-                  <div class="_coin _checkout_envio" style="display:none;"><strong>Envio</strong>: <span class="price"></span></div>
-                  <div class="_coin _checkout_descuento" <?=(isset($productos_comprados['descuento']) ? '' : 'style="display:none;"')?>><strong>Descuento:</strong>: <span class="price"><?=getFormatoPrecio($productos_comprados['descuento']);?></span></div>
-                  <div class="_coin _checkout_total"><strong>Total</strong>: <span class="price"><?=getFormatoPrecio($productos_comprados['gran_total']-(isset($productos_comprados['descuento']) ? $productos_comprados['descuento'] : 0));?></span></div>
-                   
+                    <?php endforeach; ?>
+                    <?=render('carrito/frm.cupon.checkout.phtml')?>
+                    <div class="_cont_resume_checkout">
+                        <div class="_coin _checkout_subtotal"><strong>Subtotal</strong>: <span class="price"><?=getFormatoPrecio($productos_comprados['subtotal']);?></span></div>
+                        <div class="_coin _checkout_iva"><strong>IVA</strong>: <span class="price"><?=getFormatoPrecio($productos_comprados['iva_total']);?></span></div>
+                        <div class="_coin _checkout_envio" style="display:none;"><strong>Envio</strong>: <span class="price"></span></div>
+                        <div class="_coin _checkout_descuento" <?=(isset($productos_comprados['descuento']) ? '' : 'style="display:none;"')?>><strong>Descuento:</strong>: <span class="price"><?=getFormatoPrecio($productos_comprados['descuento']);?></span></div>
+                        <div class="_coin _checkout_total"><strong>Total</strong>: <span class="price"><?=getFormatoPrecio($productos_comprados['gran_total']-(isset($productos_comprados['descuento']) ? $productos_comprados['descuento'] : 0));?></span></div>
+                   </div>
             </div>
 
         </div>
