@@ -90,16 +90,45 @@
             <div class="w-xxxx-3 _checkout_resume">                     
                     <h2>Resumen de compra</h2>
                     <?php foreach($productos_comprados['productos'] as $producto): ?>
-                      <?php
-                      $imagen = json_decode($productos_comprados["imagen"],true);
-                      $imagen = $MyConfigure->getUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE."/".$registro["id_producto"]."/".(is_array($imagen) ? $imagen[0] : $imagen);
-                      if(!file_exists(PROJECT_DIR.$imagen))
-                      {
-                        $imagen = getImg('ecommerce/producto_default.jpg');
-                      }
-                      ?>
+                      
+                      
+                    <?php
+                    $imagen = "";
+                    $_img = getCoreConfig('ecommerce/product/placeholder');
+                    if($_img != "" && file_exists(PROJECT_DIR.$_img))
+                    {
+                        $imagen = imageResize($_img,90,90, true);
+                    }
+                
+                    if(!empty($productos_comprados["imagen"]))
+                    {
+                        $_imagen = json_decode($productos_comprados["imagen"],true);
+                        
+                        if(is_array($_imagen))
+                        {
+                            if(!empty($_imagen)){
+                            
+                                foreach($_imagen as $foto)
+                                {
+                                
+                                    if($foto['principal'] == 1)
+                                    {
+                                        if(!empty($foto["img"]) && file_exists($MyConfigure->getServerUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE.'/'.$registro["id_producto"].'/'.$foto['img']))
+                                        {
+                                            $imagen = imageResize($MyConfigure->getUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE."/".$registro["id_producto"].'/'.$foto['img'],90,90, true);  
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else{
+                            $imagen = imageResize($MyConfigure->getUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE."/".$registro["id_producto"].'/'.$productos_comprados['imagen'],90,90, true);
+                        }
+                    }
+
+                    ?>
                     <ul>
-                        <li class="align_center"><?php // echo makeHTMLImg(imageResize($imagen,200,200),"","",$producto["nombre"],"class='img_100'"); ?></li>
+                        <li class="align_center"><?php  echo makeHTMLImg($imagen,"","",$producto["nombre"],"class='img_100'"); ?></li>
                         <li><h3><?=$producto['nombre']; ?></h3></li>
                         <li>x <span class="_x_number"><?=$producto['qty']; ?> = </span><strong><?=getFormatoPrecio($producto['precio']); ?></strong> </li>
                     </ul>
