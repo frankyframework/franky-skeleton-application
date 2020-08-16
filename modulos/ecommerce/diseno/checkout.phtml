@@ -128,8 +128,8 @@
 
                     ?>
                     <ul>
-                        <li class="align_center"><?php  echo makeHTMLImg($imagen,"","",$producto["nombre"],"class='img_100'"); ?></li>
-                        <li><h3><?=$producto['nombre']; ?></h3></li>
+                     
+                        <li><?php  echo makeHTMLImg($imagen,"","",$producto["nombre"],"class='img_100'"); ?><h3><?=$producto['nombre']; ?></h3></li>
                         <li>x <span class="_x_number"><?=$producto['qty']; ?> = </span><strong><?=getFormatoPrecio($producto['precio']); ?></strong> </li>
                     </ul>
                     <?php endforeach; ?>
