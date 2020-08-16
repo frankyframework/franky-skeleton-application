@@ -93,6 +93,10 @@
                       
                       
                     <?php
+
+                    $MyProducto->getInfoProducto($producto["id"]);
+                    $_registro = $MyProducto->getRows();
+
                     $imagen = "";
                     $_img = getCoreConfig('ecommerce/product/placeholder');
                     if($_img != "" && file_exists(PROJECT_DIR.$_img))
@@ -100,9 +104,9 @@
                         $imagen = imageResize($_img,90,90, true);
                     }
                 
-                    if(!empty($productos_comprados["imagen"]))
+                    if(!empty($_registro["imagen"]))
                     {
-                        $_imagen = json_decode($productos_comprados["imagen"],true);
+                        $_imagen = json_decode($_registro["imagen"],true);
                         
                         if(is_array($_imagen))
                         {
@@ -113,16 +117,16 @@
                                 
                                     if($foto['principal'] == 1)
                                     {
-                                        if(!empty($foto["img"]) && file_exists($MyConfigure->getServerUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE.'/'.$registro["id_producto"].'/'.$foto['img']))
+                                        if(!empty($foto["img"]) && file_exists($MyConfigure->getServerUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE.'/'.$producto["id"].'/'.$foto['img']))
                                         {
-                                            $imagen = imageResize($MyConfigure->getUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE."/".$registro["id_producto"].'/'.$foto['img'],90,90, true);  
+                                            $imagen = imageResize($MyConfigure->getUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE."/".$producto["id"].'/'.$foto['img'],90,90, true);  
                                         }
                                     }
                                 }
                             }
                         }
                         else{
-                            $imagen = imageResize($MyConfigure->getUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE."/".$registro["id_producto"].'/'.$productos_comprados['imagen'],90,90, true);
+                            $imagen = imageResize($MyConfigure->getUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE."/".$producto["id"].'/'.$_registro['imagen'],90,90, true);
                         }
                     }
 

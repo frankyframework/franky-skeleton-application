@@ -5,6 +5,8 @@ use Ecommerce\Form\direccionesForm;
 use Ecommerce\Form\conektaForm;
 use Ecommerce\Form\openpayForm;
 
+$productos =  OBJETO_PRODUCTOS;
+$MyProducto =  new $productos();
 
 $productos_comprados = getCarrito();
 if(empty($productos_comprados['productos']))
