@@ -101,7 +101,7 @@ $.fn.imgLoadAlive = function()
             {
                 imagen = $(this).offset();
 
-                if (window_top > (imagen.top - $(window).height() - 10)) {
+                if (window_top > (imagen.top - $(window).height() - 100)) {
 
                     $(this).attr('src',$(this).attr('data-alive'));
                     $(this).attr('data-alive','');
@@ -519,7 +519,9 @@ $(window).load(function() {
     $(window).scroll(function () {
       $.fn.imgLoadAlive();
     });
-
+    $(document).ajaxComplete(function () {
+        $.fn.imgLoadAlive();
+    });
     $('.contenedor_columnas div').textToIcon();
 
     $('.ancla').click(function(event)
