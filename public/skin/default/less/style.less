@@ -710,6 +710,58 @@ footer {
             background: darken(@theme_color, 20);
             padding: 16px 0;
         }
+        ._footer_security_seal {
+            .flex-display;
+            .flex-direction;
+            .justify-content(center);
+            @media @small {
+                .flex-direction(column);
+            }
+            div {
+                background-color: @white;
+                padding: 4px 16px;
+                .radius;
+                margin: 16px 4px;
+                @media @small {
+                    margin: 4px auto;
+                }
+                img {
+                    max-height: 36px;
+                    width: auto;
+                    margin: auto;
+                    filter: grayscale(100%);
+                    &:hover {
+                        filter: grayscale(0%);
+                    }
+                }
+                &._ssl,
+                &._payment {
+                    .flex-display;
+                    .flex-direction;
+                    .flex-wrap(wrap);
+                    .align-items(center);
+                    .justify-content(center);
+                    strong {
+                        color: @black;
+                        font-size: 1.6rem;
+                        margin: auto;
+                        padding: 0 8px 0 0;
+                    }
+                    @media @small {
+                        margin: 16px auto auto auto;
+                        width: 260px;
+                    }
+                }
+                &._cloud {
+                    .flex-display;
+                    .flex-direction;
+                    background-color: transparent;
+                    img {
+                        max-height: 50px;
+                    }
+                }
+            }
+        }
     }
     a {
         color: @white;

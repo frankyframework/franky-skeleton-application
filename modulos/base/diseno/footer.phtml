@@ -65,16 +65,24 @@
 			<div class="content">
 				<div class="w-xxxx-12 align_right cont_legales">
 					<a href="/condiciones-de-uso/">Condiciones de uso</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/aviso-de-privacidad/">Aviso de privacidad</a>
-					<a class="logo_cloud" target="_blank" href="http://www.cloudstudio.mx">
-		                <span>
-		                    <object data="/public/skin/default/images/logo_cloud.svg" type="image/svg+xml" style="#">
-		                        <!-- Implement fallback code here, or display a message: -->
-		                        <img class="image_100" src="/public/skin/default/images/logo_cloud.png" alt="logo" />
-		                   </object>
-		                </span>
-		            </a>
 				</div>
 			</div>
 		</div>
-
+	<div class="w-xxxx-12">
+		<div class="content">
+			<div class="_footer_security_seal">
+				<div class="_ssl">
+					<strong>Sitio seguro</strong>
+					<span><?php echo makeHTMLImg(getImg('lets_encrypt.png'),"","","class='image_100'",""); ?></span>
+				</div>
+				<div class="_payment">
+					<strong>Multiples métodos de pago</strong>
+					<span><?php echo makeHTMLImg(getImg('metodos_de_pagos.png'),"","","class='image_100'",""); ?></span>
+				</div>
+				<div class="_cloud">
+					<span><?php echo makeHTMLImg(getImg('logo_cloud.png'),"","","class='image_100'",""); ?></span>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
