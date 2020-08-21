@@ -340,14 +340,16 @@ main {
                 background-color: transparent;
                 .box-shadow(none);
                 border:0;
-                padding: 0 10px;
-                &:hover {
-                    color: @black;
-                }
+                padding: 0 10px;                
                 &:before {
                     font-family: @ico_font;
                     content: "\e81c";
                     font-size: 2rem;
+                }
+                &:hover {
+                    &:before {
+                        color: @enfasis_color;
+                    }
                 }
                 &.active {
                     color: @enfasis_color;
@@ -391,7 +393,8 @@ main {
                 background-color: @ultra_soft_gray;
                 width: 120px;
                 margin-bottom: 10px;
-                padding: 4px;
+                height: 45px;
+                box-sizing: border-box;
                 .radius;
                 i {
                     color: lighten(@black,50);
@@ -409,7 +412,8 @@ main {
                 input {
                     float: left;
                     width: calc(~"100%" - 60px);
-                    height: 30px;
+                    min-height: 35px;
+                    padding: 0;
                     background-color: @white;
                     text-align: center;
                     box-sizing: border-box;

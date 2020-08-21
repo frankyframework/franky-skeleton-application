@@ -15,7 +15,7 @@
 
 
 
-   <div class='w-xxxx-12'><a class="_btn <?=$class_btn?> _btn_add" href="javascript:void(0)" onclick="validateAddCart();"> Agregar a carrito</a></div>
+   <a class="_btn <?=$class_btn?> _btn_add" href="javascript:void(0)" onclick="validateAddCart();"> Agregar a carrito</a>
 </form>
 
 <script >
@@ -53,7 +53,7 @@ function validateAddCart()
 </script>
 <?php $class_btn = "_secondary";?>
 <?php endif ;?>
-    <div class='w-xxxx-12'><a class="_btn <?=$class_btn?> _btn_add link_form_info_product" href="javascript:void(0)" >Solicitar información</a></div>
+    <a class="_btn <?=$class_btn?> _btn_add link_form_info_product" href="javascript:void(0)" >Solicitar información</a>
     <div class='w-xxxx-12 content_form_info_product' style='display:none;' >
     <?php echo $contactanosForm->openTag(); ?>
     <?php echo $contactanosForm->getAllRow(); ?>

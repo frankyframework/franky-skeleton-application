@@ -20,12 +20,14 @@
                         </div>
 
 
-                        <div class='_col_mycart_resume control_qty'>
-                            <a class="menos_qty" data-id='<?php echo $_carrito_compras["id"]; ?>' href="#"><i class='icon icon-c-eliminar'></i></a>
-                            <input type="text" data-id='<?php echo $_carrito_compras["id"]; ?>' value="<?php echo $_carrito_compras["qty"]; ?>" name="qty_<?php echo $_carrito_compras["id"]; ?>" />
-                            <a class="mas_qty"  data-id='<?php echo $_carrito_compras["id"]; ?>'  href="#"><i class='icon icon-c-agregar'></i></a>
-
+                        <div class='_col_mycart_resume _cont_control_qty'>
+                            <div class="_control_qty">
+                                <a class="menos_qty" data-id='<?php echo $_carrito_compras["id"]; ?>' href="#"><i class='icon icon-c-eliminar'></i></a>
+                                <input type="text" data-id='<?php echo $_carrito_compras["id"]; ?>' value="<?php echo $_carrito_compras["qty"]; ?>" name="qty_<?php echo $_carrito_compras["id"]; ?>" />
+                                <a class="mas_qty"  data-id='<?php echo $_carrito_compras["id"]; ?>'  href="#"><i class='icon icon-c-agregar'></i></a>
+                            </div>
                         </div>
+                        
                         <div class="_col_mycart_resume subtotal_producto">
                             <?php $precio =  $_carrito_compras["precio"] * $_carrito_compras["qty"]; ?>
                             <?php echo getFormatoPrecio($precio); ?>
