@@ -145,6 +145,11 @@ header {
 }
 
 main {
+    ._my_cart {
+        padding-left: 10px;
+        padding-right: 10px;
+        box-sizing: border-box;
+    }
     /////////////// Checkout
     .contenedor_checkout {
         @media @small {
@@ -434,10 +439,10 @@ main {
             &._img_product {
                 width: 10%;
                 text-align: center;
-                @media @small {
-                    width: 100px;
-                    img {
-                        max-width: 100px;
+                img {
+                    max-width: 100%;
+                    height: auto;
+                    @media @small {
                         margin-bottom: 10px;
                     }
                 }
@@ -460,39 +465,42 @@ main {
                     }
                 }
             }
-            &.control_qty {
+            &._cont_control_qty {
                 text-align: center;
                 @media @small {
                     width: calc(~"50%" - 50px);
                 }
-                a,
-                input {
-                    float: left;
-                }
-                a {
-                    width: 30px;
-                    color: lighten(@gray, 50);
-                    font-size: 2.4rem;
-                    line-height: 45px;
-                    text-decoration: none;
-                    @media @small {
-                        width: 20px;
-                        font-size: 2rem;
-                        line-height: 40px;
+                ._control_qty {
+                    display: inline-block;
+                    a,
+                    input {
+                        float: left;
                     }
-                    &:hover {
-                        color: lighten(@gray, 40);
+                    a {
+                        width: 30px;
+                        color: lighten(@gray, 50);
+                        font-size: 2.4rem;
+                        line-height: 45px;
+                        text-decoration: none;
+                        @media @small {
+                            width: 20px;
+                            font-size: 2rem;
+                            line-height: 40px;
+                        }
+                        &:hover {
+                            color: lighten(@gray, 40);
+                        }
                     }
-                }
-                input {
-                    width: 70px;
-                    margin: 0 5px;
-                    padding: 5px;
-                    text-align: center;
-                    @media @small {
-                        font-size: 1.6rem;
-                        width: 50%;
-                        margin: 0 2px;
+                    input {
+                        width: 70px;
+                        margin: 0 5px;
+                        padding: 5px;
+                        text-align: center;
+                        @media @small {
+                            font-size: 1.6rem;
+                            width: 50%;
+                            margin: 0 2px;
+                        }
                     }
                 }
             }
