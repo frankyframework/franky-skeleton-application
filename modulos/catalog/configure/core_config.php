@@ -23,6 +23,13 @@ return array(
                     'data' => ['0' => 'No', '1' => 'Si'],
                     'value' => 1
                   ),
+                  array('path' => 'catalog/product/showdelete',
+                        'type' => 'select',
+                        'label' => '¿Mostrar registros eliminados?',
+                        'validation' => array('required' => false),
+                        'data' => ['0' => 'No', '1' => 'Si'],
+                        'value' => '0'
+                      ),
                    
           )
   ),

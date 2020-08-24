@@ -71,19 +71,21 @@
 </div>
 
 <script >
-<!--
 $(".contenedor_columnas_info").htmlDataDum(<?php echo json_encode($lista_admin_data); ?>,".no_hay_datos");
 $(window).load(function(){
     $(".btn_adm_eliminar").click(function(event){
 
          event.preventDefault();
          var nuevo_estado = ($(this).attr("href").replace("#","") == "activar" ? 1 : 0);
-
-         EliminarRegistro('<?php echo $deleteFunction; ?>',$(this).attr("id"),nuevo_estado)
+         <?php if(getCoreConfig('catalog/product/showdelete') == 0): ?>      
+                EliminarRegistro('<?php echo $deleteFunction; ?>',$(this).attr("id"),nuevo_estado,'','EliminarRegistorPanelRemove')
+        <?php else: ?>
+                EliminarRegistro('<?php echo $deleteFunction; ?>',$(this).attr("id"),nuevo_estado)
+         <?php endif; ?>
+ 
 
     });
 
 
 });
-// -->
 </script>

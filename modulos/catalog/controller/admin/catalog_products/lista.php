@@ -31,6 +31,9 @@ else{
     $orden = $MyPaginacion->getCampoOrden();
 }
 
+if(getCoreConfig('catalog/product/showdelete') == 0){
+    $CatalogproductsEntity->status(1);
+}
 
 $CatalogproductsModel->setPage($MyPaginacion->getPage());
 $CatalogproductsModel->setTampag($MyPaginacion->getTampageDefault());
