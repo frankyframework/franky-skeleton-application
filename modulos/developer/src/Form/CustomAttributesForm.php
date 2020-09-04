@@ -11,7 +11,8 @@ class CustomAttributesForm extends \Franky\Form\Form
        $this->setAtributos(array(
             'name' => $name,
             'action' => "/admin/custom_attributes/submit.php",
-            'method' => 'post'
+            'method' => 'post',
+            'enctype' => "multipart/form-data"
         ));
 
         

@@ -877,4 +877,78 @@ function validUserDevice()
       }
 }
 
+
+function saveDataCustomAttribute($id_ref,$entity)
+{
+    global $MyRequest;
+    global $MyConfigure;
+    $File                               = new Franky\Filesystem\File();
+    $CustomattributesModel              = new Base\model\CustomattributesModel();
+    $CustomattributesEntity             = new Base\entity\CustomattributesEntity();
+    $CustomattributesvaluesModel        = new Base\model\CustomattributesvaluesModel();
+    $CustomattributesvaluesEntity       = new Base\entity\CustomattributesvaluesEntity();
+
+    $custom_imputs = [];
+    $CustomattributesEntity->entity("catalog_products");
+    $CustomattributesEntity->status(1);
+    $CustomattributesModel->setTampag(100);
+    $CustomattributesModel->getData($CustomattributesEntity->getArrayCopy());
+    while($data_attrs = $CustomattributesModel->getRows()){
+        
+        $custom_imputs[] = ['id' => $data_attrs['id'],'name' => $data_attrs['name'],'type' => $data_attrs['type']];
+    }
+   
+
+    $CustomattributesvaluesEntity->id_ref($id_ref);
+    $CustomattributesvaluesEntity->entity($entity);
+    $CustomattributesvaluesModel->remove($CustomattributesvaluesEntity->getArrayCopy());
+
+    foreach($custom_imputs as $input)
+    {
+        $CustomattributesvaluesEntity->id_attribute($input['id']);
+        $name = str_replace("[]", "", $input['name']);
+        if($input['type'] == 'file')
+        {
+           
+            $dir = $MyConfigure->getServerUploadDir()."/$entity/".$id_ref."/";
+          
+            $File->mkdir($dir);
+            $handle = new \Franky\Filesystem\Upload($_FILES[$input['name']]);
+            if ($handle->uploaded)
+            {
+                if  (!in_array(strtolower(pathinfo($_FILES[$input['name']]["name"], PATHINFO_EXTENSION)),array("php","phtml")))
+                {
+                    $fileinfo = @getimagesize($_FILES[$input['name']]["tmp_name"]);
+                    //$width = $fileinfo[0];
+                    //$height = $fileinfo[1];
+                    
+                    //$handle->image_resize= false;
+                    //$handle->image_ratio_fill = true;
+                    //$handle->image_background_color = '#FFFFFF';
+                    $handle->file_auto_rename = true;
+                    $handle->file_overwrite = false;
+                    $handle->file_max_size = "22024288"; 
+
+                    $handle->Process($dir);
+
+                    if ($handle->processed)
+                    {
+                        $value = "/$entity/".$id_ref."/".$handle->file_dst_name;
+                    }
+                    else
+                    {
+                        $value = '';
+                    }
+                }
+                
+            }
+
+        }
+        else{
+            $value = (is_array($MyRequest->getRequest($name)) ? json_encode($MyRequest->getRequest($name)) : $MyRequest->getRequest($name));
+        }
+        $CustomattributesvaluesEntity->value($value);
+        $CustomattributesvaluesModel->save($CustomattributesvaluesEntity->getArrayCopy());
+    }
+}
 ?>

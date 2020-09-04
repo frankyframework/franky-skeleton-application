@@ -4,13 +4,7 @@ use Catalog\model\CatalogproductsModel;
 use Catalog\entity\CatalogproductsEntity;
 use Catalog\entity\CatalogsubcategoryproductEntity;
 use Catalog\model\CatalogsubcategoryproductModel;
-use Base\entity\redireccionesEntity;
-use Franky\Filesystem\File;
 use Franky\Haxor\Tokenizer;
-use Base\model\CustomattributesModel;
-use Base\entity\CustomattributesEntity;
-use Base\model\CustomattributesvaluesModel;
-use Base\entity\CustomattributesvaluesEntity;
 use Franky\Core\ObserverManager;
 
 $Tokenizer = new Tokenizer();
@@ -18,10 +12,6 @@ $CatalogsubcategoryproductEntity    = new CatalogsubcategoryproductEntity();
 $CatalogsubcategoryproductModel     = new CatalogsubcategoryproductModel();
 $CatalogproductsModel               = new CatalogproductsModel();
 $CatalogproductsEntity              = new CatalogproductsEntity($MyRequest->getRequest());
-$CustomattributesModel              = new CustomattributesModel();
-$CustomattributesEntity             = new CustomattributesEntity();
-$CustomattributesvaluesModel              = new CustomattributesvaluesModel();
-$CustomattributesvaluesEntity             = new CustomattributesvaluesEntity();
 
 
 
@@ -98,15 +88,7 @@ if(empty($subcategory))
 
 
 
-$custom_imputs = [];
-$CustomattributesEntity->entity("catalog_products");
-$CustomattributesEntity->status(1);
-$CustomattributesModel->setTampag(100);
-$CustomattributesModel->getData($CustomattributesEntity->getArrayCopy());
-while($data_attrs = $CustomattributesModel->getRows()){
-    
-    $custom_imputs[] = ['id' => $data_attrs['id'],'name' => $data_attrs['name']];
-}
+
 if(!$error)
 {
     $subcategorias = getCatalogSubcategorys(null,'sql');
@@ -197,18 +179,7 @@ if(!$error)
             }
         }
 
-        $CustomattributesvaluesEntity->id_ref($id);
-        $CustomattributesvaluesEntity->entity("catalog_products");
-        $CustomattributesvaluesModel->remove($CustomattributesvaluesEntity->getArrayCopy());
-
-        foreach($custom_imputs as $input)
-        {
-            $CustomattributesvaluesEntity->id_attribute($input['id']);
-            $name = str_replace("[]", "", $input['name']);
-            $value = (is_array($MyRequest->getRequest($name)) ? json_encode($MyRequest->getRequest($name)) : $MyRequest->getRequest($name));
-            $CustomattributesvaluesEntity->value($value);
-            $CustomattributesvaluesModel->save($CustomattributesvaluesEntity->getArrayCopy());
-        }
+        saveDataCustomAttribute($id,'catalog_products');
 
 
         
