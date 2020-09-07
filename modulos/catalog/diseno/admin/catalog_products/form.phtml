@@ -74,10 +74,23 @@
         <?php  echo $adminForm->getRow("iva"); ?>
         <?php  echo $adminForm->getRow("incluye_iva"); ?>
       
-        <?php foreach($custom_imputs as $kinput => $input): ?>
-          <?=$adminForm->getRow($input)?>
-        <label id="<?=$input?>-error" class="error" for="<?=$input?>" style="display:none;"></label>
-        <?php endforeach; ?>
+
+      <?php
+      if(!empty($custom_attr['custom_imputs']))
+      {
+
+        foreach($custom_attr['custom_imputs'] as $key => $data_attrs):
+        
+        ?>
+          <?=$adminForm->getRow($data_attrs['name'])?>
+          <?php if($data_attrs['type'] == 'file' && !empty($custom_attr['custom_values'][$data_attrs['name']])): ?>
+              <p><a href="<?=$MyConfigure->getUploadDir().$custom_attr['custom_values'][$data_attrs['name']]?>" target="_blank"><?=$MyConfigure->getUploadDir().$custom_attr['custom_values'][$data_attrs['name']]?></a></p>
+          <?php endif; ?>
+          <label id="<?=$data_attrs['name']?>-error" class="error" for="<?=$data_attrs['name']?>" style="display:none;"></label>
+          <?php 
+          endforeach; 
+      }    
+      ?>
         <div class="form-group"><h3>SEO</h3></div>
         <?php echo $adminForm->getRow('url_key'); ?>
         <?php echo $adminForm->getRow('meta_title'); ?>
@@ -236,7 +249,7 @@ var sortGaleria = function() {
 
 $(window).load(function(){
   tinymce.init({
-    selector: 'textarea[name=description]',
+    selector: '.editor_html',
     height: 500,
     menubar: false,
     codesample_dialog_width: '600',

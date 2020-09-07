@@ -65,6 +65,7 @@ if($CatalogproductsModel->getData($CatalogproductsEntity->getArrayCopy()) == REG
         }
     }
 
+    $custom_attr = getDataCustomAttribute($data_detalle['id'],'catalog_products');
   
   $offerSchema->setPriceCurrency('MXN');
   $offerSchema->setPrice($data_detalle['price']);

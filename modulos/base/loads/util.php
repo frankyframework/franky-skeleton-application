@@ -877,6 +877,65 @@ function validUserDevice()
       }
 }
 
+function getDataCustomAttribute($id_ref,$entity)
+{
+    $CustomattributesModel              = new Base\model\CustomattributesModel();
+    $CustomattributesEntity             = new Base\entity\CustomattributesEntity();
+    $CustomattributesvaluesModel        = new Base\model\CustomattributesvaluesModel();
+    $CustomattributesvaluesEntity       = new Base\entity\CustomattributesvaluesEntity();
+
+
+    $custom_imputs = [];
+    $values_attrs = [];
+    $CustomattributesEntity->entity($entity);
+    $CustomattributesEntity->status(1);
+    $CustomattributesModel->setTampag(100);
+    $CustomattributesModel->getData($CustomattributesEntity->getArrayCopy());
+
+    if($CustomattributesModel->getTotal() > 0)
+    {
+        while($data_attrs = $CustomattributesModel->getRows()){
+            
+            
+            $data_attrs['data'] = json_decode($data_attrs['data'],true);
+
+
+            if(!empty($data_attrs['source'])){
+                $objData = new $data_attrs['source'];
+                $data_attrs['data'] = $objData->getCollection();
+            }
+
+            $custom_imputs[$data_attrs['id']] = $data_attrs;
+
+        }
+    
+
+        $CustomattributesvaluesEntity->id_ref($id_ref);
+        $CustomattributesvaluesEntity->entity($entity);
+        $CustomattributesvaluesModel->setTampag(100);
+        if($CustomattributesvaluesModel->getData($CustomattributesvaluesEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+        {
+            
+            
+            while($_values_attrs = $CustomattributesvaluesModel->getRows()){
+            
+                $value =json_decode($_values_attrs['value'],true);
+        
+                if($value == null)
+                {
+                    $value = $_values_attrs['value'];
+                }
+                $values_attrs[$custom_imputs[$_values_attrs['id_attribute']]['name']] = $value;
+            
+            }
+            
+        }
+    }
+
+    return ['custom_imputs' => $custom_imputs,'custom_values'=>$values_attrs];
+
+
+}
 
 function saveDataCustomAttribute($id_ref,$entity)
 {
@@ -945,7 +1004,7 @@ function saveDataCustomAttribute($id_ref,$entity)
 
         }
         else{
-            $value = (is_array($MyRequest->getRequest($name)) ? json_encode($MyRequest->getRequest($name)) : $MyRequest->getRequest($name));
+            $value = (is_array($MyRequest->getRequest($name)) ? json_encode($MyRequest->getRequest($name)) : $MyRequest->getRequest($name,'',true));
         }
         $CustomattributesvaluesEntity->value($value);
         $CustomattributesvaluesModel->save($CustomattributesvaluesEntity->getArrayCopy());

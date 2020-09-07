@@ -45,63 +45,75 @@ $data_category = [];
 $data_subcategory = [];
 $adminForm = new ProductsForm("frmproduct");
 
-$custom_imputs = [];
-$CustomattributesEntity->entity("catalog_products");
-$CustomattributesEntity->status(1);
-$CustomattributesModel->setTampag(100);
-$result	 = $CustomattributesModel->getData($CustomattributesEntity->getArrayCopy());
-while($data_attrs = $CustomattributesModel->getRows()){
-    
-    $custom_imputs[$data_attrs['id']] = $data_attrs['name'];
-    $data_attrs['data'] = json_decode($data_attrs['data'],true);
+
+$custom_attr = getDataCustomAttribute($id,'catalog_products');
 
 
-    if(!empty($data_attrs['source'])){
-        $objData = new $data_attrs['source'];
-        $data_attrs['data'] = $objData->getCollection();
-    }
+if(!empty($custom_attr['custom_imputs']))
+{
 
-    if(in_array($data_attrs['type'],['text','textarea','file']))
+    foreach($custom_attr['custom_imputs'] as $key => $data_attrs)
     {
+
         
-        $adminForm->add(array(
-            'name' => $data_attrs['name'],
-            'label' => $data_attrs['label'],
-            'type'  => $data_attrs['type'],
-            'required'  => $data_attrs['required'],
-            'atributos' => array(
-                'class'       => ($data_attrs['required'] ? 'required' : ''),
-             //   'maxlength' => 60
-            ),
-            'label_atributos' => array(
-                'class'       => ($data_attrs['required'] ? 'desc_form_obligatorio' : 'desc_form_no_obligatorio')
-            )
-            )
-        );
-    }
-    if(in_array($data_attrs['type'],['radio','select','checkbox']))
-    {
-        $adminForm->add(array(
-            'name' => $data_attrs['name'],
-            'label' => $data_attrs['label'],
-            'type'  => $data_attrs['type'],
-            'required'  => $data_attrs['required'],
-            'atributos' => array(
-                'class'       =>  ($data_attrs['required'] ? 'required' : ''),
-             //   'maxlength' => 60
-            ),
-            'options' => $data_attrs['data'],
-            'label_atributos' => array(
-                 'class'       => ($data_attrs['required'] ? 'desc_form_obligatorio' : 'desc_form_no_obligatorio')
-         
-            )
-            )
-        );
-    }
+        if(in_array($data_attrs['type'],['file']))
+        {
+            
+            $adminForm->add(array(
+                'name' => $data_attrs['name'],
+                'label' => $data_attrs['label'],
+                'type'  => $data_attrs['type'],
+                'required'  => $data_attrs['required'],
+                'atributos' => array(
+                    'class'       => ($data_attrs['required'] && empty($custom_attr['custom_values'][$data_attrs['name']]) ? 'required' : ''),
+                //   'maxlength' => 60
+                ),
+                'label_atributos' => array(
+                    'class'       => ($data_attrs['required'] ? 'desc_form_obligatorio' : 'desc_form_no_obligatorio')
+                )
+                )
+            );
+        }
+        if(in_array($data_attrs['type'],['text','textarea']))
+        {
+            
+            $adminForm->add(array(
+                'name' => $data_attrs['name'],
+                'label' => $data_attrs['label'],
+                'type'  => $data_attrs['type'],
+                'required'  => $data_attrs['required'],
+                'atributos' => array(
+                    'class'       => ($data_attrs['required'] ? 'required' : '').' '.($data_attrs['type'] == 'textarea'? 'editor_html' : ''),
+                //   'maxlength' => 60
+                ),
+                'label_atributos' => array(
+                    'class'       => ($data_attrs['required'] ? 'desc_form_obligatorio' : 'desc_form_no_obligatorio')
+                )
+                )
+            );
+        }
+        if(in_array($data_attrs['type'],['radio','select','checkbox']))
+        {
+            $adminForm->add(array(
+                'name' => $data_attrs['name'],
+                'label' => $data_attrs['label'],
+                'type'  => $data_attrs['type'],
+                'required'  => $data_attrs['required'],
+                'atributos' => array(
+                    'class'       =>  ($data_attrs['required'] ? 'required' : ''),
+                //   'maxlength' => 60
+                ),
+                'options' => $data_attrs['data'],
+                'label_atributos' => array(
+                    'class'       => ($data_attrs['required'] ? 'desc_form_obligatorio' : 'desc_form_no_obligatorio')
+            
+                )
+                )
+            );
+        }
 
+    }
 }
-
-
 
 
 
@@ -141,25 +153,10 @@ if(!empty($id))
         }
     }
     
-    $CustomattributesvaluesEntity->id_ref($id);
-    $CustomattributesvaluesEntity->entity("catalog_products");
-    $CustomattributesvaluesModel->setTampag(100);
-    if($CustomattributesvaluesModel->getData($CustomattributesvaluesEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+ 
+    if(!empty($custom_attr['custom_values']))
     {
-        
-        $values_attrs = [];
-        while($_values_attrs = $CustomattributesvaluesModel->getRows()){
-         
-            $value =json_decode($_values_attrs['value'],true);
-       
-            if($value == null)
-            {
-                $value = $_values_attrs['value'];
-            }
-            $values_attrs[$custom_imputs[$_values_attrs['id_attribute']]] = $value;
-          
-        }
-        $data = array_merge($data,$values_attrs);
+        $data = array_merge($data,$custom_attr['custom_values']);
     }
 
     

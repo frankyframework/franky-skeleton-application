@@ -59,7 +59,7 @@ class ProductsForm  extends \Franky\Form\Form
                 'type'  => 'textarea',
                 'required'  => false,
                 'atributos' => array(
-                    'class' => '',
+                    'class' => 'editor_html',
                     'placeholder' => "Descripcion",
                     'rows'  => 20
                 ),
