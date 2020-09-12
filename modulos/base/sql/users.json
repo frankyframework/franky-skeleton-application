@@ -1,0 +1,157 @@
+{
+    "schema" :
+    {
+        "attributes":[
+            {
+                "name":"id",
+                "type":"int",
+                "length":11,
+                "null":0,
+                "auto_increment":1
+            },
+            {
+                "name":"usuario",
+                "type":"varchar",
+                "length":30,
+                "null":0
+            },
+            {
+                "name":"contrasena",
+                "type":"varchar",
+                "length":255,
+                "null":0
+            },
+            {
+                "name":"email",
+                "type":"varchar",
+                "length":255,
+                "null":0
+            },
+          
+            {
+                "name":"nivel",
+                "type":"int",
+                "length":2,
+                "null":0,
+                "default":0
+                
+            },
+            {
+                "name":"fecha",
+                "type":"datetime",
+                "null":0
+            },
+            {
+                "name":"ultimoAcceso",
+                "type":"datetime",
+                "null":1
+            },
+            {
+                "name":"nombre",
+                "type":"varchar",
+                "length":255,
+                "null":0
+            },
+            {
+                "name":"fecha_nacimiento",
+                "type":"date",
+                "null":0
+            },
+            {
+                "name":"sexo",
+                "type":"char",
+                "length":1,
+                "null":0
+            },
+            {
+                "name":"telefono",
+                "type":"varchar",
+                "length":10,
+                "null":1
+            },
+            {
+                "name":"verificado",
+                "type":"int",
+                "length":1,
+                "null":0,
+                "default":0
+                
+            },
+            {
+                "name":"biografia",
+                "type":"text",
+                "null":1
+            }
+
+        ],
+        "config":{
+            "primary":"id",
+            "engine":"InnoDB"
+        }
+    }
+    ,
+    "data":[
+        {
+            "id" : 1,
+            "usuario":"molder",
+            "contrasena":"$2y$10$CNbel8AlnA4DguuITxg6iORkp5uBxZe47FiOJCNu6.Soeqv6lAEDW",
+            "email":"ussiel@gmail.com",
+            "nivel":"777",
+            "fecha":"0000-00-00",
+            "ultimoAcceso":"",
+            "nombre":"Ussiel",
+            "fecha_nacimiento": "0000-00-00",
+            "sexo":"h",
+            "telefono":"",
+            "verificado": "1",
+            "biografia": ""
+        },
+        {
+            "id" : 2,
+            "usuario":"alberto",
+            "contrasena":"$2y$10$CNbel8AlnA4DguuITxg6iORkp5uBxZe47FiOJCNu6.Soeqv6lAEDW",
+            "email":"oxtlimail@gmail.com",
+            "nivel":"777",
+            "fecha":"0000-00-00",
+            "ultimoAcceso":"",
+            "nombre":"Alberto",
+            "fecha_nacimiento": "0000-00-00",
+            "sexo":"h",
+            "telefono":"",
+            "verificado": "1",
+            "biografia": ""
+        },
+        {
+            "id" : 3,
+            "usuario":"ssqueda",
+            "contrasena":"$2y$10$CNbel8AlnA4DguuITxg6iORkp5uBxZe47FiOJCNu6.Soeqv6lAEDW",
+            "email":"luis@cloudstudio.mx",
+            "nivel":"777",
+            "fecha":"0000-00-00",
+            "ultimoAcceso":"",
+            "nombre":"Jose luis",
+            "fecha_nacimiento": "0000-00-00",
+            "sexo":"h",
+            "telefono":"",
+            "verificado": "1",
+            "biografia": ""
+        },
+        {
+            "id" : 4,
+            "usuario":"brauer",
+            "contrasena":"$2y$10$CNbel8AlnA4DguuITxg6iORkp5uBxZe47FiOJCNu6.Soeqv6lAEDW",
+            "email":"max@cloudstudio.mx",
+            "nivel":"777",
+            "fecha":"0000-00-00",
+            "ultimoAcceso":"",
+            "nombre":"Jose luis",
+            "fecha_nacimiento": "0000-00-00",
+            "sexo":"h",
+            "telefono":"",
+            "verificado": "1",
+            "biografia": ""
+        }
+    ]
+}
+
+

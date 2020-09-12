@@ -1,0 +1,83 @@
+{
+    "schema" :
+    {
+        "attributes":[
+            {
+                "name":"id",
+                "type":"int",
+                "length":11,
+                "null":0,
+                "auto_increment":1
+            },
+            {
+                "name":"nombre",
+                "type":"varchar",
+                "length":255,
+                "null":0
+            },
+            {
+                "name":"friendly",
+                "type":"varchar",
+                "length":255,
+                "null":0
+            },
+            {
+                "name":"status",
+                "type":"int",
+                "length":1,
+                "default":1,
+                "null":0
+            }
+
+        ],
+        "config":{
+            "primary":"id",
+            "engine":"InnoDB"
+        }
+    }
+    ,
+    "data":[
+        {
+            "id" : 1,
+            "nombre" : "Registro de usuario Frontend",
+            "friendly": "registro-de-usuario-frontend",
+            "status" : 1
+        },
+        {
+            "id" : 2,
+            "nombre" : "Registro de usuario backend",
+            "friendly": "registro-de-usuario-backend",
+            "status" : 1
+        },
+        {
+            "id" : 3,
+            "nombre" : "Confirmacion de email",
+            "friendly": "confirmacion-de-email",
+            "status" : 1
+        },
+        {
+            "id" : 4,
+            "nombre" : "Recuperar contraseña",
+            "friendly": "recuperar-contrasena",
+            "status" : 1
+        },
+        {
+            "id" : 5,
+            "nombre" : "Contactanos",
+            "friendly": "contactanos",
+            "status" : 1
+        },
+        {
+            "id" : 6,
+            "nombre" : "Nuevo dispositivo",
+            "friendly": "nuevo-dispositivo",
+            "status" : 1
+        },
+        {
+            "id" : 7,
+            "nombre" : "Notificacion de contactanos para usuario",
+            "friendly": "contactanos-user-notification",
+            "status" : 1
+        }
+    ]
+}

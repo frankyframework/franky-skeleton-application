@@ -1,0 +1,60 @@
+{
+    "schema" :
+    {
+        "attributes":[
+            {
+                "name":"id",
+                "type":"int",
+                "length":11,
+                "null":0,
+                "auto_increment":1
+            },
+            {
+                "name":"id_franky",
+                "type":"int",
+                "length":11,
+                "null":0
+            },
+            {
+                "name":"lang",
+                "type":"varchar",
+                "length":5,
+                "null":0
+            },
+            {
+                "name":"url",
+                "type":"varchar",
+                "length":255,
+                "null":0
+            },
+            {
+                "name":"status",
+                "type":"int",
+                "length":1,
+                "null":0
+            },
+            {
+                "name":"fecha",
+                "type":"datetime",
+                "null":0
+            }
+
+        ],
+        "config":{
+            "primary":"id",
+            "keys":
+                {
+                    "franky" : {
+                        "foreing" : "id",
+                        "local":"id_franky",
+                        "delete":"CASCADE",
+                        "update":"CASCADE"
+                    }
+                }
+            ,
+            "engine":"InnoDB"
+        }
+    }
+    ,
+    "data":[]
+}

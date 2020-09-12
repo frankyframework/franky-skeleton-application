@@ -1,0 +1,92 @@
+{
+    "schema" :
+    {
+        "attributes":[
+            {
+                "name":"id",
+                "type":"int",
+                "length":11,
+                "null":0,
+                "key":"primary",
+                "auto_increment":1
+            },
+            {
+                "name":"titulo",
+                "type":"varchar",
+                "length":255,
+                "null":0
+            },
+            {
+                "name":"mostrar_titulo",
+                "type":"int",
+                "length":1,
+                "default":0,
+                "null":1
+            },
+            {
+                "name":"friendly",
+                "type":"varchar",
+                "length":255,
+                "null":0
+            },
+            {
+                "name":"template",
+                "type":"text",
+                "null":0
+                
+            },
+            {
+                "name":"fecha",
+                "type":"datetime",
+                "null":0
+            },
+            {
+                "name":"status",
+                "type":"int",
+                "length":1,
+                "default":1,
+                "null":0
+            },
+            {
+                "name":"meta_titulo",
+                "type":"varchar",
+                "length":255,
+                "null":0
+            },
+            {
+                "name":"meta_descripcion",
+                "type":"varchar",
+                "length":255,
+                "null":0
+            }
+
+        ],
+        "config":{
+            "primary":"id",
+            "engine":"MyISAM"
+        }
+    }
+    ,
+    "data":[
+        {
+            "titulo":"Condiciones de uso",
+            "mostrar_titulo":0,
+            "friendly":"/condiciones-de-uso/",
+            "template":"<div class=\"col1\">&nbsp;</div>\r\n<div class=\"col2\">\r\n<div class=\"output-container\">\r\n<div id=\"output\">\r\n<p>Lorem ipsum dolor sit amet consectetur adipiscing elit feugiat augue blandit non ad egestas, bibendum velit varius auctor aliquam fringilla ultrices phasellus tincidunt tempus nec orci, posuere torquent sapien dapibus potenti maecenas consequat himenaeos facilisis eros suspendisse eu. Semper ligula netus convallis nibh hac pharetra aptent integer, urna turpis lacus est torquent leo varius mollis, nam ut sollicitudin mus nostra sodales morbi hendrerit, gravida tempus quisque elementum suspendisse per euismod. Nullam mollis blandit lacus curabitur ut per dis, habitant libero convallis eu platea torquent cras aliquet, facilisi quis sociosqu vitae scelerisque placerat.</p>\r\n<p>Vivamus felis condimentum sem bibendum rutrum porttitor, vel egestas massa blandit euismod, venenatis in augue elementum facilisi. Sapien eu orci ornare class pulvinar penatibus viverra vel, volutpat dignissim sed netus per erat vehicula facilisi mollis, sem tempor quis tortor felis morbi mi. Molestie urna taciti varius vel sagittis suspendisse eu vivamus mattis ridiculus, pretium dapibus auctor lectus vulputate cubilia etiam commodo cum duis velit, dictum hendrerit magna tempus nascetur natoque sociis et justo. Purus sollicitudin justo mi nascetur semper, augue ut cubilia nisi porta, ridiculus curae ad suspendisse.</p>\r\n</div>\r\n</div>\r\n</div>",
+            "fecha":"2018-06-14 14:42:37",
+            "status":1,
+            "meta_titulo" :"Condiciones de uso",
+            "meta_descripcion":"Condiciones de uso"
+        },
+        {
+            "titulo":"viso de privacidad",
+            "mostrar_titulo":0,
+            "friendly":"/aviso-de-privacidad/",
+            "template":"<div class=\"col1\">&nbsp;</div>\r\n<div class=\"col2\">\r\n<div class=\"output-container\">\r\n<div id=\"output\">\r\n<p>Lorem ipsum dolor sit amet consectetur adipiscing elit feugiat augue blandit non ad egestas, bibendum velit varius auctor aliquam fringilla ultrices phasellus tincidunt tempus nec orci, posuere torquent sapien dapibus potenti maecenas consequat himenaeos facilisis eros suspendisse eu. Semper ligula netus convallis nibh hac pharetra aptent integer, urna turpis lacus est torquent leo varius mollis, nam ut sollicitudin mus nostra sodales morbi hendrerit, gravida tempus quisque elementum suspendisse per euismod. Nullam mollis blandit lacus curabitur ut per dis, habitant libero convallis eu platea torquent cras aliquet, facilisi quis sociosqu vitae scelerisque placerat.</p>\r\n<p>Vivamus felis condimentum sem bibendum rutrum porttitor, vel egestas massa blandit euismod, venenatis in augue elementum facilisi. Sapien eu orci ornare class pulvinar penatibus viverra vel, volutpat dignissim sed netus per erat vehicula facilisi mollis, sem tempor quis tortor felis morbi mi. Molestie urna taciti varius vel sagittis suspendisse eu vivamus mattis ridiculus, pretium dapibus auctor lectus vulputate cubilia etiam commodo cum duis velit, dictum hendrerit magna tempus nascetur natoque sociis et justo. Purus sollicitudin justo mi nascetur semper, augue ut cubilia nisi porta, ridiculus curae ad suspendisse.</p>\r\n</div>\r\n</div>\r\n</div>",
+            "fecha":"2018-06-14 14:42:37",
+            "status":1,
+            "meta_titulo" :"Aviso de privacidad",
+            "meta_descripcion":"Aviso de privacidad"
+        }
+    ]
+}

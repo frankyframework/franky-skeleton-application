@@ -1,0 +1,89 @@
+{
+    "schema" :
+    {
+        "attributes":[
+            {
+                "name":"id",
+                "type":"int",
+                "length":11,
+                "null":0,
+                "auto_increment":1
+            },
+            
+            {
+                "name":"id_user",
+                "type":"int",
+                "length":11,
+                "null":0
+            },
+            {
+                "name":"name",
+                "type":"varchar",
+                "length":255,
+                "null":1
+            },
+            {
+                "name":"url",
+                "type":"varchar",
+                "length":255,
+                "null":1
+            },
+            {
+                "name":"status",
+                "type":"int",
+                "length":1,
+                "default": 0,
+                "null":1
+            },
+            {
+                "name":"hora",
+                "type":"time",
+                "null":1
+            }
+          
+
+        ],
+        "config":{
+            "primary":"id",
+            "keys":
+                {
+                    "users" : {
+                        "foreing" : "id",
+                        "local":"id_user",
+                        "delete":"CASCADE",
+                        "update":"CASCADE"
+                    }
+                }
+            ,
+            "engine":"InnoDB"
+        }
+    }
+    ,
+    "data":[
+
+        {
+            "id_user" : 1,
+            "name":"gravatar",
+            "url":"https://www.gravatar.com/avatar/d15d103f43c648abf5af15d2a6b8fcdf",
+            "status": 0
+        },
+        {
+            "id_user" : 2,
+            "name":"gravatar",
+            "url":"https://www.gravatar.com/avatar/8a561ae0822d948a4a0beb5b47e5d228",
+            "status": 0
+        },
+        {
+            "id_user" : 3,
+            "name":"gravatar",
+            "url":"https://www.gravatar.com/avatar/3323392916f0301df1ce65a787d3f55e",
+            "status": 0
+        },
+        {
+            "id_user" : 4,
+            "name":"gravatar",
+            "url":"https://www.gravatar.com/avatar/98cd4d8c6b159540319ce03cc64cf2a3",
+            "status": 0
+        }
+    ]
+}

@@ -1,0 +1,38 @@
+{
+    "schema" :
+    {
+        "attributes":[
+            {
+                "name":"id",
+                "type":"int",
+                "length":11,
+                "null":0,
+                "auto_increment":1
+            },
+            {
+                "name":"path",
+                "type":"varchar",
+                "length":255,
+                "null":0
+            },
+            {
+                "name":"value",
+                "type":"text",
+                "null":1
+            },
+            {
+                "name":"modulo",
+                "type":"varchar",
+                "length":255,
+                "null":0
+            }
+
+        ],
+        "config":{
+            "primary":"id",
+            "engine":"MyISAM"
+        }
+    }
+    ,
+    "data":[]
+}
