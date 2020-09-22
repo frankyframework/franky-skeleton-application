@@ -1,0 +1,146 @@
+{
+    "schema" :
+    {
+        "attributes":[
+            {
+                "name":"id",
+                "type":"int",
+                "length":11,
+                "null":0,
+                "auto_increment":1
+            },
+            {
+                "name":"categoria",
+                "type":"int",
+                "length":11,
+                "null":0
+            },
+            
+            {
+                "name":"imagen",
+                "type":"varchar",
+                "length":255,
+                "null":1
+            },
+            {
+                "name":"imagen_portada",
+                "type":"varchar",
+                "length":255,
+                "null":1
+            },
+            {
+                "name":"titulo",
+                "type":"varchar",
+                "length":255,
+                "null":0
+            },
+            {
+                "name":"contenido",
+                "type":"text",
+                "null":0
+                
+            },
+            {
+                "name":"destacado",
+                "type":"int",
+                "length":1,
+                "null":0,
+                "default":0
+            },
+            {
+                "name":"friendly",
+                "type":"varchar",
+                "length":255,
+                "null":0
+            },
+            {
+                "name":"comentarios",
+                "type":"int",
+                "length":1,
+                "null":0,
+                "default":0
+            },
+            {
+                "name":"fecha",
+                "type":"datetime",
+                "null":0
+            },
+            {
+                "name":"fecha_modificado",
+                "type":"datetime",
+                "null":1
+            },
+            {
+                "name":"status",
+                "type":"int",
+                "length":1,
+                "null":0
+            },
+            {
+                "name":"autor",
+                "type":"int",
+                "length":1,
+                "null":0
+            },
+            {
+                "name":"keywords",
+                "type":"varchar",
+                "length":255,
+                "null":1
+            },
+            {
+                "name":"meta_titulo",
+                "type":"varchar",
+                "length":255,
+                "null":0
+            },
+            {
+                "name":"meta_descripcion",
+                "type":"text",
+                "null":0
+            },
+            {
+                "name":"visible_in_search",
+                "type":"int",
+                "length":1,
+                "null":0,
+                "default":1
+            },
+            {
+                "name":"permisos",
+                "type":"text",
+                "null":0
+                
+            },
+            {
+                "name":"autortext",
+                "type":"varchar",
+                "length":255,
+                "null":1
+            }
+
+        ],
+        "config":{
+            "primary":"id",
+            "engine":"InnoDB",
+            "keys":
+            {
+                "categorias_blog" : {
+                    "foreing" : "id",
+                    "local":"categoria",
+                    "delete":"NO ACTION",
+                    "update":"NO ACTION"
+                },
+                "users" : {
+                    "foreing" : "id",
+                    "local":"autor",
+                    "delete":"NO ACTION",
+                    "update":"NO ACTION"
+                }
+            }
+            
+        }
+    }
+    ,
+    "data":[]
+}

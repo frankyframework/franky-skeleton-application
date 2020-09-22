@@ -1,0 +1,38 @@
+{
+    "schema" :
+    {
+        "attributes":[
+            {
+                "name":"id",
+                "type":"int",
+                "length":11,
+                "null":0,
+                "auto_increment":1
+            },
+            {
+                "name":"data",
+                "type":"text",
+                "null":0
+            },
+            {
+                "name":"id_blog",
+                "type":"int",
+                "length":11,
+                "null":0
+            },
+            {
+                "name":"fecha",
+                "type":"datetime",
+                "null":0
+            }
+            
+
+        ],
+        "config":{
+            "primary":"id",
+            "engine":"InnoDB"
+        }
+    }
+    ,
+    "data":[]
+}

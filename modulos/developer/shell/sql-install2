@@ -52,14 +52,20 @@ class InstallDB
                 .($attr['auto_increment'] == 1 ? 'AUTO_INCREMENT' : '')
                 .",";
             }
-            $sql .= "PRIMARY KEY (".$schema_sql['config']['primary'].")";
+            $sql = substr($sql, 0,-1);
+
+            if(isset($schema_sql['config']['primary']))
+            {
+                $sql .= ", PRIMARY KEY (".$schema_sql['config']['primary'].")";
+            }
             if(isset($schema_sql['config']['keys']))
             {
+                $nfk = 1;
                 foreach($schema_sql['config']['keys'] as $tabla => $config)
                 {
                     $sql .= ", KEY ".$config['local']." (".$config['local']."),
-                    CONSTRAINT ".pathinfo($file,PATHINFO_FILENAME)."_ibfk_1 FOREIGN KEY (".$config['local'].") REFERENCES ".$tabla." (".$config['foreing'].") ON DELETE ".$config['delete']." ON UPDATE ".$config['update'];
-        
+                    CONSTRAINT ".pathinfo($file,PATHINFO_FILENAME)."_ibfk_$nfk FOREIGN KEY (".$config['local'].") REFERENCES ".$tabla." (".$config['foreing'].") ON DELETE ".$config['delete']." ON UPDATE ".$config['update'];
+                    $nfk++;
                 }
             }
            
@@ -81,6 +87,7 @@ class InstallDB
             }
             else{
                 echo "\t".shellFontColor("[error]","rojo")."\n";
+                echo $sql."\n";
             }
 
 
@@ -91,9 +98,10 @@ class InstallDB
         if(!empty($data_sql))
         {
             $n = 1;
+            echo shellFontColor("[*] Agregando registros a ".pathinfo($file,PATHINFO_FILENAME)." del modulo $modulo \n","default");
             foreach($data_sql as $data){
 
-                echo "\t".shellFontColor("[+] Agregando $n registros a ".pathinfo($file,PATHINFO_FILENAME)." del modulo $modulo","default");
+                echo "\t".shellFontColor("[+] $n registros","default");
                 foreach($data as $k => $v){
 
                     if(is_array($v))
@@ -135,20 +143,40 @@ if($MySession->getVar('nivel') != NIVEL_USERDEVELOPER)
 }
 
 
-
-
-
-
+$modulo = $MyRequest->getRequest("modulo");
 
 headerShell();
+$help = helpShell([
+    ["var" => "modulo", "required" => true, "description" => "nombre del modulo, * para todos"]
+]);
 
 
+$validaciones =  new validaciones();
+$valid = $validaciones->validRules(array("Modulo" => array("valor" => $modulo,"required")));
+if(!$valid)
+{
+    echo shellFontColor($validaciones->getMsg(),"rojo")."\n\n".$help;
+    exit;
+}
 
+if($modulo != "*" && !file_exists(PROJECT_DIR."/modulos/".$modulo))
+{
+    echo "\t".shellFontColor("[error] El modulo ".$modulo." no existe","rojo")."\n";
+
+    exit;
+
+}
 
 $File =  new File();
 $InstallDB = new InstallDB();
+if($modulo == "*")
+{
+    $modulos = getModulos("DESC");
+}
+else{
+    $modulos = [$modulo];
+}
 
-$modulos = getModulos("DESC");
 if(!empty($modulos))
 {
     foreach($modulos as $modulo)
