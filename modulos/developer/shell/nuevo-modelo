@@ -24,7 +24,7 @@ if(!empty($site))
     $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Database\Debug);
 }
 
-headerShell();
+
 $help = helpShell([
     ["var" => "nombre", "required" => true, "description" => "nombre del modelo"],
     ["var" => "tabla", "required" => true, "description" => "es la tabla de BD apartir de la que se creara el modelo"],

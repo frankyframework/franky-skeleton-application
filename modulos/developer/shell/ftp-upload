@@ -22,7 +22,7 @@ if(!empty($site))
     $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Database\Debug);
 }
 
-headerShell();
+
 $help = helpShell([
     ["var" => "site", "required" => true, "description" => "Es el sitio que se subira a servidor"],
     ["var" => "path", "required" => true, "description" => "Es el 'DOCUMENT ROOT' del sitio"],

@@ -23,7 +23,7 @@ if(!empty($site))
     $_SERVER["SERVER_NAME"] = $site;
     $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Database\Debug);
 }
-headerShell();
+
 $help = helpShell([
     ["var" => "nombre", "required" => true, "description" => "nombre del modulo"],
     ["var" => "principal", "required" => false, "description" => "[1 (default)|0], valor 1 creara un nodo en la configuracion data.php con el host"],

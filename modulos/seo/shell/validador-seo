@@ -22,7 +22,7 @@ ini_set('memory_limit', '-1');
 $url = $MyRequest->getRequest("url");
 $dispositivo = $MyRequest->getRequest("dispositivo","desktop");
 
-headerShell();
+
 $help = helpShell([
     ["var" => "url", "required" => true, "description" => "formato ejemplo: http(s)://dominio.com"],
     ["var" => "dispositivo", "required" => false, "description" => "[desktop(default),mobile]"],

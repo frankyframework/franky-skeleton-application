@@ -20,7 +20,7 @@ if($MySession->getVar('nivel') != NIVEL_USERDEVELOPER)
 $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Database\Debug);
 
 
-headerShell();
+
 $help = helpShell([]);
 
 

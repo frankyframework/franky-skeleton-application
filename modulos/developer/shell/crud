@@ -25,7 +25,7 @@ if(!empty($site))
     $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Database\Debug);
 }
 
-headerShell();
+
 $help = helpShell([
     ["var" => "modulo", "required" => true, "description" => "nombre del modulo"],
     ["var" => "form", "required" => true, "description" => "nombre de la clase form de la seccion"],

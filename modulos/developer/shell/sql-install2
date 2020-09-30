@@ -56,7 +56,19 @@ class InstallDB
 
             if(isset($schema_sql['config']['primary']))
             {
-                $sql .= ", PRIMARY KEY (".$schema_sql['config']['primary'].")";
+                if(is_array($schema_sql['config']['primary']))
+                {
+                    $sql .= ", PRIMARY KEY (";
+                    foreach($schema_sql['config']['primary'] as $key)
+                    {
+                        $sql .=$key.",";
+                    }
+                    $sql = substr($sql,0,-1);
+                    $sql .=")";
+                }
+                else{
+                    $sql .= ", PRIMARY KEY (".$schema_sql['config']['primary'].")";
+                }
             }
             if(isset($schema_sql['config']['keys']))
             {
@@ -145,7 +157,7 @@ if($MySession->getVar('nivel') != NIVEL_USERDEVELOPER)
 
 $modulo = $MyRequest->getRequest("modulo");
 
-headerShell();
+
 $help = helpShell([
     ["var" => "modulo", "required" => true, "description" => "nombre del modulo, * para todos"]
 ]);

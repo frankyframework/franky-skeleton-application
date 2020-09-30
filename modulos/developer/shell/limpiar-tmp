@@ -7,7 +7,7 @@ ini_set('memory_limit', '-1');
 $modulo = $MyRequest->getRequest("modulo");
 
 
-headerShell();
+
 $help = helpShell([
     ["var" => "modulo", "required" => true, "description" => "es el modulo donde se limpiara el cache "],
 ]);

@@ -96,19 +96,22 @@ function shellTable($cols = array(),$rows = array())
 
 function headerShell()
 {
-echo "===============================================
-        (0 0)
----oOO-- (_) ----oOO---\n";
-echo "HOLA SOY FRANKY DEVELOPER MI TRABAJO ES\n";
-echo "HACER TU VIDA MAS FACIL\n";
-echo "===============================================\n\n";
+    
+echo "
+______ _____            _   _ _  ____     __
+|  ____|  __ \     /\   | \ | | |/ /\ \   / /
+| |__  | |__) |   /  \  |  \| | ' /  \ \_/ / 
+|  __| |  _  /   / /\ \ | . ` |  <    \   /  
+| |    | | \ \  / ____ \| |\  | . \    | |   
+|_|    |_|  \_\/_/    \_\_| \_|_|\_\   |_|   
+\n\n";
 }
 
 function helpShell($rules)
 {
     if(!empty($rules))
     {
-        $html =  "AYUDA PARA IDIOTAS:\n\n";
+        $html =  "Lista de parametros:\n\n";
 
         foreach($rules as $rule)
         {
