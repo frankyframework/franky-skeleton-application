@@ -78,6 +78,14 @@
                 
             },
             {
+                "name":"status",
+                "type":"int",
+                "length":1,
+                "null":0,
+                "default":1
+                
+            },
+            {
                 "name":"biografia",
                 "type":"text",
                 "null":1

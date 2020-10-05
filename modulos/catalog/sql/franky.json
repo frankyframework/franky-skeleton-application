@@ -49,7 +49,7 @@
             "jquery":["jquery-validate","tags"],
             "permisos":[1,2],
             "constante":"FRM_CATALOG_SUBCATEGORY",
-            "url":"aadmin/catalog-subcategory/frm/",
+            "url":"admin/catalog-subcategory/frm/",
             "nombre":"Alta de subcategorias del catalogo",
             "ajax":["base/ajax.admin.js"],
             "status":1,

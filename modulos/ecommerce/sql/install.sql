@@ -19,6 +19,12 @@ insert into `franky` (`php`, `css`, `js`, `jquery`, `permisos`, `constante`, `ur
 insert into `franky` (`php`, `css`, `js`, `jquery`, `permisos`, `constante`, `url`, `nombre`, `ajax`, `status`, `editable`, `modulo`) values('admin/tiendas/form.php','','[\"validaciones.js\"]','[\"jquery-validate\"]','[3]','FRM_TIENDAS_ECOMMERCE','admin/ecommerce/tiendas/form/','Formulario administracion tiendas','','1','0','ecommerce');
 insert into `franky` (`php`, `css`, `js`, `jquery`, `permisos`, `constante`, `url`, `nombre`, `ajax`, `status`, `editable`, `modulo`) values('admin/tiendas/lista.php','','','[]','[3]','ADMIN_LISTA_TIENDAS_ECOMMERCE','admin/ecommerce/tiendas/','Administrar lista de tiendas','[\"base/ajax.admin.js\",\"ecommerce/ajax.admin.js\"]','1','0','ecommerce');
 
+insert into `franky` (`php`, `css`, `js`, `jquery`, `permisos`, `constante`, `url`, `nombre`, `ajax`, `status`, `editable`, `modulo`) values('srpago/confirmacion_tarjeta.php','','','','[3]','CONFIRMACION_SRPAGO_TARJETA','ecommerce/srpago/tarjeta/confirmacion/','Confirmacion sr pago tarjeta','','1','0','ecommerce');
+insert into `franky` (`php`, `css`, `js`, `jquery`, `permisos`, `constante`, `url`, `nombre`, `ajax`, `status`, `editable`, `modulo`) values('srpago/confirmacion_establecimiento.php','[\"openpay.css\"]','','','[3]','CONFIRMACION_SRPAGO_ESTABLECIMIENTO','ecommerce/srpago/est/confirmacion/','Confirmacion sr pago establecimiento','','1','0','ecommerce');
+insert into `franky` (`php`, `css`, `js`, `jquery`, `permisos`, `constante`, `url`, `nombre`, `ajax`, `status`, `editable`, `modulo`) values('srpago/confirmacion_spei.php','[\"openpay.css\"]','','','[3]','CONFIRMACION_SRPAGO_SPEI','ecommerce/srpago/spei/confirmacion/','Confirmacion sr pago SPEI','','1','0','ecommerce');
+
+
+
 insert  into `secciones_transaccionales`(`nombre`,`frinedly`,`status`) values('Nueva orden de compra','nueva-orden-de-compra',1);
 insert  into `secciones_transaccionales`(`nombre`,`frinedly`,`status`) values('Cambio de status pedido','cambio-status-pedido',1);
 insert  into `secciones_transaccionales`(`nombre`,`frinedly`,`status`) values('Agregar comprovante de pago','agregar-comprovante-de-pago',1);
@@ -121,6 +127,15 @@ insert  into `templates_email`(`nombre`,`id_transaccional`,`status`,`fecha`,`Asu
     ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
 
+  CREATE TABLE `ecommerce_customers_srpago` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `id_user` INT(11) NOT NULL,
+    `token` VARCHAR(50) DEFAULT NULL,
+    `id_categoria` INT(11) NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `id_user` (`id_user`),
+    KEY `id_categoria` (`id_categoria`)) 
+    ENGINE=INNODB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
   /*Table structure for table `ecommerce_direcciones` */
 
   DROP TABLE IF EXISTS `ecommerce_direcciones`;

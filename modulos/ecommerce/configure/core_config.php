@@ -320,6 +320,56 @@ return array(
                                   ),
           )
   ),
+  'ecommerce-sr-pago' => array(
+        'menu' => "ECOMMERCE API SR. PAGO",
+        'title' => "Configuración de Sr. pago",
+        'config' =>  array(
+                  array('path' => 'ecommerce/sr-pago/enabled',
+                          'type' => 'select',
+                          'label' => 'Habilitar metodo de pago',
+                          'validation' => array('required' => true),
+                          'data' => ['0' => 'No','1' => 'Sí'],
+                          'value' => '0'
+                        ),
+                    array('path' => 'ecommerce/sr-pago/sandbox',
+                            'type' => 'select',
+                            'label' => 'SANDBOX',
+                            'validation' => array('required' => true),
+                            'data' => ['0' => 'No','1' => 'Sí'],
+                            'value' => '1'
+                          ),
+                    array('path' => 'ecommerce/sr-pago/public',
+                            'type' => 'text',
+                            'label' => 'Public KEY',
+                            'validation' => array('required' => false),
+                            'value' => ''
+                      ),
+                      array('path' => 'ecommerce/sr-pago/secret',
+                              'type' => 'text',
+                              'label' => 'Secret KEY',
+                              'validation' => array('required' => false),
+                              'value' => ''
+                        ),
+                   
+                        array('path' => 'ecommerce/sr-pago/methods',
+                            'type' => 'select',
+                            'label' => 'Metodos de pago',
+                            'validation' => array('required' => false),
+                            'value' => ['srpago_tarjeta','srpago_oxxo','srpago_spei'],
+                            'data' => array('srpago_tarjeta' => 'Tarjeta credito/debito',
+                                            'srpago_oxxo' => 'OXOO',
+                                            'srpago_spei' => 'SPEI'
+                            ),
+                            'multiple' => true
+                          ),
+                          array('path' => 'ecommerce/sr-pago/limitcards',
+                          'type' => 'text',
+                          'label' => 'Limite de tarjetas',
+                          'validation' => array('required' => true,'numeric' => true),
+                          'value' => '3'
+                        )
+        )
+),
 );
 
 ?>

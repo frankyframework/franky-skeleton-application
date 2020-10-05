@@ -52,6 +52,17 @@ if($CardsModel->getData($CardsEntity->getArrayCopy())!= REGISTRO_SUCCESS)
             }
         }
     }
+    if(getCoreConfig('ecommerce/sr-pago/enabled') == 1)
+    {
+      if(in_array('srpago_tarjeta',getCoreConfig('ecommerce/sr-pago/methods')))
+        {
+          if($total_cards >= getCoreConfig('ecommerce/sr-pago/limitcards'))
+            {
+                $error = true;
+                $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("ecommerce_limit_cards", getCoreConfig('ecommerce/st-pago/limitcards')));
+            }
+        }
+    }
         
 }
 
@@ -74,6 +85,14 @@ if(!$error)
         $CardsEntity->nombre($MyRequest->getRequest("holder_name"));
       }
     }
+    if(getCoreConfig('ecommerce/sr-pago/enabled') == 1)
+    {
+      if(in_array('srpago_tarjeta',getCoreConfig('ecommerce/sr-pago/methods')))
+      {
+        $CardsEntity->numero(substr($MyRequest->getRequest("number"),-4));
+        $CardsEntity->nombre($MyRequest->getRequest("holder_name"));
+      }
+    }
 
 
     if($CardsModel->getData($CardsEntity->getArrayCopy())!= REGISTRO_SUCCESS)
@@ -91,6 +110,14 @@ if(!$error)
         {
            
       	  $source = addCardOpenpay($MyRequest->getRequest("token"),$MySession->GetVar('id'),$MyRequest->getRequest("device_session_id"));
+        }
+      }
+      if(getCoreConfig('ecommerce/sr-pago/enabled') == 1)
+      {
+        if(in_array('srpago_tarjeta',getCoreConfig('ecommerce/sr-pago/methods')))
+        {
+          
+      	  $source = addCardSrpago($MyRequest->getRequest("tokenInput"),$MySession->GetVar('id'));
         }
       }
 

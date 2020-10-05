@@ -113,7 +113,7 @@ function deleteCustomerOpenpay($id)
             $customer = $openpay->customers->get($registro["token"]);
             $customer->delete();
             $CustomerEntity->id($registro["id"]);
-            $CustomerModel->delete();
+            $CustomerModel->delete($CustomerEntity->getArrayCopy());
             return $customer;
         } catch (\OpenpayApiError $e) {
             //echo $e->getMessage();

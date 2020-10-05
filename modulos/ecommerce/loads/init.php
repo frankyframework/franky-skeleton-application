@@ -36,6 +36,14 @@ if(getCoreConfig('ecommerce/openpay/enabled') == 1)
   $ObserverManager->addObserver('login_user_'.NIVEL_USERSUSCRIPTOR,'checkCustomerOpenpay');
   $ObserverManager->addObserver('login_user_'.NIVEL_USERSUSCRIPTOR,'updateCustomerOpenpay');
 }
+if(getCoreConfig('ecommerce/sr-pago/enabled') == 1)
+{
+
+  include 'srpago.php';
+  $ObserverManager->addObserver('register_new_user','checkCustomerSrpago');
+  $ObserverManager->addObserver('login_user_'.NIVEL_USERSUSCRIPTOR,'checkCustomerSrpago');
+  $ObserverManager->addObserver('login_user_'.NIVEL_USERSUSCRIPTOR,'updateCustomerSrpago');
+}
 $ObserverManager->addObserver('login_user_'.NIVEL_USERSUSCRIPTOR,'setCarritoUser');
 $ObserverManager->addObserver('register_new_user','setCarritoUser');
 

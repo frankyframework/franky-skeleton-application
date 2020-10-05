@@ -102,6 +102,13 @@ function EliminarTarjetaEcommerce($id,$status)
                     deleteCardOpenpay($registro['token'],$registro['uid']);
                 }
             }
+            if(getCoreConfig('ecommerce/sr-pago/enabled') == 1)
+            {
+                if(in_array('srpago_tarjeta',getCoreConfig('ecommerce/sr-pago/methods')))
+                {
+                    deleteCardSrpago($registro['token'],$registro['uid']);
+                }
+            }
              $respuesta["message"] = "success";
         }
         else

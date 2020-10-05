@@ -56,7 +56,7 @@ class SlidersItemsForm extends \Franky\Form\Form
             'required'  => false,
             'atributos' => array(
                 'class'       => '',
-                'maxlength' => 255
+                'maxlength' => 500
             ),
             'label_atributos' => array(
                 'class'       => 'desc_form_obligatorio'
