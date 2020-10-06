@@ -188,7 +188,7 @@ function makeHTMLMetodosEnvio($id = null,$price=1)
     $EcommerceenviosModel->getData();
     $total	= $EcommerceenviosModel->getTotal();
     $metodos_envio = array();
-    $metodoenviohtml = ($price ==1 ? "<span class='envio price'>%s</span>" : '')." <span class='envio_name'>%s</span>";
+    $metodoenviohtml = ($price ==1 ? "<span class='envio price'>%s</span>" : '')." <span class='envio_name'>%s</span>, <b class='envio_time'>%s</b>";
     if($total > 0)
     {
         while($registro = $EcommerceenviosModel->getRows())
@@ -204,8 +204,8 @@ function makeHTMLMetodosEnvio($id = null,$price=1)
                 {
                     
                     $metodos_envio[$registro['id']] = ($price ==1 ? 
-                        sprintf($metodoenviohtml, getFormatoPrecio($tarifa),getCoreConfig('ecommerce/'.$registro['path'].'/titulo')) : 
-                        sprintf($metodoenviohtml, getCoreConfig('ecommerce/'.$registro['path'].'/titulo'))
+                        sprintf($metodoenviohtml, getFormatoPrecio($tarifa['price']),getCoreConfig('ecommerce/'.$registro['path'].'/titulo'),$tarifa['days']) : 
+                        sprintf($metodoenviohtml, getCoreConfig('ecommerce/'.$registro['path'].'/titulo'),$tarifa['days'])
                     );
                 }
             }
@@ -238,7 +238,9 @@ function getMetodosEnvio($id)
             {
                 $MetodoEnvio = new $registro['dataClass'];
                 
-                return $MetodoEnvio->getData();
+                $data = $MetodoEnvio->getData();
+
+                return $data['price'];
             }
 	}
     }

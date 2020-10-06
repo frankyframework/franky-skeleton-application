@@ -765,6 +765,9 @@ function loadMetodosPago(){
               if($config['path'] == "ecommerce/openpay/methods"):
                   $metodos_openpay = $config['data'];
               endif;
+              if($config['path'] == "ecommerce/sr-pago/methods"):
+                $metodos_srpago = $config['data'];
+            endif;
         endforeach;
     endforeach;
 
@@ -795,6 +798,17 @@ function loadMetodosPago(){
                 foreach($metodos as $k)
                 {
                   $metodos_de_pago[$k] = $metodos_openpay[$k];
+                }
+
+            endif;
+        }
+        if(getCoreConfig('ecommerce/sr-pago/enabled') == 1)
+        {
+            $metodos = getCoreConfig('ecommerce/sr-pago/methods');
+            if(!empty($metodos)):
+                foreach($metodos as $k)
+                {
+                  $metodos_de_pago[$k] = $metodos_srpago[$k];
                 }
 
             endif;

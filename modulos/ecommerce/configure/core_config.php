@@ -83,6 +83,12 @@ return array(
                             'data' => ['plana' => 'Plana','porcentaje' => 'Porcentaje'],
                             'value' => 'plana'
                     ),
+                    array('path' => 'ecommerce/envios-tarifa-plana/dias',
+                    'type' => 'text',
+                    'label' => 'Tiempo estimado',
+                    'validation' => array('required' => true),
+                    'value' => ''
+                    )
             )
     ),
     'ecommerce-envios-free' => array(
@@ -106,6 +112,12 @@ return array(
             array('path' => 'ecommerce/envios-free/minimo',
                     'type' => 'text',
                     'label' => 'Precio minimo',
+                    'validation' => array('required' => true),
+                    'value' => ''
+                ),
+                array('path' => 'ecommerce/envios-free/dias',
+                    'type' => 'text',
+                    'label' => 'Tiempo estimado',
                     'validation' => array('required' => true),
                     'value' => ''
                     )
@@ -132,6 +144,12 @@ return array(
             array('path' => 'ecommerce/pick-up/precio',
                     'type' => 'text',
                     'label' => 'Precio',
+                    'validation' => array('required' => true),
+                    'value' => ''
+                ),
+                array('path' => 'ecommerce/pick-up/dias',
+                    'type' => 'text',
+                    'label' => 'Tiempo estimado',
                     'validation' => array('required' => true),
                     'value' => ''
                     )
@@ -362,7 +380,7 @@ return array(
                             'validation' => array('required' => false),
                             'value' => ['srpago_tarjeta','srpago_oxxo','srpago_spei'],
                             'data' => array('srpago_tarjeta' => 'Tarjeta credito/debito',
-                                            'srpago_oxxo' => 'OXOO',
+                                            'srpago_oxxo' => 'OXXO',
                                             'srpago_spei' => 'SPEI'
                             ),
                             'multiple' => true

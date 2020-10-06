@@ -2,7 +2,7 @@
 function srpago_tarjeta()
 {
     global $MyRequest;
-    $MyForm =  new \Ecommerce\Form\openpayForm("card-payment-form");
+    $MyForm =  new \Ecommerce\Form\srpagoForm("card-payment-form");
 
     //$MyForm->addCheckGuardar();
     $MyForm->setAtributo("action", "/ecommerce/srpago/tarjeta/confirmacion.submit.php");
@@ -72,7 +72,7 @@ function srpago_spei()
         {
            $token = getToken("spei_srpago");
            $MySession->SetVar('spei_srpago',$token);
-           $respuesta["html"] = render(PROJECT_DIR."/modulos/ecommerce/diseno/srpago/button.establecimiento.phtml",['MyRequest' => $MyRequest,'token' => $token]);
+           $respuesta["html"] = render(PROJECT_DIR."/modulos/ecommerce/diseno/srpago/button.spei.phtml",['MyRequest' => $MyRequest,'token' => $token]);
         
            
         }
@@ -86,6 +86,6 @@ function srpago_spei()
 }
 /******************************** EJECUTA *************************/
 $MyAjax->register("srpago_tarjeta");
-$MyAjax->register("srpago_establecimiento");
+$MyAjax->register("srpago_oxxo");
 $MyAjax->register("srpago_spei");
 ?>
