@@ -59,6 +59,13 @@
                 "type":"int",
                 "length":1,
                 "null":0
+            },
+             {
+                "name":"required",
+                "type":"int",
+                "length":1,
+                "null":0,
+                "default": 0
             }
         ],
         "config":{

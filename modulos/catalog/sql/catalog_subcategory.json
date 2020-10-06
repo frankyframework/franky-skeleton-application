@@ -41,7 +41,7 @@
                 "default":1
             },
             {
-                "name":"user",
+                "name":"users",
                 "type":"text",
                 "null":1
                 

@@ -25,7 +25,7 @@ function checkCustomerSrpago($id)
                     
                 );
                 
-                \SrPago\SrPago::$apiKey = getCoreConfig('ecommerce/sr-pago/public');
+                \SrPago\SrPago::$apiKey = getCoreConfig('ecommerce/sr-pago/key');
                 \SrPago\SrPago::$apiSecret = getCoreConfig('ecommerce/sr-pago/secret');
                 \SrPago\SrPago::$liveMode = (getCoreConfig('ecommerce/sr-pago/sandbox') ? false : true);
                
@@ -33,14 +33,18 @@ function checkCustomerSrpago($id)
 
                 try{
                     $customer = $customerService->create($customer);
+                    if(isset($customer['result']['id']))
+                    {
+                        $CustomerEntity->token($customer['result']['id']);
+                        $CustomerEntity->id_categoria(1);
+                        $CustomerModel->save($CustomerEntity->getArrayCopy());
+                    }
                 }
                 catch (Exception $e){
                     echo 'Error ' . $e->getMessage() . ' ' . $e->getFile();
                 }
              
-                $CustomerEntity->token($customer['result']['id']);
-                $CustomerEntity->id_categoria(1);
-                $CustomerModel->save($CustomerEntity->getArrayCopy());
+                
                 //print_r($customer); die;
                 return $customer;
                 
@@ -69,6 +73,7 @@ function updateCustomerSrpago($id)
 
     if($CustomerModel->getData($CustomerEntity->getArrayCopy()) == REGISTRO_SUCCESS)
     {
+
         $registro = $CustomerModel->getRows();
         $UserModel = new \Base\model\USERS();
         if($UserModel->getData($id)==REGISTRO_SUCCESS)
@@ -101,7 +106,7 @@ function updateCustomerSrpago($id)
                   CURLOPT_POSTFIELDS =>json_encode($customer),
                   CURLOPT_HTTPHEADER => array(
                     "Content-Type: application/json",
-                    "Authorization: Basic ".base64_encode(getCoreConfig('ecommerce/sr-pago/public') .":". getCoreConfig('ecommerce/sr-pago/secret'))
+                    "Authorization: Basic ".base64_encode(getCoreConfig('ecommerce/sr-pago/key') .":". getCoreConfig('ecommerce/sr-pago/secret'))
                   ),
                 ));
                 $response = curl_exec($curl);
@@ -146,7 +151,7 @@ function deleteCustomerSrpago($id)
         try{
            
 
-            \SrPago\SrPago::$apiKey = getCoreConfig('ecommerce/sr-pago/public');
+            \SrPago\SrPago::$apiKey = getCoreConfig('ecommerce/sr-pago/key');
             \SrPago\SrPago::$apiSecret = getCoreConfig('ecommerce/sr-pago/secret');
             \SrPago\SrPago::$liveMode = (getCoreConfig('ecommerce/sr-pago/sandbox') ? false : true);
 
@@ -191,7 +196,7 @@ function deleteCardSrpago($token,$user)
 {
     try{
        
-        \SrPago\SrPago::$apiKey = getCoreConfig('ecommerce/sr-pago/public');
+        \SrPago\SrPago::$apiKey = getCoreConfig('ecommerce/sr-pago/key');
         \SrPago\SrPago::$apiSecret = getCoreConfig('ecommerce/sr-pago/secret');
         \SrPago\SrPago::$liveMode = (getCoreConfig('ecommerce/sr-pago/sandbox') ? false : true);
 
@@ -216,9 +221,9 @@ function deleteCardSrpago($token,$user)
 function addCardSrpago($token,$user)
 {
     try{
-      
+       
         
-        \SrPago\SrPago::$apiKey = getCoreConfig('ecommerce/sr-pago/public');
+        \SrPago\SrPago::$apiKey = getCoreConfig('ecommerce/sr-pago/key');
         \SrPago\SrPago::$apiSecret = getCoreConfig('ecommerce/sr-pago/secret');
         \SrPago\SrPago::$liveMode = (getCoreConfig('ecommerce/sr-pago/sandbox') ? false : true);
 
@@ -231,7 +236,7 @@ function addCardSrpago($token,$user)
         }catch (Exception $e){
             //echo 'Error ' . $e->getMessage() . ' ' . $e->getFile();
         }
-     //   print_r($newCard); die;
+        //print_r($newCard); die;
 
         return ['id' => $newCard['result']['token']];
     } catch (\OpenpayApiError $e) {

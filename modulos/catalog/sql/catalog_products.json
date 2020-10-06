@@ -121,7 +121,7 @@
                 "null":0
             },
             {
-                "name":"meta_keywords",
+                "name":"meta_keyword",
                 "type":"text",
                 "null":1
             },

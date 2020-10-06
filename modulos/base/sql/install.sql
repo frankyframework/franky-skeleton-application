@@ -308,6 +308,7 @@ CREATE TABLE `custom_attributes` (
   `createdAt` datetime NOT NULL,
   `updateAt` datetime DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT 1,
+  `required` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
@@ -319,5 +320,6 @@ CREATE TABLE `custom_attributes_values` (
   `id_attribute` int(11) NOT NULL,
   `id_ref` int(11) NOT NULL,
   `value` text NOT NULL,
+  `entity` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;

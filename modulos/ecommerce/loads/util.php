@@ -203,9 +203,10 @@ function makeHTMLMetodosEnvio($id = null,$price=1)
                 if($tarifa !== false)
                 {
                     
-                    $metodos_envio[$registro['id']] = ($price ==1 ? sprintf($metodoenviohtml, 
-                        getFormatoPrecio($tarifa),getCoreConfig('ecommerce/'.$registro['path'].'/titulo')) : 
-                        sprintf($metodoenviohtml, getCoreConfig('ecommerce/'.$registro['path'].'/titulo')));
+                    $metodos_envio[$registro['id']] = ($price ==1 ? 
+                        sprintf($metodoenviohtml, getFormatoPrecio($tarifa),getCoreConfig('ecommerce/'.$registro['path'].'/titulo')) : 
+                        sprintf($metodoenviohtml, getCoreConfig('ecommerce/'.$registro['path'].'/titulo'))
+                    );
                 }
             }
 	}

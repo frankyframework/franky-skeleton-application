@@ -25,6 +25,11 @@
                 "name":"value",
                 "type":"text",
                 "null":0
+            },
+            {
+                "name":"entity",
+                "type":"text",
+                "null":0
             }
         ],
         "config":{

@@ -80,9 +80,10 @@
             submitHandler: function() {
 
                 SrPago.setLiveMode(<?=(getCoreConfig('ecommerce/sr-pago/sandbox') ? 'false': 'true')?>);
-                SrPago.setPublishableKey("<?=(getCoreConfig('ecommerce/sr-pago/public').":".getCoreConfig('ecommerce/sr-pago/secret'))?>");
+                SrPago.setPublishableKey("<?=getCoreConfig('ecommerce/sr-pago/public')?>");
+                
 
-               
+                
                 var card = {
                     number: $('input[name=number]').val(),
                     holder_name: $('input[name=holder_name]').val(),

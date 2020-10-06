@@ -956,7 +956,6 @@ function saveDataCustomAttribute($id_ref,$entity)
         
         $custom_imputs[] = ['id' => $data_attrs['id'],'name' => $data_attrs['name'],'type' => $data_attrs['type']];
     }
-   
 
     $CustomattributesvaluesEntity->id_ref($id_ref);
     $CustomattributesvaluesEntity->entity($entity);
@@ -1008,6 +1007,9 @@ function saveDataCustomAttribute($id_ref,$entity)
         }
         $CustomattributesvaluesEntity->value($value);
         $CustomattributesvaluesModel->save($CustomattributesvaluesEntity->getArrayCopy());
+
+
     }
+    
 }
 ?>

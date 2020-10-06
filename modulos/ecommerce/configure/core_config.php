@@ -338,7 +338,7 @@ return array(
                             'data' => ['0' => 'No','1' => 'Sí'],
                             'value' => '1'
                           ),
-                    array('path' => 'ecommerce/sr-pago/public',
+                    array('path' => 'ecommerce/sr-pago/key',
                             'type' => 'text',
                             'label' => 'Public KEY',
                             'validation' => array('required' => false),
@@ -350,7 +350,12 @@ return array(
                               'validation' => array('required' => false),
                               'value' => ''
                         ),
-                   
+                        array('path' => 'ecommerce/sr-pago/public',
+                        'type' => 'text',
+                        'label' => 'Public KEY',
+                        'validation' => array('required' => false),
+                        'value' => ''
+                  ),
                         array('path' => 'ecommerce/sr-pago/methods',
                             'type' => 'select',
                             'label' => 'Metodos de pago',
