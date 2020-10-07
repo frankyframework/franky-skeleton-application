@@ -23,7 +23,8 @@ $DireccionCheckoutForm->addDirecionFacturacion($direcciones_facturacion);
 $DireccionCheckoutForm->setAtributoInput("id_facturacion", "value", "no_requiere");
 $DireccionCheckoutForm->addSubmit();
 
-$direcciones_envio = [];
+
+$direcciones_envio = makeHTMLDireccion("envio",$MySession->GetVar("id"));
 if(getCoreConfig('ecommerce/pick-up/enabled') == 1)
 {
     $direcciones_envio["pick-up"] = getCoreConfig('ecommerce/pick-up/titulo');
@@ -33,8 +34,8 @@ if(getCoreConfig('ecommerce/pick-up/enabled') == 1)
     $pickupForm->addSubmit();
 }
 
-$_direcciones_envio = makeHTMLDireccion("envio",$MySession->GetVar("id"));
-$direcciones_envio = array_merge($direcciones_envio,$_direcciones_envio);
+
+
 if(!empty($direcciones_envio))
 {
   $direcciones_envio["otra"] = 'Nueva dirección';

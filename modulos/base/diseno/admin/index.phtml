@@ -1,13 +1,15 @@
 <div class="w-xxxx12 _wrapper_avatar">
     <h1>Mi perfil</h1>
-    <?php if ($MySession->LoggedIn() && $MySession->GetVar('verificado') == 0): ?>
+    
     <div class="w-xxxx-12">
         <h2>¡Bienvenido!</h2>
-        <p>En este lugar podrás administrar tanto tu cuenta como la configuración de tu sitio</p>
+        <p>En este lugar podrás administrar tanto tu cuenta como la configuración del sitio</p>
+        <?php if ($MySession->LoggedIn() && $MySession->GetVar('verificado') == 0): ?>
         <div class="_cont_dashboard _perfil">
             <h3>Confirmar mi cuenta</h3>
             <a class="_btn _secondary" href="/registro/setVerificacion.php">Reenviar el correo de confirmación</a>
         </div>
+        <?php endif; ?>
     </div>
-    <?php endif; ?>
+   
 </div>

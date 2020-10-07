@@ -31,11 +31,11 @@ if($cupon != false)
 
 $id_tarjeta = $MyRequest->getRequest('id_tarjeta');
 $error = false;
-if($MySession->GetVar('tarjeta_openpay') == "" )
+if($MySession->GetVar('tarjeta_srpago') == "" )
 {
   $error = true;
 }
-$MySession->UnsetVar('tarjeta_openpay');
+$MySession->UnsetVar('tarjeta_srpago');
 
 if(empty($id_tarjeta))
 {
@@ -65,14 +65,14 @@ if(empty($id_tarjeta))
 
     $CardsEntity->uid($MySession->GetVar('id'));
     $CardsEntity->status(1);
-    $CardsEntity->numero(substr($MyRequest->getRequest("card_number"),-4));
+    $CardsEntity->numero(substr($MyRequest->getRequest("number"),-4));
 
 
     if($CardsModel->getData($CardsEntity->getArrayCopy())!= REGISTRO_SUCCESS)
     {
 
       $CardsEntity->nombre($MyRequest->getRequest("holder_name"));
-      $source = addCardOpenpay($MyRequest->getRequest("token"),$MySession->GetVar('id'),$MyRequest->getRequest("device_session_id"));
+      $source = addCardSrpago($MyRequest->getRequest("tokenInput"),$MySession->GetVar('id'));
       
   
      
@@ -80,6 +80,12 @@ if(empty($id_tarjeta))
       $CardsEntity->token($source['id']);
       $id_tarjeta = $source['id'];
 
+
+      if(empty($id_tarjeta))
+      {
+        $MyRequest->redirect($MyRequest->getReferer());
+        die;
+      }
       $result = $CardsModel->save($CardsEntity->getArrayCopy());
 
       if($result == REGISTRO_SUCCESS)
@@ -142,33 +148,32 @@ if(!$error)
 
 if(!$error)
 {
+
     try{
       $order_id = md5(time().$MySession->GetVar('id'));
-      $openpay = Openpay::getInstance((getCoreConfig('ecommerce/openpay/sandbox') == 1 ? getCoreConfig('ecommerce/openpay/idsandbox') :  getCoreConfig('ecommerce/openpay/id')),
-       (getCoreConfig('ecommerce/openpay/sandbox') == 1 ? getCoreConfig('ecommerce/openpay/secretsandbox') :  getCoreConfig('ecommerce/openpay/secret')));
-
-      Openpay::setProductionMode((getCoreConfig('ecommerce/openpay/sandbox') == 1 ? false : true));
-
-  
-       $customer = $openpay->customers->get(getCustomerOpenpay($MySession->GetVar('id')));
-
       
+      $chargeParams = array(
+        "amount"=> $productos_comprados['gran_total'] + $data['monto_envio'] - (isset($productos_comprados['descuento']) ? $productos_comprados['descuento'] : 0),
+        "description" => "Cargo a tarjeta Orden $order_id",
+        "reference"=> $order_id,
+        "ip"=> $MyRequest->getIP(),
+        "source"=>$id_tarjeta
+        );
+        //print_r($chargeParams);
+        
+        $metadata = array(
+            "member" => [
+                "memberFullName" => $MySession->GetVar('nombre'),
+                "memberEmailAddress" => $MySession->GetVar('email'),
+            ]
+            );
+
+        $order = pagoTarjeta($chargeParams,$metadata);
+            //print_r($order);
        
-          $order = $customer->charges->create(
-            array(
-              'method' => 'card',
-               'source_id' => $id_tarjeta,
-               'amount' => $productos_comprados['gran_total'] + $data['monto_envio'] - (isset($productos_comprados['descuento']) ? $productos_comprados['descuento'] : 0),
-               'currency' => 'MXN',
-               'description' => 'Cargo a tarjeta',
-               'order_id' => $order_id,
-               'device_session_id' => $MyRequest->getRequest("device_session_id"),
-            )
-          );
-      
           
 
-    } catch (\OpenpayApiError $e) {
+    } catch (\Exception $e) {
         $MyFlashMessage->setMsg("error",$e->getMessage());
         $MyRequest->redirect($MyRequest->getReferer());
        
@@ -177,13 +182,14 @@ if(!$error)
 
 
     $referencia = json_encode(
-            ['id' => $order->id,
-            'status' => $order->status,
-            'authorization' => $order->authorization,
-            'order_id' => $order->order_id,
+            [
+            'id' => $order['result']['transaction'],
+            'status' => $order['result']['status'],
+            'authorization' => $order['result']['authorization_code'],
+            'order_id' => $order_id,
             ]
             );
-    $status_pago = normalizeStatusTransaccion($order->status);
+    $status_pago = normalizeStatusTransaccion(getStatusTransaccionSrpago($order['result']['status']));
 
     $MySession->SetVar('status_pago',$status_pago);
     
@@ -196,7 +202,7 @@ if(!$error)
         }
     }
     else {
-        if(isset($data["direccion_facturacion"]))
+        if(isset($data["direccion_facturacion"]) && !empty($data["direccion_facturacion"]))
         {
             $direcciones_facturacion = new direcciones_facturacion();
             $DireccionesFacturacionEntity = new DireccionesFacturacionEntity($data["direccion_facturacion"]);
@@ -233,7 +239,7 @@ if(!$error)
     $MyPedidoEntity->setFecha(date('Y-m-d H:i:s'));
     $MyPedidoEntity->setUid($MySession->GetVar('id'));
     $MyPedidoEntity->setStatus($status_pago);
-    $MyPedidoEntity->setMetodo_pago("openpay_tarjeta");
+    $MyPedidoEntity->setMetodo_pago("srpago_tarjeta");
     $MyPedidoEntity->setMetodo_envio($data['id_metodo_envio']);
     $MyPedidoEntity->setMonto_compra($productos_comprados['gran_total']);
     $MyPedidoEntity->setMonto_pagado($productos_comprados['gran_total']+$data['monto_envio']);
@@ -305,5 +311,5 @@ if($error)
 {
   $MyRequest->redirect($MyRequest->getReferer());
 }
-$MyRequest->redirect($MyRequest->url(CONFIRMACION_OPENPAY_TARJETA));
+$MyRequest->redirect($MyRequest->url(CONFIRMACION_SRPAGO_TARJETA));
 ?>

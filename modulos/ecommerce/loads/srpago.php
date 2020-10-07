@@ -244,4 +244,37 @@ function addCardSrpago($token,$user)
         //El pago no pudo ser procesado
     }
 }
+
+
+function pagoTarjeta($chargeParams,$metadata)
+{
+    \SrPago\SrPago::$apiKey = getCoreConfig('ecommerce/sr-pago/key');
+    \SrPago\SrPago::$apiSecret = getCoreConfig('ecommerce/sr-pago/secret');
+    \SrPago\SrPago::$liveMode = (getCoreConfig('ecommerce/sr-pago/sandbox') ? false : true);
+
+    $chargesService = new \SrPago\Charges();
+
+    $chargeParams['metadata'] = $metadata;
+
+    try{
+        $newCharge = $chargesService->create($chargeParams);
+        return $newCharge;
+    }catch (Exception $e){
+        //echo 'Error ' . $e->getMessage() . ' ' . $e->getFile();
+    }
+    return $newCharge;
+}
+
+function getStatusTransaccionSrpago($status)
+{
+    switch ($status)
+    {
+        case "N":
+            $_status = "paid";
+        break;
+    }
+
+
+    return $_status;
+}
 ?>

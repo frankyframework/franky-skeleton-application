@@ -957,13 +957,13 @@ function saveDataCustomAttribute($id_ref,$entity)
         $custom_imputs[] = ['id' => $data_attrs['id'],'name' => $data_attrs['name'],'type' => $data_attrs['type']];
     }
 
-    $CustomattributesvaluesEntity->id_ref($id_ref);
-    $CustomattributesvaluesEntity->entity($entity);
-    $CustomattributesvaluesModel->remove($CustomattributesvaluesEntity->getArrayCopy());
-
+   
+//print_r($custom_imputs);
+//print_r($MyRequest->getRequest());
+//die;
     foreach($custom_imputs as $input)
     {
-        $CustomattributesvaluesEntity->id_attribute($input['id']);
+        
         $name = str_replace("[]", "", $input['name']);
         if($input['type'] == 'file')
         {
@@ -995,16 +995,30 @@ function saveDataCustomAttribute($id_ref,$entity)
                     }
                     else
                     {
-                        $value = '';
+                        continue;
                     }
+                }else
+                {
+                    continue;
                 }
                 
             }
+            else{
+                continue;
+            }
+            
 
         }
         else{
             $value = (is_array($MyRequest->getRequest($name)) ? json_encode($MyRequest->getRequest($name)) : $MyRequest->getRequest($name,'',true));
         }
+        $CustomattributesvaluesEntity->exchangeArray([]);
+        $CustomattributesvaluesEntity->id_attribute($input['id']);
+        $CustomattributesvaluesEntity->id_ref($id_ref);
+        $CustomattributesvaluesEntity->entity($entity);
+        $CustomattributesvaluesModel->remove($CustomattributesvaluesEntity->getArrayCopy());
+
+
         $CustomattributesvaluesEntity->value($value);
         $CustomattributesvaluesModel->save($CustomattributesvaluesEntity->getArrayCopy());
 

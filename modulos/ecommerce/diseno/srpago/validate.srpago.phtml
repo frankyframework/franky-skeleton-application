@@ -2,8 +2,8 @@
 $("#card-payment-form").find("input[type=submit]").prop("disabled", true);
 $("form[name=frm_tarjeta_checkout] input[name=continuar]").prop("disabled", true);
 var SrPagoonSuccessHandler = function(result){
-        $("#tokenInput").val(result.token);
-        $("#card-payment-form").submit();
+    $("input[name=tokenInput]").val(result.token);
+        document.getElementById("card-payment-form").submit();
     };
 var SrPagoonFailHandler = function(error){
     _alert("Error " + error.code + ": " + error.message);
