@@ -55,6 +55,8 @@ class Charges extends Base {
 
         return $this->mapToResponse($response);
     }
+
+  
     
     public function mapToResponse($response){
         if(isset($response['result']) && isset($response['result']['recipe'])){

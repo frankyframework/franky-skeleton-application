@@ -143,7 +143,7 @@ if($MyUserEntity->getTelefono() != "" && $MyUser->findTelefono($MyUserEntity->ge
 
                             $TemplateemailModel    = new \Base\model\TemplateemailModel;
                             $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
-                            $SecciontransaccionalEntity->frinedly('registro-de-usuario-frontend');
+                            $SecciontransaccionalEntity->friendly('registro-de-usuario-frontend');
                             $TemplateemailModel->setOrdensql('id DESC');
                             $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
 

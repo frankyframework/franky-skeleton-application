@@ -135,14 +135,14 @@ DROP TABLE IF EXISTS secciones_transaccionales;
 CREATE TABLE secciones_transaccionales (
   id int(11) NOT NULL AUTO_INCREMENT,
   nombre varchar(200) NOT NULL,
-  frinedly varchar(200) NOT NULL,
+  friendly varchar(200) NOT NULL,
   status int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table 'secciones_transaccionales' */
 
-insert  into secciones_transaccionales(id,nombre,frinedly,status) values
+insert  into secciones_transaccionales(id,nombre,friendly,status) values
   (1,'Registro de usuario Frontend','registro-de-usuario-frontend',1),
   (2,'Registro de usuario backend','registro-de-usuario-backend',1),
   (3,'Confirmacion de email','confirmacion-de-email',1),

@@ -87,7 +87,7 @@ if ($data_openpay['type'] == 'charge.succeeded'){
 
               $TemplateemailModel    = new \Base\model\TemplateemailModel;
               $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
-              $SecciontransaccionalEntity->frinedly('cambio-status-pedido');
+              $SecciontransaccionalEntity->friendly('cambio-status-pedido');
               $TemplateemailModel->setOrdensql('id DESC');
               $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
 

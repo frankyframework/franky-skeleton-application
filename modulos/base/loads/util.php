@@ -837,7 +837,7 @@ function validLoginUserDevice()
             {
                 $TemplateemailModel    = new \Base\model\TemplateemailModel;
                 $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
-                $SecciontransaccionalEntity->frinedly('nuevo-dispositivo');
+                $SecciontransaccionalEntity->friendly('nuevo-dispositivo');
                 $TemplateemailModel->setOrdensql('id DESC');
                 $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
 

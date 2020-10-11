@@ -13,7 +13,7 @@ class SecciontransaccionalModel  extends \Franky\Database\Mysql\objectOperations
     function getData($data = array())
     {
         $data = $this->optimizeEntity($data);
-        $campos = ["id","nombre","frinedly","status"];
+        $campos = ["id","nombre","friendly","status"];
 
         foreach($data as $k => $v)
         {

@@ -16,7 +16,7 @@ if($MySession->GetVar('id') != "")
 
     $TemplateemailModel    = new \Base\model\TemplateemailModel;
     $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
-    $SecciontransaccionalEntity->frinedly('confirmacion-de-email');
+    $SecciontransaccionalEntity->friendly('confirmacion-de-email');
     $TemplateemailModel->setOrdensql('id DESC');
     $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
 

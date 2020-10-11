@@ -654,7 +654,7 @@ function SetStatusPagoEcommerce($id,$status,$nota,$monto)
 
 
                 $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
-                $SecciontransaccionalEntity->frinedly('cambio-status-pedido');
+                $SecciontransaccionalEntity->friendly('cambio-status-pedido');
                 $TemplateemailModel->setOrdensql('id DESC');
                 $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
 

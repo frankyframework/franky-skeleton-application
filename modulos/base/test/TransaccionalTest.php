@@ -31,7 +31,7 @@ class TransaccionalTest extends TestCase
       ];
 
 
-      $this->SecciontransaccionalEntity->frinedly('contactanos');
+      $this->SecciontransaccionalEntity->friendly('contactanos');
       $this->TemplateemailModel->setOrdensql('id DESC');
       $result = $this->TemplateemailModel->getData([],$this->SecciontransaccionalEntity->getArrayCopy());
 

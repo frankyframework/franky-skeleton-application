@@ -104,7 +104,7 @@ if(!$error)
 );
 
             $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
-            $SecciontransaccionalEntity->frinedly('agregar-comprovante-de-pago');
+            $SecciontransaccionalEntity->friendly('agregar-comprovante-de-pago');
             $TemplateemailModel->setOrdensql('id DESC');
             $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
 

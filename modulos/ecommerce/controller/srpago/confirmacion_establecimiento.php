@@ -55,55 +55,76 @@ if(empty($productos_comprados)){
 
 foreach($productos_comprados['productos'] as $producto)
 {
-    $items[] = array("name" => $producto["nombre"],"unit_price" => $producto["precio"]*100,"quantity" => $producto["qty"]);
+    $items[] = array("name" => $producto["nombre"],"unit_price" => $producto["precio"],"quantity" => $producto["qty"]);
+}
+if($data['monto_envio'] > 0)
+{
+    $items[] = array("name" => "Servicio de envio","unit_price" => $data["monto_envio"],"quantity" => 1); 
 }
 
-/*Aqui openpay*/
+
+/*Aqui srpago*/
+
+
 
 
 try{
-$order_id = md5(time().$MySession->GetVar('id'));
-$openpay = Openpay::getInstance((getCoreConfig('ecommerce/openpay/sandbox') == 1 ? getCoreConfig('ecommerce/openpay/idsandbox') :  getCoreConfig('ecommerce/openpay/id')),
- (getCoreConfig('ecommerce/openpay/sandbox') == 1 ? getCoreConfig('ecommerce/openpay/secretsandbox') :  getCoreConfig('ecommerce/openpay/secret')));
+    $order_id = md5(time().$MySession->GetVar('id'));
+    
 
-Openpay::setProductionMode((getCoreConfig('ecommerce/openpay/sandbox') == 1 ? false : true));
+      
+      $chargeParams = array(
+        "payment" => array(
+          "reference" =>
+            array(
+                "description" => $order_id
+            )
+        ),
+        "total" => $productos_comprados['gran_total'] + $data['monto_envio'] - (isset($productos_comprados['descuento']) ? $productos_comprados['descuento'] : 0),
+        "store" => "oxxo"
+        );
 
- $customer = $openpay->customers->get(getCustomerOpenpay($MySession->GetVar('id')));
+      $metadata = array(
+          "member" => [
+              "memberFullName" => $MySession->GetVar('nombre'),
+              "memberEmailAddress" => $MySession->GetVar('email'),
+          ]
+          );
+     
+      $order = pagoOXXO($chargeParams,$metadata);
+   
+     //print_r($order);
+        if($order == false)
+        {
+            $MyFlashMessage->setMsg("error","Error al procesar la orden");
+            $MyRequest->redirect($MyRequest->getReferer());
+        }
 
- $limit = explode(" ",date('Y-m-d H:i:s', strtotime("+3 days")));
-    $order = $customer->charges->create(
-      array(
-        'method' => 'store',
-         'amount' => $productos_comprados['gran_total']+$data['monto_envio'] - (isset($productos_comprados['descuento']) ? $productos_comprados['descuento'] : 0),
-         'currency' => 'MXN',
-         'description' => 'Cargo a establecimiento',
-         'order_id' => $order_id,
-         'due_date' => $limit[0].'T'.$limit[1],
-      )
-    );
-
-
-} catch (\OpenpayApiError $e) {
-  $MyFlashMessage->setMsg("error",$e->getMessage());
-  $MyRequest->redirect($MyRequest->getReferer());
-
-}
-$referencia =
-        ['id' => $order->id,
-        'status' => $order->status,
-        'order_id' => $order->order_id,
-        'amount' => $order->amount,
-        'due_date' => $limit[0].' '.$limit[1],
-        'payment_method' => [
-          'reference' => $order->payment_method->reference,
-          'barcode_url' => $order->payment_method->barcode_url,
-
-        ]
-        ];
-$status_pago = normalizeStatusTransaccion($order->status);
+  } catch (\Exception $e) {
+      $MyFlashMessage->setMsg("error",$e->getMessage());
+      $MyRequest->redirect($MyRequest->getReferer());
+     
+      
+  }
 
 
+  $referencia = 
+          [
+          'id' => $order['result']['transaction'],
+          'status' => $order['result']['status_code'],
+          'url' => $order['result']['url'],
+          'barcode' => $order['result']['barcode'],
+          'bank_account_number' => $order['result']['bank_account_number'],
+          'barcode_url' => $order['result']['barcode_url'],
+          'expiration_date' => $order['result']['expiration_date'],
+          'order_id' => $order_id,
+          ];
 
+       
+$status_pago = normalizeStatusTransaccion($order['result']['status_code']);
+
+
+//print_r($data);
 
 if(isset($data["id_facturacion"]))
 {
@@ -113,7 +134,7 @@ if(isset($data["id_facturacion"]))
     }
 }
 else {
-    if(isset($data["direccion_facturacion"]))
+    if(isset($data["direccion_facturacion"]) && !empty($data["direccion_facturacion"]))
     {
         $direcciones_facturacion = new direcciones_facturacion();
         $DireccionesFacturacionEntity = new DireccionesFacturacionEntity($data["direccion_facturacion"]);
@@ -150,7 +171,7 @@ $MyPedidoEntity->setId_direccion_facturacion(json_encode($id_direccion_facturaci
 $MyPedidoEntity->setFecha(date('Y-m-d H:i:s'));
 $MyPedidoEntity->setUid($MySession->GetVar('id'));
 $MyPedidoEntity->setStatus($status_pago);
-$MyPedidoEntity->setMetodo_pago("openpay_establecimiento");
+$MyPedidoEntity->setMetodo_pago("srpago_oxxo");
 $MyPedidoEntity->setMetodo_envio($data['id_metodo_envio']);
 $MyPedidoEntity->setMonto_compra($productos_comprados['gran_total']);
 $MyPedidoEntity->setSubtotal($productos_comprados['subtotal']);
@@ -179,6 +200,7 @@ if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)
     $productos_html = render(PROJECT_DIR.'/modulos/ecommerce/diseno/email/productos.phtml',['items' =>$productos_comprados['productos']]);
     $envio_html = render(PROJECT_DIR.'/modulos/ecommerce/diseno/email/metodoenvio.phtml',['direccion' =>$direccion_envio,'metodo_envio' => makeHTMLMetodosEnvio($data['id_metodo_envio'],0)]);
 
+    
 
     $campos = array(
         "orden" => $pedido,
@@ -192,12 +214,12 @@ if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)
         'descuento' => getFormatoPrecio($productos_comprados['descuento']),
         'gran_total' => getFormatoPrecio($productos_comprados['gran_total']+$data['monto_envio']-$productos_comprados['descuento']),'metodo_pago' =>'Pago en Establecimiento','status' => getStatusTransaccion($status_pago),'referencia' => $referencia);
 
-        $campos['ticket_establecimiento'] = render(PROJECT_DIR.'/modulos/ecommerce/diseno/email/ticket_establecimiento.phtml',
-            [ 'due_date' => $limit[0].' '.$limit[1],'productos_comprados' =>$productos_comprados,'referencia' => $referencia,'MyRequest' => $MyRequest,'MySession' => $MySession]);
+        $campos['ticket_oxxo'] = render(PROJECT_DIR.'/modulos/ecommerce/diseno/email/ticket_oxxo_srpago.phtml',
+            ['chargeParams' => $chargeParams ,'items' =>$items,'order' => $order]);
 
     $TemplateemailModel    = new \Base\model\TemplateemailModel;
     $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
-    $SecciontransaccionalEntity->frinedly('nueva-orden-de-compra-establecimiento-openpay');
+    $SecciontransaccionalEntity->friendly('nueva-orden-de-compra-oxxo');
     $TemplateemailModel->setOrdensql('id DESC');
     $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
 

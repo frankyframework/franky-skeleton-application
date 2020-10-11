@@ -6,7 +6,7 @@ class SecciontransaccionalEntity
 {
     private $id;
     private $nombre;
-    private $frinedly;
+    private $friendly;
     private $status;
 
 
@@ -22,7 +22,7 @@ class SecciontransaccionalEntity
     {
         $this->id = (isset($data["id"]) ? $data["id"] : null);
         $this->nombre = (isset($data["nombre"]) ? $data["nombre"] : null);
-        $this->frinedly = (isset($data["frinedly"]) ? $data["frinedly"] : null);
+        $this->friendly = (isset($data["friendly"]) ? $data["friendly"] : null);
         $this->status = (isset($data["status"]) ? $data["status"] : null);
 
     }
@@ -43,7 +43,7 @@ class SecciontransaccionalEntity
 
     public function nombre($nombre = null){ if($nombre != null){ $this->nombre=$nombre; }else{ return $this->nombre; } }
 
-    public function frinedly($frinedly = null){ if($frinedly != null){ $this->frinedly=$frinedly; }else{ return $this->frinedly; } }
+    public function friendly($friendly = null){ if($friendly != null){ $this->friendly=$friendly; }else{ return $this->friendly; } }
 
     public function status($status = null){ if($status !== null){ $this->status=$status; }else{ return $this->status; } }
 

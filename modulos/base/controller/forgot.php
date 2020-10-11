@@ -36,7 +36,7 @@ if($error == false)
 
         $TemplateemailModel    = new \Base\model\TemplateemailModel;
         $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
-        $SecciontransaccionalEntity->frinedly('recuperar-contrasena');
+        $SecciontransaccionalEntity->friendly('recuperar-contrasena');
         $TemplateemailModel->setOrdensql('id DESC');
         $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
 

@@ -44,7 +44,7 @@ if($error== false)
 
                 $TemplateemailModel    = new \Base\model\TemplateemailModel;
                 $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
-                $SecciontransaccionalEntity->frinedly('contactanos');
+                $SecciontransaccionalEntity->friendly('contactanos');
                 $TemplateemailModel->setOrdensql('id DESC');
                 $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
 
@@ -53,7 +53,7 @@ if($error== false)
                 sendEmail($campos,$registro);
 
                 if(getCoreConfig('base/contactanos/user-notification')==1):
-                    $SecciontransaccionalEntity->frinedly('contactanos-user-notification');
+                    $SecciontransaccionalEntity->friendly('contactanos-user-notification');
                     $TemplateemailModel->setOrdensql('id DESC');
                     $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
     

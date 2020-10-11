@@ -79,7 +79,7 @@ if ($data_conketa->type == 'charge.paid'){
 
               $TemplateemailModel    = new \Base\model\TemplateemailModel;
               $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
-              $SecciontransaccionalEntity->frinedly('cambio-status-pedido');
+              $SecciontransaccionalEntity->friendly('cambio-status-pedido');
               $TemplateemailModel->setOrdensql('id DESC');
               $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
 

@@ -132,7 +132,7 @@ if(!$error)
 
             $TemplateemailModel    = new \Base\model\TemplateemailModel;
             $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
-            $SecciontransaccionalEntity->frinedly('registro-de-usuario-backend');
+            $SecciontransaccionalEntity->friendly('registro-de-usuario-backend');
             $TemplateemailModel->setOrdensql('id DESC');
             $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
 
@@ -164,7 +164,7 @@ if(!$error)
 
               $TemplateemailModel    = new \Base\model\TemplateemailModel;
               $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
-              $SecciontransaccionalEntity->frinedly('confirmacion-de-email');
+              $SecciontransaccionalEntity->friendly('confirmacion-de-email');
               $TemplateemailModel->setOrdensql('id DESC');
               $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
 

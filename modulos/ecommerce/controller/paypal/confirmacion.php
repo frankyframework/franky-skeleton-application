@@ -175,7 +175,7 @@ if($status_pago == "pending" || $status_pago == "paid")
 
                 $TemplateemailModel    = new \Base\model\TemplateemailModel;
                 $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
-                $SecciontransaccionalEntity->frinedly('nueva-orden-de-compra');
+                $SecciontransaccionalEntity->friendly('nueva-orden-de-compra');
                 $TemplateemailModel->setOrdensql('id DESC');
                 $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
 

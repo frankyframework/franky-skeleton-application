@@ -45,8 +45,8 @@ function srpago_oxxo()
 
         if($MySession->LoggedIn())
         {
-           $token = getToken("establecimiento_srpago");
-           $MySession->SetVar('establecimiento_srpago',$token);
+           $token = getToken("establecimiento_pay");
+           $MySession->SetVar('establecimiento_pay',$token);
            $respuesta["html"] = render(PROJECT_DIR."/modulos/ecommerce/diseno/srpago/button.establecimiento.phtml",['MyRequest' => $MyRequest,'token' => $token]);
         
            

@@ -17,6 +17,7 @@
         <li><strong>Total a pagar:</strong> <?php echo getFormatoPrecio($detalle_pedido['monto_compra']-$detalle_pedido['descuento']+$detalle_pedido['monto_envio']); ?></li>
         <li class="_total"><strong>Monto pagado:</strong> <?php echo getFormatoPrecio($detalle_pedido['monto_pagado']); ?></li>
         <?php
+
         $referencia = json_decode($detalle_pedido['referencia'],true);
         if($MyAccessList->MeDasChancePasar(ADMINISTRAR_PEDIDOS))
         {
@@ -27,6 +28,7 @@
             <?php if($detalle_pedido['metodo_pago'] == 'conekta_tarjeta'): ?>
                 <li>Referencia: <?=$referencia['id']?></li>
             <?php endif;?>
+
             <?php if($detalle_pedido['metodo_pago'] == 'conekta_oxxo'): ?>
                 <li>Referencia: <?=$referencia['id']?></li>
             <?php endif;?>
@@ -35,6 +37,12 @@
               <li>Autorizacion: <?=$referencia['authorization']?></li>
             <?php endif;?>
             <?php if($detalle_pedido['metodo_pago'] == 'openpay_establecimiento'): ?>
+              <li>Referencia: <?=$referencia['id']?></li>
+            <?php endif;?>
+            <?php if($detalle_pedido['metodo_pago'] == 'srpago_tarjeta'): ?>
+                <li>Referencia: <?=$referencia['id']?></li>
+            <?php endif;?>
+            <?php if($detalle_pedido['metodo_pago'] == 'srpago_oxxo'): ?>
               <li>Referencia: <?=$referencia['id']?></li>
             <?php endif;?>
 
@@ -49,6 +57,14 @@
           <li>Codigo de pago: <?=makeHTMLImg($referencia['payment_method']['barcode_url'],150,'','codigo de barras pago');?></li>
           <li>Referencia pago: <?=$referencia['payment_method']['reference']?></li>
           <li>Fecha limite de pago: <?=getfechaUI($referencia['due_date'])?></li>
+        <?php endif;?>
+        <?php if($detalle_pedido['metodo_pago'] == 'srpago_oxxo'): ?>
+
+        
+          <?php $expiration_date = explode("T",$referencia['expiration_date']); ?>
+          <li>Codigo de pago: <?=makeHTMLImg($referencia['barcode_url'],150,'','codigo de barras pago');?></li>
+          <li>Referencia pago: <?=$referencia['barcode']?></li>
+          <li>Fecha limite de pago: <?=getfechaUI($expiration_date[0])?></li>
         <?php endif;?>
     </ul>
     <h4>Productos</h4>
