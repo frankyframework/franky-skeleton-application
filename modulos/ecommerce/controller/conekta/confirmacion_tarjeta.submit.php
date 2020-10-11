@@ -191,7 +191,7 @@ if(!$error)
         }
     }
     else {
-        if(isset($data["direccion_facturacion"]))
+        if(isset($data["direccion_facturacion"]) && !empty($data["direccion_facturacion"]))
         {
             $direcciones_facturacion = new direcciones_facturacion();
             $DireccionesFacturacionEntity = new DireccionesFacturacionEntity($data["direccion_facturacion"]);
