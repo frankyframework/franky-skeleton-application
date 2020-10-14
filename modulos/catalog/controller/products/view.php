@@ -126,7 +126,7 @@ if($CatalogproductrelatedModel->getData($CatalogproductrelatedEntity->getArrayCo
         $_img = getCoreConfig('catalog/product/placeholder');
         if($_img != "" && file_exists(PROJECT_DIR.$_img))
         {
-          $registro['thumb_resize'] = imageResize($_img,500,500, false);
+            $registro['thumb_resize'] = imageResize($_img,500,500, false);
         }
         $registro["images"] = json_decode($registro["images"],true);
 

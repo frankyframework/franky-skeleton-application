@@ -314,6 +314,57 @@ function pagoOXXO($chargeParams,$metadata)
 
 }
 
+
+
+
+function pagoSPEISrPago($chargeParams,$metadata)
+{
+    $chargeParams['metadata'] = $metadata;
+
+
+    try{
+
+        $sandbox = (getCoreConfig('ecommerce/sr-pago/sandbox') == 1 ? 'sandbox-' : '' );
+        $url = "https://".$sandbox."api.srpago.com/v1/payment/spei";
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => $url,
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => "",
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => false,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => "POST",
+          CURLOPT_POSTFIELDS =>json_encode($chargeParams),
+          CURLOPT_HTTPHEADER => array(
+            "Content-Type: application/json",
+            "Authorization: Basic ".base64_encode(getCoreConfig('ecommerce/sr-pago/key') .":". getCoreConfig('ecommerce/sr-pago/secret'))
+          ),
+        ));
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+        if ($err) {
+          return false;
+        } else {
+            return json_decode($response,true);
+        }
+
+
+
+
+
+        
+    } catch (\OpenpayApiError $e) {
+        //
+        //El pago no pudo ser procesado
+        return false;
+    }
+
+}
+
 function getStatusTransaccionSrpago($status)
 {
     switch ($status)

@@ -59,7 +59,7 @@ $MyFrankyMonster->setPHPFile(getVista("admin/template/grid.phtml"));
 $title_grid = "Atributos presonalizados";
 $class_grid = "cont_custom_attributes";
 $error_grid = "No hay atributos registrados";
-$deleteFunction = "DeleteCustomAttributes";
+$deleteFunction = "EliminarCustomAttribute";
 $frm_constante_link = FRM_CUSTOM_ATTRIBUTES;
 $titulo_columnas_grid = array("createdAt" => "Fecha","name" => "Nombre","entity" => "Entidad");
 $value_columnas_grid = array("createdAt", "name","entity" );

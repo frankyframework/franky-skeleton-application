@@ -165,7 +165,7 @@ if(!empty($id))
 //print_r($data); exit;
 
 $adminForm->setData($data);
-$categorias = getCatalogCategorys('sql');
+$categorias = getCatalogCategorys('sql',['status' => 1]);
 $subcategorias = getCatalogSubcategorys(null,'sql');
 
 $adminForm->setAtributoInput("callback","value", urldecode($callback));
