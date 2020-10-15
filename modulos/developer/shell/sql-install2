@@ -156,10 +156,11 @@ if($MySession->getVar('nivel') != NIVEL_USERDEVELOPER)
 
 
 $modulo = $MyRequest->getRequest("modulo");
-
+$tabla = $MyRequest->getRequest("tabla");
 
 $help = helpShell([
-    ["var" => "modulo", "required" => true, "description" => "nombre del modulo, * para todos"]
+    ["var" => "modulo", "required" => true, "description" => "nombre del modulo, * para todos"],
+    ["var" => "tabla", "required" => false, "description" => "nombre de una tabla espesifica"]
 ]);
 
 
@@ -206,6 +207,11 @@ if(!empty($modulos))
                 
                 foreach($files as $file)
                 {
+                    
+                    if(!empty($tabla) && $tabla.'.json' != basename($file))
+                    {
+                        continue;
+                    }
                     if(!in_array($file,$InstallDB->procesados) && pathinfo($file,PATHINFO_EXTENSION) == 'json')
                     {   
                         $InstallDB->createTable($modulo,$file); 

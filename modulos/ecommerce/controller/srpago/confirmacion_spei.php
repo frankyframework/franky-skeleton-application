@@ -214,12 +214,12 @@ if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)
         'descuento' => getFormatoPrecio($productos_comprados['descuento']),
         'gran_total' => getFormatoPrecio($productos_comprados['gran_total']+$data['monto_envio']-$productos_comprados['descuento']),'metodo_pago' =>'Pago en Establecimiento','status' => getStatusTransaccion($status_pago),'referencia' => $referencia);
 
-        $campos['ticket_oxxo'] = render(PROJECT_DIR.'/modulos/ecommerce/diseno/email/ticket_spei_srpago.phtml',
+        $campos['ticket_spei'] = render(PROJECT_DIR.'/modulos/ecommerce/diseno/email/ticket_spei_srpago.phtml',
             ['chargeParams' => $chargeParams ,'items' =>$items,'order' => $order]);
 
     $TemplateemailModel    = new \Base\model\TemplateemailModel;
     $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;
-    $SecciontransaccionalEntity->friendly('nueva-orden-de-compra-oxxo');
+    $SecciontransaccionalEntity->friendly('nueva-orden-de-compra-spei');
     $TemplateemailModel->setOrdensql('id DESC');
     $TemplateemailModel->getData([],$SecciontransaccionalEntity->getArrayCopy());
 
