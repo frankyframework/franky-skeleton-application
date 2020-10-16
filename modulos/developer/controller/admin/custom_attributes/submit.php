@@ -57,7 +57,7 @@ if($type_option == "options_attr")
             $options[$v] = $label[$k];
         }
     }
-    $CustomattributesEntity->data(json_encode($options));
+    $CustomattributesEntity->data(addslashes(json_encode($options)));
     $CustomattributesEntity->source('');
 }
 else

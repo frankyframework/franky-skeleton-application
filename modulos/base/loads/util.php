@@ -1004,7 +1004,14 @@ function saveDataCustomAttribute($id_ref,$entity)
                 
             }
             else{
-                continue;
+                if($MyRequest->getRequest('file__'.$input['name'],0) == 1){
+                    continue;
+                }
+                else{
+                    $value = "";
+                }
+
+                
             }
             
 

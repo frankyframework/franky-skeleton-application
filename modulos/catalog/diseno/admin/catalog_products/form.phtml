@@ -84,7 +84,11 @@
         ?>
           <?=$adminForm->getRow($data_attrs['name'])?>
           <?php if($data_attrs['type'] == 'file' && !empty($custom_attr['custom_values'][$data_attrs['name']])): ?>
-              <p><a href="<?=$MyConfigure->getUploadDir().$custom_attr['custom_values'][$data_attrs['name']]?>" target="_blank"><?=$MyConfigure->getUploadDir().$custom_attr['custom_values'][$data_attrs['name']]?></a></p>
+              <p>
+              <input type="checkbox" name="file__<?=$data_attrs['name']?>" checked="checked" value="1" />
+              <a href="<?=$MyConfigure->getUploadDir().$custom_attr['custom_values'][$data_attrs['name']]?>" target="_blank"><?=$MyConfigure->getUploadDir().$custom_attr['custom_values'][$data_attrs['name']]?></a>
+              
+              </p>
           <?php endif; ?>
           <label id="<?=$data_attrs['name']?>-error" class="error" for="<?=$data_attrs['name']?>" style="display:none;"></label>
           <?php 
