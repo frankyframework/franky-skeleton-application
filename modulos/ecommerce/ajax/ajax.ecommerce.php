@@ -494,7 +494,7 @@ function setMetodoEnvioCheckout($id){
     $data['resumen_metodo_envio'] =   render(PROJECT_DIR.'/modulos/ecommerce/diseno/checkout/resumen.metodo_envio.phtml',['metodo_envio' =>$metodo_envio]);   
     
     $MySession->SetVar('checkout',$data);
-
+    
     return $data;
 }
 function setNuevaDireccionCheckout($data)
@@ -525,12 +525,19 @@ function setPickUpCheckout($id)
     $registro = $EcommercetiendasModel->getRows();
     $registro['horario'] = json_decode($registro['horario'],true);
     $EcommercetiendasEntity->exchangeArray($registro);
-    $data =array("id_envio" => 'pickup',"pickup" => $id,'direccion_envio' => $EcommercetiendasEntity->getArrayCopy());
+    $data = $MySession->GetVar('checkout');
+    $data = array_merge($data,array("id_envio" => 'pickup',"pickup" => $id,'direccion_pickup' => $EcommercetiendasEntity->getArrayCopy()));
     
+    $metodo_pickup = getMetodoEnvioPickup();
+    $metodo_envio = getMetodosEnvio($metodo_pickup['id']);
+
+    $data['id_metodo_envio'] = $metodo_pickup['id'];
+    $data['monto_envio'] = $metodo_envio;
+    $data['monto_envio_html'] = getFormatoPrecio($metodo_envio);
+    $data['pickup']  = true;
+
     $MySession->SetVar('checkout',$data);
     $data['resumen_envio'] =   render(PROJECT_DIR.'/modulos/ecommerce/diseno/checkout/resumen.pickup.phtml',['pickup' =>$registro]);
-
-
 
     return $data;
 }
@@ -717,31 +724,22 @@ function loadMetodosEnvio(){
     $data['gran_total'] = $carrito['gran_total'];
     $MySession->SetVar('checkout',$data);
   
-    if(isset($data['pickup']))
+    if(getCoreConfig('ecommerce/pick-up/enabled') == 1)
     {
-        $metodo_pickup = getMetodoEnvioPickup();
-        $metodo_envio = getMetodosEnvio($metodo_pickup['id']);
-
-        if($metodo_envio == 0)
-        {
-            $data['id_metodo_envio'] = $metodo_pickup['id'];
-            $data['monto_envio'] = $metodo_envio;
-            $data['monto_envio_html'] = getFormatoPrecio($metodo_envio);
-            $MySession->SetVar('checkout',$data);
-            return array('envio_requerido' => 0,'html' => '');
-        }
-        else{
-            $metodos_envio = [$metodo_pickup['id'] => makeHTMLMetodosEnvio($metodo_pickup['id'])];
-        }
-       
+        $direcciones_envio["pick-up"] = getCoreConfig('ecommerce/pick-up/titulo');
+        $pickupForm = new \Ecommerce\Form\pickupForm("frmpickup");
+        $pickuppoints = getPickUpPoints();
+        $pickupForm->addPickuppoints($pickuppoints);
+        $pickupForm->addSubmit();
     }
-    
+
+
     if($carrito['envio_requerido'] == 1)
     {
         $MetodoEnvioCheckoutForm = new \Ecommerce\Form\checkoutForm("frm_metodo_envio");
         $MetodoEnvioCheckoutForm->addMetodoEnvio($metodos_envio);
         $MetodoEnvioCheckoutForm->addSubmit();
-        return array('envio_requerido' => 1,'html' => render(PROJECT_DIR.'/modulos/ecommerce/diseno/checkout/frm.metodos_envio.phtml',['MetodoEnvioCheckoutForm' => $MetodoEnvioCheckoutForm]));
+        return array('labelpickup' =>getCoreConfig('ecommerce/pick-up/titulo'),'envio_requerido' => 1,'html' => render(PROJECT_DIR.'/modulos/ecommerce/diseno/checkout/frm.metodos_envio.phtml',['MetodoEnvioCheckoutForm' => $MetodoEnvioCheckoutForm,'pickupForm' => $pickupForm]));
     }
     
     return array('envio_requerido' => 0,'html' => '');
@@ -773,7 +771,7 @@ function loadMetodosPago(){
 
 
     $metodos_de_pago = array();
-
+   // print_r($data);
     if($data['gran_total'] > 0)
     {
         if(getCoreConfig('ecommerce/paypal/enabled') == 1)

@@ -396,10 +396,12 @@ function setPickUpCheckoutHTML(response)
 
         if(!respuesta.error)
         {
-            $(".direccion_entrega").next("div").hide();
-            $(".direccion_entrega").toggleClass("_nono").toggleClass("_sisi").toggleClass('_active');
-            $(".direccion_facturacion").toggleClass('_active').next("div").show();
-            $("#resumen_checkout_envio").html(respuesta.resumen_envio);
+            $(".metodo_envio").next("div").hide();
+            $(".metodo_envio").toggleClass("_nono").toggleClass("_sisi").toggleClass('_active');
+            $(".metodo_pago").toggleClass('_active').next("div").show();
+            $("#resumen_metodo_envio").html(respuesta.resumen_envio);
+            getInfoTotalsCheckout2();
+            loadMetodosPago();
         }
         else
         {
@@ -477,6 +479,32 @@ function loadMetodosEnvioHTML(response)
                      return false;
                 }
             });
+            $( "#frmpickup" ).validate({
+                submitHandler: function(form)
+                {
+                     setPickUpCheckout();
+                     return false;
+                }
+            });
+
+            
+            $("input[name=id_metodo_envio]").change(function()
+            {
+                if($(this).parent().find('.envio_name').text() == respuesta.labelpickup)
+                {
+                    
+                     $("#form_pick-up").show();
+                    $("form[name=frm_metodo_envio] input[name=continuar]").hide();
+                }
+                else
+                {
+                    $("#form_pick-up").hide();
+                    $("#frm_metodo_envio").show();
+                    $("form[name=frm_metodo_envio] input[name=continuar]").show();
+                }
+            })
+
+
         }
         else{
             $(".metodo_envio").next("div").hide();

@@ -6,7 +6,7 @@
               
             <?php 
             $active_class='_active';
-            if($productos_comprados['envio_requerido'] == 1): ?>
+            //if($productos_comprados['envio_requerido'] == 1): ?>
     
                 <div class="_mycart_step _first">
                     <h2 class='direccion_entrega _tab_step _nono <?=$active_class?>'>Dirección de entrega</h2>
@@ -23,13 +23,7 @@
                             <?php echo $direccionesForm->getAllRow(); ?>
                             <?php echo $direccionesForm->endTag(); ?>
                         </div>
-                        <?php if(isset($pickupForm)):?>
-                        <div id="form_pick-up" style="display:none ;">
-                            <?php echo $pickupForm->openTag(); ?>
-                            <?php echo $pickupForm->getAllRow(); ?>
-                            <?php echo $pickupForm->endTag(); ?>
-                        </div>
-                        <?php endif; ?>
+                       
 
                         
                     </div>
@@ -37,7 +31,7 @@
                 </div>
                 <?php 
                 $active_class = '';
-                endif;?>
+                //endif;?>
 
                 <div class="_mycart_step _second">
                     <h2 class='direccion_facturacion _tab_step _nono  <?=$active_class?>'>Dirección de Facturación</h2>
@@ -171,14 +165,7 @@ $(document).ready(function(){
         }
     });
     
-     $( "#frmpickup" ).validate({
-        submitHandler: function(form)
-        {
-             setPickUpCheckout();
-             return false;
-        }
-    });
-
+    
 
 
     $("input[name=id_envio]").change(function()
@@ -187,12 +174,6 @@ $(document).ready(function(){
         {
             $("#form_pick-up").hide();
             $("#form_direccion_envio").show();
-            $("form[name=frm_direccion_envio] input[name=continuar]").hide();
-        }
-         else if($(this).val() == "pick-up")
-        {
-            $("#form_direccion_envio").hide();
-             $("#form_pick-up").show();
             $("form[name=frm_direccion_envio] input[name=continuar]").hide();
         }
         else

@@ -13,8 +13,8 @@ $CoreConfigModel      = new CoreConfigModel();
 $CoreConfigEntity     = new CoreConfigEntity();
 
 $body = @file_get_contents('php://input');
-$data_openpay = json_decode($body,true);
-$referencia = (isset($data_openpay['transaction']['order_id']) ? $data_openpay['transaction']['order_id'] : -1);
+$data = json_decode($body,true);
+$referencia = (isset($data['operation']['transaction']) ? $data['operation']['transaction'] : -1);
 
 $USERS = new USERS();
 $pedidosModel = new pedidos();
@@ -24,13 +24,8 @@ $producto_pedidoEntity = new producto_pedidoEntity();
 $EcommercelogstatusModel    = new EcommercelogstatusModel();
 $EcommercelogstatusEntity   = new EcommercelogstatusEntity();
 
-if ($data_openpay['type']== 'verification'){ 
-   $CoreConfigEntity->path('ecommerce/openpay/codewebhook');
-   $CoreConfigEntity->value($data_openpay['verification_code']);
-                                
-   $result = $CoreConfigModel->updateByPath($CoreConfigEntity->getArrayCopy());
-}
-if ($data_openpay['type'] == 'charge.succeeded'){
+
+if (!empty($referencia)){
 
   if($pedidosModel->getData('', '','','',$referencia) == REGISTRO_SUCCESS)
   {
@@ -50,10 +45,10 @@ if ($data_openpay['type'] == 'charge.succeeded'){
 
 
 
-        $status_pago = normalizeStatusTransaccion($data_openpay['transaction']['status']);
-        $total = $data_openpay['transaction']['amount'];
+        $status_pago = normalizeStatusTransaccion(getStatusTransaccionSrpago($data['status']));
+        $total = $data['total']['amount'];
 
-        if($status_pago == "paid")
+        if($status_pago == "N")
         {
             $status_pago = ($gran_total+$pedido['monto_envio']-$pedido['descuento'] > $total ? "pago_incompleto" : $status_pago);
         }
@@ -75,12 +70,9 @@ if ($data_openpay['type'] == 'charge.succeeded'){
 
             if($USERS->getData($detalle_pedido['uid'])==REGISTRO_SUCCESS)
             {
-
-
               $dataUser = $USERS->getRows();
 
               $productos_html = render(PROJECT_DIR.'/modulos/ecommerce/diseno/email/productos.phtml',['items' =>$detalle_pedido['productos']]);
-
 
               $campos = array("orden" => $PedidosEntity->getId(),"nombre" =>$detalle_pedido['nombre'],'productos' =>$productos_html,"email" => $dataUser['email'],
               'gran_total' => getFormatoPrecio($detalle_pedido['monto_compra']),'metodo_pago' =>$detalle_pedido['metodo_pago'],"status" => getStatusTransaccion($status_pago));

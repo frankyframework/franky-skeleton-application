@@ -87,6 +87,14 @@ else {
         $direccion_envio = $data["direccion_envio"];
     }
 }
+
+if($data["id_envio"] == 'pickup')
+{
+    $direccion_envio = $data["direccion_pickup"];
+}
+
+
+
 $MySession->SetVar('checkout',array());
 $MyPedidoEntity->setId_direccion_envio(json_encode($direccion_envio));
 $MyPedidoEntity->setId_direccion_facturacion(json_encode($id_direccion_facturacion));

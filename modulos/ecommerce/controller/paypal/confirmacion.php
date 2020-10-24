@@ -118,6 +118,12 @@ if($status_pago == "pending" || $status_pago == "paid")
 
                 }
             }
+
+            if($data["id_envio"] == 'pickup')
+            {
+                $direccion_envio = $data["direccion_pickup"];
+            }
+        
             
             $MySession->SetVar('checkout',array());
             $MySession->SetVar('cupon_checkout',array());

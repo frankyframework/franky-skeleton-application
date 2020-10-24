@@ -242,7 +242,7 @@ function getMetodosEnvio($id)
 
                 return $data['price'];
             }
-	}
+	    }
     }
     return false;
 }
@@ -299,6 +299,7 @@ function getCarrito($descuentos = 0)
 
 
       $data_precio = parsePrecio($_registro["precio"] * $registro["qty"],$_registro["iva"],$_registro["incluye_iva"]);
+      $data_precio_unit = parsePrecio($_registro["precio"],$_registro["iva"],$_registro["incluye_iva"]);
       $iva_total += $data_precio['iva'];
       $gran_total += $data_precio['total'];
       $subtotal += $data_precio['subtotal'];
@@ -307,7 +308,10 @@ function getCarrito($descuentos = 0)
           "qty" => $registro["qty"],
           "nombre" => $_registro["nombre"],
           "caracteristicas" => $registro["caracteristicas"],
-          "precio" => $_registro["precio"]
+          "precio" => $_registro["precio"],
+          "precio_sin_iva" => $data_precio_unit['subtotal'],
+          "iva" => $data_precio_unit['iva'],
+          "sku" => $_registro['sku'],
       );
       if(isset($_registro["envio_requerido"]) && $_registro["envio_requerido"] == 1)
       {

@@ -1,9 +1,6 @@
 <?php
 use Ecommerce\Form\checkoutForm;
-use Ecommerce\Form\pickupForm;
 use Ecommerce\Form\direccionesForm;
-use Ecommerce\Form\conektaForm;
-use Ecommerce\Form\openpayForm;
 
 $productos =  OBJETO_PRODUCTOS;
 $MyProducto =  new $productos();
@@ -25,14 +22,6 @@ $DireccionCheckoutForm->addSubmit();
 
 
 $direcciones_envio = makeHTMLDireccion("envio",$MySession->GetVar("id"));
-if(getCoreConfig('ecommerce/pick-up/enabled') == 1)
-{
-    $direcciones_envio["pick-up"] = getCoreConfig('ecommerce/pick-up/titulo');
-    $pickupForm = new pickupForm("frmpickup");
-    $pickuppoints = getPickUpPoints();
-    $pickupForm->addPickuppoints($pickuppoints);
-    $pickupForm->addSubmit();
-}
 
 
 

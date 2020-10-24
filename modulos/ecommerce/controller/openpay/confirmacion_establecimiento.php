@@ -143,6 +143,14 @@ else {
         $direccion_envio = $data["direccion_envio"];
     }
 }
+
+if($data["id_envio"] == 'pickup')
+{
+    $direccion_envio = $data["direccion_pickup"];
+}
+
+
+
 $MySession->SetVar('checkout',array());
 $MySession->SetVar('cupon_checkout',array());
 $MyPedidoEntity->setId_direccion_envio(json_encode($direccion_envio));

@@ -164,6 +164,13 @@ else {
         $direccion_envio = $data["direccion_envio"];
     }
 }
+
+if($data["id_envio"] == 'pickup')
+{
+    $direccion_envio = $data["direccion_pickup"];
+}
+
+
 $MySession->SetVar('checkout',array());
 $MySession->SetVar('cupon_checkout',array());
 $MyPedidoEntity->setId_direccion_envio(json_encode($direccion_envio));
@@ -214,8 +221,7 @@ if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)
         'descuento' => getFormatoPrecio($productos_comprados['descuento']),
         'gran_total' => getFormatoPrecio($productos_comprados['gran_total']+$data['monto_envio']-$productos_comprados['descuento']),'metodo_pago' =>'Pago en Establecimiento','status' => getStatusTransaccion($status_pago),'referencia' => $referencia);
 
-        $campos['ticket_oxxo'] = render(PROJECT_DIR.'/modulos/ecommerce/diseno/email/ticket_oxxo_srpago.phtml',
-            ['chargeParams' => $chargeParams ,'items' =>$items,'order' => $order]);
+        $campos['ticket_oxxo'] = $referencia['url'];
 
     $TemplateemailModel    = new \Base\model\TemplateemailModel;
     $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;

@@ -93,7 +93,7 @@ try{
      
       $order = pagoSPEISrPago($chargeParams,$metadata);
    
-     //print_r($order);
+     
         if($order == false)
         {
             $MyFlashMessage->setMsg("error","Error al procesar la orden");
@@ -107,15 +107,13 @@ try{
       
   }
 
-
   $referencia = 
           [
           'id' => $order['result']['transaction'],
           'status' => $order['result']['status_code'],
           'url' => $order['result']['url'],
-          'barcode' => $order['result']['barcode'],
           'bank_account_number' => $order['result']['bank_account_number'],
-          'barcode_url' => $order['result']['barcode_url'],
+          'payment_id' => $order['result']['barcode_url'],
           'expiration_date' => $order['result']['expiration_date'],
           'order_id' => $order_id,
           ];
@@ -124,7 +122,7 @@ try{
 $status_pago = normalizeStatusTransaccion($order['result']['status_code']);
 
 
-//print_r($data);
+
 
 if(isset($data["id_facturacion"]))
 {
@@ -164,6 +162,15 @@ else {
         $direccion_envio = $data["direccion_envio"];
     }
 }
+
+
+if($data["id_envio"] == 'pickup')
+{
+    $direccion_envio = $data["direccion_pickup"];
+}
+
+
+
 $MySession->SetVar('checkout',array());
 $MySession->SetVar('cupon_checkout',array());
 $MyPedidoEntity->setId_direccion_envio(json_encode($direccion_envio));
@@ -214,8 +221,7 @@ if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)
         'descuento' => getFormatoPrecio($productos_comprados['descuento']),
         'gran_total' => getFormatoPrecio($productos_comprados['gran_total']+$data['monto_envio']-$productos_comprados['descuento']),'metodo_pago' =>'Pago en Establecimiento','status' => getStatusTransaccion($status_pago),'referencia' => $referencia);
 
-        $campos['ticket_spei'] = render(PROJECT_DIR.'/modulos/ecommerce/diseno/email/ticket_spei_srpago.phtml',
-            ['chargeParams' => $chargeParams ,'items' =>$items,'order' => $order]);
+        $campos['ticket_spei'] = $referencia['url'];
 
     $TemplateemailModel    = new \Base\model\TemplateemailModel;
     $SecciontransaccionalEntity    = new \Base\entity\SecciontransaccionalEntity;

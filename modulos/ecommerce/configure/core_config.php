@@ -358,7 +358,7 @@ return array(
                           ),
                     array('path' => 'ecommerce/sr-pago/key',
                             'type' => 'text',
-                            'label' => 'Public KEY',
+                            'label' => 'API KEY',
                             'validation' => array('required' => false),
                             'value' => ''
                       ),

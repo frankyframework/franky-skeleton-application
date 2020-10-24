@@ -69,3 +69,26 @@ $(document).ready(function()
         llenaCarrido();
     }
 });
+
+
+$("input[name=id_envio]").change(function()
+{
+    if($(this).val() == "otra")
+    {
+        $("#form_pick-up").hide();
+        $("#form_direccion_envio").show();
+        $("form[name=frm_direccion_envio] input[name=continuar]").hide();
+    }
+     else if($(this).val() == "pick-up")
+    {
+        $("#form_direccion_envio").hide();
+         $("#form_pick-up").show();
+        $("form[name=frm_direccion_envio] input[name=continuar]").hide();
+    }
+    else
+    {
+        $("#form_pick-up").hide();
+        $("#form_direccion_envio").hide();
+        $("form[name=frm_direccion_envio] input[name=continuar]").show();
+    }
+})

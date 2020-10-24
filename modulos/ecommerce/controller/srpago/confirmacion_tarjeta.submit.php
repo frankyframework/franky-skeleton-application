@@ -149,6 +149,9 @@ if(!$error)
 if(!$error)
 {
 
+    
+
+
     try{
       $order_id = md5(time().$MySession->GetVar('id'));
       
@@ -163,16 +166,67 @@ if(!$error)
         
         $metadata = array(
             "member" => [
+                "memberLoggedIn" => "Si",
                 "memberFullName" => $MySession->GetVar('nombre'),
                 "memberEmailAddress" => $MySession->GetVar('email'),
+                "memberAddressLine1" => $data['direccion_envio']['calle'],
+                "memberCity" => $data['direccion_envio']['ciudad'],
+                "memberState" => $data['direccion_envio']['estado'],
+                "memberCountry" => 'MX',
+                "memberPostalCode" => $data['direccion_envio']['cp'],
+                "memberPhone" => $data['direccion_envio']['telefono'],
+            ],
+            "shipping" => [
+                "shippingCharges" => $data['monto_envio'],
+                "shippingEmailAddress" => $MySession->GetVar('email'),
+                "shippingAddress" => $data['direccion_envio']['calle'],
+                "shippingCity" => $data['direccion_envio']['ciudad'],
+                "shippingState" => $data['direccion_envio']['estado'],
+                "shippingCountry" => 'MX',
+                "shippingPostalCode" => $data['direccion_envio']['cp'],
+                "shippingPhoneNumber" => $data['direccion_envio']['telefono'],
+            ],
+            "billing" => [
+                "billingEmailAddress" => $MySession->GetVar('email'),
+                "billingAddress-D" => $data['direccion_envio']['calle'],
+                "billingCity-D" => $data['direccion_envio']['ciudad'],
+                "billingState-D" => $data['direccion_envio']['estado'],
+                "billingCountry-D" => 'MX',
+                "billingPostalCode-D" => $data['direccion_envio']['cp'],
+                "billingPhoneNumber-D" => $data['direccion_envio']['telefono'],
             ]
+
             );
 
-        $order = pagoTarjeta($chargeParams,$metadata);
-            //print_r($order);
-       
-          
+            if(isset($data["id_facturacion"]) && is_numeric($data["id_facturacion"])){
+                
+                $metadata["billing"] = [
+                    "billingEmailAddress" => $MySession->GetVar('email'),
+                    "billingAddress-D" => $data['direccion_facturacion']['calle'],
+                    "billingCity-D" => $data['direccion_facturacion']['ciudad'],
+                    "billingState-D" => $data['direccion_facturacion']['estado'],
+                    "billingCountry-D" => 'MX',
+                    "billingPostalCode-D" => $data['direccion_facturacion']['cp'],
+                    "billingPhoneNumber-D" => $data['direccion_facturacion']['telefono'],
+                ];
+            }
+            foreach($productos_comprados['productos'] as $producto)
+            {
+                
+                $metadata["items"]['item'][] = [
+                    "itemNumber" => $producto["sku"],
+                    "itemDescription" => $producto["nombre"],
+                    "itemPrice" => $producto["precio_sin_iva"],
+                    "itemQuantity" => $producto["qty"],
+                    "itemTax" => $producto["iva"]
+                ];
+            }
+        
 
+           
+
+        $order = pagoTarjeta($chargeParams,$metadata);
+          
     } catch (\Exception $e) {
         $MyFlashMessage->setMsg("error",$e->getMessage());
         $MyRequest->redirect($MyRequest->getReferer());
@@ -232,6 +286,14 @@ if(!$error)
             $direccion_envio = $data["direccion_envio"];
         }
     }
+
+
+    if($data["id_envio"] == 'pickup')
+    {
+        $direccion_envio = $data["direccion_pickup"];
+    }
+
+
     $MySession->SetVar('cupon_checkout',array());
     $MySession->SetVar('checkout',array());
     $MyPedidoEntity->setId_direccion_envio(json_encode($direccion_envio));
