@@ -74,6 +74,24 @@ if(!empty($custom_attr['custom_imputs']))
                 )
             );
         }
+        if(in_array($data_attrs['type'],['multifile']))
+        {
+            
+            $adminForm->add(array(
+                'name' => $data_attrs['name'],
+                'label' => $data_attrs['label'],
+                'type'  => 'file',
+                'required'  => $data_attrs['required'],
+                'atributos' => array(
+                    'class'       => ($data_attrs['required'] && empty($custom_attr['custom_values'][$data_attrs['name']]) ? 'required' : ''),
+                   'multiple' => true
+                ),
+                'label_atributos' => array(
+                    'class'       => ($data_attrs['required'] ? 'desc_form_obligatorio' : 'desc_form_no_obligatorio')
+                )
+                )
+            );
+        }
         if(in_array($data_attrs['type'],['text','textarea']))
         {
             
