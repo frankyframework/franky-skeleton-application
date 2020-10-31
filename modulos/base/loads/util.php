@@ -1016,6 +1016,68 @@ function saveDataCustomAttribute($id_ref,$entity)
             
 
         }
+        else if($input['type'] == 'multifile')
+        {
+           
+            $multifiles = $MyRequest->getRequest('file__'.$name,[]);
+
+            $dir = $MyConfigure->getServerUploadDir()."/$entity/".$id_ref."/";
+          
+            $File->mkdir($dir);
+
+            $files = array();
+           // print_r($_FILES);
+            foreach ($_FILES[$name] as $k => $l) {
+           
+                foreach ($l as $i => $v) {
+                    
+                    $files[$i][$k] = $v;
+                }
+            }
+   
+           //print_r($files);
+           //die;
+
+            foreach ($files as $file)
+            {
+              
+                $handle = new \Franky\Filesystem\Upload($file);
+                if ($handle->uploaded)
+                {
+                    if  (!in_array(strtolower(pathinfo($file["name"], PATHINFO_EXTENSION)),array("php","phtml")))
+                    {
+                        $fileinfo = @getimagesize($file["tmp_name"]);
+                        //$width = $fileinfo[0];
+                        //$height = $fileinfo[1];
+                        
+                        //$handle->image_resize= false;
+                        //$handle->image_ratio_fill = true;
+                        //$handle->image_background_color = '#FFFFFF';
+                        $handle->file_auto_rename = true;
+                        $handle->file_overwrite = false;
+                        $handle->file_max_size = "22024288"; 
+
+                        $handle->Process($dir);
+
+                        if ($handle->processed)
+                        {
+                            $multifiles[] = "/$entity/".$id_ref."/".$handle->file_dst_name;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }else
+                    {
+                        continue;
+                    }
+                    
+                }
+            }
+            $value = json_encode($multifiles);
+            
+            
+        }
         else{
             $value = (is_array($MyRequest->getRequest($name)) ? json_encode($MyRequest->getRequest($name)) : $MyRequest->getRequest($name,'',true));
         }

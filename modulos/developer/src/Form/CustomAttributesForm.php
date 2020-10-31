@@ -73,7 +73,8 @@ class CustomAttributesForm extends \Franky\Form\Form
                                 "select" => "Drop Down",
                                 "checkbox" => "Checkbox",
                                 "radio" => "Radio",
-                                "file" => "archivo"),
+                                "file" => "Archivo",
+                                "multifile" => "Archivo multiple"),
             'label_atributos' => array(
                 'class'       => 'desc_form_obligatorio'
                 )

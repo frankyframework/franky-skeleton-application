@@ -90,6 +90,22 @@
               
               </p>
           <?php endif; ?>
+
+
+          <?php if($data_attrs['type'] == 'multifile'): ?>
+            <?php $multifile = $custom_attr['custom_values'][$data_attrs['name']];?>
+            <?php if(!empty($multifile)): ?>
+              <?php foreach($multifile as $file): ?>
+              <p>
+              <input type="checkbox" name="file__<?=$data_attrs['name']?>" checked="checked" value="<?=$file?>" />
+              <a href="<?=$MyConfigure->getUploadDir().$file?>" target="_blank"><?=$MyConfigure->getUploadDir().$file?></a>
+              </p>
+              <?php endforeach; ?>
+              <?php endif; ?>
+          <?php endif; ?>
+
+
+
           <label id="<?=$data_attrs['name']?>-error" class="error" for="<?=$data_attrs['name']?>" style="display:none;"></label>
           <?php 
           endforeach; 
@@ -263,7 +279,7 @@ $(window).load(function(){
       'searchreplace visualblocks code fullscreen',
       'insertdatetime media table contextmenu paste code help '
     ],
-    toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify table | bullist numlist outdent indent | removeformat |  help',
+    toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify table | bullist numlist outdent indent | removeformat | code | help',
     content_css: [
       '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
       '//www.tinymce.com/css/codepen.min.css'],
