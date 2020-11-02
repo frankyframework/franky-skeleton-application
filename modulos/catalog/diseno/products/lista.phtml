@@ -1,5 +1,6 @@
 <div class="w-xxxx-12 _catalog_result">
     <div class="content">
+    <?=CatalogBreadcrumbs(null); ?>
         <?php if(!empty($image_category)): ?>
         <?= makeHTMLImg($image_category, "", "", "","class='image_100'")?>
 
@@ -13,6 +14,12 @@
             </div>
             <?php endif; ?>
             <div class="cont_widget_catalog_results <?=(getCoreConfig('catalog/product/buscadorlateral') == 1 ? '' : '_no_filters')?>">
+            
+            <div class="w-xxxx-12">
+            <?php if(!empty($q)): ?>
+                <h4 class="resultados_q">Resultados para "<?=$q?>"</h4>
+            <?php endif; ?>
+            </div>
                 <?php if(!empty($resultados_pagina)): ?>
                     <?php foreach($resultados_pagina as $data): ?>
                         <?=render('products/card.phtml',['data' => $data]);?>

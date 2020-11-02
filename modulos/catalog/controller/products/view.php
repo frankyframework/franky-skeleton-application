@@ -153,6 +153,8 @@ if($CatalogproductrelatedModel->getData($CatalogproductrelatedEntity->getArrayCo
 
         $registro['id'] = $Tokenizer->token('catalog_products',$registro["id_product"]);
         $lista_relacionados_data[] = $registro;
-      
+       
     }
 }
+
+$breadcrumbs = CatalogBreadcrumbs($data_detalle['id_ori']);

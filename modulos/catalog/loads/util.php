@@ -586,4 +586,84 @@ function getCatalogVitrina($clave)
     return  '';
 }
 
+
+
+function CatalogBreadcrumbs($name =null)
+{
+    global $MyRequest;
+    global $MyFrankyMonster;
+    global $MySession;
+    $link = "";
+    $html = '<div class="w-xxxx-12 cont_breadcrumb">
+    <div class="content">
+    <ul class="breadcrumb">';
+
+    $uiCommand =  $MyFrankyMonster->getUiCommand($MyFrankyMonster->getSeccion(CATALOG_SEARCH));
+
+    $html .='<li class="nivel_2"><a href="'.$MyRequest->url(CATALOG_SEARCH).'" data-transition="back">'.$uiCommand[8].'</a></li>';
+
+    $categorias = getCatalogCategorys();
+    $_categorias = array_keys($categorias);
+    if($MyFrankyMonster->MySeccion() == CATALOG_SEARCH_CATEGORY)
+    {
+        $categoria      = $MyRequest->getUrlParam('friendly');
+        
+    
+        if(in_array($categoria, $_categorias))
+        {
+        
+            $html .='<li class="nivel_2"><a href="'.$MyRequest->url(CATALOG_SEARCH_CATEGORY,['friendly' => $categoria]).'" data-transition="back">'.$categorias[$categoria].'</a></li>';
+        }
+        else{
+            
+            $html .= '<li class="nivel_2"><a href="'.$MyRequest->url(CATALOG_SEARCH_CATEGORY,['friendly' => $categoria]).'" data-transition="back">'.$name.'</a></li>';
+        }
+        
+    }
+    if($MyFrankyMonster->MySeccion() == CATALOG_SEARCH_SUBCATEGORY)
+    {
+    
+        $categoria      = $MyRequest->getUrlParam('categoria');
+        $subcategorias = getCatalogSubcategorys($categoria);
+        $_subcategorias = array_keys(getCatalogSubcategorys($categoria));
+        $subcategoria      = $MyRequest->getUrlParam('friendly');
+
+        if(in_array($subcategoria, $_subcategorias))
+        {
+            $html .= '
+            <li class="nivel_2"><a href="'.$MyRequest->url(CATALOG_SEARCH_CATEGORY,['friendly' => $categoria]).'" data-transition="back">'.$categorias[$categoria].'</a> </li>
+            <li class="nivel_3"><a href="'.$MyRequest->url(CATALOG_SEARCH_SUBCATEGORY,['categoria' => $categoria,'friendly' => $subcategoria]).'" data-transition="back">'.$subcategorias[$subcategoria].'</a> </li>';
+        }
+        else{
+            $html .= '<li class="nivel_2"><a href="'.$MyRequest->url(CATALOG_SEARCH_CATEGORY,['friendly' => $categoria]).'" data-transition="back">'.$categorias[$categoria].'</a> </li>
+            <li class="nivel_3"><a href="'.$MyRequest->url(CATALOG_SEARCH_SUBCATEGORY,['categoria' => $categoria,'friendly' => $subcategoria]).'" data-transition="back">'.$name.'</a></li>';
+        }
+        
+    }
+    if($MyFrankyMonster->MySeccion() == CATALOG_VIEW_SUBCAT)
+    {
+    
+        $categoria      = $MyRequest->getUrlParam('categoria');
+        $subcategorias = getCatalogSubcategorys($categoria);
+        $_subcategorias = array_keys(getCatalogSubcategorys($categoria));
+        $subcategoria      = $MyRequest->getUrlParam('subcategoria');
+        $friendly      = $MyRequest->getUrlParam('friendly');
+
+    
+        $html .= '<li class="nivel_2"><a href="'.$MyRequest->url(CATALOG_SEARCH_CATEGORY,['friendly' => $categoria]).'" data-transition="back">'.$categorias[$categoria].'</a> </li>
+        <li class="nivel_3"><a href="'.$MyRequest->url(CATALOG_SEARCH_SUBCATEGORY,['categoria' => $categoria,'friendly' => $subcategoria]).'" data-transition="back">'.$subcategorias[$subcategoria].'</a> </li>
+        <li class="nivel_3"><a href="'.$MyRequest->url(CATALOG_VIEW_SUBCAT,['categoria' => $categoria,'subcategoria' => $subcategoria,'friendly' => $friendly]).'" data-transition="back">'.$name.'</a></li>';
+    
+        
+    }
+
+
+    
+    $html .= '  </ul>
+    </div>
+</div>';
+
+   
+    return $html;
+}
 ?>
