@@ -179,7 +179,7 @@ function makeHTMLDireccion($type="envio",$uid = "")
 }
 
 
-function makeHTMLMetodosEnvio($id = null,$price=1)
+function makeHTMLMetodosEnvio($id = null,$price=1, $time = 1)
 {
     $EcommerceenviosModel = new Ecommerce\model\EcommerceenviosModel();
     
@@ -188,7 +188,11 @@ function makeHTMLMetodosEnvio($id = null,$price=1)
     $EcommerceenviosModel->getData();
     $total	= $EcommerceenviosModel->getTotal();
     $metodos_envio = array();
-    $metodoenviohtml = ($price ==1 ? "<span class='envio price'>%s</span>" : '')." <span class='envio_name'>%s</span>, <b class='envio_time'>%s</b>";
+    $metodoenviohtml = "";
+    $metodoenviohtml .= ($price ==1 ? "<span class='envio price'>%s</span> " : '');
+    $metodoenviohtml .= "<span class='envio_name'>%s</span>";
+    $metodoenviohtml .= ($time ==1 ? ",<b class='envio_time'>%s</b>" : '');
+
     if($total > 0)
     {
         while($registro = $EcommerceenviosModel->getRows())
@@ -202,11 +206,23 @@ function makeHTMLMetodosEnvio($id = null,$price=1)
                 $tarifa = $MetodoEnvio->getData();
                 if($tarifa !== false)
                 {
-                    
-                    $metodos_envio[$registro['id']] = ($price ==1 ? 
-                        sprintf($metodoenviohtml, getFormatoPrecio($tarifa['price']),getCoreConfig('ecommerce/'.$registro['path'].'/titulo'),$tarifa['days']) : 
-                        sprintf($metodoenviohtml, getCoreConfig('ecommerce/'.$registro['path'].'/titulo'),$tarifa['days'])
-                    );
+                    if($price == 1 && $time == 1)
+                    {
+                        $metodos_envio[$registro['id']] = sprintf($metodoenviohtml, getFormatoPrecio($tarifa['price']),getCoreConfig('ecommerce/'.$registro['path'].'/titulo'),$tarifa['days']);
+                    }
+                    if($price == 0 && $time == 1)
+                    {
+                        $metodos_envio[$registro['id']] = sprintf($metodoenviohtml, getCoreConfig('ecommerce/'.$registro['path'].'/titulo'),$tarifa['days']);
+                    }
+                    if($price == 1 && $time == 0)
+                    {
+                        $metodos_envio[$registro['id']] = sprintf($metodoenviohtml, getFormatoPrecio($tarifa['price']),getCoreConfig('ecommerce/'.$registro['path'].'/titulo'));
+                    }
+                    if($price == 0 && $time == 0)
+                    {
+                        $metodos_envio[$registro['id']] =  sprintf($metodoenviohtml, getCoreConfig('ecommerce/'.$registro['path'].'/titulo'));
+                    }
+                  
                 }
             }
 	}

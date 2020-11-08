@@ -35,7 +35,7 @@ if($MySession->GetVar('tarjeta_srpago') == "" )
 {
   $error = true;
 }
-$MySession->UnsetVar('tarjeta_srpago');
+//$MySession->UnsetVar('tarjeta_srpago');
 
 if(empty($id_tarjeta))
 {
@@ -164,12 +164,39 @@ if(!$error)
         );
         //print_r($chargeParams);
         
+        $fullname = explode(" ",$MySession->GetVar('nombre'));
+        if(count($fullname) >= 3)
+        {
+            $apellido_materno = $fullname[count($fullname) - 1];
+            $apellido_paterno = $fullname[count($fullname) - 2];
+            unset($fullname[count($fullname) - 1]);
+            unset($fullname[count($fullname) - 2]);
+            $nombres = implode(" ",$fullname);
+        }
+        if(count($fullname) == 2)
+        {
+            $apellido_materno = "";
+            $apellido_paterno = $fullname[count($fullname) - 1];
+            $nombres = $fullname[0];
+        }
+
+        if(count($fullname) == 1)
+        {
+            $apellido_materno = "";
+            $apellido_paterno = "";
+            $nombres = $fullname[0];
+        }
+
         $metadata = array(
             "member" => [
                 "memberLoggedIn" => "Si",
                 "memberFullName" => $MySession->GetVar('nombre'),
+                "memberFirstName" => $nombres,
+                "memberMiddleName" => $apellido_paterno,
+                "memberLastName" => $apellido_materno,
                 "memberEmailAddress" => $MySession->GetVar('email'),
                 "memberAddressLine1" => $data['direccion_envio']['calle'],
+                "memberAddressLine2" => $data['direccion_envio']['colonia'],
                 "memberCity" => $data['direccion_envio']['ciudad'],
                 "memberState" => $data['direccion_envio']['estado'],
                 "memberCountry" => 'MX',
@@ -177,18 +204,28 @@ if(!$error)
                 "memberPhone" => $data['direccion_envio']['telefono'],
             ],
             "shipping" => [
-                "shippingCharges" => $data['monto_envio'],
+                "shippingFirstName" => $nombres,
+                "shippingMiddleName" => $apellido_paterno,
+                "shippingLastName" => $apellido_materno,
+                "shippingCharges" => (isset($data['monto_envio']) ? $data['monto_envio']: 0),
                 "shippingEmailAddress" => $MySession->GetVar('email'),
                 "shippingAddress" => $data['direccion_envio']['calle'],
+                "shippingAddress2" => $data['direccion_envio']['colonia'],
                 "shippingCity" => $data['direccion_envio']['ciudad'],
                 "shippingState" => $data['direccion_envio']['estado'],
                 "shippingCountry" => 'MX',
                 "shippingPostalCode" => $data['direccion_envio']['cp'],
                 "shippingPhoneNumber" => $data['direccion_envio']['telefono'],
+                "shippingMethod" => strip_tags(makeHTMLMetodosEnvio($data['id_metodo_envio'],0,0)),
+                //"shippingDeadline" => "2015-08-01"
             ],
             "billing" => [
+                "billingFirstName-D" => $nombres,
+                "billingMiddleName-D" => $apellido_paterno,
+                "billingLastName-D" => $apellido_materno,
                 "billingEmailAddress" => $MySession->GetVar('email'),
                 "billingAddress-D" => $data['direccion_envio']['calle'],
+                "billingAddress2-D" => $data['direccion_envio']['colonia'],
                 "billingCity-D" => $data['direccion_envio']['ciudad'],
                 "billingState-D" => $data['direccion_envio']['estado'],
                 "billingCountry-D" => 'MX',
@@ -201,8 +238,12 @@ if(!$error)
             if(isset($data["id_facturacion"]) && is_numeric($data["id_facturacion"])){
                 
                 $metadata["billing"] = [
+                    "billingFirstName-D" => $nombres,
+                    "billingMiddleName-D" => $apellido_paterno,
+                    "billingLastName-D" => $apellido_materno,
                     "billingEmailAddress" => $MySession->GetVar('email'),
                     "billingAddress-D" => $data['direccion_facturacion']['calle'],
+                    "billingAddress2-D" => $data['direccion_facturacion']['colonia'],
                     "billingCity-D" => $data['direccion_facturacion']['ciudad'],
                     "billingState-D" => $data['direccion_facturacion']['estado'],
                     "billingCountry-D" => 'MX',
@@ -218,13 +259,15 @@ if(!$error)
                     "itemDescription" => $producto["nombre"],
                     "itemPrice" => $producto["precio_sin_iva"],
                     "itemQuantity" => $producto["qty"],
-                    "itemTax" => $producto["iva"]
+                    "itemTax" => $producto["iva"],
+                    //"itemMeasurementUnit" => "PZ",
+                    //"itemBrandName" => "SR.Pago",
+                    //"itemCategory" => "TI"
                 ];
             }
         
-
-           
-
+print_r($metadata); die;
+    
         $order = pagoTarjeta($chargeParams,$metadata);
           
     } catch (\Exception $e) {
