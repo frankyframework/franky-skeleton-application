@@ -266,7 +266,7 @@ if(!$error)
                 ];
             }
         
-print_r($metadata); die;
+//print_r($metadata); die;
     
         $order = pagoTarjeta($chargeParams,$metadata);
           
