@@ -18,7 +18,8 @@
         "frankyframework/franky-haxor": "1.0.x-dev",
         "frankyframework/franky-filesystem": "1.0.x-dev",
         "frankyframework/franky-schema": "1.0.x-dev",
-        "facebook/graph-sdk": "^5.7"
+        "facebook/graph-sdk": "^5.7",
+        "izica/php-progressive-images-webp-jp2-jxr": "^1.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.5"

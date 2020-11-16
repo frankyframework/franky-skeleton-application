@@ -1,0 +1,77 @@
+<?php
+use Franky\Filesystem\File;
+ini_set('memory_limit', '-1');
+
+$File = new File;
+
+echo shellFontColor("Buscando imagenes...","verde")."\n";
+
+$dirs = [PROJECT_DIR.'public/skin/', PROJECT_DIR.'public/upload/'];
+
+
+foreach($dirs as $dir)
+{
+
+    $files = $File->getAllFiles($dir);
+
+
+
+    foreach($files['file'] as $_file)
+    {
+        if(in_array(pathinfo($_file,PATHINFO_EXTENSION),['jpg','png','jpeg']))
+        {
+            echo shellFontColor("[*] Convirtiendo imagen ".$_file,"default")."\n";
+
+
+            $path = pathinfo($_file,PATHINFO_DIRNAME).'/';
+            $obData = \Izica\ProgressiveImages::fromFileSource($_file)
+            ->setFileName(pathinfo($_file,PATHINFO_FILENAME))
+            ->setDestinationFolder($path)
+            ->convert();
+
+            
+
+    
+            if(
+                isset($obData->webp) 
+            )
+            {
+                echo shellFontColor($obData->webp,"default");
+                echo "\t".shellFontColor("[success]","verde")."\n";
+            }
+            else{
+                echo shellFontColor($obData->webp,"default");
+                echo "\t".shellFontColor("[error]","rojo")."\n";
+            }
+
+            if(
+                isset($obData->jpeg2000) 
+            )
+            {
+                echo shellFontColor($obData->jpeg2000,"default");
+                echo "\t".shellFontColor("[success]","verde")."\n";
+            }
+            else{
+                echo shellFontColor($obData->jpeg2000,"default");
+                echo "\t".shellFontColor("[error]","rojo")."\n";
+            }
+
+
+            if(
+                isset($obData->jpegxr) 
+            
+            )
+            {
+                echo shellFontColor($obData->jpegxr,"default");
+                echo "\t".shellFontColor("[success]","verde")."\n";
+            }
+            else{
+                echo shellFontColor($obData->jpegxr,"default");
+                echo "\t".shellFontColor("[error]","rojo")."\n";
+            }
+
+
+        }
+    }
+}
+?>

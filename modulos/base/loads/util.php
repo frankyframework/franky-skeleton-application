@@ -31,29 +31,60 @@ $_Days = array('Dom','Lun','Mar','Mie','Jue','Vie','Sab');
 
 function makeHTMLImg($src, $width="", $height="", $alt="", $extra='',$live=0)
 {
-	if(!empty($height))
-	{
-		$height = "height='$height'";
-	}
-
-	if(!empty($width))
-	{
-		$width = "width='$width'";
-	}
-  if($live == 0)
-  {
-    $html = "<img src=\"$src\" $width $height  alt=\"$alt\"  $extra />";
-  }
-  else {
-    if($live == 1)
+    $is_next_generation = false;
+    if(getCoreConfig("base/pwa/images-next-generation") == 1)
     {
-      $img_live = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z/C/HgAGgwJ/lK3Q6wAAAABJRU5ErkJggg==";
+        global $MyRequest;
+        $img = $MyRequest->link($src,false,false);
+
+        $html = "<picture>";
+        
+        $schemaImg = pathinfo($img);
+        if(file_exists(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.jxr')):
+            $is_next_generation = true;
+            $html .= "<source srcset=\"".$schemaImg['dirname'].'/'.$schemaImg['filename'].'.jxr'."\" type='image/vnd.ms-photo'>";
+        endif;
+        if(file_exists(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.jp2')):
+            $is_next_generation = true;
+            $html .= "<source srcset=\"".$schemaImg['dirname'].'/'.$schemaImg['filename'].'.jp2'."\" type='image/jp2'>";
+        endif;
+        if(file_exists(PROJECT_DIR.'/'.$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp')):
+            $is_next_generation = true;
+            $html .= "<source srcset=\"".$schemaImg['dirname'].'/'.$schemaImg['filename'].'.webp'."\" type='image/webp'>";
+        endif;
+        $html .= "<img src=\"".$src."\" alt=\"$alt\">";
+        $html .= "</picture>";
+
     }
-    else {
-      $img_live = $live;
+    
+    if(!$is_next_generation){
+
+        if(!empty($height))
+        {
+            $height = "height='$height'";
+        }
+
+        if(!empty($width))
+        {
+            $width = "width='$width'";
+        }
+        
+        if($live == 0)
+        {
+            $html = "<img src=\"$src\" $width $height  alt=\"$alt\"  $extra />";
+        }
+        else {
+            if($live == 1)
+            {
+            $img_live = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z/C/HgAGgwJ/lK3Q6wAAAABJRU5ErkJggg==";
+            }
+            else {
+            $img_live = $live;
+            }
+            $html = "<img src=\"$img_live\" data-alive=\"$src\" $width $height  alt=\"$alt\"  $extra />";
+        }
     }
-    $html = "<img src=\"$img_live\" data-alive=\"$src\" $width $height  alt=\"$alt\"  $extra />";
-  }
+    
 
 	return ($html);
 }

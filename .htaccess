@@ -5,7 +5,7 @@ RewriteEngine on
 #RewriteCond %{HTTP_HOST} ^atencioninmobiliaria\.com$ [NC]
 #RewriteRule ^(.*)$ http://www.atencioninmobiliaria.com/$1 [L,R=301]
 
-RewriteCond %{REQUEST_URI}  !\.(php?|html?|jpg|jpeg|png|bmp|gif|svg|js|css|ttf|woff|xml|txt|swf|jar|zip|kml|eot|json|pdf|ico|mp4|ogg|webm|map|woff2|otf)$
+RewriteCond %{REQUEST_URI}  !\.(php?|html?|jpg|jpeg|png|bmp|gif|svg|js|css|ttf|woff|xml|txt|swf|jar|zip|kml|eot|json|pdf|ico|mp4|ogg|webm|map|woff2|otf|webp|jp2|jxr)$
 RewriteRule ^(.*)([^/])$ http://%{HTTP_HOST}/$1$2/ [L,R=301]
 
 RewriteCond %{REQUEST_URI} ^.*/sess_tmp/.*$

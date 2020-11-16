@@ -219,8 +219,16 @@ return array(
                           'label' => 'Color de  tema',
                           'validation' => array('required' => false,'maxlength' => 10),
                           'value' => '#000'
-                      )
-                      )
+                      ),
+                      array(
+                        'path' => 'base/pwa/images-next-generation',
+                        'type' => 'select',
+                        'label' => '¿Habilitar imagenes con formato de próxima generación?',
+                        'validation' => array('required' => false),
+                        'data' => ['0' => 'No', '1' => 'Si'],
+                        'value' => '0'
+                      ),
+            )
                      
 
 
