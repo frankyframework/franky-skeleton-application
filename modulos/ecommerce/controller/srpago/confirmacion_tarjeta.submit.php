@@ -35,7 +35,7 @@ if($MySession->GetVar('tarjeta_srpago') == "" )
 {
   $error = true;
 }
-//$MySession->UnsetVar('tarjeta_srpago');
+$MySession->UnsetVar('tarjeta_srpago');
 
 if(empty($id_tarjeta))
 {
@@ -165,13 +165,21 @@ if(!$error)
         //print_r($chargeParams);
         
         $fullname = explode(" ",$MySession->GetVar('nombre'));
+        $nombres = "";
+        $middlename = "";
         if(count($fullname) >= 3)
         {
+            
             $apellido_materno = $fullname[count($fullname) - 1];
             $apellido_paterno = $fullname[count($fullname) - 2];
             unset($fullname[count($fullname) - 1]);
             unset($fullname[count($fullname) - 2]);
-            $nombres = implode(" ",$fullname);
+            if(count($fullname) > 1)
+            {
+                $nombres = $fullname[0];
+                $middlename = $fullname[1];
+            }
+            
         }
         if(count($fullname) == 2)
         {
@@ -192,8 +200,8 @@ if(!$error)
                 "memberLoggedIn" => "Si",
                 "memberFullName" => $MySession->GetVar('nombre'),
                 "memberFirstName" => $nombres,
-                "memberMiddleName" => $apellido_paterno,
-                "memberLastName" => $apellido_materno,
+                "memberMiddleName" => $middlename,
+                "memberLastName" => $apellido_paterno,
                 "memberEmailAddress" => $MySession->GetVar('email'),
                 "memberAddressLine1" => $data['direccion_envio']['calle'],
                 "memberAddressLine2" => $data['direccion_envio']['colonia'],
@@ -205,8 +213,8 @@ if(!$error)
             ],
             "shipping" => [
                 "shippingFirstName" => $nombres,
-                "shippingMiddleName" => $apellido_paterno,
-                "shippingLastName" => $apellido_materno,
+                "shippingMiddleName" => $middlename,
+                "shippingLastName" => $apellido_paterno,
                 "shippingCharges" => (isset($data['monto_envio']) ? $data['monto_envio']: 0),
                 "shippingEmailAddress" => $MySession->GetVar('email'),
                 "shippingAddress" => $data['direccion_envio']['calle'],
@@ -221,8 +229,8 @@ if(!$error)
             ],
             "billing" => [
                 "billingFirstName-D" => $nombres,
-                "billingMiddleName-D" => $apellido_paterno,
-                "billingLastName-D" => $apellido_materno,
+                "billingMiddleName-D" => $middlename,
+                "billingLastName-D" => $apellido_paterno,
                 "billingEmailAddress" => $MySession->GetVar('email'),
                 "billingAddress-D" => $data['direccion_envio']['calle'],
                 "billingAddress2-D" => $data['direccion_envio']['colonia'],
@@ -239,8 +247,8 @@ if(!$error)
                 
                 $metadata["billing"] = [
                     "billingFirstName-D" => $nombres,
-                    "billingMiddleName-D" => $apellido_paterno,
-                    "billingLastName-D" => $apellido_materno,
+                    "billingMiddleName-D" => $middlename,
+                    "billingLastName-D" => $apellido_paterno,
                     "billingEmailAddress" => $MySession->GetVar('email'),
                     "billingAddress-D" => $data['direccion_facturacion']['calle'],
                     "billingAddress2-D" => $data['direccion_facturacion']['colonia'],
@@ -259,14 +267,14 @@ if(!$error)
                     "itemDescription" => $producto["nombre"],
                     "itemPrice" => $producto["precio_sin_iva"],
                     "itemQuantity" => $producto["qty"],
-                    "itemTax" => $producto["iva"],
+                    "itemTax" => (string)$producto["iva"],
                     //"itemMeasurementUnit" => "PZ",
                     //"itemBrandName" => "SR.Pago",
                     //"itemCategory" => "TI"
                 ];
             }
         
-//print_r($metadata); die;
+//print_r(json_encode($metadata)); die;
     
         $order = pagoTarjeta($chargeParams,$metadata);
           
