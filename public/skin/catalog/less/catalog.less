@@ -25,7 +25,37 @@
     }
 }
 main {
-
+    ////// Breadcrumb //////////
+    .breadcrumb {
+        .ul-reset;
+        margin-bottom: 10px;
+        li {
+            display: inline-block;
+            a {
+                display: inline-block;
+                color: @gray;
+                font-size: 1.4rem;
+                &:hover {
+                    color: @enfasis_color;
+                }
+            }
+            &:after {
+                content: "/";
+                display: inline-block;
+                margin: 0 5px;
+            }
+            &:last-child {
+                a {
+                    text-decoration: none;
+                }
+                &:after {
+                    content: "";
+                    margin: 0px;
+                }   
+            }
+        }
+    }
+    ////// END Breadcrumb //////////
     ///////////////// Resultados
     .cont_filter {
         ul {
