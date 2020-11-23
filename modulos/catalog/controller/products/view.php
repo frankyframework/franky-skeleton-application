@@ -66,6 +66,8 @@ if($CatalogproductsModel->getData($CatalogproductsEntity->getArrayCopy()) == REG
     }
 
     $custom_attr = getDataCustomAttribute($data_detalle['id'],'catalog_products');
+
+    $configurables = getDataConfigurables($data_detalle['id']);
   
   $offerSchema->setPriceCurrency('MXN');
   $offerSchema->setPrice($data_detalle['price']);
@@ -157,4 +159,15 @@ if($CatalogproductrelatedModel->getData($CatalogproductrelatedEntity->getArrayCo
     }
 }
 
+
+//print_r($custom_attr);
+//print_r($configurables);
+//die;
+
 $breadcrumbs = CatalogBreadcrumbs($data_detalle['id_ori']);
+
+if($MyRequest->isAjax())
+{
+  echo render(PROJECT_DIR.'/modulos/catalog/diseno/products/view.phtml');
+  die;
+}

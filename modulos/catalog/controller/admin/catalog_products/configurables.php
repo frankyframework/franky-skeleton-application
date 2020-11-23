@@ -4,7 +4,8 @@ use Franky\Core\paginacion;
 use Catalog\model\CatalogproductsModel;
 use Catalog\entity\CatalogproductsEntity;
 use Franky\Haxor\Tokenizer;
-
+use Base\model\CustomattributesModel;
+use Base\entity\CustomattributesEntity;
 
 
 $CatalogproductsModel = new CatalogproductsModel();
@@ -13,7 +14,14 @@ $Tokenizer = new Tokenizer();
 
 $MyPaginacion = new paginacion();
 
+$id		= $MyRequest->getRequest('id');
+$callback	= $MyRequest->getRequest('callback');
 
+
+if(empty($Tokenizer->decode($id)))
+{
+    $MyRequest->redirect($Tokenizer->decode($callback));
+}
 $MyPaginacion->setPage($MyRequest->getRequest('page',1));
 $MyPaginacion->setCampoOrden($MyRequest->getRequest('por',"catalog_products.createdAt"));
 $MyPaginacion->setOrden($MyRequest->getRequest('order',"DESC"));
@@ -31,10 +39,7 @@ else{
     $orden = $MyPaginacion->getCampoOrden();
 }
 
-if(getCoreConfig('catalog/product/showdelete') == 0){
-    $CatalogproductsEntity->status(1);
-}
-
+$CatalogproductsModel->setExcludeId($Tokenizer->decode($id));
 $CatalogproductsModel->setPage($MyPaginacion->getPage());
 $CatalogproductsModel->setTampag($MyPaginacion->getTampageDefault());
 $CatalogproductsModel->setOrdensql($orden." ".$MyPaginacion->getOrden());
@@ -80,8 +85,6 @@ if($CatalogproductsModel->getTotal() > 0)
                 "thisClass"     => $thisClass,
                 "id" => $Tokenizer->token('catalog_products',$registro["id"]),
                 "_id" => $registro["id"],
-                "callback" => $Tokenizer->token('catalog_products',$MyRequest->getURI()),
-                "nuevo_estado"  => ($registro["status"] == 1 ?"desactivar" : "activar"),
                 "images"     => $img,
         ));
 
@@ -89,18 +92,59 @@ if($CatalogproductsModel->getTotal() > 0)
         $iRow++;
     }
 }
-//$MyFrankyMonster->setPHPFile(getVista("admin/template/grid.phtml"));
-$title_grid = "Productos";
-$class_grid = "products";
-$error_grid = "No hay productos registrados";
-$deleteFunction = "DeleteCatalogProduct";
 
-$frm_constante_link = FRM_CATALOG_PRODUCTS;
+
+
+$CatalogproductsModel->setExcludeId('');
+$CatalogproductsEntity->exchangeArray([]);
+$CatalogproductsEntity->id($Tokenizer->decode($id));
+if($CatalogproductsModel->getData($CatalogproductsEntity->getArrayCopy(),$busca_b) == REGISTRO_SUCCESS)
+{
+    $producto_actual = $CatalogproductsModel->getRows();
+}
+
+
+
+$CustomattributesModel = new CustomattributesModel();
+$CustomattributesEntity = new CustomattributesEntity();
+
+$CustomattributesEntity->entity('catalog_products');  
+$CustomattributesEntity->status(1);  
+
+$CustomattributesModel->setPage(1);
+$CustomattributesModel->setTampag(100);
+$CustomattributesModel->setOrdensql('id ASC');
+
+$result	 = $CustomattributesModel->getData($CustomattributesEntity->getArrayCopy());
+
+$attrs = array();
+if($CustomattributesModel->getTotal() > 0)
+{
+	$iRow = 0;	
+
+	while($registro = $CustomattributesModel->getRows())
+	{
+        if(in_Array($registro['type'],['select','radio'])):
+            $attrs[$registro['id']] = $registro['label'];
+        endif;
+    }
+}
+
+
+//print_r($attrs);
+
+
+
+//$MyFrankyMonster->setPHPFile(getVista("admin/template/grid.phtml"));
+$title_grid = "Productos configurables";
+$class_grid = "products_configurables";
+$error_grid = "No hay productos registrados";
+
 
 $titulo_columnas_grid = array("_id" => "ID","images" => "Thumb", "name" =>  "Nombre","sku" => "SKU");
 $value_columnas_grid = array("_id" ,"images", "name","sku");
 
-$css_columnas_grid = array("_id" => "w-xxxx-1" ,"images" => "w-xxxx-2" , "name" => "w-xxxx-4", "sku" => "w-xxxx-1");
+$css_columnas_grid = array("_id" => "w-xxxx-2" ,"images" => "w-xxxx-2" , "name" => "w-xxxx-4", "sku" => "w-xxxx-2");
 
 
 $permisos_grid = ADMINISTRAR_PRODUCTS_CATALOG;

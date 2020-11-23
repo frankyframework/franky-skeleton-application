@@ -61,7 +61,7 @@
             "css":"",
             "js":[],
             "jquery":[],
-            "permisos":"",
+            "permisos":[1,2],
             "constante":"ADMIN_CATALOG_PRODUCTS",
             "url":"admin/catalog-products/",
             "nombre":"Productos",
@@ -251,6 +251,20 @@
             "status":1,
             "editable":1,
             "modulo":"catalog"
-        }
+        },
+        {
+            "php":"admin/catalog_products/configurables.php",
+            "css":"",
+            "js":[],
+            "jquery":[],
+            "permisos":[1,2],
+            "constante":"ADMIN_CATALOG_PRODUCTS_CONFIGURABLES",
+            "url":"admin/catalog-products/configurables/",
+            "nombre":"Productos configurables",
+            "ajax":["base/ajax.admin.js","catalog/ajax.admin.js"],
+            "status":1,
+            "editable":1,
+            "modulo":"catalog"
+        },
     ]
 }

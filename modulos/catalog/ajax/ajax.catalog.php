@@ -539,6 +539,181 @@ function DeleteCatalogVitrina($id,$status)
 
     return $respuesta;
 }
+
+
+function ajax_products_agregarProductoConfigurable($id_parent,$id,$attr){
+    
+    global $MyAccessList;
+    global $MyMessageAlert;
+    $respuesta =[];
+    
+    if($MyAccessList->MeDasChancePasar(ADMINISTRAR_PRODUCTS_CATALOG))
+    {
+        $CatalogproductconfigurablesModel =  new \Catalog\model\CatalogproductconfigurablesModel();
+        $CatalogproductconfigurablesEntity =  new \Catalog\entity\CatalogproductconfigurablesEntity();
+        $Tokenizer = new \Franky\Haxor\Tokenizer;
+        $CatalogproductconfigurablesEntity->id_parent($Tokenizer->decode($id_parent));
+        $CatalogproductconfigurablesEntity->id_product($Tokenizer->decode($id));
+        $CatalogproductconfigurablesEntity->id_attribute($attr);
+        
+        
+        if($CatalogproductconfigurablesModel->save($CatalogproductconfigurablesEntity->getArrayCopy()) != REGISTRO_SUCCESS)
+        {
+            $respuesta["error"] = true;
+            $respuesta["message"] = $MyMessageAlert->Message("catalog_products_error_configurar");
+        }
+    }
+    else
+    {
+        $respuesta["error"] = true;
+        $respuesta["message"] = $MyMessageAlert->Message("sin_privilegios");
+    }
+    return $respuesta;
+}
+
+
+
+
+function ajax_products_quitarProductoConfigurable($id_parent,$id,$attr){
+    
+    global $MyAccessList;
+    global $MyMessageAlert;
+    $respuesta =[];
+    
+    if($MyAccessList->MeDasChancePasar(ADMINISTRAR_PRODUCTS_CATALOG))
+    {
+        $CatalogproductconfigurablesModel =  new \Catalog\model\CatalogproductconfigurablesModel();
+        $CatalogproductconfigurablesEntity =  new \Catalog\entity\CatalogproductconfigurablesEntity();
+        $Tokenizer = new \Franky\Haxor\Tokenizer;
+        $CatalogproductconfigurablesEntity->id_parent($Tokenizer->decode($id_parent));
+        $CatalogproductconfigurablesEntity->id_product($Tokenizer->decode($id));
+        $CatalogproductconfigurablesEntity->id_attribute($attr);
+        
+        if($CatalogproductconfigurablesModel->eliminar($CatalogproductconfigurablesEntity->getArrayCopy()) != REGISTRO_SUCCESS)
+        {
+            $respuesta["error"] = true;
+            $respuesta["message"] = $MyMessageAlert->Message("catalog_products_error_configurar_eliminar");
+        }
+    }
+    else
+    {
+        $respuesta["error"] = true;
+        $respuesta["message"] = $MyMessageAlert->Message("sin_privilegios");
+    }
+    return $respuesta;
+}
+
+function ajax_products_cargarProductosConfigurables($id)
+{
+    global $MyAccessList;
+    global $MyMessageAlert;
+    global $MyConfigure;
+    $respuesta =[];
+    
+    if($MyAccessList->MeDasChancePasar(ADMINISTRAR_PRODUCTS_CATALOG))
+    {
+        $CatalogproductconfigurablesModel =  new \Catalog\model\CatalogproductconfigurablesModel();
+        $CatalogproductconfigurablesEntity =  new \Catalog\entity\CatalogproductconfigurablesEntity();
+        $Tokenizer = new \Franky\Haxor\Tokenizer;
+        $CatalogproductconfigurablesEntity->id_parent($Tokenizer->decode($id));
+        $CatalogproductconfigurablesModel->setTampag(10000);
+        $lista_admin_data =[];
+        if($CatalogproductconfigurablesModel->getData($CatalogproductconfigurablesEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+        {
+            $iRow = 0;
+            while($registro = $CatalogproductconfigurablesModel->getRows())
+            {
+                $thisClass  = ((($iRow % 2) == 0) ? "formFieldDk" : "formFieldLt");
+
+
+                $img = "";
+                $_img = getCoreConfig('catalog/product/placeholder');
+                if($_img != "" && file_exists(PROJECT_DIR.$_img))
+                {
+                    $img = makeHTMLImg(imageResize($_img,50,50, true),50,50,$registro['name']);
+                }
+                $registro["images"] = json_decode($registro["images"],true);
+                if(!empty($registro['images']))
+                {
+                    foreach($registro["images"] as $foto)
+                    {
+                        if($foto['principal'] == 1)
+                        {
+                            if(!empty($foto["img"]) && file_exists($MyConfigure->getServerUploadDir()."/catalog/products/".$registro["id_product"].'/'.$foto['img']))
+                            {
+                                $img = imageResize($MyConfigure->getUploadDir()."/catalog/products/".$registro["id_product"].'/'.$foto['img'],50,50, true);
+                                $img = makeHTMLImg($img,50,50,$registro['name']);
+                            }
+                        }
+
+                    }
+                }
+
+                $lista_admin_data[$iRow] = array_merge($registro,array(
+                        "thisClass"     => $thisClass,
+                        "id" => $Tokenizer->token('catalog_products',$registro["id_product"]),
+                        "_id" => $registro["id_product"],
+                        "images"     => $img,
+                ));
+
+
+                $iRow++;
+            }
+            
+        }
+        $respuesta['lista_admin_data_configurables'] = ($lista_admin_data);
+        $titulo_columnas_grid = array("_id" => "ID","images" => "Thumb", "name" =>  "Nombre","sku" => "SKU");
+        $value_columnas_grid = array("_id" ,"images", "name","sku");
+
+        $css_columnas_grid = array("_id" => "w-xxxx-2" ,"images" => "w-xxxx-2" , "name" => "w-xxxx-4", "sku" => "w-xxxx-2");
+
+
+       
+
+        $respuesta['html'] = render(PROJECT_DIR.'/modulos/catalog/diseno/admin/catalog_products/widget.configurables.phtml',
+                ['titulo_columnas_grid' =>$titulo_columnas_grid,
+                 'value_columnas_grid' => $value_columnas_grid,
+                 'css_columnas_grid' => $css_columnas_grid
+                ]
+        );
+    }
+    else
+    {
+        $respuesta["error"] = true;
+        $respuesta["message"] = $MyMessageAlert->Message("sin_privilegios");
+    }
+    return $respuesta;
+}
+
+
+function ajax_products_setAttrConfigurable($id_parent,$attr){
+    
+    global $MyAccessList;
+    global $MyMessageAlert;
+    $respuesta =[];
+    
+    if($MyAccessList->MeDasChancePasar(ADMINISTRAR_PRODUCTS_CATALOG))
+    {
+        $CatalogproductconfigurablesModel =  new \Catalog\model\CatalogproductconfigurablesModel();
+        $CatalogproductconfigurablesEntity =  new \Catalog\entity\CatalogproductconfigurablesEntity();
+        $Tokenizer = new \Franky\Haxor\Tokenizer;
+     
+
+        if($CatalogproductconfigurablesModel->setAttr($Tokenizer->decode($id_parent),$attr) != REGISTRO_SUCCESS)
+        {
+            $respuesta["error"] = true;
+            $respuesta["message"] = $MyMessageAlert->Message("catalog_products_error_change_attr");
+        }
+    }
+    else
+    {
+        $respuesta["error"] = true;
+        $respuesta["message"] = $MyMessageAlert->Message("sin_privilegios");
+    }
+    return $respuesta;
+}
+
+
 /******************************** EJECUTA *************************/
 $MyAjax->register("DeleteCatalogCategory");
 $MyAjax->register("DeleteCatalogSubcategory");
@@ -552,5 +727,9 @@ $MyAjax->register("ajax_products_agregarProductoRelacionadoVitrina");
 $MyAjax->register("ajax_products_quitarProductoRelacionadoVitrina");
 $MyAjax->register("ajax_products_cargarProductosRelacionadosVitrina");
 $MyAjax->register("DeleteCatalogVitrina");
+$MyAjax->register("ajax_products_cargarProductosConfigurables");
+$MyAjax->register("ajax_products_agregarProductoConfigurable");
+$MyAjax->register("ajax_products_quitarProductoConfigurable");
+$MyAjax->register("ajax_products_setAttrConfigurable");
 
 ?>

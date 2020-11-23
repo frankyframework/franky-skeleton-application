@@ -4,12 +4,20 @@ namespace Base\model;
 class CustomattributesvaluesModel  extends \Franky\Database\Mysql\objectOperations
 {
 
+    private $ids;
+
     public function __construct()
     {
       parent::__construct();
       $this->from()->addTable('custom_attributes_values');
+      $this->ids = [];
     }
 
+
+    public function setIds($ids)
+    {
+        $this->ids = $ids;
+    }
     function getData($data = array())
     {
         $data = $this->optimizeEntity($data);
@@ -18,6 +26,12 @@ class CustomattributesvaluesModel  extends \Franky\Database\Mysql\objectOperatio
         foreach($data as $k => $v)
         {
             $this->where()->addAnd("custom_attributes_values.".$k,$v,'=');
+        }
+
+        if(!empty($this->ids))
+        {
+            $this->where()->concat('AND custom_attributes_values.id_ref in ('.implode(',',$this->ids).') ');
+          
         }
 
         return $this->getColeccion($campos);

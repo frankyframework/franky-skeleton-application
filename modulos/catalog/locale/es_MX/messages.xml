@@ -49,10 +49,24 @@
         <llave>products_error_relacionar</llave>
         <valor>Error al relacionar este producto</valor>
     </mensaje>
+
     <mensaje>
         <llave>products_error_relacionar_eliminar</llave>
         <valor>Error al quitar este producto</valor>
     </mensaje>
+
+    <mensaje>
+        <llave>products_error_configurar</llave>
+        <valor>Error al configurar este producto</valor>
+    </mensaje>
+    <mensaje>
+        <llave>products_error_configurar_eliminar</llave>
+        <valor>Error al quitar este producto</valor>
+    </mensaje>
+    <mensaje>
+        <llave>products_error_change_attr</llave>
+        <valor>Error al cambiar el atributo configurable</valor>
+    </mensaje>    
     <mensaje>
         <llave>vitrina_duplicada</llave>
         <valor>Ya existe un vitrina con este nombre</valor>

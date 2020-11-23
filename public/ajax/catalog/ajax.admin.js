@@ -246,3 +246,140 @@ function ajax_products_quitarProductoRelacionadoVitrina(id_parent,id)
     
     pasarelaAjax('GET', var_query, "ajax_products_agregarProductoRelacionadoVitrinaHTML",var_query.vars_ajax );
 }
+
+
+
+/******* Productos configurables */
+
+
+function ajax_products_cargarProductosConfigurables(id)
+{
+     var var_query = {
+          "function": "ajax_products_cargarProductosConfigurables",
+          "vars_ajax":[id]
+        };
+    
+    pasarelaAjax('GET', var_query, "ajax_products_cargarProductosConfigurablesHTML", var_query.vars_ajax);
+}
+function ajax_products_cargarProductosConfigurablesHTML(response,id){
+    
+    var respuesta = null;
+
+    if(response != "null")
+    {
+        respuesta = JSON.parse(response);
+
+        if(respuesta["error"])
+        {
+
+            if(respuesta["message"]){
+                 _alert(respuesta["message"],"Error")
+            }
+        }
+        else{
+             $("input[type=checkbox]").prop('checked',false);
+            $('.cont_productos_configurables').html(respuesta.html);
+           
+            $(".contenedor_columnas_info_configurables").htmlDataDum(respuesta.lista_admin_data_configurables,".no_hay_datos_configurables");
+            for(var x = 0; x<respuesta.lista_admin_data_configurables.length;x++)
+            {
+                $('[value='+respuesta.lista_admin_data_configurables[x].id+']').prop('checked',true);
+
+
+                $('select[name=attr_configurable]').val(respuesta.lista_admin_data_configurables[x].id_attribute)
+                    
+            }
+            
+            $("input[name='configurable[]']").unbind('change').change(function(){
+
+                if($(this).is(':checked'))
+                {
+                    ajax_products_agregarProductoConfigurable(id,$(this).attr('value'),$('select[name=attr_configurable]').val())
+                }
+                else{
+                    ajax_products_quitarProductoConfigurable(id,$(this).attr('value'),$('select[name=attr_configurable]').val())
+                }
+      
+            });
+        }
+
+    }
+    
+}
+
+function ajax_products_agregarProductoConfigurable(id_parent,id,attr)
+{
+    
+    var var_query = {
+          "function": "ajax_products_agregarProductoConfigurable",
+          "vars_ajax":[id_parent,id,attr]
+        };
+    
+    pasarelaAjax('GET', var_query, "ajax_products_agregarProductoConfigurableHTML", var_query.vars_ajax);
+}
+
+function ajax_products_agregarProductoConfigurableHTML(response,id_parent)
+{
+    var respuesta = null;
+
+    if(response != "null")
+    {
+        respuesta = JSON.parse(response);
+
+        if(respuesta["error"])
+        {
+
+            if(respuesta["message"]){
+                 _alert(respuesta["message"],"Error")
+            }
+        }
+
+    }
+    ajax_products_cargarProductosConfigurables(id_parent);
+}
+
+
+
+function ajax_products_quitarProductoConfigurable(id_parent,id,attr)
+{
+    var var_query = {
+          "function": "ajax_products_quitarProductoConfigurable",
+          "vars_ajax":[id_parent,id,attr]
+        };
+    
+    pasarelaAjax('GET', var_query, "ajax_products_agregarProductoConfigurableHTML",var_query.vars_ajax );
+}
+
+
+function ajax_products_setAttrConfigurable(id_parent,attr)
+{
+    
+    var var_query = {
+          "function": "ajax_products_setAttrConfigurable",
+          "vars_ajax":[id_parent,attr]
+        };
+    
+    pasarelaAjax('GET', var_query, "ajax_products_setAttrConfigurableHTML", var_query.vars_ajax);
+}
+
+function ajax_products_setAttrConfigurableHTML(response,id_parent,attr)
+{
+    var respuesta = null;
+
+    if(response != "null")
+    {
+        respuesta = JSON.parse(response);
+
+        if(respuesta["error"])
+        {
+
+            if(respuesta["message"]){
+                 _alert(respuesta["message"],"Error")
+            }
+        }
+
+    }
+    ajax_products_cargarProductosConfigurables(id_parent);
+    
+}
+

@@ -666,4 +666,103 @@ function CatalogBreadcrumbs($name =null)
    
     return $html;
 }
+
+
+
+
+function getDataConfigurables($id_product)
+{
+    global $MyRequest;
+    $CatalogproductconfigurablesModel =  new \Catalog\model\CatalogproductconfigurablesModel();
+    $CatalogproductconfigurablesEntity =  new \Catalog\entity\CatalogproductconfigurablesEntity();
+
+
+    $CatalogproductconfigurablesEntity->id_product($id_product);
+  
+    
+    if($CatalogproductconfigurablesModel->getData($CatalogproductconfigurablesEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+    {
+      
+        while($registro = $CatalogproductconfigurablesModel->getRows())
+        {
+            $id_product = $registro['id_parent'];
+        }
+    }
+
+    $CatalogproductconfigurablesEntity->exchangeArray([]);
+    $CatalogproductconfigurablesEntity->id_parent($id_product);
+    $CatalogproductconfigurablesModel->setTampag(10000);
+    $lista_configurables =[];
+
+    if($CatalogproductconfigurablesModel->getData($CatalogproductconfigurablesEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+    {
+ 
+        $lista_configurables[] =$id_product;
+        while($registro = $CatalogproductconfigurablesModel->getRows())
+        {
+            $lista_configurables[] = $registro['id_product'];
+            $id_attr = $registro['id_attribute'];
+        }
+
+        //print_r($lista_configurables); 
+    }
+
+    if(!empty($lista_configurables))
+    {
+        $CustomattributesvaluesModel = new \Base\model\CustomattributesvaluesModel();
+        $CustomattributesvaluesEntity = new \Base\entity\CustomattributesvaluesEntity();
+
+ 
+        $CustomattributesvaluesModel->setTampag(100);
+        $CustomattributesvaluesModel->setIds($lista_configurables);
+        $CustomattributesvaluesEntity->id_attribute($id_attr);
+        $CustomattributesvaluesModel->getData($CustomattributesvaluesEntity->getArrayCopy());
+        $lista_configurables_values= [];
+     
+        if($CustomattributesvaluesModel->getTotal() > 0)
+        {
+            
+
+            while($registro = $CustomattributesvaluesModel->getRows())
+            {
+
+                $lista_configurables_values[$registro['id_ref']] = $registro['value'];
+
+            }
+
+           // print_r($lista_configurables_values); 
+        }
+    }
+
+    $configurables = [];
+    if(!empty($lista_configurables))
+    {
+        $CatalogproductsModel = new Catalog\model\CatalogproductsModel;
+        $CatalogproductsEntity = new Catalog\entity\CatalogproductsEntity;
+
+
+        $CatalogproductsModel->setPage(1);
+        $CatalogproductsModel->setTampag(100);
+
+
+        $CatalogproductsEntity->status(1);
+        $CatalogproductsModel->setsearchIds($lista_configurables);
+  
+        if($CatalogproductsModel->getData($CatalogproductsEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+        {
+            $configurables['id_attribute'] = $id_attr;
+            while($registro = $CatalogproductsModel->getRows())
+            {
+                    $configurables['configurables'][] = ['url' => $MyRequest->url(CATALOG_SEARCH_CATEGORY,['friendly' => $registro['url_key']]),'url_key' => $registro['url_key'], 'value' => $lista_configurables_values[$registro['id']]];
+
+            }
+
+               
+            
+        }
+    }
+    
+ 
+    return $configurables;
+}
 ?>
