@@ -502,7 +502,7 @@ function loadMetodosEnvioHTML(response)
                     $("#frm_metodo_envio").show();
                     $("form[name=frm_metodo_envio] input[name=continuar]").show();
                 }
-            })
+            });
 
 
         }
