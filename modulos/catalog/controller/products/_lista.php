@@ -107,6 +107,7 @@ $CatalogproductsModel->setOrdensql($MyPaginacion->getCampoOrden()." ".$MyPaginac
 
 
 $CatalogproductsEntity->status(1);
+$CatalogproductsEntity->visible_in_search(1);
 $CatalogproductsModel->setBusca($q);
 $resultados_pagina = array();
 if($CatalogproductsModel->getDataSearch($CatalogproductsEntity->getArrayCopy()) == REGISTRO_SUCCESS)
