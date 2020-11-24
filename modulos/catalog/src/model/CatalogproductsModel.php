@@ -205,6 +205,7 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
                 }
                 $this->where()->concat(')');
                 $this->where()->addAnd("catalog_products.status",1,'=');
+                $this->where()->addAnd("catalog_products.visible_in_search",1,'=');
                 $this->where()->concat(')');
             }
           if(!empty($this->subcategoria_array)){
@@ -225,6 +226,7 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
               }
               $this->where()->concat(')');
               $this->where()->addAnd("catalog_products.status",1,'=');
+              $this->where()->addAnd("catalog_products.visible_in_search",1,'=');
                 $this->where()->concat(')');
             }
             }
@@ -251,6 +253,7 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
                     }
                     $this->where()->concat(')');
                     $this->where()->addAnd("catalog_products.status",1,'=');
+                    $this->where()->addAnd("catalog_products.visible_in_search",1,'=');
                     $this->where()->concat(')');
                 }
     
