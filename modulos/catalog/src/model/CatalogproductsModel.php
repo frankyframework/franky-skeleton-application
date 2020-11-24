@@ -178,6 +178,7 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
 
     function getDataVitrina($data = array())
     {
+        die;
         $data = $this->optimizeEntity($data);
         $campos = ["catalog_products.id","catalog_products.name","sku","category",
         "catalog_products.visible_in_search","catalog_products.description",
@@ -271,6 +272,11 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
             {
                 $this->where()->concat(" AND catalog_products.id in (".$this->search_ids.") ");
                 $this->where()->addAnd("catalog_products.status",1,'=');
+                $this->where()->addAnd("catalog_products.visible_in_search",1,'=');
+            }
+            else{
+                $this->where()->addAnd("catalog_products.status",1,'=');
+                $this->where()->addAnd("catalog_products.visible_in_search",1,'=');
             }
         }
 
