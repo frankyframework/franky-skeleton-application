@@ -461,6 +461,7 @@ function catalog_addStock($pedido)
 
 function getCatalogVitrina($clave)
 {
+   
     global $MyConfigure;
     global $MyFrankyMonster;
     global $MyMetatag;
