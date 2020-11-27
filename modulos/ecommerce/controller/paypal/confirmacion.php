@@ -147,7 +147,8 @@ if($status_pago == "pending" || $status_pago == "paid")
             if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)
             {
                 $pedido = $MyPedido->getUltimoID();
-
+                $detalle_pedido = getPedido($pedido,$MySession->GetVar('id'));
+                
                 foreach($productos_comprados['productos'] as $producto)
                 {
                     $MyPedidoProductoEntity->setCaracteristicas($producto["caracteristicas"]);

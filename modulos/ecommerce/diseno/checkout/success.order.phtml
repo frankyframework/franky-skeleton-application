@@ -1,0 +1,53 @@
+<?php if(!empty($detalle_pedido)): ?>
+<div class="order_content">
+<h4>Resumen de la orden<h4>
+
+<?php foreach($detalle_pedido['productos'] as $producto): ?>
+
+<ul class="_ul_txt_standar ul_order">
+<?php
+$imagen = "";
+    $_img = getCoreConfig('ecommerce/product/placeholder');
+    if($_img != "" && file_exists(PROJECT_DIR.$_img))
+    {
+      $imagen = imageResize($_img,50,50, true);
+    }
+
+    if(!empty($producto["imagen"]))
+    {
+        $_imagen = json_decode($producto["imagen"],true);
+        if(is_array($_imagen))
+        {
+            if(!empty($_imagen)){
+
+                foreach($_imagen as $foto)
+                {
+                    if($foto['principal'] == 1)
+                    {
+                        if(!empty($foto["img"]) && file_exists($MyConfigure->getServerUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE.'/'.$producto["id"].'/'.$foto['img']))
+                        {
+                            $imagen = imageResize($MyConfigure->getUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE."/".$producto["id"].'/'.$foto['img'],50,50, true);
+                        }
+                    }
+                }
+            }
+        }
+        else{
+            $imagen = imageResize($MyConfigure->getUploadDir()."/".DIRECTORIO_IMAGENES_PRODUCTOS_ECOMMERCE."/".$producto["id"].'/'.$producto['imagen'],50,50, true);
+        }
+    }
+
+
+    ?>
+  <li class="_image"><?=makeHTMLImg($imagen,50,50,$producto['nombre'])?></li>
+    <li class="_name"><strong>Nombre:</strong> <?php echo $producto['nombre']; ?></li>
+    <li class="_qty"><strong>Cantidad:</strong> <?php echo $producto['qty']; ?></li>
+    <li class="_total"><strong>Precio:</strong> <?php echo getFormatoPrecio($producto['precio']); ?></li>
+</ul>
+<?php if(!empty($producto['caracteristicas'])): ?>
+<p>caracteristicas: <?php echo $producto['caracteristicas']; ?></p>
+<?php endif; ?>
+<hr />
+<?php endforeach; ?>
+</div>
+<?php endif; ?>

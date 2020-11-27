@@ -251,7 +251,7 @@ if(!$error)
     if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)
     {
         $pedido = $MyPedido->getUltimoID();
-
+        $MySession->SetVar('id_pedido',$pedido);
         foreach($productos_comprados['productos'] as $producto)
         {
             $MyPedidoProductoEntity->setCaracteristicas($producto["caracteristicas"]);

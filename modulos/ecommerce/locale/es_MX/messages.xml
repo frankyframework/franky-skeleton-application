@@ -97,5 +97,9 @@
         <llave>tienda_error_delete</llave>
         <valor>Error al eliminar la tienda</valor>
     </mensaje>
+    <mensaje>
+        <llave>error_transaction</llave>
+        <valor>Error al realizar la transacción intente mas tarde</valor>
+    </mensaje>
 
 </mensajes>

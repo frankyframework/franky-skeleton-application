@@ -286,6 +286,16 @@ if(!$error)
     }
 
 
+
+    if(!isset($order['result']['status']))
+    {
+        $MyFlashMessage->setMsg("error",$MyMessageAlert->Message("ecommerce_error_transaction"));
+        $MyRequest->redirect($MyRequest->getReferer());
+        
+        die;
+    }
+
+
     $referencia = json_encode(
             [
             'id' => $order['result']['transaction'],
@@ -367,7 +377,7 @@ if(!$error)
     if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)
     {
         $pedido = $MyPedido->getUltimoID();
-
+        $MySession->SetVar('id_pedido',$pedido);
         foreach($productos_comprados['productos'] as $producto)
         {
             $MyPedidoProductoEntity->setCaracteristicas($producto["caracteristicas"]);

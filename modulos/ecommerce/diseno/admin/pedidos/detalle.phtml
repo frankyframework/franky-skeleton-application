@@ -67,11 +67,12 @@
           <li>Fecha limite de pago: <?=getfechaUI($expiration_date[0])?></li>
         <?php endif;?>
     </ul>
+    <div class="order_content">
     <h4>Productos</h4>
 
     <?php foreach($detalle_pedido['productos'] as $producto): ?>
 
-        <ul class="_ul_txt_standar">
+        <ul class="_ul_txt_standar ul_order">
         <?php
         $imagen = "";
             $_img = getCoreConfig('ecommerce/product/placeholder');
@@ -106,9 +107,9 @@
 
 
             ?>
-          <li><?=makeHTMLImg($imagen,50,50,$producto['nombre'])?></li>
-            <li><strong>Nombre:</strong> <?php echo $producto['nombre']; ?></li>
-            <li><strong>Cantidad:</strong> <?php echo $producto['qty']; ?></li>
+          <li class="_image"><?=makeHTMLImg($imagen,50,50,$producto['nombre'])?></li>
+            <li class="_name"><strong>Nombre:</strong> <?php echo $producto['nombre']; ?></li>
+            <li class="_qty"><strong>Cantidad:</strong> <?php echo $producto['qty']; ?></li>
             <li class="_total"><strong>Precio:</strong> <?php echo getFormatoPrecio($producto['precio']); ?></li>
         </ul>
     <?php if(!empty($producto['caracteristicas'])): ?>
@@ -116,7 +117,7 @@
     <?php endif; ?>
     <hr />
     <?php endforeach; ?>
-
+    </div>
     <?php if(isset($detalle_pedido['envio']) && !empty($detalle_pedido['envio'])): ?>
       <?php if(!empty( $detalle_pedido['metodo_envio'] )): ?>
         <h4>Datos del envio</h4>

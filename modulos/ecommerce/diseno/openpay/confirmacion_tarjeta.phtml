@@ -9,6 +9,8 @@
         </div>
     </div>
 </div>
+
+<?=render('checkout/success.order.phtml',['detalle_pedido' => $detalle_pedido,'MyConfigure' => $MyConfigure])?>
 <?php else: ?>
 <div class="w-xxxx-12 _success _checkout_error _pt_header">
     <div class="content">
