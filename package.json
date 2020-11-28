@@ -18,6 +18,7 @@
   "homepage": "https://bitbucket.org/cloudstudiomx/framework_franky#readme",
   "devDependencies": {
     "grunt": "^1.0.1",
+    "grunt-browser-sync": "^2.2.0",
     "grunt-contrib-less": "^1.4.1",
     "grunt-contrib-watch": "^1.0.0",
     "jit-grunt": "^0.10.0"
