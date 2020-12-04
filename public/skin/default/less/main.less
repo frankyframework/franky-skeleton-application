@@ -1,0 +1,116 @@
+/*  Contenido  */
+main {
+    margin-top: 90px;
+    ._tag_center {
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+    }
+    ._cont_login_register_acount {
+        margin: auto;
+        max-width: 400px;
+        margin-bottom: 32px;
+        display: flex;
+        flex-direction: column;
+        ._space_border {
+            padding-top: 32px;
+            margin-top: 32px;
+            border-top: solid @soft_gray 1px;
+        }
+    }
+    .form_guardar,
+    .form_login {
+        text-align: center;
+        label {
+            display: inline-block;
+        }
+    }
+    .page_wrapper {}
+    // Home
+    h2.margin_home {
+        margin-top: 36px;
+        margin-bottom: 36px;
+        font-size: 3em;
+    }
+    h2.margin_home,
+    p.margin_home {
+        margin-left: 170px;
+        margin-right: 170px;
+        text-align: center;
+    }
+    .cont_banner_programas {
+        .w-xxxx-6 {
+            text-align: center;
+        }
+        a.btn {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            z-index: 1;
+            color: @white;
+            font-size: 1.6em;
+            .box-shadow;
+            &.btn_theme_color {
+                background: @theme_color;
+            }
+            &.btn_enfasis_color {
+                background: @enfasis_color;
+            }
+            &:hover {
+                background: @gray;
+            }
+        }
+    }
+
+    /////////////// Ajax Paginar
+    .cont_paginar_ajax {
+        padding: 30px 0;
+        text-align: center;
+        a {
+            display: inline-block;
+            padding: 20px;
+            text-transform: uppercase;
+            background-color: @enfasis_color;
+            color: @white;
+            text-decoration: none;
+            .radius;
+            .box-shadow;
+            &:hover {
+                color: @black;
+                background-color: @theme_color;
+            }
+        }
+    }
+}
+
+/*  Debug  */
+#debug {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: #999;
+    z-index: 9999;
+}
+#content-detalle-debug {
+    height: 300px;
+    overflow: auto;
+    display: none;
+    width: 100%;
+    background: #fff;
+}
+#debug .pestanas .pestana {
+    float: left;
+    width: 200px;
+    font-size: 15px;
+    height: 30px;
+}
+#debug .pestanas .pestana-hide {
+    float: right;
+    width: 30px;
+    font-size: 15px;
+    height: 30px;
+}
+#content-detalle-debug div {
+    display: none;
+}

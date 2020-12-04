@@ -1,0 +1,292 @@
+header {
+    .content_header {
+        .content {
+            height: 80px;
+            @media @small {
+                height: 70px;
+            }
+        }
+        position: fixed;
+        background-color: @black;
+        width: 100%;
+        top: 0;
+        left: 0;
+        box-sizing: border-box;
+        z-index: 11;
+        @media @small {
+            position: fixed;
+            height: 70px;
+        }
+    /////////////// Brand
+        ._brand {
+            left: 10px;
+            top: 5px;
+            position: absolute;
+            z-index: 11;
+            @media @small {
+                max-width: 90px;
+                top: 15px;
+                left: 10px;
+                z-index: 10;
+            }
+            img {
+                max-width: 60px;
+                height: auto;
+                @media @small {
+                    max-width: 40px;
+                }
+            }
+        } 
+    ////////////// Menu mobile
+
+        .cont_nav_movil {
+            position: absolute;
+            display: none;
+            top: 20px;
+            left: 70px;
+            z-index: 999;
+            @media @small {
+                display: block;
+            }
+            .hamburguer {
+                position: relative;
+                margin-top: 10px;
+                display: block;
+                width: 36px;
+                height: 36px;
+                cursor: pointer;
+                margin: 0;
+                padding: 0;
+                li {
+                    position: absolute;
+                    left: 0;
+                    display: block;
+                    width: 36px;
+                    height: 3px;
+                    background: @white;
+                    margin: 5px 0;
+                    padding: 0;
+                    opacity: 1;
+                    .transition(all, 0.5s, ease-in-out);
+                    .radius(3px);
+                    &._one {
+                        top: 0;
+                    }
+                    &._two {
+                        top: 10px;
+                    }
+                    &._three {
+                        top: 20px;
+                    }
+                }
+                &.active {
+                    li {
+                        &._one {
+                            top: 10px;
+                            .rotate(45deg);
+                        }
+                        &._two {
+                            top: 10px;
+                            .rotate(-45deg);
+                        }
+                        &._three {
+                            opacity: 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        .menu_web {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            .transform-translate(0,-50%);
+            @media @medium {
+                right: 10px;
+            }
+            &.despliegue {
+                @media @small {
+                    ul {
+                        display: block;
+                    }
+                }
+            }
+            @media @small {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 100%;
+                .transform-translate(0,0%);
+            }
+            ._nav_menu {
+                float: left;
+                position: relative;
+                .ul-reset;
+                width: 100%;
+                text-align: right;
+                @media @small {
+                    display: none;
+                    height: 100vh;
+                    padding-top: 10vh;
+                    background-color: @black;
+                }
+    ////////////////////// Menú primer nivel
+                li {
+                    ul {
+                        .ul-reset;  
+                    }
+                    color: @white;
+                    float: left;
+                    font-size: 1.4rem;
+                    line-height: 70px;
+                    position: relative;
+                    @media @small {
+                        width: 100%;
+                        box-sizing: border-box;
+                        text-align: left;
+                    }
+                    a {
+                        display: inline-block;
+                        margin: 0;
+                        padding: 0 10px;
+                        height: 30px;
+                        line-height: 30px;
+                        font-weight: 400;
+                        color: @white;
+                        font-size: 1.4rem;
+                        text-decoration: none;
+                        @media @medium {
+                            margin-left: 0;
+                            margin-right: 0;
+                            font-size: 1.2rem;
+                        }
+                        &:hover {
+                            color: @enfasis_color;
+                        }
+    ////////////////////// END Menú primer nivel
+                    }                
+    ////////////////////// Menú segundo nivel
+                    ul {
+                        li {
+                            line-height: 30px;
+                            a {
+                                &:after {
+                                    font-family: @ico_font;
+                                    content: "";
+                                }
+                            }
+                            ul {
+                                background-color: @theme_color;
+                                padding: 10px;
+                                .radius(0 0 8px 8px);
+                                display: none;
+                                position: absolute;                                
+                                li {
+                                    width: 100%;
+                                    text-align: left;
+                                    a {
+                                        width: 100%;
+                                        white-space: nowrap;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    ul {
+                        li {
+                            &:hover {
+                                ul {
+                                    display: block;
+                                    @media @small {
+                                       display: none;
+                                    }
+                                }
+                            }
+                        }
+                    }
+    ////////////////////// END Menú segundo nivel
+                    &._login {
+                        width: 30px;
+                        margin: 20px 70px 0 0;
+                        ul {
+                            .ul-reset;
+                            li {
+                                a {
+                                    font-size: 0;
+                                    &:before {
+                                        font-family: @ico_font;
+                                        font-size: 3.2rem;
+                                    }
+                                    &._account {
+                                        &:before {
+                                            content: "\e87c";
+                                        }   
+                                    }
+                                    &._register {
+                                        &:before {
+                                            content: "\e87c";
+                                        }   
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    &._nav_catalog {
+                        margin-top: 20px;
+                    }
+                    &._menu_section {
+                        margin-top: 20px;
+                    }
+                    &._languaje {
+                        margin-top: 20px;
+                    }
+    ////////////////// Buscador header
+                    .cont_search_bar_ecommerce {
+                        ._search_bar_pipe {
+                            &:after {
+                                content: "";
+                                position: absolute;
+                                background: url('../images/icons/_icon_lupa_2.svg') no-repeat 50% 50%;
+                                background-size: 16px 16px;
+                                height: 16px;
+                                width: 16px;
+                                right: 20px;                                
+                                top: 26px;
+                                z-index: 1;
+                            }
+                        }
+                        #buscadorPrincipal {
+                           input[type="text"] {
+                               border: 0;
+                               width: 260px;
+                               height: 40px;
+                               @media @small {
+                                   width: 100%;
+                               }
+                           }
+                           input[type="submit"] {
+                               font-size: 0;
+                               border: 0;
+                               background-color: transparent;
+                               padding: 0;
+                               width: 40px;
+                               z-index: 2;
+                               &:hover {
+                                   cursor: pointer;
+                                   background-color: fade(@white,10);
+                               }
+                           }
+                        }
+                    }
+    ////////////////// END Buscador header
+                    
+                }
+            }
+        }
+
+    ////////////// END Menu mobile                  
+    
+    // ------------------------ END HEADER All styles before this line -------------------------------
+    }
+}
