@@ -3,9 +3,13 @@
 header {
     #widget_carrito {
         position: absolute;
-        right: 50px;
+        right: 10px;
         top: 30px;
         width: auto;
+        @media @small {
+            top: 20px;
+            right: 20px;
+        }
         ._mini_cart,
         .cont_vacio {
             position: absolute;

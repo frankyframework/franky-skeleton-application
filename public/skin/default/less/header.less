@@ -108,7 +108,8 @@ header {
             &.despliegue {
                 @media @small {
                     ul {
-                        display: block;
+                        .flex-display;
+                        .flex-direction(column);
                     }
                 }
             }
@@ -126,11 +127,12 @@ header {
                 width: 100%;
                 text-align: right;
                 @media @small {
+
                     display: none;
                     height: 100vh;
                     padding-top: 10vh;
                     background-color: @black;
-                }
+                }                
     ////////////////////// Menú primer nivel
                 li {
                     ul {
@@ -205,33 +207,7 @@ header {
                             }
                         }
                     }
-    ////////////////////// END Menú segundo nivel
-                    &._login {
-                        width: 30px;
-                        margin: 20px 70px 0 0;
-                        ul {
-                            .ul-reset;
-                            li {
-                                a {
-                                    font-size: 0;
-                                    &:before {
-                                        font-family: @ico_font;
-                                        font-size: 3.2rem;
-                                    }
-                                    &._account {
-                                        &:before {
-                                            content: "\e87c";
-                                        }   
-                                    }
-                                    &._register {
-                                        &:before {
-                                            content: "\e87c";
-                                        }   
-                                    }
-                                }
-                            }
-                        }
-                    }
+    ////////////////////// END Menú segundo nivel                    
                     &._nav_catalog {
                         margin-top: 20px;
                     }
@@ -242,45 +218,88 @@ header {
                         margin-top: 20px;
                     }
     ////////////////// Buscador header
-                    .cont_search_bar_ecommerce {
-                        ._search_bar_pipe {
-                            &:after {
-                                content: "";
-                                position: absolute;
-                                background: url('../images/icons/_icon_lupa_2.svg') no-repeat 50% 50%;
-                                background-size: 16px 16px;
-                                height: 16px;
-                                width: 16px;
-                                right: 20px;                                
-                                top: 26px;
-                                z-index: 1;
+                    &._search_bar {
+                        margin-right: 80px;
+                        @media @small {
+                            .flex-order(-1);
+                        }
+                        .cont_search_bar_ecommerce {
+                            ._search_bar_pipe {
+                                &:after {
+                                    content: "";
+                                    position: absolute;
+                                    background: url('../images/icons/_icon_lupa_2.svg') no-repeat 50% 50%;
+                                    background-size: 16px 16px;
+                                    height: 16px;
+                                    width: 16px;
+                                    right: 20px;                                
+                                    top: 26px;
+                                    z-index: 1;
+                                }
+                            }
+                            #buscadorPrincipal {
+                            input[type="text"] {
+                                border: 0;
+                                width: 260px;
+                                height: 40px;
+                                @media @small {
+                                    width: 100%;
+                                }
+                            }
+                            input[type="submit"] {
+                                font-size: 0;
+                                border: 0;
+                                background-color: transparent;
+                                padding: 0;
+                                width: 40px;
+                                z-index: 2;
+                                &:hover {
+                                    cursor: pointer;
+                                    background-color: fade(@white,10);
+                                }
+                            }
                             }
                         }
-                        #buscadorPrincipal {
-                           input[type="text"] {
-                               border: 0;
-                               width: 260px;
-                               height: 40px;
-                               @media @small {
-                                   width: 100%;
-                               }
-                           }
-                           input[type="submit"] {
-                               font-size: 0;
-                               border: 0;
-                               background-color: transparent;
-                               padding: 0;
-                               width: 40px;
-                               z-index: 2;
-                               &:hover {
-                                   cursor: pointer;
-                                   background-color: fade(@white,10);
-                               }
-                           }
-                        }
-                    }
+                    }                    
+
     ////////////////// END Buscador header
                     
+                }
+            }
+        }
+        ._ul_login {
+            width: 30px;
+            margin: 20px 100px 0 0;
+            position: absolute;
+            right: 46px;
+            top: 26px; 
+            @media @small {
+                right: 56px;
+                top: 16px;
+            }           
+            .ul-reset;
+            li {
+                a {
+                    font-size: 0;
+                    text-decoration: none;
+                    color: @white;
+                    &:hover {
+                        color: @enfasis_color;
+                    }
+                    &:before {
+                        font-family: @ico_font;
+                        font-size: 3.2rem;
+                    }
+                    &._account {
+                        &:before {
+                            content: "\e87c";
+                        }   
+                    }
+                    &._register {
+                        &:before {
+                            content: "\e87c";
+                        }   
+                    }
                 }
             }
         }
