@@ -35,9 +35,12 @@ main {
             a {
                 display: inline-block;
                 color: @gray;
-                font-size: 1.4rem;
+                font-size: 1.2rem;
                 &:hover {
                     color: @enfasis_color;
+                }
+                @media @small {
+                    font-size: .9rem;
                 }
             }
             &:after {
@@ -58,33 +61,6 @@ main {
     }
     ////// END Breadcrumb //////////
     ///////////////// Resultados
-    .cont_filter {
-        ul {
-            .ul-reset;
-            padding-left: 10px;
-            li {
-                float: left;
-                width: 100%;
-                .ul-reset;
-                margin-bottom: 10px;
-                .title_filter {
-                    display: inline-block;
-                    width: calc(~"100%" - 20px);
-                    border: 1px solid @soft_gray;
-                    padding: 10px;
-                    box-sizing: border-box;
-                    .radius;
-                }
-                input#filtro_precio {
-                    color: @black !important;
-                    width: 90%;
-                }
-                .ui-widget.ui-widget-content {
-                    width: 90%;
-                }
-            }
-        }
-    }
     .cont_widget_catalog_filter {
         float: left;
         position: relative;
@@ -99,6 +75,60 @@ main {
         @media @small {
             width: 100%;
             display: none;
+        }
+        .cont_filter {
+            ul {
+                .ul-reset;
+                padding-left: 10px;
+                li {                    
+                    float: left;
+                    width: 100%;
+                    .ul-reset;
+                    margin-bottom: 10px;
+                    .title_filter {
+                        display: inline-block;
+                        width: calc(~"100%" - 20px);
+                        border: 1px solid @soft_gray;
+                        padding: 10px;
+                        margin: 0;
+                        box-sizing: border-box;
+                        .radius;
+                        font-size: 1.4rem;
+                        font-weight: 600;
+                        margin-top: 20px;
+                    }
+                    input#filtro_precio {
+                        color: @black !important;
+                        width: 90%;
+                        margin: 0;
+                        padding: 0;
+                    }
+                    .ui-widget.ui-widget-content {
+                        margin-left: 20px;
+                       width: calc(~'100% - 60px');
+                    }
+                    label {
+                        @media @large {
+                            font-size: 1.2rem;
+                        }
+                        @media @medium {
+                            font-size: 1rem;
+                        }
+                        .flex-display;
+                        .align-items(center);
+                        margin: 4px 0;
+                        padding: 0;
+                        min-height: 25px;
+                        input {
+                            &[type="checkbox"] {
+                                margin-top: 0;
+                                margin-right: 4px;
+                            }
+                            min-height: 1px;
+                        }
+                    }
+                }
+            }
         }
     }
     .cont_widget_catalog_results {
@@ -122,7 +152,7 @@ main {
             @media @medium {
                 width: 30%;
                 margin: 10px 1.66%;
-                min-height: 270px;
+                min-height: 20px;
             }
             @media @small {
                 width: 48%;
@@ -140,16 +170,16 @@ main {
                 z-index: 2;
                 .box-shadow(none);
                 &:after {
-                    float: left;
-                    width: 32px;
-                    height: 32px;
-                    background: fade(@black, 80);
+                    display: block;
+                    width: 24px;
+                    height: 24px;
+                    background: fade(@white, 80);
                     text-align: center;
-                    line-height: 32px;
+                    line-height: 24px;
                     font-family: @ico_font;
                     content: "\e81c";
-                    font-size: 2rem;
-                    color: @white;
+                    font-size: 1.6rem;
+                    color: lighten(@black, 50);
                     text-decoration: none;
                     .radius(16px);
                 }
@@ -167,9 +197,21 @@ main {
             h2 {
                 margin: 0;
                 padding: 0;
-                font-size: 1.6rem;
+                font-size: 1.4rem;
+                height: 40px;
+                overflow: hidden;
+                line-height: 1.3;
+                @media @large {                    
+                    font-size: 1.1rem;
+                    height: 45px;
+                }
+                @media @medium {
+                    height: 30px;
+                    font-size: 1.2rem;
+                }
                 @media @small {
-                    font-size: @font_size_txt*.9;
+                    font-size: 1.2rem;
+                    height: 45px;
                 }
                 a {
                     color: @black;
@@ -205,10 +247,16 @@ main {
                 .transition;
                 .box-shadow;
                 .radius(0);
+                @media @large {
+                    top: 63%;
+                }
+                @media @medium {
+                    top: 64%;
+                }
                 @media @small {
                     .opacity(1);
                     font-size: @font_size_txt*.8;
-                    top: 70%;
+                    top: 60%;
                     right: 10px;
                 }
             }
@@ -225,9 +273,10 @@ main {
             .price {
                 float: right;
                 display: inline-block;
-                font-size: 2rem;
+                font-size: 1.6rem;
                 color: @enfasis_color;
                 font-weight: 700;
+                margin-top: 10px;
                 @media @small {
                     font-size: @font_size_txt;
                 }
@@ -262,10 +311,19 @@ main {
                 &._img_widget_catalog_product_result {
                     .radius(8px);
                     position: relative;
-                    height: 340px;
+                    height: 310px;
                     width: 100%;
                     display: inline-block;
                     overflow: hidden;
+                    @media @large {
+                        height: 210px;
+                    }
+                    @media @medium {
+                        height: 210px;
+                    }
+                    @media @small {
+                        height: 210px;
+                    }
                     img {
                         max-width: 100%;
                         width: auto;
@@ -279,7 +337,20 @@ main {
                 }
             }
         }
-
+        .resultados_q {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-left: 10px;
+            strong {
+                font-weight: 600;
+            }
+            @media @medium {
+                font-size: 1.6rem;
+            }
+            @media @small {
+                font-size: 1.2rem;
+            }
+        }
     }
     ///////////////// Detalle
     ._product_view {
