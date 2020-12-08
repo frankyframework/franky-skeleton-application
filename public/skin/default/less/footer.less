@@ -1,0 +1,125 @@
+
+/*   Footer  */
+footer {
+    font-size: 0.9em;
+    .footer_wrapper {
+        background: darken(@theme_color, 30);
+        margin-top: 32px;
+        padding-top: 16px;
+        color: @white;
+        .footer_2 {
+            background: darken(@theme_color, 20);
+            padding: 16px 0;
+        }
+        ._footer_security_seal {
+            .flex-display;
+            .flex-direction;
+            .justify-content(center);
+            @media @small {
+                .flex-direction(column);
+            }
+            div {
+                background-color: @white;
+                padding: 4px 16px;
+                .radius;
+                margin: 16px 4px;
+                @media @small {
+                    margin: 4px auto;
+                }
+                img {
+                    max-height: 36px;
+                    width: auto;
+                    margin: auto;
+                    filter: grayscale(100%);
+                    &:hover {
+                        filter: grayscale(0%);
+                    }
+                }
+                &._ssl,
+                &._payment {
+                    .flex-display;
+                    .flex-direction;
+                    .flex-wrap(wrap);
+                    .align-items(center);
+                    .justify-content(center);
+                    strong {
+                        color: @black;
+                        font-size: 1.6rem;
+                        margin: auto;
+                        padding: 0 8px 0 0;
+                    }
+                    @media @small {
+                        margin: 16px auto auto auto;
+                        width: 260px;
+                    }
+                }
+                &._cloud {
+                    .flex-display;
+                    .flex-direction;
+                    background-color: transparent;
+                    img {
+                        max-height: 50px;
+                    }
+                }
+            }
+        }
+    }
+    a {
+        color: @white;
+        text-decoration: none;
+        &:hover {
+            color: @enfasis_color;
+            text-decoration: none;
+        }
+    }
+    .logo_cloud {
+        display: block;
+        text-align: right;
+        margin-top: 10px;
+        img,
+        object {
+            max-width: 120px;
+            height: auto;
+            margin: 5px 0;
+        }
+    }
+    h3,
+    p {
+        color: @white;
+    }
+    h3 {
+        font-size: 2em;
+        margin: 10px 0 5px;
+    }
+    ul {
+        margin: 0 0 20px;
+        padding: 0 0 0 10px;
+        list-style: disc;
+        color: @white;
+        &.no_bullet {
+            list-style: none;
+        }
+        li {
+            margin-bottom: 5px;
+            p {
+                margin: 0;
+                padding: 0;
+                text-align: left;
+            }
+            strong {
+                display: block;
+            }
+            a {}
+        }
+    }
+    .cont_certificados a {
+        display: inline-block;
+        margin: 0 5px -3px;
+        opacity: 0.8;
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    // ------------------------ END MAIN All styles before this line -------------------------------
+}

@@ -3,9 +3,13 @@
 header {
     #widget_carrito {
         position: absolute;
-        right: 50px;
+        right: 20px;
         top: 30px;
         width: auto;
+        @media @small {
+            top: 20px;
+            right: 20px;
+        }
         ._mini_cart,
         .cont_vacio {
             position: absolute;
@@ -152,9 +156,13 @@ main {
     }
     /////////////// Checkout
     .contenedor_checkout {
+        font-size: 1.4rem;
         @media @small {
             padding: 0 10px;
             box-sizing: border-box;
+        }
+        h2 {
+            font-size: 1.6rem;
         }
         form {
             label {
@@ -172,6 +180,9 @@ main {
                     display: inline-block;
                 }
             }
+        }
+        #resumen_checkout_envio {
+            margin: 10px 0;
         }
         #contenedor_frm_pago {
             .cont_success_oxxo {
@@ -283,6 +294,8 @@ main {
         }
     }
     #contenedor_frm_pago,
+    #resumen_checkout_envio,
+    #resumen_metodo_envio,
     #resumen_checkout_facturacion,
     .cont_success_oxxo {
         a,
