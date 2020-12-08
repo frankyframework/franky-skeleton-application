@@ -35,6 +35,7 @@
                 "Ecommerce\\": "modulos/ecommerce/src",
                 "Catalog\\": "modulos/catalog/src",
                 "Sliders\\": "modulos/sliders/src",
+                "Carrucel\\": "modulos/carrucel/src",
                 "Calificaciones\\": "modulos/calificaciones/src",
                 "Wishlist\\": "modulos/wishlist/src",
                 "Franky\\": "modulos/franky/src",

@@ -1,6 +1,151 @@
 <?php
 use Franky\Core\validaciones;
-use \Franky\Core\Plantilla;
+use \Franky\Filesystem\File;
+ini_set('memory_limit', '-1');
+ini_set('display_errors', 1);
+
+class InstallDB
+{
+    public $procesados;
+
+    public function createTable($modulo,$file)
+    {
+        if(file_exists(PROJECT_DIR."/modulos/".$modulo."/sql/".$file))
+        {
+
+        $IBD  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Database\Debug);
+           
+        $fp = fopen(PROJECT_DIR."/modulos/".$modulo."/sql/".$file, "rb");
+        $datos = fread($fp, filesize(PROJECT_DIR."/modulos/".$modulo."/sql/".$file));
+        fclose($fp);
+        $file_schema = json_decode($datos,true);
+        $data_sql = $file_schema['data'];
+
+        if(isset($file_schema['schema']))
+        {
+            $schema_sql = $file_schema['schema'];
+        }
+        if(isset($schema_sql['config']['keys']))
+        {
+            foreach($schema_sql['config']['keys'] as $tabla => $config)
+            {
+                if(!in_array($tabla.'.json',$this->procesados)){ 
+                    $this->createTable($modulo,$tabla.'.json');
+                }
+            }
+        }
+
+        $result = $IBD->Query(pathinfo($file,PATHINFO_FILENAME),"SELECT 1 from ".pathinfo($file,PATHINFO_FILENAME)." limit 1");
+
+        if($result == IBD_ERR_DBUNAVAILABLE)
+        {
+            $sql = "CREATE TABLE ".pathinfo($file,PATHINFO_FILENAME)." (";
+            foreach($schema_sql['attributes'] as $attr)
+            {
+            
+                $sql .= $attr['name']." "
+                .$attr['type']
+                .(isset($attr['length']) ? "(".$attr['length'].")" :"")." "
+                .(in_array($attr['type'],['varchar','text','char']) ? "COLLATE utf8_unicode_ci" :"")." "
+                .(isset($attr['default']) ? "DEFAULT '".$attr['default']."'" :"")." "
+                .($attr['null'] == 1 ? 'NULL' : 'NOT NULL')." "
+                .($attr['auto_increment'] == 1 ? 'AUTO_INCREMENT' : '')
+                .",";
+            }
+            $sql = substr($sql, 0,-1);
+
+            if(isset($schema_sql['config']['primary']))
+            {
+                if(is_array($schema_sql['config']['primary']))
+                {
+                    $sql .= ", PRIMARY KEY (";
+                    foreach($schema_sql['config']['primary'] as $key)
+                    {
+                        $sql .=$key.",";
+                    }
+                    $sql = substr($sql,0,-1);
+                    $sql .=")";
+                }
+                else{
+                    $sql .= ", PRIMARY KEY (".$schema_sql['config']['primary'].")";
+                }
+            }
+            if(isset($schema_sql['config']['keys']))
+            {
+                $nfk = 1;
+                foreach($schema_sql['config']['keys'] as $tabla => $config)
+                {
+                    $sql .= ", KEY ".$config['local']." (".$config['local']."),
+                    CONSTRAINT ".pathinfo($file,PATHINFO_FILENAME)."_ibfk_$nfk FOREIGN KEY (".$config['local'].") REFERENCES ".$tabla." (".$config['foreing'].") ON DELETE ".$config['delete']." ON UPDATE ".$config['update'];
+                    $nfk++;
+                }
+            }
+           
+            
+            $sql .= ") ENGINE=".$schema_sql['config']['engine']." DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+
+        
+
+
+            echo shellFontColor("[*] Creando tabla ".pathinfo($file,PATHINFO_FILENAME),"default");
+        
+            $IBD->Execute($sql);
+            $result = $IBD->Query(pathinfo($file,PATHINFO_FILENAME),"SELECT 1 from ".pathinfo($file,PATHINFO_FILENAME)." limit 1");
+            if($result == IBD_SUCCESS)
+            {
+                echo "\t".shellFontColor("[success]","verde")."\n";
+                
+
+            }
+            else{
+                echo "\t".shellFontColor("[error]","rojo")."\n";
+                echo $sql."\n";
+            }
+
+
+           
+
+        }
+
+        if(!empty($data_sql))
+        {
+            $n = 1;
+            echo shellFontColor("[*] Agregando registros a ".pathinfo($file,PATHINFO_FILENAME)." del modulo $modulo \n","default");
+            foreach($data_sql as $data){
+
+                echo "\t".shellFontColor("[+] $n registros","default");
+                foreach($data as $k => $v){
+
+                    if(is_array($v))
+                    {
+                        $data[$k] = json_encode($v);
+                    }
+                    else{
+                        $data[$k] = addslashes($v);
+                    }
+                }
+                $insertsql = "INSERT INTO ".pathinfo($file,PATHINFO_FILENAME)." (".implode(', ', array_keys($data)).") VALUES ('".implode('\', \'', $data)."')";
+                
+                if (($result = $IBD->Execute($insertsql)) != IBD_SUCCESS)
+                {
+
+                    echo "\t".shellFontColor("[error]","rojo")."\n";
+                    echo $insertsql."\n";
+                }
+                else{
+                    echo "\t".shellFontColor("[success]","verde")."\n";
+                }
+
+                $n++;
+
+            }
+        }
+        
+        $this->procesados[] = $file;
+        }
+    }
+
+}
 
 
 if($MySession->getVar('nivel') != NIVEL_USERDEVELOPER)
@@ -10,25 +155,14 @@ if($MySession->getVar('nivel') != NIVEL_USERDEVELOPER)
 }
 
 
-
-
-ini_set('memory_limit', '-1');
-
-ini_set('display_errors', 1);
 $modulo = $MyRequest->getRequest("modulo");
-$site = $MyRequest->getRequest("site",'local.shell');
-
-if(!empty($site))
-{
-    $_SERVER["SERVER_NAME"] = $site;
-    $ibd  = new Franky\Database\IBD(new \Franky\Database\configure,'conexion_bd',new \Franky\Database\Debug);
-}
-
+$tabla = $MyRequest->getRequest("tabla");
 
 $help = helpShell([
-    ["var" => "modulo", "required" => true, "description" => "nombre del modulo"],
-    ["var" => "site", "required" => false, "description" => "si no se proporciona usa local.shell para su configuracion"],
+    ["var" => "modulo", "required" => true, "description" => "nombre del modulo, * para todos"],
+    ["var" => "tabla", "required" => false, "description" => "nombre de una tabla espesifica"]
 ]);
+
 
 $validaciones =  new validaciones();
 $valid = $validaciones->validRules(array("Modulo" => array("valor" => $modulo,"required")));
@@ -38,7 +172,7 @@ if(!$valid)
     exit;
 }
 
-if(!file_exists(PROJECT_DIR."/modulos/".$modulo))
+if($modulo != "*" && !file_exists(PROJECT_DIR."/modulos/".$modulo))
 {
     echo "\t".shellFontColor("[error] El modulo ".$modulo." no existe","rojo")."\n";
 
@@ -46,16 +180,50 @@ if(!file_exists(PROJECT_DIR."/modulos/".$modulo))
 
 }
 
-if(!file_exists(PROJECT_DIR."/modulos/".$modulo."/sql/install.sql"))
+$File =  new File();
+$InstallDB = new InstallDB();
+if($modulo == "*")
 {
-    echo "\t".shellFontColor("[error] El archivo de instalacion SQL no existe","rojo")."\n";
-
-    exit;
-
+    $modulos = getModulos("DESC");
+}
+else{
+    $modulos = [$modulo];
 }
 
+if(!empty($modulos))
+{
+    foreach($modulos as $modulo)
+    {
+                
+       
+        if(file_exists(PROJECT_DIR."/modulos/".$modulo."/sql/"))
+        {
+            
+            $files = $File->getFiles(PROJECT_DIR.'/modulos/'.$modulo.'/sql/',"file");
+            $InstallDB->procesados = [];
+           
+            if(!empty($files))
+            {
+                
+                foreach($files as $file)
+                {
+                    
+                    if(!empty($tabla) && $tabla.'.json' != basename($file))
+                    {
+                        continue;
+                    }
+                    if(!in_array($file,$InstallDB->procesados) && pathinfo($file,PATHINFO_EXTENSION) == 'json')
+                    {   
+                        $InstallDB->createTable($modulo,$file); 
+                       // print_r($InstallDB->procesados);
+                        
+                    }
+                }
+                
+            }
 
+        }
+    }
 
-SplitSQL($site, PROJECT_DIR."/modulos/".$modulo."/sql/install.sql", $delimiter = ';')
-
+}
 ?>

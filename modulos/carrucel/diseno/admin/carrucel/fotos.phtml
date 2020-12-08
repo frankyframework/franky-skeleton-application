@@ -1,9 +1,9 @@
 <div class="content">
-     <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
-        <h1 class="titulo_seccion_admin"><?php echo $album_nombre; ?></h1>
+     <div class="w-xxxx-12"><?=breadcrumbs(); ?></div>
+    <h1 class="titulo_seccion_admin"><?=$carrucel_nombre; ?></h1>
     
-        <form name="imageform" id="imageform" method="post" enctype="multipart/form-data" action='/admin/galeria/uploadify.php' style="clear:both">
-        <input type="hidden" name="album" value="<?php echo $album; ?>" />
+    <form name="imageform" id="imageform" method="post" enctype="multipart/form-data" action='/admin/carrucel/uploadify.php' style="clear:both">
+        <input type="hidden" name="carrucel" value="<?php echo $carrucel; ?>" />
         <div id='imageloadstatus' class="w-xxxx-12">
             <div id="progressbar" style="display:none;"><div class="progress-label">Loading...</div></div>
         </div>
@@ -11,42 +11,41 @@
         <a href="javascript:void(0);" onclick="$('#photoimg').click()">Subir imagenes</a>
         <input type="file" name="photos[]" id="photoimg" multiple="true" class="input-file" style='display:none' />
         </div>
-        </form>
-<div class=" w-xxxx-12 ">
-    <div class="w-xxxx-12 cont_100_p interiores one_column">
-        <div id="galeria_clientes" >
- 
-        <div class="ver_cabecera"></div>
-        
-        <div  class="fondo_galeria galeria_dock" id="cont_fotos">
-        <?php 
-        $count = 0;
-        if(!empty($lista_admin_data))
-        {
-            foreach ($lista_admin_data as $k => $v)
-            {
-                echo getFotoGaleria($v["id"],$v["id_album"],$v["foto"],$v["descripcion"],$v["fecha"],1,$count);
-                $count++;
-            }
-        }
-        ?>
- 
+    </form>
+    <div class=" w-xxxx-12 ">
+        <div class="w-xxxx-12 cont_100_p interiores one_column">
+            <div id="galeria_clientes" >
+    
+            <div class="ver_cabecera"></div>
+            
+            <div  class="fondo_galeria galeria_dock" id="cont_fotos">
+                <?php 
+                $count = 0;
+                if(!empty($lista_admin_data))
+                {
+                    foreach ($lista_admin_data as $k => $v)
+                    {
+                        echo carrucel_getFotoGaleria($v["id"],$v["id_carrucel"],$v["foto"],$v["url"]);
+                        $count++;
+                    }
+                }
+                ?>
+    
+            </div>
+            </div>  
         </div>
-        </div>  
-    </div>
-  
+    
 
-    <?php if($count == 0): ?>
-    <div class="w-xxxx-12">
-    <div class="no_hay_datos" >No hay fotos registradas</div>
+        <?php if($count == 0): ?>
+            <div class="w-xxxx-12">
+                <div class="no_hay_datos" >No hay fotos registradas</div>
+            </div>
+        <?php endif; ?>
+                
     </div>
-    <?php endif; ?>
-        
 </div>
-        </div>
 
-<script >
-    <!--
+<script>
     
     function uploadMultiGaleria(e)
     {
@@ -58,7 +57,7 @@
         }
 
         var fd = new FormData(); 
-        fd.append('album', <?php echo $album; ?>);
+        fd.append('carrucel', '<?php echo $carrucel; ?>');
 
         for (var i = 0; i < files.length; i++) { // Loop all files
                 fd.append('photos[]', files[i]); // Create an append() method, one for each file dropped
@@ -93,20 +92,22 @@
 
                     $("#imageloadbutton").show();
 
-                    ShowFotosGaleria(<?php echo $album; ?>);
+                    carrucel_ShowFotos('<?php echo $carrucel; ?>');
                     $("#photoimg").val('');
 
-                    $(function() {    
-                    $( "#cont_fotos" ).sortable({
-                        connectWith: ".fondo_galeria",
-                        update: function(event, ui){
-                            var newOrder = $(this).sortable('toArray').toString();
-                            setOrdenFotoGaleria(<?php echo $album; ?>,newOrder);  
-                        }  ,
-                        placeholder: 'ui-state-default'
-                    });
-                    $( "#cont_fotos" ).disableSelection();
-                    });
+
+                        $(function() {    
+                        $( "#cont_fotos" ).sortable({
+                            connectWith: ".fondo_galeria",
+                            update: function(event, ui){
+                                var newOrder = $(this).sortable('toArray').toString();
+                                carrucel_setOrdenFoto(newOrder);  
+                            }  ,
+                            placeholder: 'ui-state-default'
+                        });
+                        $( "#cont_fotos" ).disableSelection();
+                        });
+                        
 
                 },
                 error:function(){
@@ -146,7 +147,7 @@
           connectWith: ".fondo_galeria",
           update: function(event, ui){
               var newOrder = $(this).sortable('toArray').toString();
-              setOrdenFotoGaleria(<?php echo $album; ?>,newOrder);  
+              carrucel_setOrdenFoto(newOrder);  
           }  ,
           placeholder: 'ui-state-default'
       });
@@ -183,6 +184,5 @@
   
 
     makeDroppable();
-    
-  // -->
+
 </script>

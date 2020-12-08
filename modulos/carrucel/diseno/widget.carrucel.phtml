@@ -1,0 +1,46 @@
+<?php if(!empty($resultados_pagina)): ?>
+<div class="w-xxxx-12">
+    
+    <div class="w-xxxx-12 cont_widget_carrucel _carrucel  carrucel_<?=$carrucel['code']?>">
+    <?php foreach($resultados_pagina as $data): ?>
+      <div class="_li_carrusel">
+          <?php if(!empty($carrucel['url'])): ?>
+            <a href="<?=$carrucel['url']?>" target="_blank">
+          <?php endif; ?>
+              <?php echo makeHTMLImg($data['foto'],"","","","class='image_100'"); ?>
+              <?php if(!empty($carrucel['url'])): ?>
+              </a>
+          <?php endif; ?>
+      </div> 
+    <?php endforeach ;?>
+
+    </div>
+</div>
+<?php $responsivo = json_decode($carrucel['responsivo'],true); ?>
+<script>
+$(window).load(function(){
+$('.carrucel_<?=$carrucel['code']?>').slick({
+      infinite: <?=($carrucel['infinito'] == 1 ? 'true':'false')?>,
+      slidesToShow: <?=$carrucel['visible']?>,
+      slidesToScroll: <?=$carrucel['scroll']?>,
+      dots: <?=($carrucel['dots'] == 1 ? 'true':'false')?>,
+      <?php if(!empty($responsivo)): ?>
+      responsive: [
+        <?php foreach($responsivo as $r): ?>
+          <?php if(!empty($r['width']) && !empty($r['scroll']) && !empty($r['visible'])): ?>
+          {
+            breakpoint: <?=$r['width']; ?>,
+            settings: {
+              slidesToShow: <?=$r['visible']; ?>,
+              slidesToScroll: <?=$r['scroll']; ?>,
+            }
+          },
+        <?php endif; ?>
+        <?php endforeach;?>
+         
+      ]
+        <?php endif; ?>
+    });
+});
+</script>
+<?php endif; ?>

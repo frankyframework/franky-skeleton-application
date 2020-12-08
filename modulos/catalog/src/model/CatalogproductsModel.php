@@ -178,7 +178,7 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
 
     function getDataVitrina($data = array())
     {
-        die;
+        
         $data = $this->optimizeEntity($data);
         $campos = ["catalog_products.id","catalog_products.name","sku","category",
         "catalog_products.visible_in_search","catalog_products.description",

@@ -1,0 +1,46 @@
+{
+    "data":[
+        {
+            "php":"admin/carrucel/lista.php",
+            "css":[],
+            "js":[],
+            "jquery":[],
+            "permisos":[1,2],
+            "constante":"ADMIN_CARRUCEL_LIST",
+            "url":"admin/carrucel/",
+            "nombre":"Administrar carruceles",
+            "ajax":["base/ajax.admin.js"],
+            "status":1,
+            "editable":1,
+            "modulo":"carrucel"
+        },
+        {
+            "php":"admin/carrucel/form.php",
+            "css":[],
+            "js":["carrucel.js"],
+            "jquery":["jquery-validate"],
+            "permisos":[1,2],
+            "constante":"ADMIN_CARRUCEL_FORM",
+            "url":"admin/carrucel/form/",
+            "nombre":"Administrar carruceles",
+            "ajax":["base/ajax.admin.js"],
+            "status":1,
+            "editable":1,
+            "modulo":"carrucel"
+        },
+        {
+            "php":"admin/carrucel/fotos.php",
+            "css":["galeria.css"],
+            "js":["carrucel.js"],
+            "jquery":["ajaxform"],
+            "permisos":[1,2],
+            "constante":"ADMIN_CARRUCEL_FOTOS",
+            "url":"admin/carrucel/fotos/",
+            "nombre":"Fotos del carrucel",
+            "ajax":["base/ajax.admin.js","carrucel/ajax.admin.js"],
+            "status":1,
+            "editable":1,
+            "modulo":"carrucel"
+        }
+    ]
+}
