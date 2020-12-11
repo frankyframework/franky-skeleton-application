@@ -152,7 +152,6 @@ html {
             text-rendering: optimizeLegibility;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            font-smoothing: antialiased;
             .content {
                 max-width: 1400px;
             }
@@ -161,6 +160,19 @@ html {
                 border-color: @gray;
                 background-color: @gray;
                 background-image: none;
+            }
+            &.carrucel,
+            &.carrusel {
+                #cont_fotos {
+                    ._cont_img_carrousel {
+                        .flex-display;
+                        width: auto;
+                        margin: 0 10px;
+                        img {
+                            max-width:90px;
+                        }
+                    }
+                }
             }
         }
     }

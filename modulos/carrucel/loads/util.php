@@ -12,10 +12,10 @@ function carrucel_getFotoGaleria($id,$id_carrucel,$foto,$url)
     global $MyConfigure;
     
     $html = "";
-    $html .= "<div class='w-xxxx-2 w-xxx-3 w-xx-4 w-x-4 align_center img_foto_clientes foto_$id' id='foto_$id'>"
-            . "<div><a href=\"javascript:void(0);\" onclick=\"carrucel_eliminarFoto($id)\"><i class='icon icon-r-eliminar'></i></a></div>"
-            . "<div><a href=\"javascript:void(0);\" onclick=\"carrucel_promptEditarFoto('URL:','Editar foto','$id' )\"><i class='icon icon-editar'></i></a></div>"
-            . "<div>".  makeHTMLImg(imageResize($MyConfigure->getUploadDir()."/carruceles/$id_carrucel/$foto",220,220,true), "100%", "", $url)."</div>"
+    $html .= "<div class='_cont_img_carrousel img_foto_clientes foto_$id' id='foto_$id'>"
+            . "<div class='_img_slider_panel'>".  makeHTMLImg(imageResize($MyConfigure->getUploadDir()."/carruceles/$id_carrucel/$foto",220,220,true), "100%", "", $url)."</div>"
+            . "<div class='_controls'><div><a href=\"javascript:void(0);\" onclick=\"carrucel_eliminarFoto($id)\"><i class='icon icon-r-eliminar'></i></a></div>"
+            . "<div><a href=\"javascript:void(0);\" onclick=\"carrucel_promptEditarFoto('URL:','Editar foto','$id' )\"><i class='icon icon-editar'></i></a></div></div>"
             . "<p class='txt_gal_description label_url_foto_$id'>$url</p>" 
             . "</div>";
     return $html;
