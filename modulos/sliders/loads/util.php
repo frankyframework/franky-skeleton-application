@@ -43,7 +43,7 @@ function getSlider($code)
         
         $SlidersitemsModel->setTampag(20);
         $SlidersitemsModel->setOrdensql("orden ASC");
-
+        $SlidersitemsEntity->id_slider($slider['id']);
         $SlidersitemsModel->getData($SlidersitemsEntity->getArrayCopy());
 
 
