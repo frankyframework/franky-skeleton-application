@@ -9,7 +9,8 @@ use Ecommerce\model\direcciones_facturacion;
 use Ecommerce\entity\direcciones as DireccionesEnvioEntity;
 use Ecommerce\model\direcciones;
 use Franky\Core\ObserverManager;
-
+use Franky\Haxor\Tokenizer;
+$Tokenizer = new Tokenizer();
 
 $productos =  OBJETO_PRODUCTOS;
 $MyProducto =  new $productos();

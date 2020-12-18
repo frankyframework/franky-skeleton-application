@@ -2,13 +2,27 @@
 <div class="w-xxxx-12">
     <?php echo breadcrumbs(); ?>
 </div>
-<div class="w-xxxx-8 m-l-xxxx-2 w-xxx-10  m-l-xxx-1 w-xx-12  m-l-xx-0 _card _m_t_30">
+
+<div class="w-xxxx-12 cont_header_panel">
+          <div class="_wrapp_form_serch">   
+          <a href="#" class="imprimir_orden">Imprimir orden</a>
+          </div>
+          <?php if(in_array($detalle_pedido['metodo_pago'],['srpago_oxxo','srpago_spei'])): ?>
+            <div class="_wrapp_form_serch">
+            <a href="#" class="imprimir_ticket">Imprimir ticket</a>
+          </div>
+          <?php endif;?>
+   
+</div>
+
+
+<div class="w-xxxx-8 m-l-xxxx-2 w-xxx-10  m-l-xxx-1 w-xx-12  m-l-xx-0 _card _m_t_30 imprimible_content">
     <h1>Detalle de pedido</h1>
 
-    <ul class="_ul_txt_standar">
+    <ul class="_ul_txt_standar ">
       <li><strong>Fecha:</strong> <?php echo getFechaUI($detalle_pedido['fecha']); ?></li>
-        <li><strong>Usuario:</strong> <?php echo $detalle_pedido['nombre_user']; ?></li>
-        <li><strong>Pedido:</strong> #<?php echo $detalle_pedido['id']; ?></li>
+        <li><strong >Usuario:</strong> <?php echo $detalle_pedido['nombre_user']; ?></li>
+        <li><strong class="imprimible">Pedido:</strong> #<?php echo $detalle_pedido['id']; ?></li>
         <li><strong>Método de pago:</strong> <?php echo $detalle_pedido['metodo_pago']; ?></li>
         <li><strong>Estatus de pago:</strong> <span class='set-status'><?php echo getStatusTransaccion($detalle_pedido['status']); ?></span></li>
         <li><strong>Monto envio:</strong> <?php echo getFormatoPrecio($detalle_pedido['monto_envio']); ?></li>
@@ -46,7 +60,9 @@
               <li>Referencia: <?=$referencia['id']?></li>
             <?php endif;?>
 
-
+            <?php if($detalle_pedido['metodo_pago'] == 'srpago_spei'): ?>
+              <li>Referencia: <?=$referencia['id']?></li>
+            <?php endif;?>
             <?php
         }
         ?>
@@ -65,6 +81,13 @@
           <li>Codigo de pago: <?=makeHTMLImg($referencia['barcode_url'],150,'','codigo de barras pago');?></li>
           <li>Referencia pago: <?=$referencia['barcode']?></li>
           <li>Fecha limite de pago: <?=getfechaUI($expiration_date[0])?></li>
+         
+
+        <?php endif;?>
+        <?php if($detalle_pedido['metodo_pago'] == 'srpago_spei'): ?>
+
+        <li>Referencia pago: <?=$referencia['order_id']?></li>
+       
         <?php endif;?>
     </ul>
     <div class="order_content">
@@ -141,25 +164,30 @@
       </div>
       <div>RFC: <?php echo $detalle_pedido['facturacion']["rfc"]; ?></div>
     <?php endif; ?>
+    </div>
 
-    <h3>Actualizaciones de la orden<h3>
-<?php if(!empty($logStatus)): ?>
-<?php foreach($logStatus as $status): ?>
-<ul>
-  <li>Fecha: <?=$status['fecha']?></li>
-  <li>Status: <?=$status['status']?></li>
-  <?php if(!empty($status['info']['monto'])): ?>
-  <li>Monto: <?=getFormatoPrecio($status['info']['monto'])?></li>
-<?php endif;?>
-<?php if(!empty($status['info']['nota'])): ?>
-  <li>Nota: <?=$status['info']['nota']?></li>
-  <?php endif;?>
-</ul>
-<hr />
-<?php endforeach; ?>
-<?php else: ?>
-  <p>Sin actualizaciones recientes</p>
-<?php endif; ?>
+
+
+    <div class="w-xxxx-8 m-l-xxxx-2 w-xxx-10  m-l-xxx-1 w-xx-12  m-l-xx-0 _card _m_t_30">
+
+          <h3>Actualizaciones de la orden<h3>
+      <?php if(!empty($logStatus)): ?>
+      <?php foreach($logStatus as $status): ?>
+      <ul>
+        <li>Fecha: <?=$status['fecha']?></li>
+        <li>Status: <?=$status['status']?></li>
+        <?php if(!empty($status['info']['monto'])): ?>
+        <li>Monto: <?=getFormatoPrecio($status['info']['monto'])?></li>
+      <?php endif;?>
+      <?php if(!empty($status['info']['nota'])): ?>
+        <li>Nota: <?=$status['info']['nota']?></li>
+        <?php endif;?>
+      </ul>
+      <hr />
+      <?php endforeach; ?>
+      <?php else: ?>
+        <p>Sin actualizaciones recientes</p>
+      <?php endif; ?>
 
         <?php if($MyAccessList->MeDasChancePasar(ADMINISTRAR_MIS_PEDIDOS) &&  in_array($detalle_pedido['status'],['pending','in-progress','pago_incompleto'])): ?>
     <?php echo $ComprovantePagoForm->openTag(); ?>
@@ -222,7 +250,9 @@
                    SetStatusPagoEcommerce();
                    return false;
                 }
-        })
+        });
+
+        
 
 
 
@@ -243,5 +273,27 @@
     $n++;
     endforeach; ?>
     <?php endif; ?>
+    </div>
 </div>
-</div>
+
+
+<?php if(in_array($detalle_pedido['metodo_pago'],['srpago_oxxo','srpago_spei'])): ?>
+  <iframe  name="frameticket" id="frameticket" frameborder="0" src="/ecommerce/srpago/ticket.php?url=<?=urlencode($referencia['url'])?>" width="100%"
+    height="500" class="" style="display:none;">
+</iframe>
+<?php endif;?>
+
+<script>
+  $('.imprimir_orden').click(function(e){
+          e.preventDefault();
+          $('.imprimible_content').find('*').addClass('imprimible');
+         
+          window.print();
+  });
+  $('.imprimir_ticket').click(function(e){
+          e.preventDefault();
+          window.frames["frameticket"].focus();
+          window.frames["frameticket"].print();
+  });
+
+</script>

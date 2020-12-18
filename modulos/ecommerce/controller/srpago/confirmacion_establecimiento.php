@@ -9,7 +9,10 @@ use Ecommerce\model\direcciones_facturacion;
 use Ecommerce\entity\direcciones as DireccionesEnvioEntity;
 use Ecommerce\model\direcciones;
 use Franky\Core\ObserverManager;
+use Franky\Haxor\Tokenizer;
 
+
+$Tokenizer = new Tokenizer();
 
 if($MySession->GetVar('establecimiento_pay') == "" ||  $MyRequest->getRequest('establecimiento_pay') == "")
 {
