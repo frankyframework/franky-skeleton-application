@@ -25,8 +25,8 @@
 
                                     <?php foreach($configurables['configurables'] as $opt): ?>
                                         <?php if($opt['value'] == $key): ?>
-                                        <div class="_cont_right <?=($custom_attr['custom_values'][$custom_attr['custom_imputs'][$configurables['id_attribute']]['name']] == $key ? '_Active' : '') ?>">
-                                            <p><a href="<?= $opt['url']?>" class="configurable" data-value="<?= $key; ?>" ><?= $val; ?></a></p>
+                                        <div class=" _btn_seleccionable _cont_right <?=($custom_attr['custom_values'][$custom_attr['custom_imputs'][$configurables['id_attribute']]['name']] == $key ? '_Active' : '') ?>">
+                                            <a href="<?= $opt['url']?>" class="configurable" data-value="<?= $key; ?>" ><?= $val; ?></a>
                                         </div>
                                         <?php endif; ?>
                                     <?php endforeach; ?>
