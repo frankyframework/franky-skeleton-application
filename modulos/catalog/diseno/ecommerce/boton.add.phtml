@@ -45,7 +45,7 @@ function validateAddCart()
 {
     if($('form[name=addCartForm]').valid())
     {
-        addProductoCarrito('<?php echo $id_producto; ?>',$('input[name=qty]').val());
+        catalog_addProductoCarrito('<?php echo $id_producto; ?>',$('input[name=qty]').val());
     }
 
 }

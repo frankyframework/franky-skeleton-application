@@ -1,8 +1,11 @@
 function catalog_addProductoCarrito(id,qty)
 {
-    var caracteristicas = {};
-     var var_query = {
-          "function": "catalog_addProductoCarrito",
+    var caracteristicas = $('form[name=addCartForm]').serializeArray();
+
+    
+
+    var var_query = {
+          "function": "addProductoCarrito",
           "vars_ajax":[id,qty,JSON.stringify(caracteristicas)]
     };
 

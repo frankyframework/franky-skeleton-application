@@ -281,7 +281,7 @@ function getInfoCarrito()
 }
 
 
-function addProductoCarrito($producto,$qty=1,$caracteristicas=array())
+function addProductoCarrito($producto,$qty=1,$caracteristicas="{}")
 {
         $MyCarritoEntity =  new \Ecommerce\entity\carrito();
         $MyCarritoCompras =  new \Ecommerce\model\carrito();
@@ -293,6 +293,15 @@ function addProductoCarrito($producto,$qty=1,$caracteristicas=array())
         global $MySession;
         global $MyRequest;
 
+
+        $caracteristicas = json_decode($caracteristicas,true);
+        if(isset($caracteristicas['qty']))
+        {
+            unset($caracteristicas['qty']);
+        }
+        $caracteristicas = json_encode($caracteristicas);
+
+        
         $respuesta = array("error" => false);
 
         if($MyAccessList->MeDasChancePasar(CARRITO_ECOMMERCE))
