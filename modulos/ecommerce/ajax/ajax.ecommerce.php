@@ -543,7 +543,7 @@ function setPickUpCheckout($id)
     $registro['horario'] = json_decode($registro['horario'],true);
     $EcommercetiendasEntity->exchangeArray($registro);
     $data = $MySession->GetVar('checkout');
-    $data = array_merge($data,array("id_envio" => 'pickup',"pickup" => $id,'direccion_pickup' => $EcommercetiendasEntity->getArrayCopy()));
+    $data = array_merge($data,array("pickup" => $id,'direccion_pickup' => $EcommercetiendasEntity->getArrayCopy()));
     
     $metodo_pickup = getMetodoEnvioPickup();
     $metodo_envio = getMetodosEnvio($metodo_pickup['id']);

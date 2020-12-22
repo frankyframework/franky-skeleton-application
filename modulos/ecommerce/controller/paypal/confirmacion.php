@@ -120,7 +120,7 @@ if($status_pago == "pending" || $status_pago == "paid")
                 }
             }
 
-            if($data["id_envio"] == 'pickup')
+            if(isset($data["pickup"]))
             {
                 $direccion_envio = $data["direccion_pickup"];
             }

@@ -88,7 +88,7 @@ else {
     }
 }
 
-if($data["id_envio"] == 'pickup')
+if(isset($data["pickup"]))
 {
     $direccion_envio = $data["direccion_pickup"];
 }
