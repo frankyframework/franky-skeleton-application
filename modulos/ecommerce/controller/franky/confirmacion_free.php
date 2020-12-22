@@ -116,7 +116,7 @@ if($MyPedido->save($MyPedidoEntity->getArrayCopy()) == REGISTRO_SUCCESS)
 
     foreach($productos_comprados['productos'] as $producto)
     {
-        $MyPedidoProductoEntity->setCaracteristicas($producto["caracteristicas"]);
+        $MyPedidoProductoEntity->setCaracteristicas(json_encode($producto["caracteristicas"]));
         $MyPedidoProductoEntity->setId_pedido($pedido);
         $MyPedidoProductoEntity->setId_producto($producto["id"]);
         $MyPedidoProductoEntity->setQty($producto["qty"]);
