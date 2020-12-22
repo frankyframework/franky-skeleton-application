@@ -17,14 +17,19 @@
                         <div class="_col_mycart_resume _name">
                             <div class="_row_mycart_resume">
                                 <h3><a href="<?php echo $_carrito_compras["link"]; ?>"><?php echo $_carrito_compras["nombre"]; ?></a></h3>
-                                <?php if(!empty($_carrito_compras['caracteristicas'])): ?>
+                                
+                             </div>
+
+                             <?php if(!empty($_carrito_compras['caracteristicas'])): ?>
                                     <ul class="caracteristicas">
                                     <?php foreach($_carrito_compras['caracteristicas'] as $caracteristicas): ?>
-                                        <li><strong><?=$caracteristicas['label']?>:</strong><span><?=$caracteristicas['value']?></span></li>
+                                   
+                                        <li><strong><?=$caracteristicas['name']?>:</strong><span><?=$caracteristicas['value']?></span></li>
                                     <?php endforeach; ?>
                                     </ul>
                                 <?php endif; ?>
-                        </div>
+
+                                
                             <div class="_row_mycart_resume precio_producto"><?= getFormatoPrecio($_carrito_compras["precio"]); ?></div>
                         </div>
 
