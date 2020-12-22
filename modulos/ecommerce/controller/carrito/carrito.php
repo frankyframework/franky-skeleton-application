@@ -60,7 +60,7 @@ $MyCarritoProducto->setOrdensql("id");
                 "id"                => $Tokenizer->token("productos",$registro["id"]),
                 "id_producto"       =>  $Tokenizer->token("productos", $registro["id_producto"]),
                 "id_producto_ori"       =>  $registro["id_producto"],
-                "caracteristicas"   => "",
+                "caracteristicas"   => json_decode($registro["caracteristicas"],true),
                 "qty"               => $registro["qty"],
                 "precio"            => $_registro["precio"],
                 "iva"               => $_registro["iva"],
