@@ -323,7 +323,7 @@ function getCarrito($descuentos = 0)
       $productos_comprados['productos'][] = array("id" => $registro["id_producto"],
           "qty" => $registro["qty"],
           "nombre" => $_registro["nombre"],
-          "caracteristicas" => $registro["caracteristicas"],
+          "caracteristicas" => json_decode($registro["caracteristicas"],true),
           "precio" => $_registro["precio"],
           "precio_sin_iva" => $data_precio_unit['subtotal'],
           "iva" => $data_precio_unit['iva'],
