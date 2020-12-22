@@ -2,9 +2,13 @@
 <div class="order_content">
 <h4>Resumen de la orden<h4>
 
+<div  class="content_carrito">
+
+
 <?php foreach($detalle_pedido['productos'] as $producto): ?>
 
-<ul class="_ul_txt_standar ul_order">
+    <div class="_list_mycart_product contenedor_producto_<?php echo $_carrito_compras["id"]; ?>">
+                    <div class="_mycart_resume">
 <?php
 $imagen = "";
     $_img = getCoreConfig('ecommerce/product/placeholder');
@@ -39,15 +43,31 @@ $imagen = "";
 
 
     ?>
-  <li class="_image"><?=makeHTMLImg($imagen,50,50,$producto['nombre'])?></li>
-    <li class="_name"><strong>Nombre:</strong> <?php echo $producto['nombre']; ?></li>
-    <li class="_qty"><strong>Cantidad:</strong> <?php echo $producto['qty']; ?></li>
-    <li class="_total"><strong>Precio:</strong> <?php echo getFormatoPrecio($producto['precio']); ?></li>
-</ul>
-<?php if(!empty($producto['caracteristicas'])): ?>
-<p>caracteristicas: <?php echo $producto['caracteristicas']; ?></p>
-<?php endif; ?>
-<hr />
+  <div class="_col_mycart_resume _img_product">
+      <?=makeHTMLImg($imagen,50,50,$producto['nombre'])?>
+    </div>
+    <div class="_col_mycart_resume _name">
+                            <div class="_row_mycart_resume">
+                                <h3><?php echo $producto['nombre']; ?></h3>
+                            </div>
+
+                            <?php if(!empty($producto['caracteristicas'])): ?>
+                                    <ul class="caracteristicas">
+                                    <?php foreach($producto['caracteristicas'] as $caracteristicas): ?>
+                                   
+                                        <li><strong><?=$caracteristicas['name']?>:</strong><span><?=$caracteristicas['value']?></span></li>
+                                    <?php endforeach; ?>
+                                    </ul>
+                                <?php endif; ?>
+
+    </div>
+    <div class='_col_mycart_resume _cont_control_qty'><?php echo $producto['qty']; ?></div>
+    <div class="_col_mycart_resume subtotal_producto"><strong>Precio:</strong> <?php echo getFormatoPrecio($producto['precio']); ?></div>
+
+
+</div>
+</div>
 <?php endforeach; ?>
+</div>
 </div>
 <?php endif; ?>
