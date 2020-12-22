@@ -295,9 +295,17 @@ function addProductoCarrito($producto,$qty=1,$caracteristicas="{}")
 
 
         $caracteristicas = json_decode($caracteristicas,true);
-        if(isset($caracteristicas['qty']))
+
+        if(!empty($caracteristicas))
         {
-            unset($caracteristicas['qty']);
+            foreach($caracteristicas as $k => $val){
+                if($val['name'] == 'qty')
+                {
+                    unset($caracteristicas[$k]);
+                }
+
+            }
+            
         }
         $caracteristicas = json_encode($caracteristicas);
 
