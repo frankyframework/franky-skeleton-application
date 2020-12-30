@@ -536,10 +536,10 @@ function getCatalogVitrina($clave)
         endif;
         
         $resultados_pagina = [];
-        $CatalogproductsModel->getDataVitrina($CatalogproductsEntity->getArrayCopy());
-
-        if($CatalogproductsModel->getTotal() > 0)
+       
+        if( $CatalogproductsModel->getDataVitrina($CatalogproductsEntity->getArrayCopy()) == REGISTRO_SUCCESS)
         {
+        
             while($registro = $CatalogproductsModel->getRows())
             {
                 $registro['link'] = $MyRequest->url(CATALOG_SEARCH_CATEGORY,['friendly' => $registro['url_key']]);
