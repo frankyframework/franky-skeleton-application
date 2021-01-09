@@ -33,8 +33,28 @@ module.exports = function(grunt) {
                 livereload: true
             }
         }
-    }
+    },
+      browserSync: {
+          dev: {
+              bsFiles: {
+                  src: [
+                      'public/skin/default/css/*.css',
+                      'public/skin/default/css/franky-font/*.css',
+                      'public/skin/catalog/css/*.css',
+                      'public/skin/ecommerce/css/*.css',
+                      'public/skin/blog/css/*.css',
+                      'public/skin/galeria/css/*.css',
+                      'public/skin/slider/css/*.css',
+                      'modulos/base/diseno/*.phtml'
+                  ]
+              },
+              options: {
+                  watchTask: true,
+                  proxy: "local.franky"
+              }
+          }
+      }
   });
-
-  grunt.registerTask('default', ['less', 'watch']);
+    grunt.loadNpmTasks('grunt-browser-sync');
+    grunt.registerTask('default', ['less', 'browserSync', 'watch']);
 };
