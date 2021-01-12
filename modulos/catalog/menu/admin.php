@@ -22,8 +22,13 @@ $menucatalog = array(
      "url" => $MyRequest->url(LISTA_CATALOG_VITRINA),
      "etiqueta" => "Vitrinas"
     ),
-    )
-    )
+    array(
+      "permiso" =>   ADMINISTRAR_PRODUCTS_CATALOG,
+      "url" => $MyRequest->url(IMPORTAR_CATALOGO),
+      "etiqueta" => "Importar"
+     )
+  )
+  )
    
 );
 if(getCoreConfig('catalog/wishlist/enabled') == 1):

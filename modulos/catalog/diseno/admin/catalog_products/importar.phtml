@@ -1,0 +1,72 @@
+<div class="content">
+    <div class="w-xxxx-12"><?php echo breadcrumbs(); ?> </div>
+        <div class="w-xxxx-12 cont_global_admin">
+        <h1 class="titulo_seccion_admin"><?=_catalog('importar catalogo'); ?></h1>
+        <div class="w-xxxx-12 cont_header_panel">
+            <div class="_wrapp_form_serch">
+                <a href="" class="_btn_new">Descargar template</a>
+                <?php  if(!empty($data_productos)): ?>
+                <a href="" class="_btn_new" data-action="play">Iniciar importacion</a>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <div  class="w-xxxx-12 cont_gral_admin importar">
+        <?php  
+        if(empty($data_productos)):
+            echo $adminForm->openTag();
+            echo $adminForm->getAllRow();
+            echo $adminForm->endTag();
+        else:
+        ?>
+
+            <div >
+                <div class="w-xxxx-12">
+                    <div class="w-xxxx-12 contenedor_titulo_columnas">
+                        <?php $i = 1; ?>
+                        <?php foreach($titulo_columnas_grid as $k =>$v): ?>
+                        <div class="<?php echo (isset($css_columnas_grid[$k]) ? $css_columnas_grid[$k] : ""); ?>"><?php echo $v;  ?></div>
+                        <?php endforeach; ?>
+                        <div class="w-xxxx-1">
+                             Operacion
+                        </div>
+                        <div class="w-xxxx-1">
+                           Estado
+                        </div>
+                       
+                    </div>
+                    <div class="contenedor_columnas_info"  >
+                    <div class="w-xxxx-12 contenedor_columnas"  >
+                        <?php $i = 1; ?>
+                        <?php foreach($value_columnas_grid as $k): ?>
+                        <div class="{{_data.thisClass}}   <?php echo (isset($css_columnas_grid[$k]) ? $css_columnas_grid[$k] : ""); ?>">{{_data.<?php echo $k;  ?>}}</div>
+                        <?php endforeach; ?>
+                        <div class='w-xxxx-1 {{_data.thisClass}}'>
+                            
+                        </div>
+                        <div class='w-xxxx-1 {{_data.thisClass}}'>
+                           
+                        </div>
+                         
+                    </div>
+                    </div>
+                </div>
+                <div class="w-xxxx-12">
+                    <div class="no_hay_datos" >No se encontraron registros para cargar</div>
+                </div>
+                
+            </div>
+        <?php
+        endif;
+        ?>
+        </div>
+       
+    </div>
+</div>
+<script >
+$(".contenedor_columnas_info").htmlDataDum(<?php echo json_encode($data_productos); ?>,".no_hay_datos");
+$(document).ready(function()
+{
+  $( "#frmimport" ).validate();
+});
+</script>

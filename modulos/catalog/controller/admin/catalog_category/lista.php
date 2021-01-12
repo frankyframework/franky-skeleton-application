@@ -9,7 +9,7 @@ $Tokenizer = new Tokenizer();
 
 
 $MyPaginacion->setPage($MyRequest->getRequest('page',1));
-$MyPaginacion->setCampoOrden($MyRequest->getRequest('por',"createdAt"));
+$MyPaginacion->setCampoOrden($MyRequest->getRequest('por',"orden"));
 $MyPaginacion->setOrden($MyRequest->getRequest('order',"ASC"));
 $MyPaginacion->setTampageDefault($MyRequest->getRequest('tampag',25));		
 $busca_b	= $MyRequest->getRequest('busca_b');	
@@ -55,7 +55,8 @@ if($CatalogCategoryModel->getTotal() > 0)
 
 
 
-$MyFrankyMonster->setPHPFile(getVista("admin/template/grid.phtml"));
+$MyFrankyMonster->setPHPFile(getVista("admin/template/grid.orden.phtml"));
+$ordenfunction = "catalog_setOrdenCategoria";
 $title_grid = "Categorias";
 $class_grid = "cont_categorias_catalog";
 $error_grid = "No hay categorias registradas";

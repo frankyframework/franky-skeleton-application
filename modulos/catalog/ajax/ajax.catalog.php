@@ -714,6 +714,45 @@ function ajax_products_setAttrConfigurable($id_parent,$attr){
 }
 
 
+
+function catalog_setOrdenCategoria($orden)
+{
+
+    $CatalogcategoryModel =  new \Catalog\model\CatalogcategoryModel();
+    $CatalogcategoryEntity =  new \Catalog\entity\CatalogcategoryEntity();
+    $Tokenizer = new \Franky\Haxor\Tokenizer;
+    global $MyAccessList;
+    global $MyMessageAlert;
+        $respuesta =null;
+        if($MyAccessList->MeDasChancePasar(ADMINISTRAR_CATEGORY_CATALOG))
+        {
+           
+        
+            $orden = explode(",",str_replace("cat_","",$orden));
+
+            
+
+
+           
+            $v = "";
+            foreach($orden as $key => $val)
+            {
+                $v .= ($key)." -> $val,";
+                $CatalogcategoryEntity->id($Tokenizer->decode($val));
+                $CatalogcategoryEntity->orden($key);
+                $CatalogcategoryModel->save($CatalogcategoryEntity->getArrayCopy());
+            }
+          //  echo $v;
+        }
+        else
+        {
+             $respuesta[] = array("message" => $MyMessageAlert->Message("sin_privilegios"));
+        }
+	
+	return $respuesta;
+}
+
+
 /******************************** EJECUTA *************************/
 $MyAjax->register("DeleteCatalogCategory");
 $MyAjax->register("DeleteCatalogSubcategory");
@@ -731,5 +770,5 @@ $MyAjax->register("ajax_products_cargarProductosConfigurables");
 $MyAjax->register("ajax_products_agregarProductoConfigurable");
 $MyAjax->register("ajax_products_quitarProductoConfigurable");
 $MyAjax->register("ajax_products_setAttrConfigurable");
-
+$MyAjax->register("catalog_setOrdenCategoria");
 ?>

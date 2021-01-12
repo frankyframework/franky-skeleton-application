@@ -15,6 +15,7 @@ class CatalogcategoryEntity
     private $meta_keywords;
     private $url_key;
     private $status;
+    private $orden;
     private $createdAt;
     private $updateAt;
 
@@ -40,6 +41,7 @@ class CatalogcategoryEntity
         $this->meta_keywords = (isset($data["meta_keywords"]) ? $data["meta_keywords"] : null);
         $this->url_key = (isset($data["url_key"]) ? $data["url_key"] : null);
         $this->status = (isset($data["status"]) ? $data["status"] : null);
+        $this->orden = (isset($data["orden"]) ? $data["orden"] : null);
         $this->createdAt = (isset($data["createdAt"]) ? $data["createdAt"] : null);
         $this->updateAt = (isset($data["updateAt"]) ? $data["updateAt"] : null);
 
@@ -80,6 +82,8 @@ class CatalogcategoryEntity
     public function url_key($url_key = null){ if($url_key != null){ $this->url_key=$url_key; }else{ return $this->url_key; } }
 
     public function status($status = null){ if($status != null){ $this->status=$status; }else{ return $this->status; } }
+
+    public function orden($orden = null){ if($orden != null){ $this->orden=$orden; }else{ return $this->orden; } }
 
     public function createdAt($createdAt = null){ if($createdAt != null){ $this->createdAt=$createdAt; }else{ return $this->createdAt; } }
 

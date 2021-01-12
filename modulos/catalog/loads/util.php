@@ -43,7 +43,7 @@ function getCategoryMenu()
     
     
     $CatalogcategoryModel->setTampag(1000);
-    $CatalogcategoryModel->setOrdensql("name ASC");
+    $CatalogcategoryModel->setOrdensql("orden ASC");
     $CatalogcategoryEntity->status(1);
     $CatalogcategoryEntity->visible_in_search(1);
     $CatalogcategoryModel->getData($CatalogcategoryEntity->getArrayCopy());
