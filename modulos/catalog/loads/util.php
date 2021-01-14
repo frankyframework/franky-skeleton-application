@@ -20,12 +20,14 @@ function getImageCategorys($id)
     {
 
         $data = $CatalogcategoryModel->getRows();
-
+        $img = '';
         if(!empty($data["image"]) && file_exists($MyConfigure->getServerUploadDir()."/catalog/category/".$data["image"]))
         {
-            return ['img' =>imageResize($MyConfigure->getUploadDir()."/catalog/category/".$data["image"],1920,822, true),'descripcion' => $data['descripcion']];
-
+           $img  =  imageResize($MyConfigure->getUploadDir()."/catalog/category/".$data["image"],1920,822, true);
         }
+
+        return ['img' =>$img,'description' => $data['description']];
+
 
     }
     return '';
@@ -143,11 +145,13 @@ function getImageSubcategorys($id)
     if($total > 0)
     {
         $data = $CatalogsubcategoryModel->getRows();
+        $img = '';
         if(!empty($data["image"]) && file_exists($MyConfigure->getServerUploadDir()."/catalog/category/".$data["image"]))
         {
-            return imageResize($MyConfigure->getUploadDir()."/catalog/category/".$data["image"],1920,822, true);
-
+           $img  =  imageResize($MyConfigure->getUploadDir()."/catalog/category/".$data["image"],1920,822, true);
         }
+
+        return ['img' =>$img,'description' => $data['description']];
 
     }
     return '';

@@ -2,11 +2,9 @@
     <div class="content">
     <?=CatalogBreadcrumbs(null); ?>
         <?php if(isset($image_category['img']) &&  !empty($image_category['img'])): ?>
-        <?= makeHTMLImg($image_category, "", "", "","class='image_100'")?>
+        <?= makeHTMLImg($image_category['img'], "", "", "","class='image_100'")?>
         <?php endif; ?>
-        <?php if(isset($image_category['descripcion']) && !empty($image_category['descripcion'])): ?>
-        <p class="landing_producto_descripcion"><?= $image_category['descripcion']?></p>
-        <?php endif; ?>
+        
         <div class="w-xxxx-12">
             <?php if(getCoreConfig('catalog/product/buscadorlateral') == 1):?>
             <div class="cont_widget_catalog_filter">
@@ -20,6 +18,9 @@
             <div class="w-xxxx-12">
             <?php if(!empty($q)): ?>
                 <h2 class="resultados_q">Resultados de busqueda para la palabra <strong>"<?=$q?>"</strong></h2>
+            <?php endif; ?>
+            <?php if(isset($image_category['description']) && !empty($image_category['description'])): ?>
+            <p class="landing_producto_descripcion"><?= $image_category['description']?></p>
             <?php endif; ?>
             </div>
                 <?php if(!empty($resultados_pagina)): ?>
