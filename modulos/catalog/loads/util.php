@@ -23,7 +23,7 @@ function getImageCategorys($id)
 
         if(!empty($data["image"]) && file_exists($MyConfigure->getServerUploadDir()."/catalog/category/".$data["image"]))
         {
-            return imageResize($MyConfigure->getUploadDir()."/catalog/category/".$data["image"],1920,822, true);
+            return ['img' =>imageResize($MyConfigure->getUploadDir()."/catalog/category/".$data["image"],1920,822, true),'descripcion' => $data['descripcion']];
 
         }
 

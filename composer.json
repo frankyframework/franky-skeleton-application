@@ -19,7 +19,8 @@
         "frankyframework/franky-filesystem": "1.0.x-dev",
         "frankyframework/franky-schema": "1.0.x-dev",
         "facebook/graph-sdk": "^5.7",
-        "izica/php-progressive-images-webp-jp2-jxr": "^1.2"
+        "izica/php-progressive-images-webp-jp2-jxr": "^1.2",
+        "shuchkin/simplexls": "^0.9.6"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.5"

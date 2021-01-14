@@ -14,6 +14,15 @@ $MyPaginacion->setOrden($MyRequest->getRequest('order',"ASC"));
 $MyPaginacion->setTampageDefault($MyRequest->getRequest('tampag',25));		
 $busca_b	= $MyRequest->getRequest('busca_b');	
 
+$alias = ['id_category' => "catalog_category.id"];
+if(isset($alias[$MyRequest->getRequest('por')]))
+{
+
+  $orden = $alias[$MyRequest->getRequest('por')];
+}
+else{
+    $orden = $MyPaginacion->getCampoOrden();
+}
 
 $CatalogCategoryModel = new CatalogcategoryModel();
 
@@ -42,6 +51,7 @@ if($CatalogCategoryModel->getTotal() > 0)
 
 
 		$lista_admin_data[] = array_merge($registro,array(
+                "id_category"=>$registro["id"],
                 "id" => $Tokenizer->token("category", $registro["id"]),
                 "callback" => $Tokenizer->token("category", $MyRequest->getURI()),    
                 "createdAt" 	=> getFechaUI($registro["createdAt"]),
@@ -62,10 +72,10 @@ $class_grid = "cont_categorias_catalog";
 $error_grid = "No hay categorias registradas";
 $deleteFunction = "DeleteCatalogCategory";
 $frm_constante_link = FRM_CATALOG_CATEGORY;
-$titulo_columnas_grid = array("createdAt" => "Fecha","name" => "Nombre","image" => "Imagen");
-$value_columnas_grid = array("createdAt", "name","image" );
+$titulo_columnas_grid = array("id_category" => "ID","createdAt" => "Fecha","name" => "Nombre","image" => "Imagen");
+$value_columnas_grid = array("id_category","createdAt", "name","image" );
 
-$css_columnas_grid = array("createdAt" => "w-xxxx-4" ,"name" => "w-xxxx-3" ,"image" => "w-xxxx-3" );
+$css_columnas_grid = array("id_category" => "w-xxxx-1","createdAt" => "w-xxxx-3" ,"name" => "w-xxxx-3" ,"image" => "w-xxxx-3" );
 
 $permisos_grid = ADMINISTRAR_CATEGORY_CATALOG;
 $MyFiltrosForm = new filtrosForm('paginar');

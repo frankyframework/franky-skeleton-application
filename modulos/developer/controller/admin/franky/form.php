@@ -78,7 +78,19 @@ if(count($files) > 0)
 }
 
 $css_files = array();
-$excluir = array("imprimir.css","style.css","grid.css","estilos.css","estilos_320.css","estilos_640.css","estilos_960.css","normalize.css","panel.css","panel_extend.css","franky.mobile.css","variables.css");
+$excluir = array("imprimir.css",
+"style.css",
+"grid.css",
+"estilos.css",
+"estilos_320.css",
+"estilos_640.css",
+"estilos_960.css",
+"normalize.css",
+"panel.css",
+"panel_extend.css",
+"franky.mobile.css",
+"variables.css"
+);
 $mymodulos = ['default',$MyConfigure->getPathSite()];
 foreach($mymodulos as $modulo)
 {

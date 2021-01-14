@@ -9,6 +9,7 @@ $MyPaginacion = new paginacion();
 $Tokenizer = new Tokenizer();
 
 $alias = [
+        'id_subcategory' => 'catalog_subcategory.id',
         'createdAt' => 'catalog_subcategory.createdAt',
         'name' => 'catalog_subcategory.name',
         'image' => 'catalog_subcategory.image',
@@ -60,6 +61,7 @@ if($CatalogsubcategoryModel->getTotal() > 0)
 
 
 		$lista_admin_data[] = array_merge($registro,array(
+                "id_subcategory" => $registro["id"],
                 "id" => $Tokenizer->token("subcategory", $registro["id"]),
                 "callback" => $Tokenizer->token("subcategory", $MyRequest->getURI()),    
                 "createdAt" 	=> getFechaUI($registro["createdAt"]),
@@ -79,10 +81,10 @@ $class_grid = "cont_subcategorias_catalog";
 $error_grid = "No hay sucategorias registradas";
 $deleteFunction = "DeleteCatalogSubcategory";
 $frm_constante_link = FRM_CATALOG_SUBCATEGORY;
-$titulo_columnas_grid = array("createdAt" => "Fecha","name" => "Nombre","categoria" => "Categoria","image" => "Imagen");
-$value_columnas_grid = array("createdAt", "name","categoria","image" );
+$titulo_columnas_grid = array("id_subcategory" => "ID","createdAt" => "Fecha","name" => "Nombre","categoria" => "Categoria","image" => "Imagen");
+$value_columnas_grid = array("id_subcategory","createdAt", "name","categoria","image" );
 
-$css_columnas_grid = array("createdAt" => "w-xxxx-2" ,"name" => "w-xxxx-3" ,"categoria" => "w-xxxx-3" ,"image" => "w-xxxx-2" );
+$css_columnas_grid = array("id_subcategory" => "w-xxxx-1","createdAt" => "w-xxxx-1" ,"name" => "w-xxxx-3" ,"categoria" => "w-xxxx-3" ,"image" => "w-xxxx-2" );
 
 $permisos_grid = ADMINISTRAR_CATEGORY_CATALOG;
 $MyFiltrosForm = new filtrosForm('paginar');

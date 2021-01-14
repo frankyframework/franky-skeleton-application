@@ -4,7 +4,7 @@
         <h1 class="titulo_seccion_admin"><?=_catalog('importar catalogo'); ?></h1>
         <div class="w-xxxx-12 cont_header_panel">
             <div class="_wrapp_form_serch">
-                <a href="" class="_btn_new">Descargar template</a>
+                <a href="/admin/catalog-products/template_import.php" class="_btn_new" target="_blank">Descargar template</a>
                 <?php  if(!empty($data_productos)): ?>
                 <a href="" class="_btn_new" data-action="play">Iniciar importacion</a>
                 <?php endif; ?>
@@ -14,9 +14,29 @@
         <div  class="w-xxxx-12 cont_gral_admin importar">
         <?php  
         if(empty($data_productos)):
+
+
             echo $adminForm->openTag();
             echo $adminForm->getAllRow();
             echo $adminForm->endTag();
+
+            ?>
+
+            <div class="w-xxxx-12">
+                <h4>Reglas importantes</h4>
+
+                <ul>
+                    <li>Formato de atributo categoria: 
+                       <pre> {id_categoria:[id_subcategoria_1,id_subtagoria_2... id_subcategoria_n]}</pre>
+                    </li>
+                    <li>Formato de atributo customizado tipo checkbox: 
+                       <pre>["valor_1","valor_2"... "valor_n"]</pre>
+                    </li>
+                </ul>
+                
+            </div>
+
+            <?php
         else:
         ?>
 
@@ -56,6 +76,13 @@
                 </div>
                 
             </div>
+
+
+            <script >
+            $(".contenedor_columnas_info").htmlDataDum(<?php echo json_encode($data_productos); ?>,".no_hay_datos");
+            </script>
+
+
         <?php
         endif;
         ?>
@@ -64,7 +91,6 @@
     </div>
 </div>
 <script >
-$(".contenedor_columnas_info").htmlDataDum(<?php echo json_encode($data_productos); ?>,".no_hay_datos");
 $(document).ready(function()
 {
   $( "#frmimport" ).validate();

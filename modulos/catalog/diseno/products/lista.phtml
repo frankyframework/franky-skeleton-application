@@ -1,9 +1,11 @@
 <div class="w-xxxx-12 _catalog_result">
     <div class="content">
     <?=CatalogBreadcrumbs(null); ?>
-        <?php if(!empty($image_category)): ?>
+        <?php if(isset($image_category['img']) &&  !empty($image_category['img'])): ?>
         <?= makeHTMLImg($image_category, "", "", "","class='image_100'")?>
-
+        <?php endif; ?>
+        <?php if(isset($image_category['descripcion']) && !empty($image_category['descripcion'])): ?>
+        <p class="landing_producto_descripcion"><?= $image_category['descripcion']?></p>
         <?php endif; ?>
         <div class="w-xxxx-12">
             <?php if(getCoreConfig('catalog/product/buscadorlateral') == 1):?>

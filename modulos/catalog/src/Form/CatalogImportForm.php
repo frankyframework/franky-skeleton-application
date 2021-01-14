@@ -10,12 +10,16 @@ class CatalogImportForm extends \Franky\Form\Form
 
        $this->setAtributos(array(
             'name' => $name,
-            'action' =>  "/admin/catalog-category/importar/",
+            'action' =>  "/admin/catalog-products/importar/",
             'method' => 'post',
             'enctype' => "multipart/form-data"
         ));
 
-   
+        $this->add(array(
+            'name' => 'my_url_friendly',
+            'type'  => 'hidden'
+        )
+        );
         $this->add(array(
             'name' => 'archivo',
             'label' => _('Archivo de catalogo'),

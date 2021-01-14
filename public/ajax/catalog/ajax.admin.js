@@ -383,3 +383,29 @@ function ajax_products_setAttrConfigurableHTML(response,id_parent,attr)
     
 }
 
+
+
+
+function catalog_setOrdenCategoria(orden)
+{
+    var var_query = {
+          "function": "catalog_setOrdenCategoria",
+          "vars_ajax":[orden]
+        };
+    
+    pasarelaAjax('GET', var_query, "catalog_setOrdenCategoriaHTML", '');
+}
+
+
+function catalog_setOrdenCategoriaHTML(response)
+{
+    var respuesta = null;
+    if (response != "null")
+    {
+        respuesta = JSON.parse(response);
+       
+    }
+
+    return true;
+}
+

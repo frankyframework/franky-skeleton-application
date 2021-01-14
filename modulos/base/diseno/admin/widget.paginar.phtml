@@ -174,7 +174,7 @@ $maxPage		= ceil($MyPaginacion->getTotal() / $MyPaginacion->getTampageDefault())
 ?>
 
         <script >
-        <!--
+      
         $("select[name=tam]").change(function()
         {
 
@@ -184,5 +184,5 @@ $maxPage		= ceil($MyPaginacion->getTotal() / $MyPaginacion->getTampageDefault())
             $("a.tampag").attr('href','<?php echo $uri; ?>'+'page=1&tampag='+$(this).val());
             $("a.tampag").get(0).click();
         });
-        // -->
+      
         </script>
