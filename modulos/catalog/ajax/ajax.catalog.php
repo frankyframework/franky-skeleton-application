@@ -753,6 +753,125 @@ function catalog_setOrdenCategoria($orden)
 }
 
 
+function ajax_catalog_importar_producto($sku,$id)
+{
+    global $MySession;
+    global $MyConfigure;
+
+    $respuesta = [];
+    $file_xls = $MyConfigure->getServerUploadDir()."/catalog/importar/".$MySession->GetVar('importar-productos-file');
+
+
+    if ( $xls = SimpleXLS::parse($file_xls) ) {
+      
+        $atributos_xls = [
+            "name","sku","category","description","visible_in_search","stock","in_stock","stock_infinito","saleable","min_qty","price",
+            "iva","incluye_iva","envio_requerido","meta_title","meta_description","meta_keyword","url_key","status"
+        ];
+
+  
+        foreach($xls->rows() as $key => $val)
+        {
+
+            if($key == $id)
+            {
+                foreach($val as $_key => $_val){
+                    $_POST[$atributos_xls[$_key]] = utf8_encode($_val); 
+                }
+               
+            }
+
+        }
+  
+       
+
+
+        $CatalogsubcategoryproductEntity    = new Catalog\entity\CatalogsubcategoryproductEntity();
+        $CatalogsubcategoryproductModel     = new Catalog\model\CatalogsubcategoryproductModel();
+        $CatalogproductsModel               = new Catalog\model\CatalogproductsModel();    
+        $CatalogproductsEntity              = new Catalog\entity\CatalogproductsEntity($_POST);
+        
+        if($CatalogproductsModel->existeSKU($sku) == REGISTRO_SUCCESS)
+        {
+            $data = $CatalogproductsModel->getRows();
+            $CatalogproductsEntity->updateAt(date('Y-m-d H:i:s'));
+            $CatalogproductsEntity->id($data['id']);
+
+            $CatalogproductsModel->save($CatalogproductsEntity->getArrayCopy());
+            $respuesta["operacion"] ="update";
+        }
+        else{
+            $CatalogproductsEntity->createdAt(date('Y-m-d H:i:s'));
+            $CatalogproductsModel->save($CatalogproductsEntity->getArrayCopy());
+            $respuesta["operacion"] ="add";
+            $data['id'] = $CatalogproductsModel->getUltimoID();
+        }
+        
+
+
+        $CatalogsubcategoryproductEntity->id_product($data['id']);
+        $CatalogsubcategoryproductModel->remove($CatalogsubcategoryproductEntity->getArrayCopy());   
+        $category_subcategory = json_decode($CatalogproductsEntity->category(),true);
+
+        foreach($category_subcategory as $cat => $subcat)
+        {
+            foreach($subcat as $id_sub)
+            {  
+                $CatalogsubcategoryproductEntity->id_subcategory($id_sub);
+                $CatalogsubcategoryproductModel->save($CatalogsubcategoryproductEntity->getArrayCopy());   
+            }
+        }
+
+      
+
+        $custom_attr = getDataCustomAttribute(0,'catalog_products');
+
+
+
+        if(!empty($custom_attr['custom_imputs']))
+        {
+
+            foreach($custom_attr['custom_imputs'] as $key => $data_attrs)
+            {
+                if(!in_array($data_attrs['type'],['file','multifile']))
+                {
+                    $atributos_xls[] = $data_attrs['name'];
+                    
+                }
+
+                
+            }
+
+            foreach($xls->rows() as $key => $val)
+            {
+    
+                if($key == $id)
+                {
+                    foreach($val as $_key => $_val){
+                        $_POST[$atributos_xls[$_key]] = utf8_encode($_val); 
+                    }
+                   
+                }
+    
+            }
+           // print_r($_POST); die;
+            
+            saveDataCustomAttributeImport($data['id'],'catalog_products',$_POST);
+        }
+
+
+ 
+        $respuesta["status"] ="success";
+       
+
+    } else {
+        $respuesta["status"] ="error";
+        $respuesta["msg"] = SimpleXLS::parseError();
+    }
+
+    return $respuesta;
+}
+
 /******************************** EJECUTA *************************/
 $MyAjax->register("DeleteCatalogCategory");
 $MyAjax->register("DeleteCatalogSubcategory");
@@ -771,4 +890,6 @@ $MyAjax->register("ajax_products_agregarProductoConfigurable");
 $MyAjax->register("ajax_products_quitarProductoConfigurable");
 $MyAjax->register("ajax_products_setAttrConfigurable");
 $MyAjax->register("catalog_setOrdenCategoria");
+$MyAjax->register("ajax_catalog_importar_producto");
+
 ?>

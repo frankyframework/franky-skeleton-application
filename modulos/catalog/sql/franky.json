@@ -270,7 +270,7 @@
             "php":"admin/catalog_products/importar.php",
             "css":"",
             "js":[],
-            "jquery":[],
+            "jquery":["jquery-validate"],
             "permisos":[1,2],
             "constante":"IMPORTAR_CATALOGO",
             "url":"admin/catalog-products/importar/",

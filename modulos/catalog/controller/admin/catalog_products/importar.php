@@ -26,63 +26,29 @@ if ($handle->uploaded)
             
 
             if ( $xls = SimpleXLS::parse($dir.'/'.$handle->file_dst_name) ) {
-
-
-
+                $MySession->SetVar('importar-productos-file',$handle->file_dst_name);
 
                 $atributos_xls = [
-                    "name","sku","category","description","visible_in_search","stock","in_stock","stock_infinito","saleable","min_qty","price",
-                    "iva","incluye_iva","envio_requerido","meta_title","meta_description","meta_keyword","url_key","status"
+                    "name","sku"
                 ];
 
-                $atributos_xls_json = ["category"];
-                $custom_attr = getDataCustomAttribute(0,'catalog_products');
-
-
-
-                if(!empty($custom_attr['custom_imputs']))
-                {
-
-                    foreach($custom_attr['custom_imputs'] as $key => $data_attrs)
-                    {
-                        if(!in_array($data_attrs['type'],['file','multifile']))
-                        {
-
-                            $atributos_xls[] = $data_attrs['name'];
-
-                            if(in_array($data_attrs['type'],['checkbox']))
-                            {
-
-                                $atributos_xls_json[] = $data_attrs['name'];
-                            }
-                        }
-
-                        
-                        
-                    }
-                }
-
                
-              //  print_r( $xls->rows() );
-
+            
                 $data_productos = [];
           
                 foreach($xls->rows() as $key => $val)
                 {
+
                     if($key > 0)
                     {
-                        
+                        $thisClass  = ((($key % 2) == 0) ? "formFieldDk" : "formFieldLt");
                         foreach($val as $_key => $_val){
 
 
-
-
-                            if(in_array($atributos_xls[$_key],$atributos_xls_json)){
-                                $_val = json_decode($_val,true);
-                            }
-                            $data_productos[$key-1][$atributos_xls[$_key]] = $_val; 
+                            $data_productos[$key-1][$atributos_xls[$_key]] = utf8_encode($_val); 
                         }
-
+                        $data_productos[$key-1]['thisClass'] = $thisClass;
+                        $data_productos[$key-1]['id'] = $key;
                        
                     }
 
@@ -93,7 +59,6 @@ if ($handle->uploaded)
                 $css_columnas_grid = array("name" => "w-xxxx-4", "sku" => "w-xxxx-4");
 
 
-                print_r($data_productos); die;
 
             } else {
                 
@@ -109,31 +74,3 @@ if ($handle->uploaded)
         }
 
 }
-
-
-/*
-
-
-Array
-(
-    [0] => Array
-        (
-            [0] => ISBN
-            [1] => title
-            [2] => author
-            [3] => publisher
-            [4] => ctry
-        )
-
-    [1] => Array
-        (
-            [0] => 618260307
-            [1] => The Hobbit
-            [2] => J. R. R. Tolkien
-            [3] => Houghton Mifflin
-            [4] => USA
-        )
-
-)
-
-*/

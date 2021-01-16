@@ -1058,14 +1058,16 @@ function saveDataCustomAttribute($id_ref,$entity)
 
             $files = array();
            // print_r($_FILES);
-            foreach ($_FILES[$name] as $k => $l) {
-           
-                foreach ($l as $i => $v) {
-                    
-                    $files[$i][$k] = $v;
+           if(!empty($_FILES))
+           {
+                foreach ($_FILES[$name] as $k => $l) {
+            
+                    foreach ($l as $i => $v) {
+                        
+                        $files[$i][$k] = $v;
+                    }
                 }
             }
-   
            //print_r($files);
            //die;
 
@@ -1112,6 +1114,49 @@ function saveDataCustomAttribute($id_ref,$entity)
         else{
             $value = (is_array($MyRequest->getRequest($name)) ? json_encode($MyRequest->getRequest($name)) : $MyRequest->getRequest($name,'',true));
         }
+        $CustomattributesvaluesEntity->exchangeArray([]);
+        $CustomattributesvaluesEntity->id_attribute($input['id']);
+        $CustomattributesvaluesEntity->id_ref($id_ref);
+        $CustomattributesvaluesEntity->entity($entity);
+        $CustomattributesvaluesModel->remove($CustomattributesvaluesEntity->getArrayCopy());
+
+
+        $CustomattributesvaluesEntity->value($value);
+        $CustomattributesvaluesModel->save($CustomattributesvaluesEntity->getArrayCopy());
+
+
+    }
+    
+}
+
+
+
+
+function saveDataCustomAttributeImport($id_ref,$entity,$_data)
+{
+ 
+    $CustomattributesModel              = new Base\model\CustomattributesModel();
+    $CustomattributesEntity             = new Base\entity\CustomattributesEntity();
+    $CustomattributesvaluesModel        = new Base\model\CustomattributesvaluesModel();
+    $CustomattributesvaluesEntity       = new Base\entity\CustomattributesvaluesEntity();
+
+    $custom_imputs = [];
+    $CustomattributesEntity->entity("catalog_products");
+    $CustomattributesEntity->status(1);
+    $CustomattributesModel->setTampag(100);
+    $CustomattributesModel->getData($CustomattributesEntity->getArrayCopy());
+    while($data_attrs = $CustomattributesModel->getRows()){
+        
+        $custom_imputs[] = ['id' => $data_attrs['id'],'name' => $data_attrs['name'],'type' => $data_attrs['type']];
+    }
+
+    foreach($custom_imputs as $input)
+    {
+        
+        $name = str_replace("[]", "", $input['name']);
+       
+        $value = addslashes($_data[$name]);
+        
         $CustomattributesvaluesEntity->exchangeArray([]);
         $CustomattributesvaluesEntity->id_attribute($input['id']);
         $CustomattributesvaluesEntity->id_ref($id_ref);

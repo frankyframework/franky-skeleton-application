@@ -409,3 +409,40 @@ function catalog_setOrdenCategoriaHTML(response)
     return true;
 }
 
+
+
+function ajax_catalog_importar_producto(sku,id)
+{
+    
+   
+    var var_query = {
+          "function": "ajax_catalog_importar_producto",
+          "vars_ajax":[sku,id]
+        };
+    
+    pasarelaAjax('GET', var_query, "ajax_catalog_importar_productoHTML", [sku]);
+}
+
+
+function ajax_catalog_importar_productoHTML(response,sku)
+{
+    var respuesta = null;
+    if (response != "null")
+    {
+        respuesta = JSON.parse(response);
+
+        $('.operacion_'+sku).html(respuesta.operacion);
+        $('.status_'+sku).html(respuesta.status).removeClass('status_pending').addClass('status_complete');
+        
+       
+        $('html, body').stop().animate({
+            scrollTop: $('.status_'+sku).offset().top
+        }, 2000);
+
+
+        $('.play_importacion').click();
+       
+    }
+
+    return true;
+}
