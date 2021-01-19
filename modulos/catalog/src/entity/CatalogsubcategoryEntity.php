@@ -18,6 +18,7 @@ class CatalogsubcategoryEntity
     private $status;
     private $createdAt;
     private $updateAt;
+    private $orden;
 
     public function __construct($data = null)
     {
@@ -43,6 +44,7 @@ class CatalogsubcategoryEntity
         $this->status = (isset($data["status"]) ? $data["status"] : null);
         $this->createdAt = (isset($data["createdAt"]) ? $data["createdAt"] : null);
         $this->updateAt = (isset($data["updateAt"]) ? $data["updateAt"] : null);
+        $this->orden = (isset($data["orden"]) ? $data["orden"] : null);
 
     }
 
@@ -88,6 +90,8 @@ class CatalogsubcategoryEntity
     public function createdAt($createdAt = null){ if($createdAt != null){ $this->createdAt=$createdAt; }else{ return $this->createdAt; } }
 
     public function updateAt($updateAt = null){ if($updateAt != null){ $this->updateAt=$updateAt; }else{ return $this->updateAt; } }
+    
+    public function orden($orden = null){ if($orden != null){ $this->orden=$orden; }else{ return $this->orden; } }
 
 
     }

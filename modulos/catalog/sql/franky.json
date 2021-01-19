@@ -23,7 +23,7 @@
             "constante":"ADMIN_CATALOG_SUBCATEGORY",
             "url":"admin/catalog-subcategory/",
             "nombre":"Subcategorias del catalogo",
-            "ajax":["base/ajax.admin.js"],
+            "ajax":["base/ajax.admin.js","catalog/ajax.admin.js"],
             "status":1,
             "editable":1,
             "modulo":"catalog"

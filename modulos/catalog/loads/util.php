@@ -61,7 +61,7 @@ function getCategoryMenu()
     }
     
     $CatalogsubcategoryModel->setTampag(1000);
-    $CatalogsubcategoryModel->setOrdensql("catalog_subcategory.name ASC");
+    $CatalogsubcategoryModel->setOrdensql("catalog_subcategory.orden ASC");
     $CatalogsubcategoryEntity->status(1);
     $CatalogsubcategoryEntity->visible_in_search(1);
     $CatalogsubcategoryModel->getData($CatalogsubcategoryEntity->getArrayCopy());

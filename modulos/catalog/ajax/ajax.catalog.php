@@ -753,6 +753,45 @@ function catalog_setOrdenCategoria($orden)
 }
 
 
+
+function catalog_setOrdenSubcategoria($orden)
+{
+
+    $CatalogsubcategoryModel =  new \Catalog\model\CatalogsubcategoryModel();
+    $CatalogsubcategoryEntity =  new \Catalog\entity\CatalogsubcategoryEntity();
+    $Tokenizer = new \Franky\Haxor\Tokenizer;
+    global $MyAccessList;
+    global $MyMessageAlert;
+        $respuesta =null;
+        if($MyAccessList->MeDasChancePasar(ADMINISTRAR_CATEGORY_CATALOG))
+        {
+           
+        
+            $orden = explode(",",str_replace("cat_","",$orden));
+
+            
+
+
+           
+            $v = "";
+            foreach($orden as $key => $val)
+            {
+                $v .= ($key)." -> $val,";
+                $CatalogsubcategoryEntity->id($Tokenizer->decode($val));
+                $CatalogsubcategoryEntity->orden($key);
+                $CatalogsubcategoryModel->save($CatalogsubcategoryEntity->getArrayCopy());
+            }
+          //  echo $v;
+        }
+        else
+        {
+             $respuesta[] = array("message" => $MyMessageAlert->Message("sin_privilegios"));
+        }
+	
+	return $respuesta;
+}
+
+
 function ajax_catalog_importar_producto($sku,$id)
 {
     global $MySession;
@@ -782,7 +821,6 @@ function ajax_catalog_importar_producto($sku,$id)
             }
 
         }
-  
        
 
 
@@ -790,7 +828,7 @@ function ajax_catalog_importar_producto($sku,$id)
         $CatalogsubcategoryproductModel     = new Catalog\model\CatalogsubcategoryproductModel();
         $CatalogproductsModel               = new Catalog\model\CatalogproductsModel();    
         $CatalogproductsEntity              = new Catalog\entity\CatalogproductsEntity($_POST);
-        
+        $ObserverManager                    = new \Franky\Core\ObserverManager;
         if($CatalogproductsModel->existeSKU($sku) == REGISTRO_SUCCESS)
         {
             $data = $CatalogproductsModel->getRows();
@@ -799,12 +837,20 @@ function ajax_catalog_importar_producto($sku,$id)
 
             $CatalogproductsModel->save($CatalogproductsEntity->getArrayCopy());
             $respuesta["operacion"] ="update";
+
+            $ObserverManager->dispatch('edit_catalog_product',['data' => $CatalogproductsEntity->getArrayCopy()]);
+        
         }
         else{
             $CatalogproductsEntity->createdAt(date('Y-m-d H:i:s'));
             $CatalogproductsModel->save($CatalogproductsEntity->getArrayCopy());
             $respuesta["operacion"] ="add";
             $data['id'] = $CatalogproductsModel->getUltimoID();
+
+
+            $CatalogproductsEntity->id($data['id']);
+            
+            $ObserverManager->dispatch('save_catalog_product',['data' => $CatalogproductsEntity->getArrayCopy()]);
         }
         
 
@@ -890,6 +936,7 @@ $MyAjax->register("ajax_products_agregarProductoConfigurable");
 $MyAjax->register("ajax_products_quitarProductoConfigurable");
 $MyAjax->register("ajax_products_setAttrConfigurable");
 $MyAjax->register("catalog_setOrdenCategoria");
+$MyAjax->register("catalog_setOrdenSubcategoria");
 $MyAjax->register("ajax_catalog_importar_producto");
 
 ?>

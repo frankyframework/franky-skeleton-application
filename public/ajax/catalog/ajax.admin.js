@@ -411,6 +411,36 @@ function catalog_setOrdenCategoriaHTML(response)
 
 
 
+
+function catalog_setOrdenSubcategoria(orden)
+{
+    var var_query = {
+          "function": "catalog_setOrdenSubcategoria",
+          "vars_ajax":[orden]
+        };
+    
+    pasarelaAjax('GET', var_query, "catalog_setOrdenSubcategoriaHTML", '');
+}
+
+
+function catalog_setOrdenSubcategoriaHTML(response)
+{
+    var respuesta = null;
+    if (response != "null")
+    {
+        respuesta = JSON.parse(response);
+       
+    }
+
+    return true;
+}
+
+
+
+
+
+
+
 function ajax_catalog_importar_producto(sku,id)
 {
     

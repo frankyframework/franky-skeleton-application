@@ -8,19 +8,7 @@ use Franky\Haxor\Tokenizer;
 $MyPaginacion = new paginacion();
 $Tokenizer = new Tokenizer();
 
-$alias = [
-        'id_subcategory' => 'catalog_subcategory.id',
-        'createdAt' => 'catalog_subcategory.createdAt',
-        'name' => 'catalog_subcategory.name',
-        'image' => 'catalog_subcategory.image',
-        'categoria' => 'catalog_category.name',
 
-];
-
-$MyPaginacion->setPage($MyRequest->getRequest('page',1));
-$MyPaginacion->setCampoOrden($MyRequest->getRequest('por',"createdAt"));
-$MyPaginacion->setOrden($MyRequest->getRequest('order',"ASC"));
-$MyPaginacion->setTampageDefault($MyRequest->getRequest('tampag',25));		
 
 $busca_b	= $MyRequest->getRequest('busca_b');	
 $category_b	= $MyRequest->getRequest('id_category');
@@ -30,9 +18,9 @@ $catalog_categorias = getCatalogCategorys('sql');
 $CatalogsubcategoryModel = new CatalogsubcategoryModel();
 $CatalogsubcategoryEntity = new CatalogsubcategoryEntity();
 
-$CatalogsubcategoryModel->setPage($MyPaginacion->getPage());
-$CatalogsubcategoryModel->setTampag($MyPaginacion->getTampageDefault());
-$CatalogsubcategoryModel->setOrdensql($alias[$MyPaginacion->getCampoOrden()]." ".$MyPaginacion->getOrden());
+$CatalogsubcategoryModel->setPage(1);
+$CatalogsubcategoryModel->setTampag(1000);
+$CatalogsubcategoryModel->setOrdensql("catalog_subcategory.orden ASC");
 
 $CatalogsubcategoryModel->setBusca($busca_b);
 if(!empty($category_b))
@@ -74,8 +62,9 @@ if($CatalogsubcategoryModel->getTotal() > 0)
 }
 
 
+$MyFrankyMonster->setPHPFile(getVista("admin/template/grid.orden.phtml"));
+$ordenfunction = "catalog_setOrdenSubcategoria";
 
-$MyFrankyMonster->setPHPFile(getVista("admin/template/grid.phtml"));
 $title_grid = "Subcategorias";
 $class_grid = "cont_subcategorias_catalog";
 $error_grid = "No hay sucategorias registradas";

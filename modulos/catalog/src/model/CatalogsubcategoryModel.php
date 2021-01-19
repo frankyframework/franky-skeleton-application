@@ -34,6 +34,7 @@ class CatalogsubcategoryModel  extends \Franky\Database\Mysql\objectOperations
         "catalog_subcategory.url_key",
         "catalog_subcategory.status",
         "catalog_subcategory.createdAt",
+        "catalog_subcategory.orden",
         "catalog_category.name as categoria"];
 
         if(!empty($data))

@@ -77,6 +77,12 @@
                 "length":1,
                 "null":0
             },
+            {
+                "name":"orden",
+                "type":"int",
+                "length":1,
+                "null":0
+            },
            
             {
                 "name":"createdAt",

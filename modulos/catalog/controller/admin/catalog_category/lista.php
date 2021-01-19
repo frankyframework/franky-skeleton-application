@@ -6,29 +6,14 @@ use Franky\Haxor\Tokenizer;
 
 $MyPaginacion = new paginacion();
 $Tokenizer = new Tokenizer();
-
-
-$MyPaginacion->setPage($MyRequest->getRequest('page',1));
-$MyPaginacion->setCampoOrden($MyRequest->getRequest('por',"orden"));
-$MyPaginacion->setOrden($MyRequest->getRequest('order',"ASC"));
-$MyPaginacion->setTampageDefault($MyRequest->getRequest('tampag',25));		
+		
 $busca_b	= $MyRequest->getRequest('busca_b');	
-
-$alias = ['id_category' => "catalog_category.id"];
-if(isset($alias[$MyRequest->getRequest('por')]))
-{
-
-  $orden = $alias[$MyRequest->getRequest('por')];
-}
-else{
-    $orden = $MyPaginacion->getCampoOrden();
-}
 
 $CatalogCategoryModel = new CatalogcategoryModel();
 
-$CatalogCategoryModel->setPage($MyPaginacion->getPage());
-$CatalogCategoryModel->setTampag($MyPaginacion->getTampageDefault());
-$CatalogCategoryModel->setOrdensql($MyPaginacion->getCampoOrden()." ".$MyPaginacion->getOrden());
+$CatalogCategoryModel->setPage(1);
+$CatalogCategoryModel->setTampag(1000);
+$CatalogCategoryModel->setOrdensql("catalog_category.orden ASC");
 
 $CatalogCategoryModel->setBusca($busca_b);
 $result	 = $CatalogCategoryModel->getData([]);
