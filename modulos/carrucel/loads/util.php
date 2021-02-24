@@ -31,10 +31,10 @@ function getCarrucel($clave)
     global $MyMetatag;
     global $MyRequest;
 
-    $uiCommand = $MyFrankyMonster->getUiCommand($MyFrankyMonster->MySeccion());
+    $plugins = $MyFrankyMonster->MyJQueyfile();
   
-    if (is_array($uiCommand[3])) {
-        if (!in_array('slick',$uiCommand[3])) 
+    if (is_array($plugins)) {
+        if (!in_array('slick',$plugins)) 
         {
             $MyMetatag->setJs("/public/jquery/slick/js/slick.min.js");
             $MyMetatag->setCss("/public/jquery/slick/css/slick-theme.css");

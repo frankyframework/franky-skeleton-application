@@ -12,10 +12,11 @@ function getSlider($code)
     global $MyFrankyMonster;
     global $MyMetatag;
 
-    $uiCommand = $MyFrankyMonster->getUiCommand($MyFrankyMonster->MySeccion());
+    $plugins = $MyFrankyMonster->MyJQueyfile();
+    
   
-    if (is_array($uiCommand[3])) {
-        if (!in_array('flexslider',$uiCommand[3])) 
+    if (is_array($plugins)) {
+        if (!in_array('flexslider',$plugins)) 
         {
             $MyMetatag->setJs("/public/jquery/flexslider/js/jquery.flexslider.min.js");
             $MyMetatag->setCss("/public/jquery/flexslider/css/flexslider.css");
