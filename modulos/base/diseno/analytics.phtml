@@ -1,22 +1,9 @@
-<!-- ============== Analytics ================== -->
-<script >
-<!--
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','/public/js/analytics.js','ga'); // //www.google-analytics.com/analytics.js
-  <?php $uianalitycs = explode(',',getCoreConfig('base/google/analytics')); ?>
-  <?php if(!empty($uianalitycs)): ?>
-      <?php $i=0; ?>
-      <?php foreach($uianalitycs as $code_analitycs): ?>
-        <?php if(trim($code_analitycs) != ""): ?>
-          ga('create', '<?php echo trim($code_analitycs); ?>', 'auto' <?php echo ($i > 0 ? ",{name:'clientTracker$i'}" : ""); ?>);
-          ga('<?php echo ($i > 0 ? "clientTracker$i." : ""); ?>send', 'pageview');
-          <?php $i++; ?>
-        <?php endif; ?>
-      <?php endforeach; ?>
-  <?php endif; ?>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=<?=getCoreConfig('base/google/analytics')?>"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-// -->
+  gtag('config', '<?=getCoreConfig('base/google/analytics')?>');
 </script>
-<!-- ============== Analytics ================== -->
