@@ -6,6 +6,7 @@ return array
     "admin/catalog-products/submit.php"  => PROJECT_DIR."/modulos/catalog/controller/admin/catalog_products/submit.php",
     "admin/catalog_products/upload.php" => PROJECT_DIR."/modulos/catalog/controller/admin/catalog_products/upload.php",
     "admin/catalog-vitrinas/submit.php" => PROJECT_DIR."/modulos/catalog/controller/admin/catalog_vitrinas/submit.php",
-    "admin/catalog-products/template_import.php" => PROJECT_DIR."/modulos/catalog/controller/admin/catalog_products/template_import.php"
+    "admin/catalog-products/template_import.php" => PROJECT_DIR."/modulos/catalog/controller/admin/catalog_products/template_import.php",
+    "admin/catalog-products/template_export.php" => PROJECT_DIR."/modulos/catalog/controller/admin/catalog_products/template_export.php"
 );
 ?>

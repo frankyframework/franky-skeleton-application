@@ -25,7 +25,7 @@ $menucatalog = array(
     array(
       "permiso" =>   ADMINISTRAR_PRODUCTS_CATALOG,
       "url" => $MyRequest->url(IMPORTAR_CATALOGO),
-      "etiqueta" => "Importar"
+      "etiqueta" => "Exportar/Importar"
      )
   )
   )
