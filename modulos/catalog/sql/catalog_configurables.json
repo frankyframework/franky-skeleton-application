@@ -23,7 +23,7 @@
 
         ],
         "config":{
-            "primary":["id_product","id_attribute"],
+            "primary":["id_product","id_parent"],
             "engine":"MyISAM"
             
         }
