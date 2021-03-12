@@ -98,7 +98,8 @@ if($CatalogproductsModel->getTotal() > 0)
 $CatalogproductsModel->setExcludeId('');
 $CatalogproductsEntity->exchangeArray([]);
 $CatalogproductsEntity->id($Tokenizer->decode($id));
-if($CatalogproductsModel->getData($CatalogproductsEntity->getArrayCopy(),$busca_b) == REGISTRO_SUCCESS)
+$CatalogproductsModel->setBusca($busca_b);
+if($CatalogproductsModel->getData($CatalogproductsEntity->getArrayCopy()) == REGISTRO_SUCCESS)
 {
     $producto_actual = $CatalogproductsModel->getRows();
 }
