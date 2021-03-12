@@ -121,5 +121,6 @@ $MyFiltrosForm->setMobile($Mobile_detect->isMobile());
 $MyFiltrosForm->addBusca();
 $MyFiltrosForm->addSubmit();
 
+$MyFiltrosForm->setAtributoInput("id", "value",$id);
 $MyFiltrosForm->setAtributoInput("busca_b", "value",$busca_b);
 ?>

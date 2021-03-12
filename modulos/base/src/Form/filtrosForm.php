@@ -93,6 +93,14 @@ class filtrosForm extends \Franky\Form\Form
         ));
     }
 
+    function addId()
+    {
+        $this->add(array(
+                'name' => "id",
+                'type'  => 'hidden'
+        ));
+    }
+
     function addSubmit()
     {
         $this->add(array(
