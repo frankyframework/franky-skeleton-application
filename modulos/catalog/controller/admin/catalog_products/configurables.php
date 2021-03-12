@@ -43,7 +43,8 @@ $CatalogproductsModel->setExcludeId($Tokenizer->decode($id));
 $CatalogproductsModel->setPage($MyPaginacion->getPage());
 $CatalogproductsModel->setTampag($MyPaginacion->getTampageDefault());
 $CatalogproductsModel->setOrdensql($orden." ".$MyPaginacion->getOrden());
-$result	 		= $CatalogproductsModel->getData($CatalogproductsEntity->getArrayCopy(),$busca_b);
+$CatalogproductsModel->setBusca($busca_b);
+$result	 		= $CatalogproductsModel->getData($CatalogproductsEntity->getArrayCopy());
 $MyPaginacion->setTotal($CatalogproductsModel->getTotal());
 $lista_admin_data = array();
 
@@ -98,7 +99,7 @@ if($CatalogproductsModel->getTotal() > 0)
 $CatalogproductsModel->setExcludeId('');
 $CatalogproductsEntity->exchangeArray([]);
 $CatalogproductsEntity->id($Tokenizer->decode($id));
-$CatalogproductsModel->setBusca($busca_b);
+$CatalogproductsModel->setBusca("");
 if($CatalogproductsModel->getData($CatalogproductsEntity->getArrayCopy()) == REGISTRO_SUCCESS)
 {
     $producto_actual = $CatalogproductsModel->getRows();
