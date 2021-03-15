@@ -36,6 +36,8 @@ function getImageCategorys($id)
 
 function getCategoryMenu()
 {
+
+
     global $MyRequest;
     $CatalogcategoryModel = new Catalog\model\CatalogcategoryModel();
     $CatalogcategoryEntity = new Catalog\entity\CatalogcategoryEntity();
