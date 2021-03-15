@@ -89,19 +89,20 @@ if ($zip->open($destination) === TRUE) {
 
       $archivos = array(
                     $path."/public/js/blocks.js",
-                      $path."/public/js/analytics.js",
-                      $path."/public/js/funciones.js",
-                      $path."/public/js/validaciones.js",
-                      $path."/public/js/viewport.js",
-                      $path."/public/js/menuSlide.js",
-                      $path."/public/js/google_maps.js",
-                      $path."/public/js/geolocalizacion.js",
-                      $path."/public/js/direccionMap.js",
-                      $path."/public/js/NumeroALetras.js",
-                      $path."/public/js/skrollr.js",
-                      $path."/index.php",
-                      $path."/public/ajax/ajax.js",
-                      $path."/public/ajax/ajax.php",);
+                    $path."/public/js/analytics.js",
+                    $path."/public/js/funciones.js",
+                    $path."/public/js/menu.js",
+                    $path."/public/js/validaciones.js",
+                    $path."/public/js/viewport.js",
+                    $path."/public/js/menuSlide.js",
+                    $path."/public/js/google_maps.js",
+                    $path."/public/js/geolocalizacion.js",
+                    $path."/public/js/direccionMap.js",
+                    $path."/public/js/NumeroALetras.js",
+                    $path."/public/js/skrollr.js",
+                    $path."/index.php",
+                    $path."/public/ajax/ajax.js",
+                    $path."/public/ajax/ajax.php",);
 
     foreach($modulos as $modulo)
     {
