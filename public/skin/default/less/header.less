@@ -177,19 +177,23 @@ header {
                                     font-family: @ico_font;
                                     content: "";
                                 }
+                                
                             }
                             ul {
+                                .radius(0 0 8px 8px);
                                 background-color: @theme_color;
                                 padding: 10px;
-                                .radius(0 0 8px 8px);
                                 display: none;
                                 position: absolute;                                
+                    
                                 li {
                                     width: 100%;
                                     text-align: left;
                                     a {
                                         width: 100%;
+                                        background-color: fade(@white,10);
                                         white-space: nowrap;
+                                        
                                     }
                                 }
                             }
@@ -210,6 +214,64 @@ header {
     ////////////////////// END Menú segundo nivel                    
                     &._nav_catalog {
                         margin-top: 20px;
+                        ul {
+                            li {
+                                @media @small {
+                                    margin: 0;
+                                    padding: 0;
+                                }
+                                a {
+                                    border-bottom: 1px solid fade(@white, 10);
+                                    
+                                    @media @small {
+                                        width: 100%;
+                                        box-sizing: border-box;
+                                        &:after {
+                                            font-family: @ico_font;
+                                            content: "\e82e";
+                                            position: absolute;
+                                            right: 10px;
+                                        }
+                                    }
+                                    &:hover {
+                                        @media @small {
+                                            &:after {
+                                                content: "\e82f";
+                                            }
+                                        }
+                                    }
+                                }
+                                ul {
+                                                                
+                                    @media @small {
+                                        .radius(0);
+                                        position: relative;
+                                        background-color: transparent;
+                                        margin: 0;
+                                        padding: 0;
+                                    }
+                                    li {
+                                        
+                                        a {
+                                           
+                                            @media @small {
+                                                padding-left: 20px;
+                                                &:after {
+                                                    content: "\e833";
+                                                }
+                                            }
+                                            &:hover {
+                                                @media @small {
+                                                &:after {
+                                                        content: "\e833";
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                     &._menu_section {
                         margin-top: 20px;
