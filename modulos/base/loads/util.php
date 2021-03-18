@@ -391,9 +391,18 @@ function sendEmail($campos,$data)
 
     global $MyConfigure;
     $plantilla = new \Franky\Core\Plantilla();
-    $plantilla->asigna_variables($campos);
     $validaciones =  new \Franky\Core\validaciones();
 
+
+    if(file_exists(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/diseno/email/header.html"))
+    {
+        $campos['header'] = render(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/diseno/email/header.html");
+    }
+    if(file_exists(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/diseno/email/footer.html"))
+    {
+        $campos['footer'] = render(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/diseno/email/footer.html");
+    }
+    $plantilla->asigna_variables($campos);
     $ContenidoString = $plantilla->muestra($data['html']);
 
 
