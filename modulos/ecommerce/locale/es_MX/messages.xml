@@ -78,6 +78,10 @@
         <valor>Error al eliminar el cúpon intenta mas tarde</valor>
     </mensaje>
     <mensaje>
+        <llave>promocion_error_delete</llave>
+        <valor>Error al eliminar la promoción intenta mas tarde</valor>
+    </mensaje>
+    <mensaje>
         <llave>cupon_no_exist</llave>
         <valor>El cupon ingresado no existe</valor>
     </mensaje>

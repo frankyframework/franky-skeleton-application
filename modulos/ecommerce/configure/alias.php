@@ -15,6 +15,7 @@ return array
     "ecommerce/srpago/webhooks.php" => PROJECT_DIR."/modulos/ecommerce/controller/srpago/webhooks.php",
     "ecommerce/srpago/ticket.php" => PROJECT_DIR."/modulos/ecommerce/controller/srpago/ticket.php",
     "ecommerce/admin/cupones/submit.php" => PROJECT_DIR."/modulos/ecommerce/controller/admin/cupones/submit.php",
+    "ecommerce/admin/promociones/submit.php" => PROJECT_DIR."/modulos/ecommerce/controller/admin/promociones/submit.php",
     "ecommerce/admin/tiendas/submit.php" => PROJECT_DIR."/modulos/ecommerce/controller/admin/tiendas/submit.php",
     );
 ?>

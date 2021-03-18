@@ -919,6 +919,42 @@ function EliminarCuponesEcommerce($id,$status)
 }
 
 
+function EliminarPromocionEcommerce($id,$status)
+{
+    global $MySession;
+    $EcommercepromocionesModel             = new \Ecommerce\model\EcommercepromocionesModel();
+    $EcommercepromocionesEntity             = new \Ecommerce\entity\EcommercepromocionesEntity();
+    $Tokenizer = new \Franky\Haxor\Tokenizer;
+    global $MyAccessList;
+    global $MyMessageAlert;
+
+    $respuesta = null;
+
+    if($MyAccessList->MeDasChancePasar(ADMINISTRAR_PROMOCIONES_ECOMMERCE))
+    {
+        $EcommercepromocionesEntity->id(addslashes($Tokenizer->decode($id)));
+        $EcommercepromocionesEntity->status($status);
+
+        if($EcommercepromocionesModel->save($EcommercepromocionesEntity->getArrayCopy()) == REGISTRO_SUCCESS)
+        {
+
+        }
+        else
+        {
+              $respuesta["message"] = $MyMessageAlert->Message("ecommerce_promocion_error_delete");
+              $respuesta["error"] = true;
+        }
+    }
+    else
+    {
+         $respuesta["message"] = $MyMessageAlert->Message("sin_privilegios");
+         $respuesta["error"] = true;
+    }
+
+    return $respuesta;
+}
+
+
 function ecommerce_setCupon($cupon)
 {
 
@@ -1039,4 +1075,5 @@ $MyAjax->register("getInfoTotalsCheckout");
 $MyAjax->register("getInfoTotalsCheckout2");
 $MyAjax->register("EliminarTiendaEcommerce");
 $MyAjax->register("setPickUpCheckout");
+$MyAjax->register("EliminarPromocionEcommerce");
 ?>

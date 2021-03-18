@@ -10,12 +10,9 @@
         <?php echo $adminForm->getRow('titulo'); ?>
         <?php echo $adminForm->getRow('id_promocion'); ?>
         
-        <?php echo $adminForm->getRow('codigo_promocion'); ?>
-        <div><a href="#" class="link_generate_cupon">Generar Cupon</a></div>
+       
         <?php echo $adminForm->getRow('fecha_inicio'); ?>
         <?php echo $adminForm->getRow('fecha_fin'); ?>
-        <?php echo $adminForm->getRow('numero_usos'); ?>
-        <?php echo $adminForm->getRow('numero_usos_usuario'); ?>
         <div class="content_config_promo"></div>
         <?php echo $adminForm->getRow('guardar'); ?>
         
@@ -28,7 +25,7 @@
 
 $(document).ready(function()
 {
-    $( "#frmcupones" ).validate();
+    $( "#frmpromocion" ).validate();
 });
 
 $('select[name=id_promocion]').change(function(){
@@ -41,21 +38,9 @@ $('select[name=id_promocion]').change(function(){
     }
 });
 
-$('.link_generate_cupon').click(function(e){
-    e.preventDefault();
-    $('input[name=codigo_promocion]').val(getCode(6));
-});
 
 
 ajax_setInputsConfigPromo('<?=$id;?>',$('select[name=id_promocion]').val());
 
-function getCode(length) {
-   var result           = '';
-   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-   var charactersLength = characters.length;
-   for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-   }
-   return result;
-}
+
 </script>

@@ -34,6 +34,11 @@ return array(
          "url" => $MyRequest->url(ADMIN_LISTA_CUPONES_ECOMMERCE),
          "etiqueta" => _ecommerce("Administrar cupones")
         ),
+        array(
+            "permiso" =>   ADMINISTRAR_PROMOCIONES_ECOMMERCE,
+            "url" => $MyRequest->url(ADMIN_LISTA_PROMOCIONES_ECOMMERCE),
+            "etiqueta" => _ecommerce("Administrar promociones")
+           ),
          array(
          "permiso" =>   ADMINISTRAR_TIENDAS_ECOMMERCE,
          "url" => $MyRequest->url(ADMIN_LISTA_TIENDAS_ECOMMERCE),

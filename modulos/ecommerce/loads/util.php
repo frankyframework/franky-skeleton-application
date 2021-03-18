@@ -623,4 +623,82 @@ function validaCuponEcommerce($cupon)
 }
 
 
+
+
+
+function validaPromocionEcommerce($cupon)
+{
+    global $MySession;
+    
+    $descuento = 0;
+    
+    $EcommercepromocionesModel             = new Ecommerce\model\EcommercepromocionesModel();
+    $EcommercecuponesEntity             = new Ecommerce\entity\EcommercepromocionesEntity();
+    
+
+    $EcommercecuponesEntity->status(1);
+    if($EcommercepromocionesModel->getData($EcommercecuponesEntity->getArrayCopy()) ==REGISTRO_SUCCESS)
+    {
+        
+        $registro = $EcommercepromocionesModel->getRows();
+        $id_promo = $registro['id'];
+       
+        if($registro['fecha_inicio'] !='0000-00-00')
+        {
+            if(strtotime(date('Y-m-d')) < strtotime($registro['fecha_inicio']))
+            {
+               continue;
+            }
+        }
+        if($registro['fecha_fin'] != '0000-00-00')
+        {
+            if(strtotime(date('Y-m-d')) > strtotime($registro['fecha_fin']))
+            {
+                
+                continue;
+            }
+        }
+        
+     
+        
+        $EcommercepromocionesclassModel = new Ecommerce\model\EcommercepromocionesclassModel();
+        $EcommercepromocionesclassEntity = new Ecommerce\entity\EcommercepromocionesclassEntity();
+        
+        $EcommercepromocionesclassEntity->id($registro['id_promocion']);
+        $EcommercepromocionesclassModel->getData($EcommercepromocionesclassEntity->getArrayCopy());
+        $_registro = $EcommercepromocionesclassModel->getRows();
+
+        $class = new $_registro['dataClass'];
+
+        $class->setUser($MySession->GetVar('id'));
+        $class->setConfig(json_decode($registro['data'],true));
+        $carrito = getCarrito();
+        $class->setCarrito($carrito);
+        
+        $descuento = $class->getDiscount();
+
+
+        if($descuento == false)
+        {
+            $respuesta['error'] =true;
+            
+            return $respuesta;
+        }
+        
+        
+        $data = ['promos'][] = ['id' => $id_promo, 'descuento' => $descuento];
+        $data['descuento'] = $descuento;
+        $MySession->SetVar('cupon_checkout',$data);
+        
+        $respuesta['error'] = false;
+        
+        
+    }
+    else{
+        $respuesta['error'] =true;
+    }
+    return $respuesta;
+}
+
+
 ?>
