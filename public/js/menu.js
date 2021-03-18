@@ -57,9 +57,9 @@ $(window).on('load',function() {
         {   
             if($(this).children('ul').length > 0)
             {
-                $(this).addClass('menu_padre');
-                $(this).children('a').addClass('menu_padre')
-                
+                $(this).addClass('parent_menu');
+                $(this).children('a').addClass('parent_menu')
+
                 $(this).children('a').click(function(e){
                 
                     if($('.cont_nav_movil').is(':visible'))
