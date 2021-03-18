@@ -640,55 +640,56 @@ function validaPromocionEcommerce($cupon)
     if($EcommercepromocionesModel->getData($EcommercecuponesEntity->getArrayCopy()) ==REGISTRO_SUCCESS)
     {
         
-        $registro = $EcommercepromocionesModel->getRows();
-        $id_promo = $registro['id'];
-       
-        if($registro['fecha_inicio'] !='0000-00-00')
-        {
-            if(strtotime(date('Y-m-d')) < strtotime($registro['fecha_inicio']))
+        while( $registro = $EcommercepromocionesModel->getRows()):
+            $id_promo = $registro['id'];
+        
+            if($registro['fecha_inicio'] !='0000-00-00')
             {
-               continue;
-            }
-        }
-        if($registro['fecha_fin'] != '0000-00-00')
-        {
-            if(strtotime(date('Y-m-d')) > strtotime($registro['fecha_fin']))
-            {
-                
+                if(strtotime(date('Y-m-d')) < strtotime($registro['fecha_inicio']))
+                {
                 continue;
+                }
             }
-        }
-        
-     
-        
-        $EcommercepromocionesclassModel = new Ecommerce\model\EcommercepromocionesclassModel();
-        $EcommercepromocionesclassEntity = new Ecommerce\entity\EcommercepromocionesclassEntity();
-        
-        $EcommercepromocionesclassEntity->id($registro['id_promocion']);
-        $EcommercepromocionesclassModel->getData($EcommercepromocionesclassEntity->getArrayCopy());
-        $_registro = $EcommercepromocionesclassModel->getRows();
-
-        $class = new $_registro['dataClass'];
-
-        $class->setUser($MySession->GetVar('id'));
-        $class->setConfig(json_decode($registro['data'],true));
-        $carrito = getCarrito();
-        $class->setCarrito($carrito);
-        
-        $descuento = $class->getDiscount();
-
-
-        if($descuento == false)
-        {
-            $respuesta['error'] =true;
+            if($registro['fecha_fin'] != '0000-00-00')
+            {
+                if(strtotime(date('Y-m-d')) > strtotime($registro['fecha_fin']))
+                {
+                    
+                    continue;
+                }
+            }
             
-            return $respuesta;
-        }
         
-        
-        $data = ['promos'][] = ['id' => $id_promo, 'descuento' => $descuento];
+            
+            $EcommercepromocionesclassModel = new Ecommerce\model\EcommercepromocionesclassModel();
+            $EcommercepromocionesclassEntity = new Ecommerce\entity\EcommercepromocionesclassEntity();
+            
+            $EcommercepromocionesclassEntity->id($registro['id_promocion']);
+            $EcommercepromocionesclassModel->getData($EcommercepromocionesclassEntity->getArrayCopy());
+            $_registro = $EcommercepromocionesclassModel->getRows();
+
+            $class = new $_registro['dataClass'];
+
+            $class->setUser($MySession->GetVar('id'));
+            $class->setConfig(json_decode($registro['data'],true));
+            $carrito = getCarrito();
+            $class->setCarrito($carrito);
+            
+            $descuento = $class->getDiscount();
+
+
+            if($descuento == false)
+            {
+                $respuesta['error'] =true;
+                
+                return $respuesta;
+            }
+            
+            
+            $data['promos'][] = ['id' => $id_promo, 'descuento' => $descuento];
+        endwhile;
         $data['descuento'] = $descuento;
-        $MySession->SetVar('cupon_checkout',$data);
+        $MySession->SetVar('promocion_checkout',$data);
         
         $respuesta['error'] = false;
         
