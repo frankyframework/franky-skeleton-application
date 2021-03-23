@@ -265,7 +265,7 @@ function getInfoCarrito()
 
             $respuesta["subtotal"] += $_registro["precio"] * $registro["qty"];
 
-            $respuesta["productos"][] = array("id" => $Tokenizer->token("productos",$registro["id"]),"nombre" => $_registro["nombre"],"precio" => getFormatoPrecio($_registro["precio"]),"qty" =>  $registro["qty"],"img" => $imagen,"subtotal" => getFormatoPrecio($registro["qty"]*$_registro["precio"]));
+            $respuesta["productos"][] = array("id" => $Tokenizer->token("productos",$registro["id"]),"_id" => $registro['id'],"nombre" => $_registro["nombre"],"precio" => getFormatoPrecio($_registro["precio"]),"qty" =>  $registro["qty"],"img" => $imagen,"subtotal" => getFormatoPrecio($registro["qty"]*$_registro["precio"]),"caracteristicas" => json_decode($registro['caracteristicas'],true));
 
         }
 

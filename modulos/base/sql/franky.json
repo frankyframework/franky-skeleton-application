@@ -447,7 +447,7 @@
             "constante":"ADMIN_DEVICES",
             "url":"admin/devices/",
             "nombre":"Administracion de dispositivos",
-            "ajax":"",
+            "ajax":["base/ajax.admin.js"],
             "status":1,
             "editable":1,
             "modulo":"base"

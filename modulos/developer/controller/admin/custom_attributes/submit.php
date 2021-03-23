@@ -11,8 +11,9 @@ $CustomattributesEntity = new CustomattributesEntity($MyRequest->getRequest());
 
 $id       = $Tokenizer->decode($MyRequest->getRequest('id'));
 $callback = $Tokenizer->decode($MyRequest->getRequest('callback'));
+$required = $MyRequest->getRequest('required',0);
 $type_option = $MyRequest->getRequest('type_option');
-
+$CustomattributesEntity->required($required);
 
 if($Tokenizer->decode($MyRequest->getRequest('id')) != false)
 {
