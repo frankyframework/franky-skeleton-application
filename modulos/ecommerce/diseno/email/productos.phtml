@@ -14,8 +14,9 @@ $MyProducto =  new $productos();
     <?php if(!empty($producto['caracteristicas'])): ?>
           <ul class="caracteristicas">
           <?php foreach($producto['caracteristicas'] as $caracteristicas): ?>
-          
+              <?php if(!empty($caracteristicas['value'])): ?>
               <li><strong><?=$caracteristicas['name']?>:</strong><span><?=$caracteristicas['value']?></span></li>
+              <?php endif; ?>
           <?php endforeach; ?>
           </ul>
       <?php endif; ?>
