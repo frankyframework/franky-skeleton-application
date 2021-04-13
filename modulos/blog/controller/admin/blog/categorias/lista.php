@@ -10,8 +10,19 @@ $MyPaginacion->setOrden($MyRequest->getRequest('order',"ASC"));
 $MyPaginacion->setTampageDefault($MyRequest->getRequest('tampag',25));		
 $busca_b	= $MyRequest->getRequest('busca_b');	
 
-
 $MyCategoriaBlog = new categoriasBlog();
+
+
+if(getCoreConfig('blog/idioma/multi-idioma') == 1)
+{
+    $lang_b	= $MyRequest->getRequest('lang_b',$_SESSION['lang'] );
+    $idiomas_disponibles = getCoreConfig('base/theme/langs');
+    $MyCategoriaBlog->setLang($lang_b);
+
+}
+
+
+
 
 $MyCategoriaBlog->setPage($MyPaginacion->getPage());
 $MyCategoriaBlog->setTampag($MyPaginacion->getTampageDefault());
@@ -59,6 +70,22 @@ $css_columnas_grid = array("fecha" => "w-xxxx-5" ,"nombre" => "w-xxxx-5" );
 $permisos_grid = ADMINISTRAR_CATEGORIAS_BLOG;
 $MyFiltrosForm = new filtrosForm('paginar');
 $MyFiltrosForm->setMobile($Mobile_detect->isMobile());
+
+
+if(getCoreConfig('blog/idioma/multi-idioma') == 1)
+{
+    $idiomas = array();
+    foreach($idiomas_disponibles as $idioma)
+    {
+        $idiomas[$idioma] = $idioma;
+    }
+    $MyFiltrosForm->addLang();
+    $MyFiltrosForm->setOptionsInput("lang_b", $idiomas);
+    $MyFiltrosForm->setAtributoInput("lang_b","value",$lang_b);
+
+}
+
+
 $MyFiltrosForm->addBusca();
 $MyFiltrosForm->addSubmit();
 

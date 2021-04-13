@@ -26,6 +26,7 @@ $meta_descripcion   = $MyRequest->getRequest('meta_descripcion');
 $visible_in_search    = $MyRequest->getRequest('visible_in_search',0);
 $permisos             = $MyRequest->getRequest('permisos',array());
 $autortext   = $MyRequest->getRequest('autortext');
+$lang   = $MyRequest->getRequest('lang');
 
 $data_img   = json_decode(stripslashes($MyRequest->getRequest('data_img')),true);
 

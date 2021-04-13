@@ -1,4 +1,23 @@
-<?php echo render("admin/template/form.phtml"); ?>
+<div class="content">
+    <div class="w-xxxx-12"><?php echo breadcrumbs(); ?></div>
+    <div class="w-xxxx-12">
+         <div class="w-xxxx-4 m-l-xxxx-1">
+             <h1><?php echo $title_form; ?></h1>
+            <?php echo $adminForm->openTag(); ?>
+            <?php echo $adminForm->getRow('id'); ?>
+            <?php echo $adminForm->getRow('callback'); ?>
+            <?php if(getCoreConfig('blog/idioma/multi-idioma') == 1): ?>
+              <?php echo $adminForm->getRow('lang'); ?>
+             <?php endif; ?>
+            <?php echo $adminForm->getRow('nombre'); ?>
+            <?php echo $adminForm->getRow('visible'); ?>
+            <?php echo $adminForm->getRow('permisos[]'); ?>
+            <?php echo $adminForm->getRow('guardar'); ?>
+            <?php echo $adminForm->endTag(); ?>
+       </div>
+    </div>
+</div>
+
 <script >
 $(document).ready(function(){
          $("#frmcategoriablog").validate();

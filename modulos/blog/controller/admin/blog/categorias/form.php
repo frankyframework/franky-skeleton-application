@@ -17,6 +17,19 @@ if(!empty($id))
 
 $adminForm = new categoriasBlogForm("frmcategoria");
 $adminForm->setOptionsInput("permisos[]", $_Niveles_usuarios);
+if(getCoreConfig('blog/idioma/multi-idioma') == 1)
+{
+    $idiomas_disponibles = getCoreConfig('base/theme/langs');
+    $idiomas = array();
+    foreach($idiomas_disponibles as $idioma)
+    {
+        $idiomas[$idioma] = $idioma;
+    }
+    $adminForm->addLang();
+    $adminForm->setOptionsInput("lang", $idiomas);
+
+}
+
 $adminForm->setData($data);
 $adminForm->setAtributoInput("callback","value", urldecode($callback));
 $title_form = "Categorias Blog";

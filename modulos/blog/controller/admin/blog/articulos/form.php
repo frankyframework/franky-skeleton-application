@@ -81,10 +81,26 @@ $MySession->SetVar('path_img_blog',$path_img_blog);
 $adminForm = new articulosBlogForm("frmarticulosblog");
 $adminForm->setOptionsInput("categoria", makeHTMLCategoriasBlog("sql"));
 $adminForm->setOptionsInput("permisos[]", $_Niveles_usuarios);
+
+if(getCoreConfig('blog/idioma/multi-idioma') == 1)
+{
+    $idiomas_disponibles = getCoreConfig('base/theme/langs');
+    $idiomas = array();
+    foreach($idiomas_disponibles as $idioma)
+    {
+        $idiomas[$idioma] = $idioma;
+    }
+    $adminForm->addLang();
+    $adminForm->setOptionsInput("lang", $idiomas);
+
+}
+
+
 $adminForm->setData($data);
 $adminForm->setAtributoInput("contenido","value", ($data['contenido']));
 $adminForm->setAtributoInput("callback","value", $callback);
 $adminForm->setAtributoInput("borrador","value", $borrador);
+
 
 
 $MyMetatag->setCode("<script  src='/public/plugins/tinymce/tinymce.min.js'></script>");

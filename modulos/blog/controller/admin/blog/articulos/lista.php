@@ -35,6 +35,14 @@ $destacado_b = $MyRequest->getRequest('destacado_b');
 $status_b = $MyRequest->getRequest('status_b');
 $categoria_b = $MyRequest->getRequest('categoria_b');
 
+if(getCoreConfig('blog/idioma/multi-idioma') == 1)
+{
+    $lang_b	= $MyRequest->getRequest('lang_b',$_SESSION['lang'] );
+    $idiomas_disponibles = getCoreConfig('base/theme/langs');
+    $MyBlog->setLang($lang_b);
+
+}
+
 if(getCoreConfig('blog/registers/showdelete') == 0){
     $status_b = 1;
 }
@@ -93,8 +101,24 @@ $value_columnas_grid = array("fecha","titulo" , "categoria_nombre" ,"usuario" );
 $permisos_grid = ADMINISTRAR_ARTICULOS_BLOG;
 $MyFiltrosForm = new filtrosForm('paginar');
 $MyFiltrosForm->setMobile($Mobile_detect->isMobile());
+
+
+$MyFiltrosForm->setAtributoInput("busca_b", "value",$busca_b);
+
+
+if(getCoreConfig('blog/idioma/multi-idioma') == 1)
+{
+    $idiomas = array();
+    foreach($idiomas_disponibles as $idioma)
+    {
+        $idiomas[$idioma] = $idioma;
+    }
+    $MyFiltrosForm->addLang();
+    $MyFiltrosForm->setOptionsInput("lang_b", $idiomas);
+    $MyFiltrosForm->setAtributoInput("lang_b","value",$lang_b);
+
+}
 $MyFiltrosForm->addBusca();
 $MyFiltrosForm->addSubmit();
 
-$MyFiltrosForm->setAtributoInput("busca_b", "value",$busca_b);
 ?>

@@ -8,7 +8,7 @@ $callback           = $MyRequest->getRequest('callback');
 $nombre             = $MyRequest->getRequest('nombre');
 $visible             = $MyRequest->getRequest('visible',0);
 $permisos             = $MyRequest->getRequest('permisos',array());
-
+$lang                 = $MyRequest->getRequest('lang');
 $error = false;
             
 $rules = array(
@@ -38,6 +38,10 @@ if(!$MyAccessList->MeDasChancePasar(ADMINISTRAR_CATEGORIAS_BLOG))
 
 if($error == false)        
 {
+    if(getCoreConfig('blog/idioma/multi-idioma') == 1)
+    {
+        $MyCategoriaBlog ->setLang($lang);
+    }
     if(empty($id))
     {
         $result = $MyCategoriaBlog->save($nombre, getFriendly($nombre),'',json_encode($permisos),$visible);
