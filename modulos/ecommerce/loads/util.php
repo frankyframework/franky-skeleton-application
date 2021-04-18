@@ -626,18 +626,18 @@ function validaCuponEcommerce($cupon)
 
 
 
-function validaPromocionEcommerce($cupon)
+function validaPromocionEcommerce()
 {
     global $MySession;
     
     $descuento = 0;
     
     $EcommercepromocionesModel             = new Ecommerce\model\EcommercepromocionesModel();
-    $EcommercecuponesEntity             = new Ecommerce\entity\EcommercepromocionesEntity();
+    $EcommercepromocionesEntity             = new Ecommerce\entity\EcommercepromocionesEntity();
     
 
-    $EcommercecuponesEntity->status(1);
-    if($EcommercepromocionesModel->getData($EcommercecuponesEntity->getArrayCopy()) ==REGISTRO_SUCCESS)
+    $EcommercepromocionesEntity->status(1);
+    if($EcommercepromocionesModel->getData($EcommercepromocionesEntity->getArrayCopy()) ==REGISTRO_SUCCESS)
     {
         
         while( $registro = $EcommercepromocionesModel->getRows()):

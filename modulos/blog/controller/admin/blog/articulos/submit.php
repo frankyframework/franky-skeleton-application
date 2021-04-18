@@ -26,6 +26,8 @@ $keywords           = $MyRequest->getRequest('keywords');
 $destacado          = $MyRequest->getRequest('destacado',0);
 $meta_titulo        = $MyRequest->getRequest('meta_titulo');
 $meta_descripcion   = $MyRequest->getRequest('meta_descripcion');
+
+$lang   = $MyRequest->getRequest('lang');
 $autortext   = $MyRequest->getRequest('autortext');
 
 $data_img   = json_decode(stripslashes($MyRequest->getRequest('data_img')),true);
@@ -121,6 +123,11 @@ else {
 
 if($error == false)
 {
+
+    if(getCoreConfig('blog/idioma/multi-idioma') == 1)
+    {
+        $MyBlog->setLang($lang);
+    }
     if(empty($id))
     {
         $result = $MyBlog->save($categoria,$titulo,  getFriendly($titulo),$autortext,$contenido,$comentarios,$MySession->GetVar('id'),$keywords,$destacado,$imagen,$imagen_portada,$visible_in_search,json_encode($permisos),$meta_titulo, $meta_descripcion);
@@ -130,7 +137,7 @@ if($error == false)
             rename($dir_blog,str_replace($MySession->GetVar('path_img_blog'),$MyBlog->getUltimoID(),$dir_blog));
 
             $contenido = str_replace($MySession->GetVar('path_img_blog'),$MyBlog->getUltimoID(),$contenido);
-            $MyBlog->edit($MyBlog->getUltimoID(),$categoria,$titulo,  getFriendly($titulo),$contenido,$comentarios,$keywords,$destacado,$imagen,$imagen_portada,$visible_in_search, json_encode($permisos),$meta_titulo, $meta_descripcion);
+            $MyBlog->edit($MyBlog->getUltimoID(),$categoria,$titulo,  getFriendly($titulo),$autortext,$contenido,$comentarios,$keywords,$destacado,$imagen,$imagen_portada,$visible_in_search, json_encode($permisos),$meta_titulo, $meta_descripcion);
 
             $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("blog_guardar_articulo_success"));
             $location =  $MyRequest->url(ADMIN_LISTA_ARTICULOS_BLOG);

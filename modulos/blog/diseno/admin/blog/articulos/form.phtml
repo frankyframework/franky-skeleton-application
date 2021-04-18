@@ -80,8 +80,10 @@ $(window).load(function(){
                      </div>
            </div>
 
-
-
+              <?php if(getCoreConfig('blog/idioma/multi-idioma') == 1): ?>
+              <?php echo $adminForm->getRow('lang'); ?>
+             <?php endif; ?>
+             
              <?php echo $adminForm->getRow('titulo'); ?>
              <?php echo $adminForm->getRow('categoria'); ?>
              <?php echo $adminForm->getRow('autortext'); ?>

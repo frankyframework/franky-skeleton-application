@@ -20,6 +20,11 @@ $amigable_context =  $MyRequest->getUrlParam("articulo");;
 $amigable_categoria_context =  $MyRequest->getUrlParam("categoria");;
 
 $MyBlog->setNivel($MySession->GetVar('nivel'));
+if(getCoreConfig('blog/idioma/multi-idioma') == 1)
+{
+    $MyBlog->setLang($_SESSION['lang'] );
+}
+
 $MyBlog->getData($amigable_context, "","","",1);
 $total			= $MyBlog->getTotal();
 

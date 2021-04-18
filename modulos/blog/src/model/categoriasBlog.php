@@ -4,6 +4,7 @@ namespace Blog\model;
 class categoriasBlog  extends \Franky\Database\Mysql\objectOperations
 {
         var $visible;
+        var $lang;
 
         public function __construct()
         {
@@ -13,9 +14,14 @@ class categoriasBlog  extends \Franky\Database\Mysql\objectOperations
 
         }
 
+        public function setLang($lang)
+        {
+          $this->lang = $lang;
+        }
+
         function getData($id='',$status='',$busca='')
         {
-            $campos = array("id","categorias_blog.nombre","categorias_blog.friendly as amigable_categoria","fecha","status","visible","permisos","imagen","imagen_portada");
+            $campos = array("id","categorias_blog.nombre","categorias_blog.friendly as amigable_categoria","fecha","status","visible","permisos","imagen","imagen_portada","lang");
 
 
             if(!empty($id))
@@ -46,7 +52,10 @@ class categoriasBlog  extends \Franky\Database\Mysql\objectOperations
                 $this->where()->addAnd('visible',$this->visible,'=');
             }
 
-          
+            if(!empty($this->lang))
+            {
+              $this->where()->addAnd("categorias_blog.lang",$this->lang,'=');
+            }
 
 
             return $this->getColeccion($campos);
@@ -65,6 +74,11 @@ class categoriasBlog  extends \Franky\Database\Mysql\objectOperations
                 "status" => "1",
             );
 
+            if(!empty($this->lang))
+            {
+              $nvoregistro['lang'] = $this->lang;
+            }
+
 
             return $this->guardarRegistro($nvoregistro);
         }
@@ -80,7 +94,11 @@ class categoriasBlog  extends \Franky\Database\Mysql\objectOperations
 
             if(!empty($imagen))
             {
-              $nvoregistro['image'] = $imgen;
+              $nvoregistro['image'] = $imagen;
+            }
+            if(!empty($this->lang))
+            {
+              $nvoregistro['lang'] = $this->lang;
             }
 
               $this->where()->addAnd('id',$id,'=');

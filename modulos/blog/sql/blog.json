@@ -117,6 +117,13 @@
                 "type":"varchar",
                 "length":255,
                 "null":1
+            },
+            {
+                "name":"lang",
+                "type":"varchar",
+                "length":5,
+                "null":0,
+                "default":1
             }
 
         ],

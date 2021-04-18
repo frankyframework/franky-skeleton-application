@@ -29,7 +29,13 @@ return array(
                       'label' => 'Tipo de paginación',
                       'data' => ['normal' => 'Normal', 'ajax' => 'Ajax'],
                       'value' => 'normal'
-                    )  
+                    ) ,
+                    array('path' => 'blog/idioma/multi-idioma',
+                      'type' => 'select',
+                      'label' => 'Habilitar multi idioma',
+                      'data' => ['1' => 'Sí', '0' => 'No'],
+                      'value' => '0'
+                    )   
    
           ),
          ),

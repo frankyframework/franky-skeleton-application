@@ -31,7 +31,10 @@ if(empty($amigable_categoria_context))
 
 
 $MyBlog->setNivel($MySession->GetVar('nivel'));
-
+if(getCoreConfig('blog/idioma/multi-idioma') == 1)
+{
+    $MyBlog->setLang($_SESSION['lang'] );
+}
 $result	 = $MyBlog->getData( '', $busca_b,$autor_b,$destacado_b,1,$amigable_categoria_context);
 
 
@@ -90,20 +93,29 @@ if($MyBlog->getTotal() > 0)
 
 if(!empty($amigable_categoria_context))
 {
-    $MyCategoriaBlog->getData($amigable_categoria_context);
-    $registro = $MyCategoriaBlog->getRows();
-
-    $registro['url'] = $MyRequest->url(BLOG_CATEGORIA,['categoria' => $registro['friendly']],true);
-    $MyMetatag->setVars($registro);
-
-    $permisos = json_decode($registro['permisos'],true);
-    if(!empty($permisos) && !$MySession->LoggedIn())
+    if(getCoreConfig('blog/idioma/multi-idioma') == 1)
     {
-        $MyRequest->redirect($MyRequest->Url(LOGIN).'?callback='.urlencode($MyRequest->url(BLOG_CATEGORIA,array("categoria" => $amigable_categoria_context))));
+        $MyCategoriaBlog->setLang($_SESSION['lang'] );
     }
-    if(!empty($permisos) && !in_array($MySession->GetVar('nivel'),$permisos))
+    if($MyCategoriaBlog->getData($amigable_categoria_context)==REGISTRO_SUCCESS)
     {
-        $MyRequest->redirect();
+        $registro = $MyCategoriaBlog->getRows();
+
+        $registro['url'] = $MyRequest->url(BLOG_CATEGORIA,['categoria' => $registro['friendly']],true);
+        $MyMetatag->setVars($registro);
+
+        $permisos = json_decode($registro['permisos'],true);
+        if(!empty($permisos) && !$MySession->LoggedIn())
+        {
+            $MyRequest->redirect($MyRequest->Url(LOGIN).'?callback='.urlencode($MyRequest->url(BLOG_CATEGORIA,array("categoria" => $amigable_categoria_context))));
+        }
+        if(!empty($permisos) && !in_array($MySession->GetVar('nivel'),$permisos))
+        {
+            $MyRequest->redirect();
+        }   
+    }
+    else{
+        $MyRequest->redirect($MyRequest->Url(BLOG));
     }
 }
 

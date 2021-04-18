@@ -7,6 +7,7 @@ class Blog  extends \Franky\Database\Mysql\objectOperations
     var $visible_in_search;
     var $nivel;
     var $is_admin;
+    var $lang;
 
     public function __construct()
       {
@@ -32,10 +33,15 @@ class Blog  extends \Franky\Database\Mysql\objectOperations
         $this->is_admin = $val;
       }
 
+      public function setLang($lang)
+      {
+        $this->lang = $lang;
+      }
+
 
         function getData($id='',$busca='',$autor='',$destacado='',$status='',$categoria="",$next="",$back ="")
         {
-            $campos = array("blog.id","blog.categoria","titulo","contenido","destacado","blog.friendly","comentarios","blog.fecha","fecha_modificado",
+            $campos = array("blog.id","blog.categoria","titulo","contenido","destacado","blog.friendly","comentarios","blog.fecha","fecha_modificado","blog.lang",
                 "blog.status","autor","keywords","meta_titulo","meta_descripcion","visible_in_search","blog.permisos","blog.imagen","blog.imagen_portada",
                 "categorias_blog.nombre as categoria_nombre","categorias_blog.friendly as amigable_categoria","categorias_blog.visible","categorias_blog.permisos"
                 ,"users.nombre as nombre_user","usuario","biografia","users.id as id_user","autortext");
@@ -111,7 +117,10 @@ class Blog  extends \Franky\Database\Mysql\objectOperations
             {
                 $this->where()->addAnd('blog.visible_in_search',$this->visible_in_search,'=');
             }
-            
+            if(!empty($this->lang))
+            {
+              $this->where()->addAnd("blog.lang",$this->lang,'=');
+            }
             if(empty($this->is_admin))
             {
 
@@ -130,6 +139,8 @@ class Blog  extends \Franky\Database\Mysql\objectOperations
                   $this->where()->concat(')');
                 }
             }
+
+            
             $this->from()->addInner('categorias_blog','blog.categoria','categorias_blog.id');
             $this->from()->addInner('users','blog.autor','users.id');
 
@@ -159,6 +170,11 @@ class Blog  extends \Franky\Database\Mysql\objectOperations
                 "meta_descripcion" => $meta_descripcion
             );
 
+            if(!empty($this->lang))
+            {
+              $nvoregistro['lang'] = $this->lang;
+            }
+
             return $this->guardarRegistro( $nvoregistro);
         }
 
@@ -178,6 +194,10 @@ class Blog  extends \Franky\Database\Mysql\objectOperations
                 "meta_titulo" => $meta_titulo,
                 "meta_descripcion" => $meta_descripcion
             );
+            if(!empty($this->lang))
+            {
+              $nvoregistro['lang'] = $this->lang;
+            }
 
             if(!empty($imagen))
             {

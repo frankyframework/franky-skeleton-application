@@ -244,5 +244,23 @@ class articulosBlogForm extends \Franky\Form\Form
 
     }
 
+    function addLang()
+    {
+        $this->add(array(
+            'name' => 'lang',
+            'type'  => 'select',
+            'label' => 'Idioma',
+            'require' => true,
+            'atributos' => array(
+                'class' => 'required'
+             ),
+            'options' =>  array(),
+
+
+        )
+    );
+    }
+
+
 }
 ?>

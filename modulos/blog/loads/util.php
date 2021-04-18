@@ -57,6 +57,12 @@ function getMenuCategoriasBlog()
     $MyCategoriaBlog = new Blog\model\categoriasBlog();
     $MyCategoriaBlog->setOrdensql("nombre ASC");
     $MyCategoriaBlog->setTampag(1000);
+
+    if(getCoreConfig('blog/idioma/multi-idioma') == 1)
+    {
+        $MyCategoriaBlog->setLang($_SESSION['lang'] );
+    }
+
     $MyCategoriaBlog->getData('',1);
     $total = $MyCategoriaBlog->getTotal();
 
@@ -94,6 +100,10 @@ function getMenuArticulosBlog($cat = "")
     $MyBlog = new Blog\model\Blog();
     $MyBlog->setOrdensql("titulo ASC");
     $MyBlog->setTampag(10);
+    if(getCoreConfig('blog/idioma/multi-idioma') == 1)
+    {
+        $MyBlog->setLang($_SESSION['lang'] );
+    }
     $MyBlog->getData('',"","","",1);
     $total = $MyBlog->getTotal();
 
@@ -175,6 +185,10 @@ function prevArticuloBlog($id){
     global $MyConfigure;
   $MyBlog = new \Blog\model\Blog();
   $blog_detalle = array();
+  if(getCoreConfig('blog/idioma/multi-idioma') == 1)
+    {
+        $MyBlog->setLang($_SESSION['lang'] );
+    }
   if($MyBlog->getData($id, "","","",1,"","",1)== REGISTRO_SUCCESS)
   {
       $registro = $MyBlog->getRows();
@@ -193,6 +207,10 @@ function nextArticuloBlog($id){
     global $MyRequest;
   $MyBlog = new \Blog\model\Blog();
   $blog_detalle = array();
+  if(getCoreConfig('blog/idioma/multi-idioma') == 1)
+    {
+        $MyBlog->setLang($_SESSION['lang'] );
+    }
   if($MyBlog->getData($id, "","","",1,"",1)== REGISTRO_SUCCESS)
   {
       $registro = $MyBlog->getRows();
