@@ -215,7 +215,7 @@ header {
                     &._nav_catalog {
                         margin-top: 20px;
                         ul {
-                            li {
+                            li {                                
                                 @media @small {
                                     margin: 0;
                                     padding: 0;
@@ -226,12 +226,7 @@ header {
                                     @media @small {
                                         width: 100%;
                                         box-sizing: border-box;
-                                        &:after {
-                                            font-family: @ico_font;
-                                            content: "\e82e";
-                                            position: absolute;
-                                            right: 10px;
-                                        }
+                                        
                                     }
                                     &:hover {
                                         @media @small {
@@ -267,6 +262,36 @@ header {
                                                     }
                                                 }
                                             }
+                                        }
+                                    }
+                                }
+                                &.parent_menu {
+                                    a {
+                                        &:after {
+                                            font-family: @ico_font;
+                                            content: "\e82e";
+                                            position: absolute;
+                                            right: 10px;
+                                        }
+                                    }
+                                }
+                                &.parent_menu {
+                                    &.active {
+                                        a {
+                                            &:after {
+                                               
+                                                content: "\e82f";
+                                            }
+                                        }
+                                    }
+                                    ul {
+                                        li {
+                                            a {
+                                                &:after {
+                                                
+                                                    content: "\e833" !important;
+                                                }
+                                            }   
                                         }
                                     }
                                 }
