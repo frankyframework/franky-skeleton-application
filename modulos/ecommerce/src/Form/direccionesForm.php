@@ -249,7 +249,7 @@ class direccionesForm extends \Franky\Form\Form
     {
          $this->add(array(
                 'name' => 'entre_calle1',
-                'label' => 'Entre calle:',
+                'label' => 'Entre calles y referencias:',
                 'type'  => 'text',
                 'required'  => true,
                 'atributos' => array(
@@ -262,20 +262,7 @@ class direccionesForm extends \Franky\Form\Form
             )
         );
 
-        $this->add(array(
-                'name' => 'entre_calle2',
-                'label' => 'y calle:',
-                'type'  => 'text',
-                'required'  => true,
-                'atributos' => array(
-                  'class' => 'required',
-                    'maxlength' => 250
-                 ),
-                'label_atributos' => array(
-                    'class'       => 'desc_form_obligatorio'
-                 )
-            )
-        );
+     
     }
     public function addInstrucciones()
     {

@@ -340,13 +340,20 @@ function getCarrito($descuentos = 0)
     $productos_comprados['subtotal'] = $subtotal;
     $productos_comprados['iva_total'] = $iva_total;
     $productos_comprados['envio_requerido'] = $envio_requerido;
-
+    $productos_comprados['descuento'] = 0;
     
     $cupon = $MySession->GetVar('cupon_checkout');
 
     if($cupon  != false){
-        $productos_comprados['descuento'] = $cupon['descuento'];
+        $productos_comprados['descuento'] += $cupon['descuento'];
 
+    }
+
+
+    $promocion = $MySession->GetVar('promocion_checkout');
+
+    if(isset($promocion['descuento'])){
+        $productos_comprados['descuento'] += $promocion['descuento'];
     }
 
 
@@ -631,13 +638,17 @@ function validaPromocionEcommerce()
     global $MySession;
     
     $descuento = 0;
-    
+    $data =[];
     $EcommercepromocionesModel             = new Ecommerce\model\EcommercepromocionesModel();
     $EcommercepromocionesEntity             = new Ecommerce\entity\EcommercepromocionesEntity();
     
 
     $EcommercepromocionesEntity->status(1);
-    if($EcommercepromocionesModel->getData($EcommercepromocionesEntity->getArrayCopy()) ==REGISTRO_SUCCESS)
+
+    $cupon = $MySession->GetVar('cupon_checkout');
+  
+
+    if($EcommercepromocionesModel->getData($EcommercepromocionesEntity->getArrayCopy()) ==REGISTRO_SUCCESS && $cupon == false)
     {
         
         while( $registro = $EcommercepromocionesModel->getRows()):
@@ -659,7 +670,6 @@ function validaPromocionEcommerce()
                 }
             }
             
-        
             
             $EcommercepromocionesclassModel = new Ecommerce\model\EcommercepromocionesclassModel();
             $EcommercepromocionesclassEntity = new Ecommerce\entity\EcommercepromocionesclassEntity();
@@ -675,20 +685,16 @@ function validaPromocionEcommerce()
             $carrito = getCarrito();
             $class->setCarrito($carrito);
             
-            $descuento = $class->getDiscount();
+           $_descuento = $class->getDiscount();
 
 
-            if($descuento == false)
+            if($_descuento > $descuento)
             {
-                $respuesta['error'] =true;
-                
-                return $respuesta;
+                $descuento = $_descuento;
+                 $data = ['id' => $id_promo,'promo' => $registro['titulo'], 'descuento' => $descuento];
             }
-            
-            
-            $data['promos'][] = ['id' => $id_promo, 'descuento' => $descuento];
         endwhile;
-        $data['descuento'] = $descuento;
+        
         $MySession->SetVar('promocion_checkout',$data);
         
         $respuesta['error'] = false;
@@ -696,6 +702,7 @@ function validaPromocionEcommerce()
         
     }
     else{
+        $MySession->UnsetVar('promocion_checkout');
         $respuesta['error'] =true;
     }
     return $respuesta;

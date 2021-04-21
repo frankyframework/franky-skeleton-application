@@ -158,7 +158,6 @@ insert into `templates_email` ( `nombre`, `id_transaccional`, `Asunto`, `destina
     `municipio` varchar(255) NOT NULL,
     `colonia` varchar(255) NOT NULL,
     `entre_calle1` varchar(255) DEFAULT NULL,
-    `entre_calle2` varchar(255) DEFAULT NULL,
     `instrucciones` text DEFAULT NULL,
     `conekta` varchar(50) DEFAULT NULL,
     PRIMARY KEY (`id`),

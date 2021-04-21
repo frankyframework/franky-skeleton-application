@@ -21,7 +21,6 @@ namespace Ecommerce\entity;
     private $municipio;
     private $colonia;
     private $entre_calle1;
-    private $entre_calle2;
     private $instrucciones;
 
     public function __construct($data = null)
@@ -50,7 +49,6 @@ namespace Ecommerce\entity;
         $this->municipio        = (isset($data['municipio']))      ? $data['municipio']       : null;
         $this->colonia          = (isset($data['colonia']))      ? $data['colonia']       : null;
         $this->entre_calle1     = (isset($data['entre_calle1']))      ? $data['entre_calle1']       : null;
-        $this->entre_calle2     = (isset($data['entre_calle2']))      ? $data['entre_calle2']       : null;
         $this->instrucciones    = (isset($data['instrucciones']))      ? $data['instrucciones']       : null;
 
         
@@ -75,7 +73,6 @@ namespace Ecommerce\entity;
         _ecommerce("Municipio") => array("valor" => $this->municipio,"required"),
         _ecommerce("Colonia") => array("valor" => $this->colonia,"required"),
         _ecommerce("Entre calle") => array("valor" => $this->entre_calle1,"required"),
-        _ecommerce("Entre calle") => array("valor" => $this->entre_calle2,"required"),
         _ecommerce("Intrucciones especificas") => array("valor" => $this->instrucciones,"length"=> array("max" => "255")),
         );
     }
@@ -160,10 +157,7 @@ namespace Ecommerce\entity;
         return $this->entre_calle1;
     }
     
-    public function getEntre_calle2()
-    {
-        return $this->entre_calle2;
-    }
+  
     
     public function getInstrucciones()
     {
@@ -253,10 +247,6 @@ namespace Ecommerce\entity;
         $this->entre_calle1 = $entre_calle1;
     }
     
-    public function setEntre_calle2($entre_calle2)
-    {
-        $this->entre_calle2 =  $entre_calle2;
-    }
     
     public function setInstrucciones($instrucciones)
     {

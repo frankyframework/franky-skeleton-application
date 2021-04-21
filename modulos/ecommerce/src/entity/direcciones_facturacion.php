@@ -72,8 +72,7 @@ namespace Ecommerce\entity;
         _ecommerce("Ciudad") => array("valor" => $this->ciudad,"required"),
         _ecommerce("Municipio") => array("valor" => $this->municipio,"required"),
         _ecommerce("Colonia") => array("valor" => $this->colonia,"required"),
-        _ecommerce("Entre calles") => array("valor" => $this->entre_calle1,"required"),
-        _ecommerce("Entre calles") => array("valor" => $this->entre_calle2,"required")
+        _ecommerce("Entre calles") => array("valor" => $this->entre_calle1,"required")
         );
     }
 

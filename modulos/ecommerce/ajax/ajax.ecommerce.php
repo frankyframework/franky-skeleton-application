@@ -181,10 +181,12 @@ function eliminarProductoCarrito($id)
                 if($cupon != false)
                 {
                     $valida_cupo = validaCuponEcommerce($cupon['cupon']);
+                    
                     if($valida_cupo['error'] == true){
                         ecommerce_removeCupon();
                     }
                 }
+                validaPromocionEcommerce();
         }
         else
         {
@@ -399,11 +401,12 @@ function setQTYProductoCarrido($id,$qty)
                     if($cupon != false)
                     {
                         $valida_cupo = validaCuponEcommerce($cupon['cupon']);
+                        
                         if($valida_cupo['error'] == true){
                             ecommerce_removeCupon();
                         }
                     }
-
+                    validaPromocionEcommerce();
                 }
                 else
                 {
@@ -962,6 +965,7 @@ function ecommerce_setCupon($cupon)
     $respuesta = ['html' => ''];
     
     $valida_cupo = validaCuponEcommerce($cupon);
+    validaPromocionEcommerce();
     if($valida_cupo['error'] == true){
         $respuesta['error'] =true;
         $respuesta['message'] = $MyMessageAlert->Message($valida_cupo['message']);
@@ -989,10 +993,12 @@ function getInfoTotalsCheckout()
     if($cupon != false)
     {
         $valida_cupo = validaCuponEcommerce($cupon['cupon']);
+        
         if($valida_cupo['error'] == true){
             ecommerce_removeCupon();
         }
     }
+    validaPromocionEcommerce();
     $parse_precio   =  getCarrito();
     $respuesta["total"] =$parse_precio['gran_total'];
     $respuesta["subtotal"] = getFormatoPrecio($parse_precio['subtotal']);
@@ -1018,10 +1024,12 @@ function getInfoTotalsCheckout2()
     if($cupon != false)
     {
         $valida_cupo = validaCuponEcommerce($cupon['cupon']);
+        
         if($valida_cupo['error'] == true){
             ecommerce_removeCupon();
         }
     }
+    validaPromocionEcommerce();
     $data = $MySession->GetVar('checkout');
     
     $productos_comprados = getCarrito();

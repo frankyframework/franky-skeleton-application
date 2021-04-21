@@ -20,7 +20,7 @@ class EcommercepromocionesModel  extends \Franky\Database\Mysql\objectOperations
     function getData($data = array())
     {
         $data = $this->optimizeEntity($data);
-        $campos = ["ecommerce_promociones.id","titulo","id_promocion","fecha_inicio","fecha_fin","status","data","ecommerce_cupones.createdAt",
+        $campos = ["ecommerce_promociones.id","titulo","id_promocion","fecha_inicio","fecha_fin","status","data","ecommerce_promociones.createdAt",
             "ecommerce_promociones_class.nombre",
             "ecommerce_promociones_class.dataClass"];
         if(!empty($data))
