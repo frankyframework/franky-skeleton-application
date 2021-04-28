@@ -8,7 +8,7 @@
                 <?php echo $MyFiltrosForm->getAllRow(); ?>
                 <?php echo $MyFiltrosForm->endTag(); ?>
                 <?php if(!empty($frm_constante_link)): ?>
-                  <a href="<?php echo $MyRequest->url($frm_constante_link); ?>" class="_btn_new">Nuevo</a>
+                  <a href="<?php echo $MyRequest->url($frm_constante_link); ?>" class="_btn_new"><?= __('Nuevo') ?></a>
                 <?php endif; ?>
             </div>
         </div>

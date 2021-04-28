@@ -96,8 +96,11 @@ msgstr "Birthday"
 msgid  "Tu email"
 msgstr "Your email"
 
-msgid  "La página que buscas no se no existe o ha cambiado de lugar, da"
-msgstr "The page that you try to find dosen't exist"
+msgid  "La página que buscas no se no existe o ha cambiado de lugar, da <a href=\"/\">click</a> para visitar nuestro home."
+msgstr "The page that you try to find dosen't exist <a href=\"/\">click here</a> para visitar nuestro home."
 
-msgid  "para visitar nuestro home."
-msgstr "here to visit our home page."
+msgid  "Página 404"
+msgstr "Page 404"
+
+msgid  "Nuevo"
+msgstr "New"

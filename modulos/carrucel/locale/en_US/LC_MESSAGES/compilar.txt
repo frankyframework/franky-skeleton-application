@@ -1,0 +1,1 @@
+msgfmt carrucel.po --output-file=carrucel.mo

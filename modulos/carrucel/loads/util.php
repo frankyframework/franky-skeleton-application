@@ -1,6 +1,6 @@
 <?php
 
-function _gcarrucel($txt)
+function _carrusel($txt)
 {
     return dgettext("carrucel",$txt);
 }

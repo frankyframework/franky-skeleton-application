@@ -50,9 +50,9 @@ if($CarrucelcarrucelesModel->getTotal() > 0)
 
 
 //$MyFrankyMonster->setPHPFile(getVista("admin/template/grid.phtml"));
-$title_grid = "Carruceles";
+$title_grid = _carrusel("Carruceles");
 $class_grid = "cont_sliders";
-$error_grid = "No hay carruceles registrados";
+$error_grid = _carrusel("No hay carruceles registrados");
 $deleteFunction = "carrucel_DeleteCarrucel";
 $frm_constante_link = ADMIN_CARRUCEL_FORM;
 $titulo_columnas_grid = array("createdAt" => "Fecha","nombre" => "Nombre","code" => "Code");
