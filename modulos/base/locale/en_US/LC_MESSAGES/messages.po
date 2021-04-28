@@ -95,3 +95,9 @@ msgstr "Birthday"
 
 msgid  "Tu email"
 msgstr "Your email"
+
+msgid  "La página que buscas no se no existe o ha cambiado de lugar, da"
+msgstr "The page that you try to find dosen't exist"
+
+msgid  "para visitar nuestro home."
+msgstr "here to visit our home page."
