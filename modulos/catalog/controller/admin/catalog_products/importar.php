@@ -45,7 +45,7 @@ if ($handle->uploaded)
                         foreach($val as $_key => $_val){
 
 
-                            $data_productos[$key-1][$atributos_xls[$_key]] = utf8_encode($_val); 
+                            $data_productos[$key-1][$atributos_xls[$_key]] = ($_val); 
                         }
                         $data_productos[$key-1]['thisClass'] = $thisClass;
                         $data_productos[$key-1]['id'] = $key;
