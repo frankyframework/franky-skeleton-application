@@ -1,2 +1,3 @@
-msgfmt messages.po --output-file=messages.mo
-
+msgfmt blog.po --output-file=blog.mo
+Variables: _blog("id")
+Cadenas: <?= _blog('id') ?>
