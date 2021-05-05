@@ -1,0 +1,3 @@
+msgfmt galeria.po --output-file=galeria.mo
+Variables: _galeria("id")
+Cadenas: <?= _galeria('id') ?>

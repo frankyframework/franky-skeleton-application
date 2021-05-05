@@ -1,1 +1,3 @@
 msgfmt carrucel.po --output-file=carrucel.mo
+Variables: _carrusel("id")
+Cadenas: <?= _carrusel('id') ?>

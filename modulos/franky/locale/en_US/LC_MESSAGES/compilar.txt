@@ -1,0 +1,3 @@
+msgfmt franky.po --output-file=franky.mo
+Variables: _franky("id")
+Cadenas: <?= _franky('id') ?>

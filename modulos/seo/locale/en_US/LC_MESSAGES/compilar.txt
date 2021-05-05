@@ -1,0 +1,3 @@
+msgfmt seo.po --output-file=seo.mo
+Variables: _seo("id")
+Cadenas: <?= _seo('id') ?>
