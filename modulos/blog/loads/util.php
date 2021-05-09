@@ -13,7 +13,7 @@ function makeHTMLCategoriasBlog( $type="interface")
 
         while($registro = $MyCategoriaBlog->getRows())
         {
-            $categorias[($type == "interface" ? $registro["friendly"] : $registro['id'])] = $registro["nombre"];
+            $categorias[($type == "interface" ? $registro["amigable_categoria"] : $registro['id'])] = $registro["nombre"];
 	}
     }
     return $categorias;
@@ -223,5 +223,54 @@ function nextArticuloBlog($id){
 
   return $blog_detalle;
 
+}
+
+
+
+function BlogBreadcrumbs($name =null)
+{
+    global $MyRequest;
+    global $MyFrankyMonster;
+    global $MySession;
+    $link = "";
+    $html = '<div class="w-xxxx-12 cont_breadcrumb">
+    <div class="content">
+    <ul class="breadcrumb">';
+
+    $uiCommand =  $MyFrankyMonster->getUiCommand($MyFrankyMonster->getSeccion(BLOG));
+
+    $html .='<li class="nivel_2"><a href="'.$MyRequest->url(BLOG).'" data-transition="back">'.$uiCommand[8].'</a></li>';
+
+    $categorias = makeHTMLCategoriasBlog();
+
+    if($MyFrankyMonster->MySeccion() == BLOG_CATEGORIA)
+    {
+        $categoria      = $MyRequest->getUrlParam('categoria');
+        
+        $html .='<li class="nivel_2"><a href="'.$MyRequest->url(BLOG_CATEGORIA,['categoria' => $categoria]).'" data-transition="back">'.$categorias[$categoria].'</a></li>';
+       
+        
+    }
+    if($MyFrankyMonster->MySeccion() == BLOG_DETALLE)
+    {
+    
+        $categoria      = $MyRequest->getUrlParam('categoria');
+        
+        $friendly      = $MyRequest->getUrlParam('articulo');
+
+    
+        $html .= '<li class="nivel_2"><a href="'.$MyRequest->url(BLOG_CATEGORIA,['categoria' => $categoria]).'" data-transition="back">'.$categorias[$categoria].'</a> </li>
+        <li class="nivel_3"><a href="'.$MyRequest->url(BLOG_DETALLE,['categoria' => $categoria,'articulo' => $friendly]).'" data-transition="back">'.$name.'</a> </li>';
+
+    }
+
+
+    
+    $html .= '  </ul>
+    </div>
+</div>';
+
+   
+    return $html;
 }
 ?>
