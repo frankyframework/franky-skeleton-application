@@ -123,7 +123,7 @@
                 "type":"varchar",
                 "length":5,
                 "null":0,
-                "default":1
+                "default":"es_MX"
             }
 
         ],
