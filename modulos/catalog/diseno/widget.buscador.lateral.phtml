@@ -30,7 +30,7 @@ else{
 
 
 
-if(!is_array($categoria))
+if(!empty($categoria) && !is_array($categoria))
 {
   $categoria = [$categoria];
 }

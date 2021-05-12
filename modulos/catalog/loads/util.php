@@ -274,7 +274,7 @@ function catalog_getPriceMaxMinProduct()
     if($CatalogproductsModel->getData($CatalogproductsEntity->getArrayCopy()) == REGISTRO_SUCCESS)
     {
             $registro = $CatalogproductsModel->getRows();
-            $precio[1] = $registro['price'];
+            $precio[1] = ($registro['price'] > 0 ? $registro['price'] : 0);
 
     }
 
