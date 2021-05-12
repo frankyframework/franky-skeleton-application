@@ -1,7 +1,39 @@
 <?php
+$data = $MyRequest->getRequest();
+if($MyFrankyMonster->MySeccion() == CATALOG_SEARCH_CATEGORY)
+{
+  
+  $categoria      = $MyRequest->getUrlParam('friendly');
+  $subcategoria   = $MyRequest->getRequest('subcategoria');
+  $BuscadorLateralForm->setAtributo('action',$MyRequest->url(CATALOG_SEARCH_CATEGORY,['friendly' => $categoria]));
 
-$categoria      = $MyRequest->getUrlParam('categoria',$MyRequest->getRequest('categoria'));
-$subcategoria      = $MyRequest->getUrlParam('subcategoria',$MyRequest->getRequest('subcategoria'));
+}
+else if($MyFrankyMonster->MySeccion() == CATALOG_SEARCH_SUBCATEGORY)
+{
+   
+  $categoria      = $MyRequest->getUrlParam('categoria');
+  $subcategoria      = $MyRequest->getUrlParam('friendly');
+  $BuscadorLateralForm->setAtributo('action',$MyRequest->url(CATALOG_SEARCH_SUBCATEGORY,['categoria' => $categoria,'friendly' => $subcategoria]));
+}
+else{
+  $categoria      = $MyRequest->getRequest('categoria');
+  $subcategoria      = $MyRequest->getRequest('subcategoria');
+
+  if(!empty($categoria)):
+    $data['categoria[]'] = (is_array($categoria) ? $categoria: [$categoria]);
+  endif;
+
+  if(!empty($subcategoria)):
+    $data['subcategoria[]'] = (is_array($subcategoria) ? $subcategoria: [$subcategoria]);
+  endif;
+}
+
+
+
+if(!is_array($categoria))
+{
+  $categoria = [$categoria];
+}
 
 $precio	= $MyRequest->getRequest('precio');
 $precio_rango = catalog_getPriceMaxMinProduct();
@@ -15,14 +47,8 @@ if(!empty($precio))
     }
 }
 
-$data = $MyRequest->getRequest();
-if(!empty($categoria)):
-   $data['categoria[]'] = (is_array($categoria) ? $categoria: [$categoria]);
-endif;
 
-if(!empty($subcategoria)):
-  $data['subcategoria[]'] = (is_array($subcategoria) ? $subcategoria: [$subcategoria]);
-endif;
+
 
 
 
@@ -40,7 +66,7 @@ endif;
           <span class="w-xxxx-12 w-xxx-12 w-xx-12 w-x-12" id="slider-range"></span>
         </li>
 
-        <?php if(!in_array($MyFrankyMonster->MySeccion(),[CATALOG_SEARCH_CATEGORY,CATALOG_SEARCH_SUBCATEGORY])): ?>
+
        <?php
           $cat_in_search = [];
           $cat_id_in_search = [];
@@ -60,10 +86,16 @@ endif;
               endif; 
             endforeach;
           endif; ?>
-          <li class="area_categoria"><span class="title_filter">Categorías</span>
+          <li class="area_categoria">
+          <?php if(!in_array($MyFrankyMonster->MySeccion(),[CATALOG_SEARCH_CATEGORY,CATALOG_SEARCH_SUBCATEGORY])): ?>
+          <span class="title_filter">Categorías</span>
+          
+         
+         
           <?php  echo $BuscadorLateralForm->get("categoria[]"); ?>
           </li>
-              <?php if(!empty($categoria)) :?>
+          <?php endif; ?>
+          <?php if(!empty($categoria) && !in_array($MyFrankyMonster->MySeccion(),[CATALOG_SEARCH_SUBCATEGORY])) :?>
               <li class="area_subcategoria">
                 <span class="title_filter">Subcategorías</span>
                 <?php if(!empty($cat_id_in_search)): ?>
@@ -86,8 +118,8 @@ endif;
                 </ul>
                 <?php endif; ?>
               </li>
-              <?php endif; ?>
-        <?php endif; ?>
+          <?php endif; ?>
+        
 
      
     </ul>
@@ -99,7 +131,7 @@ endif;
    var ejecutaBusqueda = function(){
       $.ajax({
                        type: 'GET',
-                       url: "<?php echo $MyRequest->url($MyFrankyMonster->MySeccion()); ?>",
+                       url: $("form[name=buscadorLateral]").attr('action'),
                        data: $("form[name=buscadorLateral]").serialize(),
                        cache: false,
                        beforeSend: function(){

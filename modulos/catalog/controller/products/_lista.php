@@ -21,6 +21,7 @@ $image_category = '';
 if($MyFrankyMonster->MySeccion() == CATALOG_SEARCH_CATEGORY)
 {
     $categoria      = $MyRequest->getUrlParam('friendly',$MyRequest->getRequest('categoria'));
+    $subcategoria = $MyRequest->getRequest('subcategoria');
     $image_category = getImageCategorys($categoria);   
 }
 elseif($MyFrankyMonster->MySeccion() == CATALOG_SEARCH_SUBCATEGORY)
