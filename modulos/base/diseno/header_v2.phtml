@@ -1,0 +1,47 @@
+<div class="w-xxxx-12 content_header">
+    <div class="content">
+        <a class="_brand" href="<?php echo $MyRequest->url(HOME); ?>">
+            <?php echo makeHTMLImg(getImg("logo.png"),"","","","class=''"); ?>
+        </a>
+        <div class="cont_nav_movil">
+            <ul class="hamburguer">
+                <li class="_one"></li>
+                <li class="_two"></li>
+                <li class="_three"></li>
+            </ul>
+        </div>
+        <ul class="top_links">
+                <li class="_languaje">
+                    <ul>
+                        <?php if(!empty(getCoreConfig('base/theme/langs'))): ?>
+                        <?php foreach(getCoreConfig('base/theme/langs') as $key_lang): ?>
+                        <?php if($_SESSION["lang"] != $key_lang): ?>
+                        <li class="first">
+                            <a
+                                href="/lang.php?lang=<?=$key_lang?>&amp;callback=<?php echo $callbacks_idioma[$key_lang]; ?>"><?= strtoupper(substr($key_lang,0,2))?></a>
+                        </li><?php endif; ?>
+                        <?php endforeach; ?>
+                        <?php endif; ?>
+                    </ul>
+                </li>
+                <?php echo render( "widget_login.phtml"); ?>
+        </ul>
+        <nav class="menu_web">
+            <ul class="_nav_menu">
+                <li class="_menu_section">
+                <ul>
+                    <li>
+                        <a href="<?=$MyRequest->url(CONTACTANOS)?>">Empresa</a>
+                        <ul>
+                            <li><a href="<?=$MyRequest->url(CONTACTANOS)?>">Quiénes somos</a></li>
+                            <li><a href="<?=$MyRequest->url(CONTACTANOS)?>">Contáctanos</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                </li>
+                <li class="_search_bar"></li>
+            </ul>
+        </nav>
+
+    </div>
+</div>
