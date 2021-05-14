@@ -50,8 +50,7 @@
             },
             {
                 "name":"price",
-                "type":"varchar",
-                "length":15,
+                "type":"float",
                 "null":1
                 
             },
