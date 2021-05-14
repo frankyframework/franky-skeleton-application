@@ -1,0 +1,75 @@
+<div class="w-xxxx-12">
+
+		<div class="w-xxxx-12 footer_1">
+			<div class="content">
+				<div class="w-xxxx-6">
+                    <div class="w-xxxx-8">
+                        <h3>SUSCRIBETE AL BOLETÍN</h3>
+                        <?=render('widgets/newsletter.phtml')?>
+                        <p>Al inscribirte al newsletter aceptas nuestras <a href="/condiciones-de-uso/">condiciones de uso.</a></p>
+                    </div>
+					<div class="w-xxxx-4">
+						<h3>Empresa</h3>
+						<ul>
+							<li><a href="#">Quienes somos</a></li>
+							<li><a href="#">Servicios</a></li>
+							<li><a href="#">FAQS</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="w-xxxx-6">
+					<?php if(getCoreConfig('base/empresa/contacto')): ?>
+					<div class="w-xxxx-7">
+						<h3>Medios de contacto</h3>
+						<ul class="no_bullet">
+							<li><p><strong><?=getCoreConfig('base/empresa/ciudad')?>:</strong>
+								<a href="javascript:void(0)" class='tel1'>Tel. <?=getCoreConfig('base/empresa/telefono')?></a></p></li>
+							<li><p><?=getCoreConfig('base/empresa/calle')?> #<?=getCoreConfig('base/empresa/numero')?> <br/>Col. <?=getCoreConfig('base/empresa/colonia')?>, c.p. <?=getCoreConfig('base/empresa/cp')?><br/><?=getCoreConfig('base/empresa/municipio')?>, <?=getCoreConfig('base/empresa/pais')?></p></li>
+							<!-- <li><p><a href="mailto:<?=getCoreConfig('base/empresa/email')?>"><?=getCoreConfig('base/empresa/email')?></a></p></li> -->
+						</ul>
+					</div>
+					<?php endif; ?>
+					<?php if(getCoreConfig('base/empresa/redes')): ?>
+					<div class="w-xxxx-5">
+						<h3>Síguenos</h3>
+						<ul class="no_bullet">
+						<?php if(getCoreConfig('base/empresa/facebook')): ?>
+							<li><a href="<?=getCoreConfig('base/empresa/facebook')?>"><i class="icon icon-facebook"></i>  Facebook</a></li>
+						<?php endif; ?>
+              			<?php if(getCoreConfig('base/empresa/twitter')): ?>
+							<li><a href="<?=getCoreConfig('base/empresa/twitter')?>"><i class="icon icon-twitter"></i>  Twitter</a></li>
+						<?php endif; ?>
+						<?php if(getCoreConfig('base/empresa/instagram')): ?>
+							<li><a href="<?=getCoreConfig('base/empresa/instagram')?>"><i class="icon icon-instagram"></i>  Instagram</a></li>
+						<?php endif; ?>
+						</ul>
+					</div>
+					<?php endif; ?>
+				</div>
+			</div>
+		</div>
+		<div class="w-xxxx-12 footer_2">
+			<div class="content">
+				<div class="w-xxxx-12 align_right cont_legales">
+					<a href="/condiciones-de-uso/">Condiciones de uso</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/aviso-de-privacidad/">Aviso de privacidad</a>
+				</div>
+			</div>
+		</div>
+	<div class="w-xxxx-12">
+		<div class="content">
+			<div class="_footer_security_seal">
+				<div class="_ssl">
+					<strong>Sitio seguro</strong>
+					<span><?php echo makeHTMLImg(getImg('lets_encrypt.png'),"","","class='image_100'",""); ?></span>
+				</div>
+				<div class="_payment">
+					<strong>Multiples métodos de pago</strong>
+					<span><?php echo makeHTMLImg(getImg('metodos_de_pagos.png'),"","","class='image_100'",""); ?></span>
+				</div>
+				<div class="_cloud">
+					<span><?php echo makeHTMLImg(getImg('logo_cloud.png'),"","","class='image_100'",""); ?></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

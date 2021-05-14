@@ -1,7 +1,7 @@
 
 /*   Footer  */
 footer {
-    font-size: 0.9em;
+    font-size: 1rem;
     .footer_wrapper {
         background: darken(@theme_color, 30);
         margin-top: 32px;
@@ -10,6 +10,29 @@ footer {
         .footer_2 {
             background: darken(@theme_color, 20);
             padding: 16px 0;
+        }
+        .cont_news {
+            form {
+                float: none;
+                width: calc(~"100%" - 20px);
+                margin-right: 20px;
+            }
+            .cont_input_button_newsletter {
+                position: relative;
+                button {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    box-sizing: border-box;
+                    height: 40px;
+                    margin: 0;
+                    .radius(0 6px 6px 0);
+                }
+                input {
+                    box-sizing: border-box;
+                    height: 40px;
+                }
+            }
         }
         ._footer_security_seal {
             .flex-display;
