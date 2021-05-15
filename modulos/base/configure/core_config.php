@@ -32,7 +32,14 @@ return array(
                               'value' => 'es_MX'
                             ),
 
-
+                          array('path' => 'base/theme/theme',
+                            'type' => 'select',
+                            'label' => 'Tema',
+                              'validation' => array('required' => true),
+                            'data' => ['default' => 'Default','theme1' => 'Tema 1'],
+                              'value' => 'default'
+                            )
+                          
           )
   ),
   'empresa' => array(
