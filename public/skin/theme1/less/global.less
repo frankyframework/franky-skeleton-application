@@ -1,0 +1,320 @@
+html {
+    font-size: 62.5%;
+}
+body {
+    font-family: @font_gral;
+    background: @white;
+    margin: 0;
+    padding: 0;
+    color: @black;
+    .text-smoot;
+}
+body.active_nav {
+    overflow: hidden !important;
+}
+* {
+    outline: none;
+}
+:focus {
+    outline: none;
+}
+img {
+    border: none;
+}
+h1 {
+    font-size: @font_size_txt*2;
+    text-align: left;
+    color: @black;
+    margin: 10px 0;
+}
+h2 {
+    font-size: @font_size_txt*1.5;
+    text-align: left;
+    color: lighten(@black, 20);
+    margin: 10px 0;
+}
+h3,
+h4,
+h5,
+h6 {
+    font-size: @font_size_txt;
+    color: lighten(@black, 20);
+    text-align: left;
+    margin: 10px 0;
+}
+p {
+    font-size: @font_size_txt;
+    text-align: left;
+    margin: 5px 0;
+}
+a {
+    color: #336699;
+    text-decoration: underline;
+    &:hover {
+        color: #000000;
+        text-decoration: underline;
+    }
+}
+.clear {
+    clear: both;
+}
+
+/* ****** Estilos Botones ******** */
+.btn.btn-text,
+.btn.btn-text,
+a.btn.btn-text,
+a.btn.btn-text,
+button.btn.btn-text,
+button.btn.btn-text,
+input.btn.btn-text,
+input.btn.btn-text {
+    ._btn_rules;
+}
+._btn._btn-text:hover,
+.btn.btn-text:hover,
+a:hover._btn._btn-text,
+a:hover.btn.btn-text,
+button:hover._btn._btn-text,
+button:hover.btn.btn-text,
+input:hover._btn._btn-text,
+input:hover.btn.btn-text {
+    ._btn_rules_hover;
+}
+
+._btn._btn-default,
+.btn.btn-default,
+a._btn._btn-default,
+a.btn.btn-default,
+button._btn._btn-default,
+button.btn.btn-default {
+    ._btn_secondary_rules;
+}
+._btn._btn-primary,
+.btn.btn-primary,
+a._btn._btn-primary,
+a.btn.btn-primary,
+button._btn._btn-primary,
+button.btn.btn-primary,
+input._btn._btn-primary,
+input.btn.btn-primary {
+    ._btn_primary_rules;
+}
+._btn._btn-default:hover,
+._btn._btn-primary:hover,
+.btn.btn-default:hover,
+.btn.btn-primary:hover,
+a:hover._btn._btn-default,
+a:hover._btn._btn-primary,
+a:hover.btn.btn-default,
+a:hover.btn.btn-primary,
+button:hover._btn._btn-default,
+button:hover._btn._btn-primary,
+button:hover.btn.btn-default,
+button:hover.btn.btn-primary,
+input:hover._btn._btn-default,
+input:hover._btn._btn-primary,
+input:hover.btn.btn-default,
+input:hover.btn.btn-primary {
+    ._btn_primary_rules_hover;
+}
+
+//// Botones (updateted)
+a,
+button,
+input,
+label {
+    &._btn {
+        ._btn_rules;
+        &:hover {
+            ._btn_rules_hover;
+        }
+
+        &._primary {
+            ._btn_primary_rules;
+            &:hover {
+                ._btn_primary_rules_hover;
+            }
+        }
+        &._secondary {
+            ._btn_secondary_rules;
+            &:hover {
+                ._btn_secondary_rules_hover;
+            }
+        }
+    }
+}
+
+._btn_rules {
+    float: none;
+    display: inline-block;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 5px 20px;
+    margin: 0 5px;
+    box-sizing: border-box;
+    line-height: 32px;
+    font-size: 1.4rem;
+    .aparience-reset;
+    .radius;
+}
+._btn_rules_hover {
+    text-decoration: none;
+}
+._btn_primary_rules {
+    background-color: @enfasis_color;
+    color: @white;
+    border: 1px solid @enfasis_color;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+._btn_primary_rules_hover {
+    background: darken(@enfasis_color,15);
+    color: @white !important;
+    border: 1px solid darken(@enfasis_color,15);
+}
+._btn_secondary_rules {
+    background: @white;
+    color: @theme_color;
+    border: 1px solid @theme_color;
+    padding: 1px 30px;
+    .radius(4px);
+}
+._btn_secondary_rules_hover {
+    background-color: @theme_color;
+    color: @white;
+}
+
+ul.gral,
+ul {
+    list-style: none;
+    margin: 8px 0 8px 20px;
+    padding: 0;
+    font-size: 1.4rem;
+}
+ul.gral li {
+    margin: 2px 0;
+    padding: 0 0 0 10px;
+}
+ul.gral li p {
+    padding: 0;
+    margin: 0;
+    text-indent: 0;
+}
+ol.gral {
+    list-style: decimal;
+    margin: 8px 0 8px 40px;
+    padding: 0;
+}
+ol.gral li {
+    margin: 2px 0;
+    padding: 0;
+}
+ol.gral li p {
+    padding: 0;
+    margin: 0;
+    text-indent: 0;
+}
+
+#up {
+    position: fixed;
+    bottom: 30px;
+    right: 5px;
+    z-index: 99;
+}
+#up span {
+    width: 60px;
+    height: 60px;
+    display: block;
+    background: url("/skin/default/images/up_arrow.png") no-repeat center center;
+}
+
+.margin_top {
+    margin-top: 10px !important;
+}
+.margin_bottom {
+    margin-bottom: 10px !important;
+}
+.margin_top_bottom {
+    margin-bottom: 10px !important;
+    margin-top: 10px !important;
+}
+.margin_left_right {
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+}
+.margin_left {
+    margin-left: 10px !important;
+}
+.margin_right {
+    margin-right: 10px !important;
+}
+
+object {
+    pointer-events: none;
+}
+
+// Alertas
+
+.alert-variation(@names; @notificationColors; @index) when (iscolor(extract(@notificationColors, @index))) and (@index > 0) {
+    .alert-variation(@names; @notificationColors; (@index - 1)); // decrement.
+
+    @name: extract(@names, @index);
+    @color: extract(@notificationColors, @index);
+
+    .alert-@{name} {
+        border-color: darken(@color, 10%);
+        color: darken(@color, 30%);
+        background-color: @color;
+    }
+
+}
+// Gracias
+.cont_error_pages {
+    margin-top: 100px;
+    text-align: center;
+    &.error {
+        i {
+            color: @error;
+        }
+    }
+    &.gracias {
+        i {
+            color: @success;
+        }
+    }
+    i {
+        font-size: 5em;
+    }
+    h1,
+    p {
+        text-align: center;
+    }
+}
+
+/*********** Panel *************/
+
+/*********** Paginación *************/
+.cont_paginar {
+    text-align: center;
+    max-width: 300px;
+    margin: 0 auto;
+    font-size: 1.3em;
+    a,
+    span {
+        display: inline-block;
+        margin: 0 2px;
+    }
+    a {
+        font-size: 1em;
+    }
+    .resumen_paginacion {
+        font-weight: bold;
+    }
+    div {
+        &.cont_numereacion,
+        &.form_tampag {
+            display: block;
+            margin-top: 10px;
+        }
+    }
+}

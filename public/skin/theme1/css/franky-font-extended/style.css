@@ -1,0 +1,44 @@
+@font-face {
+  font-family: 'franky-font-extended';
+  src:
+    url('/public/skin/default/css/franky-font-extended/fonts/franky-font-extended.ttf?ctcpwk') format('truetype'),
+    url('/public/skin/default/css/franky-font-extended/fonts/franky-font-extended.woff?ctcpwk') format('woff'),
+    url('/public/skin/default/css/franky-font-extended/fonts/franky-font-extended.svg?ctcpwk#franky-font-extended') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'franky-font-extended' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-Instagram:before {
+  content: "\e9162";
+}
+.icon-linkedin:before {
+  content: "\e9172";
+}
+.icon-icon_phone:before {
+  content: "\e90a2";
+}
+.icon-icon_face:before {
+  content: "\e9072";
+}
+.icon-icon_twitter:before {
+  content: "\e9082";
+}
+.icon-whats_app:before {
+  content: "\e9092";
+}

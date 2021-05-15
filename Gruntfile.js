@@ -11,6 +11,7 @@ module.exports = function(grunt) {
           optimization: 2
         },
         files: { // destination file and source file
+            "public/skin/theme1/css/style.css": "public/skin/theme1/less/style.less",
           "public/skin/default/css/style.css": "public/skin/default/less/style.less",
           "public/skin/default/css/grid.css": "public/skin/default/less/grid.less", 
           "public/skin/default/css/panel.css": "public/skin/default/less/panel.less", 
@@ -23,7 +24,9 @@ module.exports = function(grunt) {
     },
     watch: {
       less: {
-            files: ['public/skin/default/less/*.less', 
+            files: [
+            'public/skin/default/less/*.less', 
+            'public/skin/theme1/less/*.less', 
             'public/skin/ecommerce/less/*.less', 
             'public/skin/catalog/less/*.less', 
             'public/skin/blog/less/*.less', 
@@ -39,6 +42,7 @@ module.exports = function(grunt) {
               bsFiles: {
                   src: [
                       'public/skin/default/css/*.css',
+                      'public/skin/theme1/css/*.css',
                       'public/skin/default/css/franky-font/*.css',
                       'public/skin/catalog/css/*.css',
                       'public/skin/ecommerce/css/*.css',

@@ -1,0 +1,255 @@
+// Generales
+@font_gral : Trebuchet MS, Helvetica, Sans-Serif;
+@ico_font : ~"'franky-font'";
+@ico_font_ext : ~"'franky-font-extended'";
+@enfasis_color : #ea5b5b;
+@theme_color : #0e7cf0;
+@white : #ffffff;
+@black : #000000;
+@gray : #333333;
+@secondary_gray : #cfcfd0;
+@bkg_gray : @soft_gray;
+@ultra_soft_gray : #f5f5f5;
+@soft_gray : #eeeeee;
+@font_size_txt : 1.4rem;
+@bkg_nav : fade(@theme_color, 90%);
+@success : #179e3f;
+@error : #ED5565;
+@bkgTip : #c6eae8;
+@unit : 8px;
+@fontSize : 1.4rem;
+@fontZform : 1.4rem;
+
+@fontFacebook : #3d5a96;
+
+// Redes
+@fColor : #3d5a96;
+@tColor : #3ac3ed;
+@iColor : #b01f94;
+@yColor : #df2c28;
+@lColor : #0274b3;
+
+
+// Grid
+
+@W1X :  8.33%;
+@W2X :  16.4%;
+@W3X :  25%;
+@W4X :  33%;
+@W5X :  41.65%;
+@W6X :  50%;
+@W7X :  58.35%;
+@W8X :  66.67%;
+@W9X :  75%;
+@W10X : 83.6%;
+@W11X : 91.67%;
+@W12X : 100%;
+
+// Notification variables
+@notificationColors : #ED5565, #A0D468, #F6BB42, #5D9CEC;
+@names  : error, success, attention, info;
+@length : length(@notificationColors);
+
+.opacity (@opacity: 0.5) {
+	-webkit-opacity: 	@opacity;
+	-moz-opacity: 		@opacity;
+	opacity: 		@opacity;
+}
+
+.radius (@radius:6px;){
+    border-radius: @radius;
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+}
+.rotate (@rotate:7deg){
+    -ms-transform: rotate(@rotate); /* IE 9 */
+    -webkit-transform: rotate(@rotate); /* Chrome, Safari, Opera */
+    transform: rotate(@rotate);
+}
+.text-shadow (@shadow-string: 1px 3px 5px rgba(0, 0, 0, 0.5)) {
+	text-shadow: @shadow-string;
+}
+
+.text-smoot {
+  text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smoothing: antialiased;
+}
+
+.box-shadow (@shadow-string: 0px 2px 7px 3px rgba(0, 0, 0, 0.08)) {
+	-webkit-box-shadow: @shadow-string;
+	-moz-box-shadow:    @shadow-string;
+	box-shadow:         @shadow-string;
+}
+
+.aparience-reset {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.transform-translate(@trans1:-50%, @trans2:-50%) {
+	-ms-transform: translate(@trans1, @trans2); /* IE 9 */
+   -webkit-transform: translate(@trans1, @trans2); /* Safari */
+   transform: translate(@trans1, @trans2);
+}
+
+.transition(@property:all, @duration:0.3s, @ease:ease-in-out) {
+  -webkit-transition: @property @duration @ease;
+  -moz-transition: @property @duration @ease;
+  -o-transition: @property @duration @ease;
+  -ms-transition: @property @duration @ease;
+  transition: @property @duration @ease;
+}
+
+.gradient (@gradient_color1:rgba(0,0,0,1), @gradient_color2:rgba(0,0,0,0)) {
+    background-color: @gradient_color2;
+    background-image:     -ms-linear-gradient(top left, @gradient_color1 0%, @gradient_color2 100%);
+    background-image: -webkit-linear-gradient(top, @gradient_color1, @gradient_color2);
+    background-image:    -moz-linear-gradient(top, @gradient_color1, @gradient_color2);
+    background-image:      -o-linear-gradient(top, @gradient_color1, @gradient_color2);
+    background-image:        -webkit-gradient(linear, left top, left bottom, from(@gradient_color1), to(@gradient_color2));
+    background-image:         linear-gradient(top, @gradient_color1, @gradient_color2);
+}
+
+.ul-reset {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.float_right_switch { float: right !important;
+	@media @small { float: left !important; }
+}
+
+// Media
+
+@xsmall: ~"all and (max-width: 360px)";
+@small: ~"all and (max-width: 767px)";
+@medium: ~"all and (min-width: 768px) and (max-width: 979px)";
+@large: ~"all and (min-width: 980px) and (max-width: 1399px)";
+@xlarge: ~"all and (min-width: 1400px)";
+
+// --------------------------------------------------
+// Flexbox LESS mixins
+// The spec: http://www.w3.org/TR/css3-flexbox
+// --------------------------------------------------
+
+// Flexbox display
+// flex or inline-flex
+.flex-display(@display: flex) {
+	display: ~"-webkit-@{display}";
+	display: ~"-ms-@{display}box"; // IE10 uses -ms-flexbox
+	display: ~"-ms-@{display}"; // IE11
+	display: @display;
+}
+
+// The 'flex' shorthand
+// - applies to: flex items
+// <positive-number>, initial, auto, or none
+.flex(@columns: initial) {
+  -webkit-flex: @columns;
+      -ms-flex: @columns;
+          flex: @columns;
+}
+
+// Flex Flow Direction
+// - applies to: flex containers
+// row | row-reverse | column | column-reverse
+.flex-direction(@direction: row) {
+  -webkit-flex-direction: @direction;
+      -ms-flex-direction: @direction;
+          flex-direction: @direction;
+}
+
+// Flex Line Wrapping
+// - applies to: flex containers
+// nowrap | wrap | wrap-reverse
+.flex-wrap(@wrap: nowrap) {
+  -webkit-flex-wrap: @wrap;
+      -ms-flex-wrap: @wrap;
+          flex-wrap: @wrap;
+}
+
+// Flex Direction and Wrap
+// - applies to: flex containers
+// <flex-direction> || <flex-wrap>
+.flex-flow(@flow) {
+  -webkit-flex-flow: @flow;
+      -ms-flex-flow: @flow;
+          flex-flow: @flow;
+}
+
+// Display Order
+// - applies to: flex items
+// <integer>
+.flex-order(@order: 0) {
+  -webkit-order: @order;
+      -ms-order: @order;
+          order: @order;
+}
+
+// Flex grow factor
+// - applies to: flex items
+// <number>
+.flex-grow(@grow: 0) {
+  -webkit-flex-grow: @grow;
+      -ms-flex-grow: @grow;
+          flex-grow: @grow;
+}
+
+// Flex shrink
+// - applies to: flex item shrink factor
+// <number> 
+.flex-shrink(@shrink: 1) {
+  -webkit-flex-shrink: @shrink;
+      -ms-flex-shrink: @shrink;
+          flex-shrink: @shrink;
+}
+
+// Flex basis
+// - the initial main size of the flex item
+// - applies to: flex items
+// <width> 
+.flex-basis(@width: auto) {
+  -webkit-flex-basis: @width;
+      -ms-flex-basis: @width;
+          flex-basis: @width;
+}
+
+// Axis Alignment
+// - applies to: flex containers
+// flex-start | flex-end | center | space-between | space-around 
+.justify-content(@justify: flex-start) {
+  -webkit-justify-content: @justify;
+      -ms-justify-content: @justify;
+          justify-content: @justify;
+}
+
+// Packing Flex Lines
+// - applies to: multi-line flex containers
+// flex-start | flex-end | center | space-between | space-around | stretch 
+.align-content(@align: stretch) {
+  -webkit-align-content: @align;
+      -ms-align-content: @align;
+          align-content: @align;
+}
+
+// Cross-axis Alignment
+// - applies to: flex containers
+// flex-start | flex-end | center | baseline | stretch 
+.align-items(@align: stretch) {
+  -webkit-align-items: @align;
+      -ms-align-items: @align;
+          align-items: @align;
+}
+
+// Cross-axis Alignment
+// - applies to: flex items
+// auto | flex-start | flex-end | center | baseline | stretch 
+.align-self(@align: auto) {
+  -webkit-align-self: @align;
+      -ms-align-self: @align;
+          align-self: @align;
+}
