@@ -2,35 +2,22 @@
 
 		<div class="w-xxxx-12 footer_1">
 			<div class="content">
-				<div class="w-xxxx-7">
+				<div class="w-xxxx-6">
+                    <div class="w-xxxx-8">
+                        <h3>SUSCRIBETE AL BOLETÍN</h3>
+                        <?=render('widgets/newsletter.phtml')?>
+                        <p>Al inscribirte al newsletter aceptas nuestras <a href="/condiciones-de-uso/">condiciones de uso.</a></p>
+                    </div>
 					<div class="w-xxxx-4">
-						<h3>XXXXX</h3>
+						<h3>Empresa</h3>
 						<ul>
-							<li><a href="#">XXXXXXXXXXX</a></li>
-							<li><a href="#">XXXXXXXXXXX</a></li>
-							<li><a href="#">XXXXXXXXXXX</a></li>
-						</ul>
-					</div>
-					<div class="w-xxxx-4">
-						<h3>XXXXXXXXXXX</h3>
-						<ul>
-							<li><a href="#">XXXXXXXXXXX</a></li>
-							<li><a href="#">XXXXXXXXXXX</a></li>
-							<li><a href="#">XXXXXXXXXXX</a></li>
-						</ul>
-					</div>
-					<div class="w-xxxx-4">
-						<h3>XXXXXXXXXXX</h3>
-						<ul>
-							<li><a href="#">XXXXXXXXXXX</a></li>
-							<li><a href="#">XXXXXXXXXXX</a></li>
-							<li><a href="#">XXXXXXXXXXX</a></li>
-							<li><a href="#">XXXXXXXXXXX</a></li>
-							<li><a href="#">XXXXXXXXXXX</a></li>
+							<li><a href="#">Quienes somos</a></li>
+							<li><a href="#">Servicios</a></li>
+							<li><a href="#">FAQS</a></li>
 						</ul>
 					</div>
 				</div>
-				<div class="w-xxxx-5">
+				<div class="w-xxxx-6">
 					<?php if(getCoreConfig('base/empresa/contacto')): ?>
 					<div class="w-xxxx-7">
 						<h3>Medios de contacto</h3>
@@ -38,7 +25,7 @@
 							<li><p><strong><?=getCoreConfig('base/empresa/ciudad')?>:</strong>
 								<a href="javascript:void(0)" class='tel1'>Tel. <?=getCoreConfig('base/empresa/telefono')?></a></p></li>
 							<li><p><?=getCoreConfig('base/empresa/calle')?> #<?=getCoreConfig('base/empresa/numero')?> <br/>Col. <?=getCoreConfig('base/empresa/colonia')?>, c.p. <?=getCoreConfig('base/empresa/cp')?><br/><?=getCoreConfig('base/empresa/municipio')?>, <?=getCoreConfig('base/empresa/pais')?></p></li>
-							<li><p><a href="mailto:<?=getCoreConfig('base/empresa/email')?>"><?=getCoreConfig('base/empresa/email')?></a></p></li>
+							<!-- <li><p><a href="mailto:<?=getCoreConfig('base/empresa/email')?>"><?=getCoreConfig('base/empresa/email')?></a></p></li> -->
 						</ul>
 					</div>
 					<?php endif; ?>

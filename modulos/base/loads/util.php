@@ -297,9 +297,17 @@ function getVista($file,$type="server")
 
     if($MyFrankyMonster->MyModulo() == "base")
     {
-        if(file_exists(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/diseno/".$file))
+        if(file_exists(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/diseno/".getCoreConfig('base/theme/theme')."/".$file))
+        {
+            $url = "/modulos/".$MyConfigure->getPathSite()."/diseno/".getCoreConfig('base/theme/theme')."/".$file;
+        }
+        elseif(file_exists(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/diseno/".$file))
         {
             $url = "/modulos/".$MyConfigure->getPathSite()."/diseno/".$file;
+        }
+        elseif (file_exists(PROJECT_DIR."/modulos/base/diseno/".getCoreConfig('base/theme/theme')."/".$file))
+        {
+            $url = "/modulos/base/diseno/".getCoreConfig('base/theme/theme')."/".$file;
         }
         else
         {
@@ -309,7 +317,20 @@ function getVista($file,$type="server")
     else
     {
 
-        if(file_exists(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/".$MyFrankyMonster->MyModulo()."/diseno/".$file))
+        if(file_exists(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/".$MyFrankyMonster->MyModulo()."/diseno/".getCoreConfig('base/theme/theme')."/".$file))
+        {
+            $url = "/modulos/".$MyConfigure->getPathSite()."/".$MyFrankyMonster->MyModulo()."/diseno/".getCoreConfig('base/theme/theme')."/".$file;
+        }
+        elseif(file_exists(PROJECT_DIR."/modulos/".$MyFrankyMonster->MyModulo()."/diseno/".getCoreConfig('base/theme/theme')."/".$file))
+        {
+            $url = "/modulos/".$MyFrankyMonster->MyModulo()."/diseno/".getCoreConfig('base/theme/theme')."/".$file;
+        }
+        elseif(file_exists(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/diseno/".getCoreConfig('base/theme/theme')."/".$file))
+        {
+            $url = "/modulos/".$MyConfigure->getPathSite()."/diseno/".getCoreConfig('base/theme/theme')."/".$file;
+        }
+
+        elseif(file_exists(PROJECT_DIR."/modulos/".$MyConfigure->getPathSite()."/".$MyFrankyMonster->MyModulo()."/diseno/".$file))
         {
             $url = "/modulos/".$MyConfigure->getPathSite()."/".$MyFrankyMonster->MyModulo()."/diseno/".$file;
         }
