@@ -184,17 +184,18 @@ function getCss($file)
 {
     global $MyConfigure;
     global $MyFrankyMonster;
+
     if(file_exists(PROJECT_DIR."/public/skin/".$MyConfigure->getPathSite()."/css/".$file))
     {
         return "/public/skin/".$MyConfigure->getPathSite()."/css/".$file;
     }
-    if(file_exists(PROJECT_DIR."/public/skin/".$MyFrankyMonster->MyModulo()."/css/".$file))
+    elseif(file_exists(PROJECT_DIR."/public/skin/".$MyFrankyMonster->MyModulo()."/css/".$file))
     {
         return "/public/skin/".$MyFrankyMonster->MyModulo()."/css/".$file;
     }
     else
     {
-        return "/public/skin/default/css/".$file;
+        return "/public/skin/".getCoreConfig('base/theme/theme')."/css/".$file;
     }
 
 }
@@ -213,7 +214,7 @@ function getImg($file)
     }
     else
     {
-        return "/public/skin/default/images/".$file;
+        return "/public/skin/".getCoreConfig('base/theme/theme')."/images/".$file;
     }
 }
 
