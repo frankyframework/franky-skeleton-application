@@ -3,13 +3,34 @@
 footer {
     font-size: 1rem;
     .footer_wrapper {
-        background: darken(@theme_color, 30);
+        background: @theme_color;
         margin-top: 32px;
         padding-top: 16px;
-        color: @white;
+        color: @black;
         .footer_2 {
-            background: darken(@theme_color, 20);
+            background: darken(@theme_color, 5);
             padding: 16px 0;
+            text-align: center;
+        }
+        .cont_legales ul {
+            .ul-reset;
+            .flex-display;
+            .justify-content(center);
+            li {
+                a {
+                    &:before {
+                        content: "/";
+                        margin: auto 10px;
+                    }
+                }
+                &:first-child {
+                    a {
+                        &:before {
+                            content: "";
+                        }
+                    }
+                }
+            }
         }
         .cont_news {
             form {
@@ -27,6 +48,7 @@ footer {
                     height: 40px;
                     margin: 0;
                     .radius(0 6px 6px 0);
+                    color: @black;
                 }
                 input {
                     box-sizing: border-box;
@@ -88,7 +110,7 @@ footer {
         }
     }
     a {
-        color: @white;
+        color: @black;
         text-decoration: none;
         &:hover {
             color: @enfasis_color;
@@ -108,7 +130,7 @@ footer {
     }
     h3,
     p {
-        color: @white;
+        color: @black;
     }
     h3 {
         font-size: 2em;
@@ -118,7 +140,7 @@ footer {
         margin: 0 0 20px;
         padding: 0 0 0 10px;
         list-style: disc;
-        color: @white;
+        color: @black;
         &.no_bullet {
             list-style: none;
         }
