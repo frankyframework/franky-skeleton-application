@@ -1,6 +1,6 @@
 <?php
 $css = array();
-$css[] = getCss("style.css");
+// $css[] = getCss("style.css");
 $css[] = getCss("grid.css");
 $css[] = getCss("franky.mobile.css");
 $css[] = getCss("franky-font/style.css");
@@ -72,4 +72,5 @@ else
     }
 }
 //echo $MyMetatag->getCss();
+$MyMetatag->setCss(getCss("style.css"));
 ?>

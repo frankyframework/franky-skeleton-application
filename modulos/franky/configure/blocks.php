@@ -7,13 +7,13 @@ return json_encode([
     ], 
     [
         'position' => 'after',
-        'reference' => '.menu_web',
+        'reference' => '.cont_mi_carrito',
         'html' => getHTMLRenderMinicart()
         
     ], 
     [
         'position' => 'before',
-        'reference' => '._menu_section',
+        'reference' => '._category_menu',
         'html' => getCategoryMenu()
     ],
 ]);
