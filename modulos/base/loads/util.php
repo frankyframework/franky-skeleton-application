@@ -343,6 +343,10 @@ function getVista($file,$type="server")
         {
             $url = "/modulos/".$MyConfigure->getPathSite()."/diseno/".$file;
         }
+        elseif(file_exists(PROJECT_DIR."/modulos/base/diseno/".getCoreConfig('base/theme/theme').'/'.$file))
+        {
+            $url = "/modulos/base/diseno/".getCoreConfig('base/theme/theme').'/'.$file;
+        }
         else
         {
 

@@ -47,6 +47,7 @@ header("Content-disposition: attachment; filename=template_productos.xls");
          <th width="" ><strong>Meta keywords</strong></th>
          <th width="" ><strong>Url key</strong></th>
          <th width="" ><strong>¿Esta activo?</strong></th>
+         <th width="" ><strong>Sumar imagenes</strong></th>
       
       <?php
       if(!empty($custom_attr['custom_imputs']))

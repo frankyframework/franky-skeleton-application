@@ -340,7 +340,7 @@ class CatalogproductsModel  extends \Franky\Database\Mysql\objectOperations
     }
     function existeSKU($sku,$id='')
     {
-        $campos = array("id");
+        $campos = array("id","images");
         $this->where()->addAnd('sku',$sku,'=');
         if(!empty($id))
         {

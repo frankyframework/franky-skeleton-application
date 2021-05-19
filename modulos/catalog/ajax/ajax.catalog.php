@@ -796,7 +796,7 @@ function ajax_catalog_importar_producto($sku,$id)
 {
     global $MySession;
     global $MyConfigure;
-
+    global $MyMessageAlert;
     $respuesta = [];
     $file_xls = $MyConfigure->getServerUploadDir()."/catalog/importar/".$MySession->GetVar('importar-productos-file');
 
@@ -805,109 +805,182 @@ function ajax_catalog_importar_producto($sku,$id)
       
         $atributos_xls = [
             "name","sku","category","description","visible_in_search","stock","in_stock","stock_infinito","saleable","min_qty","price",
-            "iva","incluye_iva","envio_requerido","meta_title","meta_description","meta_keyword","url_key","status"
+            "iva","incluye_iva","envio_requerido","meta_title","meta_description","meta_keyword","url_key","status","new_images"
         ];
 
-  
-        foreach($xls->rows() as $key => $val)
+        $_xls = $xls->rows();
+
+        if($_xls[$id])
         {
 
-            if($key == $id)
-            {
-                foreach($val as $_key => $_val){
-                    $_POST[$atributos_xls[$_key]] = utf8_encode($_val); 
-                }
-               
-            }
-
-        }
-       
-
-
-        $CatalogsubcategoryproductEntity    = new Catalog\entity\CatalogsubcategoryproductEntity();
-        $CatalogsubcategoryproductModel     = new Catalog\model\CatalogsubcategoryproductModel();
-        $CatalogproductsModel               = new Catalog\model\CatalogproductsModel();    
-        $CatalogproductsEntity              = new Catalog\entity\CatalogproductsEntity($_POST);
-        $ObserverManager                    = new \Franky\Core\ObserverManager;
-        if($CatalogproductsModel->existeSKU($sku) == REGISTRO_SUCCESS)
-        {
-            $data = $CatalogproductsModel->getRows();
-            $CatalogproductsEntity->updateAt(date('Y-m-d H:i:s'));
-            $CatalogproductsEntity->id($data['id']);
-
-            $CatalogproductsModel->save($CatalogproductsEntity->getArrayCopy());
-            $respuesta["operacion"] ="update";
-
-            $ObserverManager->dispatch('edit_catalog_product',['data' => $CatalogproductsEntity->getArrayCopy()]);
         
-        }
-        else{
-            $CatalogproductsEntity->createdAt(date('Y-m-d H:i:s'));
-            $CatalogproductsModel->save($CatalogproductsEntity->getArrayCopy());
-            $respuesta["operacion"] ="add";
-            $data['id'] = $CatalogproductsModel->getUltimoID();
-
-
-            $CatalogproductsEntity->id($data['id']);
+            foreach($_xls[$id] as $_key => $_val){
+                $_POST[$atributos_xls[$_key]] = utf8_encode($_val); 
+            }
             
-            $ObserverManager->dispatch('save_catalog_product',['data' => $CatalogproductsEntity->getArrayCopy()]);
-        }
+            $CatalogsubcategoryproductEntity    = new Catalog\entity\CatalogsubcategoryproductEntity();
+            $CatalogsubcategoryproductModel     = new Catalog\model\CatalogsubcategoryproductModel();
+            $CatalogproductsModel               = new Catalog\model\CatalogproductsModel();    
+            $CatalogproductsEntity              = new Catalog\entity\CatalogproductsEntity($_POST);
+            $ObserverManager                    = new \Franky\Core\ObserverManager;
+            if($CatalogproductsModel->existeSKU($sku) == REGISTRO_SUCCESS)
+            {
+                $data = $CatalogproductsModel->getRows();
+                $CatalogproductsEntity->updateAt(date('Y-m-d H:i:s'));
+                $CatalogproductsEntity->id($data['id']);
+
+                $CatalogproductsModel->save($CatalogproductsEntity->getArrayCopy());
+                $respuesta["operacion"] ="update";
+
+                $ObserverManager->dispatch('edit_catalog_product',['data' => $CatalogproductsEntity->getArrayCopy()]);
+                
+            }
+            else{
+                $CatalogproductsEntity->createdAt(date('Y-m-d H:i:s'));
+                $CatalogproductsModel->save($CatalogproductsEntity->getArrayCopy());
+                $respuesta["operacion"] ="add";
+                $data['id'] = $CatalogproductsModel->getUltimoID();
+
+
+                $CatalogproductsEntity->id($data['id']);
+                
+                $ObserverManager->dispatch('save_catalog_product',['data' => $CatalogproductsEntity->getArrayCopy()]);
+            }
+            
+
+
+            $CatalogsubcategoryproductEntity->id_product($data['id']);
+            $CatalogsubcategoryproductModel->remove($CatalogsubcategoryproductEntity->getArrayCopy());   
+            $category_subcategory = json_decode($CatalogproductsEntity->category(),true);
+
+            foreach($category_subcategory as $cat => $subcat)
+            {
+                foreach($subcat as $id_sub)
+                {  
+                    $CatalogsubcategoryproductEntity->id_subcategory($id_sub);
+                    $CatalogsubcategoryproductModel->save($CatalogsubcategoryproductEntity->getArrayCopy());   
+                }
+            }
+
         
 
-
-        $CatalogsubcategoryproductEntity->id_product($data['id']);
-        $CatalogsubcategoryproductModel->remove($CatalogsubcategoryproductEntity->getArrayCopy());   
-        $category_subcategory = json_decode($CatalogproductsEntity->category(),true);
-
-        foreach($category_subcategory as $cat => $subcat)
-        {
-            foreach($subcat as $id_sub)
-            {  
-                $CatalogsubcategoryproductEntity->id_subcategory($id_sub);
-                $CatalogsubcategoryproductModel->save($CatalogsubcategoryproductEntity->getArrayCopy());   
-            }
-        }
-
-      
-
-        $custom_attr = getDataCustomAttribute(0,'catalog_products');
+            $custom_attr = getDataCustomAttribute(0,'catalog_products');
 
 
 
-        if(!empty($custom_attr['custom_imputs']))
-        {
-
-            foreach($custom_attr['custom_imputs'] as $key => $data_attrs)
+            if(!empty($custom_attr['custom_imputs']))
             {
-                if(!in_array($data_attrs['type'],['file','multifile']))
+
+                foreach($custom_attr['custom_imputs'] as $key => $data_attrs)
                 {
-                    $atributos_xls[] = $data_attrs['name'];
+                    if(!in_array($data_attrs['type'],['file','multifile']))
+                    {
+                        $atributos_xls[] = $data_attrs['name'];
+                        
+                    }
+
                     
                 }
 
                 
-            }
-
-            foreach($xls->rows() as $key => $val)
-            {
-    
-                if($key == $id)
-                {
-                    foreach($val as $_key => $_val){
-                        $_POST[$atributos_xls[$_key]] = utf8_encode($_val); 
-                    }
-                   
+                foreach($_xls[$id] as $_key => $_val){
+                    $_POST[$atributos_xls[$_key]] = utf8_encode($_val); 
                 }
-    
+                   
+                // print_r($_POST); die;
+                
+                saveDataCustomAttributeImport($data['id'],'catalog_products',$_POST);
             }
-           // print_r($_POST); die;
-            
-            saveDataCustomAttributeImport($data['id'],'catalog_products',$_POST);
+
+
+            if(!empty($_POST['new_images']))
+            {
+                $new_images = explode(",",$_POST['new_images']);
+                $images = [];
+                $principal = 1;
+             
+                if(isset($data['images']) && !empty($data['images'])){
+                    $principal = 0;
+                    $images = json_decode($data['images'],true);
+                }
+
+                if(!empty($new_images))
+                {
+
+                    $dir = $MyConfigure->getServerUploadDir()."/catalog/products/".$data['id']."/";
+                    $dir2 = $MyConfigure->getServerUploadDir()."/catalog/importar/images/";
+                    $File = new \Franky\Filesystem\File();
+                    $File->mkdir($dir);
+
+                    foreach($new_images as $image)
+                    {
+                        $image = trim($image);
+                       
+                        if(!file_exists($dir2.$image))
+                        {
+                            continue;
+                        }
+                       
+
+                        $handle = new \Franky\Filesystem\Upload($dir2.$image);
+
+
+                        if ($handle->uploaded)
+                        {
+                          
+                            if  (!in_array(strtolower(pathinfo($dir2.$image, PATHINFO_EXTENSION)),array("jpg","png","gif","bmp","jpe","jpeg")))//($handle->file_is_image)
+                            {
+                                continue;
+                            }
+                            
+                            $handle->file_max_size = 1024*1024*100; //1k(1024) x 512
+                         
+                            if($handle->image_src_x > 2000 || $handle->image_src_y > 2000)
+                            {
+                                $handle->image_resize = true;
+                                $handle->image_x = 2000;
+                                $handle->image_y = 2000;
+                            }
+                            $handle->file_auto_rename = true;
+                            $handle->file_overwrite = false;
+                              
+
+                            $handle->Process($dir);
+
+                            if ($handle->processed)
+                            {
+                                $images[] = array("token" => md5($handle->file_dst_name), "img" => $handle->file_dst_name,'principal' => $principal);
+                                $principal = 0;
+                            }
+                            else
+                            {
+                                $respuesta["msg"].=  $MyMessageAlert->Message("imagen_error",$image);
+                            }
+                        
+                        }
+                        else
+                        {
+                            $respuesta["msg"].=  $MyMessageAlert->Message("imagen_error",$image);
+                        }
+
+                        
+
+                    }
+                    $CatalogproductsEntity->exchangeArray([]);
+                    $CatalogproductsEntity->id($data['id']);
+                    $CatalogproductsEntity->updateAt(date('Y-m-d H:i:s'));
+                    $CatalogproductsEntity->images(json_encode($images));
+                    $CatalogproductsModel->save($CatalogproductsEntity->getArrayCopy());
+                }
+            }
+    
+            $respuesta["status"] ="success";
         }
-
-
- 
-        $respuesta["status"] ="success";
+        else
+        {
+            $respuesta["status"] ="error";
+            $respuesta["msg"] = "empty";
+        }
        
 
     } else {
