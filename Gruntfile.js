@@ -12,9 +12,10 @@ module.exports = function(grunt) {
         },
         files: { // destination file and source file
             "public/skin/theme1/css/style.css": "public/skin/theme1/less/style.less",
-          "public/skin/default/css/style.css": "public/skin/default/less/style.less",
-          "public/skin/default/css/grid.css": "public/skin/default/less/grid.less", 
-          "public/skin/default/css/panel.css": "public/skin/default/less/panel.less", 
+            "public/skin/default/css/style.css": "public/skin/theme1/less/style.less",
+          "public/skin/base/css/style.css": "public/skin/base/less/style.less",
+          "public/skin/base/css/grid.css": "public/skin/base/less/grid.less", 
+          "public/skin/base/css/panel.css": "public/skin/base/less/panel.less", 
           "public/skin/ecommerce/css/cart.css": "public/skin/ecommerce/less/cart.less", 
           "public/skin/catalog/css/catalog.css": "public/skin/catalog/less/catalog.less", 
           "public/skin/blog/css/blog.css": "public/skin/blog/less/blog.less", 
@@ -25,6 +26,7 @@ module.exports = function(grunt) {
     watch: {
       less: {
             files: [
+            'public/skin/base/less/*.less', 
             'public/skin/default/less/*.less', 
             'public/skin/theme1/less/*.less', 
             'public/skin/ecommerce/less/*.less', 
@@ -41,9 +43,10 @@ module.exports = function(grunt) {
           dev: {
               bsFiles: {
                   src: [
+                      'public/skin/base/css/*.css',
                       'public/skin/default/css/*.css',
                       'public/skin/theme1/css/*.css',
-                      'public/skin/default/css/franky-font/*.css',
+                      'public/skin/base/css/franky-font/*.css',
                       'public/skin/catalog/css/*.css',
                       'public/skin/ecommerce/css/*.css',
                       'public/skin/blog/css/*.css',
