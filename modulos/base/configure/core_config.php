@@ -299,6 +299,33 @@ return array(
         )
 
     ),
+    'servidor' => array(
+      'menu' => "Servirdor",
+      'title' => "Configurar Servidor",
+      'config' => array(
+                array('path' => 'base/server/session_path',
+                'type' => 'text',
+                'label' => 'Path para guardar las sesiones',
+                'validation' => array('required' => true),
+                'value' => 'sess_tmp' 
+                ),
+                array('path' => 'base/server/session_time',
+                'type' => 'text',
+                'label' => 'Tiempo de vida de la sesion en segundos',
+                'validation' => array('required' => true),
+                'value' => '43200' //12 hrs
+                ),
+            
+                array('path' => 'base/server/session_renew',
+                      'type' => 'select',
+                      'label' => '¿Renovar sesion automaticamente?',
+                      'validation' => array('required' => true,'maxlength' => 1),
+                      'data' => ['0' => 'No','1' => 'Sí'],
+                      'value' => 0
+                    )
+      )
+
+  ),
     'debug' => array(
             'menu' => "DEBUG",
             'title' => "Herramientas de debbuging",

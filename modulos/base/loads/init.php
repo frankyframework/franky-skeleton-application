@@ -1,13 +1,7 @@
 <?php
-
-ini_set('session.save_path', PROJECT_DIR.'/sess_tmp');
-session_start();
-
 ini_set('ignore_repeated_errors',true);
-
 define ("_PHP_ERROR_LOG_", PROJECT_DIR."/logs/error_php.log");
 ini_set('error_log',_PHP_ERROR_LOG_);
-
 date_default_timezone_set('America/Mexico_City');
 
 require_once(PROJECT_DIR.'/php-gettext/gettext.inc');
@@ -22,7 +16,30 @@ $MyConfigure        = new \Franky\Core\configure();
 $available_debug_ip = explode(",",getCoreConfig('base/debug/ip'));
 $enable_debug_php = getCoreConfig('base/debug/display_errors');
 $enable_debug_site = getCoreConfig('base/debug/debug');
+$session_time = getCoreConfig('base/server/session_time');
+$session_autorenew = getCoreConfig('base/server/session_renew');
+$session_path =  PROJECT_DIR.'/'.getCoreConfig('base/server/session_path');
 $enable_ip = 0;
+
+// Set the maxlifetime of session
+ini_set( "session.gc_maxlifetime", $session_time );
+// Also set the session cookie timeout
+ini_set( "session.cookie_lifetime", $session_time );
+ini_set('session.save_path',$session_path);
+
+
+$handler = new \Base\model\FileSessionHandler(new \Franky\Filesystem\File);
+session_set_save_handler($handler, true);
+register_shutdown_function('session_write_close');
+
+session_start();
+
+$sessionName = session_name();
+
+if($session_autorenew == 1 && isset( $_COOKIE[ $sessionName ] ) ) {
+
+	setcookie( $sessionName, $_COOKIE[ $sessionName ], time() + $session_time, '/' );
+}
 
 if(empty($available_debug_ip)):
     $available_debug_ip = array('%');
