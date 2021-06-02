@@ -468,16 +468,16 @@ function ajax_catalog_importar_productoHTML(response)
         else{
             for(var i = 0; i < respuesta.data.length; i++)
             {
-                $('.operacion_'+ respuesta.data[i].sku).html(respuesta.data[i].operacion);
+                $('.operacion_'+ respuesta.data[i].id).html(respuesta.data[i].operacion);
                 if(respuesta.data[i].status == "error")
                 {
-                    $('.status_'+respuesta.data[i].sku).html(respuesta.data[i].status).removeClass('status_pending').addClass('status_error');
+                    $('.status_'+respuesta.data[i].id).html(respuesta.data[i].status).removeClass('status_pending').addClass('status_error');
                 }
                 else{
-                    $('.status_'+respuesta.data[i].sku).html(respuesta.data[i].status).removeClass('status_pending').addClass('status_complete');
+                    $('.status_'+respuesta.data[i].id).html(respuesta.data[i].status).removeClass('status_pending').addClass('status_complete');
                 }
                 $('html, body').stop().animate({
-                    scrollTop: $('.status_'+respuesta.data[i].sku).offset().top - 150
+                    scrollTop: $('.status_'+respuesta.data[i].id).offset().top - 150
                 }, 500);
             }
 

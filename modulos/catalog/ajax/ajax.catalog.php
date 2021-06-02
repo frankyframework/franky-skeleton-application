@@ -827,6 +827,7 @@ function ajax_catalog_importar_producto($id)
                 $_POST['url_key'] = getFriendly($_POST['name']);
             }
             $respuesta['data'][$count]['sku'] = $_POST['sku'];
+            $respuesta['data'][$count]['id'] = $id;
 
             $CatalogsubcategoryproductEntity    = new Catalog\entity\CatalogsubcategoryproductEntity();
             $CatalogsubcategoryproductModel     = new Catalog\model\CatalogsubcategoryproductModel();

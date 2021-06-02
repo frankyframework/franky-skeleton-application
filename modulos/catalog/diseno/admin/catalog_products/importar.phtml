@@ -77,8 +77,8 @@
                         <?php foreach($value_columnas_grid as $k): ?>
                         <div class="{{_data.thisClass}}   <?php echo (isset($css_columnas_grid[$k]) ? $css_columnas_grid[$k] : ""); ?>">{{_data.<?php echo $k;  ?>}}</div>
                         <?php endforeach; ?>
-                        <div class='w-xxxx-1 {{_data.thisClass}} operacion_{{_data.sku}}'></div>
-                        <div class='w-xxxx-1 {{_data.thisClass}} status_pending status_{{_data.sku}}' data-sku="{{_data.sku}}"  data-id="{{_data.id}}">Pendiente</div>
+                        <div class='w-xxxx-1 {{_data.thisClass}} operacion_{{_data.id}}'></div>
+                        <div class='w-xxxx-1 {{_data.thisClass}} status_pending status_{{_data.id}}' data-sku="{{_data.sku}}"  data-id="{{_data.id}}">Pendiente</div>
                     </div>
                     </div>
                 </div>
