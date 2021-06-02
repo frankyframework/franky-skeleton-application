@@ -49,6 +49,11 @@ if ($handle->uploaded)
                         }
                         $data_productos[$key-1]['thisClass'] = $thisClass;
                         $data_productos[$key-1]['id'] = $key;
+                        $data_productos[$key-1]['sku'] = getFriendly($data_productos[$key-1]['sku']);
+                        if(empty($data_productos[$key-1]['sku'] ))
+                        {
+                            $data_productos[$key-1]['sku'] = 'T-'.time();
+                        }
                        
                     }
 

@@ -27,6 +27,7 @@ $price  = $MyRequest->getRequest('price');
 $iva  = $MyRequest->getRequest('iva');
 $visible_in_search  = $MyRequest->getRequest('visible_in_search');
 $CatalogproductsEntity->description($description);
+$CatalogproductsEntity->sku(getFriendly($CatalogproductsEntity->sku()));
 $error = false;
 
 if(empty($iva))

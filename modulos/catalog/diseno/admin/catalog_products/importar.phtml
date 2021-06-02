@@ -94,11 +94,10 @@
 
             $('.play_importacion').click(function(e){
                 e.preventDefault();
-                var sku = $('.status_pending').eq(1).attr('data-sku');
                 var id = $('.status_pending').eq(1).attr('data-id');
-                if(sku.length > 0)
+                if(id.length > 0)
                 {
-                    ajax_catalog_importar_producto(sku,id);
+                    ajax_catalog_importar_producto(id);
                 }
             });
             </script>

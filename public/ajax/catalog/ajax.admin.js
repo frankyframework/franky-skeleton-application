@@ -441,36 +441,54 @@ function catalog_setOrdenSubcategoriaHTML(response)
 
 
 
-function ajax_catalog_importar_producto(sku,id)
+function ajax_catalog_importar_producto(id)
 {
     
    
     var var_query = {
           "function": "ajax_catalog_importar_producto",
-          "vars_ajax":[sku,id]
+          "vars_ajax":[id]
         };
     
-    pasarelaAjax('GET', var_query, "ajax_catalog_importar_productoHTML", [sku]);
+    pasarelaAjax('GET', var_query, "ajax_catalog_importar_productoHTML",[]);
 }
 
 
-function ajax_catalog_importar_productoHTML(response,sku)
+function ajax_catalog_importar_productoHTML(response)
 {
     var respuesta = null;
     if (response != "null")
     {
         respuesta = JSON.parse(response);
 
-        $('.operacion_'+sku).html(respuesta.operacion);
-        $('.status_'+sku).html(respuesta.status).removeClass('status_pending').addClass('status_complete');
-        
+        if(respuesta.error == true)
+        {
+            _alert(respuesta.msg);
+        }
+        else{
+            for(var i = 0; i < respuesta.data.length; i++)
+            {
+                $('.operacion_'+ respuesta.data[i].sku).html(respuesta.data[i].operacion);
+                if(respuesta.data[i].status == "error")
+                {
+                    $('.status_'+respuesta.data[i].sku).html(respuesta.data[i].status).removeClass('status_pending').addClass('status_error');
+                }
+                else{
+                    $('.status_'+respuesta.data[i].sku).html(respuesta.data[i].status).removeClass('status_pending').addClass('status_complete');
+                }
+                $('html, body').stop().animate({
+                    scrollTop: $('.status_'+respuesta.data[i].sku).offset().top - 150
+                }, 500);
+            }
+
+            
+    
+    
+            $('.play_importacion').click();
+        }
+      
        
-        $('html, body').stop().animate({
-            scrollTop: $('.status_'+sku).offset().top
-        }, 2000);
-
-
-        $('.play_importacion').click();
+      
        
     }
 
