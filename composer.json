@@ -18,7 +18,18 @@
         "frankyframework/franky-haxor": "1.0.x-dev",
         "frankyframework/franky-filesystem": "1.0.x-dev",
         "frankyframework/franky-schema": "1.0.x-dev",
-        "frankyframework/base":"1.0.x-dev"
+        "frankyframework/base":"1.0.x-dev",
+        "frankyframework/blog":"1.0.x-dev",
+        "frankyframework/catalog":"1.0.x-dev",
+        "frankyframework/carrusel":"1.0.x-dev",
+        "frankyframework/calificaciones":"1.0.x-dev",
+        "frankyframework/sociallogin":"1.0.x-dev",
+        "frankyframework/developer":"1.0.x-dev",
+        "frankyframework/ecommerce":"1.0.x-dev",
+        "frankyframework/galeria":"1.0.x-dev",
+        "frankyframework/seo":"1.0.x-dev",
+        "frankyframework/sliders":"1.0.x-dev",
+        "frankyframework/wishlist":"1.0.x-dev"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.5"
