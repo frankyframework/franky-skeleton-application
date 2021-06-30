@@ -1,3 +1,0 @@
-msgfmt ecommerce.po --output-file=ecommerce.mo
-Variables: _ecommerce("id")
-Cadenas: <?= _ecommerce('id') ?>

@@ -186,68 +186,6 @@ _alert = function(msg,title)
 
 
 
-$.fn.htmlDataDum = function(data,fail)
-{
-    var data = JSON.parse(JSON.stringify(data));
-    var html = $(this).html();
-    var parent = $(this).parent();
-    var id=''
-    $(this).hide();
-    $(fail).hide();
-
-    if(data.length > 0)
-    {
-        $.each( data, function( key, _data ) {
-            var fila = html;
-            $.each( _data, function( _key, _value ) {
-                if(_key == 'id')
-                {
-                    id= _value;
-                }
-              if(_value == ''){ _value = '&nbsp;';  }
-
-               fila = fila.replace(RegExp("{{_data."+_key+"}}", "g"), _value);
-            });
-
-            fila = fila.replace(RegExp("{{_data.callback}}", "g"), encodeURIComponent($(location).attr('href')));
-
-            parent.append("<div class='copia_fila'  id='cat_"+id+"'>"+fila+"<div>");
-
-        });
-
-        $(".btn_adm_eliminar").each(function( key, value) {
-
-            if($(this).attr("href").replace("#","") == "activar")
-            {
-
-                $(this).html("<i class='icon  icon-c-encender'> </i>");
-            }
-            else if($(this).attr("href").replace("#","") == "desactivar")
-            {
-                $(this).html("<i class='icon  icon-r-eliminar'> </i>");
-            }
-            else
-            {
-                $(this).parent().append("&nbsp;");
-                $(this).remove();
-            }
-
-        });
-
-        $(document).trigger("load-grid-admin", [ "Custom", "Event" ]);
-
-
-       // $(this).remove()
-       // $(this).show();
-    }
-    else
-    {
-         $(fail).show();
-    }
-
-    return true;
-}
-
 $.fn.imagesresize = function(width){
 
     $(this).each(function(index,val){
@@ -329,72 +267,16 @@ function getCookie(cname) {
   return "";
 }
 
-$(document).ready(function(){
-    $("._btn_collapse_panel").click(function(){
-        $(this).toggleClass( "active" );
-        $('._left_menu').toggleClass( "active" );
-        $('._panel_content').toggleClass( "active" );
 
-        if($('._left_menu').attr('class').search('active') > -1)
-        {
-            setCookie('menu_panel', 'active', 30)
-        }
-        else
-        {
-            setCookie('menu_panel', 'inactive', 30)
-        }
-    });
-    if($("._btn_collapse_panel").length > 0)
-    {
-        if(getCookie('menu_panel') == 'active')
-        {
-            $("._btn_collapse_panel").click();
-        }
-    }
-
-
-});
 
 
 $(document).ready(function(){
 
     $(".imprimible").addAllParentClass("imprimible");
-    $(".hide_render_debug").click(function(e){
-        e.preventDefault();
-        $(this).parent().next('.content_render_debug').slideToggle()
-
-    });
-    $(".close_render_debug").click(function(e){
-        e.preventDefault();
-        $(this).parent().parent().remove()
-
-    });
+    
 
 
-    $("#up").hide();
-    $(function () {
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 200) {
-                $('#up').fadeIn();
-            } else {
-                $('#up').fadeOut();
-            }
-        });
-        $('#up a').click(function (e) {
-            e.preventDefault();
-            $('body,html').animate({
-                scrollTop: 0
-            }, 800);
-            return false;
-        });
-    });
 
-    $("#debug .pestanas .pestana a").click(function(e){
-        e.preventDefault();
-        $("#content-detalle-debug div").hide();
-        $($(this).attr("href")).show();
-        $("#content-detalle-debug").show();
-   });
 
     $("a").each(function(index,val){
         if($(location).attr('href').search($(this).attr('href')) > -1)
@@ -404,54 +286,11 @@ $(document).ready(function(){
     });
 
 
-    if(!isMobile())
-    {
-      $(function() {
-          $( "input[name=rango_inicial].filtros_panel").datepicker({
-              defaultDate: "+1w",
-              changeMonth: false,
-              numberOfMonths: 3,
-              dateFormat:"yy-mm-dd",
-              maxDate: "+0D",
-              onClose: function( selectedDate ) {
-              $("input[name=rango_final].filtros_panel").datepicker( "option", "minDate", selectedDate );
-              }
-          });
-          $( "input[name=rango_final].filtros_panel").datepicker({
-              defaultDate: "+1w",
-              changeMonth: false,
-              numberOfMonths: 3,
-              dateFormat:"yy-mm-dd",
-              maxDate: "+0D",
-              onClose: function( selectedDate ) {
-              $( "input[name=rango_inicial].filtros_panel").datepicker( "option", "maxDate", selectedDate );
-              }
-          });
-      });
-    }
-
-    $("form[name=users],form[name=frmContacto]").find("[placeholder]").each(function(index){
-
-       $(this).newplaceholder();
-    });
-
-    $("form[name=users],form[name=frmContacto]").find("[placeholder]").keyup(function(){  $(this).newplaceholder();});
-
 });
-window.loaderStyle = $('#loader').attr('style');
+
+
+
 $(window).load(function() {
-
-
-
-    if($('#preloaderfullpage'))
-    {
-	     $('#preloaderfullpage').fadeOut('slow',function(){
-            $(this).remove();
-            $('body').css({'overflow':'visible'});
-        });
-
-    }
-
 
 
     if($("#dialog-message"))
@@ -467,16 +306,6 @@ $(window).load(function() {
             }
         });},300);
     }
-
-
-    $.fn.imgLoadAlive();
-    $(window).scroll(function () {
-      $.fn.imgLoadAlive();
-    });
-    $(document).ajaxComplete(function () {
-        $.fn.imgLoadAlive();
-    });
-    $('.contenedor_columnas div').textToIcon();
 
     $('.ancla').click(function(event)
     {
@@ -501,13 +330,6 @@ $(window).load(function() {
        }
 
     });
-
-    if(isMobile())
-    {
-        $(".tel1").attr('href',"tel:"+$(".tel1").eq(0).text());
-    }
-
-
 
 
 });

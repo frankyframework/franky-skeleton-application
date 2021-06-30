@@ -1,2 +1,0 @@
- msgfmt messages.po --output-file=messages.mo
-

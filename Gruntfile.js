@@ -11,28 +11,28 @@ module.exports = function(grunt) {
           optimization: 2
         },
         files: { // destination file and source file
-            "public/skin/theme1/css/style.css": "public/skin/theme1/less/style.less",
-            "public/skin/default/css/style.css": "public/skin/theme1/less/style.less",
-          "public/skin/base/css/style.css": "public/skin/base/less/style.less",
-          "public/skin/base/css/grid.css": "public/skin/base/less/grid.less", 
-          "public/skin/base/css/panel.css": "public/skin/base/less/panel.less", 
-          "public/skin/ecommerce/css/cart.css": "public/skin/ecommerce/less/cart.less", 
-          "public/skin/catalog/css/catalog.css": "public/skin/catalog/less/catalog.less", 
-          "public/skin/blog/css/blog.css": "public/skin/blog/less/blog.less", 
-          "public/skin/sliders/css/sliders.css": "public/skin/sliders/less/sliders.less",
+            "modulos/base/web/theme1/css/style.css": "modulos/base/web/theme1/less/style.less",
+            "modulos/base/web/default/css/style.css": "modulos/base/web/base/less/style.less",
+          "modulos/base/web/base/css/style.css": "modulos/base/web/base/less/style.less",
+          "modulos/base/web/base/css/grid.css": "modulos/base/web/base/less/grid.less", 
+          "modulos/base/web/base/css/panel.css": "modulos/base/web/base/less/panel.less", 
+          "modulos/ecommerce/web/css/cart.css": "modulos/ecommerce/web/less/cart.less", 
+          "modulos/catalog/web/css/catalog.css": "modulos/catalog/web/less/catalog.less", 
+          "modulos/blog/web/css/blog.css": "modulos/blog/web/less/blog.less", 
+          "modulos/sliders/web/css/sliders.css": "modulos/sliders/web/less/sliders.less",
         }
       }
     },
     watch: {
       less: {
             files: [
-            'public/skin/base/less/*.less', 
-            'public/skin/default/less/*.less', 
-            'public/skin/theme1/less/*.less', 
-            'public/skin/ecommerce/less/*.less', 
-            'public/skin/catalog/less/*.less', 
-            'public/skin/blog/less/*.less', 
-            'public/skin/sliders/less/*.less'],
+            'modulos/base/web/base/less/*.less', 
+            'modulos/base/web/default/less/*.less', 
+            'modulos/base/web/theme1/less/*.less', 
+            'modulos/ecommerce/web/less/*.less', 
+            'modulos/catalog/web/less/*.less', 
+            'modulos/blog/web/less/*.less', 
+            'modulos/sliders/web/less/*.less'],
             tasks: ['less'],
             options: {
                 livereload: true
@@ -43,15 +43,15 @@ module.exports = function(grunt) {
           dev: {
               bsFiles: {
                   src: [
-                      'public/skin/base/css/*.css',
-                      'public/skin/default/css/*.css',
-                      'public/skin/theme1/css/*.css',
-                      'public/skin/base/css/franky-font/*.css',
-                      'public/skin/catalog/css/*.css',
-                      'public/skin/ecommerce/css/*.css',
-                      'public/skin/blog/css/*.css',
-                      'public/skin/galeria/css/*.css',
-                      'public/skin/slider/css/*.css',
+                      'modulos/base/web/base/css/*.css',
+                      'modulos/base/web/default/css/*.css',
+                      'modulos/base/web/theme1/css/*.css',
+                      'modulos/base/web/base/css/franky-font/*.css',
+                      'modulos/catalog/web/css/*.css',
+                      'modulos/ecommerce/web/css/*.css',
+                      'modulos/blog/web/css/*.css',
+                      'modulos/galeria/web/css/*.css',
+                      'modulos/slider/web/css/*.css',
                       'modulos/base/diseno/*.phtml'
                   ]
               },

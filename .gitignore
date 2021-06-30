@@ -1,8 +1,6 @@
 /vendor
 /configure/data.php
 /configure/databases.php
-/configure/modulos.php
-/phpunit.xml
 /logs/
 /sess_tmp/
 /composer.lock
@@ -13,3 +11,15 @@
 /public/hash/
 /public/upload/
 /nbproject/private/
+/modulos/base
+/modulos/sociallogin
+/modulos/blog
+/modulos/carrusel
+/modulos/calificaciones
+/modulos/catalog
+/modulos/developer
+/modulos/ecommerce
+/modulos/galeria
+/modulos/seo
+/modulos/sliders
+/modulos/wishlist

@@ -1,3 +1,0 @@
-msgfmt sliders.po --output-file=sliders.mo
-Variables: _sliders("id")
-Cadenas: <?= _sliders('id') ?>
