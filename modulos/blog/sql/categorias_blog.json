@@ -63,6 +63,23 @@
                 "length":5,
                 "null":0,
                 "default":"es_MX"
+            },
+            {
+                "name":"meta_keywords",
+                "type":"varchar",
+                "length":255,
+                "null":1
+            },
+            {
+                "name":"meta_titulo",
+                "type":"varchar",
+                "length":255,
+                "null":0
+            },
+            {
+                "name":"meta_descripcion",
+                "type":"text",
+                "null":0
             }
 
         ],

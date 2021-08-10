@@ -66,6 +66,55 @@ class categoriasBlogForm extends \Franky\Form\Form
         );
 
 
+        $this->add(array(
+            'name' => 'meta_keywords',
+            'label' => 'Keywords:',
+            'type'  => 'text',
+            'required'  => false,
+            'atributos' => array(
+                'class'       => '',
+                'maxlength' => 255,
+                'id'    => "keywords"
+             ),
+            'label_atributos' => array(
+                'class'       => 'desc_form_no_obligatorio'
+             )
+        )
+    );
+
+    $this->add(array(
+            'name' => 'meta_titulo',
+            'label' => 'Meta titulo:',
+            'type'  => 'text',
+            'required'  => true,
+            'atributos' => array(
+                'class'       => 'required',
+                'maxlength' => 255
+
+             ),
+            'label_atributos' => array(
+                'class'       => 'desc_form_obligatorio'
+             )
+        )
+    );
+
+    $this->add(array(
+            'name' => 'meta_descripcion',
+            'label' => 'Meta descripcion:',
+            'type'  => 'text',
+            'required'  => true,
+            'atributos' => array(
+                'class'       => 'required',
+                'maxlength' => 255
+             ),
+            'label_atributos' => array(
+                'class'       => 'desc_form_obligatorio'
+             )
+        )
+    );
+
+
+
          $this->add(array(
                 'name' => 'guardar',
                 'type'  => 'submit',

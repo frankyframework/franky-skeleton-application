@@ -21,7 +21,8 @@ class categoriasBlog  extends \Franky\Database\Mysql\objectOperations
 
         function getData($id='',$status='',$busca='')
         {
-            $campos = array("id","categorias_blog.nombre","categorias_blog.friendly as amigable_categoria","fecha","status","visible","permisos","imagen","imagen_portada","lang");
+            $campos = array("id","categorias_blog.nombre","categorias_blog.friendly as amigable_categoria","fecha",
+            "status","visible","permisos","imagen","imagen_portada","lang","meta_keywords","meta_titulo","meta_descripcion");
 
 
             if(!empty($id))
@@ -62,7 +63,7 @@ class categoriasBlog  extends \Franky\Database\Mysql\objectOperations
 
         }
 
-        function save($categoria,$friendly,$imagen,$permisos,$visible)
+        function save($categoria,$friendly,$imagen,$permisos,$visible,$meta_keywords,$meta_titulo,$meta_descripcion)
         {
             $nvoregistro = array(
                 "nombre" => $categoria,
@@ -70,6 +71,9 @@ class categoriasBlog  extends \Franky\Database\Mysql\objectOperations
                 "imagen" => $imagen,
                 "visible" => $visible,
                 "permisos" => $permisos,
+                "meta_keywords" => $meta_keywords,
+                "meta_titulo" => $meta_titulo,
+                "meta_descripcion" => $meta_descripcion,
                 "fecha" => date('Y-m-d')." ".date('H:i:s'),
                 "status" => "1",
             );
@@ -83,13 +87,16 @@ class categoriasBlog  extends \Franky\Database\Mysql\objectOperations
             return $this->guardarRegistro($nvoregistro);
         }
 
-        function edit($id,$categoria,$friendly,$imagen,$permisos,$visible)
+        function edit($id,$categoria,$friendly,$imagen,$permisos,$visible,$meta_keywords,$meta_titulo,$meta_descripcion)
         {
            $nvoregistro = array(
                 "nombre" => $categoria,
                 "friendly" => $friendly,
                 "visible" => $visible,
                 "permisos" => $permisos,
+                "meta_keywords" => $meta_keywords,
+                "meta_titulo" => $meta_titulo,
+                "meta_descripcion" => $meta_descripcion
             );
 
             if(!empty($imagen))

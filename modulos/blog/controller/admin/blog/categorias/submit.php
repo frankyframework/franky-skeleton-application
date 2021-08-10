@@ -9,6 +9,9 @@ $nombre             = $MyRequest->getRequest('nombre');
 $visible             = $MyRequest->getRequest('visible',0);
 $permisos             = $MyRequest->getRequest('permisos',array());
 $lang                 = $MyRequest->getRequest('lang');
+$meta_keywords        = $MyRequest->getRequest('meta_keywords');
+$meta_titulo          = $MyRequest->getRequest('meta_titulo');
+$meta_descripcion      = $MyRequest->getRequest('meta_descripcion');
 $error = false;
             
 $rules = array(
@@ -44,7 +47,7 @@ if($error == false)
     }
     if(empty($id))
     {
-        $result = $MyCategoriaBlog->save($nombre, getFriendly($nombre),'',json_encode($permisos),$visible);
+        $result = $MyCategoriaBlog->save($nombre, getFriendly($nombre),'',json_encode($permisos),$visible,$meta_keywords,$meta_titulo,$meta_descripcion);
         if($result == REGISTRO_SUCCESS)
         {
             
@@ -63,7 +66,7 @@ if($error == false)
         
          
          
-        $result = $MyCategoriaBlog->edit($id,$nombre, getFriendly($nombre),'',json_encode($permisos),$visible);
+        $result = $MyCategoriaBlog->edit($id,$nombre, getFriendly($nombre),'',json_encode($permisos),$visible,$meta_keywords,$meta_titulo,$meta_descripcion);
         if($result == REGISTRO_SUCCESS)
         {
             $MyFlashMessage->setMsg("success",$MyMessageAlert->Message("editar_generico_success"));

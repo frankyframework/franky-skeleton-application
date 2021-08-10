@@ -5,7 +5,6 @@ return array(
     'sliders',
     'carrucel',
     'galeria',
-    
     //'sociallogin',
     'developer',
     'ecommerce',

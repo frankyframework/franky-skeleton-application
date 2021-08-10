@@ -103,6 +103,9 @@ if(!empty($amigable_categoria_context))
 
         $registro['url'] = $MyRequest->url(BLOG_CATEGORIA,['categoria' => $registro['friendly']],true);
         $MyMetatag->setVars($registro);
+        $MyMetatag->setTitulo($registro["meta_titulo"]);
+        $MyMetatag->setDescripcion($registro["meta_descripcion"]);
+        $MyMetatag->setKeywords($registro["meta_keywords"]);
 
         $permisos = json_decode($registro['permisos'],true);
         if(!empty($permisos) && !$MySession->LoggedIn())
