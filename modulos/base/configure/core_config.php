@@ -131,6 +131,12 @@ return array(
         'label' => 'Instagram',
         'validation' => array('url' => true),
         'value' => 'https://www.instagram.com/'
+        ),
+        array('path' => 'base/empresa/whatsapp',
+        'type' => 'text',
+        'label' => 'Whatsapp',
+        'validation' => array('required' => false),
+        'value' => ''
       ),
 
     )

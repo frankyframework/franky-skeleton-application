@@ -34,13 +34,16 @@
 						<h3>Síguenos</h3>
 						<ul class="no_bullet">
 						<?php if(getCoreConfig('base/empresa/facebook')): ?>
-							<li><a href="<?=getCoreConfig('base/empresa/facebook')?>"><i class="icon icon-facebook"></i>  Facebook</a></li>
+							<li><a href="<?=getCoreConfig('base/empresa/facebook')?>" target="_blank"><i class="icon icon-facebook"></i>  Facebook</a></li>
 						<?php endif; ?>
               			<?php if(getCoreConfig('base/empresa/twitter')): ?>
-							<li><a href="<?=getCoreConfig('base/empresa/twitter')?>"><i class="icon icon-twitter"></i>  Twitter</a></li>
+							<li><a href="<?=getCoreConfig('base/empresa/twitter')?>" target="_blank"><i class="icon icon-twitter"></i>  Twitter</a></li>
 						<?php endif; ?>
 						<?php if(getCoreConfig('base/empresa/instagram')): ?>
-							<li><a href="<?=getCoreConfig('base/empresa/instagram')?>"><i class="icon icon-instagram"></i>  Instagram</a></li>
+							<li><a href="<?=getCoreConfig('base/empresa/instagram')?>" target="_blank"><i class="icon icon-instagram"></i>  Instagram</a></li>
+						<?php endif; ?>
+						<?php if(getCoreConfig('base/empresa/whatsapp')): ?>
+							<li><a href="https://api.whatsapp.com/send?phone=<?=getCoreConfig('base/empresa/whatsapp')?>" target="_blank"><i class="icon icon-whatsapp"></i>  Whatsapp</a></li>
 						<?php endif; ?>
 						</ul>
 					</div>
