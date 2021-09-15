@@ -31,7 +31,7 @@
                         <?php if($_SESSION["lang"] != $key_lang): ?>
                         <li class="first">
                             <a
-                                href="/lang.php?lang=<?=$key_lang?>&amp;callback=<?php echo $callbacks_idioma[$key_lang]; ?>" class="idioma <?php echo $callbacks_idioma[$key_lang]; ?>"><?= strtoupper(substr($key_lang,0,2))?></a>
+                                href="/lang.php?lang=<?=$key_lang?>&amp;callback=<?php echo $callbacks_idioma[$key_lang]; ?>" class="idioma <?php echo strtolower($key_lang); ?>"><?= strtoupper(substr($key_lang,0,2))?></a>
                         </li><?php endif; ?>
                         <?php endforeach; ?>
                         <?php endif; ?>
