@@ -19,7 +19,7 @@ $UserdeviceModel->setPage($MyPaginacion->getPage());
 $UserdeviceModel->setTampag($MyPaginacion->getTampageDefault());
 $UserdeviceModel->setOrdensql($MyPaginacion->getCampoOrden()." ".$MyPaginacion->getOrden());
 
-
+$UserdeviceEntity->id_user($MySession->GetVar('id'));
 $result	 = $UserdeviceModel->getData($UserdeviceEntity->getArrayCopy());
 $MyPaginacion->setTotal($UserdeviceModel->getTotal());
 
