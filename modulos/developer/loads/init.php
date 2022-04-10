@@ -1,8 +1,7 @@
 <?php
 include 'lca.php';
 include 'util.php';
-bindtextdomain("developer", PROJECT_DIR .'/modulos/developer/locale');
-
+__bindtextdomain("developer", 'developer');
 
 if (function_exists('bind_textdomain_codeset')) 
 {

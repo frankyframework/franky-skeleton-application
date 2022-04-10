@@ -31,6 +31,21 @@ return array(
                             'data' => include(PROJECT_DIR.'/modulos/base/configure/idiomas.php'),
                               'value' => 'es_MX'
                             ),
+                            array('path' => 'base/theme/langs-admin',
+                            'type' => 'select',
+                            'label' => 'Idiomas disponibles Admin',
+                            'validation' => array('required' => false),
+                            'value' => ['es_MX'],
+                            'data' => include(PROJECT_DIR.'/modulos/base/configure/idiomas_admin.php'),
+                            'multiple' => true
+                            ),
+                            array('path' => 'base/theme/baselang-admin',
+                            'type' => 'select',
+                            'label' => 'Idioma predefinodo Admin',
+                            'validation' => array('required' => false),
+                            'data' => include(PROJECT_DIR.'/modulos/base/configure/idiomas_admin.php'),
+                            'value' => 'es_MX'
+                          ),
 
                           array('path' => 'base/theme/theme',
                             'type' => 'select',

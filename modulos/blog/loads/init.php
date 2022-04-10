@@ -1,7 +1,7 @@
 <?php
 include 'lca.php';
 include 'util.php';
-bindtextdomain("blog", PROJECT_DIR .'/modulos/blog/locale');
+__bindtextdomain("blog", "blog");
 
 
 if (function_exists('bind_textdomain_codeset'))

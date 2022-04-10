@@ -1,8 +1,7 @@
 <?php
 include 'lca.php';
 include 'util.php';
-bindtextdomain("galeria", PROJECT_DIR .'/modulos/galeria/locale');
-
+__bindtextdomain("galeria", 'galeria');
 
 if (function_exists('bind_textdomain_codeset')) 
 {

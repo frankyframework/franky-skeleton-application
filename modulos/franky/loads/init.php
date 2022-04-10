@@ -2,8 +2,7 @@
 include 'lca.php';
 include 'util.php';
 
-bindtextdomain("franky", PROJECT_DIR ."/modulos/franky/locale");
-
+__bindtextdomain("franky", "franky");
 
 if (function_exists('bind_textdomain_codeset'))
 {

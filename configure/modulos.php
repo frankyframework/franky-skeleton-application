@@ -11,5 +11,4 @@ return array(
     'catalog',
     'wishlist',
     'calificaciones'
-
 );

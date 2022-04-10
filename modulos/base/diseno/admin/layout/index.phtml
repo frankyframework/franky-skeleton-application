@@ -12,26 +12,41 @@
     <div id="loader" style="width: 100px;height: 100px;position: absolute;left:50%; top:50%;background: url('<?php echo getImg('SVG/loader.svg'); ?>') no-repeat center 0; margin:-50px 0 0 -50px;">&nbsp;</div>
 </div>
 <?php endif; ?>
-    <header>
-        <div class="w-xxxx-12">
+        <header>
+            <div class="w-xxxx-12">
+                <div class="w-xxxx-11">
+                    <?php $logopanel = getImg('logo.png'); ?>
 
-                <?php $logopanel = getImg('logo.png'); ?>
-
-                <?php
-                if(getCoreConfig('base/theme/logopanel') != "")
-                {
-                    if(file_exists(PROJECT_DIR.getCoreConfig('base/theme/logopanel')))
+                    <?php
+                    if(getCoreConfig('base/theme/logopanel') != "")
                     {
-                        $logopanel = getCoreConfig('base/theme/logopanel');
+                        if(file_exists(PROJECT_DIR.getCoreConfig('base/theme/logopanel')))
+                        {
+                            $logopanel = getCoreConfig('base/theme/logopanel');
+                        }
+
                     }
-
-                }
-                ?>
-                <a class="_admin_logo" href="<?php echo $MyRequest->url(ADMIN) ?>"><?php echo makeHTMLImg($logopanel,"","200","200","class='img_logo'"); ?></a>
-                <a target="_blank" class="_btn _txt _my_site" href="/">VER SITIO</a>
-
-        </div>
-    </header>
+                    ?>
+                    <a class="_admin_logo" href="<?php echo $MyRequest->url(ADMIN) ?>"><?php echo makeHTMLImg($logopanel,"","200","200","class='img_logo'"); ?></a>
+                    
+                    
+                    <a target="_blank" class="_btn _txt _my_site" href="/">VER SITIO</a>
+                </div>
+                <div class="w-xxxx-1 w-xxx-12  w-xx-12  w-x-12">
+                    <form name="lang-admin-frm" action="/admin/lang.php" method="post">
+                    <select name="lang_admin" onchange="$('form[name=lang-admin-frm]').submit();">
+                        <?php if(!empty(getCoreConfig('base/theme/langs-admin'))): ?>
+                        <?php foreach(getCoreConfig('base/theme/langs-admin') as $key_lang): ?>
+                        
+                            <option value="<?=$key_lang?>" <?=($_SESSION["lang_admin"] == $key_lang ? "selected='selected'" : "" )?>><?php echo strtolower($key_lang); ?></option>
+                    
+                        <?php endforeach; ?>
+                        <?php endif; ?>
+                    </select>
+                    </form>
+                </div>
+            </div>
+        </header>
         <main>
 
         	<div class="w-xxxx-12 page_wrapper">

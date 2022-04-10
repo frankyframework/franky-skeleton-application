@@ -1,8 +1,7 @@
 <?php
 include 'lca.php';
 include 'util.php';
-bindtextdomain("seo", PROJECT_DIR .'/modulos/seo/locale');
-
+__bindtextdomain("seo", 'seo');
 
 if (function_exists('bind_textdomain_codeset')) 
 {

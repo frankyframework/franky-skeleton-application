@@ -1,7 +1,13 @@
 <?php
 $archivos_mensaje = array();
 
-$lang = (isset($_SESSION["lang"]) ? $_SESSION["lang"] : DEFAULT_LOCALE);
+if($MyFrankyMonster->isAdmin())
+{
+    $lang = (isset($_SESSION["lang_admin"]) ? $_SESSION["lang_admin"] : DEFAULT_LOCALE);
+}
+else{
+    $lang = (isset($_SESSION["lang"]) ? $_SESSION["lang"] : DEFAULT_LOCALE);
+}
 
 $modulos = getModulos();
 if(!empty($modulos))

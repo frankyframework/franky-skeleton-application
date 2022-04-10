@@ -64,7 +64,26 @@ if($paginasModel->getData() == REGISTRO_SUCCESS)
 
 
 
-		    $keyCommand = (PREFIDIOMA !="" ? PREFIDIOMA."/".$registro["url"] : $registro["url"]);
+			$_seccion = explode("/",$registro["url"]);
+				
+			if($_seccion[0] == PATH_ADMIN)
+			{
+				if(isset($urlInternacional[$_SESSION['lang_admin']][$registro["id"]]))
+				{
+					$registro["url"] =$urlInternacional[$_SESSION['lang_admin']][$registro["id"]];
+				}
+				$keyCommand = $registro["url"];
+
+			}
+			else{
+
+				if(isset($urlInternacional[$_SESSION['lang']][$registro["id"]]))
+				{
+					$registro["url"] =$urlInternacional[$_SESSION['lang']][$registro["id"]];
+				}
+
+				$keyCommand = (PREFIDIOMA !="" ? PREFIDIOMA."/".$registro["url"] : $registro["url"]);
+			}
 		    define($registro["constante"],$keyCommand);
 
 		    $MyFrankyMonster->pushCommand($keyCommand,array(

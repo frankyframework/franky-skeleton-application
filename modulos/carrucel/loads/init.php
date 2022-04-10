@@ -1,7 +1,7 @@
 <?php
 include 'lca.php';
 include 'util.php';
-bindtextdomain("carrucel", PROJECT_DIR .'/modulos/carrucel/locale');
+__bindtextdomain("carrusel", 'carrusel');
 
 
 if (function_exists('bind_textdomain_codeset')) 

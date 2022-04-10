@@ -84,36 +84,76 @@ define('DEFAULT_LOCALE',$idioma_base);
 
 $idiomas = getCoreConfig('base/theme/langs');
 $seccion = $MyRequest->getRequest('my_url_friendly');
-$locale = DEFAULT_LOCALE;
-$_SESSION['lang'] = DEFAULT_LOCALE;
-if($MyRequest->getRequest("lang") != "" && in_array($MyRequest->getRequest("lang"),$idiomas))
+$_seccion = explode("/",$seccion);
+				
+if($_seccion[0] == PATH_ADMIN)
 {
-   $locale = $MyRequest->Sanitizacion($MyRequest->getRequest("lang"));
-   $path_idioma =  $catalogo_idiomas[$MyRequest->getRequest("lang")];
-    $_SESSION["lang"] = $locale;
+    
+    $catalogo_idiomas  = include(PROJECT_DIR.'/modulos/base/configure/idiomas_admin.php');
+    $idioma_base = getCoreConfig('base/theme/baselang-admin');
+    define('DEFAULT_LOCALE',$idioma_base);
+
+    $idiomas = getCoreConfig('base/theme/langs-admin');
+    $locale = DEFAULT_LOCALE;
+    if($_SESSION['lang_admin'])
+    {
+        $idioma_encontrado = false;
+        foreach ($catalogo_idiomas as $idioma => $path_idioma)
+        {
+            if(in_array($_SESSION["lang_admin"],$idiomas))
+            {
+                $idioma_encontrado = true;
+            }
+
+        }
+        if($idioma_encontrado)
+        {
+            $locale = $_SESSION["lang_admin"];
+        }
+    }
 }
 else
 {
-    $idioma_encontrado = false;
-    foreach ($catalogo_idiomas as $idioma => $path_idioma)
+    $catalogo_idiomas  = include(PROJECT_DIR.'/modulos/base/configure/idiomas.php');
+    $idioma_base = getCoreConfig('base/theme/baselang');
+    define('DEFAULT_LOCALE',$idioma_base);
+
+    $idiomas = getCoreConfig('base/theme/langs');
+
+    $locale = DEFAULT_LOCALE;
+    if(!$_SESSION['lang'])
     {
-
-        $is_idioma = substr($seccion, 0,strlen($path_idioma)+1);
-        if(!empty($path_idioma) && $is_idioma == $path_idioma."/" && in_array($idioma,$idiomas))
+        $_SESSION['lang'] = DEFAULT_LOCALE;
+    }
+    if($MyRequest->getRequest("lang") != "" && in_array($MyRequest->getRequest("lang"),$idiomas))
+    {
+        $locale = $MyRequest->Sanitizacion($MyRequest->getRequest("lang"));
+        $path_idioma =  $catalogo_idiomas[$MyRequest->getRequest("lang")];
+        $_SESSION["lang"] = $locale;
+    }
+    else
+    {
+        $idioma_encontrado = false;
+        foreach ($catalogo_idiomas as $idioma => $path_idioma)
         {
-            $locale = $idioma;
 
-            $_SESSION["lang"] = $idioma;
+            $is_idioma = substr($seccion, 0,strlen($path_idioma)+1);
+            if(!empty($path_idioma) && $is_idioma == $path_idioma."/" && in_array($idioma,$idiomas))
+            {
+                $locale = $idioma;
 
-            $idioma_encontrado = true;
+                $_SESSION["lang"] = $idioma;
+
+                $idioma_encontrado = true;
+            }
+
+        }
+        if(!$idioma_encontrado)
+        {
+            $locale = $_SESSION["lang"];
         }
 
     }
-    if(!$idioma_encontrado)
-    {
-        $locale = $_SESSION["lang"];
-    }
-
 }
 
 if($locale != DEFAULT_LOCALE)
@@ -128,7 +168,7 @@ else
 
 $domain = 'messages';
 
-bindtextdomain($domain, LOCALE_DIR);
+__bindtextdomain($domain, "base");
 
 
 if (function_exists('bind_textdomain_codeset'))

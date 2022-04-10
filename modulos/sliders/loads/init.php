@@ -1,8 +1,7 @@
 <?php
 include 'lca.php';
 include 'util.php';
-bindtextdomain("sliders", PROJECT_DIR ."/modulos/sliders/locale");
-
+__bindtextdomain("sliders",'sliders');
 
 if (function_exists('bind_textdomain_codeset'))
 {
