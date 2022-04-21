@@ -34,13 +34,13 @@ function __bindtextdomain($domain,$modulo)
     global $MyConfigure;
     if(file_exists( PROJECT_DIR .'/modulos/'.$MyConfigure->getPathSite().'/'.$modulo.'/locale/'))
     {
-        $dir = PROJECT_DIR .'/modulos/'.$modulo.'/locale/';
+        $dir = PROJECT_DIR .'/modulos/'.$MyConfigure->getPathSite().'/'.$modulo.'/locale/';
     }
     else{
         $dir = PROJECT_DIR .'/modulos/'.$modulo.'/locale/';
     }
    
-    bindtextdomain($domain, $$dir);
+    bindtextdomain($domain, $dir);
 }
 
 function makeHTMLImg($src, $width="", $height="", $alt="", $extra='',$live=0)
