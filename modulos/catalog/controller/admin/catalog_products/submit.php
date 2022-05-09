@@ -53,6 +53,14 @@ if($CatalogproductsEntity->url_key() === "")
 else{
     $CatalogproductsEntity->url_key(getFriendly($CatalogproductsEntity->url_key()));
 }
+if($CatalogproductsEntity->sku() === "")
+{
+    $CatalogproductsEntity->sku(getFriendly($CatalogproductsEntity->name()));
+}
+else{
+    $CatalogproductsEntity->sku(getFriendly($CatalogproductsEntity->sku()));
+}
+
 
 
 $album = $MySession->GetVar('addProduct');

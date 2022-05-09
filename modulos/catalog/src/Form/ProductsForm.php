@@ -43,10 +43,10 @@ class ProductsForm  extends \Franky\Form\Form
             'name' => 'sku',
             'label' => 'SKU',
             'type'  => 'text',
-            'required'  => true,
+            'required'  => false,
             'atributos' => array(
                 'maxlength' => 255,
-                'class' => 'required'
+                'class' => ''
              ),
             'label_atributos' => array(
                 'class'       => 'desc_form_obligatorio'
