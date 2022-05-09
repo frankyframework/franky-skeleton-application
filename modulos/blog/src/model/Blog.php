@@ -42,7 +42,7 @@ class Blog  extends \Franky\Database\Mysql\objectOperations
         function getData($id='',$busca='',$autor='',$destacado='',$status='',$categoria="",$next="",$back ="")
         {
             $campos = array("blog.id","blog.categoria","titulo","contenido","destacado","blog.friendly","comentarios","blog.fecha","fecha_modificado","blog.lang",
-                "blog.status","autor","keywords","meta_titulo","meta_descripcion","visible_in_search","blog.permisos","blog.imagen","blog.imagen_portada",
+                "blog.status","autor","blog.keywords","blog.meta_titulo","blog.meta_descripcion","visible_in_search","blog.permisos","blog.imagen","blog.imagen_portada",
                 "categorias_blog.nombre as categoria_nombre","categorias_blog.friendly as amigable_categoria","categorias_blog.visible","categorias_blog.permisos"
                 ,"users.nombre as nombre_user","usuario","biografia","users.id as id_user","autortext");
 
