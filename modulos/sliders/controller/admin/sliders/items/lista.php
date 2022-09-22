@@ -11,7 +11,7 @@ $id_slider = $MyRequest->getRequest('id');
 $MyPaginacion->setPage($MyRequest->getRequest('page',1));
 $MyPaginacion->setCampoOrden($MyRequest->getRequest('por',"orden"));
 $MyPaginacion->setOrden($MyRequest->getRequest('order',"ASC"));
-$MyPaginacion->setTampageDefault($MyRequest->getRequest('tampag',25));		
+$MyPaginacion->setTampageDefault($MyRequest->getRequest('tampag',500));		
 $busca_b	= $MyRequest->getRequest('busca_b');	
 
 
