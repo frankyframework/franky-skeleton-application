@@ -24,22 +24,7 @@ $data = $MyFlashMessage->getResponse();
 $galeria_frm = "";
 $album = $MySession->GetVar('addProduct');
 
-if(empty($album))
-{
-   $album = md5(session_id().time());
-
-}
-else{
-    if(isset($_SESSION['album_'.$album]) && !empty($_SESSION['album_'.$album]))
-    {
-
-        foreach($_SESSION['album_'.$album]  as $foto)
-        {
-
-            $galeria_frm .= getFotoCatalogProduct($album,$foto['img'],md5($foto['img']),$foto['principal']);
-        }
-    }
-}
+$album = md5(session_id().time());
 
 $data_category = [];
 $data_subcategory = [];
